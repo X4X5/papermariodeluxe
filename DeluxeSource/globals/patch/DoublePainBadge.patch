@@ -1,0 +1,33 @@
+#define .IDOfDoublePain 0000012D
+
+#new:Function $IsBadgeEquipped
+{
+PUSH    S1, S2, S3
+.Init
+LIO        S2, 8010F498    % position in list
+ADDIU    S3, S2, 78        % end of list
+.Loop
+LH        S1, 0 (S2)
+BEQL    A0, S1, .End
+ADDIU    A0, R0, 1 % return true
+BNE        S2, S3, .Loop
+ADDIU    S2, S2, 2
+ADDIU    A0, R0, 0 % return false
+.End
+ADDU    v0, a0, r0 %move result to v0 to follow calling convention
+POP        S1, S2, S3
+JR        RA
+NOP
+}
+
+@Hook 1A641C %80277B3C
+{
+    JAL $IsBadgeEquipped
+    ORI a0, r0, .IDOfDoublePain
+    BNEL v0, r0, .skip
+    ADDU s0, s0, s0
+    .skip
+    LBU v0, 01B8 (s3)
+    J 80277B44
+    SUBU v0, v0, s0
+}

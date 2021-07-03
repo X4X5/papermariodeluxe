@@ -1,0 +1,24 @@
+%NoSlowdownOnSpin
+@Function E25DD0 %normal spin
+{
+%802B6070: ADDIU	V0, R0, 0x0019 (how many frames is the spin duration)
+ADDIU v0, r0, 001E %30 frames now
+}
+
+@Function E25E10 %normal spin
+{
+%802B60B0: ADDIU	V0, R0, 0x000F (how many frames into spin to start slowing down)
+ADDIU v0, r0, 001E %30 frames now
+}
+
+@Function E25E7C %speedy spin
+{
+%802B611C: ADDIU	V0, R0, 0x001E (how many frames is the spin duration)
+ADDIU v0, r0, 23 %35 frames now
+}
+
+@Function E25EA4 %speedy spin
+{
+%802B6144: ADDIU	V0, R0, 0x0014
+ADDIU v0, r0, 23 %35 frames now
+}
