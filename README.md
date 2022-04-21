@@ -10,7 +10,6 @@ A: No. This mod is meant to be enjoyed, but it's also not meant to be a walk in 
 
 
 Q: New badges? What all does this entail?
-
 A: There will be new badges, but this does mean it'll replace vanilla ones, as well. Not to worry, this mod won't change every single badge in the game, I'll really only swap badges if the new badge is just a flashy version of the old badge.
 
 
