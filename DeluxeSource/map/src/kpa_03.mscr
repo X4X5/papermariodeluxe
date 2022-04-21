@@ -1,6 +1,13 @@
 % Script File: kpa_03.mscr
 % Decoded from: 0 to 39A0 (kpa_03)
 
+#define .NpcID:WorldKoopatrol_00    00
+#define .NpcID:WorldKoopatrol_01    01
+#define .NpcID:BonyBeetle_02        02
+#define .NpcID:BonyBeetle_03        03
+#define .NpcID:Magikoopa_04         04
+#define .NpcID:Magikoopa_05         05
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -30,7 +37,7 @@
    68:  MFC1      A2, F6
    6C:  TRUNC.W.S F6, F0
    70:  MFC1      A3, F6
-   74:  JAL       ~Func:set_transition_stencil_center_worldpos
+   74:  JAL       ~Func:set_screen_overlay_center_worldpos
    78:  COPY      A1, A0
    7C:  LAB       V0, 8010EBB0
    84:  BEQ       V0, R0, .oD0
@@ -79,10 +86,10 @@
   11C:  LWC1      F6, 70 (S0)
   120:  CVT.S.W   F6, F6
   124:  MFC1      A1, F6
-  128:  JAL       ~Func:set_transition_stencil_alpha
+  128:  JAL       ~Func:set_screen_overlay_alpha
   12C:  LI        A0, 1
   130:  LUI       A1, 437F
-  134:  JAL       ~Func:set_transition_stencil_zoom_1
+  134:  JAL       ~Func:set_screen_overlay_params_back
   138:  ADDIU     A0, R0, B
   13C:  LW        RA, 24 (SP)
   140:  LW        S2, 20 (SP)
@@ -1042,7 +1049,7 @@ PADDING: 80240158 to 80240160 (00000158 to 00000160)
   32C:  SWC1      F0, 18 (SP)
   330:  LW        A1, 38 (S1)
   334:  LW        A3, 40 (S1)
-  338:  JAL       8006FF50
+  338:  JAL       ~Func:playFX_12
   33C:  CLEAR     A0
   340:  SW        V0, 78 (S2)
   344:  SH        S0, 8E (S1)
@@ -1646,7 +1653,7 @@ PADDING: 80240158 to 80240160 (00000158 to 00000160)
   170:  LIF       F0, 0.09951172
   17C:  LI        V0, D
   180:  SW        V0, 14 (SP)
-  184:  JAL       8006FFB0
+  184:  JAL       ~Func:playFX_13
   188:  SWC1      F0, 10 (SP)
   18C:  LI        V0, F
   190:  SH        V0, 8E (S0)
@@ -2178,8 +2185,8 @@ PADDING: 80241F5C to 80241F60 (00001F5C to 00001F60)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_802435B8 )
    84:  ExecWait  $Script_MakeEntities
@@ -2451,7 +2458,7 @@ MISSING: 80242530 to 802425B4 (00002530 to 000025B4)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -2478,60 +2485,60 @@ MISSING: 802429D4 to 80242A00 (000029D4 to 00002A00)
 
 #new:NpcGroup $NpcGroup_80242A18
 {
-	00000000 $NpcSettings_80242230 ~Vec3f:NPC_80242A18 % 1045 -255 -194
+	.NpcID:WorldKoopatrol_00 $NpcSettings_80242230 ~Vec3f:NPC_WorldKoopatrol_00 % 1045 -255 -194
 	00000400 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80242A18
-	~AnimationTable:NPC_80242A18 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_00
+	~AnimationTable:NPC_WorldKoopatrol_00 % .Sprite:WorldKoopatrol
 	00000003 00000000 $ExtraAnimationList_80242A00 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242C08
 {
-	00000001 $NpcSettings_80242230 ~Vec3f:NPC_80242C08 % 950 -265 0
+	.NpcID:WorldKoopatrol_01 $NpcSettings_80242230 ~Vec3f:NPC_WorldKoopatrol_01 % 950 -265 0
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80242C08
-	~AnimationTable:NPC_80242C08 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_01
+	~AnimationTable:NPC_WorldKoopatrol_01 % .Sprite:WorldKoopatrol
 	00000003 00000000 $ExtraAnimationList_80242A00 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242DF8
 {
-	00000002 $NpcSettings_802425B4 ~Vec3f:NPC_80242DF8 % -940 140 -145
+	.NpcID:BonyBeetle_02 $NpcSettings_802425B4 ~Vec3f:NPC_BonyBeetle_02 % -940 140 -145
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80242DF8
-	~AnimationTable:NPC_80242DF8 % .Sprite:BonyBeetle
+	~Movement:NPC_BonyBeetle_02
+	~AnimationTable:NPC_BonyBeetle_02 % .Sprite:BonyBeetle
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242FE8
 {
-	00000003 $NpcSettings_802425B4 ~Vec3f:NPC_80242FE8 % 175 -130 0
+	.NpcID:BonyBeetle_03 $NpcSettings_802425B4 ~Vec3f:NPC_BonyBeetle_03 % 175 -130 0
 	00002C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:4 ~FP:Standard:2 ~CoinBonus:0:4
-	~Movement:NPC_80242FE8
-	~AnimationTable:NPC_80242FE8 % .Sprite:BonyBeetle
+	~Movement:NPC_BonyBeetle_03
+	~AnimationTable:NPC_BonyBeetle_03 % .Sprite:BonyBeetle
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802431D8
 {
-	00000004 $NpcSettings_802427C0 ~Vec3f:NPC_802431D8 % -1000 -160 -150
+	.NpcID:Magikoopa_04 $NpcSettings_802427C0 ~Vec3f:NPC_Magikoopa_04 % -1000 -160 -150
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:5:MapleSyrup:5:ThunderRage:5:StopWatch:5
 	~HP:Standard:2 ~FP:Standard:5 ~CoinBonus:1:3
-	~Movement:NPC_802431D8
-	~AnimationTable:NPC_802431D8 % .Sprite:Magikoopa
+	~Movement:NPC_Magikoopa_04
+	~AnimationTable:NPC_Magikoopa_04 % .Sprite:Magikoopa
 	00000003 00000000 $ExtraAnimationList_802427EC 00000000 % no tattle string
 	%
 	% $NpcGroup_802431D8[1F0]
-	00000005 $NpcSettings_802429A8 ~Vec3f:NPC_802433C8 % 0 -1000 0
+	.NpcID:Magikoopa_05 $NpcSettings_802429A8 ~Vec3f:NPC_Magikoopa_05 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802433C8
-	~AnimationTable:NPC_802433C8 % .Sprite:Magikoopa
+	~Movement:NPC_Magikoopa_05
+	~AnimationTable:NPC_Magikoopa_05 % .Sprite:Magikoopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2568,12 +2575,12 @@ MISSING: 802429D4 to 80242A00 (000029D4 to 00002A00)
    40:  	Set   *Var3  FFFFFEED
    50:  	Exec  $Script_80243600 *VarA
    60:  	Call  SetPlayerJumpscale    ( *Fixed[0.7] )
-   70:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80243700 00000014 )
+   70:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80243700  20` )
    8C:  Else
    94:  	Set   *Var3  00000000
    A4:  	Exec  $Script_80243600 *VarA
    B4:  	Call  SetPlayerJumpscale    ( *Fixed[1.1] )
-   C4:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80243754 00000028 )
+   C4:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80243754  40` )
    E0:  EndIf
    E8:  Kill  *VarA
    F4:  Call  SetPlayerActionState  ( .ActionState:Idle )

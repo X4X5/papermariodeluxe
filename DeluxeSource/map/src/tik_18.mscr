@@ -1,6 +1,9 @@
 % Script File: tik_18.mscr
 % Decoded from: 0 to 1F00 (tik_18)
 
+#define .NpcID:Goomba_00            00
+#define .NpcID:SpikedGoomba_01      01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -557,8 +560,8 @@ PADDING: 8024073C to 80240740 (0000073C to 00000740)
 {
     0:  Set   *GB_WorldLocation  .Location:ToadTownTunnels
    10:  Call  SetSpriteShading  ( .Shading:tik_18 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80241D44 )
@@ -871,7 +874,7 @@ PADDING: 802415B4 to 802415C0 (000015B4 to 000015C0)
   1A0:  	Call  SetNpcRotation    ( .Npc:Self 00000000 00000000 00000000 )
   1BC:  EndThread
   1C4:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.7] )
-  1D8:  Call  NpcJump0  ( .Npc:Self 000000BE FFFFFFF6 FFFFFFF6 00000019 )
+  1D8:  Call  NpcJump0  ( .Npc:Self  190`  -10`  -10`  25` )
   1F8:  Call  SetNpcAnimation   ( .Npc:Self 0027010B )
   20C:  Wait  20`
   218:  Call  SetNpcAnimation   ( .Npc:Self 00270101 )
@@ -882,7 +885,7 @@ PADDING: 802415B4 to 802415C0 (000015B4 to 000015C0)
 
 #new:Script $Script_Init_80241908
 {
-    0:  Call  SetNpcPos ( .Npc:Self 00000096 0000004C FFFFFFC1 )
+    0:  Call  SetNpcPos ( .Npc:Self  150`  76`  -63` )
    1C:  Call  SetNpcRotation    ( .Npc:Self FFFFFFAB 00000000 00000000 )
    38:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_802416B8 )
    4C:  Return
@@ -891,23 +894,23 @@ PADDING: 802415B4 to 802415C0 (000015B4 to 000015C0)
 
 #new:NpcGroup $NpcGroup_80241964
 {
-	00000000 $NpcSettings_80241610 ~Vec3f:NPC_80241964 % -60 -10 -30
+	.NpcID:Goomba_00 $NpcSettings_80241610 ~Vec3f:NPC_Goomba_00 % -60 -10 -30
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:20:DizzyDial:5:SleepySheep:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80241964
-	~AnimationTable:NPC_80241964 % .Sprite:Goomba
+	~Movement:NPC_Goomba_00
+	~AnimationTable:NPC_Goomba_00 % .Sprite:Goomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241B54
 {
-	00000001 $NpcSettings_8024168C ~Vec3f:NPC_80241B54 % 30 -10 -20
+	.NpcID:SpikedGoomba_01 $NpcSettings_8024168C ~Vec3f:NPC_SpikedGoomba_01 % 30 -10 -20
 	00002C00 $Script_Init_80241908 00000000 00000000 0000010E
 	~Items:20:DizzyDial:5:SleepySheep:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80241B54
-	~AnimationTable:NPC_80241B54 % .Sprite:SpikedGoomba
+	~Movement:NPC_SpikedGoomba_01
+	~AnimationTable:NPC_SpikedGoomba_01 % .Sprite:SpikedGoomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

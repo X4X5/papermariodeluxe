@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Map name="jan_02" background="yos_bg" textures="jan_tex">
 	<ModelTree>
 		<Node name="Root" id="86">
@@ -280,12 +280,12 @@
 				<Node name="Entry1" id="0"/>
 			</Node>
 			<Node name="NPCs" id="8">
-				<Node name="NPC_80246DC4" id="2"/>
-				<Node name="NPC_80246FB4" id="3"/>
-				<Node name="NPC_802471A4" id="4"/>
-				<Node name="NPC_80247394" id="5"/>
-				<Node name="NPC_80247584" id="6"/>
-				<Node name="NPC_80247774" id="7"/>
+				<Node name="VillageLeader_00" id="2"/>
+				<Node name="LeadersFriend_01" id="3"/>
+				<Node name="Yoshi_02" id="4"/>
+				<Node name="Yoshi_03" id="5"/>
+				<Node name="Yoshi_04" id="6"/>
+				<Node name="ChuckQuizmo_05" id="7"/>
 			</Node>
 			<Node name="Entities" id="A">
 				<Node name="Entity80247990" id="9"/>
@@ -9722,32 +9722,32 @@
 			<MapObject name="NPCs" id="8"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-150,15,300" yaw="90.000000">
-			<MapObject name="NPC_80247774" id="7"/>
+			<MapObject name="ChuckQuizmo_05" id="7"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="AF" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="600,0,-150" yaw="270.000000">
-			<MapObject name="NPC_80247584" id="6"/>
+			<MapObject name="Yoshi_04" id="6"/>
 			<Movement type="Patrol" data="2,258,0,FFFFFF6A,1E5,0,FFFFFF24,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,FFFF8001,258,0,FFFFFF6A,64,0,0,1,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="96" palette="2" animations="1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="180,0,-520" yaw="270.000000">
-			<MapObject name="NPC_80247394" id="5"/>
+			<MapObject name="Yoshi_03" id="5"/>
 			<Movement type="Patrol" data="3,B4,0,FFFFFDF8,A,0,FFFFFDF8,64,0,FFFFFDA8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,FFFF8001,5,0,FFFFFDD6,64,0,0,1,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="96" palette="1" animations="1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-520,0,-270" yaw="90.000000">
-			<MapObject name="NPC_802471A4" id="4"/>
+			<MapObject name="Yoshi_02" id="4"/>
 			<Movement type="Patrol" data="2,FFFFFDF8,0,FFFFFEF2,FFFFFE5C,0,FFFFFEF2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,FFFF8001,FFFFFDF8,0,FFFFFEF2,64,0,0,1,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="96" palette="4" animations="1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="172,30,418" yaw="90.000000">
-			<MapObject name="NPC_80246FB4" id="3"/>
+			<MapObject name="LeadersFriend_01" id="3"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="C3" palette="0" animations="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="323,30,412" yaw="270.000000">
-			<MapObject name="NPC_80246DC4" id="2"/>
+			<MapObject name="VillageLeader_00" id="2"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="C2" palette="0" animations="3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3"/>
 		</Marker>

@@ -1,6 +1,11 @@
 % Script File: kpa_17.mscr
 % Decoded from: 0 to 16A0 (kpa_17)
 
+#define .NpcID:Toad_00              00
+#define .NpcID:Toad_01              01
+#define .NpcID:ToadGuard_02         02
+#define .NpcID:ToadMinister_03      03
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 % 1042.0  250.0 -496.0   90.0
@@ -96,8 +101,8 @@ PADDING: 802401AC to 802401B0 (000001AC to 000001B0)
    30:  Set   *AreaByte[3]  00000000
    40:  Set   *AreaByte[4]  00000000
    50:  Call  SetSpriteShading  ( .Shading:None )
-   60:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   80:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   60:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   80:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    9C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    B0:  Call  SetCamEnabled     ( .Cam:Default .True )
    C4:  Call  MakeNpcs  ( .True $NpcGroupList_80241674 )
@@ -129,15 +134,15 @@ MISSING: 8024049C to 802404C8 (0000049C to 000004C8)
 
 #new:Script $Script_802404C8
 {
-    0:  Call  UseSettingsFrom   ( .Cam:Default 00000412 0000001E FFFFFE10 )
-   1C:  Call  SetPanTarget      ( .Cam:Default 00000412 0000001E FFFFFE10 )
+    0:  Call  UseSettingsFrom   ( .Cam:Default  1042`  30`  -496` )
+   1C:  Call  SetPanTarget      ( .Cam:Default  1042`  30`  -496` )
    38:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    4C:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    64:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
    78:  Call  DisablePlayerInput    ( .True )
    88:  Call  DisablePlayerPhysics  ( .True )
    98:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   B0:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+   B0:  Call  InterpPlayerYaw   (  270`  0` )
    C4:  Wait  60`
    D0:  Call  PartnerIsFlying   ( *Var0 )
    E0:  If  *Var0  ==  .True
@@ -153,28 +158,28 @@ MISSING: 8024049C to 802404C8 (0000049C to 000004C8)
   180:  	Call  SetPlayerPos  ( *Var0 *Var1 *Var2 )
   198:  	Wait  1`
   1A4:  	If  *Var1  <=  0000001E
-  1B4:  		Call  SetPlayerPos      ( *Var0 0000001E *Var2 )
+  1B4:  		Call  SetPlayerPos      ( *Var0  30` *Var2 )
   1CC:  		Call  PlaySoundAtPlayer ( 000003FB 00000000 )
   1E0:  		BreakLoop
   1E8:  	EndIf
   1F0:  EndLoop
   1F8:  Call  SetPlayerAnimation    ( 00080018 )
   208:  Thread
-  210:  	Call  ShakeCam  ( .Cam:Default 00000000 00000014 *Fixed[0.6] )
+  210:  	Call  ShakeCam  ( .Cam:Default 00000000  20` *Fixed[0.6] )
   22C:  EndThread
   234:  Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  244:  Call  PlayerJump1   ( 00000406 0000001E FFFFFE10 0000000A )
+  244:  Call  PlayerJump1   (  1030`  30`  -496`  10` )
   260:  Call  SetPlayerAnimation    ( 00010002 )
   270:  Wait  1`
   27C:  Call  DisablePlayerPhysics  ( .False )
   28C:  Wait  1`
-  298:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
+  298:  Call  InterpPlayerYaw       (  90`  0` )
   2AC:  Wait  5`
   2B8:  Call  DisablePlayerPhysics  ( .True )
   2C8:  Wait  1`
   2D4:  Call  SetPlayerAnimation    ( 0001002A )
   2E4:  Wait  1`
-  2F0:  Call  ShowMessageAtScreenPos    ( 00130007 000003E8 00000000 ) % Gaaaah ha ha ha ha!! You fell for it, worm! You'll ...
+  2F0:  Call  ShowMessageAtScreenPos    ( 00130007  1000`  0` ) % Gaaaah ha ha ha ha!! You fell for it, worm! You'll ...
   308:  Call  SetPlayerAnimation    ( 00010002 )
   318:  Wait  10`
   324:  Call  DisablePlayerPhysics  ( .False )
@@ -288,8 +293,8 @@ MISSING: 8024049C to 802404C8 (0000049C to 000004C8)
 #new:Script $Script_Init_80240D54
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80240978 )
-   14:  Call  SetNpcPos ( .Npc:Self 0000032D 0000001E FFFFFE76 )
-   30:  Call  InterpNpcYaw      ( .Npc:Self 0000010E 00000000 )
+   14:  Call  SetNpcPos ( .Npc:Self  813`  30`  -394` )
+   30:  Call  InterpNpcYaw      ( .Npc:Self  270`  0` )
    48:  Return
    50:  End
 }
@@ -297,8 +302,8 @@ MISSING: 8024049C to 802404C8 (0000049C to 000004C8)
 #new:Script $Script_Init_80240DAC
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80240A60 )
-   14:  Call  SetNpcPos ( .Npc:Self 00000366 0000001E FFFFFE2F )
-   30:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+   14:  Call  SetNpcPos ( .Npc:Self  870`  30`  -465` )
+   30:  Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
    48:  Return
    50:  End
 }
@@ -306,8 +311,8 @@ MISSING: 8024049C to 802404C8 (0000049C to 000004C8)
 #new:Script $Script_Init_80240E04
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80240B48 )
-   14:  Call  SetNpcPos ( .Npc:Self 000003A2 0000001E FFFFFE70 )
-   30:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+   14:  Call  SetNpcPos ( .Npc:Self  930`  30`  -400` )
+   30:  Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
    48:  Return
    50:  End
 }
@@ -315,43 +320,43 @@ MISSING: 8024049C to 802404C8 (0000049C to 000004C8)
 #new:Script $Script_Init_80240E5C
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80240C30 )
-   14:  Call  SetNpcPos ( .Npc:Self 0000044C 0000001E FFFFFE3E )
-   30:  Call  InterpNpcYaw      ( .Npc:Self 0000010E 00000000 )
+   14:  Call  SetNpcPos ( .Npc:Self  1100`  30`  -450` )
+   30:  Call  InterpNpcYaw      ( .Npc:Self  270`  0` )
    48:  Return
    50:  End
 }
 
 #new:NpcGroup $NpcGroup_80240EB4
 {
-	00000000 $NpcSettings_80240470 ~Vec3f:NPC_80240EB4 % 0 -1000 0
+	.NpcID:Toad_00 $NpcSettings_80240470 ~Vec3f:NPC_Toad_00 % 0 -1000 0
 	00000D01 $Script_Init_80240D54 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80240EB4
-	~AnimationTable:NPC_80240EB4 % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 001A0113 % This Toad worked in the castle. Even though he's i ...
 	%
 	% $NpcGroup_80240EB4[1F0]
-	00000001 $NpcSettings_80240470 ~Vec3f:NPC_802410A4 % 0 -1000 0
+	.NpcID:Toad_01 $NpcSettings_80240470 ~Vec3f:NPC_Toad_01 % 0 -1000 0
 	00000D01 $Script_Init_80240DAC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802410A4
-	~AnimationTable:NPC_802410A4 % .Sprite:Toad
+	~Movement:NPC_Toad_01
+	~AnimationTable:NPC_Toad_01 % .Sprite:Toad
 	00000000 00000000 00000000 001A0114 % This Toad's been captured. He looks like he's all  ...
 	%
 	% $NpcGroup_80240EB4[3E0]
-	00000002 $NpcSettings_80240470 ~Vec3f:NPC_80241294 % 0 -1000 0
+	.NpcID:ToadGuard_02 $NpcSettings_80240470 ~Vec3f:NPC_ToadGuard_02 % 0 -1000 0
 	00000D01 $Script_Init_80240E04 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241294
-	~AnimationTable:NPC_80241294 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_02
+	~AnimationTable:NPC_ToadGuard_02 % .Sprite:ToadGuard
 	00000000 00000000 00000000 001A0115 % He was a soldier at Princess Peach's Castle. He wa ...
 	%
 	% $NpcGroup_80240EB4[5D0]
-	00000003 $NpcSettings_80240470 ~Vec3f:NPC_80241484 % 0 -1000 0
+	.NpcID:ToadMinister_03 $NpcSettings_80240470 ~Vec3f:NPC_ToadMinister_03 % 0 -1000 0
 	00000D01 $Script_Init_80240E5C 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241484
-	~AnimationTable:NPC_80241484 % .Sprite:ToadMinister
+	~Movement:NPC_ToadMinister_03
+	~AnimationTable:NPC_ToadMinister_03 % .Sprite:ToadMinister
 	00000000 00000000 00000000 001A0116 % This is the Toad Minister. Uh... Pleasure to meet  ...
 }
 

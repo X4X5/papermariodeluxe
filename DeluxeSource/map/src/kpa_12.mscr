@@ -1,6 +1,7 @@
 % Script File: kpa_12.mscr
 % Decoded from: 0 to 15D0 (kpa_12)
 
+
 #new:Function_GetTattle $Function_GetTattle
 {
     0:  ADDIU     SP, SP, FFE8
@@ -485,8 +486,8 @@ PADDING: 80240468 to 80240470 (00000468 to 00000470)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GF_KPA16_ShutOffLava  ==  .False
    80:  	Call  EnableGroup   ( ~Model:after .False )

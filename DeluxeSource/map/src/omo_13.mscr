@@ -1,6 +1,10 @@
 % Script File: omo_13.mscr
 % Decoded from: 0 to 3220 (omo_13)
 
+#define .NpcID:ShyGuy_00            00
+#define .NpcID:ShyGuy_01            01
+#define .NpcID:GrooveGuy_02         02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FF30
@@ -1517,8 +1521,8 @@ PADDING: 8024157C to 80241580 (0000157C to 00001580)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GF_OMO13_Defeated_AntiGuy  ==  .True
    80:  	Call  ModifyColliderFlags   ( 00000000 ~Collider:he 7FFFFE00 )
@@ -1737,7 +1741,7 @@ PADDING: 80241AD8 to 80241AE0 (00001AD8 to 00001AE0)
    10:  	Call  SpeakToPlayer ( .Npc:Self 003B0515 003B0515 00000005 000F004D ) % Oh...so good...tart... So yummy...
    30:  	Return
    38:  EndIf
-   40:  Call  AdjustCam ( .Cam:Default *Fixed[5.0] 0000000A *Fixed[300.0] *Fixed[15.0] *Fixed[-7.5] )
+   40:  Call  AdjustCam ( .Cam:Default *Fixed[5.0]  10` *Fixed[300.0] *Fixed[15.0] *Fixed[-7.5] )
    64:  Call  FindItem  ( .Item:LemonCandy *Var0 )
    78:  If  *Var0  ==  FFFFFFFF
    88:  	Thread
@@ -1765,7 +1769,7 @@ PADDING: 80241AD8 to 80241AE0 (00001AD8 to 00001AE0)
   210:  Else
   218:  	Call  SpeakToPlayer     ( .Npc:Self 003B0511 003B0501 00000000 000F004A ) % Sniff sniff... Sniff? Do I smell Lemon Candy? Hey! ...
   238:  	Call  PlaySoundAtNpc    ( .Npc:Self 00000262 00000000 )
-  250:  	Call  ShowEmote ( .Npc:Self .Emote:Exclamation 00000000 0000001E 00000001 00000000 00000000 00000000 00000000 )
+  250:  	Call  ShowEmote ( .Npc:Self .Emote:Exclamation  0`  30` .True  0`  0`  0`  0` )
   280:  	Wait  30`
   28C:  	Call  EndSpeech ( .Npc:Self 003B0511 003B0501 00000000 )
   2A8:  	Wait  15`
@@ -1842,8 +1846,8 @@ PADDING: 80241AD8 to 80241AE0 (00001AD8 to 00001AE0)
   1B8:  		EndIf
   1C0:  	EndIf
   1C8:  	Call  SetNpcSpeed       ( .Npc:Self *Fixed[3.0] )
-  1DC:  	Call  NpcMoveTo ( .Npc:Self *Var0 FFFFFF9C 00000000 )
-  1F8:  	Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+  1DC:  	Call  NpcMoveTo ( .Npc:Self *Var0  -100`  0` )
+  1F8:  	Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
   210:  	Call  SetNpcAnimation   ( .Npc:Self 003B0515 )
   224:  	Call  SetNpcFlagBits    ( .Npc:Self 00000100 .False )
   23C:  	Label  9
@@ -1888,33 +1892,33 @@ PADDING: 80241AD8 to 80241AE0 (00001AD8 to 00001AE0)
 
 #new:NpcGroup $NpcGroup_80242668
 {
-	00000000 $NpcSettings_80241BD8 ~Vec3f:NPC_80242668 % 110 0 -20
+	.NpcID:ShyGuy_00 $NpcSettings_80241BD8 ~Vec3f:NPC_ShyGuy_00 % 110 0 -20
 	00640D01 $Script_Init_802425EC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242668
-	~AnimationTable:NPC_80242668 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_00
+	~AnimationTable:NPC_ShyGuy_00 % .Sprite:ShyGuy
 	00000000 00000000 00000000 001A00BA % He's a guard named Anti Guy. He's all by himself!  ...
 }
 
 #new:NpcGroup $NpcGroup_80242858
 {
-	00000001 $NpcSettings_80241B30 ~Vec3f:NPC_80242858 % 300 0 50
+	.NpcID:ShyGuy_01 $NpcSettings_80241B30 ~Vec3f:NPC_ShyGuy_01 % 300 0 50
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:DizzyDial:2:SuperShroom:2:ThunderBolt:2:DriedShroom:2:SleepySheep:2:POWBlock:2:FrightJar:2
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80242858
-	~AnimationTable:NPC_80242858 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_01
+	~AnimationTable:NPC_ShyGuy_01 % .Sprite:ShyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242A48
 {
-	00000002 $NpcSettings_80241BAC ~Vec3f:NPC_80242A48 % -222 0 35
+	.NpcID:GrooveGuy_02 $NpcSettings_80241BAC ~Vec3f:NPC_GrooveGuy_02 % -222 0 35
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:5:Mystery:5:FrightJar:5
 	~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:0:3
-	~Movement:NPC_80242A48
-	~AnimationTable:NPC_80242A48 % .Sprite:GrooveGuy
+	~Movement:NPC_GrooveGuy_02
+	~AnimationTable:NPC_GrooveGuy_02 % .Sprite:GrooveGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

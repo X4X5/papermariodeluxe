@@ -1,6 +1,7 @@
 % Script File: kzn_06.mscr
 % Decoded from: 0 to 1A10 (kzn_06)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -276,7 +277,7 @@ PADDING: 8024030C to 80240310 (0000030C to 00000310)
    98:  LW        A1, 48 (S0)
    9C:  LW        A2, 4C (S0)
    A0:  LW        A3, 50 (S0)
-   A4:  JAL       80070730
+   A4:  JAL       ~Func:playFX_27
    A8:  LI        A0, 1
         .oAC
    AC:  LW        V0, 70 (S1)
@@ -330,7 +331,7 @@ PADDING: 802403E4 to 802403F0 (000003E4 to 000003F0)
    78:  COPY      A0, V0
    7C:  COPY      A0, V0
    80:  LI        A1, FFFF
-   84:  JAL       8011BC7C
+   84:  JAL       ~Func:set_mdl_custom_gfx_set
    88:  LI        A2, 2
    8C:  LHU       V0, 0 (S3)
    90:  SLT       V0, S0, V0
@@ -346,7 +347,7 @@ PADDING: 802403E4 to 802403F0 (000003E4 to 000003F0)
    B4:  BEQL      A0, R0, .oCC
    B8:  ADDIU     S0, S0, 1
    BC:  LI        A1, FFFF
-   C0:  JAL       8011BC7C
+   C0:  JAL       ~Func:set_mdl_custom_gfx_set
    C4:  LI        A2, 2
    C8:  ADDIU     S0, S0, 1
         .oCC
@@ -533,7 +534,7 @@ PADDING: 802403E4 to 802403F0 (000003E4 to 000003F0)
    48:  COPY      A0, V0
    4C:  COPY      A0, V0
    50:  LI        A1, FFFF
-   54:  JAL       8011BC7C
+   54:  JAL       ~Func:set_mdl_custom_gfx_set
    58:  CLEAR     A2
    5C:  LHU       V0, 0 (S2)
    60:  SLT       V0, S0, V0
@@ -549,7 +550,7 @@ PADDING: 802403E4 to 802403F0 (000003E4 to 000003F0)
    84:  BEQL      A0, R0, .o9C
    88:  ADDIU     S0, S0, 1
    8C:  LI        A1, FFFF
-   90:  JAL       8011BC7C
+   90:  JAL       ~Func:set_mdl_custom_gfx_set
    94:  CLEAR     A2
    98:  ADDIU     S0, S0, 1
         .o9C
@@ -625,7 +626,7 @@ PADDING: 802403E4 to 802403F0 (000003E4 to 000003F0)
    D0:  COPY      S0, V0
    D4:  COPY      A0, S0
    D8:  LI        A1, FFFF
-   DC:  JAL       8011BC7C
+   DC:  JAL       ~Func:set_mdl_custom_gfx_set
    E0:  LI        A2, 3
    E4:  BEQ       S6, R0, .oF8
    E8:  NOP
@@ -699,7 +700,7 @@ PADDING: 802403E4 to 802403F0 (000003E4 to 000003F0)
   1D0:  COPY      S0, V0
   1D4:  COPY      A0, S0
   1D8:  LI        A1, FFFF
-  1DC:  JAL       8011BC7C
+  1DC:  JAL       ~Func:set_mdl_custom_gfx_set
   1E0:  CLEAR     A2
   1E4:  BNE       S6, R0, .o1F8
   1E8:  NOP
@@ -881,8 +882,8 @@ PADDING: 80240A68 to 80240A70 (00000A68 to 00000A70)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading  ( .Shading:kzn_06 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Set   *GF_KZN06_Visited  .True
    80:  ExecWait  $Script_MakeEntities
@@ -932,14 +933,14 @@ PADDING: 80240A68 to 80240A70 (00000A68 to 00000A70)
    84:  If  *GB_StoryProgress  <  .Story:Ch5_LavaStreamBlocked % 1B
    94:  	Call  CreatePushBlockGrid   ( 00000000 ~PushGrid:Grid_80241244 00000000 )
    BC:  	Call  SetPushBlockFallEffect    ( 00000000 $Function_80240310 )
-   D0:  	Call  SetPushBlock  ( 00000000 00000004 00000000 00000001 )
-   EC:  	Call  SetPushBlock  ( 00000000 00000006 00000000 00000001 )
-  108:  	Call  SetPushBlock  ( 00000000 00000008 00000000 00000001 )
+   D0:  	Call  SetPushBlock  ( 00000000  4`  0` 00000001 )
+   EC:  	Call  SetPushBlock  ( 00000000  6`  0` 00000001 )
+  108:  	Call  SetPushBlock  ( 00000000  8`  0` 00000001 )
   124:  Else
   12C:  	Call  CreatePushBlockGrid   ( 00000000 ~PushGrid:Grid_802412DC 00000000 )
-  154:  	Call  SetPushBlock  ( 00000000 00000009 00000000 00000001 )
-  170:  	Call  SetPushBlock  ( 00000000 0000000A 00000000 00000001 )
-  18C:  	Call  SetPushBlock  ( 00000000 0000000B 00000000 00000001 )
+  154:  	Call  SetPushBlock  ( 00000000  9`  0` 00000001 )
+  170:  	Call  SetPushBlock  ( 00000000  10`  0` 00000001 )
+  18C:  	Call  SetPushBlock  ( 00000000  11`  0` 00000001 )
   1A8:  EndIf
   1B0:  Return
   1B8:  End
@@ -1031,7 +1032,7 @@ PADDING: 80240A68 to 80240A70 (00000A68 to 00000A70)
 #new:Script $Script_80241744
 {
     0:  Label  A
-    C:  Call  GetPushBlock  ( 00000000 0000000B 00000000 *Var2 )
+    C:  Call  GetPushBlock  ( 00000000  11`  0` *Var2 )
    28:  If  *Var2  ==  00000000
    38:  	Wait  1`
    44:  	Goto  A

@@ -1,6 +1,7 @@
 % Script File: kzn_10.mscr
 % Decoded from: 0 to 2020 (kzn_10)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -620,17 +621,17 @@ PADDING: 80240328 to 80240330 (00000328 to 00000330)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading  ( .Shading:kzn_10 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Thread
    78:  	Call  GetEntryID    ( *Var0 )
    88:  	If  *Var0  ==  ~Entry:Entry0
-   98:  		Call  UseSettingsFrom   ( .Cam:Default FFFFFE43 FFFFFFF3 00000000 )
-   B4:  		Call  SetPanTarget      ( .Cam:Default FFFFFE43 FFFFFFF3 00000000 )
+   98:  		Call  UseSettingsFrom   ( .Cam:Default  -445`  -13`  0` )
+   B4:  		Call  SetPanTarget      ( .Cam:Default  -445`  -13`  0` )
    D0:  	Else
-   D8:  		Call  UseSettingsFrom   ( .Cam:Default 000001A9 FFFFFF0A 00000000 )
-   F4:  		Call  SetPanTarget      ( .Cam:Default 000001A9 FFFFFF0A 00000000 )
+   D8:  		Call  UseSettingsFrom   ( .Cam:Default  425`  -246`  0` )
+   F4:  		Call  SetPanTarget      ( .Cam:Default  425`  -246`  0` )
   110:  	EndIf
   118:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   12C:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -678,11 +679,11 @@ PADDING: 80240D0C to 80240D10 (00000D0C to 00000D10)
   104:  EndIf
   10C:  Call  GetPlayerTargetYaw    ( *Var0 )
   11C:  If  *Var0  <  000000B4
-  12C:  	Call  InterpPlayerYaw       ( 0000005A 00000001 )
+  12C:  	Call  InterpPlayerYaw       (  90`  1` )
   140:  	Wait  1`
   14C:  	Call  $Function_802404B4    ( 00000014 )
   15C:  Else
-  164:  	Call  InterpPlayerYaw       ( 0000010E 00000001 )
+  164:  	Call  InterpPlayerYaw       (  270`  1` )
   178:  	Wait  1`
   184:  	Call  $Function_802404B4    ( FFFFFFEC )
   194:  EndIf
@@ -741,7 +742,7 @@ PADDING: 80240D0C to 80240D10 (00000D0C to 00000D10)
   1F0:  	Set   *Var2  00000000
   200:  	Call  $Function_8024037C ( )
   20C:  	Sub   *Var2  00000037
-  21C:  	Call  SetPanTarget      ( .Cam:Default *Var3 *Var2 00000000 )
+  21C:  	Call  SetPanTarget      ( .Cam:Default *Var3 *Var2  0` )
   238:  	Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   250:  	Wait  1`
   25C:  EndLoop
@@ -779,7 +780,7 @@ PADDING: 80240D0C to 80240D10 (00000D0C to 00000D10)
 #new:Script $Script_80241424
 {
     0:  Loop
-    C:  	Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[1.0] )
+    C:  	Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[1.0] )
    28:  EndLoop
    30:  Return
    38:  End
@@ -837,8 +838,8 @@ PADDING: 80240D0C to 80240D10 (00000D0C to 00000D10)
   300:  		Default
   308:  			Call  GetPlayerPos      ( *Var1 *Var2 *Var3 )
   320:  			Call  SetPlayerJumpscale    ( *Fixed[2.5] )
-  330:  			Call  PlayerJump1       ( *Var1 *Var2 *Var3 00000008 )
-  34C:  			Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  330:  			Call  PlayerJump1       ( *Var1 *Var2 *Var3  8` )
+  34C:  			Call  InterpPlayerYaw   (  270`  0` )
   360:  			If  *Var0  !=  00000008
   370:  				Wait  3`
   37C:  				Call  SetPlayerAnimation    ( 0001002B )
@@ -848,8 +849,8 @@ PADDING: 80240D0C to 80240D10 (00000D0C to 00000D10)
   3B0:  	EndSwitch
   3B8:  EndThread
   3C0:  Call  PlaySoundAt   ( 000001E3 00000000 FFFFFE2F 00000000 00000000 )
-  3E0:  Call  ShakeCam      ( .Cam:Default 00000000 0000000A *Fixed[2.5] )
-  3FC:  Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[1.2] )
+  3E0:  Call  ShakeCam      ( .Cam:Default 00000000  10` *Fixed[2.5] )
+  3FC:  Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[1.2] )
   418:  Wait  15`
   424:  Call  DisablePlayerInput    ( .False )
   434:  Exec  $Script_80240FB0 *VarA
@@ -898,9 +899,9 @@ PADDING: 80240D0C to 80240D10 (00000D0C to 00000D10)
   6DC:  Set   *AreaFlag[004]  .True
   6EC:  Kill  *MapVar[A]
   6F8:  Thread
-  700:  	Call  ShakeCam  ( .Cam:Default 00000000 00000023 *Fixed[2.0] )
-  71C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000014 *Fixed[1.0] )
-  738:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.5] )
+  700:  	Call  ShakeCam  ( .Cam:Default 00000000  35` *Fixed[2.0] )
+  71C:  	Call  ShakeCam  ( .Cam:Default 00000000  20` *Fixed[1.0] )
+  738:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.5] )
   754:  EndThread
   75C:  Call  StopSound     ( 8000001B )
   76C:  Call  PlaySoundAt   ( 000001E4 00000000 0000019F FFFFFF10 00000000 )

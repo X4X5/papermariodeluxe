@@ -1,6 +1,16 @@
 % Script File: kpa_50.mscr
 % Decoded from: 0 to 36C0 (kpa_50)
 
+#define .NpcID:WorldKoopatrol_00    00
+#define .NpcID:WorldKoopatrol_01    01
+#define .NpcID:HammerBros_10        0A
+#define .NpcID:HammerBros_11        0B
+#define .NpcID:HammerBros_12        0C
+#define .NpcID:HammerBros_13        0D
+#define .NpcID:HammerBros_14        0E
+#define .NpcID:HammerBros_15        0F
+#define .NpcID:HammerBros_16        10
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD0
@@ -676,7 +686,7 @@
   4A4:  LW        A1, 38 (S2)
   4A8:  LW        A2, 3C (S2)
   4AC:  LW        A3, 40 (S2)
-  4B0:  JAL       ~Func:fx_walk_normal
+  4B0:  JAL       ~Func:fx_walk
   4B4:  LI        A0, 2
   4B8:  LIF       F0, -1000.0
   4C0:  SW        R0, 6C (S3)
@@ -784,7 +794,7 @@
   104:  LW        A1, 38 (S0)
   108:  LW        A2, 3C (S0)
   10C:  LW        A3, 40 (S0)
-  110:  JAL       ~Func:fx_walk_normal
+  110:  JAL       ~Func:fx_walk
   114:  LI        A0, 2
   118:  LWC1      F12, 6C (S2)
   11C:  JAL       ~Func:clamp_angle
@@ -940,7 +950,7 @@
   37C:  LW        A1, 38 (S0)
   380:  LW        A2, 3C (S0)
   384:  LW        A3, 40 (S0)
-  388:  JAL       ~Func:fx_walk_normal
+  388:  JAL       ~Func:fx_walk
   38C:  LI        A0, 2
   390:  LIF       F0, -1000.0
   398:  SW        R0, 6C (S1)
@@ -1873,8 +1883,8 @@ PADDING: 80241AF8 to 80241B00 (00001AF8 to 00001B00)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80243460 )
    84:  Call  SetGroupEnabled   ( ~Model:dw1 00000000 )
@@ -1895,7 +1905,7 @@ PADDING: 80241AF8 to 80241B00 (00001AF8 to 00001B00)
    28:  		Call  SetSelfVar    ( 00000000 00000005 )
    3C:  		Call  RemoveNpc     ( .Npc:Self )
    4C:  	Case  ==  .Outcome:PlayerFled % 2
-   58:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   58:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    74:  		Call  80045900  ( 00000001 )
    84:  	Case  ==  .Outcome:EnemyFled % 3
    90:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1992,7 +2002,7 @@ PADDING: 80241AF8 to 80241B00 (00001AF8 to 00001B00)
    D4:  		Call  SetSelfVar    ( 00000000 00000004 )
    E8:  		Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   104:  		Call  PlayEffect    ( ~FX:Steam:Ring *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  148:  		Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  148:  		Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   164:  		Call  SetSelfVar    ( 00000000 00000000 )
   178:  	EndCaseGroup
   180:  	Default
@@ -2050,80 +2060,80 @@ PADDING: 80241AF8 to 80241B00 (00001AF8 to 00001B00)
 
 #new:NpcGroup $NpcGroup_802422F0
 {
-	00000000 $NpcSettings_802422C4 ~Vec3f:NPC_802422F0 % -251 0 -30
+	.NpcID:WorldKoopatrol_00 $NpcSettings_802422C4 ~Vec3f:NPC_WorldKoopatrol_00 % -251 0 -30
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802422F0
-	~AnimationTable:NPC_802422F0 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_00
+	~AnimationTable:NPC_WorldKoopatrol_00 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802424E0
 {
-	00000001 $NpcSettings_802422C4 ~Vec3f:NPC_802424E0 % 100 0 -30
+	.NpcID:WorldKoopatrol_01 $NpcSettings_802422C4 ~Vec3f:NPC_WorldKoopatrol_01 % 100 0 -30
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802424E0
-	~AnimationTable:NPC_802424E0 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_01
+	~AnimationTable:NPC_WorldKoopatrol_01 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802426D0
 {
-	0000000A $NpcSettings_80241F60 ~Vec3f:NPC_802426D0 % 450 0 -30
+	.NpcID:HammerBros_10 $NpcSettings_80241F60 ~Vec3f:NPC_HammerBros_10 % 450 0 -30
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:5:MapleSyrup:5
 	~HP:Standard:4 ~FP:Standard:3 ~CoinBonus:0:3
-	~Movement:NPC_802426D0
-	~AnimationTable:NPC_802426D0 % .Sprite:HammerBros
+	~Movement:NPC_HammerBros_10
+	~AnimationTable:NPC_HammerBros_10 % .Sprite:HammerBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802426D0[1F0]
-	0000000B $NpcSettings_802421F0 ~Vec3f:NPC_802428C0 % 0 -1000 0
+	.NpcID:HammerBros_11 $NpcSettings_802421F0 ~Vec3f:NPC_HammerBros_11 % 0 -1000 0
 	00800C00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802428C0
-	~AnimationTable:NPC_802428C0 % .Sprite:HammerBros
+	~Movement:NPC_HammerBros_11
+	~AnimationTable:NPC_HammerBros_11 % .Sprite:HammerBros
 	00000000 00000000 $ExtraAnimationList_8024221C 00000000 % no tattle string
 	%
 	% $NpcGroup_802426D0[3E0]
-	0000000C $NpcSettings_802421F0 ~Vec3f:NPC_80242AB0 % 0 -1000 0
+	.NpcID:HammerBros_12 $NpcSettings_802421F0 ~Vec3f:NPC_HammerBros_12 % 0 -1000 0
 	00800C00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242AB0
-	~AnimationTable:NPC_80242AB0 % .Sprite:HammerBros
+	~Movement:NPC_HammerBros_12
+	~AnimationTable:NPC_HammerBros_12 % .Sprite:HammerBros
 	00000000 00000000 $ExtraAnimationList_8024221C 00000000 % no tattle string
 	%
 	% $NpcGroup_802426D0[5D0]
-	0000000D $NpcSettings_802421F0 ~Vec3f:NPC_80242CA0 % 0 -1000 0
+	.NpcID:HammerBros_13 $NpcSettings_802421F0 ~Vec3f:NPC_HammerBros_13 % 0 -1000 0
 	00800C00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242CA0
-	~AnimationTable:NPC_80242CA0 % .Sprite:HammerBros
+	~Movement:NPC_HammerBros_13
+	~AnimationTable:NPC_HammerBros_13 % .Sprite:HammerBros
 	00000000 00000000 $ExtraAnimationList_8024221C 00000000 % no tattle string
 	%
 	% $NpcGroup_802426D0[7C0]
-	0000000E $NpcSettings_802421F0 ~Vec3f:NPC_80242E90 % 0 -1000 0
+	.NpcID:HammerBros_14 $NpcSettings_802421F0 ~Vec3f:NPC_HammerBros_14 % 0 -1000 0
 	00800C00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242E90
-	~AnimationTable:NPC_80242E90 % .Sprite:HammerBros
+	~Movement:NPC_HammerBros_14
+	~AnimationTable:NPC_HammerBros_14 % .Sprite:HammerBros
 	00000000 00000000 $ExtraAnimationList_8024221C 00000000 % no tattle string
 	%
 	% $NpcGroup_802426D0[9B0]
-	0000000F $NpcSettings_802421F0 ~Vec3f:NPC_80243080 % 0 -1000 0
+	.NpcID:HammerBros_15 $NpcSettings_802421F0 ~Vec3f:NPC_HammerBros_15 % 0 -1000 0
 	00800C00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243080
-	~AnimationTable:NPC_80243080 % .Sprite:HammerBros
+	~Movement:NPC_HammerBros_15
+	~AnimationTable:NPC_HammerBros_15 % .Sprite:HammerBros
 	00000000 00000000 $ExtraAnimationList_8024221C 00000000 % no tattle string
 	%
 	% $NpcGroup_802426D0[BA0]
-	00000010 $NpcSettings_802421F0 ~Vec3f:NPC_80243270 % 0 -1000 0
+	.NpcID:HammerBros_16 $NpcSettings_802421F0 ~Vec3f:NPC_HammerBros_16 % 0 -1000 0
 	00800C00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243270
-	~AnimationTable:NPC_80243270 % .Sprite:HammerBros
+	~Movement:NPC_HammerBros_16
+	~AnimationTable:NPC_HammerBros_16 % .Sprite:HammerBros
 	00000000 00000000 $ExtraAnimationList_8024221C 00000000 % no tattle string
 }
 

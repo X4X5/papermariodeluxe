@@ -1,6 +1,7 @@
 % Script File: isk_19.mscr
 % Decoded from: 0 to 530 (isk_19)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %  548.0 -910.0  182.0   21.0
@@ -26,7 +27,7 @@
    60:  		Wait  20`
    6C:  		SetGroup  00000000
    78:  		Call  SetTimeFreezeMode ( 00000001 )
-   88:  		Call  ShowMessageAtScreenPos    ( 000D00E1 000000A0 00000028 ) % This is your final warning! Enough of this foolish ...
+   88:  		Call  ShowMessageAtScreenPos    ( 000D00E1  160`  40` ) % This is your final warning! Enough of this foolish ...
    A0:  		Set   *GF_ISK19_FinalWarning  .True
    B0:  		Call  DisablePlayerInput        ( .False )
    C0:  		Call  SetTimeFreezeMode ( 00000000 )
@@ -98,8 +99,8 @@ PADDING: 8024021C to 80240220 (0000021C to 00000220)
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:isk_19 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  ExecWait  $Script_MakeEntities

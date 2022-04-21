@@ -1,6 +1,7 @@
 % Script File: kpa_41.mscr
 % Decoded from: 0 to 560 (kpa_41)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 % -340.0    0.0  -70.0   90.0
@@ -131,8 +132,8 @@ PADDING: 802400E8 to 802400F0 (000000E8 to 000000F0)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Exec  $Script_EnterWalk_8024041C
    7C:  Exec  $Script_80240080

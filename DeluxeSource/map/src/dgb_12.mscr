@@ -1,6 +1,7 @@
 % Script File: dgb_12.mscr
 % Decoded from: 0 to A70 (dgb_12)
 
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -261,8 +262,8 @@ PADDING: 802403A8 to 802403B0 (000003A8 to 000003B0)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  ExecWait  $Script_MakeEntities
@@ -372,7 +373,7 @@ PADDING: 80240868 to 80240870 (00000868 to 00000870)
 
 #new:Script $Script_802409BC
 {
-    0:  Set   *VarA  .Item:CastleKey1 % 13
+    0:  Set   *VarA  .Item:TubbaCastleKey % 13
    10:  Set   *VarB  00000001
    20:  Set   *GF_DGB12_Chest_CastleKey1  .True
    30:  ExecWait  $Script_802408DC

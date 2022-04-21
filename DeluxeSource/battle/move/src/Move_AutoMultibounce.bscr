@@ -186,7 +186,7 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    D4:  Call  80273444      ( *Var0 00000000 00000000 )
    EC:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   104:  Wait  1`
-  110:  Call  AddGoalPos    ( .Actor:Player FFFFFFEC 00000000 00000000 )
+  110:  Call  AddGoalPos    ( .Actor:Player  -20`  0`  0` )
   12C:  Call  80273444      ( 00000006 00000000 00000002 )
   144:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   15C:  Wait  5`
@@ -216,7 +216,7 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    D4:  Call  80273444      ( *Var0 00000000 00000000 )
    EC:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   104:  Wait  1`
-  110:  Call  AddGoalPos    ( .Actor:Player FFFFFFE2 00000000 00000000 )
+  110:  Call  AddGoalPos    ( .Actor:Player  -30`  0`  0` )
   12C:  Call  80273444      ( 00000006 00000000 00000002 )
   144:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   15C:  Wait  2`
@@ -246,7 +246,7 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    D4:  Call  80273444      ( *Var0 00000000 00000000 )
    EC:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   104:  Wait  1`
-  110:  Call  AddGoalPos    ( .Actor:Player FFFFFFEC 00000000 00000000 )
+  110:  Call  AddGoalPos    ( .Actor:Player  -20`  0`  0` )
   12C:  Call  80273444      ( 00000006 00000000 00000002 )
   144:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   15C:  Wait  2`
@@ -277,7 +277,7 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    D4:  Call  80273444      ( *Var0 00000000 00000000 )
    EC:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   104:  Wait  1`
-  110:  Call  AddGoalPos    ( .Actor:Player FFFFFFEC 00000000 00000000 )
+  110:  Call  AddGoalPos    ( .Actor:Player  -20`  0`  0` )
   12C:  Call  80273444      ( 00000006 00000000 00000002 )
   144:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   15C:  Wait  2`
@@ -309,18 +309,18 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    E8:  Call  $Function_802A1000 ( )
    F4:  Call  80273444  ( *Var0 00000000 00000000 )
   10C:  ChildThread
-  114:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[1.0] )
+  114:  	Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[1.0] )
   130:  EndChildThread
-  138:  Call  AddGoalPos    ( .Actor:Player FFFFFFE2 00000000 00000000 )
+  138:  Call  AddGoalPos    ( .Actor:Player  -30`  0`  0` )
   154:  Call  80273444      ( 00000008 00000000 00000002 )
   16C:  ChildThread
-  174:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[1.0] )
+  174:  	Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[1.0] )
   190:  EndChildThread
-  198:  Call  AddGoalPos    ( .Actor:Player FFFFFFEC 00000000 00000000 )
+  198:  Call  AddGoalPos    ( .Actor:Player  -20`  0`  0` )
   1B4:  Call  SetGoalPos    ( .Actor:Player *Var0 *Var1 *Var2 )
   1D0:  Call  80273444      ( 00000006 00000000 00000002 )
   1E8:  ChildThread
-  1F0:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[1.0] )
+  1F0:  	Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[1.0] )
   20C:  EndChildThread
   214:  Call  SetGoalToHome ( .Actor:Player )
   224:  Call  80273444      ( 00000004 00000000 00000002 )
@@ -336,7 +336,7 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    2C:  Call  SetAnimation      ( .Actor:Player 00000000 0001000C )
    44:  Wait  2`
    50:  ChildThread
-   58:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000005 *Fixed[1.0] )
+   58:  	Call  ShakeCam  ( .Cam:Battle 00000000  5` *Fixed[1.0] )
    74:  EndChildThread
    7C:  Call  PlaySoundAtActor  ( .Actor:Player 00000162 )
    90:  Call  SetAnimation      ( .Actor:Player 00000000 00010030 )
@@ -450,7 +450,7 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    10:  Call  SetBattleFlagBits ( 00001000 .True )
    24:  Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
    3C:  Switch  *Var1
-   48:  	Case  ==  00000000 % 0
+   48:  	Case  ==  .Item:Nothing % 0
    54:  		ExecWait  $Script_802A26A8
    60:  	Case  ==  .Item:Jump % 1
    6C:  		ExecWait  $Script_802A2EC0
@@ -480,19 +480,19 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    CC:  	Case  >  .False
    D8:  		If  *Flag[00]  ==  .False
    E8:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015A 00000000 )
-  104:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000001 00000070 )
+  104:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000001 00000070 )
   128:  		Else
   130:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015A 00000000 )
-  14C:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000001 00000070 )
+  14C:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000001 00000070 )
   170:  		EndIf
   178:  	Default
   180:  		Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015A 00000000 )
-  19C:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000001 00000030 )
+  19C:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000001 00000030 )
   1C0:  EndSwitch
   1C8:  Call  PlaySoundAtActor  ( .Actor:Player 00000235 )
   1DC:  Switch  *Var0
   1E8:  	CaseOR  ==  .HitResult:Hit % 0
-  1F4:  	CaseOR  ==  00000002 % 2
+  1F4:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   200:  		If  *Flag[00]  ==  .True
   210:  			ExecWait  $Script_802A15D8
   21C:  			Return
@@ -547,18 +547,18 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
   4C4:  	Case  >  .False
   4D0:  		If  *Flag[00]  ==  .False
   4E0:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015A 00000000 )
-  4FC:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000001 00000070 )
+  4FC:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000001 00000070 )
   520:  		Else
   528:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015A 00000000 )
-  544:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000001 000000F0 )
+  544:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000001 000000F0 )
   568:  		EndIf
   570:  	Default
   578:  		If  *Flag[00]  ==  .False
   588:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015A 00000000 )
-  5A4:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000001 00000030 )
+  5A4:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000001 00000030 )
   5C8:  		Else
   5D0:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015A 00000000 )
-  5EC:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000001 000000F0 )
+  5EC:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000001 000000F0 )
   610:  		EndIf
   618:  EndSwitch
   620:  Switch  *VarF
@@ -623,19 +623,19 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    CC:  	Case  >  .False
    D8:  		If  *Flag[00]  ==  .False
    E8:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015B 00000000 )
-  104:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000002 00000070 )
+  104:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000002 00000070 )
   128:  		Else
   130:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015B 00000000 )
-  14C:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000002 00000070 )
+  14C:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000002 00000070 )
   170:  		EndIf
   178:  	Default
   180:  		Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015B 00000000 )
-  19C:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000002 00000030 )
+  19C:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000002 00000030 )
   1C0:  EndSwitch
   1C8:  Call  PlaySoundAtActor  ( .Actor:Player 00000235 )
   1DC:  Switch  *Var0
   1E8:  	CaseOR  ==  .HitResult:Hit % 0
-  1F4:  	CaseOR  ==  00000002 % 2
+  1F4:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   200:  		If  *Flag[00]  ==  .True
   210:  			ExecWait  $Script_802A15D8
   21C:  			Return
@@ -695,18 +695,18 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
   518:  	Case  >  .False
   524:  		If  *Flag[00]  ==  .False
   534:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015B 00000000 )
-  550:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000002 00000070 )
+  550:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000002 00000070 )
   574:  		Else
   57C:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015B 00000000 )
-  598:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000002 000000F0 )
+  598:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000002 000000F0 )
   5BC:  		EndIf
   5C4:  	Default
   5CC:  		If  *Flag[00]  ==  .False
   5DC:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015B 00000000 )
-  5F8:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000002 00000030 )
+  5F8:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000002 00000030 )
   61C:  		Else
   624:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015B 00000000 )
-  640:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000002 000000F0 )
+  640:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000002 000000F0 )
   664:  		EndIf
   66C:  EndSwitch
   674:  Switch  *VarF
@@ -771,19 +771,19 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
    CC:  	Case  >  .False
    D8:  		If  *Flag[00]  ==  .False
    E8:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015C 00000000 )
-  104:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000003 00000070 )
+  104:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000003 00000070 )
   128:  		Else
   130:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015C 00000000 )
-  14C:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000003 00000070 )
+  14C:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000003 00000070 )
   170:  		EndIf
   178:  	Default
   180:  		Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015C 00000000 )
-  19C:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000003 00000030 )
+  19C:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000003 00000030 )
   1C0:  EndSwitch
   1C8:  Call  PlaySoundAtActor  ( .Actor:Player 00000235 )
   1DC:  Switch  *Var0
   1E8:  	CaseOR  ==  .HitResult:Hit % 0
-  1F4:  	CaseOR  ==  00000002 % 2
+  1F4:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   200:  		If  *Flag[00]  ==  .True
   210:  			ExecWait  $Script_802A15D8
   21C:  			Return
@@ -836,18 +836,18 @@ PADDING: 802A10E4 to 802A10F0 (0076A914 to 0076A920)
   4A8:  	Case  >  .False
   4B4:  		If  *Flag[00]  ==  .False
   4C4:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015C 00000000 )
-  4E0:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000003 00000070 )
+  4E0:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000003 00000070 )
   504:  		Else
   50C:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015C 00000000 )
-  528:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000003 000000F0 )
+  528:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000003 000000F0 )
   54C:  		EndIf
   554:  	Default
   55C:  		If  *Flag[00]  ==  .False
   56C:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015C 00000000 )
-  588:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000003 00000030 )
+  588:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000003 00000030 )
   5AC:  		Else
   5B4:  			Call  SetActorSounds    ( .Actor:Player .ActorSound:Hurt 0000015C 00000000 )
-  5D0:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Unblockable|Jump:1000000 00000000 00000000 00000003 000000F0 )
+  5D0:  			Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:MultiBounce|NoOtherDamagePopups|Jump 00000000 00000000 00000003 000000F0 )
   5F4:  		EndIf
   5FC:  EndSwitch
   604:  Switch  *VarF

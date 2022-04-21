@@ -1,6 +1,7 @@
 % Script File: kpa_14.mscr
 % Decoded from: 0 to 1EE0 (kpa_14)
 
+
 #new:Function_GetTattle $Function_GetTattle
 {
     0:  ADDIU     SP, SP, FFE8
@@ -863,14 +864,14 @@ PADDING: 80240988 to 80240990 (00000988 to 00000990)
   160:  						Call  802D2B6C ( )
   16C:  						Call  SetPlayerActionState  ( .ActionState:HitLava )
   17C:  						Wait  10`
-  188:  						Call  UseSettingsFrom       ( .Cam:Default *Var5 0000001E FFFFFF79 )
-  1A4:  						Call  SetPanTarget  ( .Cam:Default *Var5 0000001E FFFFFF79 )
+  188:  						Call  UseSettingsFrom       ( .Cam:Default *Var5  30`  -135` )
+  1A4:  						Call  SetPanTarget  ( .Cam:Default *Var5  30`  -135` )
   1C0:  						Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   1D4:  						Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1EC:  						Call  MakeLerp      ( *Var0 *Var5 0000001E .Easing:Linear )
   208:  						Loop
   214:  							Call  UpdateLerp ( )
-  220:  							Call  SetPlayerPos  ( *Var0 000000FA FFFFFF79 )
+  220:  							Call  SetPlayerPos  ( *Var0  250`  -135` )
   238:  							Wait  1`
   244:  							If  *Var1  ==  00000000
   254:  								BreakLoop
@@ -879,7 +880,7 @@ PADDING: 80240988 to 80240990 (00000988 to 00000990)
   26C:  						Call  MakeLerp  ( 000000FA 0000001E 00000014 .Easing:QuadraticIn )
   288:  						Loop
   294:  							Call  UpdateLerp ( )
-  2A0:  							Call  SetPlayerPos  ( *Var5 *Var0 FFFFFF79 )
+  2A0:  							Call  SetPlayerPos  ( *Var5 *Var0  -135` )
   2B8:  							Wait  1`
   2C4:  							If  *Var1  ==  00000000
   2D4:  								BreakLoop
@@ -889,7 +890,7 @@ PADDING: 80240988 to 80240990 (00000988 to 00000990)
   2FC:  						Call  MakeLerp  ( 0000001E 0000003C 00000005 .Easing:QuadraticIn )
   318:  						Loop
   324:  							Call  UpdateLerp ( )
-  330:  							Call  SetPlayerPos  ( *Var5 *Var0 FFFFFF79 )
+  330:  							Call  SetPlayerPos  ( *Var5 *Var0  -135` )
   348:  							Wait  1`
   354:  							If  *Var1  ==  00000000
   364:  								BreakLoop
@@ -899,7 +900,7 @@ PADDING: 80240988 to 80240990 (00000988 to 00000990)
   388:  						Call  MakeLerp  ( 0000003C 0000001E 00000005 .Easing:QuadraticIn )
   3A4:  						Loop
   3B0:  							Call  UpdateLerp ( )
-  3BC:  							Call  SetPlayerPos  ( *Var5 *Var0 FFFFFF79 )
+  3BC:  							Call  SetPlayerPos  ( *Var5 *Var0  -135` )
   3D4:  							Wait  1`
   3E0:  							If  *Var1  ==  00000000
   3F0:  								BreakLoop
@@ -925,8 +926,8 @@ PADDING: 80240988 to 80240990 (00000988 to 00000990)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  ExecWait  $Script_MakeEntities
    7C:  If  *GF_KPA16_ShutOffLava  ==  .False
@@ -999,7 +1000,7 @@ PADDING: 802418F4 to 80241900 (000018F4 to 00001900)
 
 #new:ItemList $ItemList_8024196C
 {
-	.Item:CastleKey2
+	.Item:BowserCastleKey
 	00000000
 }
 
@@ -1007,7 +1008,7 @@ PADDING: 802418F4 to 80241900 (000018F4 to 00001900)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf

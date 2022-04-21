@@ -1,6 +1,11 @@
 % Script File: dgb_01.mscr
 % Decoded from: 0 to 236C0 (dgb_01)
 
+#define .NpcID:Sentinel_00          00
+#define .NpcID:Sentinel_01          01
+#define .NpcID:Sentinel_02          02
+#define .NpcID:Sentinel_03          03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1873,7 +1878,7 @@ PADDING: 80240114 to 80240120 (00000114 to 00000120)
   254:  LI        V0, 10
   258:  JAL       ~Func:disable_player_input
   25C:  NOP
-  260:  JAL       800EF628
+  260:  JAL       ~Func:partner_disable_input
   264:  NOP
   268:  LI        V0, 14
   26C:  BEQ       R0, R0, .o278
@@ -2088,7 +2093,7 @@ PADDING: 80240114 to 80240120 (00000114 to 00000120)
         .o58
    58:  JAL       ~Func:enable_player_input
    5C:  NOP
-   60:  JAL       800EF600
+   60:  JAL       ~Func:partner_enable_input
    64:  NOP
    68:  LI        V0, 10
         .o6C
@@ -3538,7 +3543,7 @@ PADDING: 80240114 to 80240120 (00000114 to 00000120)
     8:  JAL       ~Func:increment_status_menu_disabled
     C:  NOP
    10:  LUI       A1, 437F
-   14:  JAL       ~Func:set_transition_stencil_zoom_1
+   14:  JAL       ~Func:set_screen_overlay_params_back
    18:  CLEAR     A0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -3750,7 +3755,7 @@ PADDING: 80243548 to 80243550 (00003548 to 00003550)
 
 #new:ItemList $ItemList_80243C40
 {
-	.Item:CastleKey1
+	.Item:TubbaCastleKey
 	00000000
 }
 
@@ -3758,8 +3763,8 @@ PADDING: 80243548 to 80243550 (00003548 to 00003550)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Set   *GF_Map_TubbasManor  .True
@@ -3821,7 +3826,7 @@ PADDING: 80243EE4 to 80243EF0 (00003EE4 to 00003EF0)
    EC:  	Wait  5`
    F8:  EndThread
   100:  Thread
-  108:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[1.0] )
+  108:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[1.0] )
   124:  EndThread
   12C:  Wait  30`
   138:  Thread
@@ -3831,10 +3836,10 @@ PADDING: 80243EE4 to 80243EF0 (00003EE4 to 00003EF0)
   170:  	EndLoop
   178:  EndThread
   180:  Thread
-  188:  	Call  ShakeCam  ( .Cam:Default 00000000 0000003C *Fixed[1.0] )
+  188:  	Call  ShakeCam  ( .Cam:Default 00000000  60` *Fixed[1.0] )
   1A4:  EndThread
-  1AC:  Call  UseSettingsFrom   ( .Cam:Default 00000190 000001A4 00000000 )
-  1C8:  Call  SetPanTarget  ( .Cam:Default 00000190 000001A4 00000000 )
+  1AC:  Call  UseSettingsFrom   ( .Cam:Default  400`  420`  0` )
+  1C8:  Call  SetPanTarget  ( .Cam:Default  400`  420`  0` )
   1E4:  Call  SetCamDistance    ( .Cam:Default *Fixed[450.0] )
   1F8:  Call  SetCamPitch   ( .Cam:Default *Fixed[20.0] *Fixed[-11.0] )
   210:  Call  SetCamPosB    ( .Cam:Default *Fixed[500.0] *Fixed[0.0] )
@@ -3863,7 +3868,7 @@ PADDING: 80243EE4 to 80243EF0 (00003EE4 to 00003EF0)
   3C0:  Call  SetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
   3DC:  Wait  1`
   3E8:  Call  EnablePartnerAI ( )
-  3F4:  Call  ShakeCam  ( .Cam:Default 00000000 00000014 *Fixed[1.0] )
+  3F4:  Call  ShakeCam  ( .Cam:Default 00000000  20` *Fixed[1.0] )
   410:  Call  LoadAnimatedModel ( 00000000 $AnimatedModelTree_80252F4C )
   424:  Call  PlayModelAnimation    ( 00000000 $ModelAnimation_802539A0 )
   438:  Call  SetAnimatedModelRootPosition  ( 00000000 00000000 00000000 00000000 )
@@ -3896,15 +3901,15 @@ PADDING: 80243EE4 to 80243EF0 (00003EE4 to 00003EF0)
   5B0:  	Call  SetGroupEnabled       ( ~Model:g87 00000000 )
   5C4:  	Call  SetPlayerAnimation    ( 00080013 )
   5D4:  	Call  SetPlayerJumpscale    ( *Fixed[0.5] )
-  5E4:  	Call  PlayerJump1   ( 00000079 000000D2 00000000 0000003C )
+  5E4:  	Call  PlayerJump1   (  121`  210`  0`  60` )
   600:  	Wait  10`
   60C:  	Call  SetPlayerAnimation    ( 0008001F )
   61C:  	Wait  20`
   628:  	Call  SetPlayerAnimation    ( .PlayerAnim:RunPanic )
   638:  	Call  SetPlayerSpeed        ( *Fixed[8.0] )
-  648:  	Call  PlayerMoveTo  ( 0000019C FFFFFFE3 00000000 )
+  648:  	Call  PlayerMoveTo  (  412`  -29`  0` )
   660:  	Wait  10`
-  66C:  	Call  InterpPlayerYaw       ( 0000010E 00000000 )
+  66C:  	Call  InterpPlayerYaw       (  270`  0` )
   680:  	Call  SetPlayerAnimation    ( 00010002 )
   690:  	Call  ModifyColliderFlags   ( 00000001 ~Collider:after 7FFFFE00 )
   6A8:  	Call  DisablePlayerPhysics  ( .False )
@@ -3915,23 +3920,23 @@ PADDING: 80243EE4 to 80243EF0 (00003EE4 to 00003EF0)
   6F4:  	Sub   *Var1  000000D2
   704:  	Wait  1`
   710:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.5] )
-  724:  	Call  NpcJump1  ( .Npc:Partner 00000097 *Var1 00000000 0000003C )
+  724:  	Call  NpcJump1  ( .Npc:Partner  151` *Var1  0` 0000003C )
   744:  	Wait  30`
   750:  	Call  EnablePartnerAI ( )
   75C:  EndThread
-  764:  Call  ShakeCam  ( .Cam:Default 00000000 0000012C *Fixed[1.0] )
+  764:  Call  ShakeCam  ( .Cam:Default 00000000  300` *Fixed[1.0] )
   780:  Call  StopSound ( 8000005D )
   790:  Thread
   798:  	Call  SetNpcAnimation   ( 00000004 006A000D )
   7AC:  	Call  SetNpcSpeed       ( 00000004 *Fixed[3.0] )
-  7C0:  	Call  NpcMoveTo ( 00000004 000000B0 00000000 00000000 )
+  7C0:  	Call  NpcMoveTo ( 00000004  176`  0`  0` )
   7DC:  EndThread
   7E4:  Thread
   7EC:  	Call  PlaySoundAtNpc    ( 00000004 000020F6 00000000 )
-  804:  	Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.3] )
+  804:  	Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.3] )
   820:  	Wait  5`
   82C:  	Call  PlaySoundAtNpc    ( 00000004 000020F6 00000000 )
-  844:  	Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[0.15] )
+  844:  	Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[0.15] )
   860:  	Wait  8`
   86C:  EndThread
   874:  Wait  20`
@@ -3947,23 +3952,23 @@ PADDING: 80243EE4 to 80243EF0 (00003EE4 to 00003EF0)
   944:  Thread
   94C:  	Wait  30`
   958:  	Call  SetNpcAnimation   ( 00000004 006A000D )
-  96C:  	Call  SetNpcPos     ( 00000004 00000089 000000F4 00000023 )
+  96C:  	Call  SetNpcPos     ( 00000004  137`  244`  35` )
   988:  	Call  SetNpcSpeed   ( 00000004 *Fixed[3.0] )
-  99C:  	Call  NpcMoveTo     ( 00000004 000001D6 00000000 00000000 )
-  9B8:  	Call  ShakeCam      ( .Cam:Default 00000000 0000000A *Fixed[3.0] )
+  99C:  	Call  NpcMoveTo     ( 00000004  470`  0`  0` )
+  9B8:  	Call  ShakeCam      ( .Cam:Default 00000000  10` *Fixed[3.0] )
   9D4:  EndThread
   9DC:  Thread
   9E4:  	Loop
   9F0:  		Call  PlaySoundAtNpc    ( 00000004 000020F6 00000000 )
-  A08:  		Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.3] )
+  A08:  		Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.3] )
   A24:  		Wait  5`
   A30:  		Call  PlaySoundAtNpc    ( 00000004 000020F6 00000000 )
-  A48:  		Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[0.15] )
+  A48:  		Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[0.15] )
   A64:  		Wait  8`
   A70:  	EndLoop
   A78:  EndThread
   A80:  Call  SetPlayerSpeed        ( *Fixed[3.0] )
-  A90:  Call  PlayerMoveTo  ( 000001D6 00000000 00000000 )
+  A90:  Call  PlayerMoveTo  (  470`  0`  0` )
   AA8:  Call  DisablePlayerInput    ( .False )
   AB8:  Exec  $Script_ExitDoubleDoor_80243820
   AC4:  Return
@@ -3997,7 +4002,7 @@ PADDING: 80243EE4 to 80243EF0 (00003EE4 to 00003EF0)
     C:  SuspendAll  00000001
    18:  Call  ShowKeyChoicePopup ( )
    24:  If  *Var0  ==  00000000
-   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    4C:  	Call  CloseChoicePopup ( )
    58:  	ResumeAll  00000001
    64:  	Return
@@ -4007,7 +4012,7 @@ PADDING: 80243EE4 to 80243EF0 (00003EE4 to 00003EF0)
    90:  	ResumeAll  00000001
    9C:  	Return
    A4:  EndIf
-   AC:  Call  FindKeyItem       ( .Item:CastleKey1 *Var0 )
+   AC:  Call  FindKeyItem       ( .Item:TubbaCastleKey *Var0 )
    C0:  Call  RemoveKeyItemAt   ( *Var0 )
    D0:  Call  CloseChoicePopup ( )
    DC:  Set   *GF_DGB01_UnlockedEastWing  .True
@@ -4116,13 +4121,13 @@ PADDING: 80243EE4 to 80243EF0 (00003EE4 to 00003EF0)
   2D8:  Thread
   2E0:  	Call  SetNpcAnimation   ( .Npc:Partner 00000108 )
   2F4:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  310:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  310:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   330:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  34C:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  34C:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   36C:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  388:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  388:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   3A8:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  3C4:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  3C4:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   3E4:  EndThread
   3EC:  Wait  30`
   3F8:  Call  GotoMap   ( $ASCII_80263508 00000002 ) % dgb_00
@@ -4229,9 +4234,9 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
   114:  	EndIf
   11C:  EndLoop
   124:  Call  SetNpcAnimation   ( 00000004 006A000A )
-  138:  Call  SetNpcPos ( .Npc:Self 00000208 000001A4 00000000 )
-  154:  Call  SetNpcYaw ( .Npc:Self 0000010E )
-  168:  Call  NpcMoveTo ( .Npc:Self 00000186 00000000 0000001E )
+  138:  Call  SetNpcPos ( .Npc:Self  520`  420`  0` )
+  154:  Call  SetNpcYaw ( .Npc:Self  270` )
+  168:  Call  NpcMoveTo ( .Npc:Self  390`  0`  30` )
   184:  Call  SetNpcAnimation   ( 00000004 006A0007 )
   198:  Thread
   1A0:  	Wait  20`
@@ -4262,11 +4267,11 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
   338:  Wait  4`
   344:  Call  SetNpcJumpscale   ( 00000004 *Fixed[1.0] )
   358:  Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
-  374:  Call  NpcJump0  ( 00000004 *Var0 *Var1 *Var2 0000001E )
+  374:  Call  NpcJump0  ( 00000004 *Var0 *Var1 *Var2  30` )
   394:  Call  PlaySoundAtNpc    ( 00000004 000020A0 00000000 )
   3AC:  Call  PlaySound ( 8000005D )
-  3BC:  Call  ShakeCam  ( .Cam:Default 00000000 0000000F *Fixed[4.0] )
-  3D8:  Call  ShakeCam  ( .Cam:Default 00000000 0000000F *Fixed[2.0] )
+  3BC:  Call  ShakeCam  ( .Cam:Default 00000000  15` *Fixed[4.0] )
+  3D8:  Call  ShakeCam  ( .Cam:Default 00000000  15` *Fixed[2.0] )
   3F4:  Call  SetSelfVar        ( 00000000 00000003 )
   408:  Return
   410:  End
@@ -4293,23 +4298,23 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
 #new:Script $Script_Init_80245814
 {
     0:  If  *GB_ARN_Tubba_MapID  !=  00000001
-   10:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   10:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    2C:  	Call  SetNpcFlagBits    ( .Npc:Self 00000004 .True )
    44:  	Return
    4C:  EndIf
    54:  If  *GB_StoryProgress  >=  .Story:Ch3_TubbaChasedMarioInHall % FFFFFFE5
-   64:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   64:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    80:  	Call  SetNpcFlagBits    ( .Npc:Self 00000004 .True )
    98:  	Return
    A0:  EndIf
-   A8:  Call  SetNpcPos     ( 00000004 00000089 000000F4 00000023 )
+   A8:  Call  SetNpcPos     ( 00000004  137`  244`  35` )
    C4:  Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_802457D8 )
    D8:  Call  SetNpcScale   ( .Npc:Self *Fixed[1.25] *Fixed[1.25] *Fixed[1.25] )
    F4:  Thread
    FC:  	Loop
-  108:  		Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[2.0] )
+  108:  		Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[2.0] )
   124:  		Wait  5`
-  130:  		Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[1.0] )
+  130:  		Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[1.0] )
   14C:  		Wait  8`
   158:  	EndLoop
   160:  EndThread
@@ -4333,10 +4338,10 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
    E0:  		BreakLoop
    E8:  	EndIf
    F0:  EndLoop
-   F8:  Call  SetNpcPos ( .Npc:Self 0000022B 00000000 00000000 )
-  114:  Call  SetNpcYaw ( .Npc:Self 0000010E )
+   F8:  Call  SetNpcPos ( .Npc:Self  555`  0`  0` )
+  114:  Call  SetNpcYaw ( .Npc:Self  270` )
   128:  Call  SetNpcAnimation   ( 00000004 006A000A )
-  13C:  Call  NpcMoveTo ( .Npc:Self 000001AA 00000000 0000001E )
+  13C:  Call  NpcMoveTo ( .Npc:Self  426`  0`  30` )
   158:  Thread
   160:  	Wait  20`
   16C:  	Call  MakeLerp  ( 00000050 00000000 0000000A .Easing:Linear )
@@ -4354,15 +4359,15 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
   234:  Thread
   23C:  	Loop
   248:  		Call  PlaySoundAtNpc    ( .Npc:Self 000020F6 00400000 )
-  260:  		Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[2.0] )
+  260:  		Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[2.0] )
   27C:  		Wait  5`
   288:  		Call  PlaySoundAtNpc    ( .Npc:Self 000020F6 00400000 )
-  2A0:  		Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[1.0] )
+  2A0:  		Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[1.0] )
   2BC:  		Wait  8`
   2C8:  	EndLoop
   2D0:  EndThread
   2D8:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[5.0] )
-  2EC:  Call  NpcMoveTo ( .Npc:Self 00000103 000000A7 00000000 )
+  2EC:  Call  NpcMoveTo ( .Npc:Self  259`  167`  0` )
   308:  Call  $Function_802430C0    ( $AISettings_80245298 )
   318:  Return
   320:  End
@@ -4382,7 +4387,7 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
     0:  If  *GB_ARN_Tubba_MapID  !=  00000001
    10:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_8024598C )
    24:  Else
-   2C:  	Call  SetNpcPos ( .Npc:Self 00000088 00000000 FFFFFEB6 )
+   2C:  	Call  SetNpcPos ( .Npc:Self  136`  0`  -330` )
    48:  EndIf
    50:  Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_80245CB4 )
    64:  Call  SetNpcScale   ( .Npc:Self *Fixed[1.25] *Fixed[1.25] *Fixed[1.25] )
@@ -4397,7 +4402,7 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
    20:  	Call  SetNpcFlagBits    ( .Npc:Self 00000048 .True )
    38:  	Call  EnableNpcShadow   ( .Npc:Self .False )
    4C:  	Call  SetNpcAnimation   ( .Npc:Self 00380001 )
-   60:  	Call  SetNpcPos ( .Npc:Self FFFFFFDF FFFFFFFD 00000008 )
+   60:  	Call  SetNpcPos ( .Npc:Self  -33`  -3`  8` )
    7C:  	Call  SetNpcRotation    ( .Npc:Self FFFFFFCE 0000001E 0000000A )
    98:  	Call  BindNpcIdle       ( .Npc:Self 00000000 )
    AC:  EndIf
@@ -4412,7 +4417,7 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
    20:  	Call  SetNpcFlagBits    ( .Npc:Self 00000048 .True )
    38:  	Call  EnableNpcShadow   ( .Npc:Self .False )
    4C:  	Call  SetNpcAnimation   ( .Npc:Self 00380001 )
-   60:  	Call  SetNpcPos ( .Npc:Self FFFFFE1A 000000B6 0000001C )
+   60:  	Call  SetNpcPos ( .Npc:Self  -486`  182`  28` )
    7C:  	Call  SetNpcRotation    ( .Npc:Self FFFFFFF6 00000032 00000000 )
    98:  	Call  BindNpcIdle       ( .Npc:Self 00000000 )
    AC:  EndIf
@@ -4427,7 +4432,7 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
    20:  	Call  SetNpcFlagBits    ( .Npc:Self 00000048 .True )
    38:  	Call  EnableNpcShadow   ( .Npc:Self .False )
    4C:  	Call  SetNpcAnimation   ( .Npc:Self 00380001 )
-   60:  	Call  SetNpcPos ( .Npc:Self FFFFFF37 00000000 FFFFFF71 )
+   60:  	Call  SetNpcPos ( .Npc:Self  -201`  0`  -143` )
    7C:  	Call  SetNpcRotation    ( .Npc:Self FFFFFFCE 00000000 00000000 )
    98:  	Call  BindNpcIdle       ( .Npc:Self 00000000 )
    AC:  EndIf
@@ -4442,7 +4447,7 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
    20:  	Call  SetNpcFlagBits    ( .Npc:Self 00000048 .True )
    38:  	Call  EnableNpcShadow   ( .Npc:Self .False )
    4C:  	Call  SetNpcAnimation   ( .Npc:Self 00380001 )
-   60:  	Call  SetNpcPos ( .Npc:Self FFFFFECF FFFFFFFF FFFFFFB0 )
+   60:  	Call  SetNpcPos ( .Npc:Self  -305`  -1`  -80` )
    7C:  	Call  SetNpcRotation    ( .Npc:Self FFFFFFBF FFFFFFE2 00000000 )
    98:  	Call  BindNpcIdle       ( .Npc:Self 00000000 )
    AC:  EndIf
@@ -4452,41 +4457,41 @@ MISSING: 80245340 to 8024536C (00005340 to 0000536C)
 
 #new:NpcGroup $NpcGroup_80246090
 {
-	00000000 $NpcSettings_8024526C ~Vec3f:NPC_80246090 % -180 100 230
+	.NpcID:Sentinel_00 $NpcSettings_8024526C ~Vec3f:NPC_Sentinel_00 % -180 100 230
 	00000C00 $Script_Init_80245D80 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246090
-	~AnimationTable:NPC_80246090 % .Sprite:Sentinel
+	~Movement:NPC_Sentinel_00
+	~AnimationTable:NPC_Sentinel_00 % .Sprite:Sentinel
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80246280
 {
-	00000001 $NpcSettings_8024526C ~Vec3f:NPC_80246280 % 180 100 230
+	.NpcID:Sentinel_01 $NpcSettings_8024526C ~Vec3f:NPC_Sentinel_01 % 180 100 230
 	00000C00 $Script_Init_80245E44 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80246280
-	~AnimationTable:NPC_80246280 % .Sprite:Sentinel
+	~Movement:NPC_Sentinel_01
+	~AnimationTable:NPC_Sentinel_01 % .Sprite:Sentinel
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80246470
 {
-	00000002 $NpcSettings_8024526C ~Vec3f:NPC_80246470 % -180 100 -230
+	.NpcID:Sentinel_02 $NpcSettings_8024526C ~Vec3f:NPC_Sentinel_02 % -180 100 -230
 	00000C00 $Script_Init_80245F08 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246470
-	~AnimationTable:NPC_80246470 % .Sprite:Sentinel
+	~Movement:NPC_Sentinel_02
+	~AnimationTable:NPC_Sentinel_02 % .Sprite:Sentinel
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80246660
 {
-	00000003 $NpcSettings_8024526C ~Vec3f:NPC_80246660 % 180 100 -230
+	.NpcID:Sentinel_03 $NpcSettings_8024526C ~Vec3f:NPC_Sentinel_03 % 180 100 -230
 	00000C00 $Script_Init_80245FCC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80246660
-	~AnimationTable:NPC_80246660 % .Sprite:Sentinel
+	~Movement:NPC_Sentinel_03
+	~AnimationTable:NPC_Sentinel_03 % .Sprite:Sentinel
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

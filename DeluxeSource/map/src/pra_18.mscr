@@ -1,6 +1,13 @@
 % Script File: pra_18.mscr
 % Decoded from: 0 to 3390 (pra_18)
 
+#define .NpcID:WorldClubba_00       00
+#define .NpcID:WorldClubba_01       01
+#define .NpcID:WorldClubba_02       02
+#define .NpcID:WorldClubba_03       03
+#define .NpcID:WorldClubba_04       04
+#define .NpcID:WorldClubba_05       05
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -85,7 +92,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
     8:  COPY      S0, A0
     C:  LA        A1, $Function_80240128
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  CLEAR     A0
    20:  LW        V1, 13C (S0)
    24:  SW        V0, 0 (V1)
@@ -246,7 +253,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    1C:  BEQ       V0, R0, .o50
    20:  NOP
    24:  LA        A1, $Function_80240500
-   2C:  JAL       ~Func:create_dynamic_entity_world
+   2C:  JAL       ~Func:create_generic_entity_world
    30:  CLEAR     A0
    34:  LW        V1, 13C (S0)
    38:  SW        V0, 0 (V1)
@@ -527,7 +534,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   224:  COPY      A0, S3
   228:  ADDIU     A1, SP, 120
   22C:  ADDIU     A2, SP, 124
-  230:  JAL       ~Func:player_get_spin_history
+  230:  JAL       ~Func:phys_get_spin_history
   234:  ADDIU     A3, SP, 128
   238:  LW        A2, 124 (SP)
   23C:  LUI       V0, 8000
@@ -736,7 +743,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
         .o8C
    8C:  LA        A0, $Function_80240EB8
         .o94
-   94:  JAL       ~Func:create_dynamic_entity_world
+   94:  JAL       ~Func:create_generic_entity_world
    98:  CLEAR     A1
    9C:  LW        V1, 13C (S0)
    A0:  SW        V0, 4 (V1)
@@ -1086,8 +1093,8 @@ PADDING: 80240FCC to 80240FD0 (00000FCC to 00000FD0)
 {
     0:  Set   *GB_WorldLocation  .Location:CrystalPalace
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000018 00000018 00000028 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  24`  24`  40` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80243350 )
@@ -1471,55 +1478,55 @@ PADDING: 80241934 to 80241940 (00001934 to 00001940)
 
 #new:NpcGroup $NpcGroup_802427B0
 {
-	00000000 $NpcSettings_80241940 ~Vec3f:NPC_802427B0 % 268 0 70
+	.NpcID:WorldClubba_00 $NpcSettings_80241940 ~Vec3f:NPC_WorldClubba_00 % 268 0 70
 	00500D00 $Script_Init_802423B4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802427B0
-	~AnimationTable:NPC_802427B0 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_00
+	~AnimationTable:NPC_WorldClubba_00 % .Sprite:WorldClubba
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802427B0[1F0]
-	00000003 $NpcSettings_80241940 ~Vec3f:NPC_802429A0 % 268 0 70
+	.NpcID:WorldClubba_03 $NpcSettings_80241940 ~Vec3f:NPC_WorldClubba_03 % 268 0 70
 	00404D00 $Script_Init_8024260C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802429A0
-	~AnimationTable:NPC_802429A0 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_03
+	~AnimationTable:NPC_WorldClubba_03 % .Sprite:WorldClubba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242B90
 {
-	00000001 $NpcSettings_80241940 ~Vec3f:NPC_80242B90 % 490 0 70
+	.NpcID:WorldClubba_01 $NpcSettings_80241940 ~Vec3f:NPC_WorldClubba_01 % 490 0 70
 	00500D00 $Script_Init_8024248C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242B90
-	~AnimationTable:NPC_80242B90 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_01
+	~AnimationTable:NPC_WorldClubba_01 % .Sprite:WorldClubba
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242B90[1F0]
-	00000004 $NpcSettings_80241940 ~Vec3f:NPC_80242D80 % 490 0 70
+	.NpcID:WorldClubba_04 $NpcSettings_80241940 ~Vec3f:NPC_WorldClubba_04 % 490 0 70
 	00404D00 $Script_Init_802426A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242D80
-	~AnimationTable:NPC_80242D80 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_04
+	~AnimationTable:NPC_WorldClubba_04 % .Sprite:WorldClubba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242F70
 {
-	00000002 $NpcSettings_80241940 ~Vec3f:NPC_80242F70 % 717 0 70
+	.NpcID:WorldClubba_02 $NpcSettings_80241940 ~Vec3f:NPC_WorldClubba_02 % 717 0 70
 	00500D00 $Script_Init_80242564 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242F70
-	~AnimationTable:NPC_80242F70 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_02
+	~AnimationTable:NPC_WorldClubba_02 % .Sprite:WorldClubba
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242F70[1F0]
-	00000005 $NpcSettings_80241940 ~Vec3f:NPC_80243160 % 717 0 70
+	.NpcID:WorldClubba_05 $NpcSettings_80241940 ~Vec3f:NPC_WorldClubba_05 % 717 0 70
 	00404D00 $Script_Init_80242744 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243160
-	~AnimationTable:NPC_80243160 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_05
+	~AnimationTable:NPC_WorldClubba_05 % .Sprite:WorldClubba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

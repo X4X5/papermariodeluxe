@@ -1,6 +1,11 @@
 % Script File: trd_10.mscr
 % Decoded from: 0 to 2AD0 (trd_10)
 
+#define .NpcID:KoopaBros_00         00
+#define .NpcID:KoopaBros_01         01
+#define .NpcID:KoopaBros_02         02
+#define .NpcID:KoopaBros_03         03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -97,7 +102,7 @@
   118:  LW        A1, C (S0)
   11C:  LW        A2, 10 (S0)
   120:  LW        A3, 14 (S0)
-  124:  JAL       800729B0
+  124:  JAL       ~Func:playFX_83
   128:  LI        A0, 2
   12C:  SW        V0, 50 (S0)
   130:  SH        R0, 4E (S0)
@@ -213,7 +218,7 @@
   178:  LW        A1, 18 (S1)
   17C:  LW        A2, 1C (S1)
   180:  LW        A3, 20 (S1)
-  184:  JAL       800726B0
+  184:  JAL       ~Func:playFX_7B
   188:  LI        A0, 1
   18C:  SW        V0, 54 (S1)
   190:  LW        V1, C (V0)
@@ -448,7 +453,7 @@
    A0:  LW        A1, 18 (S0)
    A4:  LW        A2, 24 (S0)
    A8:  LW        A3, 20 (S0)
-   AC:  JAL       800726B0
+   AC:  JAL       ~Func:playFX_7B
    B0:  LI        A0, 1
    B4:  SW        V0, 54 (S0)
    B8:  LW        V1, C (V0)
@@ -601,15 +606,15 @@ MISSING: 80240814 to 80240850 (00000814 to 00000850)
    B4:  EndSwitch
    BC:  If  *Var0  ==  00000000
    CC:  	Call  DisablePlayerInput    ( .True )
-   DC:  	Call  UseSettingsFrom   ( .Cam:Default FFFFFF79 00000055 00000000 )
+   DC:  	Call  UseSettingsFrom   ( .Cam:Default  -135`  85`  0` )
    F8:  	Call  SetCamSpeed       ( .Cam:Default *Fixed[0.6] )
-  10C:  	Call  SetPanTarget      ( .Cam:Default FFFFFF79 0000001E 00000000 )
+  10C:  	Call  SetPanTarget      ( .Cam:Default  -135`  30`  0` )
   128:  	Call  GetCamDistance    ( .Cam:Default *Var1 )
   13C:  	Sub   *Var1  00000064
   14C:  	Call  SetCamDistance    ( .Cam:Default *Var1 )
   160:  	If  00002710  !=  00002710
   170:  		Call  GetCamPitch   ( .Cam:Default *Var2 *Var3 )
-  188:  		Call  SetCamPitch   ( .Cam:Default *Var2 00002710 )
+  188:  		Call  SetCamPitch   ( .Cam:Default *Var2  10000` )
   1A0:  	EndIf
   1A8:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1C0:  	Call  $Function_8024004C    ( 00000000 000000B4 FFFFFF79 0000000A 00000000 FFFFFF79 00000055 00000000 0000001E 00000000 )
@@ -639,7 +644,7 @@ MISSING: 80240814 to 80240850 (00000814 to 00000850)
   320:  	EndThread
   328:  	Add   *Var1  00000064
   338:  	Call  SetCamDistance        ( .Cam:Default *Var1 )
-  34C:  	Call  SetPanTarget  ( .Cam:Default FFFFFF79 00000000 00000000 )
+  34C:  	Call  SetPanTarget  ( .Cam:Default  -135`  0`  0` )
   368:  	Call  $Function_802405BC    ( 00000002 )
   378:  	Call  GetPlayerPos  ( *Var2 *Var3 *Var4 )
   390:  	Call  UseSettingsFrom       ( .Cam:Default *Var2 *Var3 *Var4 )
@@ -675,8 +680,8 @@ MISSING: 80240814 to 80240850 (00000814 to 00000850)
    48:  		ExecWait  EnterDoubleDoor
    54:  	Case  ==  ~Entry:Entry1
    60:  		Call  DisablePartnerAI  ( 00000000 )
-   70:  		Call  SetNpcPos ( .Npc:Partner FFFFFF03 00000000 00000000 )
-   8C:  		Call  SetNpcYaw ( .Npc:Partner 0000005A )
+   70:  		Call  SetNpcPos ( .Npc:Partner  -253`  0`  0` )
+   8C:  		Call  SetNpcYaw ( .Npc:Partner  90` )
    A0:  		Wait  3`
    AC:  		Call  EnablePartnerAI ( )
    B8:  EndSwitch
@@ -713,8 +718,8 @@ MISSING: 80240814 to 80240850 (00000814 to 00000850)
     0:  Set   *GB_WorldLocation  .Location:KoopaBrosFortress
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  $Function_802407F4 ( )
-   2C:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   4C:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   2C:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   4C:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    68:  Call  SetCamEnabled     ( .Cam:Default .True )
    7C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    90:  Call  MakeNpcs  ( .True $NpcGroupList_8024268C )
@@ -755,16 +760,16 @@ PADDING: 80241118 to 80241120 (00001118 to 00001120)
 #new:Script $Script_NpcAI_80241170
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  SetPlayerPos  ( FFFFFEB3 00000000 00000000 )
-   28:  Call  SetNpcPos     ( .Npc:Partner FFFFFE95 00000000 00000000 )
-   44:  Call  UseSettingsFrom       ( .Cam:Default FFFFFF10 00000000 00000000 )
-   60:  Call  SetPanTarget  ( .Cam:Default FFFFFF10 FFFFFF56 00000000 )
-   7C:  Call  SetCamPitch   ( .Cam:Default 00000012 FFFFFFFD )
+   10:  Call  SetPlayerPos  (  -333`  0`  0` )
+   28:  Call  SetNpcPos     ( .Npc:Partner  -363`  0`  0` )
+   44:  Call  UseSettingsFrom       ( .Cam:Default  -240`  0`  0` )
+   60:  Call  SetPanTarget  ( .Cam:Default  -240`  -170`  0` )
+   7C:  Call  SetCamPitch   ( .Cam:Default  18`  -3` )
    94:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    A8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    C0:  Wait  1`
-   CC:  Call  UseSettingsFrom       ( .Cam:Default FFFFFF10 00000000 00000000 )
-   E8:  Call  SetPanTarget  ( .Cam:Default FFFFFF10 00000000 00000000 )
+   CC:  Call  UseSettingsFrom       ( .Cam:Default  -240`  0`  0` )
+   E8:  Call  SetPanTarget  ( .Cam:Default  -240`  0`  0` )
   104:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.2] )
   118:  Call  PanToTarget   ( .Cam:Default *Fixed[0.5] 00000001 )
   130:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -780,7 +785,7 @@ PADDING: 80241118 to 80241120 (00001118 to 00001120)
   1FC:  	Goto  A
   208:  EndIf
   210:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  220:  Call  PlayerMoveTo  ( FFFFFF24 00000000 00000000 )
+  220:  Call  PlayerMoveTo  (  -220`  0`  0` )
   238:  Call  MakeLerp      ( FFFFFFB0 00000000 0000000A .Easing:Linear )
   254:  Label  B
   260:  Call  UpdateLerp ( )
@@ -791,49 +796,49 @@ PADDING: 80241118 to 80241120 (00001118 to 00001120)
   2C8:  	Goto  B
   2D4:  EndIf
   2DC:  Call  PlaySound     ( 000001C4 )
-  2EC:  Call  SetNpcPos     ( 00000000 FFFFFFE0 00000000 00000000 )
-  308:  Call  NpcMoveTo     ( 00000000 FFFFFFA8 00000000 0000000F )
+  2EC:  Call  SetNpcPos     ( .NpcID:KoopaBros_00  -32`  0`  0` )
+  308:  Call  NpcMoveTo     ( .NpcID:KoopaBros_00  -88`  0`  15` )
   324:  Wait  10`
   330:  Call  802CFD30      ( 00000000 00000005 00000004 00000002 00000001 00000000 )
-  354:  Call  SetNpcAnimation   ( 00000000 0066001E )
+  354:  Call  SetNpcAnimation   ( .NpcID:KoopaBros_00 0066001E )
   368:  Wait  12`
   374:  Call  802CFD30      ( 00000000 00000000 00000000 00000000 00000000 00000000 )
-  398:  Call  SetNpcAnimation   ( 00000000 00660004 )
+  398:  Call  SetNpcAnimation   ( .NpcID:KoopaBros_00 00660004 )
   3AC:  Wait  10`
-  3B8:  Call  SpeakToPlayer ( 00000000 00660002 00660004 00000000 000C00F4 ) % You guys ready?!
-  3D8:  Call  SetNpcPos     ( 00000001 FFFFFFE0 00000000 00000000 )
-  3F4:  Call  NpcMoveTo     ( 00000001 FFFFFFC0 00000000 0000000A )
-  410:  Call  SpeakToPlayer ( 00000001 00660102 00660104 00000000 000C00F5 ) % Hey, Black! What are you doing?! Hurry, man! Shake ...
-  430:  Call  NpcMoveTo     ( 00000001 00000000 00000000 0000000A )
-  44C:  Call  InterpNpcYaw  ( 00000000 FFFFFFF6 00000004 )
-  464:  Call  NpcMoveTo     ( 00000000 00000000 00000000 0000000A )
+  3B8:  Call  SpeakToPlayer ( .NpcID:KoopaBros_00 00660002 00660004 00000000 000C00F4 ) % You guys ready?!
+  3D8:  Call  SetNpcPos     ( .NpcID:KoopaBros_01  -32`  0`  0` )
+  3F4:  Call  NpcMoveTo     ( .NpcID:KoopaBros_01  -64`  0`  10` )
+  410:  Call  SpeakToPlayer ( .NpcID:KoopaBros_01 00660102 00660104 00000000 000C00F5 ) % Hey, Black! What are you doing?! Hurry, man! Shake ...
+  430:  Call  NpcMoveTo     ( .NpcID:KoopaBros_01  0`  0`  10` )
+  44C:  Call  InterpNpcYaw  ( .NpcID:KoopaBros_00  -10`  4` )
+  464:  Call  NpcMoveTo     ( .NpcID:KoopaBros_00  0`  0`  10` )
   480:  Wait  30`
-  48C:  Call  SetNpcPos     ( 00000000 00000000 FFFFFC18 00000000 )
-  4A8:  Call  SetNpcFlagBits    ( 00000000 00000002 .True )
-  4C0:  Call  SetNpcFlagBits    ( 00000000 00000010 .False )
-  4D8:  Call  SetNpcPos     ( 00000001 00000000 FFFFFC18 00000000 )
-  4F4:  Call  SetNpcPos     ( 00000002 00000000 FFFFFC18 00000000 )
-  510:  Call  SetNpcPos     ( 00000003 00000000 FFFFFC18 00000000 )
-  52C:  Call  ShowMessageAtScreenPos    ( 000C00F6 0000012C 00000064 ) % Ow! My shell! Get off!
-  544:  Call  ShowMessageAtScreenPos    ( 000C00F7 0000012C 00000064 ) % Wait... Wait a minute...
-  55C:  Call  ShowMessageAtScreenPos    ( 000C00F8 0000012C 00000064 ) % Whoa!!!
+  48C:  Call  SetNpcPos     ( .NpcID:KoopaBros_00  0`  -1000`  0` )
+  4A8:  Call  SetNpcFlagBits    ( .NpcID:KoopaBros_00 00000002 .True )
+  4C0:  Call  SetNpcFlagBits    ( .NpcID:KoopaBros_00 00000010 .False )
+  4D8:  Call  SetNpcPos     ( .NpcID:KoopaBros_01  0`  -1000`  0` )
+  4F4:  Call  SetNpcPos     ( .NpcID:KoopaBros_02  0`  -1000`  0` )
+  510:  Call  SetNpcPos     ( .NpcID:KoopaBros_03  0`  -1000`  0` )
+  52C:  Call  ShowMessageAtScreenPos    ( 000C00F6  300`  100` ) % Ow! My shell! Get off!
+  544:  Call  ShowMessageAtScreenPos    ( 000C00F7  300`  100` ) % Wait... Wait a minute...
+  55C:  Call  ShowMessageAtScreenPos    ( 000C00F8  300`  100` ) % Whoa!!!
   574:  Call  PlaySoundAt   ( 000001E2 00000000 00000000 00000000 00000000 )
-  594:  Call  ShakeCam      ( .Cam:Default 00000000 00000014 *Fixed[1.0] )
-  5B0:  Call  ShowMessageAtScreenPos    ( 000C00F9 0000012C 00000064 ) % Oh, for the love of... What are you doing, Yellow? ...
+  594:  Call  ShakeCam      ( .Cam:Default 00000000  20` *Fixed[1.0] )
+  5B0:  Call  ShowMessageAtScreenPos    ( 000C00F9  300`  100` ) % Oh, for the love of... What are you doing, Yellow? ...
   5C8:  Wait  30`
-  5D4:  Call  ShowMessageAtScreenPos    ( 000C00FA 0000012C 00000064 ) % OK, hang on... OK! I'm ready, Red!
+  5D4:  Call  ShowMessageAtScreenPos    ( 000C00FA  300`  100` ) % OK, hang on... OK! I'm ready, Red!
   5EC:  Wait  30`
-  5F8:  Call  ShowMessageAtScreenPos    ( 000C00FB 0000012C 00000064 ) % Finally! Let's do this! Remember to look cool, guy ...
+  5F8:  Call  ShowMessageAtScreenPos    ( 000C00FB  300`  100` ) % Finally! Let's do this! Remember to look cool, guy ...
   610:  Wait  10`
-  61C:  Call  ShowMessageAtScreenPos    ( 000C00FC 0000012C 00000064 ) % Yaaaaaaaa!!!
-  634:  Call  UseSettingsFrom   ( .Cam:Default FFFFFF60 00000000 00000000 )
-  650:  Call  SetPanTarget  ( .Cam:Default FFFFFF60 00000000 00000000 )
+  61C:  Call  ShowMessageAtScreenPos    ( 000C00FC  300`  100` ) % Yaaaaaaaa!!!
+  634:  Call  UseSettingsFrom   ( .Cam:Default  -160`  0`  0` )
+  650:  Call  SetPanTarget  ( .Cam:Default  -160`  0`  0` )
   66C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.2] )
   680:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   698:  Set   *AreaFlag[00D]  .True
   6A8:  Wait  60`
   6B4:  Call  DisablePlayerInput        ( .False )
-  6C4:  Call  SetNpcPos     ( 00000000 FFFFFF65 00000000 00000000 )
+  6C4:  Call  SetNpcPos     ( .NpcID:KoopaBros_00  -155`  0`  0` )
   6E0:  Call  StartBossBattle   ( .Song:FakeBowserBattle )
   6F0:  Return
   6F8:  End
@@ -855,9 +860,9 @@ PADDING: 80241118 to 80241120 (00001118 to 00001120)
 {
     0:  Call  SetEncounterStatusFlags   ( 00000002 .True )
    14:  Call  DisablePlayerInput        ( .True )
-   24:  Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
-   40:  Call  SetNpcFlagBits    ( 00000000 00000002 .False )
-   58:  Call  SetNpcFlagBits    ( 00000000 00000010 .True )
+   24:  Call  SetNpcPos ( .NpcID:KoopaBros_00  0`  -1000`  0` )
+   40:  Call  SetNpcFlagBits    ( .NpcID:KoopaBros_00 00000002 .False )
+   58:  Call  SetNpcFlagBits    ( .NpcID:KoopaBros_00 00000010 .True )
    70:  Call  SetMusicTrack     ( 00000000 .Song:KoopaBrosInterlude 00000000 00000008 )
    8C:  Call  GetBattleOutcome  ( *Var0 )
    9C:  Switch  *Var0
@@ -865,34 +870,34 @@ PADDING: 80241118 to 80241120 (00001118 to 00001120)
    B4:  		Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
    CC:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    E0:  		Call  EnableGroup   ( ~Model:nise_koppa .False )
-   F4:  		Call  SetNpcPos     ( 00000000 FFFFFF56 0000001E FFFFFFC9 )
-  110:  		Call  SetNpcPos     ( 00000001 FFFFFF6A 0000001E 00000037 )
-  12C:  		Call  SetNpcPos     ( 00000002 FFFFFF7E 0000001E FFFFFFC9 )
-  148:  		Call  SetNpcPos     ( 00000003 FFFFFF92 0000001E 00000037 )
-  164:  		Call  SetNpcAnimation   ( 00000000 0066001C )
-  178:  		Call  SetNpcAnimation   ( 00000001 0066011C )
-  18C:  		Call  SetNpcAnimation   ( 00000002 0066021C )
-  1A0:  		Call  SetNpcAnimation   ( 00000003 0066031C )
+   F4:  		Call  SetNpcPos     ( .NpcID:KoopaBros_00  -170`  30`  -55` )
+  110:  		Call  SetNpcPos     ( .NpcID:KoopaBros_01  -150`  30`  55` )
+  12C:  		Call  SetNpcPos     ( .NpcID:KoopaBros_02  -130`  30`  -55` )
+  148:  		Call  SetNpcPos     ( .NpcID:KoopaBros_03  -110`  30`  55` )
+  164:  		Call  SetNpcAnimation   ( .NpcID:KoopaBros_00 0066001C )
+  178:  		Call  SetNpcAnimation   ( .NpcID:KoopaBros_01 0066011C )
+  18C:  		Call  SetNpcAnimation   ( .NpcID:KoopaBros_02 0066021C )
+  1A0:  		Call  SetNpcAnimation   ( .NpcID:KoopaBros_03 0066031C )
   1B4:  		Wait  1`
   1C0:  		Thread
   1C8:  			Wait  30`
-  1D4:  			Call  ShowMessageAtScreenPos    ( 000C010B 000000A0 00000028 ) % Whoa!!!
+  1D4:  			Call  ShowMessageAtScreenPos    ( 000C010B  160`  40` ) % Whoa!!!
   1EC:  		EndThread
-  1F4:  		Call  SetNpcJumpscale   ( 00000000 *Fixed[0.3] )
-  208:  		Call  SetNpcJumpscale   ( 00000001 *Fixed[0.3] )
-  21C:  		Call  SetNpcJumpscale   ( 00000002 *Fixed[0.3] )
-  230:  		Call  SetNpcJumpscale   ( 00000003 *Fixed[0.3] )
+  1F4:  		Call  SetNpcJumpscale   ( .NpcID:KoopaBros_00 *Fixed[0.3] )
+  208:  		Call  SetNpcJumpscale   ( .NpcID:KoopaBros_01 *Fixed[0.3] )
+  21C:  		Call  SetNpcJumpscale   ( .NpcID:KoopaBros_02 *Fixed[0.3] )
+  230:  		Call  SetNpcJumpscale   ( .NpcID:KoopaBros_03 *Fixed[0.3] )
   244:  		Thread
-  24C:  			Call  NpcJump0  ( 00000000 FFFFFF56 FFFFFE70 FFFFFF38 0000004B )
+  24C:  			Call  NpcJump0  ( .NpcID:KoopaBros_00  -170`  -400`  -200`  75` )
   26C:  		EndThread
   274:  		Thread
-  27C:  			Call  NpcJump0  ( 00000001 FFFFFF6A FFFFFE70 000000C8 0000004B )
+  27C:  			Call  NpcJump0  ( .NpcID:KoopaBros_01  -150`  -400`  200`  75` )
   29C:  		EndThread
   2A4:  		Thread
-  2AC:  			Call  NpcJump0  ( 00000002 FFFFFF7E FFFFFE70 FFFFFF38 0000004B )
+  2AC:  			Call  NpcJump0  ( .NpcID:KoopaBros_02  -130`  -400`  -200`  75` )
   2CC:  		EndThread
   2D4:  		Thread
-  2DC:  			Call  NpcJump0  ( 00000003 FFFFFF92 FFFFFE70 000000C8 0000004B )
+  2DC:  			Call  NpcJump0  ( .NpcID:KoopaBros_03  -110`  -400`  200`  75` )
   2FC:  		EndThread
   304:  		Thread
   30C:  			Wait  165`
@@ -902,7 +907,7 @@ PADDING: 80241118 to 80241120 (00001118 to 00001120)
   340:  		EndThread
   348:  		Wait  120`
   354:  		Call  PlaySoundAt   ( 000001E2 00000000 00000000 00000000 00000000 )
-  374:  		Call  ShakeCam      ( .Cam:Default 00000000 0000000F *Fixed[0.5] )
+  374:  		Call  ShakeCam      ( .Cam:Default 00000000  15` *Fixed[0.5] )
   390:  		Wait  15`
   39C:  		Set   *GF_TRD10_Defeated_KoopaBros  .True
   3AC:  	Case  ==  .Outcome:PlayerLost % 1
@@ -1058,35 +1063,35 @@ PADDING: 80241118 to 80241120 (00001118 to 00001120)
 
 #new:NpcGroup $NpcGroup_80241ECC
 {
-	00000000 $NpcSettings_80241E1C ~Vec3f:NPC_80241ECC % 0 0 0
+	.NpcID:KoopaBros_00 $NpcSettings_80241E1C ~Vec3f:NPC_KoopaBros_00 % 0 0 0
 	00840D05 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241ECC
-	~AnimationTable:NPC_80241ECC % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_00
+	~AnimationTable:NPC_KoopaBros_00 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241ECC[1F0]
-	00000001 $NpcSettings_80241E48 ~Vec3f:NPC_802420BC % 0 0 0
+	.NpcID:KoopaBros_01 $NpcSettings_80241E48 ~Vec3f:NPC_KoopaBros_01 % 0 0 0
 	00840D05 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802420BC
-	~AnimationTable:NPC_802420BC % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_01
+	~AnimationTable:NPC_KoopaBros_01 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241ECC[3E0]
-	00000002 $NpcSettings_80241E74 ~Vec3f:NPC_802422AC % 0 0 0
+	.NpcID:KoopaBros_02 $NpcSettings_80241E74 ~Vec3f:NPC_KoopaBros_02 % 0 0 0
 	00840D05 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802422AC
-	~AnimationTable:NPC_802422AC % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_02
+	~AnimationTable:NPC_KoopaBros_02 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241ECC[5D0]
-	00000003 $NpcSettings_80241EA0 ~Vec3f:NPC_8024249C % 0 0 0
+	.NpcID:KoopaBros_03 $NpcSettings_80241EA0 ~Vec3f:NPC_KoopaBros_03 % 0 0 0
 	00840D05 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024249C
-	~AnimationTable:NPC_8024249C % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_03
+	~AnimationTable:NPC_KoopaBros_03 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

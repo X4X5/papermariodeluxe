@@ -1,6 +1,10 @@
 % Script File: trd_02.mscr
 % Decoded from: 0 to 3670 (trd_02)
 
+#define .NpcID:Bombomb_00           00
+#define .NpcID:Bombomb_01           01
+#define .NpcID:KoopaTroopa_02       02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1999,10 +2003,10 @@ PADDING: 80241B1C to 80241B20 (00001B1C to 00001B20)
    44:  Call  SetGroupEnabled   ( ~Model:move_saku 00000000 )
    58:  Call  PlaySound ( 80000004 )
    68:  Thread
-   70:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.7] )
-   8C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000140 *Fixed[1.0] )
-   A8:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.7] )
-   C4:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.4] )
+   70:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.7] )
+   8C:  	Call  ShakeCam  ( .Cam:Default 00000000  320` *Fixed[1.0] )
+   A8:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.7] )
+   C4:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.4] )
    E0:  EndThread
    E8:  Wait  20`
    F4:  Thread
@@ -2083,7 +2087,7 @@ PADDING: 80241B1C to 80241B20 (00001B1C to 00001B20)
 
 #new:ItemList $ItemList_8024252C
 {
-	.Item:FortressKey
+	.Item:KoopaFortressKey
 	00000000
 }
 
@@ -2091,8 +2095,8 @@ PADDING: 80241B1C to 80241B20 (00001B1C to 00001B20)
 {
     0:  Set   *GB_WorldLocation  .Location:KoopaBrosFortress
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_802432A0 )
@@ -2146,7 +2150,7 @@ PADDING: 80242888 to 80242890 (00002888 to 00002890)
     C:  SuspendAll  00000001
    18:  Call  ShowKeyChoicePopup ( )
    24:  If  *Var0  ==  00000000
-   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    4C:  	Call  CloseChoicePopup ( )
    58:  	ResumeAll  00000001
    64:  	Return
@@ -2280,34 +2284,34 @@ MISSING: 80242BEC to 80242C18 (00002BEC to 00002C18)
 
 #new:NpcGroup $NpcGroup_80242CD0
 {
-	00000000 $NpcSettings_80242B20 ~Vec3f:NPC_80242CD0 % -70 0 80
+	.NpcID:Bombomb_00 $NpcSettings_80242B20 ~Vec3f:NPC_Bombomb_00 % -70 0 80
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:5:HoneySyrup:5:FireFlower:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80242CD0
-	~AnimationTable:NPC_80242CD0 % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_00
+	~AnimationTable:NPC_Bombomb_00 % .Sprite:Bombomb
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242EC0
 {
-	00000001 $NpcSettings_80242B20 ~Vec3f:NPC_80242EC0 % 140 0 80
+	.NpcID:Bombomb_01 $NpcSettings_80242B20 ~Vec3f:NPC_Bombomb_01 % 140 0 80
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:HoneySyrup:5:FireFlower:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80242EC0
-	~AnimationTable:NPC_80242EC0 % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_01
+	~AnimationTable:NPC_Bombomb_01 % .Sprite:Bombomb
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802430B0
 {
-	00000002 $NpcSettings_80242CA4 ~Vec3f:NPC_802430B0 % 50 187 183
+	.NpcID:KoopaTroopa_02 $NpcSettings_80242CA4 ~Vec3f:NPC_KoopaTroopa_02 % 50 187 183
 	00000C00 00000000 00000000 00000000 00000000
 	~Items:5:Mushroom:5:POWBlock:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_802430B0
-	~AnimationTable:NPC_802430B0 % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_02
+	~AnimationTable:NPC_KoopaTroopa_02 % .Sprite:KoopaTroopa
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

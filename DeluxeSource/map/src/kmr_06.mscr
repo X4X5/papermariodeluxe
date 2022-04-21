@@ -1,6 +1,9 @@
 % Script File: kmr_06.mscr
 % Decoded from: 0 to 28B0 (kmr_06)
 
+#define .NpcID:SpikedGoomba_00      00
+#define .NpcID:Paragoomba_01        01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFC8
@@ -1416,7 +1419,6 @@
 PADDING: 802414F8 to 80241500 (000014F8 to 00001500)
 00000000 00000000
 
-% Origin: HEURISTIC
 #new:Function $Function_80241500
 {
     0:  ADDIU     SP, SP, FF10
@@ -1585,7 +1587,6 @@ PADDING: 802414F8 to 80241500 (000014F8 to 00001500)
   2A4:  ADDIU     SP, SP, F0
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802417A8
 {
     0:  ADDIU     SP, SP, FFD8
@@ -1662,7 +1663,7 @@ PADDING: 802414F8 to 80241500 (000014F8 to 00001500)
    F0:  LI        A0, 1
    F4:  CLEAR     A0
    F8:  LA        A1, $Function_802417A8
-  100:  JAL       ~Func:create_dynamic_entity_world
+  100:  JAL       ~Func:create_generic_entity_world
   104:  SW        V0, 0 (S0)
   108:  COPY      A0, S3
   10C:  LI        A1, *MapVar[A]
@@ -1948,7 +1949,7 @@ PADDING: 802414F8 to 80241500 (000014F8 to 00001500)
    48:  JAL       ~Func:get_variable
    4C:  COPY      S3, V0
    50:  LW        A0, 4 (S2)
-   54:  JAL       ~Func:free_dynamic_entity
+   54:  JAL       ~Func:free_generic_entity
    58:  COPY      S1, V0
    5C:  JAL       ~Func:heap_free
    60:  COPY      A0, S2
@@ -2040,8 +2041,8 @@ PADDING: 80241E2C to 80241E30 (00001E2C to 00001E30)
 {
     0:  Set   *GB_WorldLocation  .Location:GoombaRoad
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80242580 )
    84:  ExecWait  $Script_MakeEntities
@@ -2125,21 +2126,21 @@ PADDING: 80241E2C to 80241E30 (00001E2C to 00001E30)
 
 #new:NpcGroup $NpcGroup_802421A0
 {
-	00000000 $NpcSettings_80242090 ~Vec3f:NPC_802421A0 % 160 0 30
+	.NpcID:SpikedGoomba_00 $NpcSettings_80242090 ~Vec3f:NPC_SpikedGoomba_00 % 160 0 30
 	00002C00 00000000 00000000 00000000 0000010E
 	~Items:5:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_802421A0
-	~AnimationTable:NPC_802421A0 % .Sprite:SpikedGoomba
+	~Movement:NPC_SpikedGoomba_00
+	~AnimationTable:NPC_SpikedGoomba_00 % .Sprite:SpikedGoomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242390
 {
-	00000001 $NpcSettings_80242174 ~Vec3f:NPC_80242390 % 525 60 15
+	.NpcID:Paragoomba_01 $NpcSettings_80242174 ~Vec3f:NPC_Paragoomba_01 % 525 60 15
 	00000D00 00000000 00000000 00000000 0000010E
 	~Items:5:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80242390
-	~AnimationTable:NPC_80242390 % .Sprite:Paragoomba
+	~Movement:NPC_Paragoomba_01
+	~AnimationTable:NPC_Paragoomba_01 % .Sprite:Paragoomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2170,7 +2171,7 @@ PADDING: 8024261C to 80242620 (0000261C to 00002620)
     0:  SetGroup  00000000
     C:  SuspendAll  00000001
    18:  Call  DisablePlayerInput        ( .True )
-   28:  Call  ShowMessageAtScreenPos    ( 001D0166 000000A0 00000028 ) % Eat a Mushroom to regain your energy! When HP gets ...
+   28:  Call  ShowMessageAtScreenPos    ( 001D0166  160`  40` ) % Eat a Mushroom to regain your energy! When HP gets ...
    40:  If  *GF_KMR06_Item_Mushroom  ==  .False
    50:  	If  *MapFlag[0A]  ==  .False
    60:  		Set   *MapFlag[0A]  .True

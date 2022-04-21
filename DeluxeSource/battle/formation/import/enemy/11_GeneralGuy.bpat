@@ -33,7 +33,7 @@
     8:  COPY      S0, A0
     C:  BEQ       A1, R0, .o48
    10:  SW        RA, 14 (SP)
-   14:  JAL       8011D82C
+   14:  JAL       ~Func:mdl_set_all_fog_mode
    18:  LI        A0, 1
    1C:  CLEAR     A0
    20:  COPY      A1, A0
@@ -175,8 +175,8 @@
 }
 
 #new:Script $Script_Init_8021858C_11 {
-    0:  Call  SetActorPos   ( .Actor:Self 000000C8 00000000 00000000 )
-   1C:  Call  ForceHomePos  ( .Actor:Self 000000C8 00000000 00000000 )
+    0:  Call  SetActorPos   ( .Actor:Self  200`  0`  0` )
+   1C:  Call  ForceHomePos  ( .Actor:Self  200`  0`  0` )
    38:  Call  HPBarToHome   ( .Actor:Self )
    48:  Call  BindTakeTurn  ( .Actor:Self $Script_TakeTurn_80218BA0_11 )
    5C:  Call  BindIdle      ( .Actor:Self $Script_Idle_802186B8_11 )
@@ -320,11 +320,11 @@
    3C:  Call  SetGoalToTarget   ( .Actor:Self )
    4C:  Call  UseBattleCamPreset    ( 0000000F )
    5C:  Call  BattleCamTargetActor  ( .Actor:Self )
-   6C:  Call  MoveBattleCamOver ( 0000001E )
+   6C:  Call  MoveBattleCamOver (  30` )
    7C:  Thread
    84:  	Wait  35`
    90:  	Call  UseBattleCamPreset    ( 00000002 )
-   A0:  	Call  MoveBattleCamOver     ( 0000001E )
+   A0:  	Call  MoveBattleCamOver     (  30` )
    B0:  EndThread
    B8:  Wait  5`
    C4:  Call  PlaySoundAtPart   ( .Actor:Enemy0 00000001 0000206A )
@@ -360,7 +360,7 @@
   358:  		Sub   *Var0  00000078 
   368:  		Call  SetPartMoveSpeed  ( .Actor:Self 00000002 *Fixed[12.0] )
   380:  		Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.1] )
-  398:  		Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000000 .True )
+  398:  		Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2  0` .True )
   3C0:  		Call  SetPartFlagBits   ( .Actor:Self 00000002 00000001 .True )
   3DC:  		Call  SetAnimation      ( .Actor:Enemy0 00000001 00760002 )
   3F4:  		Call  SetPartFlagBits   ( .Actor:Enemy0 00000001 00000001 .True )
@@ -378,7 +378,7 @@
   4E0:  		Set   *Var1  FFFFFFFB 
   4F0:  		Call  SetPartMoveSpeed  ( .Actor:Self 00000002 *Fixed[14.0] )
   508:  		Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.1] )
-  520:  		Call  FlyPartTo ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000000 0000001E .Easing:Linear )
+  520:  		Call  FlyPartTo ( .Actor:Self 00000002 *Var0 *Var1 *Var2  0`  30` .Easing:Linear )
   54C:  		Call  EnemyTestTarget   ( .Actor:Self *Var0 ~Flags:DamageType:TriggerLucky 00000000 00000000 00000000 )
   570:  		Call  UseBattleCamPreset    ( 00000002 )
   580:  		Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -386,7 +386,7 @@
   5AC:  		Set   *Var1  FFFFFFFB 
   5BC:  		Call  SetPartMoveSpeed  ( .Actor:Self 00000002 *Fixed[6.0] )
   5D4:  		Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.1] )
-  5EC:  		Call  FlyPartTo ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000000 0000000F .Easing:Linear )
+  5EC:  		Call  FlyPartTo ( .Actor:Self 00000002 *Var0 *Var1 *Var2  0`  15` .Easing:Linear )
   618:  		Call  SetPartFlagBits   ( .Actor:Self 00000002 00000001 .True )
   634:  		Call  SetAnimation      ( .Actor:Enemy0 00000001 00760002 )
   64C:  		Call  SetPartFlagBits   ( .Actor:Enemy0 00000001 00000001 .True )
@@ -400,7 +400,7 @@
   6E4:  Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
   700:  Call  SetPartMoveSpeed  ( .Actor:Self 00000002 *Fixed[14.0] )
   718:  Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.1] )
-  730:  Call  FlyPartTo ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000000 0000000F .Easing:Linear )
+  730:  Call  FlyPartTo ( .Actor:Self 00000002 *Var0 *Var1 *Var2  0`  15` .Easing:Linear )
   75C:  Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
   778:  Call  PlayEffect        ( ~FX:BigSmokePuff *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   7BC:  Call  PlaySoundAtPart   ( .Actor:Self 00000002 .Sound:BombBlast )
@@ -410,7 +410,7 @@
   80C:  Call  EnemyDamageTarget ( .Actor:Self *VarF ~Flags:DamageType:NoContact|Blast 00000000 00000000 00000004 00000020 )
   834:  Switch  *VarF 
   840:  	CaseOR  ==  .HitResult:Hit % 0
-  84C:  	CaseOR  ==  00000002 % 2
+  84C:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   858:  	CaseOR  ==  0000000A % A
   864:  		Call  SetAnimation  ( .Actor:Self 00000001 00760002 )
   87C:  		Wait  30`
@@ -441,9 +441,9 @@
    4C:  Call  UseBattleCamPreset    ( 00000013 )
    5C:  Call  GetActorPos       ( .Actor:Self *Var0 *Var1 *Var2 )
    78:  Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-   90:  Call  SetBattleCamZoom  ( 00000140 )
-   A0:  Call  SetBattleCamOffsetZ   ( 0000001E )
-   B0:  Call  MoveBattleCamOver ( 00000028 )
+   90:  Call  SetBattleCamZoom  (  320` )
+   A0:  Call  SetBattleCamOffsetZ   (  30` )
+   B0:  Call  MoveBattleCamOver (  40` )
    C0:  Wait  40`
    CC:  Call  PlaySoundAtPart   ( .Actor:Enemy0 00000001 0000206A )
    E4:  Call  SetAnimation      ( .Actor:Enemy0 00000001 0076000B )
@@ -458,7 +458,7 @@
   190:  Wait  20`
   19C:  Call  SetActorVar       ( .Actor:Enemy1 00000006 00000001 )
   1B4:  Call  UseBattleCamPreset    ( 00000002 )
-  1C4:  Call  MoveBattleCamOver ( 0000001E )
+  1C4:  Call  MoveBattleCamOver (  30` )
   1D4:  Thread
   1DC:  	Call  $Function_80218000_11 ( )
   1E8:  EndThread
@@ -552,7 +552,7 @@
   934:  Call  EnemyDamageTarget ( .Actor:Self *VarF ~Flags:DamageType:NoContact|Electric 00000000 00000000 00000005 00000020 )
   95C:  Switch  *VarF 
   968:  	CaseOR  ==  .HitResult:Hit % 0
-  974:  	CaseOR  ==  00000002 % 2
+  974:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   980:  	CaseOR  ==  0000000A % A
   98C:  		Call  SetAnimation  ( .Actor:Self 00000001 00760002 )
   9A4:  		If  *VarF  ==  0000000A % A

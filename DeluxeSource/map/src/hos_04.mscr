@@ -1,6 +1,8 @@
 % Script File: hos_04.mscr
 % Decoded from: 0 to 3370 (hos_04)
 
+#define .NpcID:Twink_00             00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -792,7 +794,7 @@ PADDING: 80240B5C to 80240B60 (00000B5C to 00000B60)
    34:  LWC1      F0, 74 (S0)
    38:  CVT.S.W   F0, F0
    3C:  MFC1      A1, F0
-   40:  JAL       ~Func:set_transition_stencil_zoom_0
+   40:  JAL       ~Func:set_screen_overlay_params_front
    44:  CLEAR     A0
    48:  LW        V0, 74 (S0)
    4C:  LW        RA, 14 (SP)
@@ -910,11 +912,11 @@ PADDING: 80240BC8 to 80240BD0 (00000BC8 to 00000BD0)
         .o194
   194:  ADDIU     S0, SP, 18
   198:  COPY      A1, S0
-  19C:  JAL       80137DC0
+  19C:  JAL       ~Func:get_screen_overlay_params
   1A0:  ADDIU     A2, SP, 1C
   1A4:  CLEAR     A0
   1A8:  COPY      A1, S0
-  1AC:  JAL       80137DC0
+  1AC:  JAL       ~Func:get_screen_overlay_params
   1B0:  ADDIU     A2, SP, 20
   1B4:  LWC1      F2, 1C (SP)
   1B8:  LIF       F4, 255.0
@@ -1082,17 +1084,17 @@ PADDING: 80241048 to 80241050 (00001048 to 00001050)
    50:  		If  *GF_HOS04_Visited  ==  .False
    60:  			Thread
    68:  				Call  DisablePlayerInput    ( .True )
-   78:  				Call  SetPlayerPos  ( FFFFFD8A 00000000 00000000 )
+   78:  				Call  SetPlayerPos  (  -630`  0`  0` )
    90:  				Call  GetCurrentPartner     ( *Var0 )
    A0:  				If  *Var0  ==  00000000
    B0:  					Call  DisablePartnerAI  ( 00000000 )
-   C0:  					Call  SetNpcPos ( .Npc:Partner FFFFFD6C 00000000 00000000 )
+   C0:  					Call  SetNpcPos ( .Npc:Partner  -660`  0`  0` )
    DC:  					Wait  1`
    E8:  					Call  EnablePartnerAI ( )
    F4:  				EndIf
-   FC:  				Call  UseSettingsFrom   ( .Cam:Default FFFFFDCB 00000000 00000000 )
-  118:  				Call  SetPanTarget  ( .Cam:Default FFFFFDCB 00000000 00000000 )
-  134:  				Call  SetCamDistance    ( .Cam:Default 00000546 )
+   FC:  				Call  UseSettingsFrom   ( .Cam:Default  -565`  0`  0` )
+  118:  				Call  SetPanTarget  ( .Cam:Default  -565`  0`  0` )
+  134:  				Call  SetCamDistance    ( .Cam:Default  1350` )
   148:  				Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-25.0] )
   160:  				Call  SetCamPosA    ( .Cam:Default *Fixed[-15.0] *Fixed[-100.0] )
   178:  				Call  SetCamPosB    ( .Cam:Default *Fixed[87.5] *Fixed[50.0] )
@@ -1110,8 +1112,8 @@ PADDING: 80241048 to 80241050 (00001048 to 00001050)
   25C:  				Wait  20`
   268:  				Set   *GF_HOS04_Visited  .True
   278:  				Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  290:  				Call  UseSettingsFrom   ( .Cam:Default *Var0 00000000 *Var2 )
-  2AC:  				Call  SetPanTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+  290:  				Call  UseSettingsFrom   ( .Cam:Default *Var0  0` *Var2 )
+  2AC:  				Call  SetPanTarget  ( .Cam:Default *Var0  0` *Var2 )
   2C8:  				Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   2DC:  				Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   2F4:  				Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -1152,8 +1154,8 @@ PADDING: 80241048 to 80241050 (00001048 to 00001050)
 {
     0:  Set   *GB_WorldLocation  .Location:StarHaven
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Thread
@@ -1231,12 +1233,12 @@ PADDING: 802416E8 to 802416F0 (000016E8 to 000016F0)
   1D8:  Call  EnableTexPanning  ( ~Model:o438 .True )
   1EC:  Call  EnableTexPanning  ( ~Model:o462 .True )
   200:  Call  EnableTexPanning  ( ~Model:o469 .True )
-  214:  Call  802C90FC  ( 000000A2 00000000 FFFFFFFF )
-  22C:  Call  802C90FC  ( 0000009A 00000000 FFFFFFFF )
-  244:  Call  802C90FC  ( 000000A0 00000001 FFFFFFFF )
-  25C:  Call  802C90FC  ( 00000098 00000001 FFFFFFFF )
-  274:  Call  802C94A0  ( 00000000 $Function_80240000 00000000 )
-  28C:  Call  802C94A0  ( 00000001 $Function_80240154 00000000 )
+  214:  Call  SetModelCustomGfx ( ~Model:o469 00000000 FFFFFFFF )
+  22C:  Call  SetModelCustomGfx ( ~Model:o462 00000000 FFFFFFFF )
+  244:  Call  SetModelCustomGfx ( ~Model:o465 00000001 FFFFFFFF )
+  25C:  Call  SetModelCustomGfx ( ~Model:o461 00000001 FFFFFFFF )
+  274:  Call  SetCustomGfxBuilders  ( 00000000 $Function_80240000 00000000 )
+  28C:  Call  SetCustomGfxBuilders  ( 00000001 $Function_80240154 00000000 )
   2A4:  Return
   2AC:  End
 }
@@ -1330,7 +1332,7 @@ PADDING: 80241B20 to 80241B24 (00001B20 to 00001B24)
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    34:  Call  $Function_802405E0    ( 00000000 0000004B )
-   48:  Call  SetPanTarget      ( .Cam:Default 00000000 0000001E 00000000 )
+   48:  Call  SetPanTarget      ( .Cam:Default  0`  30`  0` )
    64:  Call  LoadSettings      ( .Cam:Default $???_80241B50 )
    78:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    90:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
@@ -1343,19 +1345,19 @@ PADDING: 80241B20 to 80241B24 (00001B20 to 00001B24)
 
 #new:Script $Script_80241C5C
 {
-    0:  Call  SetNpcAnimation   ( 00000000 0020001A )
-   14:  Call  SetNpcYaw ( 00000000 000000B4 )
+    0:  Call  SetNpcAnimation   ( .NpcID:Twink_00 0020001A )
+   14:  Call  SetNpcYaw ( .NpcID:Twink_00  180` )
    28:  Call  $Function_802409B0 ( )
    34:  Wait  15`
    40:  Thread
    48:  	Wait  10`
-   54:  	Call  InterpNpcYaw      ( 00000000 00000000 00000000 )
+   54:  	Call  InterpNpcYaw      ( .NpcID:Twink_00  0`  0` )
    6C:  	Wait  2`
-   78:  	Call  SetNpcAnimation   ( 00000000 00200000 )
+   78:  	Call  SetNpcAnimation   ( .NpcID:Twink_00 00200000 )
    8C:  	Wait  20`
-   98:  	Call  InterpNpcYaw      ( 00000000 000000B4 00000000 )
+   98:  	Call  InterpNpcYaw      ( .NpcID:Twink_00  180`  0` )
    B0:  	Wait  2`
-   BC:  	Call  SetNpcAnimation   ( 00000000 0020001A )
+   BC:  	Call  SetNpcAnimation   ( .NpcID:Twink_00 0020001A )
    D0:  EndThread
    D8:  Thread
    E0:  	Wait  100`
@@ -1364,12 +1366,12 @@ PADDING: 80241B20 to 80241B24 (00001B20 to 00001B24)
   100:  Call  LoadPath  ( 000000C8 $VectorList_80241AC0 00000008 .Easing:Linear )
   11C:  Label  0
   128:  Call  GetNextPathPos ( )
-  134:  Call  SetNpcPos ( 00000000 *Var1 *Var2 *Var3 )
+  134:  Call  SetNpcPos ( .NpcID:Twink_00 *Var1 *Var2 *Var3 )
   150:  Wait  1`
   15C:  If  *Var0  ==  00000001
   16C:  	Goto  0
   178:  EndIf
-  180:  Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+  180:  Call  SetNpcPos ( .NpcID:Twink_00  0`  -1000`  0` )
   19C:  Thread
   1A4:  	Wait  85`
   1B0:  	Call  $Function_8024068C ( )
@@ -1386,7 +1388,7 @@ PADDING: 80241B20 to 80241B24 (00001B20 to 00001B24)
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    34:  Call  $Function_802405E0    ( 00000000 0000004B )
-   48:  Call  SetPanTarget      ( .Cam:Default 00000000 0000001E 00000000 )
+   48:  Call  SetPanTarget      ( .Cam:Default  0`  30`  0` )
    64:  Call  LoadSettings      ( .Cam:Default $???_80241B24 )
    78:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    90:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
@@ -1420,11 +1422,11 @@ MISSING: 80241F6C to 80241FC4 (00001F6C to 00001FC4)
 
 #new:NpcGroup $NpcGroup_80241FD4
 {
-	00000000 $NpcSettings_80241F40 ~Vec3f:NPC_80241FD4 % 0 -1000 0
+	.NpcID:Twink_00 $NpcSettings_80241F40 ~Vec3f:NPC_Twink_00 % 0 -1000 0
 	00000801 $Script_Init_80241FC4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241FD4
-	~AnimationTable:NPC_80241FD4 % .Sprite:Twink
+	~Movement:NPC_Twink_00
+	~AnimationTable:NPC_Twink_00 % .Sprite:Twink
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1444,9 +1446,9 @@ PADDING: 802421DC to 802421E0 (000021DC to 000021E0)
    20:  Call  SetPlayerActionState  ( .ActionState:Land )
    30:  Call  DisablePartnerAI  ( 00000000 )
    40:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   58:  Call  SetCamPerspective ( .Cam:Default 00000003 0000002D 00000010 00001000 )
-   78:  Call  UseSettingsFrom   ( .Cam:Default FFFFFEE8 00000000 00000000 )
-   94:  Call  SetPanTarget      ( .Cam:Default FFFFFEE8 00000000 00000000 )
+   58:  Call  SetCamPerspective ( .Cam:Default 00000003  45`  16`  4096` )
+   78:  Call  UseSettingsFrom   ( .Cam:Default  -280`  0`  0` )
+   94:  Call  SetPanTarget      ( .Cam:Default  -280`  0`  0` )
    B0:  Call  SetCamType        ( .Cam:Default 00000000 .False )
    C8:  Call  SetCamDistance    ( .Cam:Default *Fixed[550.0] )
    DC:  Call  SetCamPosA        ( .Cam:Default *Fixed[-688.0] *Fixed[50.0] )
@@ -1463,8 +1465,8 @@ PADDING: 802421DC to 802421E0 (000021DC to 000021E0)
   1B0:  		Call  UpdateLerp ( )
   1BC:  		Call  TranslateGroup    ( ~Model:g161 00000000 *Var0 00000000 )
   1D8:  		Add   *Var0  00000208
-  1E8:  		Call  SetPlayerPos      ( 0000013B *Var0 00000005 )
-  200:  		Call  SetNpcPos ( .Npc:Partner 00000139 *Var0 00000005 )
+  1E8:  		Call  SetPlayerPos      (  315` *Var0  5` )
+  200:  		Call  SetNpcPos ( .Npc:Partner  313` *Var0  5` )
   21C:  		Wait  1`
   228:  		If  *Var1  ==  00000000
   238:  			BreakLoop
@@ -1512,12 +1514,12 @@ PADDING: 802421DC to 802421E0 (000021DC to 000021E0)
    30:  Call  DisablePartnerAI  ( 00000000 )
    40:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
    58:  Call  ModifyColliderFlags   ( 00000000 ~Collider:g1 7FFFFE00 )
-   70:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
-   84:  Call  UseSettingsFrom   ( .Cam:Default FFFFFE0C 00000000 00000000 )
-   A0:  Call  SetPanTarget      ( .Cam:Default FFFFEC78 00000000 00000000 )
+   70:  Call  InterpPlayerYaw   (  90`  0` )
+   84:  Call  UseSettingsFrom   ( .Cam:Default  -500`  0`  0` )
+   A0:  Call  SetPanTarget      ( .Cam:Default  -5000`  0`  0` )
    BC:  Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
-   D0:  Call  SetCamPosA        ( .Cam:Default FFFFEC78 00000032 )
-   E8:  Call  SetCamPosB        ( .Cam:Default 00001388 00000032 )
+   D0:  Call  SetCamPosA        ( .Cam:Default  -5000`  50` )
+   E8:  Call  SetCamPosB        ( .Cam:Default  5000`  50` )
   100:  Call  SetCamPitch       ( .Cam:Default *Fixed[17.0] *Fixed[-7.0] )
   118:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   12C:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
@@ -1558,7 +1560,7 @@ PADDING: 802421DC to 802421E0 (000021DC to 000021E0)
   32C:  	Set   *Var0  FFFFEC78
   33C:  	Loop
   348:  		Add   *Var0  0000002D
-  358:  		Call  SetPanTarget  ( .Cam:Default *Var0 00000000 00000000 )
+  358:  		Call  SetPanTarget  ( .Cam:Default *Var0  0`  0` )
   374:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   38C:  		Wait  1`
   398:  	EndLoop
@@ -1593,11 +1595,11 @@ PADDING: 802421DC to 802421E0 (000021DC to 000021E0)
    30:  Call  DisablePartnerAI  ( 00000000 )
    40:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
    58:  Call  ModifyColliderFlags   ( 00000000 ~Collider:g1 7FFFFE00 )
-   70:  Call  UseSettingsFrom   ( .Cam:Default FFFFFE0C 00000000 00000000 )
-   8C:  Call  SetPanTarget      ( .Cam:Default FFFFEC78 00000000 00000000 )
+   70:  Call  UseSettingsFrom   ( .Cam:Default  -500`  0`  0` )
+   8C:  Call  SetPanTarget      ( .Cam:Default  -5000`  0`  0` )
    A8:  Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
-   BC:  Call  SetCamPosA        ( .Cam:Default FFFFEC78 00000032 )
-   D4:  Call  SetCamPosB        ( .Cam:Default 00001388 00000032 )
+   BC:  Call  SetCamPosA        ( .Cam:Default  -5000`  50` )
+   D4:  Call  SetCamPosB        ( .Cam:Default  5000`  50` )
    EC:  Call  SetCamPitch       ( .Cam:Default *Fixed[17.0] *Fixed[-7.0] )
   104:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   118:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
@@ -1623,7 +1625,7 @@ PADDING: 802421DC to 802421E0 (000021DC to 000021E0)
   244:  	Set   *Var0  FFFFEC78
   254:  	Loop
   260:  		Add   *Var0  0000002D
-  270:  		Call  SetPanTarget  ( .Cam:Default *Var0 00000000 00000000 )
+  270:  		Call  SetPanTarget  ( .Cam:Default *Var0  0`  0` )
   28C:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   2A4:  		Wait  1`
   2B0:  		If  *Var0  >  00000000
@@ -1657,12 +1659,12 @@ PADDING: 802421DC to 802421E0 (000021DC to 000021E0)
    30:  Call  DisablePartnerAI  ( 00000000 )
    40:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
    58:  Call  ModifyColliderFlags   ( 00000000 ~Collider:g1 7FFFFE00 )
-   70:  Call  SetNpcYaw ( .Npc:Partner 0000005A )
-   84:  Call  UseSettingsFrom   ( .Cam:Default FFFFFE0C 00000000 00000000 )
-   A0:  Call  SetPanTarget      ( .Cam:Default 00001388 00000000 00000000 )
+   70:  Call  SetNpcYaw ( .Npc:Partner  90` )
+   84:  Call  UseSettingsFrom   ( .Cam:Default  -500`  0`  0` )
+   A0:  Call  SetPanTarget      ( .Cam:Default  5000`  0`  0` )
    BC:  Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
-   D0:  Call  SetCamPosA        ( .Cam:Default FFFFEC78 00000032 )
-   E8:  Call  SetCamPosB        ( .Cam:Default 00001388 00000032 )
+   D0:  Call  SetCamPosA        ( .Cam:Default  -5000`  50` )
+   E8:  Call  SetCamPosB        ( .Cam:Default  5000`  50` )
   100:  Call  SetCamPitch       ( .Cam:Default *Fixed[17.0] *Fixed[-7.0] )
   118:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   12C:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
@@ -1673,7 +1675,7 @@ PADDING: 802421DC to 802421E0 (000021DC to 000021E0)
   184:  Exec  $Script_80242474
   190:  Wait  2`
   19C:  Thread
-  1A4:  	Call  InterpPlayerYaw   ( 000000E1 00000000 )
+  1A4:  	Call  InterpPlayerYaw   (  225`  0` )
   1B8:  	Set   *Var7  FFFFFFCE
   1C8:  	Loop
   1D4:  		Add   *MapVar[A]  *Var7
@@ -1696,7 +1698,7 @@ PADDING: 802421DC to 802421E0 (000021DC to 000021E0)
   2D8:  	Set   *Var0  00001388
   2E8:  	Loop
   2F4:  		Add   *Var0  FFFFFFD3
-  304:  		Call  SetPanTarget  ( .Cam:Default *Var0 00000000 00000000 )
+  304:  		Call  SetPanTarget  ( .Cam:Default *Var0  0`  0` )
   320:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   338:  		Wait  1`
   344:  		If  *Var0  <  FFFFFC18

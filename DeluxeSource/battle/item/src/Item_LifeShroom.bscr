@@ -276,7 +276,7 @@
    8C:  CVT.S.W   F0, F0
    90:  MFC1      A3, F0
    94:  CLEAR     A0
-   98:  JAL       80071090
+   98:  JAL       ~Func:playFX_40
    9C:  SW        V0, 10 (SP)
    A0:  LW        RA, 28 (SP)
    A4:  LW        S3, 24 (SP)
@@ -392,10 +392,10 @@ PADDING: 802A14F4 to 802A1500 (0072EA24 to 0072EA30)
 #new:Script $Script_802A1804
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -455,17 +455,17 @@ PADDING: 802A14F4 to 802A1500 (0072EA24 to 0072EA30)
 
 #new:Script $Script_802A1ABC
 {
-    0:  Call  SetActorYaw   ( .Actor:Player 0000001E )
+    0:  Call  SetActorYaw   ( .Actor:Player  30` )
    14:  Wait  1`
-   20:  Call  SetActorYaw   ( .Actor:Player 0000003C )
+   20:  Call  SetActorYaw   ( .Actor:Player  60` )
    34:  Wait  1`
-   40:  Call  SetActorYaw   ( .Actor:Player 0000005A )
+   40:  Call  SetActorYaw   ( .Actor:Player  90` )
    54:  Wait  1`
-   60:  Call  SetActorYaw   ( .Actor:Player 00000078 )
+   60:  Call  SetActorYaw   ( .Actor:Player  120` )
    74:  Wait  1`
-   80:  Call  SetActorYaw   ( .Actor:Player 00000096 )
+   80:  Call  SetActorYaw   ( .Actor:Player  150` )
    94:  Wait  1`
-   A0:  Call  SetActorYaw   ( .Actor:Player 000000B4 )
+   A0:  Call  SetActorYaw   ( .Actor:Player  180` )
    B4:  Wait  10`
    C0:  Set   *Var1  *VarF
    D0:  ExecWait  $Script_802A1804
@@ -497,15 +497,15 @@ PADDING: 802A14F4 to 802A1500 (0072EA24 to 0072EA30)
   29C:  Call  InitTargetIterator ( )
   2A8:  Call  SetGoalToTarget   ( .Actor:Self )
   2B8:  Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
-  2D4:  Call  SetBattleCamTarget    ( FFFFFF83 00000001 00000000 )
-  2EC:  Call  SetBattleCamOffsetZ   ( 00000029 )
-  2FC:  Call  SetBattleCamZoom  ( 000000F8 )
-  30C:  Call  MoveBattleCamOver ( 00000019 )
+  2D4:  Call  SetBattleCamTarget    (  -125`  1`  0` )
+  2EC:  Call  SetBattleCamOffsetZ   (  41` )
+  2FC:  Call  SetBattleCamZoom  (  248` )
+  30C:  Call  MoveBattleCamOver (  25` )
   31C:  Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[0.4] )
   330:  Add   *Var2  00000005
-  340:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000019 )
-  360:  Call  AddBattleCamZoom  ( 00000064 )
-  370:  Call  MoveBattleCamOver ( 0000001E )
+  340:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  25` )
+  360:  Call  AddBattleCamZoom  (  100` )
+  370:  Call  MoveBattleCamOver (  30` )
   380:  Call  GetActorPos       ( .Actor:Partner *Var0 *Var1 *Var2 )
   39C:  Add   *Var1  00000019
   3AC:  Call  802D7520  ( *Var0 *Var1 *Var2 *VarB )
@@ -516,17 +516,17 @@ PADDING: 802A14F4 to 802A1500 (0072EA24 to 0072EA30)
   3FC:  Call  GetActorPos   ( .Actor:Partner *Var0 *Var1 *Var2 )
   418:  Call  802D75D8      ( *Var0 *Var1 *Var2 *VarB )
   434:  Wait  20`
-  440:  Call  SetActorYaw   ( .Actor:Player 00000096 )
+  440:  Call  SetActorYaw   ( .Actor:Player  150` )
   454:  Wait  1`
-  460:  Call  SetActorYaw   ( .Actor:Player 00000078 )
+  460:  Call  SetActorYaw   ( .Actor:Player  120` )
   474:  Wait  1`
-  480:  Call  SetActorYaw   ( .Actor:Player 0000005A )
+  480:  Call  SetActorYaw   ( .Actor:Player  90` )
   494:  Wait  1`
-  4A0:  Call  SetActorYaw   ( .Actor:Player 0000003C )
+  4A0:  Call  SetActorYaw   ( .Actor:Player  60` )
   4B4:  Wait  1`
-  4C0:  Call  SetActorYaw   ( .Actor:Player 0000001E )
+  4C0:  Call  SetActorYaw   ( .Actor:Player  30` )
   4D4:  Wait  1`
-  4E0:  Call  SetActorYaw   ( .Actor:Player 00000000 )
+  4E0:  Call  SetActorYaw   ( .Actor:Player  0` )
   4F4:  Wait  10`
   500:  Return
   508:  End

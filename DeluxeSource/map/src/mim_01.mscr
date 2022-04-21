@@ -1,6 +1,9 @@
 % Script File: mim_01.mscr
 % Decoded from: 0 to 47C0 (mim_01)
 
+#define .NpcID:PiranhaPlant_01      01
+#define .NpcID:PiranhaPlant_02      02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -2162,8 +2165,8 @@ PADDING: 80241F6C to 80241F70 (00001F6C to 00001F70)
 {
     0:  Set   *GB_WorldLocation  .Location:ForeverForest
    10:  Call  SetSpriteShading  ( .Shading:mim_01 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 0000028A )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  650` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Set   *GF_Map_ForeverForest  .True
@@ -2192,7 +2195,7 @@ PADDING: 80241F6C to 80241F70 (00001F6C to 00001F70)
    30:  SetGroup  00000000
    3C:  Call  SetTimeFreezeMode     ( 00000001 )
    4C:  Call  DisablePlayerInput    ( .True )
-   5C:  Call  ShowMessageAtScreenPos    ( 001D017E 000000A0 00000028 ) % Forever Forest Toad Town
+   5C:  Call  ShowMessageAtScreenPos    ( 001D017E  160`  40` ) % Forever Forest Toad Town
    74:  Call  DisablePlayerInput    ( .False )
    84:  Call  SetTimeFreezeMode     ( 00000000 )
    94:  Return
@@ -2431,7 +2434,7 @@ PADDING: 80242C98 to 80242CA0 (00002C98 to 00002CA0)
    DC:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    F4:  			Add   *Var0  *Var7
   104:  			Add   *Var2  *Var8
-  114:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  114:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   12C:  		EndThread
   134:  		Set   *Var1  00000001
   144:  		Exec  $Script_80242CA0
@@ -2464,7 +2467,7 @@ PADDING: 80242C98 to 80242CA0 (00002C98 to 00002CA0)
   2D4:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   2EC:  			Sub   *Var0  *Var7
   2FC:  			Sub   *Var2  *Var8
-  30C:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  30C:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   324:  		EndThread
   32C:  		Set   *Var1  00000002
   33C:  		Exec  $Script_80242CA0
@@ -2495,7 +2498,7 @@ PADDING: 80242C98 to 80242CA0 (00002C98 to 00002CA0)
   4B0:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   4C8:  			Add   *Var0  *Var7
   4D8:  			Add   *Var2  *Var8
-  4E8:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  4E8:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   500:  		EndThread
   508:  		Set   *Var1  00000001
   518:  		Exec  $Script_80242CA0
@@ -2575,7 +2578,7 @@ PADDING: 80242C98 to 80242CA0 (00002C98 to 00002CA0)
    EC:  	Thread
    F4:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   10C:  		Add   *Var0  00000046
-  11C:  		Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  11C:  		Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   134:  	EndThread
   13C:  	Set   *Var1  00000001
   14C:  	Exec  $Script_80242CA0
@@ -2607,7 +2610,7 @@ PADDING: 80242C98 to 80242CA0 (00002C98 to 00002CA0)
   2D0:  	Thread
   2D8:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   2F0:  		Sub   *Var0  00000046
-  300:  		Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  300:  		Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   318:  	EndThread
   320:  	Set   *Var1  00000002
   330:  	Exec  $Script_80242CA0
@@ -2664,7 +2667,7 @@ PADDING: 80242C98 to 80242CA0 (00002C98 to 00002CA0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -2749,19 +2752,19 @@ PADDING: 80242C98 to 80242CA0 (00002C98 to 00002CA0)
 
 #new:NpcGroup $NpcGroup_802441D4
 {
-	00000001 $NpcSettings_80244070 ~Vec3f:NPC_802441D4 % 135 0 -300
+	.NpcID:PiranhaPlant_01 $NpcSettings_80244070 ~Vec3f:NPC_PiranhaPlant_01 % 135 0 -300
 	00000400 00000000 00000000 00000000 00000000
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_802441D4
-	~AnimationTable:NPC_802441D4 % .Sprite:PiranhaPlant
+	~Movement:NPC_PiranhaPlant_01
+	~AnimationTable:NPC_PiranhaPlant_01 % .Sprite:PiranhaPlant
 	00000001 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802441D4[1F0]
-	00000002 $NpcSettings_802441A8 ~Vec3f:NPC_802443C4 % 0 -1000 0
+	.NpcID:PiranhaPlant_02 $NpcSettings_802441A8 ~Vec3f:NPC_PiranhaPlant_02 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802443C4
-	~AnimationTable:NPC_802443C4 % .Sprite:PiranhaPlant
+	~Movement:NPC_PiranhaPlant_02
+	~AnimationTable:NPC_PiranhaPlant_02 % .Sprite:PiranhaPlant
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

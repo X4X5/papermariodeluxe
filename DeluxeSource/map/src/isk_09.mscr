@@ -1,6 +1,7 @@
 % Script File: isk_09.mscr
 % Decoded from: 0 to 2680 (isk_09)
 
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -253,7 +254,7 @@ PADDING: 80240324 to 80240330 (00000324 to 00000330)
    60:  		Wait  20`
    6C:  		SetGroup  00000000
    78:  		Call  SetTimeFreezeMode ( 00000001 )
-   88:  		Call  ShowMessageAtScreenPos    ( 000D00DF 000000A0 00000028 ) % Uh...? Wait! C'mon, don't go in that room! ... Ooo ...
+   88:  		Call  ShowMessageAtScreenPos    ( 000D00DF  160`  40` ) % Uh...? Wait! C'mon, don't go in that room! ... Ooo ...
    A0:  		Set   *GF_ISK09_ThirdWarning  .True
    B0:  		Call  DisablePlayerInput        ( .False )
    C0:  		Call  SetTimeFreezeMode ( 00000000 )
@@ -308,8 +309,8 @@ PADDING: 80240578 to 80240580 (00000578 to 00000580)
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:isk_09 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  ExecWait  $Script_MakeEntities
@@ -394,8 +395,8 @@ PADDING: 802406E8 to 802406F0 (000006E8 to 000006F0)
    6C:  	If  *Var0  ==  .False
    7C:  		Thread
    84:  			Call  DisablePartnerAI  ( 00000000 )
-   94:  			Call  NpcFlyTo  ( .Npc:Partner FFFFFF22 FFFFFEA5 FFFFFDED 00000014 00000000 .Easing:Linear )
-   BC:  			Call  InterpNpcYaw      ( .Npc:Partner 00000046 00000000 )
+   94:  			Call  NpcFlyTo  ( .Npc:Partner  -222`  -347`  -531`  20`  0` .Easing:Linear )
+   BC:  			Call  InterpNpcYaw      ( .Npc:Partner  70`  0` )
    D4:  			Loop
    E0:  				If  *GB_StoryProgress  ==  .Story:Ch2_GotSuperHammer % FFFFFFC5
    F0:  					BreakLoop
@@ -407,7 +408,7 @@ PADDING: 802406E8 to 802406F0 (000006E8 to 000006F0)
   128:  	EndIf
   130:  	Wait  60`
   13C:  	Exec  $Script_8024053C
-  148:  	Call  ShowMessageAtScreenPos    ( 001D017D 000000A0 00000028 ) % You got the Super Hammer! The attack power of Mari ...
+  148:  	Call  ShowMessageAtScreenPos    ( 001D017D  160`  40` ) % You got the Super Hammer! The attack power of Mari ...
   160:  	Call  $Function_802402BC ( )
   16C:  	Set   *GB_StoryProgress  .Story:Ch2_GotSuperHammer
   17C:  EndIf
@@ -599,17 +600,17 @@ PADDING: 80241078 to 80241080 (00001078 to 00001080)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
-   24:  Call  UseSettingsFrom       ( .Cam:Default FFFFFDF6 FFFFFECA FFFFFFA1 )
-   40:  Call  SetPanTarget  ( .Cam:Default FFFFFDF6 FFFFFE87 FFFFFFA4 )
+   24:  Call  UseSettingsFrom       ( .Cam:Default  -522`  -310`  -95` )
+   40:  Call  SetPanTarget  ( .Cam:Default  -522`  -377`  -92` )
    5C:  Wait  1`
    68:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    80:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    94:  ExecWait  $Script_80241264
-   A0:  Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.1] )
-   BC:  Call  SetPanTarget  ( .Cam:Default FFFFFDF6 FFFFFF22 FFFFFFA4 )
+   A0:  Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.1] )
+   BC:  Call  SetPanTarget  ( .Cam:Default  -522`  -222`  -92` )
    D8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    EC:  ExecWait  $Script_8024131C
-   F8:  Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.1] )
+   F8:  Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.1] )
   114:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   12C:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   148:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -623,17 +624,17 @@ PADDING: 80241078 to 80241080 (00001078 to 00001080)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
-   24:  Call  UseSettingsFrom       ( .Cam:Default FFFFFDF6 FFFFFECA FFFFFFA1 )
-   40:  Call  SetPanTarget  ( .Cam:Default FFFFFDF6 FFFFFE87 FFFFFFA4 )
+   24:  Call  UseSettingsFrom       ( .Cam:Default  -522`  -310`  -95` )
+   40:  Call  SetPanTarget  ( .Cam:Default  -522`  -377`  -92` )
    5C:  Wait  1`
    68:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    80:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    94:  ExecWait  $Script_802412C0
-   A0:  Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.1] )
-   BC:  Call  SetPanTarget  ( .Cam:Default FFFFFDF6 FFFFFF22 FFFFFFA4 )
+   A0:  Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.1] )
+   BC:  Call  SetPanTarget  ( .Cam:Default  -522`  -222`  -92` )
    D8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    EC:  ExecWait  $Script_80241378
-   F8:  Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.1] )
+   F8:  Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.1] )
   114:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   12C:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   148:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -647,17 +648,17 @@ PADDING: 80241078 to 80241080 (00001078 to 00001080)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
-   24:  Call  UseSettingsFrom       ( .Cam:Default FFFFFE68 FFFFFECA FFFFFEA5 )
-   40:  Call  SetPanTarget  ( .Cam:Default FFFFFE68 FFFFFE87 FFFFFEA5 )
+   24:  Call  UseSettingsFrom       ( .Cam:Default  -408`  -310`  -347` )
+   40:  Call  SetPanTarget  ( .Cam:Default  -408`  -377`  -347` )
    5C:  Wait  1`
    68:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    80:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    94:  ExecWait  $Script_802413D4
-   A0:  Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.1] )
-   BC:  Call  SetPanTarget  ( .Cam:Default FFFFFE68 FFFFFF22 FFFFFEA5 )
+   A0:  Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.1] )
+   BC:  Call  SetPanTarget  ( .Cam:Default  -408`  -222`  -347` )
    D8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    EC:  ExecWait  $Script_8024148C
-   F8:  Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.1] )
+   F8:  Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.1] )
   114:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   12C:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   148:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -671,17 +672,17 @@ PADDING: 80241078 to 80241080 (00001078 to 00001080)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
-   24:  Call  UseSettingsFrom       ( .Cam:Default FFFFFE68 FFFFFECA FFFFFEA5 )
-   40:  Call  SetPanTarget  ( .Cam:Default FFFFFE68 FFFFFE87 FFFFFEA5 )
+   24:  Call  UseSettingsFrom       ( .Cam:Default  -408`  -310`  -347` )
+   40:  Call  SetPanTarget  ( .Cam:Default  -408`  -377`  -347` )
    5C:  Wait  1`
    68:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    80:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    94:  ExecWait  $Script_80241430
-   A0:  Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.1] )
-   BC:  Call  SetPanTarget  ( .Cam:Default FFFFFE68 FFFFFF22 FFFFFEA5 )
+   A0:  Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.1] )
+   BC:  Call  SetPanTarget  ( .Cam:Default  -408`  -222`  -347` )
    D8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    EC:  ExecWait  $Script_802414E8
-   F8:  Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.1] )
+   F8:  Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.1] )
   114:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   12C:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   148:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )

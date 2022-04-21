@@ -1,6 +1,8 @@
 % Script File: sam_12.mscr
 % Decoded from: 0 to 1620 (sam_12)
 
+#define .NpcID:Merlar_00            00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -49,7 +51,7 @@ PADDING: 80240088 to 80240090 (00000088 to 00000090)
     C:  JAL       ~Func:get_float_variable
    10:  LW        A1, 0 (V0)
    14:  MFC1      A1, F0
-   18:  JAL       ~Func:set_transition_stencil_zoom_0
+   18:  JAL       ~Func:set_screen_overlay_params_front
    1C:  CLEAR     A0
    20:  LW        RA, 10 (SP)
    24:  LI        V0, 2
@@ -148,7 +150,7 @@ PADDING: 80240088 to 80240090 (00000088 to 00000090)
    74:  CVT.S.W   F0, F0
    78:  MFC1      A3, F0
    7C:  CLEAR     A0
-   80:  JAL       800705B0
+   80:  JAL       ~Func:playFX_23
    84:  SW        R0, 10 (SP)
    88:  LW        RA, 24 (SP)
    8C:  LW        S2, 20 (SP)
@@ -297,8 +299,8 @@ PADDING: 8024041C to 80240420 (0000041C to 00000420)
 {
     0:  Set   *GB_WorldLocation  .Location:ShiverMountain
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80240864 )
@@ -354,11 +356,11 @@ PADDING: 802405BC to 802405C0 (000005BC to 000005C0)
 
 #new:NpcGroup $NpcGroup_80240674
 {
-	00000000 $NpcSettings_802405D0 ~Vec3f:NPC_80240674 % 0 -1000 0
+	.NpcID:Merlar_00 $NpcSettings_802405D0 ~Vec3f:NPC_Merlar_00 % 0 -1000 0
 	00400F09 $Script_Init_80240628 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_80240674
-	~AnimationTable:NPC_80240674 % .Sprite:Merlar
+	~Movement:NPC_Merlar_00
+	~AnimationTable:NPC_Merlar_00 % .Sprite:Merlar
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -416,8 +418,8 @@ PADDING: 8024087C to 80240880 (0000087C to 00000880)
 
 #new:Script $Script_80240A78
 {
-    0:  Call  PlaySoundAtNpc    ( 00000000 000000B1 00000000 )
-   18:  Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+    0:  Call  PlaySoundAtNpc    ( .NpcID:Merlar_00 000000B1 00000000 )
+   18:  Call  GetNpcPos ( .NpcID:Merlar_00 *Var0 *Var1 *Var2 )
    34:  Add   *Var1  0000001E
    44:  Loop  00000008
    50:  	Call  PlayEffect    ( ~FX:Sparkles:TreeShake *Var0 *Var1 *Var2 0000001E 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
@@ -452,18 +454,18 @@ PADDING: 8024087C to 80240880 (0000087C to 00000880)
    84:  	Call  802D2B6C ( )
    90:  	Wait  20`
    9C:  EndIf
-   A4:  Call  UseSettingsFrom   ( .Cam:Default 000000A0 00000000 00000000 )
-   C0:  Call  SetPanTarget  ( .Cam:Default 000000A0 00000000 00000000 )
+   A4:  Call  UseSettingsFrom   ( .Cam:Default  160`  0`  0` )
+   C0:  Call  SetPanTarget  ( .Cam:Default  160`  0`  0` )
    DC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    F4:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  104:  Call  PlayerMoveTo  ( 0000005A 00000000 00000000 )
+  104:  Call  PlayerMoveTo  (  90`  0`  0` )
   11C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   130:  Wait  20`
   13C:  Exec  $Script_802409E0 *Var9
   14C:  Wait  100`
-  158:  Call  SetNpcPos     ( 00000000 000000C8 00000032 00000000 )
+  158:  Call  SetNpcPos     ( .NpcID:Merlar_00  200`  50`  0` )
   174:  Exec  $Script_80240A78
-  180:  Call  PlaySoundAtNpc    ( 00000000 00000139 00000000 )
+  180:  Call  PlaySoundAtNpc    ( .NpcID:Merlar_00 00000139 00000000 )
   198:  SetF  *Var0  *Fixed[0.0]
   1A8:  Loop  00000064
   1B4:  	AddF  *Var0  *Fixed[1.0]
@@ -472,8 +474,8 @@ PADDING: 8024087C to 80240880 (0000087C to 00000880)
   1F4:  EndLoop
   1FC:  Exec  $Script_80240894 *Var8
   20C:  Wait  30`
-  218:  Call  SpeakToPlayer ( 00000000 00B10002 00B10001 00000000 00120133 ) % At last...it is Mario! I'm glad you found this pla ...
-  238:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  218:  Call  SpeakToPlayer ( .NpcID:Merlar_00 00B10002 00B10001 00000000 00120133 ) % At last...it is Mario! I'm glad you found this pla ...
+  238:  Call  GetNpcPos     ( .NpcID:Merlar_00 *Var0 *Var1 *Var2 )
   254:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   270:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   28C:  Call  SetCamDistance    ( .Cam:Default *Fixed[225.0] )
@@ -482,14 +484,14 @@ PADDING: 8024087C to 80240880 (0000087C to 00000880)
   2D0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   2E4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   2FC:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  310:  Call  SpeakToPlayer ( 00000000 00B10002 00B10001 00000000 00120134 ) % My name is Madam Merlar. I am a messenger of the S ...
-  330:  Call  SetPanTarget  ( .Cam:Default 000000A0 00000000 00000000 )
+  310:  Call  SpeakToPlayer ( .NpcID:Merlar_00 00B10002 00B10001 00000000 00120134 ) % My name is Madam Merlar. I am a messenger of the S ...
+  330:  Call  SetPanTarget  ( .Cam:Default  160`  0`  0` )
   34C:  Call  SetCamDistance    ( .Cam:Default *Fixed[400.0] )
   360:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-10.0] )
   378:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  38C:  Call  SpeakToPlayer ( 00000000 00B10002 00B10001 00000000 00120135 ) % We have little time to waste, so listen carefully. ...
+  38C:  Call  SpeakToPlayer ( .NpcID:Merlar_00 00B10002 00B10001 00000000 00120135 ) % We have little time to waste, so listen carefully. ...
   3AC:  Exec  $Script_80240B30 *VarA
-  3BC:  Call  EndSpeech     ( 00000000 00B10002 00B10001 00000000 )
+  3BC:  Call  EndSpeech     ( .NpcID:Merlar_00 00B10002 00B10001 00000000 )
   3D8:  SetF  *Var0  *Fixed[0.0]
   3E8:  Loop  00000032
   3F4:  	AddF  *Var0  *Fixed[5.1]
@@ -507,7 +509,7 @@ PADDING: 8024087C to 80240880 (0000087C to 00000880)
   4AC:  	EndLoop
   4B4:  	Set   *MapFlag[00]  .True
   4C4:  EndThread
-  4CC:  Call  ContinueSpeech    ( 00000000 00B10002 00B10001 00000000 00120136 ) % .................................. ............... ...
+  4CC:  Call  ContinueSpeech    ( .NpcID:Merlar_00 00B10002 00B10001 00000000 00120136 ) % .................................. ............... ...
   4EC:  Label  6
   4F8:  If  *MapFlag[00]  ==  .False
   508:  	Wait  1`
@@ -523,7 +525,7 @@ PADDING: 8024087C to 80240880 (0000087C to 00000880)
   590:  Wait  20`
   59C:  Call  SetPlayerAnimation    ( 00080007 )
   5AC:  Wait  30`
-  5B8:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  5B8:  Call  GetNpcPos     ( .NpcID:Merlar_00 *Var0 *Var1 *Var2 )
   5D4:  Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
   5F0:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   60C:  Call  SetCamDistance        ( .Cam:Default *Fixed[225.0] )
@@ -532,9 +534,9 @@ PADDING: 8024087C to 80240880 (0000087C to 00000880)
   650:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   664:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   67C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  690:  Call  SpeakToPlayer ( 00000000 00B10002 00B10001 00000000 00120137 ) % Well... OK, then. As I was saying, you need the St ...
+  690:  Call  SpeakToPlayer ( .NpcID:Merlar_00 00B10002 00B10001 00000000 00120137 ) % Well... OK, then. As I was saying, you need the St ...
   6B0:  Wait  30`
-  6BC:  Call  SetPanTarget  ( .Cam:Default 000000E6 00000000 00000000 )
+  6BC:  Call  SetPanTarget  ( .Cam:Default  230`  0`  0` )
   6D8:  Call  SetCamPosB    ( .Cam:Default *Fixed[230.0] *Fixed[60.0] )
   6F0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   704:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -552,12 +554,12 @@ PADDING: 8024087C to 80240880 (0000087C to 00000880)
   7B0:  	Call  $Function_802400C0    ( *MapVar[0] *Fixed[230.0] *Var0 *Fixed[0.0] )
   7CC:  	Wait  1`
   7D8:  EndLoop
-  7E0:  Call  SetPanTarget  ( .Cam:Default 000000A0 00000000 00000000 )
+  7E0:  Call  SetPanTarget  ( .Cam:Default  160`  0`  0` )
   7FC:  Call  SetCamDistance    ( .Cam:Default *Fixed[400.0] )
   810:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-10.0] )
   828:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   83C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  850:  Call  SpeakToPlayer ( 00000000 00B10002 00B10001 00000000 00120138 ) % With this stone, you can open the way to the Cryst ...
+  850:  Call  SpeakToPlayer ( .NpcID:Merlar_00 00B10002 00B10001 00000000 00120138 ) % With this stone, you can open the way to the Cryst ...
   870:  Kill  *Var8
   87C:  Kill  *Var9
   888:  Thread
@@ -574,7 +576,7 @@ PADDING: 8024087C to 80240880 (0000087C to 00000880)
   948:  	Call  802CFD30  ( 00000000 00000007 *Var0 00000000 00000000 00000000 )
   96C:  	Wait  1`
   978:  EndLoop
-  980:  Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+  980:  Call  SetNpcPos ( .NpcID:Merlar_00  0`  -1000`  0` )
   99C:  Set   *GB_StoryProgress  .Story:Ch7_GotStarStone
   9AC:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   9C4:  Call  DisablePlayerInput    ( .False )

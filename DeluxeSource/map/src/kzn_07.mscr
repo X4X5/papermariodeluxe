@@ -1,6 +1,9 @@
 % Script File: kzn_07.mscr
 % Decoded from: 0 to 3150 (kzn_07)
 
+#define .NpcID:Bubble_00            00
+#define .NpcID:Bubble_01            01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFB0
@@ -37,7 +40,7 @@
    78:  COPY      A0, V0
    7C:  COPY      A0, V0
    80:  LI        A1, FFFF
-   84:  JAL       8011BC7C
+   84:  JAL       ~Func:set_mdl_custom_gfx_set
    88:  LI        A2, 2
    8C:  LHU       V0, 0 (S3)
    90:  SLT       V0, S0, V0
@@ -53,7 +56,7 @@
    B4:  BEQL      A0, R0, .oCC
    B8:  ADDIU     S0, S0, 1
    BC:  LI        A1, FFFF
-   C0:  JAL       8011BC7C
+   C0:  JAL       ~Func:set_mdl_custom_gfx_set
    C4:  LI        A2, 2
    C8:  ADDIU     S0, S0, 1
         .oCC
@@ -240,7 +243,7 @@
    48:  COPY      A0, V0
    4C:  COPY      A0, V0
    50:  LI        A1, FFFF
-   54:  JAL       8011BC7C
+   54:  JAL       ~Func:set_mdl_custom_gfx_set
    58:  CLEAR     A2
    5C:  LHU       V0, 0 (S2)
    60:  SLT       V0, S0, V0
@@ -256,7 +259,7 @@
    84:  BEQL      A0, R0, .o9C
    88:  ADDIU     S0, S0, 1
    8C:  LI        A1, FFFF
-   90:  JAL       8011BC7C
+   90:  JAL       ~Func:set_mdl_custom_gfx_set
    94:  CLEAR     A2
    98:  ADDIU     S0, S0, 1
         .o9C
@@ -548,7 +551,7 @@ PADDING: 80240718 to 80240720 (00000718 to 00000720)
    98:  LW        A1, 48 (S0)
    9C:  LW        A2, 4C (S0)
    A0:  LW        A3, 50 (S0)
-   A4:  JAL       80070730
+   A4:  JAL       ~Func:playFX_27
    A8:  LI        A0, 1
         .oAC
    AC:  LW        V0, 70 (S1)
@@ -2542,8 +2545,8 @@ PADDING: 802423D8 to 802423E0 (000023D8 to 000023E0)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading  ( .Shading:kzn_07 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80243054 )
@@ -2589,7 +2592,7 @@ PADDING: 80242924 to 80242930 (00002924 to 00002930)
    44:  	EndIf
    4C:  	Wait  60`
    58:  	Exec  $Script_8024239C
-   64:  	Call  ShowMessageAtScreenPos    ( 001D0186 000000A0 00000028 ) % You got the Ultra Hammer! The attack power of Mari ...
+   64:  	Call  ShowMessageAtScreenPos    ( 001D0186  160`  40` ) % You got the Ultra Hammer! The attack power of Mari ...
    7C:  	Call  $Function_802407F4 ( )
    88:  	Set   *GB_StoryProgress  .Story:Ch5_GotUltraHammer
    98:  EndIf
@@ -2615,8 +2618,8 @@ PADDING: 80242924 to 80242930 (00002924 to 00002930)
    88:  EndIf
    90:  Call  CreatePushBlockGrid   ( 00000000 ~PushGrid:Grid_80242B00 00000000 )
    B8:  Call  SetPushBlockFallEffect    ( 00000000 $Function_80240720 )
-   CC:  Call  SetPushBlock  ( 00000000 00000008 00000001 00000001 )
-   E8:  Call  SetPushBlock  ( 00000000 0000000B 00000004 00000001 )
+   CC:  Call  SetPushBlock  ( 00000000  8`  1` 00000001 )
+   E8:  Call  SetPushBlock  ( 00000000  11`  4` 00000001 )
   104:  Return
   10C:  End
 }
@@ -2664,21 +2667,21 @@ PADDING: 80242B84 to 80242B90 (00002B84 to 00002B90)
 
 #new:NpcGroup $NpcGroup_80242C74
 {
-	00000000 $NpcSettings_80242C48 ~Vec3f:NPC_80242C74 % -200 50 150
+	.NpcID:Bubble_00 $NpcSettings_80242C48 ~Vec3f:NPC_Bubble_00 % -200 50 150
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80242C74
-	~AnimationTable:NPC_80242C74 % .Sprite:Bubble
+	~Movement:NPC_Bubble_00
+	~AnimationTable:NPC_Bubble_00 % .Sprite:Bubble
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242E64
 {
-	00000001 $NpcSettings_80242C48 ~Vec3f:NPC_80242E64 % -250 80 50
+	.NpcID:Bubble_01 $NpcSettings_80242C48 ~Vec3f:NPC_Bubble_01 % -250 80 50
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80242E64
-	~AnimationTable:NPC_80242E64 % .Sprite:Bubble
+	~Movement:NPC_Bubble_01
+	~AnimationTable:NPC_Bubble_01 % .Sprite:Bubble
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 

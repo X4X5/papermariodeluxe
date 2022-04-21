@@ -1,6 +1,7 @@
 % Script File: kpa_15.mscr
 % Decoded from: 0 to CA0 (kpa_15)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -532,8 +533,8 @@ PADDING: 802405CC to 802405D0 (000005CC to 000005D0)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  ExecWait  $Script_MakeEntities
    7C:  If  *GF_KPA16_ShutOffLava  ==  .False
@@ -599,7 +600,7 @@ PADDING: 80240A94 to 80240AA0 (00000A94 to 00000AA0)
 
 #new:Script $Script_80240BEC
 {
-    0:  Set   *VarA  .Item:CastleKey2 % 1A
+    0:  Set   *VarA  .Item:BowserCastleKey % 1A
    10:  Set   *VarB  00000001
    20:  Set   *GF_KPA15_Chest_CastleKey2  .True
    30:  ExecWait  $Script_80240B0C

@@ -1,6 +1,11 @@
 % Script File: kzn_17.mscr
 % Decoded from: 0 to 65F0 (kzn_17)
 
+#define .NpcID:Kolorado_00          00
+#define .NpcID:PutridPiranha_01     01
+#define .NpcID:PutridPiranha_02     02
+#define .NpcID:SpikeTop_03          03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -3485,8 +3490,8 @@ PADDING: 8024309C to 802430A0 (0000309C to 000030A0)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading  ( .Shading:kzn_17 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80245810 )
    84:  ExecWait  $Script_MakeEntities
@@ -3588,7 +3593,7 @@ MISSING: 8024360C to 8024364C (0000360C to 0000364C)
   1FC:  	Call  AssignScript  ( $Script_8024370C )
   20C:  EndIf
   214:  Call  CreatePushBlockGrid   ( 00000000 ~PushGrid:Grid_80243940 00000000 )
-  23C:  Call  SetPushBlock  ( 00000000 0000001C 00000001 00000001 )
+  23C:  Call  SetPushBlock  ( 00000000  28`  1` 00000001 )
   258:  Return
   260:  End
 }
@@ -3609,7 +3614,7 @@ PADDING: 80243994 to 802439A0 (00003994 to 000039A0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -3908,7 +3913,7 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -3948,7 +3953,7 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -4033,45 +4038,45 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
 
 #new:Script $Script_80244AC8
 {
-    0:  Call  SetNpcPos ( 00000000 000001BF 00000000 00000027 )
-   1C:  Call  SetNpcYaw ( 00000000 0000010E )
-   30:  Call  SetNpcAnimation   ( 00000000 00B60007 )
+    0:  Call  SetNpcPos ( .NpcID:Kolorado_00  447`  0`  39` )
+   1C:  Call  SetNpcYaw ( .NpcID:Kolorado_00  270` )
+   30:  Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B60007 )
    44:  Return
    4C:  End
 }
 
 #new:Script $Script_80244B1C
 {
-    0:  Call  SetEnemyFlagBits  ( 00000000 00400000 00000001 )
+    0:  Call  SetEnemyFlagBits  ( .NpcID:Kolorado_00 00400000 00000001 )
    18:  Call  802CDE68  ( 00000000 0000000D )
-   2C:  Call  SetNpcRotation    ( 00000000 00000000 00000000 000000FA )
-   48:  Call  SetNpcAnimation   ( 00000000 00B6000C )
+   2C:  Call  SetNpcRotation    ( .NpcID:Kolorado_00 00000000 00000000 000000FA )
+   48:  Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B6000C )
    5C:  Call  802CFD30  ( 00000000 00000004 *Fixed[3.0] *Fixed[3.0] 00000000 00000000 )
-   80:  Call  PlaySoundAtNpc    ( 00000000 000000E1 00000000 )
+   80:  Call  PlaySoundAtNpc    ( .NpcID:Kolorado_00 000000E1 00000000 )
    98:  Thread
-   A0:  	Call  SetNpcCollisionSize   ( 00000000 00000014 00000018 )
+   A0:  	Call  SetNpcCollisionSize   ( .NpcID:Kolorado_00  20`  24` )
    B8:  	Call  LoadPath  ( 0000001E $VectorList_80244A8C 00000005 .Easing:Linear )
    D4:  	Label  0
    E0:  	Call  GetNextPathPos ( )
-   EC:  	Call  SetNpcPos ( 00000000 *Var1 *Var2 *Var3 )
+   EC:  	Call  SetNpcPos ( .NpcID:Kolorado_00 *Var1 *Var2 *Var3 )
   108:  	Wait  1`
   114:  	If  *Var0  ==  00000001
   124:  		Goto  0
   130:  	EndIf
   138:  EndThread
-  140:  Call  SpeakToPlayer ( 00000000 00B6000C 00B6000C 00000005 001000F9 ) % Aiigh!
+  140:  Call  SpeakToPlayer ( .NpcID:Kolorado_00 00B6000C 00B6000C 00000005 001000F9 ) % Aiigh!
   160:  Return
   168:  End
 }
 
 #new:Script $Script_80244C8C
 {
-    0:  Call  SetNpcPos ( 00000000 000001BF 00000000 00000046 )
-   1C:  Call  SetNpcYaw ( 00000000 0000010E )
-   30:  Call  SetEnemyFlagBits  ( 00000000 00400000 00000001 )
+    0:  Call  SetNpcPos ( .NpcID:Kolorado_00  447`  0`  70` )
+   1C:  Call  SetNpcYaw ( .NpcID:Kolorado_00  270` )
+   30:  Call  SetEnemyFlagBits  ( .NpcID:Kolorado_00 00400000 00000001 )
    48:  Call  802CDE68  ( 00000000 0000000D )
-   5C:  Call  SetNpcRotation    ( 00000000 00000000 00000000 000000FA )
-   78:  Call  SetNpcAnimation   ( 00000000 00B6000C )
+   5C:  Call  SetNpcRotation    ( .NpcID:Kolorado_00 00000000 00000000 000000FA )
+   78:  Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B6000C )
    8C:  Call  802CFD30  ( 00000000 00000004 *Fixed[3.0] *Fixed[3.0] 00000000 00000000 )
    B0:  Return
    B8:  End
@@ -4086,12 +4091,12 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
    40:  	Goto  0
    4C:  EndIf
    54:  Call  DisablePlayerInput        ( .True )
-   64:  Call  ShowMessageAtScreenPos    ( 001000F7 000000A0 00000028 ) % Mario! Wai... Wait one moment!
+   64:  Call  ShowMessageAtScreenPos    ( 001000F7  160`  40` ) % Mario! Wai... Wait one moment!
    7C:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
-   94:  Call  SetNpcPos ( .Npc:Self 00000122 00000000 0000001E )
+   94:  Call  SetNpcPos ( .Npc:Self  290`  0`  30` )
    B0:  Call  SetNpcSpeed       ( .Npc:Self *Fixed[5.0] )
    C4:  Call  SetNpcAnimation   ( .Npc:Self 00B60007 )
-   D8:  Call  NpcMoveTo ( .Npc:Self 00000280 00000050 00000000 )
+   D8:  Call  NpcMoveTo ( .Npc:Self  640`  80`  0` )
    F4:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .False )
   10C:  Call  SetNpcAnimation   ( .Npc:Self 00B60002 )
   120:  Call  SpeakToPlayer     ( .Npc:Self 00B60009 00B60002 00000000 001000F8 ) % Huff huff huff.. According to the information I've ...
@@ -4124,11 +4129,11 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
    2C:  		Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80244D4C )
    40:  		Return
    48:  	Case  <  .Story:Ch5_HiddenPassageOpen % 20
-   54:  		Call  SetNpcPos ( .Npc:Self 00000280 00000000 00000050 )
+   54:  		Call  SetNpcPos ( .Npc:Self  640`  0`  80` )
    70:  		Call  SetNpcAnimation   ( .Npc:Self 00B60002 )
    84:  		Return
    8C:  	Case  ==  .Story:Ch5_HiddenPassageOpen % 20
-   98:  		Call  SetNpcCollisionSize   ( 00000000 00000014 00000018 )
+   98:  		Call  SetNpcCollisionSize   ( .NpcID:Kolorado_00  20`  24` )
    B0:  		Exec  $Script_80244C8C
    BC:  		Return
    C4:  	Default
@@ -4140,39 +4145,39 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
 
 #new:NpcGroup $NpcGroup_80245050
 {
-	00000000 $NpcSettings_802439A0 ~Vec3f:NPC_80245050 % 0 -1000 0
+	.NpcID:Kolorado_00 $NpcSettings_802439A0 ~Vec3f:NPC_Kolorado_00 % 0 -1000 0
 	00510509 $Script_Init_80244F5C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245050
-	~AnimationTable:NPC_80245050 % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_00
+	~AnimationTable:NPC_Kolorado_00 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 }
 
 #new:NpcGroup $NpcGroup_80245240
 {
-	00000001 $NpcSettings_80243B8C ~Vec3f:NPC_80245240 % -325 0 150
+	.NpcID:PutridPiranha_01 $NpcSettings_80243B8C ~Vec3f:NPC_PutridPiranha_01 % -325 0 150
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80245240
-	~AnimationTable:NPC_80245240 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_01
+	~AnimationTable:NPC_PutridPiranha_01 % .Sprite:PutridPiranha
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80245240[1F0]
-	00000002 $NpcSettings_80243CC4 ~Vec3f:NPC_80245430 % 0 -1000 0
+	.NpcID:PutridPiranha_02 $NpcSettings_80243CC4 ~Vec3f:NPC_PutridPiranha_02 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245430
-	~AnimationTable:NPC_80245430 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_02
+	~AnimationTable:NPC_PutridPiranha_02 % .Sprite:PutridPiranha
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245620
 {
-	00000003 $NpcSettings_8024401C ~Vec3f:NPC_80245620 % -450 0 100
+	.NpcID:SpikeTop_03 $NpcSettings_8024401C ~Vec3f:NPC_SpikeTop_03 % -450 0 100
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperSoda:A ~HP:Standard:4 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80245620
-	~AnimationTable:NPC_80245620 % .Sprite:SpikeTop
+	~Movement:NPC_SpikeTop_03
+	~AnimationTable:NPC_SpikeTop_03 % .Sprite:SpikeTop
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
@@ -4209,11 +4214,11 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
   104:  EndIf
   10C:  Call  GetPlayerTargetYaw    ( *Var0 )
   11C:  If  *Var0  <  000000B4
-  12C:  	Call  InterpPlayerYaw       ( 0000005A 00000001 )
+  12C:  	Call  InterpPlayerYaw       (  90`  1` )
   140:  	Wait  1`
   14C:  	Call  $Function_80242E84    ( 00000014 )
   15C:  Else
-  164:  	Call  InterpPlayerYaw       ( 0000010E 00000001 )
+  164:  	Call  InterpPlayerYaw       (  270`  1` )
   178:  	Wait  1`
   184:  	Call  $Function_80242E84    ( FFFFFFEC )
   194:  EndIf
@@ -4241,7 +4246,7 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
     0:  Call  GetPlayerPos  ( *Var3 *Var4 *Var5 )
    18:  Call  UseSettingsFrom   ( .Cam:Default *Var3 *Var4 *Var5 )
    34:  Call  SetPanTarget  ( .Cam:Default *Var3 *Var4 *Var5 )
-   50:  Call  SetCamDistance    ( .Cam:Default 000001F4 )
+   50:  Call  SetCamDistance    ( .Cam:Default  500` )
    64:  Call  SetCamSpeed   ( .Cam:Default *Fixed[10.0] )
    78:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    90:  Loop
@@ -4258,7 +4263,7 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
   134:  			Set   *Var2  *Var1
   144:  			Call  $Function_80242D4C ( )
   150:  			Sub   *Var2  00000037
-  160:  			Call  SetPanTarget  ( .Cam:Default *Var0 *Var2 0000001E )
+  160:  			Call  SetPanTarget  ( .Cam:Default *Var0 *Var2  30` )
   17C:  			Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   194:  		EndIf
   19C:  	EndIf
@@ -4271,7 +4276,7 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
 #new:Script $Script_80245CA8
 {
     0:  Loop
-    C:  	Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[1.0] )
+    C:  	Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[1.0] )
    28:  EndLoop
    30:  Return
    38:  End
@@ -4352,9 +4357,9 @@ MISSING: 80244048 to 80244074 (00004048 to 00004074)
   4A8:  			Call  EnableModel   ( ~Model:mae .False )
   4BC:  			Call  EnableModel   ( ~Model:ato .True )
   4D0:  			Thread
-  4D8:  				Call  ShakeCam  ( .Cam:Default 00000000 00000014 *Fixed[3.0] )
-  4F4:  				Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[1.7] )
-  510:  				Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.5] )
+  4D8:  				Call  ShakeCam  ( .Cam:Default 00000000  20` *Fixed[3.0] )
+  4F4:  				Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[1.7] )
+  510:  				Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.5] )
   52C:  			EndThread
   534:  			Set   *AreaFlag[006]  .True
   544:  		EndIf

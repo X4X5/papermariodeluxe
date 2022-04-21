@@ -1,6 +1,19 @@
 % Script File: jan_22.mscr
 % Decoded from: 0 to BB50 (jan_22)
 
+#define .NpcID:Kolorado_00          00
+#define .NpcID:Kolorado_01          01
+#define .NpcID:Kolorado_02          02
+#define .NpcID:Kolorado_03          03
+#define .NpcID:JungleGuy_04         04
+#define .NpcID:RafaelRaven_05       05
+#define .NpcID:Raven_06             06
+#define .NpcID:Raven_07             07
+#define .NpcID:Raven_08             08
+#define .NpcID:Raven_09             09
+#define .NpcID:Raven_10             0A
+#define .NpcID:WorldMisstar_11      0B
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFB8
@@ -1972,8 +1985,8 @@ PADDING: 8024195C to 80241960 (0000195C to 00001960)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  ModifyColliderFlags   ( 00000000 ~Collider:o304 7FFFFE00 )
    88:  Switch  *GB_StoryProgress
@@ -2146,7 +2159,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   180:  If  *Var0  ==  00000000
   190:  	Add   *Var5  FFFFFFFB
   1A0:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.5] )
-  1B4:  	Call  NpcJump0  ( .Npc:Partner *Var3 *Var4 *Var5 0000000A )
+  1B4:  	Call  NpcJump0  ( .Npc:Partner *Var3 *Var4 *Var5  10` )
   1D4:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
   1E8:  EndIf
   1F0:  Exec  $Script_80242620 *Var7
@@ -2200,16 +2213,16 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   514:  EndThread
   51C:  Thread
   524:  	Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  534:  	Call  PlayerJump        ( ~Vec3d:JumpDest_80242BBC 00000014 )
+  534:  	Call  PlayerJump        ( ~Vec3d:JumpDest_80242BBC  20` )
   550:  	Call  HidePlayerShadow  ( .False )
   560:  	Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  570:  	Call  PlayerMoveTo      ( 0000011D 0000000F 00000000 )
+  570:  	Call  PlayerMoveTo      (  285`  15`  0` )
   588:  EndThread
   590:  Call  PartnerIsFlying   ( *Var0 )
   5A0:  If  *Var0  ==  .True
   5B0:  	Wait  10`
   5BC:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[1.0] )
-  5D0:  	Call  NpcJump0  ( .Npc:Partner 00000104 000000CD 0000000F 0000000F )
+  5D0:  	Call  NpcJump0  ( .Npc:Partner  260`  205`  15`  15` )
   5F0:  EndIf
   5F8:  Call  EnableNpcShadow       ( .Npc:Partner .True )
   60C:  Call  SetNpcFlagBits        ( .Npc:Partner 00000040 .False )
@@ -2240,11 +2253,11 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 
 #new:Script $Script_80242E08
 {
-    0:  Call  SetNpcPos ( 00000006 000000B1 00000000 FFFFFFF6 )
-   1C:  Call  SetNpcPos ( 00000007 0000007F 00000000 00000005 )
-   38:  Call  SetNpcPos ( 00000008 00000098 00000000 00000000 )
-   54:  Call  SetNpcPos ( 00000009 00000066 00000000 00000000 )
-   70:  Call  SetNpcPos ( 0000000A 0000004D 00000000 FFFFFFF6 )
+    0:  Call  SetNpcPos ( .NpcID:Raven_06  177`  0`  -10` )
+   1C:  Call  SetNpcPos ( .NpcID:Raven_07  127`  0`  5` )
+   38:  Call  SetNpcPos ( .NpcID:Raven_08  152`  0`  0` )
+   54:  Call  SetNpcPos ( .NpcID:Raven_09  102`  0`  0` )
+   70:  Call  SetNpcPos ( .NpcID:Raven_10  77`  0`  -10` )
    8C:  Return
    94:  End
 }
@@ -2252,44 +2265,44 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 #new:Script $Script_80242EA4
 {
     0:  ChildThread
-    8:  	Call  PlaySoundAtNpc    ( 00000007 000002A6 00000000 )
-   20:  	Call  SetNpcFlagBits    ( 00000007 00000100 .True )
-   38:  	Call  SetNpcAnimation   ( 00000007 00980006 )
-   4C:  	Call  NpcJump0  ( 00000007 0000010F 00000145 FFFFFFEF 0000001E )
+    8:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_07 000002A6 00000000 )
+   20:  	Call  SetNpcFlagBits    ( .NpcID:Raven_07 00000100 .True )
+   38:  	Call  SetNpcAnimation   ( .NpcID:Raven_07 00980006 )
+   4C:  	Call  NpcJump0  ( .NpcID:Raven_07  271`  325`  -17`  30` )
    6C:  EndChildThread
    74:  ChildThread
    7C:  	Wait  3`
-   88:  	Call  PlaySoundAtNpc    ( 0000000A 000002A7 00000000 )
-   A0:  	Call  SetNpcFlagBits    ( 0000000A 00000100 .True )
-   B8:  	Call  SetNpcAnimation   ( 0000000A 00980006 )
-   CC:  	Call  NpcJump0  ( 0000000A 00000190 000000D7 FFFFFFE9 0000001E )
+   88:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_10 000002A7 00000000 )
+   A0:  	Call  SetNpcFlagBits    ( .NpcID:Raven_10 00000100 .True )
+   B8:  	Call  SetNpcAnimation   ( .NpcID:Raven_10 00980006 )
+   CC:  	Call  NpcJump0  ( .NpcID:Raven_10  400`  215`  -23`  30` )
    EC:  EndChildThread
    F4:  ChildThread
    FC:  	Wait  6`
-  108:  	Call  PlaySoundAtNpc    ( 00000006 000002A6 00000000 )
-  120:  	Call  SetNpcFlagBits    ( 00000006 00000100 .True )
-  138:  	Call  SetNpcAnimation   ( 00000006 00980006 )
-  14C:  	Call  NpcJump0  ( 00000006 000000D0 0000014F FFFFFFEF 0000001E )
+  108:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_06 000002A6 00000000 )
+  120:  	Call  SetNpcFlagBits    ( .NpcID:Raven_06 00000100 .True )
+  138:  	Call  SetNpcAnimation   ( .NpcID:Raven_06 00980006 )
+  14C:  	Call  NpcJump0  ( .NpcID:Raven_06  208`  335`  -17`  30` )
   16C:  EndChildThread
   174:  ChildThread
   17C:  	Wait  9`
-  188:  	Call  PlaySoundAtNpc    ( 00000008 000002A7 00000000 )
-  1A0:  	Call  SetNpcFlagBits    ( 00000008 00000100 .True )
-  1B8:  	Call  SetNpcAnimation   ( 00000008 00980006 )
-  1CC:  	Call  NpcJump0  ( 00000008 00000147 000000C8 FFFFFFF8 0000001E )
+  188:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_08 000002A7 00000000 )
+  1A0:  	Call  SetNpcFlagBits    ( .NpcID:Raven_08 00000100 .True )
+  1B8:  	Call  SetNpcAnimation   ( .NpcID:Raven_08 00980006 )
+  1CC:  	Call  NpcJump0  ( .NpcID:Raven_08  327`  200`  -8`  30` )
   1EC:  EndChildThread
   1F4:  Wait  30`
-  200:  Call  PlaySoundAtNpc    ( 00000009 000002A6 00000000 )
-  218:  Call  SetNpcFlagBits    ( 00000009 00000100 .True )
-  230:  Call  SetNpcAnimation   ( 00000009 00980006 )
-  244:  Call  NpcJump0  ( 00000009 000000DE 0000011C FFFFFFF3 0000000F )
+  200:  Call  PlaySoundAtNpc    ( .NpcID:Raven_09 000002A6 00000000 )
+  218:  Call  SetNpcFlagBits    ( .NpcID:Raven_09 00000100 .True )
+  230:  Call  SetNpcAnimation   ( .NpcID:Raven_09 00980006 )
+  244:  Call  NpcJump0  ( .NpcID:Raven_09  222`  284`  -13`  15` )
   264:  Return
   26C:  End
 }
 
 #new:Script $Script_Interact_80243118
 {
-    0:  Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+    0:  Call  GetNpcPos     ( .NpcID:RafaelRaven_05 *Var0 *Var1 *Var2 )
    1C:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    38:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
    54:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-8.5] )
@@ -2298,12 +2311,12 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    98:  Call  $Function_80240FA8 ( )
    A4:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    B8:  Wait  10`
-   C4:  Call  SetNpcFlagBits    ( 00000005 00000100 .True )
+   C4:  Call  SetNpcFlagBits    ( .NpcID:RafaelRaven_05 00000100 .True )
    DC:  Call  NpcFacePlayer ( .Npc:Self 00000000 )
    F0:  Call  SpeakToPlayer ( .Npc:Self 00C40009 00C40002 00000000 001000C7 ) % Aye aye, all right. Is everyone ready?
   110:  Wait  10`
   11C:  Call  SpeakToPlayer ( .Npc:Self 00C40009 00C40002 00000000 001000C8 ) % Now, Ravens! Get to work!!
-  13C:  Call  SetNpcVar     ( 00000006 00000000 0000000A )
+  13C:  Call  SetNpcVar     ( .NpcID:Raven_06 00000000 0000000A )
   154:  Call  BindNpcInteract   ( .Npc:Self 00000000 )
   168:  Return
   170:  End
@@ -2327,7 +2340,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
     C:  	Case  ==  .Story:Ch5_RafaelMovedRoot % 16
    18:  		Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80243290 )
    2C:  	Case  ==  .Story:Ch5_RafaelWaitingForMario % 17
-   38:  		Call  SetNpcPos ( .Npc:Self 0000007D 00000000 FFFFFFD8 )
+   38:  		Call  SetNpcPos ( .Npc:Self  125`  0`  -40` )
    54:  		Call  SetNpcFlagBits    ( .Npc:Self 00000100 .False )
    6C:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80243118 )
    80:  	Default
@@ -2340,10 +2353,10 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 #new:Script $Script_Interact_802433A0
 {
     0:  If  *GF_JAN22_Met_Raven  ==  .False
-   10:  	Call  SpeakToPlayer ( 00000006 00980005 00980001 00000000 001000D2 ) % Caw cawcaw caaaw...
+   10:  	Call  SpeakToPlayer ( .NpcID:Raven_06 00980005 00980001 00000000 001000D2 ) % Caw cawcaw caaaw...
    30:  	Set   *GF_JAN22_Met_Raven  .True
    40:  Else
-   48:  	Call  SpeakToPlayer ( 00000006 00980005 00980001 00000000 001000D3 ) % Caw cawcaw.
+   48:  	Call  SpeakToPlayer ( .NpcID:Raven_06 00980005 00980001 00000000 001000D3 ) % Caw cawcaw.
    68:  EndIf
    70:  Return
    78:  End
@@ -2352,11 +2365,11 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 #new:Script $Script_80243420
 {
     0:  Wait  45`
-    C:  Call  NpcJump0      ( *Var0 0000001E 00000000 FFFFFFF1 0000000A )
+    C:  Call  NpcJump0      ( *Var0  30`  0`  -15`  10` )
    2C:  Call  SetNpcAnimation   ( *Var0 00980003 )
    40:  Call  SetNpcSpeed   ( *Var0 *Fixed[3.0] )
-   54:  Call  NpcMoveTo     ( *Var0 FFFFFF88 00000000 00000000 )
-   70:  Call  SetNpcPos     ( *Var0 00000000 FFFFFC18 00000000 )
+   54:  Call  NpcMoveTo     ( *Var0  -120`  0`  0` )
+   70:  Call  SetNpcPos     ( *Var0  0`  -1000`  0` )
    8C:  Return
    94:  End
 }
@@ -2365,17 +2378,17 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 {
     0:  Call  PlaySoundAt   ( 8000001E 00000000 0000010E 00000082 00000000 )
    20:  Loop
-   2C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000003 *Fixed[1.0] )
+   2C:  	Call  ShakeCam  ( .Cam:Default 00000000  3` *Fixed[1.0] )
    48:  	Wait  30`
-   54:  	Call  ShakeCam  ( .Cam:Default 00000000 00000008 *Fixed[1.0] )
+   54:  	Call  ShakeCam  ( .Cam:Default 00000000  8` *Fixed[1.0] )
    70:  	Call  RandInt   ( 00000004 *Var0 )
    84:  	Add   *Var0  00000001
    94:  	Call  PlayEffect    ( ~FX:Stars:Fan 00000122 0000009B 00000000 000000F0 00000000 00000000 *Var0 00000000 00000000 00000000 00000000 00000000 )
    D8:  	Wait  10`
    E4:  	Call  PlayEffect    ( ~FX:Stars:Fan 00000113 00000096 00000000 000000F0 00000000 00000000 00000003 00000000 00000000 00000000 00000000 00000000 )
-  128:  	Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[1.0] )
+  128:  	Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[1.0] )
   144:  	Wait  4`
-  150:  	Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[1.0] )
+  150:  	Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[1.0] )
   16C:  	Wait  4`
   178:  EndLoop
   180:  Return
@@ -2391,11 +2404,11 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    34:  EndIf
    3C:  Call  ModifyColliderFlags   ( 00000001 ~Collider:o304 7FFFFE00 )
    54:  Label  1
-   60:  Call  NpcFacePlayer ( 00000006 00000000 )
-   74:  Call  NpcFacePlayer ( 00000007 00000000 )
-   88:  Call  NpcFacePlayer ( 00000008 00000000 )
-   9C:  Call  NpcFacePlayer ( 00000009 00000000 )
-   B0:  Call  NpcFacePlayer ( 0000000A 00000000 )
+   60:  Call  NpcFacePlayer ( .NpcID:Raven_06 00000000 )
+   74:  Call  NpcFacePlayer ( .NpcID:Raven_07 00000000 )
+   88:  Call  NpcFacePlayer ( .NpcID:Raven_08 00000000 )
+   9C:  Call  NpcFacePlayer ( .NpcID:Raven_09 00000000 )
+   B0:  Call  NpcFacePlayer ( .NpcID:Raven_10 00000000 )
    C4:  Call  GetSelfVar    ( 00000000 *Var0 )
    D8:  If  *Var0  ==  00000000
    E8:  	Wait  1`
@@ -2407,83 +2420,83 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   140:  Switch  *Var0
   14C:  	Case  ==  0000000A
   158:  		Call  DisablePlayerInput    ( .True )
-  168:  		Call  InterpNpcYaw  ( 00000006 0000005A 00000000 )
-  180:  		Call  InterpNpcYaw  ( 00000007 0000005A 00000000 )
-  198:  		Call  InterpNpcYaw  ( 00000008 0000005A 00000000 )
-  1B0:  		Call  InterpNpcYaw  ( 00000009 0000005A 00000000 )
-  1C8:  		Call  InterpNpcYaw  ( 0000000A 0000005A 00000000 )
+  168:  		Call  InterpNpcYaw  ( .NpcID:Raven_06  90`  0` )
+  180:  		Call  InterpNpcYaw  ( .NpcID:Raven_07  90`  0` )
+  198:  		Call  InterpNpcYaw  ( .NpcID:Raven_08  90`  0` )
+  1B0:  		Call  InterpNpcYaw  ( .NpcID:Raven_09  90`  0` )
+  1C8:  		Call  InterpNpcYaw  ( .NpcID:Raven_10  90`  0` )
   1E0:  		Wait  10`
   1EC:  		Exec  $Script_80242EA4 *Var9
   1FC:  		Wait  40`
   208:  		Kill  *Var9
   214:  		Wait  10`
-  220:  		Call  SetNpcPos     ( 00000006 00000000 FFFFFC18 00000000 )
-  23C:  		Call  SetNpcPos     ( 00000007 00000000 FFFFFC18 00000000 )
-  258:  		Call  SetNpcPos     ( 00000008 00000000 FFFFFC18 00000000 )
-  274:  		Call  SetNpcPos     ( 00000009 00000000 FFFFFC18 00000000 )
-  290:  		Call  SetNpcPos     ( 0000000A 00000000 FFFFFC18 00000000 )
-  2AC:  		Call  UseSettingsFrom   ( .Cam:Default 0000012C 000000FA 00000096 )
-  2C8:  		Call  SetPanTarget  ( .Cam:Default 0000012C 000000FA 00000096 )
+  220:  		Call  SetNpcPos     ( .NpcID:Raven_06  0`  -1000`  0` )
+  23C:  		Call  SetNpcPos     ( .NpcID:Raven_07  0`  -1000`  0` )
+  258:  		Call  SetNpcPos     ( .NpcID:Raven_08  0`  -1000`  0` )
+  274:  		Call  SetNpcPos     ( .NpcID:Raven_09  0`  -1000`  0` )
+  290:  		Call  SetNpcPos     ( .NpcID:Raven_10  0`  -1000`  0` )
+  2AC:  		Call  UseSettingsFrom   ( .Cam:Default  300`  250`  150` )
+  2C8:  		Call  SetPanTarget  ( .Cam:Default  300`  250`  150` )
   2E4:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   2F8:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   310:  		Exec  $Script_80242E08
   31C:  		Wait  10`
   328:  		ExecWait  $Script_80242EA4
-  334:  		Call  SetNpcAnimation   ( 00000006 00980003 )
-  348:  		Call  SetNpcAnimation   ( 00000007 00980003 )
-  35C:  		Call  SetNpcAnimation   ( 00000008 00980003 )
-  370:  		Call  SetNpcAnimation   ( 0000000A 00980003 )
-  384:  		Call  PlaySoundAtNpc    ( 00000009 00000165 00000000 )
-  39C:  		Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[1.0] )
+  334:  		Call  SetNpcAnimation   ( .NpcID:Raven_06 00980003 )
+  348:  		Call  SetNpcAnimation   ( .NpcID:Raven_07 00980003 )
+  35C:  		Call  SetNpcAnimation   ( .NpcID:Raven_08 00980003 )
+  370:  		Call  SetNpcAnimation   ( .NpcID:Raven_10 00980003 )
+  384:  		Call  PlaySoundAtNpc    ( .NpcID:Raven_09 00000165 00000000 )
+  39C:  		Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[1.0] )
   3B8:  		Thread
-  3C0:  			Call  SetNpcJumpscale   ( 00000006 *Fixed[3.0] )
-  3D4:  			Call  GetNpcPos ( 00000006 *Var0 *Var1 *Var2 )
-  3F0:  			Call  NpcJump0  ( 00000006 *Var0 *Var1 *Var2 00000005 )
+  3C0:  			Call  SetNpcJumpscale   ( .NpcID:Raven_06 *Fixed[3.0] )
+  3D4:  			Call  GetNpcPos ( .NpcID:Raven_06 *Var0 *Var1 *Var2 )
+  3F0:  			Call  NpcJump0  ( .NpcID:Raven_06 *Var0 *Var1 *Var2  5` )
   410:  		EndThread
   418:  		Thread
-  420:  			Call  SetNpcJumpscale   ( 00000007 *Fixed[3.0] )
-  434:  			Call  GetNpcPos     ( 00000007 *Var0 *Var1 *Var2 )
-  450:  			Call  NpcJump0      ( 00000007 *Var0 *Var1 *Var2 00000005 )
-  470:  			Call  InterpNpcYaw  ( 00000007 0000010E 00000000 )
+  420:  			Call  SetNpcJumpscale   ( .NpcID:Raven_07 *Fixed[3.0] )
+  434:  			Call  GetNpcPos     ( .NpcID:Raven_07 *Var0 *Var1 *Var2 )
+  450:  			Call  NpcJump0      ( .NpcID:Raven_07 *Var0 *Var1 *Var2  5` )
+  470:  			Call  InterpNpcYaw  ( .NpcID:Raven_07  270`  0` )
   488:  		EndThread
   490:  		Wait  3`
-  49C:  		Call  PlaySoundAtNpc    ( 00000009 0000020C 00000000 )
-  4B4:  		Call  SetNpcRotation    ( 00000009 00000000 00000000 000000B4 )
-  4D0:  		Call  SetNpcFlagBits    ( 00000009 00000200 .True )
-  4E8:  		Call  InterpNpcYaw  ( 00000008 0000010E 00000000 )
-  500:  		Call  InterpNpcYaw  ( 0000000A 0000010E 00000000 )
-  518:  		Call  SetNpcYaw     ( 00000005 0000005A )
-  52C:  		Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+  49C:  		Call  PlaySoundAtNpc    ( .NpcID:Raven_09 0000020C 00000000 )
+  4B4:  		Call  SetNpcRotation    ( .NpcID:Raven_09 00000000 00000000 000000B4 )
+  4D0:  		Call  SetNpcFlagBits    ( .NpcID:Raven_09 00000200 .True )
+  4E8:  		Call  InterpNpcYaw  ( .NpcID:Raven_08  270`  0` )
+  500:  		Call  InterpNpcYaw  ( .NpcID:Raven_10  270`  0` )
+  518:  		Call  SetNpcYaw     ( .NpcID:RafaelRaven_05  90` )
+  52C:  		Call  GetNpcPos     ( .NpcID:RafaelRaven_05 *Var0 *Var1 *Var2 )
   548:  		Call  GetPlayerPos  ( *Var3 *Var4 *Var5 )
   560:  		Add   *Var2  00000050
-  570:  		Call  SetPlayerPos  ( 00000091 00000000 *Var2 )
-  588:  		Call  InterpPlayerYaw   ( 0000005A 00000000 )
-  59C:  		Call  SetNpcPos     ( .Npc:Partner 00000073 00000000 *Var2 )
-  5B8:  		Call  SetNpcYaw     ( .Npc:Partner 0000005A )
+  570:  		Call  SetPlayerPos  (  145`  0` *Var2 )
+  588:  		Call  InterpPlayerYaw   (  90`  0` )
+  59C:  		Call  SetNpcPos     ( .Npc:Partner  115`  0` *Var2 )
+  5B8:  		Call  SetNpcYaw     ( .Npc:Partner  90` )
   5CC:  		Wait  80`
-  5D8:  		Call  SetNpcRotation    ( 00000009 00000000 00000000 00000000 )
+  5D8:  		Call  SetNpcRotation    ( .NpcID:Raven_09 00000000 00000000 00000000 )
   5F4:  		Call  SetSelfVar    ( 00000000 0000000B )
   608:  	Case  ==  0000000B
-  614:  		Call  UseSettingsFrom   ( .Cam:Default 000000A5 00000000 00000000 )
-  630:  		Call  SetPanTarget  ( .Cam:Default 000000A5 00000000 00000000 )
+  614:  		Call  UseSettingsFrom   ( .Cam:Default  165`  0`  0` )
+  630:  		Call  SetPanTarget  ( .Cam:Default  165`  0`  0` )
   64C:  		Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-8.5] )
   664:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   678:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   690:  		Wait  20`
-  69C:  		Call  SetNpcFlagBits    ( 00000009 00000200 .False )
-  6B4:  		Call  NpcMoveTo     ( 00000009 00000104 FFFFFFEC 00000000 )
-  6D0:  		Call  SetNpcRotation    ( 00000009 00000000 00000000 0000005A )
-  6EC:  		Call  SetNpcAnimation   ( 00000009 00980003 )
-  700:  		Call  NpcJump0      ( 00000009 0000012C 0000012C FFFFFFF2 00000014 )
-  720:  		Call  SetNpcRotation    ( 00000009 00000000 00000000 00000000 )
+  69C:  		Call  SetNpcFlagBits    ( .NpcID:Raven_09 00000200 .False )
+  6B4:  		Call  NpcMoveTo     ( .NpcID:Raven_09  260`  -20`  0` )
+  6D0:  		Call  SetNpcRotation    ( .NpcID:Raven_09 00000000 00000000 0000005A )
+  6EC:  		Call  SetNpcAnimation   ( .NpcID:Raven_09 00980003 )
+  700:  		Call  NpcJump0      ( .NpcID:Raven_09  300`  300`  -14`  20` )
+  720:  		Call  SetNpcRotation    ( .NpcID:Raven_09 00000000 00000000 00000000 )
   73C:  		Exec  $Script_802434BC *VarA
   74C:  		Wait  30`
-  758:  		Call  SpeakToPlayer ( 00000005 00C40009 00C40002 00000000 001000CA ) % This won't take long.
+  758:  		Call  SpeakToPlayer ( .NpcID:RafaelRaven_05 00C40009 00C40002 00000000 001000CA ) % This won't take long.
   778:  		Wait  50`
-  784:  		Call  SetNpcVar     ( 00000001 00000000 0000000A )
+  784:  		Call  SetNpcVar     ( .NpcID:Kolorado_01 00000000 0000000A )
   79C:  		Wait  140`
   7A8:  		Label  B
-  7B4:  		Call  GetNpcVar     ( 00000001 00000000 *Var0 )
+  7B4:  		Call  GetNpcVar     ( .NpcID:Kolorado_01 00000000 *Var0 )
   7CC:  		If  *Var0  !=  00000000
   7DC:  			Wait  1`
   7E8:  			Goto  B
@@ -2500,32 +2513,32 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   88C:  		Call  ModifyColliderFlags   ( 00000001 ~Collider:g29 7FFFFE00 )
   8A4:  		Call  ModifyColliderFlags   ( 00000001 ~Collider:g39 7FFFFE00 )
   8BC:  		Call  ModifyColliderFlags   ( 00000001 ~Collider:g86 7FFFFE00 )
-  8D4:  		Call  SetNpcAnimation   ( 00000006 00980001 )
-  8E8:  		Call  SetNpcPos ( 00000006 000000FF 000000CD FFFFFFE7 )
-  904:  		Call  SetNpcPos ( 00000007 000000C8 000000B9 00000000 )
-  920:  		Call  SetNpcPos ( 00000008 00000152 000000D4 FFFFFFEC )
-  93C:  		Call  SetNpcPos ( 00000009 0000010B 0000013A FFFFFFF4 )
-  958:  		Call  PlaySoundAtNpc    ( 0000000A 000002A6 00000000 )
+  8D4:  		Call  SetNpcAnimation   ( .NpcID:Raven_06 00980001 )
+  8E8:  		Call  SetNpcPos ( .NpcID:Raven_06  255`  205`  -25` )
+  904:  		Call  SetNpcPos ( .NpcID:Raven_07  200`  185`  0` )
+  920:  		Call  SetNpcPos ( .NpcID:Raven_08  338`  212`  -20` )
+  93C:  		Call  SetNpcPos ( .NpcID:Raven_09  267`  314`  -12` )
+  958:  		Call  PlaySoundAtNpc    ( .NpcID:Raven_10 000002A6 00000000 )
   970:  		Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   988:  		Add   *Var0  0000003C
-  998:  		Call  NpcJump0  ( 0000000A *Var0 00000000 00000028 00000014 )
+  998:  		Call  NpcJump0  ( .NpcID:Raven_10 *Var0  0`  40`  20` )
   9B8:  		Wait  10`
-  9C4:  		Call  SpeakToPlayer     ( 0000000A 00980005 00980001 00000000 001000CC ) % Caw caw caaaw!
+  9C4:  		Call  SpeakToPlayer     ( .NpcID:Raven_10 00980005 00980001 00000000 001000CC ) % Caw caw caaaw!
   9E4:  		Wait  15`
-  9F0:  		Call  SetNpcAnimation   ( 00000006 00980001 )
-  A04:  		Call  SetNpcAnimation   ( 00000007 00980001 )
-  A18:  		Call  SetNpcAnimation   ( 00000008 00980001 )
-  A2C:  		Call  SetNpcAnimation   ( 00000009 00980001 )
-  A40:  		Call  UseSettingsFrom   ( .Cam:Default 0000012C 000000FA 00000096 )
-  A5C:  		Call  SetPanTarget      ( .Cam:Default 0000012C 000000FA 00000096 )
+  9F0:  		Call  SetNpcAnimation   ( .NpcID:Raven_06 00980001 )
+  A04:  		Call  SetNpcAnimation   ( .NpcID:Raven_07 00980001 )
+  A18:  		Call  SetNpcAnimation   ( .NpcID:Raven_08 00980001 )
+  A2C:  		Call  SetNpcAnimation   ( .NpcID:Raven_09 00980001 )
+  A40:  		Call  UseSettingsFrom   ( .Cam:Default  300`  250`  150` )
+  A5C:  		Call  SetPanTarget      ( .Cam:Default  300`  250`  150` )
   A78:  		Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   A8C:  		Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   AA4:  		Wait  15`
-  AB0:  		Call  PlaySoundAtNpc    ( 0000000A 000002A6 00000000 )
-  AC8:  		Call  SetNpcPos ( 0000000A 0000015E 00000000 00000064 )
-  AE4:  		Call  SetNpcAnimation   ( 0000000A 00980006 )
-  AF8:  		Call  NpcJump0  ( 0000000A 00000190 000000D7 FFFFFFE9 00000014 )
-  B18:  		Call  SpeakToPlayer     ( 0000000A 00980005 00980001 00000000 001000CD ) % Finished! Caw!
+  AB0:  		Call  PlaySoundAtNpc    ( .NpcID:Raven_10 000002A6 00000000 )
+  AC8:  		Call  SetNpcPos ( .NpcID:Raven_10  350`  0`  100` )
+  AE4:  		Call  SetNpcAnimation   ( .NpcID:Raven_10 00980006 )
+  AF8:  		Call  NpcJump0  ( .NpcID:Raven_10  400`  215`  -23`  20` )
+  B18:  		Call  SpeakToPlayer     ( .NpcID:Raven_10 00980005 00980001 00000000 001000CD ) % Finished! Caw!
   B38:  		Thread
   B40:  			Call  PlaySoundAtModel  ( ~Model:o123 00000186 00000000 )
   B58:  			Call  MakeLerp  ( 000000AA 00000000 0000003C .Easing:CubicOut )
@@ -2533,7 +2546,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   B80:  				Call  UpdateLerp ( )
   B8C:  				Set   *Var3  *Var0
   B9C:  				Add   *Var3  00000009
-  BAC:  				Call  SetNpcPos ( 00000007 000000C8 *Var3 00000000 )
+  BAC:  				Call  SetNpcPos ( .NpcID:Raven_07  200` *Var3  0` )
   BC8:  				SetF  *Var2  *Fixed[200.0]
   BD8:  				SubF  *Var2  *Var0
   BE8:  				DivF  *Var2  *Fixed[200.0]
@@ -2548,14 +2561,14 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   C80:  			Call  SetSelfVar    ( 00000000 00000016 )
   C94:  		EndThread
   C9C:  		Wait  20`
-  CA8:  		Call  UseSettingsFrom   ( .Cam:Default 000000A5 00000000 00000000 )
-  CC4:  		Call  SetPanTarget  ( .Cam:Default 000000A5 00000000 00000000 )
+  CA8:  		Call  UseSettingsFrom   ( .Cam:Default  165`  0`  0` )
+  CC4:  		Call  SetPanTarget  ( .Cam:Default  165`  0`  0` )
   CE0:  		Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-8.5] )
   CF8:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   D0C:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   D24:  		Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   D38:  		Wait  10`
-  D44:  		Call  SpeakToPlayer ( 00000005 00C40009 00C40002 00000000 001000CE ) % Roger that! You can reach the volcano now.
+  D44:  		Call  SpeakToPlayer ( .NpcID:RafaelRaven_05 00C40009 00C40002 00000000 001000CE ) % Roger that! You can reach the volcano now.
   D64:  		Loop
   D70:  			Wait  1`
   D7C:  			Call  GetSelfVar    ( 00000000 *Var0 )
@@ -2563,46 +2576,46 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   DA0:  				BreakLoop
   DA8:  			EndIf
   DB0:  		EndLoop
-  DB8:  		Call  PlaySoundAtNpc    ( 0000000A 000002A6 00000000 )
-  DD0:  		Call  NpcJump0  ( 0000000A 00000096 00000000 00000014 0000000F )
-  DF0:  		Call  SetNpcAnimation   ( 0000000A 00980003 )
+  DB8:  		Call  PlaySoundAtNpc    ( .NpcID:Raven_10 000002A6 00000000 )
+  DD0:  		Call  NpcJump0  ( .NpcID:Raven_10  150`  0`  20`  15` )
+  DF0:  		Call  SetNpcAnimation   ( .NpcID:Raven_10 00980003 )
   E04:  		Thread
-  E0C:  			Call  NpcMoveTo ( 0000000A 00000041 00000019 0000001E )
-  E28:  			Call  SetNpcAnimation   ( 0000000A 00980001 )
-  E3C:  			Call  InterpNpcYaw      ( 0000000A 0000005A 00000000 )
+  E0C:  			Call  NpcMoveTo ( .NpcID:Raven_10  65`  25`  30` )
+  E28:  			Call  SetNpcAnimation   ( .NpcID:Raven_10 00980001 )
+  E3C:  			Call  InterpNpcYaw      ( .NpcID:Raven_10  90`  0` )
   E54:  		EndThread
-  E5C:  		Call  PlaySoundAtNpc    ( 00000009 000002A7 00000000 )
-  E74:  		Call  NpcJump0  ( 00000009 00000096 00000000 00000014 0000000F )
-  E94:  		Call  SetNpcAnimation   ( 00000009 00980003 )
+  E5C:  		Call  PlaySoundAtNpc    ( .NpcID:Raven_09 000002A7 00000000 )
+  E74:  		Call  NpcJump0  ( .NpcID:Raven_09  150`  0`  20`  15` )
+  E94:  		Call  SetNpcAnimation   ( .NpcID:Raven_09 00980003 )
   EA8:  		Thread
-  EB0:  			Call  NpcMoveTo ( 00000009 00000050 FFFFFFF6 00000019 )
-  ECC:  			Call  SetNpcAnimation   ( 00000009 00980001 )
-  EE0:  			Call  InterpNpcYaw      ( 00000009 0000005A 00000000 )
+  EB0:  			Call  NpcMoveTo ( .NpcID:Raven_09  80`  -10`  25` )
+  ECC:  			Call  SetNpcAnimation   ( .NpcID:Raven_09 00980001 )
+  EE0:  			Call  InterpNpcYaw      ( .NpcID:Raven_09  90`  0` )
   EF8:  		EndThread
-  F00:  		Call  PlaySoundAtNpc    ( 00000008 000002A6 00000000 )
-  F18:  		Call  NpcJump0  ( 00000008 00000096 00000000 00000014 0000000F )
-  F38:  		Call  SetNpcAnimation   ( 00000008 00980003 )
+  F00:  		Call  PlaySoundAtNpc    ( .NpcID:Raven_08 000002A6 00000000 )
+  F18:  		Call  NpcJump0  ( .NpcID:Raven_08  150`  0`  20`  15` )
+  F38:  		Call  SetNpcAnimation   ( .NpcID:Raven_08 00980003 )
   F4C:  		Thread
-  F54:  			Call  NpcMoveTo ( 00000008 0000005F 00000019 00000014 )
-  F70:  			Call  SetNpcAnimation   ( 00000008 00980001 )
-  F84:  			Call  InterpNpcYaw      ( 00000008 0000005A 00000000 )
+  F54:  			Call  NpcMoveTo ( .NpcID:Raven_08  95`  25`  20` )
+  F70:  			Call  SetNpcAnimation   ( .NpcID:Raven_08 00980001 )
+  F84:  			Call  InterpNpcYaw      ( .NpcID:Raven_08  90`  0` )
   F9C:  		EndThread
-  FA4:  		Call  PlaySoundAtNpc    ( 00000007 000002A7 00000000 )
-  FBC:  		Call  NpcJump0      ( 00000007 00000096 00000000 00000014 0000000F )
-  FDC:  		Call  SetNpcAnimation   ( 00000007 00980003 )
-  FF0:  		Call  NpcMoveTo     ( 00000007 0000006E FFFFFFF6 0000000F )
- 100C:  		Call  SetNpcAnimation   ( 00000007 00980001 )
- 1020:  		Call  InterpNpcYaw  ( 00000007 0000005A 00000000 )
- 1038:  		Call  SetNpcVar     ( 00000001 00000000 00000014 )
+  FA4:  		Call  PlaySoundAtNpc    ( .NpcID:Raven_07 000002A7 00000000 )
+  FBC:  		Call  NpcJump0      ( .NpcID:Raven_07  150`  0`  20`  15` )
+  FDC:  		Call  SetNpcAnimation   ( .NpcID:Raven_07 00980003 )
+  FF0:  		Call  NpcMoveTo     ( .NpcID:Raven_07  110`  -10`  15` )
+ 100C:  		Call  SetNpcAnimation   ( .NpcID:Raven_07 00980001 )
+ 1020:  		Call  InterpNpcYaw  ( .NpcID:Raven_07  90`  0` )
+ 1038:  		Call  SetNpcVar     ( .NpcID:Kolorado_01 00000000 00000014 )
  1050:  		Call  SetSelfVar    ( 00000000 00000019 )
  1064:  	Case  ==  00000019
- 1070:  		Call  GetNpcVar ( 00000001 00000000 *Var0 )
+ 1070:  		Call  GetNpcVar ( .NpcID:Kolorado_01 00000000 *Var0 )
  1088:  		If  *Var0  ==  FFFFFFFF
- 1098:  			Call  SpeakToPlayer ( 00000005 00C40009 00C40002 00000000 001000D0 ) % That Koopa! What a maverick! Charging into the vol ...
+ 1098:  			Call  SpeakToPlayer ( .NpcID:RafaelRaven_05 00C40009 00C40002 00000000 001000D0 ) % That Koopa! What a maverick! Charging into the vol ...
  10B8:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
  10D0:  			Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
  10EC:  			Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
- 1108:  			Call  SetCamDistance    ( .Cam:Default 0000015E )
+ 1108:  			Call  SetCamDistance    ( .Cam:Default  350` )
  111C:  			Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-7.0] )
  1134:  			Call  SetCamSpeed   ( .Cam:Default *Fixed[10.0] )
  1148:  			Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2611,12 +2624,12 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
  1180:  			ExecWait  $Script_802425C0
  118C:  			Call  AddKeyItem    ( .Item:UltraStone )
  119C:  			Wait  20`
- 11A8:  			Call  SetCamDistance    ( .Cam:Default 00000190 )
+ 11A8:  			Call  SetCamDistance    ( .Cam:Default  400` )
  11BC:  			Call  SetCamPitch   ( .Cam:Default *Fixed[20.0] *Fixed[-11.5] )
  11D4:  			Call  SetCamSpeed   ( .Cam:Default *Fixed[3.5] )
  11E8:  			Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
  1200:  			Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 1214:  			Call  SpeakToPlayer ( 00000005 00C40009 00C40002 00000000 001000D1 ) % That's an Ultra Stone. I found it a long time ago  ...
+ 1214:  			Call  SpeakToPlayer ( .NpcID:RafaelRaven_05 00C40009 00C40002 00000000 001000D1 ) % That's an Ultra Stone. I found it a long time ago  ...
  1234:  			Set   *Var0  00000007
  1244:  			Exec  $Script_80243420
  1250:  			Thread
@@ -2634,13 +2647,13 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
  12D4:  				Set   *Var0  0000000A
  12E4:  				Exec  $Script_80243420
  12F0:  			EndThread
- 12F8:  			Call  SetNpcAnimation   ( 00000005 00C40004 )
- 130C:  			Call  SetNpcSpeed       ( 00000005 *Fixed[3.0] )
- 1320:  			Call  NpcMoveTo ( 00000005 FFFFFF88 00000000 00000000 )
- 133C:  			Call  SetNpcPos ( 00000005 00000000 FFFFFC18 00000000 )
+ 12F8:  			Call  SetNpcAnimation   ( .NpcID:RafaelRaven_05 00C40004 )
+ 130C:  			Call  SetNpcSpeed       ( .NpcID:RafaelRaven_05 *Fixed[3.0] )
+ 1320:  			Call  NpcMoveTo ( .NpcID:RafaelRaven_05  -120`  0`  0` )
+ 133C:  			Call  SetNpcPos ( .NpcID:RafaelRaven_05  0`  -1000`  0` )
  1358:  			Wait  40`
- 1364:  			Call  BindNpcInteract   ( 00000006 $Script_Interact_802433A0 )
- 1378:  			Call  SetNpcFlagBits    ( 00000006 00000100 .False )
+ 1364:  			Call  BindNpcInteract   ( .NpcID:Raven_06 $Script_Interact_802433A0 )
+ 1378:  			Call  SetNpcFlagBits    ( .NpcID:Raven_06 00000100 .False )
  1390:  			Call  $Function_80240FC4 ( )
  139C:  			Call  ResetCam  ( .Cam:Default *Fixed[1.5] )
  13B0:  			Set   *GB_StoryProgress  .Story:Ch5_ZipLineReady
@@ -2664,17 +2677,17 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    4C:  		Exec  $Script_80242E08
    58:  	Case  .Story:Ch5_ZipLineReady  to  .Story:Ch5_OpenedEscapeRoute % 18 to 25
    68:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802433A0 )
-   7C:  		Call  SetNpcPos ( 00000006 00000104 000000CD FFFFFFE7 )
-   98:  		Call  SetNpcFlagBits    ( 00000006 00000100 .False )
+   7C:  		Call  SetNpcPos ( .NpcID:Raven_06  260`  205`  -25` )
+   98:  		Call  SetNpcFlagBits    ( .NpcID:Raven_06 00000100 .False )
    B0:  		Goto  1E
    BC:  	Default
    C4:  		Call  ModifyColliderFlags   ( 00000000 ~Collider:o346 7FFFFE00 )
-   DC:  		Call  RemoveNpc ( 00000006 )
+   DC:  		Call  RemoveNpc ( .NpcID:Raven_06 )
    EC:  		Label  1E
-   F8:  		Call  RemoveNpc ( 00000007 )
-  108:  		Call  RemoveNpc ( 00000008 )
-  118:  		Call  RemoveNpc ( 00000009 )
-  128:  		Call  RemoveNpc ( 0000000A )
+   F8:  		Call  RemoveNpc ( .NpcID:Raven_07 )
+  108:  		Call  RemoveNpc ( .NpcID:Raven_08 )
+  118:  		Call  RemoveNpc ( .NpcID:Raven_09 )
+  128:  		Call  RemoveNpc ( .NpcID:Raven_10 )
   138:  EndSwitch
   140:  Return
   148:  End
@@ -2691,19 +2704,19 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 #new:Script $Script_80244BD0
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  SetNpcPos     ( 00000005 FFFFFF38 00000000 FFFFFF56 )
-   2C:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
-   40:  Call  SetPlayerPos  ( FFFFFF42 00000000 FFFFFF38 )
-   58:  Call  SetNpcPos     ( .Npc:Partner FFFFFF42 00000000 FFFFFF2E )
+   10:  Call  SetNpcPos     ( .NpcID:RafaelRaven_05  -200`  0`  -170` )
+   2C:  Call  InterpPlayerYaw       (  90`  0` )
+   40:  Call  SetPlayerPos  (  -190`  0`  -200` )
+   58:  Call  SetNpcPos     ( .Npc:Partner  -190`  0`  -210` )
    74:  ExecWait  $Script_8024AC34
-   80:  Call  SetNpcAnimation       ( 00000005 00C40004 )
-   94:  Call  SetNpcSpeed   ( 00000005 *Fixed[4.0] )
-   A8:  Call  NpcMoveTo     ( 00000005 FFFFFF4C FFFFFFE2 00000000 )
+   80:  Call  SetNpcAnimation       ( .NpcID:RafaelRaven_05 00C40004 )
+   94:  Call  SetNpcSpeed   ( .NpcID:RafaelRaven_05 *Fixed[4.0] )
+   A8:  Call  NpcMoveTo     ( .NpcID:RafaelRaven_05  -180`  -30`  0` )
    C4:  Thread
-   CC:  	Call  NpcMoveTo ( 00000005 0000007D FFFFFFD8 00000000 )
-   E8:  	Call  SetNpcAnimation   ( 00000005 00C40002 )
-   FC:  	Call  SetNpcFlagBits    ( 00000005 00000100 .False )
-  114:  	Call  InterpNpcYaw      ( 00000005 0000010E 00000000 )
+   CC:  	Call  NpcMoveTo ( .NpcID:RafaelRaven_05  125`  -40`  0` )
+   E8:  	Call  SetNpcAnimation   ( .NpcID:RafaelRaven_05 00C40002 )
+   FC:  	Call  SetNpcFlagBits    ( .NpcID:RafaelRaven_05 00000100 .False )
+  114:  	Call  InterpNpcYaw      ( .NpcID:RafaelRaven_05  270`  0` )
   12C:  EndThread
   134:  Wait  15`
   140:  Call  SetPlayerAnimation    ( .PlayerAnim:Running )
@@ -2717,47 +2730,47 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   1C4:  EndIf
   1CC:  Call  SetPlayerAnimation    ( 00010002 )
   1DC:  Thread
-  1E4:  	Call  SetNpcPos     ( 00000006 FFFFFF38 00000000 FFFFFF42 )
-  200:  	Call  SetNpcAnimation   ( 00000006 00980003 )
-  214:  	Call  SetNpcSpeed   ( 00000006 *Fixed[6.0] )
-  228:  	Call  NpcMoveTo     ( 00000006 FFFFFF6A FFFFFFF6 00000000 )
-  244:  	Call  NpcMoveTo     ( 00000006 000000B1 FFFFFFF6 00000000 )
-  260:  	Call  SetNpcAnimation   ( 00000006 00980001 )
+  1E4:  	Call  SetNpcPos     ( .NpcID:Raven_06  -200`  0`  -190` )
+  200:  	Call  SetNpcAnimation   ( .NpcID:Raven_06 00980003 )
+  214:  	Call  SetNpcSpeed   ( .NpcID:Raven_06 *Fixed[6.0] )
+  228:  	Call  NpcMoveTo     ( .NpcID:Raven_06  -150`  -10`  0` )
+  244:  	Call  NpcMoveTo     ( .NpcID:Raven_06  177`  -10`  0` )
+  260:  	Call  SetNpcAnimation   ( .NpcID:Raven_06 00980001 )
   274:  EndThread
   27C:  Thread
   284:  	Wait  15`
-  290:  	Call  SetNpcPos     ( 00000007 FFFFFF38 00000000 FFFFFF1A )
-  2AC:  	Call  SetNpcAnimation   ( 00000007 00980003 )
-  2C0:  	Call  SetNpcSpeed   ( 00000007 *Fixed[6.0] )
-  2D4:  	Call  NpcMoveTo     ( 00000007 FFFFFF6A FFFFFFF6 00000000 )
-  2F0:  	Call  NpcMoveTo     ( 00000007 00000098 00000000 00000000 )
-  30C:  	Call  SetNpcAnimation   ( 00000007 00980001 )
+  290:  	Call  SetNpcPos     ( .NpcID:Raven_07  -200`  0`  -230` )
+  2AC:  	Call  SetNpcAnimation   ( .NpcID:Raven_07 00980003 )
+  2C0:  	Call  SetNpcSpeed   ( .NpcID:Raven_07 *Fixed[6.0] )
+  2D4:  	Call  NpcMoveTo     ( .NpcID:Raven_07  -150`  -10`  0` )
+  2F0:  	Call  NpcMoveTo     ( .NpcID:Raven_07  152`  0`  0` )
+  30C:  	Call  SetNpcAnimation   ( .NpcID:Raven_07 00980001 )
   320:  EndThread
   328:  Thread
   330:  	Wait  30`
-  33C:  	Call  SetNpcPos     ( 00000008 FFFFFF38 00000000 FFFFFF1A )
-  358:  	Call  SetNpcAnimation   ( 00000008 00980003 )
-  36C:  	Call  SetNpcSpeed   ( 00000008 *Fixed[6.0] )
-  380:  	Call  NpcMoveTo     ( 00000008 FFFFFF6A FFFFFFF6 00000000 )
-  39C:  	Call  NpcMoveTo     ( 00000008 0000007F 00000005 00000000 )
-  3B8:  	Call  SetNpcAnimation   ( 00000008 00980001 )
+  33C:  	Call  SetNpcPos     ( .NpcID:Raven_08  -200`  0`  -230` )
+  358:  	Call  SetNpcAnimation   ( .NpcID:Raven_08 00980003 )
+  36C:  	Call  SetNpcSpeed   ( .NpcID:Raven_08 *Fixed[6.0] )
+  380:  	Call  NpcMoveTo     ( .NpcID:Raven_08  -150`  -10`  0` )
+  39C:  	Call  NpcMoveTo     ( .NpcID:Raven_08  127`  5`  0` )
+  3B8:  	Call  SetNpcAnimation   ( .NpcID:Raven_08 00980001 )
   3CC:  EndThread
   3D4:  Thread
   3DC:  	Wait  45`
-  3E8:  	Call  SetNpcPos     ( 00000009 FFFFFF38 00000000 FFFFFF1A )
-  404:  	Call  SetNpcAnimation   ( 00000009 00980003 )
-  418:  	Call  SetNpcSpeed   ( 00000009 *Fixed[6.0] )
-  42C:  	Call  NpcMoveTo     ( 00000009 FFFFFF6A FFFFFFF6 00000000 )
-  448:  	Call  NpcMoveTo     ( 00000009 00000066 00000000 00000000 )
-  464:  	Call  SetNpcAnimation   ( 00000009 00980001 )
+  3E8:  	Call  SetNpcPos     ( .NpcID:Raven_09  -200`  0`  -230` )
+  404:  	Call  SetNpcAnimation   ( .NpcID:Raven_09 00980003 )
+  418:  	Call  SetNpcSpeed   ( .NpcID:Raven_09 *Fixed[6.0] )
+  42C:  	Call  NpcMoveTo     ( .NpcID:Raven_09  -150`  -10`  0` )
+  448:  	Call  NpcMoveTo     ( .NpcID:Raven_09  102`  0`  0` )
+  464:  	Call  SetNpcAnimation   ( .NpcID:Raven_09 00980001 )
   478:  EndThread
   480:  Wait  60`
-  48C:  Call  SetNpcPos ( 0000000A FFFFFF38 00000000 FFFFFF1A )
-  4A8:  Call  SetNpcAnimation   ( 0000000A 00980003 )
-  4BC:  Call  SetNpcSpeed       ( 0000000A *Fixed[6.0] )
-  4D0:  Call  NpcMoveTo ( 0000000A FFFFFF6A FFFFFFF6 00000000 )
-  4EC:  Call  NpcMoveTo ( 0000000A 0000004D FFFFFFF6 00000000 )
-  508:  Call  SetNpcAnimation   ( 0000000A 00980001 )
+  48C:  Call  SetNpcPos ( .NpcID:Raven_10  -200`  0`  -230` )
+  4A8:  Call  SetNpcAnimation   ( .NpcID:Raven_10 00980003 )
+  4BC:  Call  SetNpcSpeed       ( .NpcID:Raven_10 *Fixed[6.0] )
+  4D0:  Call  NpcMoveTo ( .NpcID:Raven_10  -150`  -10`  0` )
+  4EC:  Call  NpcMoveTo ( .NpcID:Raven_10  77`  -10`  0` )
+  508:  Call  SetNpcAnimation   ( .NpcID:Raven_10 00980001 )
   51C:  Set   *GB_StoryProgress  .Story:Ch5_RafaelWaitingForMario
   52C:  Call  DisablePlayerInput    ( .False )
   53C:  Return
@@ -2768,7 +2781,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 {
     0:  ChildThread
     8:  	Loop
-   14:  		Call  PlayerFaceNpc ( .Npc:Self 00000000 )
+   14:  		Call  PlayerFaceNpc ( .Npc:Self .False )
    28:  		Wait  1`
    34:  	EndLoop
    3C:  EndChildThread
@@ -2777,7 +2790,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    74:  Add   *Var0  00000096
    84:  Call  SetNpcAnimation   ( .Npc:Self 00B60006 )
    98:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[4.0] )
-   AC:  Call  NpcMoveTo     ( .Npc:Self *Var0 0000003C 00000000 )
+   AC:  Call  NpcMoveTo     ( .Npc:Self *Var0  60`  0` )
    C8:  Call  SetSelfVar    ( 00000000 00000003 )
    DC:  Return
    E4:  End
@@ -2793,11 +2806,11 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    48:  	EndIf
    50:  EndLoop
    58:  Call  DisablePlayerInput        ( .True )
-   68:  Call  ShowMessageAtScreenPos    ( 001000BC 00000140 0000003C ) % Yaaaaaaargh!! Yeeeeek! H---E---L---P... HELP!!
+   68:  Call  ShowMessageAtScreenPos    ( 001000BC  320`  60` ) % Yaaaaaaargh!! Yeeeeek! H---E---L---P... HELP!!
    80:  Call  PlaySoundAtPlayer ( 00000262 00000000 )
-   94:  Call  ShowEmote ( 00000000 .Emote:Exclamation 00000000 00000019 00000000 00000000 00000000 00000000 00000000 )
+   94:  Call  ShowEmote ( .NpcID:Kolorado_00 .Emote:Exclamation  0`  25` .False  0`  0`  0`  0` )
    C4:  Call  PlaySoundAtNpc    ( .Npc:Partner 00000262 00000000 )
-   DC:  Call  ShowEmote ( .Npc:Partner .Emote:Exclamation 00000000 00000019 00000001 00000000 00000000 00000000 00000000 )
+   DC:  Call  ShowEmote ( .Npc:Partner .Emote:Exclamation  0`  25` .True  0`  0`  0`  0` )
   10C:  Wait  25`
   118:  Call  DisablePlayerInput        ( .False )
   128:  Label  0
@@ -2813,21 +2826,21 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   1BC:  			Call  DisablePlayerInput        ( .True )
   1CC:  			Call  802D2C14      ( 00000001 )
   1DC:  			Call  SetNpcFlagBits    ( .Npc:Partner 00000100 .True )
-  1F4:  			Call  RemoveNpc     ( 00000004 )
+  1F4:  			Call  RemoveNpc     ( .NpcID:JungleGuy_04 )
   204:  			Call  SetNpcFlagBits    ( .Npc:Self 00000140 .True )
-  21C:  			Call  ShowMessageAtScreenPos    ( 001000C0 00000000 0000003C ) % Yow! Off me, you brute! Aargh!
-  234:  			Call  InterpPlayerYaw   ( 0000010E 00000004 )
+  21C:  			Call  ShowMessageAtScreenPos    ( 001000C0  0`  60` ) % Yow! Off me, you brute! Aargh!
+  234:  			Call  InterpPlayerYaw   (  270`  4` )
   248:  			Call  SetNpcAnimation   ( .Npc:Self 00B60007 )
   25C:  			Call  SetNpcSpeed   ( .Npc:Self *Fixed[5.0] )
   270:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   288:  			Set   *Var3  *Var0
   298:  			Add   *Var3  FFFFFFCE
-  2A8:  			Call  NpcMoveTo     ( .Npc:Self *Var3 *Var2 00000000 )
+  2A8:  			Call  NpcMoveTo     ( .Npc:Self *Var3 *Var2  0` )
   2C4:  			Add   *Var0  *Var3
   2D4:  			Div   *Var0  00000002
   2E4:  			Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   300:  			Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  31C:  			Call  SetCamDistance    ( .Cam:Default 0000012C )
+  31C:  			Call  SetCamDistance    ( .Cam:Default  300` )
   330:  			Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-7.5] )
   348:  			Call  SetCamSpeed   ( .Cam:Default *Fixed[5.0] )
   35C:  			Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2865,8 +2878,8 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   568:  			EndIf
   570:  			Call  SetNpcAnimation   ( .Npc:Self 00B60006 )
   584:  			Call  SetNpcSpeed   ( .Npc:Self *Fixed[4.5] )
-  598:  			Call  NpcMoveTo     ( .Npc:Self *Var0 0000003C 00000000 )
-  5B4:  			Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  598:  			Call  NpcMoveTo     ( .Npc:Self *Var0  60`  0` )
+  5B4:  			Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   5D0:  			Set   *GB_StoryProgress  .Story:Ch5_KoloradoEscapedSpearGuys
   5E0:  		EndThread
   5E8:  		Exec  $Script_8024511C *Var9
@@ -2900,11 +2913,11 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    7C:  	Goto  1
    88:  EndIf
    90:  Call  DisablePlayerInput        ( .True )
-   A0:  Call  ShowMessageAtScreenPos    ( 001000C5 00000000 0000003C ) % Ugh... Geaargh!! S--T--O--P! STOP IT!!
+   A0:  Call  ShowMessageAtScreenPos    ( 001000C5  0`  60` ) % Ugh... Geaargh!! S--T--O--P! STOP IT!!
    B8:  Call  PlaySoundAtPlayer ( 00000262 00000000 )
-   CC:  Call  ShowEmote ( 00000000 .Emote:Exclamation 00000000 00000014 00000000 00000000 00000000 00000000 00000000 )
+   CC:  Call  ShowEmote ( .NpcID:Kolorado_00 .Emote:Exclamation  0`  20` .False  0`  0`  0`  0` )
    FC:  Call  PlaySoundAtNpc    ( .Npc:Partner 00000262 00000000 )
-  114:  Call  ShowEmote ( .Npc:Partner .Emote:Exclamation 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+  114:  Call  ShowEmote ( .Npc:Partner .Emote:Exclamation  0`  20` .True  0`  0`  0`  0` )
   144:  Wait  20`
   150:  Call  DisablePlayerInput        ( .False )
   160:  Label  2
@@ -2917,8 +2930,8 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   1C4:  Call  SpeakToPlayer     ( .Npc:Self 00B60008 00B60001 00000000 001000C6 ) % ...Oh ho ho ho! Did you think I was beset by enemi ...
   1E4:  Call  SetNpcAnimation   ( .Npc:Self 00B60006 )
   1F8:  Call  SetNpcSpeed       ( .Npc:Self *Fixed[5.0] )
-  20C:  Call  NpcMoveTo ( .Npc:Self FFFFFE2A 00000000 00000000 )
-  228:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  20C:  Call  NpcMoveTo ( .Npc:Self  -470`  0`  0` )
+  228:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   244:  Call  DisablePlayerInput    ( .False )
   254:  Return
   25C:  End
@@ -2931,14 +2944,14 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    20:  Switch  *Var0
    2C:  	Case  ==  0000000A
    38:  		Call  DisablePlayerInput    ( .True )
-   48:  		Call  SetNpcPos     ( .Npc:Self FFFFFF9C 00000000 0000003C )
+   48:  		Call  SetNpcPos     ( .Npc:Self  -100`  0`  60` )
    64:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    7C:  		Sub   *Var0  0000003C
    8C:  		Call  SetNpcAnimation       ( .Npc:Self 00B60004 )
    A0:  		Call  SetNpcSpeed   ( .Npc:Self *Fixed[3.0] )
-   B4:  		Call  NpcMoveTo     ( .Npc:Self *Var0 0000003C 00000000 )
+   B4:  		Call  NpcMoveTo     ( .Npc:Self *Var0  60`  0` )
    D0:  		Call  SetNpcAnimation       ( .Npc:Self 00B60001 )
-   E4:  		Call  SpeakToPlayer ( 00000001 00B60008 00B60001 00000000 001000CB ) % Hmm!? What in blazes...?
+   E4:  		Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60008 00B60001 00000000 001000CB ) % Hmm!? What in blazes...?
   104:  		Call  SetSelfVar    ( 00000000 00000000 )
   118:  		Call  DisablePlayerInput    ( .False )
   128:  	Case  ==  00000014
@@ -2946,7 +2959,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   144:  		Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000000 001000CF ) % Ooh! Top notch, really!! It would appear we can en ...
   164:  		Thread
   16C:  			Label  14
-  178:  			Call  PlayerFaceNpc ( 00000001 00000000 )
+  178:  			Call  PlayerFaceNpc ( .NpcID:Kolorado_01 .False )
   18C:  			Call  GetSelfVar    ( 00000000 *Var0 )
   1A0:  			If  *Var0  ==  00000014
   1B0:  				Wait  1`
@@ -2956,10 +2969,10 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   1D8:  		Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
   1F0:  		Call  SetNpcAnimation   ( .Npc:Self 00B60004 )
   204:  		Call  SetNpcSpeed       ( .Npc:Self *Fixed[3.0] )
-  218:  		Call  NpcMoveTo ( .Npc:Self 000000BE 0000003C 00000000 )
+  218:  		Call  NpcMoveTo ( .Npc:Self  190`  60`  0` )
   234:  		Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.5] )
   248:  		Call  PlaySoundAtNpc    ( .Npc:Self 0000032C 00000000 )
-  260:  		Call  NpcJump0  ( .Npc:Self 000000C8 00000000 00000000 00000014 )
+  260:  		Call  NpcJump0  ( .Npc:Self  200`  0`  0`  20` )
   280:  		Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
   294:  		Call  SetSelfVar        ( 00000000 00000015 )
   2A8:  		Call  PlaySoundAtModel  ( ~Model:o123 00000186 00000000 )
@@ -2981,7 +2994,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   3EC:  				BreakLoop
   3F4:  			EndIf
   3FC:  		EndLoop
-  404:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  404:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   420:  		Wait  40`
   42C:  		Call  PlaySoundAtModel  ( ~Model:o123 00000186 00000000 )
   444:  		Call  MakeLerp  ( 000000AA 00000000 0000003C .Easing:CubicOut )
@@ -3026,15 +3039,15 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    C0:  If  *VarA  <  00000014
    D0:  	Add   *Var2  *Var1
    E0:  	Call  SetPlayerSpeed    ( *Fixed[3.0] )
-   F0:  	Call  PlayerMoveTo      ( *Var2 *Var4 00000000 )
-  108:  	Call  PlayerFaceNpc     ( 00000001 00000003 )
+   F0:  	Call  PlayerMoveTo      ( *Var2 *Var4  0` )
+  108:  	Call  PlayerFaceNpc     ( .NpcID:Kolorado_01 00000003 )
   11C:  EndIf
   124:  Wait  15`
   130:  Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000000 001000C2 ) % Ah! Mario... Have a look at this!
-  150:  Call  InterpPlayerYaw   ( 0000005A 00000003 )
-  164:  Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000003 )
+  150:  Call  InterpPlayerYaw   (  90`  3` )
+  164:  Call  InterpNpcYaw  ( .Npc:Self  90`  3` )
   17C:  Call  SetMusicTrack ( 00000000 .Song:MtLavalava 00000001 00000008 )
-  198:  Call  UseSettingsFrom   ( .Cam:Default 00000000 000000C8 00000000 )
+  198:  Call  UseSettingsFrom   ( .Cam:Default  0`  200`  0` )
   1B4:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   1CC:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   1E8:  Call  SetCamPitch   ( .Cam:Default *Fixed[16.0] *Fixed[-11.5] )
@@ -3044,18 +3057,18 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   240:  Wait  40`
   24C:  Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000005 001000C3 ) % Looks like the entrance to the volcano, eh, old bo ...
   26C:  Wait  10`
-  278:  Call  AdjustCam     ( .Cam:Default *Fixed[90.0] 00000000 0000012C 0000000F *Fixed[-6.0] )
+  278:  Call  AdjustCam     ( .Cam:Default *Fixed[90.0]  0`  300`  15` *Fixed[-6.0] )
   29C:  Wait  10`
   2A8:  Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000000 001000C4 ) % But I shall not give up! A good explorer never sto ...
   2C8:  Call  ResetCam      ( .Cam:Default *Fixed[5.0] )
   2DC:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
   2F4:  Call  SetNpcAnimation   ( .Npc:Self 00B60006 )
   308:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[5.0] )
-  31C:  Call  NpcMoveTo     ( .Npc:Self 000001F4 00000000 00000000 )
+  31C:  Call  NpcMoveTo     ( .Npc:Self  500`  0`  0` )
   338:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .False )
-  350:  Call  SetNpcPos     ( .Npc:Self FFFFFED4 00000000 00000000 )
+  350:  Call  SetNpcPos     ( .Npc:Self  -300`  0`  0` )
   36C:  Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
-  380:  Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000004 )
+  380:  Call  InterpNpcYaw  ( .Npc:Self  90`  4` )
   398:  Set   *GB_StoryProgress  .Story:Ch5_YoshiChildrenAreMissing
   3A8:  ExecWait  $Script_802419E0
   3B4:  Return
@@ -3080,11 +3093,11 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    B0:  	Wait  5`
    BC:  	Set   *AreaFlag[00A]  .True
    CC:  	Wait  10`
-   D8:  	Call  SetNpcAnimation   ( 00000004 0042000D )
+   D8:  	Call  SetNpcAnimation   ( .NpcID:JungleGuy_04 0042000D )
    EC:  	Call  NpcFacePlayer     ( .Npc:Self 00000000 )
   100:  	Call  SpeakToPlayer     ( .Npc:Self 00B60009 00B60002 00000000 001000BD ) % Ow! Get ahold of yourself! What do you say you att ...
   120:  	Set   *AreaFlag[00A]  .False
-  130:  	Call  SetNpcAnimation   ( 00000004 00420010 )
+  130:  	Call  SetNpcAnimation   ( .NpcID:JungleGuy_04 00420010 )
   144:  	Call  DisablePlayerInput    ( .False )
   154:  EndIf
   15C:  Return
@@ -3100,7 +3113,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    50:  	Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80245208 )
    64:  	Call  BindNpcHit        ( .Npc:Self $Script_Hit_80246474 )
    78:  Else
-   80:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   80:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    9C:  EndIf
    A4:  Return
    AC:  End
@@ -3110,15 +3123,15 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 {
     0:  Switch  *GB_StoryProgress
     C:  	Case  <  .Story:Ch5_YoshiChildrenAreMissing % E
-   18:  		Call  SetNpcPos     ( .Npc:Self 000002EE 00000000 0000001E )
+   18:  		Call  SetNpcPos     ( .Npc:Self  750`  0`  30` )
    34:  		Call  SetSelfVar    ( 00000000 00000000 )
    48:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802460B0 )
    5C:  		Call  BindNpcIdle   ( .Npc:Self $Script_Idle_802458B0 )
    70:  	Case  .Story:Ch5_RafaelMovedRoot  to  .Story:Ch5_RafaelWaitingForMario % 16 to 17
    80:  		Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80245B14 )
-   94:  		Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   94:  		Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
    B0:  	Default
-   B8:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   B8:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    D4:  EndSwitch
    DC:  Return
    E4:  End
@@ -3128,7 +3141,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 {
     0:  Loop
     C:  	Call  GetModelCenter    ( ~Model:o112 )
-   1C:  	Call  SetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+   1C:  	Call  SetNpcPos ( .NpcID:Kolorado_02 *Var0 *Var1 *Var2 )
    38:  	Wait  1`
    44:  EndLoop
    4C:  Return
@@ -3139,7 +3152,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 {
     0:  Loop
     C:  	Call  GetModelCenter    ( ~Model:o131 )
-   1C:  	Call  SetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
+   1C:  	Call  SetNpcPos ( .NpcID:Kolorado_03 *Var0 *Var1 *Var2 )
    38:  	Wait  1`
    44:  EndLoop
    4C:  Return
@@ -3188,13 +3201,13 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   1E8:  	Else
   1F0:  		Sub   *Var9  00000001
   200:  	EndIf
-  208:  	Call  InterpNpcYaw  ( 00000000 0000010E 00000002 )
+  208:  	Call  InterpNpcYaw  ( .NpcID:Kolorado_00  270`  2` )
   220:  	Wait  2`
   22C:  	Label  1
   238:  	If  *AreaFlag[00A]  ==  .False
-  248:  		Call  InterpNpcYaw  ( 00000000 0000005A 00000002 )
+  248:  		Call  InterpNpcYaw  ( .NpcID:Kolorado_00  90`  2` )
   260:  		If  *Var8  ==  00000000
-  270:  			Call  PlaySoundAtNpc    ( 00000000 000000E1 00000000 )
+  270:  			Call  PlaySoundAtNpc    ( .NpcID:Kolorado_00 000000E1 00000000 )
   288:  			Set   *Var8  00000002
   298:  		EndIf
   2A0:  		Sub   *Var8  00000001
@@ -3214,36 +3227,36 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
    10:  Switch  *Var0
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  DisablePlayerInput    ( .True )
-   38:  		Call  SetNpcYaw ( 00000000 0000005A )
-   4C:  		Call  SetNpcAnimation       ( 00000000 00B60001 )
+   38:  		Call  SetNpcYaw ( .NpcID:Kolorado_00  90` )
+   4C:  		Call  SetNpcAnimation       ( .NpcID:Kolorado_00 00B60001 )
    60:  		Thread
    68:  			Wait  30`
-   74:  			Call  GetNpcPos     ( 00000000 *Var3 *Var1 *Var2 )
+   74:  			Call  GetNpcPos     ( .NpcID:Kolorado_00 *Var3 *Var1 *Var2 )
    90:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    A8:  			Set   *Var4  *Var0
    B8:  			If  *Var3  <  *Var0
-   C8:  				Call  InterpPlayerYaw   ( 0000010E 00000000 )
+   C8:  				Call  InterpPlayerYaw   (  270`  0` )
    DC:  				Add   *Var4  FFFFFFE2
    EC:  			Else
-   F4:  				Call  InterpPlayerYaw   ( 0000005A 00000000 )
+   F4:  				Call  InterpPlayerYaw   (  90`  0` )
   108:  				Add   *Var4  0000001E
   118:  			EndIf
   120:  			Add   *Var0  *Var4
   130:  			Div   *Var0  00000002
   140:  			Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   15C:  			Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  178:  			Call  SetCamDistance    ( .Cam:Default 0000012C )
+  178:  			Call  SetCamDistance    ( .Cam:Default  300` )
   18C:  			Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-7.5] )
   1A4:  			Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   1B8:  			Call  $Function_80240FA8 ( )
   1C4:  			Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
-  1DC:  			Call  SetNpcFlagBits    ( 00000000 00000140 .True )
-  1F4:  			Call  SetNpcAnimation   ( 00000000 00B60006 )
-  208:  			Call  SetNpcSpeed   ( 00000000 *Fixed[2.5] )
-  21C:  			Call  NpcMoveTo     ( 00000000 *Var4 *Var2 00000000 )
-  238:  			Call  SetNpcAnimation   ( 00000000 00B60001 )
-  24C:  			Call  NpcFacePlayer ( 00000000 00000000 )
-  260:  			Call  SetNpcVar     ( 00000000 00000000 00000001 )
+  1DC:  			Call  SetNpcFlagBits    ( .NpcID:Kolorado_00 00000140 .True )
+  1F4:  			Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B60006 )
+  208:  			Call  SetNpcSpeed   ( .NpcID:Kolorado_00 *Fixed[2.5] )
+  21C:  			Call  NpcMoveTo     ( .NpcID:Kolorado_00 *Var4 *Var2  0` )
+  238:  			Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B60001 )
+  24C:  			Call  NpcFacePlayer ( .NpcID:Kolorado_00 00000000 )
+  260:  			Call  SetNpcVar     ( .NpcID:Kolorado_00 00000000 00000001 )
   278:  		EndThread
   280:  		Call  DoNpcDefeat ( )
   28C:  	Case  ==  .Outcome:PlayerLost % 1
@@ -3291,10 +3304,10 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
     0:  Set   *AreaFlag[00B]  .False
    10:  Set   *AreaFlag[00C]  .False
    20:  Label  0
-   2C:  Call  GetNpcPos ( 0000000B *Var4 *Var2 *Var3 )
+   2C:  Call  GetNpcPos ( .NpcID:WorldMisstar_11 *Var4 *Var2 *Var3 )
    48:  Add   *Var4  0000000A
    58:  Sub   *Var3  00000005
-   68:  Call  SetNpcPos ( 00000001 *Var4 *Var2 *Var3 )
+   68:  Call  SetNpcPos ( .NpcID:Kolorado_01 *Var4 *Var2 *Var3 )
    84:  If  *AreaFlag[00B]  ==  .False
    94:  	Sub   *Var4  00000014
    A4:  	Add   *Var3  0000000A
@@ -3314,8 +3327,8 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 #new:Script $Script_802470F8
 {
     0:  Label  0
-    C:  Call  PlayerFaceNpc ( 0000000B 00000001 )
-   20:  Call  NpcFaceNpc    ( .Npc:Partner 0000000B 00000001 )
+    C:  Call  PlayerFaceNpc ( .NpcID:WorldMisstar_11 .True )
+   20:  Call  NpcFaceNpc    ( .Npc:Partner .NpcID:WorldMisstar_11 00000001 )
    38:  Wait  1`
    44:  Goto  0
    50:  Return
@@ -3352,25 +3365,25 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   104:  Call  DisablePlayerPhysics  ( .False )
   114:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.4] )
   128:  Set   *AreaFlag[00B]  .True
-  138:  Call  NpcJump0  ( .Npc:Self 00000271 00000014 00000000 00000019 )
+  138:  Call  NpcJump0  ( .Npc:Self  625`  20`  0`  25` )
   158:  Thread
   160:  	Call  SetNpcSpeed   ( .Npc:Partner *Fixed[1.0] )
-  174:  	Call  NpcMoveTo     ( .Npc:Partner 000002BC 00000000 00000000 )
+  174:  	Call  NpcMoveTo     ( .Npc:Partner  700`  0`  0` )
   190:  EndThread
   198:  Set   *AreaFlag[00C]  .True
-  1A8:  Call  SetNpcFlagBits    ( 00000001 00000200 .True )
-  1C0:  Call  NpcJump0      ( .Npc:Self 000002A3 00000028 00000000 00000014 )
+  1A8:  Call  SetNpcFlagBits    ( .NpcID:Kolorado_01 00000200 .True )
+  1C0:  Call  NpcJump0      ( .Npc:Self  675`  40`  0`  20` )
   1E0:  Exec  $Script_80246EB4 *Var9
   1F0:  Wait  20`
   1FC:  Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   218:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-  234:  Call  SetPanTarget  ( .Cam:Default *Var0 00000000 *Var2 )
-  250:  Call  SetCamDistance    ( .Cam:Default 00000145 )
+  234:  Call  SetPanTarget  ( .Cam:Default *Var0  0` *Var2 )
+  250:  Call  SetCamDistance    ( .Cam:Default  325` )
   264:  Call  SetCamPitch   ( .Cam:Default *Fixed[16.0] *Fixed[-11.5] )
   27C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
   290:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
-  2A8:  Call  SpeakToPlayer ( 00000001 00B6000A 00B60003 00000000 001000D4 ) % Oh, woe is me... My beautiful treasure...
-  2C8:  Call  NpcFaceNpc    ( .Npc:Self 00000001 00000001 )
+  2A8:  Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B6000A 00B60003 00000000 001000D4 ) % Oh, woe is me... My beautiful treasure...
+  2C8:  Call  NpcFaceNpc    ( .Npc:Self .NpcID:Kolorado_01 00000001 )
   2E0:  Wait  10`
   2EC:  Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   308:  Call  SpeakToPlayer ( .Npc:Self 00160009 00160008 00000205 001000D5 ) % Listen to you! No treasure in the world is more va ...
@@ -3384,19 +3397,19 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   390:  EndLoop
   398:  Call  EndSpeech     ( .Npc:Self 00160002 00160001 00000205 )
   3B4:  Wait  10`
-  3C0:  Call  InterpNpcYaw  ( 00000001 0000010E 00000001 )
+  3C0:  Call  InterpNpcYaw  ( .NpcID:Kolorado_01  270`  1` )
   3D8:  Wait  15`
-  3E4:  Call  SpeakToPlayer ( 00000001 00B6000A 00B60003 00000005 001000D6 ) % But... Sigh...
+  3E4:  Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B6000A 00B60003 00000005 001000D6 ) % But... Sigh...
   404:  Wait  10`
   410:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   428:  Add   *Var0  0000001E
-  438:  Call  SetPanTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+  438:  Call  SetPanTarget  ( .Cam:Default *Var0  0` *Var2 )
   454:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.5] )
   468:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
-  480:  Call  InterpNpcYaw  ( 00000001 0000005A 0000000A )
+  480:  Call  InterpNpcYaw  ( .NpcID:Kolorado_01  90`  10` )
   498:  Exec  $Script_802470F8 *Var8
   4A8:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.5] )
-  4BC:  Call  NpcJump0      ( .Npc:Self 000002F8 00000023 00000000 00000014 )
+  4BC:  Call  NpcJump0      ( .Npc:Self  760`  35`  0`  20` )
   4DC:  Kill  *Var8
   4E8:  Wait  5`
   4F4:  Call  NpcFacePlayer ( .Npc:Self 00000004 )
@@ -3436,7 +3449,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   7B0:  Call  SetNpcAnimation   ( .Npc:Self 00160001 )
   7C4:  Exec  $Script_80246EB4 *Var9
   7D4:  Call  $Function_80240FE0 ( )
-  7E0:  Call  ShowMessageAtScreenPos    ( 001D0195 000000A0 00000028 ) % Mario's Star Energy goes up to 5! Mario can now us ...
+  7E0:  Call  ShowMessageAtScreenPos    ( 001D0195  160`  40` ) % Mario's Star Energy goes up to 5! Mario can now us ...
   7F8:  Wait  10`
   804:  Call  SpeakToPlayer     ( .Npc:Self 00160002 00160001 00000200 001000D8 ) % I have to go back to Star Haven for now, but if yo ...
   824:  Wait  10`
@@ -3474,7 +3487,7 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   A3C:  			BreakLoop
   A44:  		EndIf
   A4C:  	EndLoop
-  A54:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  A54:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   A70:  EndThread
   A78:  Thread
   A80:  	Wait  15`
@@ -3483,20 +3496,20 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
   AAC:  Wait  10`
   AB8:  Call  SetPlayerAnimation    ( 0001002A )
   AC8:  Wait  90`
-  AD4:  Call  ResetCam  ( .Cam:Default 00000003 )
+  AD4:  Call  ResetCam  ( .Cam:Default  3` )
   AE8:  Wait  20`
   AF4:  Call  SetPlayerAnimation    ( 00010002 )
   B04:  Kill  *Var9
   B10:  Set   *GB_StoryProgress  .Story:Ch5_StarSpritDeparted
   B20:  Wait  10`
-  B2C:  Call  SpeakToPlayer     ( 00000001 00B6000A 00B60003 00000000 001000D9 ) % Oh... I was so close... The treasure...right there ...
+  B2C:  Call  SpeakToPlayer     ( .NpcID:Kolorado_01 00B6000A 00B60003 00000000 001000D9 ) % Oh... I was so close... The treasure...right there ...
   B4C:  Wait  5`
-  B58:  Call  InterpNpcYaw      ( 00000001 0000010E 00000004 )
-  B70:  Call  SetNpcAnimation   ( 00000001 00B60005 )
-  B84:  Call  SetNpcSpeed       ( 00000001 *Fixed[1.0] )
-  B98:  Call  NpcMoveTo ( 00000001 00000212 00000000 00000000 )
-  BB4:  Call  SetNpcFlagBits    ( 00000001 00000200 .False )
-  BCC:  Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
+  B58:  Call  InterpNpcYaw      ( .NpcID:Kolorado_01  270`  4` )
+  B70:  Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60005 )
+  B84:  Call  SetNpcSpeed       ( .NpcID:Kolorado_01 *Fixed[1.0] )
+  B98:  Call  NpcMoveTo ( .NpcID:Kolorado_01  530`  0`  0` )
+  BB4:  Call  SetNpcFlagBits    ( .NpcID:Kolorado_01 00000200 .False )
+  BCC:  Call  SetNpcPos ( .NpcID:Kolorado_01  0`  -1000`  0` )
   BE8:  Call  EnablePartnerAI ( )
   BF4:  Call  DisablePlayerInput    ( .False )
   C04:  Return
@@ -3506,17 +3519,17 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 #new:Script $Script_Init_80247D9C
 {
     0:  If  *GB_StoryProgress  ==  .Story:Ch5_BeganPeachMission % 26
-   10:  	Call  SetPlayerPos  ( 00000000 FFFFFC18 00000000 )
-   28:  	Call  SetNpcPos     ( .Npc:Partner 00000000 FFFFFC18 00000000 )
-   44:  	Call  SetNpcPos     ( 00000001 00000000 FFFFFC18 00000000 )
-   60:  	Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
-   7C:  	Call  InterpPlayerYaw   ( 0000010E 00000000 )
-   90:  	Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000000 )
-   A8:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
-   C0:  	Call  SetNpcAnimation   ( 00000001 00B60003 )
-   D4:  	Call  UseSettingsFrom   ( .Cam:Default 000002BC 00000000 00000000 )
-   F0:  	Call  SetPanTarget  ( .Cam:Default 000002BC 00000000 00000000 )
-  10C:  	Call  SetCamDistance    ( .Cam:Default 000001F4 )
+   10:  	Call  SetPlayerPos  (  0`  -1000`  0` )
+   28:  	Call  SetNpcPos     ( .Npc:Partner  0`  -1000`  0` )
+   44:  	Call  SetNpcPos     ( .NpcID:Kolorado_01  0`  -1000`  0` )
+   60:  	Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
+   7C:  	Call  InterpPlayerYaw   (  270`  0` )
+   90:  	Call  InterpNpcYaw  ( .Npc:Partner  270`  0` )
+   A8:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
+   C0:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60003 )
+   D4:  	Call  UseSettingsFrom   ( .Cam:Default  700`  0`  0` )
+   F0:  	Call  SetPanTarget  ( .Cam:Default  700`  0`  0` )
+  10C:  	Call  SetCamDistance    ( .Cam:Default  500` )
   120:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   134:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   14C:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80247188 )
@@ -3529,105 +3542,105 @@ MISSING: 80242538 to 80242590 (00002538 to 00002590)
 
 #new:NpcGroup $NpcGroup_80247F2C
 {
-	00000000 $NpcSettings_802423E0 ~Vec3f:NPC_80247F2C % -100 0 10
+	.NpcID:Kolorado_00 $NpcSettings_802423E0 ~Vec3f:NPC_Kolorado_00 % -100 0 10
 	21700100 $Script_Init_802465E0 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80247F2C
-	~AnimationTable:NPC_80247F2C % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_00
+	~AnimationTable:NPC_Kolorado_00 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 	%
 	% $NpcGroup_80247F2C[1F0]
-	00000001 $NpcSettings_802423E0 ~Vec3f:NPC_8024811C % -100 0 10
+	.NpcID:Kolorado_01 $NpcSettings_802423E0 ~Vec3f:NPC_Kolorado_01 % -100 0 10
 	00600101 $Script_Init_80246694 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024811C
-	~AnimationTable:NPC_8024811C % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_01
+	~AnimationTable:NPC_Kolorado_01 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 	%
 	% $NpcGroup_80247F2C[3E0]
-	00000002 $NpcSettings_80242590 ~Vec3f:NPC_8024830C % -100 0 10
+	.NpcID:Kolorado_02 $NpcSettings_80242590 ~Vec3f:NPC_Kolorado_02 % -100 0 10
 	00200F01 $Script_Init_80246838 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024830C
-	~AnimationTable:NPC_8024830C % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_02
+	~AnimationTable:NPC_Kolorado_02 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 	%
 	% $NpcGroup_80247F2C[5D0]
-	00000003 $NpcSettings_80242590 ~Vec3f:NPC_802484FC % -100 0 10
+	.NpcID:Kolorado_03 $NpcSettings_80242590 ~Vec3f:NPC_Kolorado_03 % -100 0 10
 	00200F01 $Script_Init_80246838 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802484FC
-	~AnimationTable:NPC_802484FC % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_03
+	~AnimationTable:NPC_Kolorado_03 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 }
 
 #new:NpcGroup $NpcGroup_802486EC
 {
-	00000004 $NpcSettings_8024245C ~Vec3f:NPC_802486EC % -70 0 10
+	.NpcID:JungleGuy_04 $NpcSettings_8024245C ~Vec3f:NPC_JungleGuy_04 % -70 0 10
 	00E42D00 $Script_Init_80246E38 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802486EC
-	~AnimationTable:NPC_802486EC % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_04
+	~AnimationTable:NPC_JungleGuy_04 % .Sprite:JungleGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802488DC
 {
-	00000005 $NpcSettings_802424B4 ~Vec3f:NPC_802488DC % 0 -1000 0
+	.NpcID:RafaelRaven_05 $NpcSettings_802424B4 ~Vec3f:NPC_RafaelRaven_05 % 0 -1000 0
 	00400705 $Script_Init_802432F0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802488DC
-	~AnimationTable:NPC_802488DC % .Sprite:RafaelRaven
+	~Movement:NPC_RafaelRaven_05
+	~AnimationTable:NPC_RafaelRaven_05 % .Sprite:RafaelRaven
 	00000000 00000000 00000000 001A00D0 % He's Raphael the Raven, the guardian of this jungl ...
 	%
 	% $NpcGroup_802488DC[1F0]
-	00000006 $NpcSettings_802424E0 ~Vec3f:NPC_80248ACC % 0 -1000 0
+	.NpcID:Raven_06 $NpcSettings_802424E0 ~Vec3f:NPC_Raven_06 % 0 -1000 0
 	00000505 $Script_Init_80244A5C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248ACC
-	~AnimationTable:NPC_80248ACC % .Sprite:Raven
+	~Movement:NPC_Raven_06
+	~AnimationTable:NPC_Raven_06 % .Sprite:Raven
 	00000000 00000000 00000000 001A00C9 % He's a Raven. Ravens are short and chubby. They're ...
 	%
 	% $NpcGroup_802488DC[3E0]
-	00000007 $NpcSettings_802424E0 ~Vec3f:NPC_80248CBC % 0 -1000 0
+	.NpcID:Raven_07 $NpcSettings_802424E0 ~Vec3f:NPC_Raven_07 % 0 -1000 0
 	00000505 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248CBC
-	~AnimationTable:NPC_80248CBC % .Sprite:Raven
+	~Movement:NPC_Raven_07
+	~AnimationTable:NPC_Raven_07 % .Sprite:Raven
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802488DC[5D0]
-	00000008 $NpcSettings_802424E0 ~Vec3f:NPC_80248EAC % 0 -1000 0
+	.NpcID:Raven_08 $NpcSettings_802424E0 ~Vec3f:NPC_Raven_08 % 0 -1000 0
 	00000505 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248EAC
-	~AnimationTable:NPC_80248EAC % .Sprite:Raven
+	~Movement:NPC_Raven_08
+	~AnimationTable:NPC_Raven_08 % .Sprite:Raven
 	00000000 00000000 00000000 001A00CB % He's a Raven. He looks good in black. Can we take  ...
 	%
 	% $NpcGroup_802488DC[7C0]
-	00000009 $NpcSettings_802424E0 ~Vec3f:NPC_8024909C % 0 -1000 0
+	.NpcID:Raven_09 $NpcSettings_802424E0 ~Vec3f:NPC_Raven_09 % 0 -1000 0
 	00000505 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024909C
-	~AnimationTable:NPC_8024909C % .Sprite:Raven
+	~Movement:NPC_Raven_09
+	~AnimationTable:NPC_Raven_09 % .Sprite:Raven
 	00000000 00000000 00000000 001A00CC % He's a Raven. Ravens only say "caw" unless they th ...
 	%
 	% $NpcGroup_802488DC[9B0]
-	0000000A $NpcSettings_802424E0 ~Vec3f:NPC_8024928C % 0 -1000 0
+	.NpcID:Raven_10 $NpcSettings_802424E0 ~Vec3f:NPC_Raven_10 % 0 -1000 0
 	00000505 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024928C
-	~AnimationTable:NPC_8024928C % .Sprite:Raven
+	~Movement:NPC_Raven_10
+	~AnimationTable:NPC_Raven_10 % .Sprite:Raven
 	00000000 00000000 00000000 001A00CD % He's a Raven. Ravens are really cute. I told Koope ...
 }
 
 #new:NpcGroup $NpcGroup_8024947C
 {
-	0000000B $NpcSettings_8024250C ~Vec3f:NPC_8024947C % 1075 120 130
+	.NpcID:WorldMisstar_11 $NpcSettings_8024250C ~Vec3f:NPC_WorldMisstar_11 % 1075 120 130
 	00400705 $Script_Init_80247D9C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024947C
-	~AnimationTable:NPC_8024947C % .Sprite:WorldMisstar
+	~Movement:NPC_WorldMisstar_11
+	~AnimationTable:NPC_WorldMisstar_11 % .Sprite:WorldMisstar
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -3713,11 +3726,11 @@ PADDING: 80249788 to 80249790 (00009788 to 00009790)
   14C:  	Set   *Var1  *Array[5]
   15C:  	Add   *Var1  FFFFFFFB
   16C:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.5] )
-  180:  	Call  NpcJump0  ( .Npc:Partner *Array[3] *Var0 *Var1 00000008 )
+  180:  	Call  NpcJump0  ( .Npc:Partner *Array[3] *Var0 *Var1  8` )
   1A0:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   1B4:  EndThread
-  1BC:  Call  SetPlayerJumpscale    ( 00000000 )
-  1CC:  Call  PlayerJump    ( ~Vec3d:JumpDest_802499F4 00000007 )
+  1BC:  Call  SetPlayerJumpscale    (  0` )
+  1CC:  Call  PlayerJump    ( ~Vec3d:JumpDest_802499F4  7` )
   1E8:  Call  SetPlayerActionState  ( .ActionState:Land )
   1F8:  Wait  1`
   204:  Call  SetPlayerAnimation    ( 0008000D )

@@ -1,6 +1,12 @@
 % Script File: omo_01.mscr
 % Decoded from: 0 to 25E0 (omo_01)
 
+#define .NpcID:ShyGuy_00            00
+#define .NpcID:ShyGuy_01            01
+#define .NpcID:ShyGuy_02            02
+#define .NpcID:ShyGuy_03            03
+#define .NpcID:ShyGuy_04            04
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FF30
@@ -879,8 +885,8 @@ PADDING: 80240CAC to 80240CB0 (00000CAC to 00000CB0)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *GF_Map_ShyGuysToybox  .True
@@ -1105,12 +1111,12 @@ PADDING: 80241304 to 80241310 (00001304 to 00001310)
 
 #new:NpcGroup $NpcGroup_802417A0
 {
-	00000000 $NpcSettings_80241360 ~Vec3f:NPC_802417A0 % -165 0 -50
+	.NpcID:ShyGuy_00 $NpcSettings_80241360 ~Vec3f:NPC_ShyGuy_00 % -165 0 -50
 	00000C00 $Script_Init_802416A0 00000000 00000000 0000005A
 	~Items:5:DizzyDial:2:SuperShroom:2:ThunderBolt:2:DriedShroom:2:SleepySheep:2:POWBlock:2:FrightJar:2
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_802417A0
-	~AnimationTable:NPC_802417A0 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_00
+	~AnimationTable:NPC_ShyGuy_00 % .Sprite:ShyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1128,12 +1134,12 @@ PADDING: 80241304 to 80241310 (00001304 to 00001310)
 
 #new:NpcGroup $NpcGroup_80241A00
 {
-	00000001 $NpcSettings_80241360 ~Vec3f:NPC_80241A00 % -25 0 -160
+	.NpcID:ShyGuy_01 $NpcSettings_80241360 ~Vec3f:NPC_ShyGuy_01 % -25 0 -160
 	00000C00 $Script_Init_80241990 00000000 00000000 0000010E
 	~Items:5:DizzyDial:2:SuperShroom:2:ThunderBolt:2:DriedShroom:2:SleepySheep:2:POWBlock:2:FrightJar:2
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80241A00
-	~AnimationTable:NPC_80241A00 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_01
+	~AnimationTable:NPC_ShyGuy_01 % .Sprite:ShyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1151,12 +1157,12 @@ PADDING: 80241304 to 80241310 (00001304 to 00001310)
 
 #new:NpcGroup $NpcGroup_80241C60
 {
-	00000002 $NpcSettings_80241360 ~Vec3f:NPC_80241C60 % -60 0 390
+	.NpcID:ShyGuy_02 $NpcSettings_80241360 ~Vec3f:NPC_ShyGuy_02 % -60 0 390
 	00000C00 $Script_Init_80241BF0 00000000 00000000 0000010E
 	~Items:5:DizzyDial:2:SuperShroom:2:ThunderBolt:2:DriedShroom:2:SleepySheep:2:POWBlock:2:FrightJar:2
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80241C60
-	~AnimationTable:NPC_80241C60 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_02
+	~AnimationTable:NPC_ShyGuy_02 % .Sprite:ShyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1174,12 +1180,12 @@ PADDING: 80241304 to 80241310 (00001304 to 00001310)
 
 #new:NpcGroup $NpcGroup_80241EC0
 {
-	00000003 $NpcSettings_80241360 ~Vec3f:NPC_80241EC0 % 50 0 230
+	.NpcID:ShyGuy_03 $NpcSettings_80241360 ~Vec3f:NPC_ShyGuy_03 % 50 0 230
 	00000C00 $Script_Init_80241E50 00000000 00000000 0000010E
 	~Items:5:DizzyDial:2:SuperShroom:2:ThunderBolt:2:DriedShroom:2:SleepySheep:2:POWBlock:2:FrightJar:2
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80241EC0
-	~AnimationTable:NPC_80241EC0 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_03
+	~AnimationTable:NPC_ShyGuy_03 % .Sprite:ShyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1197,12 +1203,12 @@ PADDING: 80241304 to 80241310 (00001304 to 00001310)
 
 #new:NpcGroup $NpcGroup_80242120
 {
-	00000004 $NpcSettings_80241360 ~Vec3f:NPC_80242120 % 340 0 120
+	.NpcID:ShyGuy_04 $NpcSettings_80241360 ~Vec3f:NPC_ShyGuy_04 % 340 0 120
 	00000C00 $Script_Init_802420B0 00000000 00000000 0000010E
 	~Items:5:DizzyDial:2:SuperShroom:2:ThunderBolt:2:DriedShroom:2:SleepySheep:2:POWBlock:2:FrightJar:2
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80242120
-	~AnimationTable:NPC_80242120 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_04
+	~AnimationTable:NPC_ShyGuy_04 % .Sprite:ShyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

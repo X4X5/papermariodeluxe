@@ -1,6 +1,8 @@
 % Script File: kmr_30.mscr
 % Decoded from: 0 to 1570 (kmr_30)
 
+#define .NpcID:ParadePeach_00       00
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -406,8 +408,8 @@ PADDING: 802404D8 to 802404E0 (000004D8 to 000004E0)
 {
     0:  Set   *GB_WorldLocation  .Location:MariosHouse
    10:  Call  SetSpriteShading  ( .Shading:kmr_30 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_802408FC )
@@ -433,11 +435,11 @@ PADDING: 802406DC to 802406E0 (000006DC to 000006E0)
 
 #new:NpcGroup $NpcGroup_8024070C
 {
-	00000000 $NpcSettings_802406E0 ~Vec3f:NPC_8024070C % 0 -1000 0
+	.NpcID:ParadePeach_00 $NpcSettings_802406E0 ~Vec3f:NPC_ParadePeach_00 % 0 -1000 0
 	00000F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024070C
-	~AnimationTable:NPC_8024070C % .Sprite:ParadePeach
+	~Movement:NPC_ParadePeach_00
+	~AnimationTable:NPC_ParadePeach_00 % .Sprite:ParadePeach
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -500,35 +502,35 @@ PADDING: 80240914 to 80240920 (00000914 to 00000920)
 #new:Script $Script_80240C10
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
-   24:  Call  SetPlayerPos  ( 00000208 00000000 FFFFFF4C )
-   3C:  Call  SetNpcAnimation   ( 00000000 00D6000D )
-   50:  Call  SetNpcYaw     ( 00000000 0000010E )
-   64:  Call  SetNpcPos     ( 00000000 00000230 00000000 FFFFFF4C )
+   10:  Call  InterpPlayerYaw   (  270`  0` )
+   24:  Call  SetPlayerPos  (  520`  0`  -180` )
+   3C:  Call  SetNpcAnimation   ( .NpcID:ParadePeach_00 00D6000D )
+   50:  Call  SetNpcYaw     ( .NpcID:ParadePeach_00  270` )
+   64:  Call  SetNpcPos     ( .NpcID:ParadePeach_00  560`  0`  -180` )
    80:  Call  DisablePartnerAI  ( 00000000 )
    90:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   A8:  Call  SetNpcPos     ( .Npc:Partner 00000000 FFFFFE0C 00000000 )
+   A8:  Call  SetNpcPos     ( .Npc:Partner  0`  -500`  0` )
    C4:  Call  EnableGroup   ( ~Model:the_end .False )
-   D8:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
-   F4:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+   D8:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
+   F4:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
   110:  Call  SetCamPitch   ( .Cam:Default *Fixed[8.0] *Fixed[-11.5] )
   128:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   13C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   154:  Thread
-  15C:  	Call  SetNpcSpeed       ( 00000000 *Fixed[2.0] )
-  170:  	Call  SetNpcFlagBits    ( 00000000 00000200 .True )
-  188:  	Call  SetNpcFlagBits    ( 00000000 00000008 .False )
-  1A0:  	Call  SetNpcAnimation   ( 00000000 00D6000F )
-  1B4:  	Call  NpcMoveTo ( 00000000 000001C2 FFFFFFC4 00000000 )
-  1D0:  	Call  SetNpcAnimation   ( 00000000 00D60010 )
-  1E4:  	Call  NpcMoveTo ( 00000000 0000015E FFFFFFA6 00000000 )
-  200:  	Call  NpcMoveTo ( 00000000 0000014A FFFFFF7E 00000000 )
-  21C:  	Call  SetNpcAnimation   ( 00000000 00D6000E )
+  15C:  	Call  SetNpcSpeed       ( .NpcID:ParadePeach_00 *Fixed[2.0] )
+  170:  	Call  SetNpcFlagBits    ( .NpcID:ParadePeach_00 00000200 .True )
+  188:  	Call  SetNpcFlagBits    ( .NpcID:ParadePeach_00 00000008 .False )
+  1A0:  	Call  SetNpcAnimation   ( .NpcID:ParadePeach_00 00D6000F )
+  1B4:  	Call  NpcMoveTo ( .NpcID:ParadePeach_00  450`  -60`  0` )
+  1D0:  	Call  SetNpcAnimation   ( .NpcID:ParadePeach_00 00D60010 )
+  1E4:  	Call  NpcMoveTo ( .NpcID:ParadePeach_00  350`  -90`  0` )
+  200:  	Call  NpcMoveTo ( .NpcID:ParadePeach_00  330`  -130`  0` )
+  21C:  	Call  SetNpcAnimation   ( .NpcID:ParadePeach_00 00D6000E )
   230:  EndThread
   238:  Call  SetPlayerSpeed        ( *Fixed[2.0] )
-  248:  Call  PlayerMoveTo  ( 000001C2 FFFFFFC4 00000000 )
-  260:  Call  PlayerMoveTo  ( 00000140 FFFFFFB0 00000000 )
-  278:  Call  PlayerMoveTo  ( 0000012C FFFFFF88 00000000 )
+  248:  Call  PlayerMoveTo  (  450`  -60`  0` )
+  260:  Call  PlayerMoveTo  (  320`  -80`  0` )
+  278:  Call  PlayerMoveTo  (  300`  -120`  0` )
   290:  Wait  30`
   29C:  Call  PlayEffect    ( ~FX:Firework:Rocket1 00000099 00000172 FFFFFEA2 FFFFFFFF 00000004 FFFFFFFF *Fixed[1.6] 00000046 00000000 00000000 00000000 00000000 )
   2E0:  Call  $Function_80240310    ( *VarF )
@@ -587,13 +589,13 @@ PADDING: 80240914 to 80240920 (00000914 to 00000920)
   66C:  	EndLoop
   674:  EndThread
   67C:  Wait  30`
-  688:  Call  EnableGroup   ( ~Model:the_end .True )
-  69C:  Call  802C90FC  ( 0000004F 00000001 FFFFFFFF )
-  6B4:  Call  802C90FC  ( 00000050 00000001 FFFFFFFF )
-  6CC:  Call  802C90FC  ( 00000051 00000001 FFFFFFFF )
-  6E4:  Call  802C90FC  ( 00000052 00000001 FFFFFFFF )
-  6FC:  Call  802C90FC  ( 00000053 00000001 FFFFFFFF )
-  714:  Call  802C94A0  ( 00000001 $Function_80240488 00000000 )
+  688:  Call  EnableGroup       ( ~Model:the_end .True )
+  69C:  Call  SetModelCustomGfx ( ~Model:t 00000001 FFFFFFFF )
+  6B4:  Call  SetModelCustomGfx ( ~Model:h 00000001 FFFFFFFF )
+  6CC:  Call  SetModelCustomGfx ( ~Model:e 00000001 FFFFFFFF )
+  6E4:  Call  SetModelCustomGfx ( ~Model:d 00000001 FFFFFFFF )
+  6FC:  Call  SetModelCustomGfx ( ~Model:n 00000001 FFFFFFFF )
+  714:  Call  SetCustomGfxBuilders  ( 00000001 $Function_80240488 00000000 )
   72C:  Call  MakeLerp  ( 00000000 000000FF 0000005A .Easing:Linear )
   748:  Loop
   754:  	Call  UpdateLerp ( )

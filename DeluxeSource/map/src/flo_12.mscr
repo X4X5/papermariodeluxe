@@ -1,6 +1,9 @@
 % Script File: flo_12.mscr
 % Decoded from: 0 to 29E0 (flo_12)
 
+#define .NpcID:Rosie_00             00
+#define .NpcID:Rosie_01             01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -10,7 +13,7 @@
    10:  COPY      A3, A0
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -602,8 +605,8 @@ PADDING: 8024086C to 80240870 (0000086C to 00000870)
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   54:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   54:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *AreaFlag[016]  .False
    94:  Call  MakeNpcs  ( .False $NpcGroupList_802429B8 )
@@ -913,18 +916,18 @@ PADDING: 80240E28 to 80240E30 (00000E28 to 00000E30)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
-   20:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+   20:  Call  GetNpcPos     ( .NpcID:Rosie_00 *Var0 *Var1 *Var2 )
    3C:  Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
    58:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-   74:  Call  SetCamDistance        ( .Cam:Default 0000015E )
+   74:  Call  SetCamDistance        ( .Cam:Default  350` )
    88:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-9.5] )
-   A0:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
-   B8:  Call  SetCamPosB    ( .Cam:Default 00000000 FFFFFFCE )
+   A0:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
+   B8:  Call  SetCamPosB    ( .Cam:Default  0`  -50` )
    D0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    E4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    FC:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   110:  Wait  20`
-  11C:  Call  SpeakToPlayer ( 00000000 00CA0004 00CA0002 00000005 001100C7 ) % Ohh, it's about time. The sun! Flower Fields is sa ...
+  11C:  Call  SpeakToPlayer ( .NpcID:Rosie_00 00CA0004 00CA0002 00000005 001100C7 ) % Ohh, it's about time. The sun! Flower Fields is sa ...
   13C:  Wait  10`
   148:  Call  GotoMap       ( $ASCII_802429D8 00000002 ) % flo_03
   15C:  Wait  100`
@@ -935,10 +938,10 @@ PADDING: 80240E28 to 80240E30 (00000E28 to 00000E30)
 #new:Script $Script_80241B6C
 {
     0:  Wait  10`
-    C:  Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-   24:  Call  PlayerMoveTo      ( FFFFFFFB 00000014 00000014 )
-   3C:  Call  SetNpcFlagBits    ( 00000000 00000100 .False )
-   54:  Call  PlayerFaceNpc     ( 00000000 00000001 )
+    C:  Call  SetNpcFlagBits    ( .NpcID:Rosie_00 00000100 .True )
+   24:  Call  PlayerMoveTo      (  -5`  20`  20` )
+   3C:  Call  SetNpcFlagBits    ( .NpcID:Rosie_00 00000100 .False )
+   54:  Call  PlayerFaceNpc     ( .NpcID:Rosie_00 .True )
    68:  Return
    70:  End
 }
@@ -946,12 +949,12 @@ PADDING: 80240E28 to 80240E30 (00000E28 to 00000E30)
 #new:Script $Script_80241BE4
 {
     0:  Wait  10`
-    C:  Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-   24:  Call  SetNpcFlagBits    ( 00000001 00000100 .True )
-   3C:  Call  PlayerMoveTo      ( FFFFFFFB 00000014 00000014 )
-   54:  Call  SetNpcFlagBits    ( 00000000 00000100 .False )
-   6C:  Call  SetNpcFlagBits    ( 00000001 00000100 .False )
-   84:  Call  PlayerFaceNpc     ( 00000000 00000001 )
+    C:  Call  SetNpcFlagBits    ( .NpcID:Rosie_00 00000100 .True )
+   24:  Call  SetNpcFlagBits    ( .NpcID:Rosie_01 00000100 .True )
+   3C:  Call  PlayerMoveTo      (  -5`  20`  20` )
+   54:  Call  SetNpcFlagBits    ( .NpcID:Rosie_00 00000100 .False )
+   6C:  Call  SetNpcFlagBits    ( .NpcID:Rosie_01 00000100 .False )
+   84:  Call  PlayerFaceNpc     ( .NpcID:Rosie_00 .True )
    98:  Return
    A0:  End
 }
@@ -966,7 +969,7 @@ PADDING: 80240E28 to 80240E30 (00000E28 to 00000E30)
    3C:  				Exec  $Script_80241B6C
    48:  				Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
    64:  				Add   *Var0  0000001E
-   74:  				Call  SetCamProperties  ( .Cam:Default *Fixed[4.0] *Var0 *Var1 *Var2 00000145 *Fixed[19.0] *Fixed[-9.5] )
+   74:  				Call  SetCamProperties  ( .Cam:Default *Fixed[4.0] *Var0 *Var1 *Var2  325` *Fixed[19.0] *Fixed[-9.5] )
    A0:  				Call  SpeakToPlayer ( .Npc:Self 00CA0003 00CA0001 00000005 0011008C ) % Oh, hello. It seems like ages since I last saw a v ...
    C0:  				Call  ShowChoice    ( 001E0011 ) % Yes No
    D0:  				Wait  10`
@@ -976,7 +979,7 @@ PADDING: 80240E28 to 80240E30 (00000E28 to 00000E30)
   114:  					Case  ==  00000001
   120:  						Call  ContinueSpeech    ( .Npc:Self 00CA0003 00CA0001 00000005 0011008E ) % Oh, you don't think so? Tee hee hee... You don't h ...
   140:  				EndSwitch
-  148:  				Call  SetNpcFlagBits    ( 00000001 00000100 .False )
+  148:  				Call  SetNpcFlagBits    ( .NpcID:Rosie_01 00000100 .False )
   160:  				Call  SetNpcAnimation   ( .Npc:Self 00CA0005 )
   174:  				Wait  10`
   180:  				Call  SetNpcAnimation   ( .Npc:Self 00CA0002 )
@@ -1023,7 +1026,7 @@ PADDING: 80240E28 to 80240E30 (00000E28 to 00000E30)
   464:  			Exec  $Script_80241BE4
   470:  			Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
   48C:  			Add   *Var0  0000001E
-  49C:  			Call  SetCamProperties  ( .Cam:Default *Fixed[4.0] *Var0 *Var1 *Var2 00000145 *Fixed[19.0] *Fixed[-9.5] )
+  49C:  			Call  SetCamProperties  ( .Cam:Default *Fixed[4.0] *Var0 *Var1 *Var2  325` *Fixed[19.0] *Fixed[-9.5] )
   4C8:  		EndIf
   4D0:  		Call  SpeakToPlayer ( .Npc:Self 00CA0004 00CA0002 00000005 00110094 ) % Have you found anything?
   4F0:  		Set   *Var0  $???_802419EC
@@ -1068,24 +1071,24 @@ PADDING: 80240E28 to 80240E30 (00000E28 to 00000E30)
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80241C8C )
    14:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    30:  Add   *Var0  00000023
-   40:  Call  SetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
-   5C:  Call  SetNpcFlagBits    ( 00000001 00000002 .True )
-   74:  Call  SetNpcFlagBits    ( 00000001 00000010 .True )
+   40:  Call  SetNpcPos ( .NpcID:Rosie_01 *Var0 *Var1 *Var2 )
+   5C:  Call  SetNpcFlagBits    ( .NpcID:Rosie_01 00000002 .True )
+   74:  Call  SetNpcFlagBits    ( .NpcID:Rosie_01 00000010 .True )
    8C:  Switch  *GB_StoryProgress
    98:  	Case  <  .Story:Ch6_GotCrystalBerry % 2F
    A4:  		If  *GF_FLO12_Met_Rosie  ==  .True
-   B4:  			Call  SetNpcFlagBits    ( 00000001 00000100 .False )
+   B4:  			Call  SetNpcFlagBits    ( .NpcID:Rosie_01 00000100 .False )
    CC:  			Call  SetNpcAnimation   ( .Npc:Self 00CA0002 )
    E0:  			Call  MakeItemEntity    ( .Item:WaterStone ~Vec3d:Item802424B0 .ItemSpawnMode:Decoration 00000564 )
   104:  			Set   *VarA  *Var0
   114:  		EndIf
   11C:  	Case  <  .Story:Ch6_GotWaterStone % 30
-  128:  		Call  SetNpcFlagBits    ( 00000001 00000100 .False )
+  128:  		Call  SetNpcFlagBits    ( .NpcID:Rosie_01 00000100 .False )
   140:  		Call  SetNpcAnimation   ( .Npc:Self 00CA0002 )
   154:  		Call  MakeItemEntity    ( .Item:WaterStone ~Vec3d:Item80242524 .ItemSpawnMode:Decoration 00000564 )
   178:  		Set   *VarA  *Var0
   188:  	Default
-  190:  		Call  SetNpcFlagBits    ( 00000001 00000100 .False )
+  190:  		Call  SetNpcFlagBits    ( .NpcID:Rosie_01 00000100 .False )
   1A8:  		Call  SetNpcAnimation   ( .Npc:Self 00CA0002 )
   1BC:  		Call  MakeItemEntity    ( .Item:CrystalBerry ~Vec3d:Item8024258C .ItemSpawnMode:Decoration 00000564 )
   1E0:  		Set   *VarA  *Var0
@@ -1096,19 +1099,19 @@ PADDING: 80240E28 to 80240E30 (00000E28 to 00000E30)
 
 #new:NpcGroup $NpcGroup_802425D8
 {
-	00000000 $NpcSettings_80240E30 ~Vec3f:NPC_802425D8 % -70 0 20
+	.NpcID:Rosie_00 $NpcSettings_80240E30 ~Vec3f:NPC_Rosie_00 % -70 0 20
 	00400D01 $Script_Init_802423D0 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802425D8
-	~AnimationTable:NPC_802425D8 % .Sprite:Rosie
+	~Movement:NPC_Rosie_00
+	~AnimationTable:NPC_Rosie_00 % .Sprite:Rosie
 	00000000 00000000 00000000 001A00E0 % What do you know? A rose called Rosie! She loves i ...
 	%
 	% $NpcGroup_802425D8[1F0]
-	00000001 $NpcSettings_80240E5C ~Vec3f:NPC_802427C8 % -70 0 20
+	.NpcID:Rosie_01 $NpcSettings_80240E5C ~Vec3f:NPC_Rosie_01 % -70 0 20
 	00000201 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802427C8
-	~AnimationTable:NPC_802427C8 % .Sprite:Rosie
+	~Movement:NPC_Rosie_01
+	~AnimationTable:NPC_Rosie_01 % .Sprite:Rosie
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

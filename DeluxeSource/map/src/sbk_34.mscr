@@ -1,6 +1,9 @@
 % Script File: sbk_34.mscr
 % Decoded from: 0 to 27E0 (sbk_34)
 
+#define .NpcID:Nomadimouse_00       00
+#define .NpcID:Nomadimouse_01       01
+
 #new:Function $Function_80240000
 {
     0:  MTC1      R0, F0
@@ -11,7 +14,7 @@
    14:  SW        R0, 14 (SP)
    18:  SWC1      F0, 10 (SP)
    1C:  COPY      A2, A1
-   20:  JAL       80072950
+   20:  JAL       ~Func:playFX_82
    24:  COPY      A3, A1
    28:  LW        RA, 18 (SP)
    2C:  LI        V0, 2
@@ -764,8 +767,8 @@ PADDING: 802409DC to 802409E0 (000009DC to 000009E0)
    20:  If  *GB_StoryProgress  ==  .Story:Ch2_GotPulseStone % FFFFFFC1
    30:  	Call  DisablePulseStone ( .False )
    40:  EndIf
-   48:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   68:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   48:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   68:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    84:  Call  SetCamEnabled ( .Cam:Default .True )
    98:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    AC:  Call  MakeNpcs      ( .False $NpcGroupList_80241D90 )
@@ -900,7 +903,7 @@ PADDING: 802409DC to 802409E0 (000009DC to 000009E0)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -940,7 +943,7 @@ PADDING: 802409DC to 802409E0 (000009DC to 000009E0)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -1010,19 +1013,19 @@ PADDING: 802409DC to 802409E0 (000009DC to 000009E0)
     0:  Switch  *GB_StoryProgress
     C:  	Case  <  .Story:Ch2_ArrivedAtDryDryOutpost % FFFFFFBC
    18:  		If  *GF_SBK34_Met_Nomadimouse  ==  .False
-   28:  			Call  AdjustCam     ( .Cam:Default *Fixed[4.0] 00000000 *Fixed[250.0] *Fixed[15.0] *Fixed[-6.0] )
+   28:  			Call  AdjustCam     ( .Cam:Default *Fixed[4.0]  0` *Fixed[250.0] *Fixed[15.0] *Fixed[-6.0] )
    4C:  			Call  SpeakToPlayer ( .Npc:Self 00B90002 00B90001 00000000 000D0056 ) % Hello, fellow travelers. I'm in the middle of a jo ...
    6C:  			Set   *GF_SBK34_Met_Nomadimouse  .True
-   7C:  			Call  ResetCam      ( .Cam:Default 00000004 )
+   7C:  			Call  ResetCam      ( .Cam:Default  4` )
    90:  		Else
    98:  			Call  SpeakToPlayer ( .Npc:Self 00B90002 00B90001 00000000 000D0057 ) % Go straight east on this path to reach Dry Dry Out ...
    B8:  		EndIf
    C0:  	Case  <  .Story:Ch2_UncoveredDryDryRuins % FFFFFFC2
    CC:  		If  *GF_SBK34_Met_Nomadimouse  ==  .False
-   DC:  			Call  AdjustCam     ( .Cam:Default *Fixed[4.0] 00000000 *Fixed[250.0] *Fixed[15.0] *Fixed[-6.0] )
+   DC:  			Call  AdjustCam     ( .Cam:Default *Fixed[4.0]  0` *Fixed[250.0] *Fixed[15.0] *Fixed[-6.0] )
   100:  			Call  SpeakToPlayer ( .Npc:Self 00B90002 00B90001 00000000 000D0058 ) % Hello, fellow travelers. I'm in the middle of a jo ...
   120:  			Set   *GF_SBK34_Met_Nomadimouse  .True
-  130:  			Call  ResetCam      ( .Cam:Default 00000004 )
+  130:  			Call  ResetCam      ( .Cam:Default  4` )
   144:  		Else
   14C:  			Call  SpeakToPlayer ( .Npc:Self 00B90002 00B90001 00000000 000D0059 ) % If you go southeast from here, you'll reach a beau ...
   16C:  		EndIf
@@ -1055,19 +1058,19 @@ PADDING: 802409DC to 802409E0 (000009DC to 000009E0)
 
 #new:NpcGroup $NpcGroup_802419B0
 {
-	00000000 $NpcSettings_80240D70 ~Vec3f:NPC_802419B0 % 114 0 -50
+	.NpcID:Nomadimouse_00 $NpcSettings_80240D70 ~Vec3f:NPC_Nomadimouse_00 % 114 0 -50
 	00402D01 $Script_Init_80241954 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802419B0
-	~AnimationTable:NPC_802419B0 % .Sprite:Nomadimouse
+	~Movement:NPC_Nomadimouse_00
+	~AnimationTable:NPC_Nomadimouse_00 % .Sprite:Nomadimouse
 	00000000 00000000 00000000 001A008E % He's a Nomadimouse. It looks like he's in mid-jour ...
 	%
 	% $NpcGroup_802419B0[1F0]
-	00000001 $NpcSettings_80240D70 ~Vec3f:NPC_80241BA0 % 134 0 -50
+	.NpcID:Nomadimouse_01 $NpcSettings_80240D70 ~Vec3f:NPC_Nomadimouse_01 % 134 0 -50
 	00402D01 $Script_Init_8024198C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80241BA0
-	~AnimationTable:NPC_80241BA0 % .Sprite:Nomadimouse
+	~Movement:NPC_Nomadimouse_01
+	~AnimationTable:NPC_Nomadimouse_01 % .Sprite:Nomadimouse
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

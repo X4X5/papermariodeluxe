@@ -1,6 +1,7 @@
 % Script File: dgb_14.mscr
 % Decoded from: 0 to 4E0 (dgb_14)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %  575.0    0.0  180.0  270.0
@@ -97,8 +98,8 @@ PADDING: 802400F8 to 80240100 (000000F8 to 00000100)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  ExecWait  $Script_MakeEntities

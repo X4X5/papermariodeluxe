@@ -1,6 +1,7 @@
 % Script File: pra_05.mscr
 % Decoded from: 0 to 1880 (pra_05)
 
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -13,7 +14,6 @@
 PADDING: 80240018 to 80240020 (00000018 to 00000020)
 00000000 00000000
 
-% Origin: HEURISTIC
 #new:Function $Function_80240020
 {
     0:  LI        V0, FEFFFFFF
@@ -30,7 +30,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  COPY      V0, A0
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240054
 {
     0:  SRA       V0, A0, 10
@@ -84,7 +83,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
     8:  COPY      S0, A0
     C:  LA        A1, $Function_80240128
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  CLEAR     A0
    20:  LW        V1, 13C (S0)
    24:  SW        V0, 0 (V1)
@@ -95,7 +94,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    38:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240128
 {
     0:  ADDIU     SP, SP, FFB0
@@ -213,7 +211,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   1C4:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802402F0
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -244,7 +241,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    1C:  BEQ       V0, R0, .o50
    20:  NOP
    24:  LA        A1, $Function_80240500
-   2C:  JAL       ~Func:create_dynamic_entity_world
+   2C:  JAL       ~Func:create_generic_entity_world
    30:  CLEAR     A0
    34:  LW        V1, 13C (S0)
    38:  SW        V0, 0 (V1)
@@ -260,7 +257,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    60:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240500
 {
     0:  ADDIU     SP, SP, FFB0
@@ -364,7 +360,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   188:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_8024068C
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -385,7 +380,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
 	27BD0140
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240870
 {
     0:  ADDIU     SP, SP, FE80
@@ -525,7 +519,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   224:  COPY      A0, S3
   228:  ADDIU     A1, SP, 120
   22C:  ADDIU     A2, SP, 124
-  230:  JAL       ~Func:player_get_spin_history
+  230:  JAL       ~Func:phys_get_spin_history
   234:  ADDIU     A3, SP, 128
   238:  LW        A2, 124 (SP)
   23C:  LUI       V0, 8000
@@ -733,7 +727,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
         .o8C
    8C:  LA        A0, $Function_80240EB8
         .o94
-   94:  JAL       ~Func:create_dynamic_entity_world
+   94:  JAL       ~Func:create_generic_entity_world
    98:  CLEAR     A1
    9C:  LW        V1, 13C (S0)
    A0:  SW        V0, 4 (V1)
@@ -789,7 +783,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   144:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240E84
 {
     0:  ADDIU     SP, SP, FFE8
@@ -808,7 +801,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EB8
 {
     0:  ADDIU     SP, SP, FFE8
@@ -827,7 +819,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EEC
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1151,8 +1142,8 @@ PADDING: 8024126C to 80241270 (0000126C to 00001270)
 {
     0:  Set   *GB_WorldLocation  .Location:CrystalPalace
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000018 00000018 00000028 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  24`  24`  40` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  ExecWait  $Script_MakeEntities

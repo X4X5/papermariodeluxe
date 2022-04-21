@@ -1,6 +1,7 @@
 % Script File: kpa_60.mscr
 % Decoded from: 0 to 18E0 (kpa_60)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -336,7 +337,7 @@ PADDING: 802403EC to 802403F0 (000003EC to 000003F0)
 
 #new:ItemList $ItemList_80240510
 {
-	.Item:CastleKey2
+	.Item:BowserCastleKey
 	00000000
 }
 
@@ -344,7 +345,7 @@ PADDING: 802403EC to 802403F0 (000003EC to 000003F0)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf
@@ -517,18 +518,18 @@ PADDING: 802403EC to 802403F0 (000003EC to 000003F0)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePartnerAI  ( 00000000 )
-   20:  Call  SetPlayerPos      ( FFFFFFE2 00000015 0000024E )
-   38:  Call  SetNpcPos ( .Npc:Partner FFFFFFE2 00000015 0000024E )
+   20:  Call  SetPlayerPos      (  -30`  21`  590` )
+   38:  Call  SetNpcPos ( .Npc:Partner  -30`  21`  590` )
    54:  Call  SetNpcFlagBits    ( .Npc:Partner 00000040 .True )
    6C:  Call  EnableModel       ( ~Model:o1616 .False )
    80:  Call  TranslateModel    ( ~Model:o1650 FFFFFFF6 00000000 0000002D )
    9C:  Thread
    A4:  	Call  SetPlayerSpeed    ( *Fixed[3.0] )
-   B4:  	Call  PlayerMoveTo      ( 0000004B 00000244 00000000 )
+   B4:  	Call  PlayerMoveTo      (  75`  580`  0` )
    CC:  EndThread
    D4:  Wait  15`
    E0:  Call  SetNpcSpeed       ( .Npc:Partner *Fixed[3.0] )
-   F4:  Call  NpcMoveTo ( .Npc:Partner 00000041 00000258 00000000 )
+   F4:  Call  NpcMoveTo ( .Npc:Partner  65`  600`  0` )
   110:  ExecWait  $Script_80240920
   11C:  Call  SetNpcFlagBits    ( .Npc:Partner 00000040 .False )
   134:  Call  EnablePartnerAI ( )
@@ -619,8 +620,8 @@ PADDING: 802403EC to 802403F0 (000003EC to 000003F0)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *GF_Map_BowsersCastle  .True
@@ -682,9 +683,9 @@ PADDING: 802403EC to 802403F0 (000003EC to 000003F0)
    78:  Set   *MapVar[B]  00000000
    88:  Set   *MapVar[C]  00000000
    98:  Exec  $Script_802412D0
-   A4:  Call  SetCamPerspective ( .Cam:Default 00000003 0000001E 00000010 00001000 )
-   C4:  Call  UseSettingsFrom   ( .Cam:Default 00000000 FFFFFFBA 00000000 )
-   E0:  Call  SetPanTarget      ( .Cam:Default 00000000 FFFFFFBA 00000000 )
+   A4:  Call  SetCamPerspective ( .Cam:Default 00000003  30`  16`  4096` )
+   C4:  Call  UseSettingsFrom   ( .Cam:Default  0`  -70`  0` )
+   E0:  Call  SetPanTarget      ( .Cam:Default  0`  -70`  0` )
    FC:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   110:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   128:  Call  PlaySound ( 00000182 )
@@ -728,16 +729,16 @@ PADDING: 802403EC to 802403F0 (000003EC to 000003F0)
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  DisablePartnerAI  ( 00000000 )
    30:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   48:  Call  InterpPlayerYaw   ( 000000B4 00000001 )
-   5C:  Call  SetNpcYaw ( .Npc:Partner 0000010E )
+   48:  Call  InterpPlayerYaw   (  180`  1` )
+   5C:  Call  SetNpcYaw ( .Npc:Partner  270` )
    70:  Set   *MapVar[D]  000000B4
    80:  Set   *MapVar[A]  FFFFFF88
    90:  Set   *MapVar[B]  000000A0
    A0:  Set   *MapVar[C]  FFFFFC36
    B0:  Exec  $Script_802412D0
-   BC:  Call  SetCamPerspective ( .Cam:Default 00000003 0000001E 00000010 00001000 )
-   DC:  Call  UseSettingsFrom   ( .Cam:Default 00000000 FFFFFFBA 00000000 )
-   F8:  Call  SetPanTarget      ( .Cam:Default 00000000 FFFFFFBA 00000000 )
+   BC:  Call  SetCamPerspective ( .Cam:Default 00000003  30`  16`  4096` )
+   DC:  Call  UseSettingsFrom   ( .Cam:Default  0`  -70`  0` )
+   F8:  Call  SetPanTarget      ( .Cam:Default  0`  -70`  0` )
   114:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   128:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   140:  Thread

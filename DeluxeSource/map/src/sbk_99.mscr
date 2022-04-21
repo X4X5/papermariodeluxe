@@ -1,6 +1,7 @@
 % Script File: sbk_99.mscr
 % Decoded from: 0 to 350 (sbk_99)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 % -484.0  100.0    5.0   90.0
@@ -64,9 +65,9 @@
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryDesert
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000098 000000F0 )
-   5C:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  152`  240` )
+   5C:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    78:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    8C:  Call  SetCamEnabled     ( .Cam:Default .True )
    A0:  Set   *GF_Map_DryDryDesert  .True

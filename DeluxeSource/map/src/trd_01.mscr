@@ -1,6 +1,11 @@
 % Script File: trd_01.mscr
 % Decoded from: 0 to 4650 (trd_01)
 
+#define .NpcID:KoopaTroopa_00       00
+#define .NpcID:KoopaTroopa_01       01
+#define .NpcID:KoopaTroopa_02       02
+#define .NpcID:Bombomb_03           03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1765,7 +1770,7 @@ PADDING: 8024177C to 80241780 (0000177C to 00001780)
    74:  Set   *Var2  000000FF
    84:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    A0:  Call  SetPanTarget      ( .Cam:Default *Var0 *Var1 *Var2 )
-   BC:  Call  SetCamPitch       ( .Cam:Default 00000012 0000000C )
+   BC:  Call  SetCamPitch       ( .Cam:Default  18`  12` )
    D4:  Call  SetCamSpeed       ( .Cam:Default *Fixed[0.4] )
    E8:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   100:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
@@ -1813,42 +1818,42 @@ PADDING: 8024177C to 80241780 (0000177C to 00001780)
   3E8:  EndChildThread
   3F0:  Thread
   3F8:  	Call  PlaySound ( 80000007 )
-  408:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[4.0] )
-  424:  	Call  ShakeCam  ( .Cam:Default 00000000 00000014 *Fixed[0.7] )
-  440:  	Call  ShakeCam  ( .Cam:Default 00000000 000000FA *Fixed[1.0] )
-  45C:  	Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[0.5] )
-  478:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[1.2] )
+  408:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[4.0] )
+  424:  	Call  ShakeCam  ( .Cam:Default 00000000  20` *Fixed[0.7] )
+  440:  	Call  ShakeCam  ( .Cam:Default 00000000  250` *Fixed[1.0] )
+  45C:  	Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[0.5] )
+  478:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[1.2] )
   494:  	Call  StopSound ( 80000007 )
   4A4:  EndThread
   4AC:  Thread
   4B4:  	Wait  50`
-  4C0:  	Call  SetPanTarget  ( .Cam:Default *Var0 000001F4 *Var2 )
+  4C0:  	Call  SetPanTarget  ( .Cam:Default *Var0  500` *Var2 )
   4DC:  EndThread
   4E4:  Thread
-  4EC:  	Call  GetNpcPos ( 00000001 *Var4 *Var5 *Var6 )
-  508:  	Call  SetNpcPos ( 00000001 *Var4 FFFFFFE5 *Var6 )
+  4EC:  	Call  GetNpcPos ( .NpcID:KoopaTroopa_01 *Var4 *Var5 *Var6 )
+  508:  	Call  SetNpcPos ( .NpcID:KoopaTroopa_01 *Var4  -27` *Var6 )
   524:  	Wait  100`
   530:  	Call  MakeLerp  ( FFFFFFE5 0000012C 000000D2 .Easing:QuadraticOut )
   54C:  	Loop  000000D2
   558:  		Call  UpdateLerp ( )
-  564:  		Call  SetNpcPos ( 00000001 *Var4 *Var0 *Var6 )
+  564:  		Call  SetNpcPos ( .NpcID:KoopaTroopa_01 *Var4 *Var0 *Var6 )
   580:  		Wait  1`
   58C:  	EndLoop
   594:  EndThread
   59C:  Thread
   5A4:  	Wait  20`
-  5B0:  	Call  PlaySoundAtNpc    ( 00000001 00000263 00000000 )
-  5C8:  	Call  ShowEmote ( 00000001 .Emote:Question 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+  5B0:  	Call  PlaySoundAtNpc    ( .NpcID:KoopaTroopa_01 00000263 00000000 )
+  5C8:  	Call  ShowEmote ( .NpcID:KoopaTroopa_01 .Emote:Question  0`  20` .True  0`  0`  0`  0` )
   5F8:  	Wait  120`
-  604:  	Call  SetNpcAnimation   ( 00000001 00290108 )
+  604:  	Call  SetNpcAnimation   ( .NpcID:KoopaTroopa_01 00290108 )
   618:  	Wait  20`
-  624:  	Call  SetNpcAnimation   ( 00000001 00290117 )
-  638:  	Call  PlaySoundAtNpc    ( 00000001 00000262 00000000 )
-  650:  	Call  ShowEmote ( 00000001 .Emote:Exclamation 00000000 0000000F 00000001 00000000 00000000 00000000 00000000 )
+  624:  	Call  SetNpcAnimation   ( .NpcID:KoopaTroopa_01 00290117 )
+  638:  	Call  PlaySoundAtNpc    ( .NpcID:KoopaTroopa_01 00000262 00000000 )
+  650:  	Call  ShowEmote ( .NpcID:KoopaTroopa_01 .Emote:Exclamation  0`  15` .True  0`  0`  0`  0` )
   680:  	Loop  00000004
-  68C:  		Call  InterpNpcYaw  ( 00000001 0000010E 00000000 )
+  68C:  		Call  InterpNpcYaw  ( .NpcID:KoopaTroopa_01  270`  0` )
   6A4:  		Wait  20`
-  6B0:  		Call  InterpNpcYaw  ( 00000001 0000005A 00000000 )
+  6B0:  		Call  InterpNpcYaw  ( .NpcID:KoopaTroopa_01  90`  0` )
   6C8:  		Wait  15`
   6D4:  	EndLoop
   6DC:  EndThread
@@ -1857,29 +1862,29 @@ PADDING: 8024177C to 80241780 (0000177C to 00001780)
   6F8:  	Set   *MapFlag[0A]  .True
   708:  EndThread
   710:  Thread
-  718:  	Call  GetNpcPos ( 00000002 *Var4 *Var5 *Var6 )
-  734:  	Call  SetNpcPos ( 00000002 *Var4 FFFFFFE5 *Var6 )
+  718:  	Call  GetNpcPos ( .NpcID:KoopaTroopa_02 *Var4 *Var5 *Var6 )
+  734:  	Call  SetNpcPos ( .NpcID:KoopaTroopa_02 *Var4  -27` *Var6 )
   750:  	Wait  85`
   75C:  	Call  MakeLerp  ( FFFFFFE5 0000015E 000000D7 .Easing:QuadraticOut )
   778:  	Loop  000000D7
   784:  		Call  UpdateLerp ( )
-  790:  		Call  SetNpcPos ( 00000002 *Var4 *Var0 *Var6 )
+  790:  		Call  SetNpcPos ( .NpcID:KoopaTroopa_02 *Var4 *Var0 *Var6 )
   7AC:  		Wait  1`
   7B8:  	EndLoop
   7C0:  EndThread
   7C8:  Thread
   7D0:  	Wait  25`
-  7DC:  	Call  ShowEmote ( 00000002 .Emote:Question 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+  7DC:  	Call  ShowEmote ( .NpcID:KoopaTroopa_02 .Emote:Question  0`  20` .True  0`  0`  0`  0` )
   80C:  	Wait  120`
-  818:  	Call  SetNpcAnimation   ( 00000002 00290108 )
+  818:  	Call  SetNpcAnimation   ( .NpcID:KoopaTroopa_02 00290108 )
   82C:  	Wait  20`
-  838:  	Call  SetNpcAnimation   ( 00000002 00290117 )
-  84C:  	Call  PlaySoundAtNpc    ( 00000002 00000262 00000000 )
-  864:  	Call  ShowEmote ( 00000002 .Emote:Exclamation 00000000 0000000F 00000001 00000000 00000000 00000000 00000000 )
+  838:  	Call  SetNpcAnimation   ( .NpcID:KoopaTroopa_02 00290117 )
+  84C:  	Call  PlaySoundAtNpc    ( .NpcID:KoopaTroopa_02 00000262 00000000 )
+  864:  	Call  ShowEmote ( .NpcID:KoopaTroopa_02 .Emote:Exclamation  0`  15` .True  0`  0`  0`  0` )
   894:  	Loop  00000004
-  8A0:  		Call  InterpNpcYaw  ( 00000002 0000010E 00000000 )
+  8A0:  		Call  InterpNpcYaw  ( .NpcID:KoopaTroopa_02  270`  0` )
   8B8:  		Wait  20`
-  8C4:  		Call  InterpNpcYaw  ( 00000002 0000005A 00000000 )
+  8C4:  		Call  InterpNpcYaw  ( .NpcID:KoopaTroopa_02  90`  0` )
   8DC:  		Wait  15`
   8E8:  	EndLoop
   8F0:  EndThread
@@ -1977,7 +1982,7 @@ PADDING: 8024177C to 80241780 (0000177C to 00001780)
   E70:  	Call  EnableModel   ( ~Model:sui1 .False )
   E84:  	Call  EnableModel   ( ~Model:sui2 .False )
   E98:  EndThread
-  EA0:  Call  UseSettingsFrom   ( .Cam:Default 00000000 000000DC 000000FF )
+  EA0:  Call  UseSettingsFrom   ( .Cam:Default  0`  220`  255` )
   EBC:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   ED4:  Wait  1`
   EE0:  Call  ResetCam  ( .Cam:Default *Fixed[1.5] )
@@ -2008,7 +2013,7 @@ PADDING: 8024177C to 80241780 (0000177C to 00001780)
 
 #new:ItemList $ItemList_80242BEC
 {
-	.Item:FortressKey
+	.Item:KoopaFortressKey
 	00000000
 }
 
@@ -2016,8 +2021,8 @@ PADDING: 8024177C to 80241780 (0000177C to 00001780)
 {
     0:  Set   *GB_WorldLocation  .Location:KoopaBrosFortress
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_802443D8 )
@@ -2079,8 +2084,8 @@ PADDING: 80242FC4 to 80242FD0 (00002FC4 to 00002FD0)
     0:  Label  0
     C:  If  *GF_TRD01_Item_FortressKey  ==  .True
    1C:  	Call  AwaitPlayerApproach   ( 00000140 00000000 00000028 )
-   34:  	Call  UseSettingsFrom   ( .Cam:Default 000000DC 00000000 00000000 )
-   50:  	Call  SetPanTarget  ( .Cam:Default 0000012C 00000000 00000000 )
+   34:  	Call  UseSettingsFrom   ( .Cam:Default  220`  0`  0` )
+   50:  	Call  SetPanTarget  ( .Cam:Default  300`  0`  0` )
    6C:  	Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
    80:  	Call  GetCamPosA    ( .Cam:Default *Var0 *Var1 )
    98:  	Call  SetCamPosA    ( .Cam:Default *Fixed[-64.0] *Var1 )
@@ -2101,7 +2106,7 @@ PADDING: 80242FC4 to 80242FD0 (00002FC4 to 00002FD0)
     C:  SuspendAll  00000001
    18:  Call  ShowKeyChoicePopup ( )
    24:  If  *Var0  ==  00000000
-   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    4C:  	Call  CloseChoicePopup ( )
    58:  	ResumeAll  00000001
    64:  	Return
@@ -2111,7 +2116,7 @@ PADDING: 80242FC4 to 80242FD0 (00002FC4 to 00002FD0)
    90:  	ResumeAll  00000001
    9C:  	Return
    A4:  EndIf
-   AC:  Call  FindKeyItem       ( .Item:FortressKey *Var0 )
+   AC:  Call  FindKeyItem       ( .Item:KoopaFortressKey *Var0 )
    C0:  Call  RemoveKeyItemAt   ( *Var0 )
    D0:  Call  CloseChoicePopup ( )
    DC:  Set   *GF_TRD01_UnlockedDoor  .True
@@ -2147,7 +2152,7 @@ PADDING: 80242FC4 to 80242FD0 (00002FC4 to 00002FD0)
    A8:  Call  MakeItemEntity    ( .Item:SmashCharge ~Vec3d:Item80243360 .ItemSpawnMode:Fixed_NeverVanish *GF_TRD01_Item_SmashCharge )
    CC:  If  *GF_TRD01_Defeated_KoopaGuard  ==  .True
    DC:  	If  *GF_TRD01_Item_FortressKey  ==  .False
-   EC:  		Call  MakeItemEntity    ( .Item:FortressKey ~Vec3d:Item802433A4 00000000 *GF_TRD01_Item_FortressKey )
+   EC:  		Call  MakeItemEntity    ( .Item:KoopaFortressKey ~Vec3d:Item802433A4 00000000 *GF_TRD01_Item_FortressKey )
   110:  	EndIf
   118:  EndIf
   120:  Return
@@ -2223,11 +2228,11 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
    30:  Call  SetNpcFlagBits    ( .Npc:Self 00000040 .True )
    48:  Call  GetSelfNpcID      ( *Var0 )
    58:  If  *Var0  ==  00000001
-   68:  	Call  SetNpcPos ( .Npc:Self 0000002D FFFFFFE2 00000014 )
+   68:  	Call  SetNpcPos ( .Npc:Self  45`  -30`  20` )
    84:  Else
-   8C:  	Call  SetNpcPos ( .Npc:Self FFFFFFBA FFFFFFE2 FFFFFFEC )
+   8C:  	Call  SetNpcPos ( .Npc:Self  -70`  -30`  -20` )
    A8:  EndIf
-   B0:  Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+   B0:  Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
    C8:  Call  EnableNpcShadow   ( .Npc:Self .False )
    DC:  Call  GetNpcPos     ( .Npc:Self *Var2 *Var3 *Var4 )
    F8:  Label  0
@@ -2280,12 +2285,12 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
   39C:  Call  GetSelfNpcID      ( *Var0 )
   3AC:  If  *Var0  ==  00000001
   3BC:  	Call  SetNpcSpeed   ( .Npc:Self *Fixed[3.0] )
-  3D0:  	Call  NpcMoveTo     ( .Npc:Self 000000BE 00000014 00000000 )
-  3EC:  	Call  NpcMoveTo     ( .Npc:Self 000000F5 0000004B 00000000 )
+  3D0:  	Call  NpcMoveTo     ( .Npc:Self  190`  20`  0` )
+  3EC:  	Call  NpcMoveTo     ( .Npc:Self  245`  75`  0` )
   408:  Else
   410:  	Call  SetNpcSpeed   ( .Npc:Self *Fixed[3.6] )
-  424:  	Call  NpcMoveTo     ( .Npc:Self 000000D2 FFFFFFEC 00000000 )
-  440:  	Call  NpcMoveTo     ( .Npc:Self 00000104 00000019 00000000 )
+  424:  	Call  NpcMoveTo     ( .Npc:Self  210`  -20`  0` )
+  440:  	Call  NpcMoveTo     ( .Npc:Self  260`  25`  0` )
   45C:  EndIf
   464:  Call  SetNpcSpeed       ( .Npc:Self *Fixed[1.5] )
   478:  Call  $Function_80241630 ( )
@@ -2303,12 +2308,12 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
    10:  	Call  BindNpcIdle       ( .Npc:Self $Script_Idle_8024352C )
    24:  	Call  SetNpcAnimation   ( .Npc:Self 0029010E )
    38:  Else
-   40:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+   40:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
    58:  	Call  GetSelfNpcID  ( *Var0 )
    68:  	If  *Var0  ==  00000001
-   78:  		Call  SetNpcPos ( .Npc:Self 000000F0 000000DC 00000082 )
+   78:  		Call  SetNpcPos ( .Npc:Self  240`  220`  130` )
    94:  	Else
-   9C:  		Call  SetNpcPos ( .Npc:Self 00000050 000000DC 00000109 )
+   9C:  		Call  SetNpcPos ( .Npc:Self  80`  220`  265` )
    B8:  	EndIf
    C0:  EndIf
    C8:  Return
@@ -2323,7 +2328,7 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
    28:  		Set   *GF_TRD01_Defeated_KoopaGuard  .True
    38:  		Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    54:  		Call  PlaySound ( 0000000B )
-   64:  		Call  MakeItemEntity    ( .Item:FortressKey *Var0 *Var1 *Var2 .ItemSpawnMode:Toss_NeverVanish *GF_TRD01_Item_FortressKey )
+   64:  		Call  MakeItemEntity    ( .Item:KoopaFortressKey *Var0 *Var1 *Var2 .ItemSpawnMode:Toss_NeverVanish *GF_TRD01_Item_FortressKey )
    88:  		Exec  $Script_80242FD0
    94:  		Call  DoNpcDefeat ( )
    A0:  	Case  ==  .Outcome:PlayerLost % 1
@@ -2346,44 +2351,44 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
 
 #new:NpcGroup $NpcGroup_80243C18
 {
-	00000000 $NpcSettings_80243490 ~Vec3f:NPC_80243C18 % 260 0 30
+	.NpcID:KoopaTroopa_00 $NpcSettings_80243490 ~Vec3f:NPC_KoopaTroopa_00 % 260 0 30
 	00802C00 $Script_Init_80243BC4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243C18
-	~AnimationTable:NPC_80243C18 % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_00
+	~AnimationTable:NPC_KoopaTroopa_00 % .Sprite:KoopaTroopa
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243E08
 {
-	00000001 $NpcSettings_80243490 ~Vec3f:NPC_80243E08 % 0 0 0
+	.NpcID:KoopaTroopa_01 $NpcSettings_80243490 ~Vec3f:NPC_KoopaTroopa_01 % 0 0 0
 	00002C00 $Script_Init_80243A1C 00000000 00000000 0000010E
 	~Items:5:Mushroom:5:POWBlock:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_80243E08
-	~AnimationTable:NPC_80243E08 % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_01
+	~AnimationTable:NPC_KoopaTroopa_01 % .Sprite:KoopaTroopa
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243FF8
 {
-	00000002 $NpcSettings_80243490 ~Vec3f:NPC_80243FF8 % 0 0 0
+	.NpcID:KoopaTroopa_02 $NpcSettings_80243490 ~Vec3f:NPC_KoopaTroopa_02 % 0 0 0
 	00002400 $Script_Init_80243A1C 00000000 00000000 0000005A
 	~Items:5:Mushroom:5:POWBlock:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_80243FF8
-	~AnimationTable:NPC_80243FF8 % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_02
+	~AnimationTable:NPC_KoopaTroopa_02 % .Sprite:KoopaTroopa
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802441E8
 {
-	00000003 $NpcSettings_80243500 ~Vec3f:NPC_802441E8 % -255 640 35
+	.NpcID:Bombomb_03 $NpcSettings_80243500 ~Vec3f:NPC_Bombomb_03 % -255 640 35
 	00002C00 00000000 00000000 00000000 000000B4
 	~Items:5:HoneySyrup:5:FireFlower:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_802441E8
-	~AnimationTable:NPC_802441E8 % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_03
+	~AnimationTable:NPC_Bombomb_03 % .Sprite:Bombomb
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

@@ -1,6 +1,7 @@
 % Script File: kpa_63.mscr
 % Decoded from: 0 to 12C0 (kpa_63)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFC0
@@ -247,8 +248,8 @@ PADDING: 80240364 to 80240370 (00000364 to 00000370)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *GF_Map_BowsersCastle  .True
@@ -322,30 +323,30 @@ PADDING: 8024077C to 80240780 (0000077C to 00000780)
    40:  Call  HidePlayerShadow  ( .True )
    50:  Call  GetModelCenter    ( ~Model:o308 )
    60:  Add   *Var0  FFFFFFFB
-   70:  Call  SetPlayerJumpscale    ( 00000000 )
-   80:  Call  PlayerJump2       ( *Var0 *Var1 *Var2 00000002 )
+   70:  Call  SetPlayerJumpscale    (  0` )
+   80:  Call  PlayerJump2       ( *Var0 *Var1 *Var2  2` )
    9C:  Call  SetPlayerActionState  ( .ActionState:Land )
    AC:  Set   *MapVar[C]  00000001
-   BC:  Call  InterpPlayerYaw   ( 000000E1 00000000 )
+   BC:  Call  InterpPlayerYaw   (  225`  0` )
    D0:  Call  DisablePlayerPhysics  ( .True )
    E0:  Call  DisablePartnerAI  ( 00000000 )
    F0:  Add   *Var2  0000000A
   100:  Call  SetNpcFlagBits    ( .Npc:Partner 00000140 .True )
   118:  Call  SetNpcJumpscale   ( .Npc:Partner 00000001 )
-  12C:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000F )
+  12C:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  15` )
   14C:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   160:  Set   *MapVar[D]  00000001
   170:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
   188:  Call  EnableNpcShadow   ( .Npc:Partner .False )
   19C:  Wait  10`
-  1A8:  Call  ShowMessageAtScreenPos    ( 001D0188 000000A0 00000028 ) % Are you ready to take off?
+  1A8:  Call  ShowMessageAtScreenPos    ( 001D0188  160`  40` ) % Are you ready to take off?
   1C0:  Call  ShowChoice        ( 001E000C ) % Yes No
   1D0:  Call  CloseMessage ( )
   1DC:  If  *Var0  ==  00000001
   1EC:  	Call  DisablePlayerPhysics  ( .False )
-  1FC:  	Call  SetPlayerJumpscale    ( 00000002 )
+  1FC:  	Call  SetPlayerJumpscale    (  2` )
   20C:  	Set   *MapVar[C]  00000000
-  21C:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80240BF4 0000000D )
+  21C:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80240BF4  13` )
   238:  	Call  HidePlayerShadow      ( .False )
   248:  	Call  SetPlayerActionState  ( .ActionState:Land )
   258:  	Set   *MapVar[D]  00000000
@@ -353,7 +354,7 @@ PADDING: 8024077C to 80240780 (0000077C to 00000780)
   278:  	If  *Var0  ==  .True
   288:  		Wait  10`
   294:  		Call  SetNpcJumpscale   ( .Npc:Partner 00000002 )
-  2A8:  		Call  NpcJump0  ( .Npc:Partner FFFFFFBF 00000000 000000E1 0000000D )
+  2A8:  		Call  NpcJump0  ( .Npc:Partner  -65`  0`  225`  13` )
   2C8:  	EndIf
   2D0:  	Call  EnableNpcShadow       ( .Npc:Partner .True )
   2E4:  	Call  SetNpcFlagBits        ( .Npc:Partner 00000040 .False )
@@ -389,14 +390,14 @@ PADDING: 8024077C to 80240780 (0000077C to 00000780)
    10:  Set   *MapVar[B]  000000B4
    20:  Set   *MapVar[C]  00000001
    30:  Set   *MapVar[D]  00000001
-   40:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
+   40:  Call  InterpPlayerYaw   (  90`  0` )
    54:  Call  DisablePlayerInput    ( .True )
    64:  Call  DisablePlayerPhysics  ( .True )
    74:  Call  SetPlayerActionState  ( .ActionState:Land )
    84:  Call  DisablePartnerAI  ( 00000000 )
    94:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   AC:  Call  UseSettingsFrom   ( .Cam:Default FFFFFF88 00000000 000000E6 )
-   C8:  Call  SetPanTarget      ( .Cam:Default FFFFFF88 00000000 000000E6 )
+   AC:  Call  UseSettingsFrom   ( .Cam:Default  -120`  0`  230` )
+   C8:  Call  SetPanTarget      ( .Cam:Default  -120`  0`  230` )
    E4:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    F8:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   110:  Call  HidePlayerShadow  ( .False )
@@ -416,7 +417,7 @@ PADDING: 8024077C to 80240780 (0000077C to 00000780)
   1D8:  EndThread
   1E0:  Wait  20`
   1EC:  Thread
-  1F4:  	Call  InterpPlayerYaw   ( 0000010E 00000028 )
+  1F4:  	Call  InterpPlayerYaw   (  270`  40` )
   208:  EndThread
   210:  Call  MakeLerp  ( 000000B4 00000000 0000003C .Easing:QuadraticOut )
   22C:  Loop
@@ -428,9 +429,9 @@ PADDING: 8024077C to 80240780 (0000077C to 00000780)
   278:  	EndIf
   280:  EndLoop
   288:  Kill  *Var9
-  294:  Call  SetPlayerJumpscale    ( 00000002 )
+  294:  Call  SetPlayerJumpscale    (  2` )
   2A4:  Set   *MapVar[C]  00000000
-  2B4:  Call  PlayerJump    ( ~Vec3d:JumpDest_802410C8 0000000D )
+  2B4:  Call  PlayerJump    ( ~Vec3d:JumpDest_802410C8  13` )
   2D0:  Call  HidePlayerShadow      ( .False )
   2E0:  Call  DisablePlayerPhysics  ( .False )
   2F0:  Set   *MapVar[D]  00000000
@@ -438,7 +439,7 @@ PADDING: 8024077C to 80240780 (0000077C to 00000780)
   310:  If  *Var0  ==  .True
   320:  	Wait  10`
   32C:  	Call  SetNpcJumpscale   ( .Npc:Partner 00000002 )
-  340:  	Call  NpcJump0  ( .Npc:Partner FFFFFFBF 00000000 000000E1 0000000D )
+  340:  	Call  NpcJump0  ( .Npc:Partner  -65`  0`  225`  13` )
   360:  EndIf
   368:  Call  EnableNpcShadow   ( .Npc:Partner .True )
   37C:  Call  EnablePartnerAI ( )

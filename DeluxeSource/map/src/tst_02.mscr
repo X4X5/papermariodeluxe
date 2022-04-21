@@ -1,6 +1,7 @@
 % Script File: tst_02.mscr
 % Decoded from: 0 to 350 (tst_02)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %  -41.0    0.0   25.0    0.0
@@ -45,8 +46,8 @@
 {
     0:  Set   *GB_WorldLocation  .Location:Testing
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  ExecWait  $Script_MakeEntities
    7C:  Bind  $Script_802400F0 .Trigger:WallPush ~Collider:deilitw 00000001 00000000
@@ -65,7 +66,7 @@ PADDING: 80240214 to 80240220 (00000214 to 00000220)
    48:  Call  MakeEntity    ( .Entity:MultiTriggerBlock ~Vec4d:Entity80240268 80000000 )
    6C:  Call  MakeEntity    ( .Entity:MultiTriggerBlock ~Vec4d:Entity8024028C 80000000 )
    90:  Call  MakeEntity    ( .Entity:MultiTriggerBlock ~Vec4d:Entity802402B0 80000000 )
-   B4:  Call  MakeEntity    ( .Entity:GiantChest ~Vec4d:Entity802402D4 00000000 80000000 )
+   B4:  Call  MakeEntity    ( .Entity:GiantChest ~Vec4d:Entity802402D4 .Item:Nothing 80000000 )
    DC:  Call  MakeEntity    ( .Entity:Chest ~Vec4d:Entity802402FC 00000000 80000000 )
   104:  Return
   10C:  End

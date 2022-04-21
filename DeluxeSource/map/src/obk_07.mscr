@@ -1,6 +1,10 @@
 % Script File: obk_07.mscr
 % Decoded from: 0 to 4C80 (obk_07)
 
+#define .NpcID:Boo_00               00
+#define .NpcID:Boo_01               01
+#define .NpcID:Boo_02               02
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -385,7 +389,6 @@ PADDING: 802404FC to 80240500 (000004FC to 00000500)
    20:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240564
 {
     0:  ADDIU     SP, SP, FF98
@@ -701,7 +704,6 @@ PADDING: 802404FC to 80240500 (000004FC to 00000500)
   4A8:  ADDIU     SP, SP, 68
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240A10
 {
     0:  ADDIU     SP, SP, FFD8
@@ -729,7 +731,6 @@ PADDING: 802404FC to 80240500 (000004FC to 00000500)
    58:  ADDIU     SP, SP, 28
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240A6C
 {
     0:  ADDIU     SP, SP, FFD8
@@ -1131,7 +1132,6 @@ PADDING: 802404FC to 80240500 (000004FC to 00000500)
   1C4:  ADDIU     SP, SP, 28
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802410C0
 {
     0:  ADDIU     SP, SP, FFD8
@@ -1196,7 +1196,7 @@ PADDING: 802404FC to 80240500 (000004FC to 00000500)
    2C:  LW        V1, 0 (A2)
    30:  COPY      S1, V0
    34:  ORI       V1, V1, 10
-   38:  JAL       ~Func:create_dynamic_entity_frontUI
+   38:  JAL       ~Func:create_generic_entity_frontUI
    3C:  SW        V1, 0 (A2)
    40:  LI        A0, 59
    44:  ADDIU     V1, S1, 164
@@ -1358,7 +1358,7 @@ PADDING: 802404FC to 80240500 (000004FC to 00000500)
    44:  NOP
    48:  JAL       ~Func:free_hud_element
    4C:  LW        A0, 44 (S0)
-   50:  JAL       ~Func:free_dynamic_entity
+   50:  JAL       ~Func:free_generic_entity
    54:  LW        A0, 2C (S0)
    58:  LW        RA, 14 (SP)
    5C:  LW        S0, 10 (SP)
@@ -1988,8 +1988,8 @@ PADDING: 80241C48 to 80241C50 (00001C48 to 00001C50)
 {
     0:  Set   *GB_WorldLocation  .Location:BoosMansion
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80243054 )
@@ -2048,7 +2048,7 @@ PADDING: 80241FAC to 80241FB0 (00001FAC to 00001FB0)
 
 #new:Script $Script_802420FC
 {
-    0:  Set   *VarA  .Item:Weight % 1C
+    0:  Set   *VarA  .Item:BooWeight % 1C
    10:  Set   *VarB  00000001
    20:  Set   *GB_StoryProgress  .Story:Ch3_GotWeight
    30:  Set   *GF_OBK07_Chest_Weight  .True
@@ -2143,7 +2143,7 @@ PADDING: 802421BC to 802421C0 (000021BC to 000021C0)
    20:  Set   *MapVar[0]  00000001
    30:  Call  DisablePlayerInput    ( .True )
    40:  Thread
-   48:  	Call  AdjustCam ( .Cam:Default *Fixed[4.0] 00000000 *Fixed[250.0] *Fixed[17.5] *Fixed[-10.0] )
+   48:  	Call  AdjustCam ( .Cam:Default *Fixed[4.0]  0` *Fixed[250.0] *Fixed[17.5] *Fixed[-10.0] )
    6C:  EndThread
    74:  Wait  10`
    80:  Thread
@@ -2152,11 +2152,11 @@ PADDING: 802421BC to 802421C0 (000021BC to 000021C0)
    A4:  	Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
    BC:  	Sub   *Var0  00000019
    CC:  	Call  SetNpcFlagBits    ( .Npc:Partner 00000100 .True )
-   E4:  	Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2 0000000A )
+   E4:  	Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2  10` )
   100:  	Call  SetNpcFlagBits    ( .Npc:Partner 00000100 .False )
   118:  	Call  EnablePartnerAI ( )
-  124:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
-  138:  	Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+  124:  	Call  InterpPlayerYaw   (  90`  0` )
+  138:  	Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
   150:  EndThread
   158:  Call  PlaySoundAtPlayer     ( 000000F5 00000000 )
   16C:  Set   *Var0  $???_802421C0
@@ -2208,7 +2208,7 @@ PADDING: 802428FC to 80242900 (000028FC to 00002900)
    38:  	Call  $Function_802402CC ( )
    44:  	Call  $Function_80240454 ( )
    50:  	Call  802CFD30  ( FFFFFFFF 00000007 *Var0 00000000 00000000 00000000 )
-   74:  	Call  802D0244  ( FFFFFFFF 00000011 )
+   74:  	Call  SetNpcRenderMode  ( .Npc:Self .RenderMode:Surface_XLU_Layer1 )
    88:  	Wait  1`
    94:  EndLoop
    9C:  Return
@@ -2224,11 +2224,11 @@ PADDING: 802428FC to 80242900 (000028FC to 00002900)
 
 #new:NpcGroup $NpcGroup_80242A04
 {
-	00000000 $NpcSettings_80242900 ~Vec3f:NPC_80242A04 % 523 -139 193
+	.NpcID:Boo_00 $NpcSettings_80242900 ~Vec3f:NPC_Boo_00 % 523 -139 193
 	00000F01 $Script_Init_802429E0 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80242A04
-	~AnimationTable:NPC_80242A04 % .Sprite:Boo
+	~Movement:NPC_Boo_00
+	~AnimationTable:NPC_Boo_00 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2241,11 +2241,11 @@ PADDING: 802428FC to 80242900 (000028FC to 00002900)
 
 #new:NpcGroup $NpcGroup_80242C18
 {
-	00000001 $NpcSettings_80242900 ~Vec3f:NPC_80242C18 % 473 -122 247
+	.NpcID:Boo_01 $NpcSettings_80242900 ~Vec3f:NPC_Boo_01 % 473 -122 247
 	00000F01 $Script_Init_80242BF4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80242C18
-	~AnimationTable:NPC_80242C18 % .Sprite:Boo
+	~Movement:NPC_Boo_01
+	~AnimationTable:NPC_Boo_01 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2263,11 +2263,11 @@ PADDING: 802428FC to 80242900 (000028FC to 00002900)
 
 #new:NpcGroup $NpcGroup_80242E64
 {
-	00000002 $NpcSettings_80242900 ~Vec3f:NPC_80242E64 % 168 0 -161
+	.NpcID:Boo_02 $NpcSettings_80242900 ~Vec3f:NPC_Boo_02 % 168 0 -161
 	00400D01 $Script_Init_80242E08 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242E64
-	~AnimationTable:NPC_80242E64 % .Sprite:Boo
+	~Movement:NPC_Boo_02
+	~AnimationTable:NPC_Boo_02 % .Sprite:Boo
 	00000000 00000000 00000000 001A00A8 % This Boo is guarding a treasure chest. Bow told hi ...
 }
 
@@ -2284,7 +2284,7 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
 
 #new:ItemList $ItemList_80243090
 {
-	.Item:Record
+	.Item:BooRecord
 	00000000
 }
 
@@ -2293,19 +2293,16 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
 	00000044 00000000
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802430A0
 {
 	2121751D 23A3460C B46B0078 730D1300
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802430B0
 {
 	00E4862E B4F27570 FFF304BC F70D0500
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802430C0
 {
 	2D38D254 28D17D2C B5A11B55 FFFFFF00
@@ -2441,7 +2438,7 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
    68:  	EndIf
    70:  	Wait  1`
    7C:  EndLoop
-   84:  Call  SetNpcRotation    ( 00000002 00000000 00000000 00000000 )
+   84:  Call  SetNpcRotation    ( .NpcID:Boo_02 00000000 00000000 00000000 )
    A0:  Set   *MapFlag[0A]  .True
    B0:  Set   *MapFlag[0B]  .True
    C0:  Set   *MapFlag[0C]  .True
@@ -2502,10 +2499,10 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
   1BC:  	Goto  21
   1C8:  EndIf
   1D0:  Label  B
-  1DC:  Call  PlayerMoveTo      ( FFFFFF36 FFFFFF56 00000000 )
+  1DC:  Call  PlayerMoveTo      (  -202`  -170`  0` )
   1F4:  Label  21
-  200:  Call  PlayerMoveTo      ( FFFFFF28 FFFFFF8D 00000000 )
-  218:  Call  InterpPlayerYaw   ( 00000026 00000001 )
+  200:  Call  PlayerMoveTo      (  -216`  -115`  0` )
+  218:  Call  InterpPlayerYaw   (  38`  1` )
   22C:  Loop
   238:  	Wait  1`
   244:  	If  *MapVar[3]  ==  00000001
@@ -2518,7 +2515,7 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
   290:  Wait  30`
   29C:  Call  $Function_80241898 ( )
   2A8:  If  *MapVar[2]  ==  00000000
-  2B8:  	Call  BindNpcAI ( 00000002 $Script_NpcAI_80243E94 )
+  2B8:  	Call  BindNpcAI ( .NpcID:Boo_02 $Script_NpcAI_80243E94 )
   2CC:  	Exec  $Script_80244380 *MapVar[F]
   2DC:  Else
   2E4:  	Exec  $Script_802446EC *MapVar[F]
@@ -2577,7 +2574,7 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
    64:  EndIf
    6C:  Call  ShowKeyChoicePopup ( )
    78:  If  *Var0  ==  00000000
-   88:  	Call  ShowMessageAtScreenPos    ( 001D015A 000000A0 00000028 ) % It's a phonograph. It would be nice if there were  ...
+   88:  	Call  ShowMessageAtScreenPos    ( 001D015A  160`  40` ) % It's a phonograph. It would be nice if there were  ...
    A0:  	Goto  64
    AC:  EndIf
    B4:  If  *Var0  ==  FFFFFFFF
@@ -2601,7 +2598,7 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
   1AC:  If  *GB_StoryProgress  <  .Story:Ch3_GotWeight % FFFFFFD6
   1BC:  	Set   *MapVar[3]  00000000
   1CC:  	Thread
-  1D4:  		Call  ShowMessageAtScreenPos    ( 001D0181 000000A0 00000028 ) % Tap to play the record. You've gotta have rhythm!  ...
+  1D4:  		Call  ShowMessageAtScreenPos    ( 001D0181  160`  40` ) % Tap to play the record. You've gotta have rhythm!  ...
   1EC:  		Set   *MapVar[3]  00000001
   1FC:  	EndThread
   204:  EndIf
@@ -2616,16 +2613,16 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
 
 #new:Script $Script_NpcAI_80243E94
 {
-    0:  Call  SetNpcAnimation   ( 00000002 00950001 )
+    0:  Call  SetNpcAnimation   ( .NpcID:Boo_02 00950001 )
    14:  Label  0
    20:  Call  RandInt       ( 0000001E *Var0 )
    34:  Add   *Var0  0000001E
    44:  Wait  *Var0
-   50:  Call  InterpNpcYaw  ( 00000002 0000005A 00000005 )
+   50:  Call  InterpNpcYaw  ( .NpcID:Boo_02  90`  5` )
    68:  Call  RandInt       ( 0000001E *Var0 )
    7C:  Add   *Var0  0000001E
    8C:  Wait  *Var0
-   98:  Call  InterpNpcYaw  ( 00000002 0000010E 00000005 )
+   98:  Call  InterpNpcYaw  ( .NpcID:Boo_02  270`  5` )
    B0:  Goto  0
    BC:  Return
    C4:  End
@@ -2646,20 +2643,20 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
    38:  			Call  RandInt       ( 0000000A *Var0 )
    4C:  			Add   *Var0  0000000A
    5C:  			Wait  *Var0
-   68:  			Call  InterpNpcYaw  ( 00000002 0000005A 00000005 )
+   68:  			Call  InterpNpcYaw  ( .NpcID:Boo_02  90`  5` )
    80:  			Call  RandInt       ( 0000000A *Var0 )
    94:  			Add   *Var0  0000000A
    A4:  			Wait  *Var0
-   B0:  			Call  InterpNpcYaw  ( 00000002 0000010E 00000005 )
+   B0:  			Call  InterpNpcYaw  ( .NpcID:Boo_02  270`  5` )
    C8:  		Case  <  0000003C
-   D4:  			Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-   F0:  			Call  SetNpcJumpscale   ( 00000002 *Fixed[1.0] )
-  104:  			Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 0000000A )
+   D4:  			Call  GetNpcPos ( .NpcID:Boo_02 *Var0 *Var1 *Var2 )
+   F0:  			Call  SetNpcJumpscale   ( .NpcID:Boo_02 *Fixed[1.0] )
+  104:  			Call  NpcJump0  ( .NpcID:Boo_02 *Var0 *Var1 *Var2  10` )
   124:  		Case  <  00000063
   130:  			Call  MakeLerp  ( 00000000 000002D0 00000014 .Easing:QuadraticOut )
   14C:  			Loop
   158:  				Call  UpdateLerp ( )
-  164:  				Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  164:  				Call  SetNpcRotation    ( .NpcID:Boo_02 00000000 *Var0 00000000 )
   180:  				Wait  1`
   18C:  				If  *Var1  ==  00000000
   19C:  					BreakLoop
@@ -2676,14 +2673,14 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
     0:  Wait  1`
     C:  If  *MapVar[1]  ==  00000001
    1C:  	Wait  150`
-   28:  	Call  BindNpcAI ( 00000002 $Script_NpcAI_80243F60 )
+   28:  	Call  BindNpcAI ( .NpcID:Boo_02 $Script_NpcAI_80243F60 )
    3C:  	Wait  1`
-   48:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 00000000 )
+   48:  	Call  SetNpcRotation    ( .NpcID:Boo_02 00000000 00000000 00000000 )
    64:  	Wait  90`
    70:  Else
-   78:  	Call  BindNpcAI ( 00000002 $Script_NpcAI_80243F60 )
+   78:  	Call  BindNpcAI ( .NpcID:Boo_02 $Script_NpcAI_80243F60 )
    8C:  	Wait  1`
-   98:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 00000000 )
+   98:  	Call  SetNpcRotation    ( .NpcID:Boo_02 00000000 00000000 00000000 )
    B4:  EndIf
    BC:  Call  AwaitPlayerLeave  ( 000000A8 FFFFFF78 00000032 )
    D4:  Call  MakeLerp  ( 000000B4 00000000 0000000A .Easing:Linear )
@@ -2695,7 +2692,7 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
   144:  	EndIf
   14C:  	Wait  1`
   158:  EndLoop
-  160:  Call  SetNpcPos ( 00000002 000000A8 00000000 FFFFFF78 )
+  160:  Call  SetNpcPos ( .NpcID:Boo_02  168`  0`  -136` )
   17C:  Call  MakeLerp  ( 00000000 000000B4 0000000A .Easing:Linear )
   198:  Loop
   1A4:  	Call  UpdateLerp ( )
@@ -2706,7 +2703,7 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
   1F4:  	Wait  1`
   200:  EndLoop
   208:  Set   *MapVar[1]  00000000
-  218:  Call  BindNpcAI ( 00000002 $Script_NpcAI_80243E94 )
+  218:  Call  BindNpcAI ( .NpcID:Boo_02 $Script_NpcAI_80243E94 )
   22C:  Return
   234:  End
 }
@@ -2715,13 +2712,13 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
 {
     0:  Set   *MapVar[1]  00000000
    10:  Set   *MapFlag[0D]  .False
-   20:  Call  InterpNpcYaw  ( 00000002 0000010E 00000005 )
+   20:  Call  InterpNpcYaw  ( .NpcID:Boo_02  270`  5` )
    38:  Set   *VarC  00000000
    48:  Loop
-   54:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+   54:  	Call  GetNpcPos ( .NpcID:Boo_02 *Var0 *Var1 *Var2 )
    70:  	If  *Var0  <=  FFFFFFA4
    80:  		Set   *MapVar[1]  00000001
-   90:  		Call  BindNpcAI ( 00000002 $Script_NpcAI_80243F70 )
+   90:  		Call  BindNpcAI ( .NpcID:Boo_02 $Script_NpcAI_80243F70 )
    A4:  		Return
    AC:  	EndIf
    B4:  	If  *VarA  ==  00000000
@@ -2743,27 +2740,27 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
   188:  			Switch  *Var0
   194:  				Case  <  0000003C
   1A0:  				Case  <  00000050
-  1AC:  					Call  BindNpcAI ( 00000002 $Script_NpcAI_80243F60 )
+  1AC:  					Call  BindNpcAI ( .NpcID:Boo_02 $Script_NpcAI_80243F60 )
   1C0:  					Set   *MapFlag[0D]  .True
-  1D0:  					Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-  1EC:  					Call  SetNpcJumpscale   ( 00000002 *Fixed[1.0] )
-  200:  					Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 0000000A )
+  1D0:  					Call  GetNpcPos ( .NpcID:Boo_02 *Var0 *Var1 *Var2 )
+  1EC:  					Call  SetNpcJumpscale   ( .NpcID:Boo_02 *Fixed[1.0] )
+  200:  					Call  NpcJump0  ( .NpcID:Boo_02 *Var0 *Var1 *Var2  10` )
   220:  					Set   *MapFlag[0D]  .False
-  230:  					Call  BindNpcAI ( 00000002 $Script_NpcAI_80243E94 )
+  230:  					Call  BindNpcAI ( .NpcID:Boo_02 $Script_NpcAI_80243E94 )
   244:  				Case  <  00000063
-  250:  					Call  BindNpcAI ( 00000002 $Script_NpcAI_80243F60 )
+  250:  					Call  BindNpcAI ( .NpcID:Boo_02 $Script_NpcAI_80243F60 )
   264:  					Set   *MapFlag[0D]  .True
   274:  					Call  MakeLerp  ( 00000000 000002D0 00000014 .Easing:QuadraticOut )
   290:  					Loop
   29C:  						Call  UpdateLerp ( )
-  2A8:  						Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  2A8:  						Call  SetNpcRotation    ( .NpcID:Boo_02 00000000 *Var0 00000000 )
   2C4:  						Wait  1`
   2D0:  						If  *Var1  ==  00000000
   2E0:  							BreakLoop
   2E8:  						EndIf
   2F0:  					EndLoop
   2F8:  					Set   *MapFlag[0D]  .False
-  308:  					Call  BindNpcAI ( 00000002 $Script_NpcAI_80243E94 )
+  308:  					Call  BindNpcAI ( .NpcID:Boo_02 $Script_NpcAI_80243E94 )
   31C:  			EndSwitch
   324:  		EndIf
   32C:  	EndIf
@@ -2789,9 +2786,9 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
 {
     0:  Thread
     8:  	Wait  25`
-   14:  	Call  PlaySoundAtNpc    ( 00000002 .Sound:BooSpook 00000000 )
+   14:  	Call  PlaySoundAtNpc    ( .NpcID:Boo_02 .Sound:BooSpook 00000000 )
    2C:  EndThread
-   34:  Call  SetNpcAnimation   ( 00000002 00950008 )
+   34:  Call  SetNpcAnimation   ( .NpcID:Boo_02 00950008 )
    48:  Wait  10`
    54:  Call  MakeLerp  ( 000000FF 00000000 0000003C .Easing:Linear )
    70:  Label  0
@@ -2801,7 +2798,7 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
    B8:  If  *Var1  ==  00000001
    C8:  	Goto  0
    D4:  EndIf
-   DC:  Call  SetNpcPos ( 00000002 00000000 FFFFFC18 00000000 )
+   DC:  Call  SetNpcPos ( .NpcID:Boo_02  0`  -1000`  0` )
    F8:  Set   *MapVar[2]  00000001
   108:  Return
   110:  End
@@ -2812,15 +2809,15 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
     0:  Switch  *GB_StoryProgress
     C:  	Case  <  .Story:Ch3_PlayedTheRecord % FFFFFFD5
    18:  		If  *GF_OBK08_Item_Record  ==  .True
-   28:  			Call  SpeakToPlayer ( 00000002 00950004 00950001 00000000 000E0036 ) % I am so bored!! Boo-ored! I know the Lady Bow orde ...
+   28:  			Call  SpeakToPlayer ( .NpcID:Boo_02 00950004 00950001 00000000 000E0036 ) % I am so bored!! Boo-ored! I know the Lady Bow orde ...
    48:  		Else
-   50:  			Call  SpeakToPlayer ( 00000002 00950004 00950001 00000000 000E0035 ) % I am so bored!! Boo-ored! I know the Lady Bow orde ...
+   50:  			Call  SpeakToPlayer ( .NpcID:Boo_02 00950004 00950001 00000000 000E0035 ) % I am so bored!! Boo-ored! I know the Lady Bow orde ...
    70:  		EndIf
    78:  	Case  ==  .Story:Ch3_PlayedTheRecord % FFFFFFD5
    84:  		If  *MapVar[1]  ==  00000001
-   94:  			Call  SpeakToPlayer ( 00000002 00950004 00950001 00000000 000E0037 ) % Oh yeah, such rhythm! What a groove! Par-tay!
+   94:  			Call  SpeakToPlayer ( .NpcID:Boo_02 00950004 00950001 00000000 000E0037 ) % Oh yeah, such rhythm! What a groove! Par-tay!
    B4:  		Else
-   BC:  			Call  SpeakToPlayer ( 00000002 00950004 00950001 00000000 000E0038 ) % Oh Boo! Is that...the end? I was just starting to  ...
+   BC:  			Call  SpeakToPlayer ( .NpcID:Boo_02 00950004 00950001 00000000 000E0038 ) % Oh Boo! Is that...the end? I was just starting to  ...
    DC:  		EndIf
    E4:  EndSwitch
    EC:  Return
@@ -2830,20 +2827,20 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
 #new:Script $Script_8024493C
 {
     0:  Kill  *MapVar[5]
-    C:  Call  SetNpcRotation    ( 00000002 00000000 00000000 00000000 )
+    C:  Call  SetNpcRotation    ( .NpcID:Boo_02 00000000 00000000 00000000 )
    28:  Exec  $Script_80241BE0
    34:  Call  DisablePlayerInput    ( .True )
-   44:  Call  BindNpcAI     ( 00000002 $Script_NpcAI_80243F60 )
-   58:  Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+   44:  Call  BindNpcAI     ( .NpcID:Boo_02 $Script_NpcAI_80243F60 )
+   58:  Call  GetNpcPos     ( .NpcID:Boo_02 *Var0 *Var1 *Var2 )
    74:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    90:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
    AC:  Call  SetCamDistance    ( .Cam:Default *Fixed[300.0] )
    C0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    D4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    EC:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  100:  Call  SpeakToPlayer ( 00000002 00950009 00950009 00000000 000E0039 ) % Oh! Noooo... Lady Bow gave me one job...to guard t ...
-  120:  Call  SetNpcAnimation   ( 00000002 00950001 )
-  134:  Call  EndSpeech     ( 00000002 00950004 00950001 00000000 )
+  100:  Call  SpeakToPlayer ( .NpcID:Boo_02 00950009 00950009 00000000 000E0039 ) % Oh! Noooo... Lady Bow gave me one job...to guard t ...
+  120:  Call  SetNpcAnimation   ( .NpcID:Boo_02 00950001 )
+  134:  Call  EndSpeech     ( .NpcID:Boo_02 00950004 00950001 00000000 )
   150:  ExecWait  $Script_80244728
   15C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   174:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -2859,12 +2856,12 @@ PADDING: 80243084 to 80243090 (00003084 to 00003090)
 
 #new:Script $Script_80244B60
 {
-    0:  Call  SetNpcScale       ( 00000002 *Fixed[1.0] *Fixed[1.0] *Fixed[1.0] )
-   1C:  Call  SetNpcCollisionSize   ( 00000002 00000028 00000028 )
+    0:  Call  SetNpcScale       ( .NpcID:Boo_02 *Fixed[1.0] *Fixed[1.0] *Fixed[1.0] )
+   1C:  Call  SetNpcCollisionSize   ( .NpcID:Boo_02  40`  40` )
    34:  Call  $Function_80241B50 ( )
    40:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80244840 )
    54:  Call  BindNpcIdle       ( .Npc:Self $Script_NpcAI_80243E94 )
-   68:  Call  SetNpcPos ( 00000002 000000A8 00000000 FFFFFF78 )
+   68:  Call  SetNpcPos ( .NpcID:Boo_02  168`  0`  -136` )
    84:  Return
    8C:  End
 }

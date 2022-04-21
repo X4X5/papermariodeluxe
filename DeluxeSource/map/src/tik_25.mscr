@@ -1,6 +1,7 @@
 % Script File: tik_25.mscr
 % Decoded from: 0 to 1A90 (tik_25)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -783,8 +784,8 @@ PADDING: 80240878 to 80240880 (00000878 to 00000880)
 {
     0:  Set   *GB_WorldLocation  .Location:ToadTownTunnels
    10:  Call  SetSpriteShading  ( .Shading:tik_25 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  ExecWait  $Script_MakeEntities
@@ -827,7 +828,7 @@ PADDING: 80241448 to 80241450 (00001448 to 00001450)
    44:  	EndIf
    4C:  	Wait  60`
    58:  	Exec  $Script_8024083C
-   64:  	Call  ShowMessageAtScreenPos    ( 001D0187 000000A0 00000028 ) % You got the Ultra Boots! The attack power of Mario ...
+   64:  	Call  ShowMessageAtScreenPos    ( 001D0187  160`  40` ) % You got the Ultra Boots! The attack power of Mario ...
    7C:  	Call  $Function_80240680 ( )
    88:  EndIf
    90:  Return

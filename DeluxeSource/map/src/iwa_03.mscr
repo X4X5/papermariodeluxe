@@ -1,6 +1,12 @@
 % Script File: iwa_03.mscr
 % Decoded from: 0 to 2D30 (iwa_03)
 
+#define .NpcID:Cleft_00             00
+#define .NpcID:Cleft_01             01
+#define .NpcID:Cleft_02             02
+#define .NpcID:MontyMole_03         03
+#define .NpcID:MontyMole_04         04
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -719,7 +725,7 @@ PADDING: 8024033C to 80240340 (0000033C to 00000340)
    A8:  LW        A2, 3C (S0)
    AC:  LW        A1, 38 (S0)
    B0:  MFC1      A3, F2
-   B4:  JAL       ~Func:fx_walk_normal
+   B4:  JAL       ~Func:fx_walk
    B8:  LI        A0, 2
         .oBC
    BC:  LHU       V0, 8E (S0)
@@ -1384,8 +1390,8 @@ PADDING: 80241344 to 80241350 (00001344 to 00001350)
 {
     0:  Set   *GB_WorldLocation  .Location:MtRugged
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80242920 )
    84:  ExecWait  $Script_MakeEntities
@@ -1458,10 +1464,10 @@ PADDING: 80241344 to 80241350 (00001344 to 00001350)
    3C:  Exec  $Script_8024167C *VarA
    4C:  If  *MapVar[9]  ==  00000000
    5C:  	Call  SetPlayerJumpscale    ( *Fixed[1.4] )
-   6C:  	Call  PlayerJump    ( ~Vec3d:JumpDest_8024174C 0000000F )
+   6C:  	Call  PlayerJump    ( ~Vec3d:JumpDest_8024174C  15` )
    88:  Else
    90:  	Call  SetPlayerJumpscale    ( *Fixed[0.7] )
-   A0:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80241780 00000028 )
+   A0:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80241780  40` )
    BC:  EndIf
    C4:  Kill  *VarA
    D0:  Call  SetPlayerActionState  ( .ActionState:Idle )
@@ -1578,8 +1584,8 @@ PADDING: 80241AF4 to 80241B00 (00001AF4 to 00001B00)
   178:  	Add   *Var5  0000001E
   188:  	Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
   19C:  	Call  PlaySoundAtNpc    ( .Npc:Self .Sound:MolePop 00000000 )
-  1B4:  	Call  NpcJump0  ( .Npc:Self *Var4 *Var5 *Var6 00000014 )
-  1D4:  	Call  SetNpcPos ( *Var0 00000000 FFFFFC18 00000000 )
+  1B4:  	Call  NpcJump0  ( .Npc:Self *Var4 *Var5 *Var6  20` )
+  1D4:  	Call  SetNpcPos ( *Var0  0`  -1000`  0` )
   1F0:  	Call  SetSelfEnemyFlagBits  ( 00000020 00000000 )
   204:  	Call  NpcFacePlayer     ( .Npc:Self 00000000 )
   218:  	Call  SetSelfEnemyFlagBits  ( 40000000 00000001 )
@@ -1631,49 +1637,49 @@ PADDING: 80241AF4 to 80241B00 (00001AF4 to 00001B00)
 
 #new:NpcGroup $NpcGroup_80241F70
 {
-	00000000 $NpcSettings_80241F44 ~Vec3f:NPC_80241F70 % -525 -75 60
+	.NpcID:Cleft_00 $NpcSettings_80241F44 ~Vec3f:NPC_Cleft_00 % -525 -75 60
 	00000C00 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:3
-	~Movement:NPC_80241F70
-	~AnimationTable:NPC_80241F70 % .Sprite:Cleft
+	~Movement:NPC_Cleft_00
+	~AnimationTable:NPC_Cleft_00 % .Sprite:Cleft
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242160
 {
-	00000001 $NpcSettings_80241F44 ~Vec3f:NPC_80242160 % -1686 -60 180
+	.NpcID:Cleft_01 $NpcSettings_80241F44 ~Vec3f:NPC_Cleft_01 % -1686 -60 180
 	00000C00 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:3
-	~Movement:NPC_80242160
-	~AnimationTable:NPC_80242160 % .Sprite:Cleft
+	~Movement:NPC_Cleft_01
+	~AnimationTable:NPC_Cleft_01 % .Sprite:Cleft
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242350
 {
-	00000002 $NpcSettings_80241F44 ~Vec3f:NPC_80242350 % -1300 408 -125
+	.NpcID:Cleft_02 $NpcSettings_80241F44 ~Vec3f:NPC_Cleft_02 % -1300 408 -125
 	00000C00 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:3
-	~Movement:NPC_80242350
-	~AnimationTable:NPC_80242350 % .Sprite:Cleft
+	~Movement:NPC_Cleft_02
+	~AnimationTable:NPC_Cleft_02 % .Sprite:Cleft
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242540
 {
-	00000003 $NpcSettings_80241E98 ~Vec3f:NPC_80242540 % -1000 23 60
+	.NpcID:MontyMole_03 $NpcSettings_80241E98 ~Vec3f:NPC_MontyMole_03 % -1000 23 60
 	00000400 00000000 00000000 00000000 00000000
 	~Items:10:HoneySyrup:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80242540
-	~AnimationTable:NPC_80242540 % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_03
+	~AnimationTable:NPC_MontyMole_03 % .Sprite:MontyMole
 	00000001 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242540[1F0]
-	00000004 $NpcSettings_80241EC4 ~Vec3f:NPC_80242730 % -1000 23 60
+	.NpcID:MontyMole_04 $NpcSettings_80241EC4 ~Vec3f:NPC_MontyMole_04 % -1000 23 60
 	00000F21 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80242730
-	~AnimationTable:NPC_80242730 % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_04
+	~AnimationTable:NPC_MontyMole_04 % .Sprite:MontyMole
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1721,7 +1727,7 @@ PADDING: 8024295C to 80242960 (0000295C to 00002960)
    CC:  Wait  15`
    D8:  Call  ModifyColliderFlags   ( 00000000 ~Collider:st1 7FFFFE00 )
    F0:  Call  SetPlayerSpeed        ( *Fixed[3.0] )
-  100:  Call  PlayerMoveTo  ( FFFFFA4C FFFFFFC4 00000000 )
+  100:  Call  PlayerMoveTo  (  -1460`  -60`  0` )
   118:  Call  DisablePlayerInput    ( .False )
   128:  Wait  100`
   134:  Thread

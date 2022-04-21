@@ -1,6 +1,12 @@
 % Script File: omo_04.mscr
 % Decoded from: 0 to 4EC0 (omo_04)
 
+#define .NpcID:Goomba_00            00
+#define .NpcID:WorldClubba_01       01
+#define .NpcID:WorldKammy_02        02
+#define .NpcID:ShyGuy_03            03
+#define .NpcID:SkyGuy_04            04
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -2187,8 +2193,8 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GF_OMO04_SpawnedPeachChoice1  ==  .False
    80:  	Call  MakeNpcs  ( .True $NpcGroupList_80243E30 )
@@ -2368,7 +2374,7 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
    8C:  Call  $Function_802402BC ( )
    98:  Exec  $Script_802427E8 *VarA
    A8:  Call  SetPlayerJumpscale    ( *Fixed[0.7] )
-   B8:  Call  PlayerJump    ( *Var7 *Var8 *Var9 00000028 )
+   B8:  Call  PlayerJump    ( *Var7 *Var8 *Var9  40` )
    D4:  Kill  *VarA
    E0:  Call  $Function_802402D8 ( )
    EC:  Wait  1`
@@ -2570,11 +2576,11 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
    54:  Call  DisablePlayerInput    ( .True )
    64:  Call  $Function_80241E04 ( )
    70:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-   8C:  Call  SetCamProperties      ( .Cam:Default *Fixed[5.0] *Var0 *Var1 *Var2 0000012C *Fixed[13.0] *Fixed[-9.5] )
+   8C:  Call  SetCamProperties      ( .Cam:Default *Fixed[5.0] *Var0 *Var1 *Var2  300` *Fixed[13.0] *Fixed[-9.5] )
    B8:  If  *GB_OMO_PeachChoice1  ==  00000000
-   C8:  	Call  SpeakToPlayer ( 00000000 00260003 00260001 00000000 000F003A ) % Oh... Mario!? I have to fight Mario?! By myself? W ...
+   C8:  	Call  SpeakToPlayer ( .NpcID:Goomba_00 00260003 00260001 00000000 000F003A ) % Oh... Mario!? I have to fight Mario?! By myself? W ...
    E8:  Else
-   F0:  	Call  SpeakToPlayer ( 00000001 00390005 00390002 00000000 000F003B ) % Oh, it's Mario!! See this fine club I have? I'm go ...
+   F0:  	Call  SpeakToPlayer ( .NpcID:WorldClubba_01 00390005 00390002 00000000 000F003B ) % Oh, it's Mario!! See this fine club I have? I'm go ...
   110:  EndIf
   118:  Thread
   120:  	Call  $Function_80241E20 ( )
@@ -2606,7 +2612,7 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
    10:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_802430D4 )
    24:  	Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_8024324C )
    38:  Else
-   40:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   40:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    5C:  EndIf
    64:  Return
    6C:  End
@@ -2618,7 +2624,7 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
    10:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_802430D4 )
    24:  	Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_8024324C )
    38:  Else
-   40:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   40:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    5C:  EndIf
    64:  Return
    6C:  End
@@ -2634,43 +2640,43 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
 
 #new:NpcGroup $NpcGroup_802433E0
 {
-	00000000 $NpcSettings_80243050 ~Vec3f:NPC_802433E0 % 1100 0 0
+	.NpcID:Goomba_00 $NpcSettings_80243050 ~Vec3f:NPC_Goomba_00 % 1100 0 0
 	00440F00 $Script_Init_802432C0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802433E0
-	~AnimationTable:NPC_802433E0 % .Sprite:Goomba
+	~Movement:NPC_Goomba_00
+	~AnimationTable:NPC_Goomba_00 % .Sprite:Goomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802435D0
 {
-	00000001 $NpcSettings_8024307C ~Vec3f:NPC_802435D0 % 1100 0 0
+	.NpcID:WorldClubba_01 $NpcSettings_8024307C ~Vec3f:NPC_WorldClubba_01 % 1100 0 0
 	00440F00 $Script_Init_80243334 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802435D0
-	~AnimationTable:NPC_802435D0 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_01
+	~AnimationTable:NPC_WorldClubba_01 % .Sprite:WorldClubba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802437C0
 {
-	00000003 $NpcSettings_80243024 ~Vec3f:NPC_802437C0 % -770 0 0
+	.NpcID:ShyGuy_03 $NpcSettings_80243024 ~Vec3f:NPC_ShyGuy_03 % -770 0 0
 	00000800 00000000 00000000 00000000 0000010E
 	~Items:5:DizzyDial:2:SuperShroom:2:ThunderBolt:2:DriedShroom:2:SleepySheep:2:POWBlock:2:FrightJar:2
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_802437C0
-	~AnimationTable:NPC_802437C0 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_03
+	~AnimationTable:NPC_ShyGuy_03 % .Sprite:ShyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802439B0
 {
-	00000004 $NpcSettings_80242FA8 ~Vec3f:NPC_802439B0 % -170 60 30
+	.NpcID:SkyGuy_04 $NpcSettings_80242FA8 ~Vec3f:NPC_SkyGuy_04 % -170 60 30
 	00000800 00000000 00000000 00000000 0000010E
 	~Items:5:Mushroom:5:SuperShroom:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_802439B0
-	~AnimationTable:NPC_802439B0 % .Sprite:SkyGuy
+	~Movement:NPC_SkyGuy_04
+	~AnimationTable:NPC_SkyGuy_04 % .Sprite:SkyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2681,11 +2687,11 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
 
 #new:NpcGroup $NpcGroup_80243BBC
 {
-	00000002 $NpcSettings_802430A8 ~Vec3f:NPC_80243BBC % 0 -1000 0
+	.NpcID:WorldKammy_02 $NpcSettings_802430A8 ~Vec3f:NPC_WorldKammy_02 % 0 -1000 0
 	00000F04 $Script_Init_802433A8 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243BBC
-	~AnimationTable:NPC_80243BBC % .Sprite:WorldKammy
+	~Movement:NPC_WorldKammy_02
+	~AnimationTable:NPC_WorldKammy_02 % .Sprite:WorldKammy
 	00000000 00000000 $ExtraAnimationList_80243BA0 00000000 % no tattle string
 }
 
@@ -2738,9 +2744,9 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
    84:  		If  *Var5  ==  00000000
    94:  			Switch  *Var6
    A0:  				Case  <  *Var2
-   AC:  					Call  SetNpcYaw ( .Npc:Self 0000005A )
+   AC:  					Call  SetNpcYaw ( .Npc:Self  90` )
    C0:  				Case  >  *Var2
-   CC:  					Call  SetNpcYaw ( .Npc:Self 0000010E )
+   CC:  					Call  SetNpcYaw ( .Npc:Self  270` )
    E0:  			EndSwitch
    E8:  			Set   *Var6  *Var2
    F8:  			Wait  1`
@@ -2759,10 +2765,10 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
 #new:Script $Script_Aux_80244000
 {
     0:  Set   *MapFlag[0A]  .False
-   10:  Call  GetNpcPos ( 00000002 *Var6 *Var7 *Var8 )
+   10:  Call  GetNpcPos ( .NpcID:WorldKammy_02 *Var6 *Var7 *Var8 )
    2C:  Loop
    38:  	Call  $Function_80241E40    ( *MapFlag[0A] )
-   48:  	Call  GetNpcPos ( 00000002 *Var9 *VarA *VarB )
+   48:  	Call  GetNpcPos ( .NpcID:WorldKammy_02 *Var9 *VarA *VarB )
    64:  	Set   *Var3  *Var9
    74:  	Set   *Var4  *VarA
    84:  	Set   *Var5  *VarB
@@ -2816,7 +2822,7 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
 #new:Script $Script_80244240
 {
     0:  Loop
-    C:  	Call  PlaySoundAtNpc    ( 00000002 00000295 00000000 )
+    C:  	Call  PlaySoundAtNpc    ( .NpcID:WorldKammy_02 00000295 00000000 )
    24:  	Wait  4`
    30:  EndLoop
    38:  Return
@@ -2836,14 +2842,14 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
    74:  	Case  ==  00000002
    80:  		Set   *MapVar[A]  0000008A
    90:  EndSwitch
-   98:  Call  SetNpcPos ( 00000002 00000320 0000008C FFFFFFEC )
-   B4:  Call  SetNpcYaw ( 00000002 0000010E )
-   C8:  Call  SetNpcAnimation   ( 00000002 00600015 )
+   98:  Call  SetNpcPos ( .NpcID:WorldKammy_02  800`  140`  -20` )
+   B4:  Call  SetNpcYaw ( .NpcID:WorldKammy_02  270` )
+   C8:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_02 00600015 )
    DC:  If  *AreaByte[4]  !=  00000002
-   EC:  	Call  SetNpcPos ( *MapVar[A] 00000000 FFFFFC18 00000000 )
+   EC:  	Call  SetNpcPos ( *MapVar[A]  0`  -1000`  0` )
   108:  EndIf
-  110:  Call  UseSettingsFrom   ( .Cam:Default 0000044C 00000000 00000000 )
-  12C:  Call  SetPanTarget  ( .Cam:Default 0000044C 00000000 00000000 )
+  110:  Call  UseSettingsFrom   ( .Cam:Default  1100`  0`  0` )
+  12C:  Call  SetPanTarget  ( .Cam:Default  1100`  0`  0` )
   148:  Call  SetCamDistance    ( .Cam:Default *Fixed[500.0] )
   15C:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-7.5] )
   174:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
@@ -2855,13 +2861,13 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
   1E0:  Thread
   1E8:  	Wait  100`
   1F4:  	Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
-  208:  	Call  SetCamSpeed       ( .Cam:Default 00000002 )
+  208:  	Call  SetCamSpeed       ( .Cam:Default  2` )
   21C:  	Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   234:  EndThread
   23C:  Call  LoadPath  ( 00000096 $VectorList_8024418C 00000008 .Easing:Linear )
   258:  Loop
   264:  	Call  GetNextPathPos ( )
-  270:  	Call  SetNpcPos ( 00000002 *Var1 *Var2 *Var3 )
+  270:  	Call  SetNpcPos ( .NpcID:WorldKammy_02 *Var1 *Var2 *Var3 )
   28C:  	Wait  1`
   298:  	If  *Var0  !=  00000001
   2A8:  		BreakLoop
@@ -2869,78 +2875,78 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
   2B8:  EndLoop
   2C0:  Set   *MapFlag[0A]  .False
   2D0:  Kill  *MapVar[B]
-  2DC:  Call  PlaySoundAtNpc    ( 00000002 0000032B 00000000 )
+  2DC:  Call  PlaySoundAtNpc    ( .NpcID:WorldKammy_02 0000032B 00000000 )
   2F4:  Thread
-  2FC:  	Call  SetNpcAnimation   ( 00000002 00600010 )
+  2FC:  	Call  SetNpcAnimation   ( .NpcID:WorldKammy_02 00600010 )
   310:  	Wait  1`
-  31C:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 FFFFFFFB )
+  31C:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 FFFFFFFB )
   338:  	Wait  1`
-  344:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 FFFFFFF6 )
+  344:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 FFFFFFF6 )
   360:  	Wait  1`
-  36C:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 FFFFFFF1 )
+  36C:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 FFFFFFF1 )
   388:  	Wait  1`
-  394:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 FFFFFFF6 )
+  394:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 FFFFFFF6 )
   3B0:  	Wait  1`
-  3BC:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 FFFFFFF1 )
+  3BC:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 FFFFFFF1 )
   3D8:  	Wait  1`
-  3E4:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 FFFFFFF6 )
+  3E4:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 FFFFFFF6 )
   400:  	Wait  1`
-  40C:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 FFFFFFF1 )
+  40C:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 FFFFFFF1 )
   428:  	Wait  1`
-  434:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 FFFFFFF6 )
+  434:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 FFFFFFF6 )
   450:  	Wait  1`
-  45C:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 FFFFFFF1 )
+  45C:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 FFFFFFF1 )
   478:  	Wait  3`
-  484:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 00000000 )
+  484:  	Call  SetNpcRotation    ( .NpcID:WorldKammy_02 00000000 00000000 00000000 )
   4A0:  EndThread
   4A8:  Call  LoadPath  ( 0000000A $VectorList_802441EC 00000003 .Easing:Linear )
   4C4:  Loop
   4D0:  	Call  GetNextPathPos ( )
-  4DC:  	Call  SetNpcPos ( 00000002 *Var1 *Var2 *Var3 )
+  4DC:  	Call  SetNpcPos ( .NpcID:WorldKammy_02 *Var1 *Var2 *Var3 )
   4F8:  	Wait  1`
   504:  	If  *Var0  !=  00000001
   514:  		BreakLoop
   51C:  	EndIf
   524:  EndLoop
   52C:  Wait  15`
-  538:  Call  SetNpcVar     ( 00000002 00000000 00000001 )
-  550:  Call  SetNpcAnimation   ( 00000002 00600013 )
+  538:  Call  SetNpcVar     ( .NpcID:WorldKammy_02 00000000 00000001 )
+  550:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_02 00600013 )
   564:  Wait  45`
-  570:  Call  SetNpcAnimation   ( 00000002 0060000E )
-  584:  Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+  570:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_02 0060000E )
+  584:  Call  GetNpcPos     ( .NpcID:WorldKammy_02 *Var0 *Var1 *Var2 )
   5A0:  Add   *Var0  00000019
   5B0:  Add   *Var1  00000026
   5C0:  Call  PlaySoundAt   ( 0000207A 00000000 *Var0 *Var1 *Var2 )
   5E0:  Call  PlayEffect    ( ~FX:GatherEnergyPink *Var0 *Var1 *Var2 *Fixed[1.0] 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   624:  Wait  100`
-  630:  Call  SetNpcAnimation   ( 00000002 0060000F )
+  630:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_02 0060000F )
   644:  Add   *Var0  00000037
   654:  Call  PlaySoundAt   ( 00002098 00000000 *Var0 *Var1 *Var2 )
   674:  Call  PlayEffect    ( ~FX:BigSmokePuff *Var0 00000000 00000000 00000001 0000000F 00000003 00000008 00000000 00000000 00000000 00000000 00000000 00000000 )
   6B8:  Wait  5`
   6C4:  If  *AreaByte[4]  !=  00000002
-  6D4:  	Call  SetNpcPos ( *MapVar[A] *Var0 00000000 00000000 )
+  6D4:  	Call  SetNpcPos ( *MapVar[A] *Var0  0`  0` )
   6F0:  Else
   6F8:  	Call  MakeItemEntity    ( *MapVar[A] *Var0 00000000 00000000 .ItemSpawnMode:Decoration 00000000 )
   71C:  EndIf
   724:  Wait  10`
-  730:  Call  SetNpcAnimation   ( 00000002 00600013 )
+  730:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_02 00600013 )
   744:  Wait  45`
   750:  Switch  *AreaByte[4]
   75C:  	Case  ==  00000000
-  768:  		Call  SpeakToPlayer ( 00000002 00600016 00600013 00000205 000F0036 ) % Perfect... Mario really hates these guys so he'll  ...
+  768:  		Call  SpeakToPlayer ( .NpcID:WorldKammy_02 00600016 00600013 00000205 000F0036 ) % Perfect... Mario really hates these guys so he'll  ...
   788:  		Wait  30`
-  794:  		Call  SpeakToPlayer ( 00000002 00600016 00600013 00000205 000F0037 ) % Well...it doesn't matter. King Bowser ordered it.  ...
+  794:  		Call  SpeakToPlayer ( .NpcID:WorldKammy_02 00600016 00600013 00000205 000F0037 ) % Well...it doesn't matter. King Bowser ordered it.  ...
   7B4:  	Case  ==  00000001
-  7C0:  		Call  SpeakToPlayer ( 00000002 00600016 00600013 00000205 000F0038 ) % Nyeah heh heh heh!!! Ooh, I can't wait until Mario ...
+  7C0:  		Call  SpeakToPlayer ( .NpcID:WorldKammy_02 00600016 00600013 00000205 000F0038 ) % Nyeah heh heh heh!!! Ooh, I can't wait until Mario ...
   7E0:  		Wait  10`
-  7EC:  		Call  SpeakToPlayer ( 00000002 00600016 00600013 00000205 000F0039 ) % Nyeah heh heh hah!!!!!
+  7EC:  		Call  SpeakToPlayer ( .NpcID:WorldKammy_02 00600016 00600013 00000205 000F0039 ) % Nyeah heh heh hah!!!!!
   80C:  	Case  ==  00000002
-  818:  		Call  SpeakToPlayer ( 00000002 00600016 00600013 00000205 000F0034 ) % Nyeah heh heh... Perfect. Mario hates this thing,  ...
+  818:  		Call  SpeakToPlayer ( .NpcID:WorldKammy_02 00600016 00600013 00000205 000F0034 ) % Nyeah heh heh... Perfect. Mario hates this thing,  ...
   838:  		Wait  30`
-  844:  		Call  SpeakToPlayer ( 00000002 00600016 00600013 00000205 000F0035 ) % Well...it doesn't matter. King Bowser ordered it.  ...
+  844:  		Call  SpeakToPlayer ( .NpcID:WorldKammy_02 00600016 00600013 00000205 000F0035 ) % Well...it doesn't matter. King Bowser ordered it.  ...
   864:  EndSwitch
-  86C:  Call  SetNpcVar ( 00000002 00000000 00000000 )
+  86C:  Call  SetNpcVar ( .NpcID:WorldKammy_02 00000000 00000000 )
   884:  Wait  5`
   890:  Call  SetCamDistance    ( .Cam:Default *Fixed[500.0] )
   8A4:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
@@ -2950,7 +2956,7 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
   8E4:  	Call  LoadPath  ( 00000082 $VectorList_80244210 00000004 .Easing:Linear )
   900:  	Loop
   90C:  		Call  GetNextPathPos ( )
-  918:  		Call  SetNpcPos ( 00000002 *Var1 *Var2 *Var3 )
+  918:  		Call  SetNpcPos ( .NpcID:WorldKammy_02 *Var1 *Var2 *Var3 )
   934:  		Wait  1`
   940:  		If  *Var0  !=  00000001
   950:  			BreakLoop
@@ -2960,7 +2966,7 @@ PADDING: 80241FD8 to 80241FE0 (00001FD8 to 00001FE0)
   970:  Wait  90`
   97C:  If  *AreaByte[4]  !=  00000002
   98C:  	Call  PlaySoundAtNpc    ( *MapVar[A] 00000263 00000000 )
-  9A4:  	Call  ShowEmote ( *MapVar[A] .Emote:Question 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+  9A4:  	Call  ShowEmote ( *MapVar[A] .Emote:Question  0`  20` .True  0`  0`  0`  0` )
   9D4:  	Wait  5`
   9E0:  EndIf
   9E8:  Call  GotoMap   ( $ASCII_80244EB0 00000000 ) % omo_04

@@ -1,6 +1,7 @@
 % Script File: kmr_23.mscr
 % Decoded from: 0 to 3810 (kmr_23)
 
+
 #new:Function_Init $Function_Init
 {
     0:  JR        RA
@@ -80,7 +81,7 @@ PADDING: 80240008 to 80240010 (00000008 to 00000010)
    D0:  LW        A1, 0 (S0)
    D4:  LW        A2, 4 (S0)
    D8:  LW        A3, 8 (S0)
-   DC:  JAL       800726B0
+   DC:  JAL       ~Func:playFX_7B
    E0:  LI        A0, 1
    E4:  SW        V0, 28 (S0)
    E8:  LW        V1, C (V0)
@@ -344,7 +345,7 @@ PADDING: 80240008 to 80240010 (00000008 to 00000010)
    64:  LW        A1, 0 (V0)
    68:  LW        A3, 8 (V0)
    6C:  MFC1      A2, F2
-   70:  JAL       80070BB0
+   70:  JAL       ~Func:playFX_33
    74:  LI        A0, E
    78:  LW        RA, 20 (SP)
    7C:  LW        S1, 1C (SP)
@@ -455,14 +456,14 @@ PADDING: 80240008 to 80240010 (00000008 to 00000010)
    6C:  CLEAR     A0
    70:  LI        A1, D0
    74:  COPY      A2, A1
-   78:  JAL       ~Func:set_transition_stencil_color
+   78:  JAL       ~Func:set_screen_overlay_color
    7C:  COPY      A3, A1
    80:  LH        V0, 24 (S1)
    84:  MTC1      V0, F0
    88:  NOP
    8C:  CVT.S.W   F0, F0
    90:  MFC1      A1, F0
-   94:  JAL       ~Func:set_transition_stencil_zoom_0
+   94:  JAL       ~Func:set_screen_overlay_params_front
    98:  LI        A0, 1
    9C:  LI        A0, FF
    A0:  LH        V0, 24 (S1)
@@ -507,7 +508,7 @@ PADDING: 80240008 to 80240010 (00000008 to 00000010)
   134:  NOP
   138:  CVT.S.W   F0, F0
   13C:  MFC1      A1, F0
-  140:  JAL       ~Func:set_transition_stencil_zoom_0
+  140:  JAL       ~Func:set_screen_overlay_params_front
   144:  LI        A0, 1
   148:  LH        V0, 24 (S1)
   14C:  LHU       V1, 24 (S1)
@@ -617,7 +618,7 @@ PADDING: 80240008 to 80240010 (00000008 to 00000010)
    58:  SW        R0, 14 (SP)
    5C:  COPY      A3, A2
    60:  ADDIU     A0, A0, A
-   64:  JAL       800725F0
+   64:  JAL       ~Func:playFX_79
    68:  SWC1      F0, 10 (SP)
    6C:  SW        V0, 2C (S3)
    70:  SW        R0, 70 (S2)
@@ -911,7 +912,6 @@ MISSING: 80240C94 to 80240D14 (00000C94 to 00000D14)
    44:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240DA4
 {
     0:  ADDIU     SP, SP, FFA0
@@ -1163,29 +1163,29 @@ PADDING: 802410C8 to 802410D0 (000010C8 to 000010D0)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
-   20:  Call  SetPlayerPos  ( FFFFFFFE 00000000 00000000 )
+   20:  Call  SetPlayerPos  (  -2`  0`  0` )
    38:  Call  SetPlayerFlagBits     ( 00200000 .True )
-   4C:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
+   4C:  Call  InterpPlayerYaw       (  90`  0` )
    60:  Wait  1`
    6C:  Call  SetPlayerAnimation    ( 00010024 )
    7C:  Call  GetCurrentPartnerID   ( *Var0 )
    8C:  If  *Var0  !=  .Partner:None % 0
    9C:  	Call  DisablePartnerAI  ( 00000000 )
    AC:  	Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   C4:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   C4:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    E0:  EndIf
    E8:  Call  SetSpriteShading  ( .Shading:None )
-   F8:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-  118:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   F8:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+  118:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
   134:  Call  SetCamEnabled ( .Cam:Default .True )
   148:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
   15C:  Call  SetCamType    ( .Cam:Default 00000004 .False )
-  174:  Call  SetCamPitch   ( .Cam:Default 00000000 00000000 )
-  18C:  Call  SetCamDistance    ( .Cam:Default 000001B8 )
-  1A0:  Call  SetCamPosA    ( .Cam:Default 00000000 00000064 )
-  1B8:  Call  SetCamPosB    ( .Cam:Default 00000000 00000000 )
-  1D0:  Call  SetCamPosC    ( .Cam:Default 00000000 00000041 )
-  1E8:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+  174:  Call  SetCamPitch   ( .Cam:Default  0`  0` )
+  18C:  Call  SetCamDistance    ( .Cam:Default  440` )
+  1A0:  Call  SetCamPosA    ( .Cam:Default  0`  100` )
+  1B8:  Call  SetCamPosB    ( .Cam:Default  0`  0` )
+  1D0:  Call  SetCamPosC    ( .Cam:Default  0`  65` )
+  1E8:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
   204:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   218:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   230:  Call  GetEntryID    ( *Var0 )
@@ -1244,25 +1244,21 @@ PADDING: 802410C8 to 802410D0 (000010C8 to 000010D0)
 	F7F6E554 03010000 64542403 01000000 02020201 00000000 00000000 00000000
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802417C8
 {
 	00000000
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802417CC
 {
 	00000000
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802417D0
 {
 	00000000 00000000
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802417D8
 {
 	00000000 00000000 00000000 $???_802416C8 31080808 08080808 08000000 00000000
@@ -1319,7 +1315,7 @@ PADDING: 802410C8 to 802410D0 (000010C8 to 000010D0)
   294:  	Case  ==  ~Entry:Entry6
   2A0:  		Set   *Var1  001D01AB
   2B0:  EndSwitch
-  2B8:  Call  ShowMessageAtScreenPos    ( *Var1 000000A0 00000028 ) % variable string ID
+  2B8:  Call  ShowMessageAtScreenPos    ( *Var1  160`  40` ) % variable string ID
   2D0:  Call  $Function_80240D5C ( )
   2DC:  Wait  15`
   2E8:  Set   *MapFlag[0A]  .True
@@ -1330,7 +1326,7 @@ PADDING: 802410C8 to 802410D0 (000010C8 to 000010D0)
 #new:Script $Script_Init_80241B18
 {
     0:  Call  SetNpcScale       ( .Npc:Self *Fixed[0.85] *Fixed[0.85] *Fixed[0.85] )
-   1C:  Call  SetNpcPos ( .Npc:Self 00000000 00000000 00000014 )
+   1C:  Call  SetNpcPos ( .Npc:Self  0`  0`  20` )
    38:  Call  SetNpcFlagBits    ( .Npc:Self 00040000 .True )
    50:  Call  EnableNpcShadow   ( .Npc:Self .False )
    64:  Exec  $Script_80241810
@@ -1342,7 +1338,7 @@ PADDING: 802410C8 to 802410D0 (000010C8 to 000010D0)
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00000209 )
    14:  Call  802CFD30  ( FFFFFFFF 00000008 00000000 00000000 00000000 00000000 )
-   38:  Call  SetNpcPos ( .Npc:Self 00000000 0000005E 00000000 )
+   38:  Call  SetNpcPos ( .Npc:Self  0`  94`  0` )
    54:  Call  EnableNpcShadow   ( .Npc:Self .False )
    68:  Return
    70:  End
@@ -1529,7 +1525,6 @@ PADDING: 802437D8 to 802437E0 (000037D8 to 000037E0)
 	"kmr_24"
 }
 
-% Origin: HEURISTIC
 #new:JumpTable $JumpTable_802437F0
 {
 	$Function_80240DA4[54] $Function_80240DA4[68] $Function_80240DA4[C8] $Function_80240DA4[DC]

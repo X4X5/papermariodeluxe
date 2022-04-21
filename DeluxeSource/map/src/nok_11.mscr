@@ -1,6 +1,14 @@
 % Script File: nok_11.mscr
 % Decoded from: 0 to 5DB0 (nok_11)
 
+#define .NpcID:KoopaTroopa_00       00
+#define .NpcID:Paragoomba_02        02
+#define .NpcID:SpikedGoomba_04      04
+#define .NpcID:JrTroopa_05          05
+#define .NpcID:JrTroopa_06          06
+#define .NpcID:KentCKoopa_07        07
+#define .NpcID:KentCKoopa_08        08
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -2268,8 +2276,8 @@ PADDING: 80242008 to 80242010 (00002008 to 00002010)
 {
     0:  Set   *GB_WorldLocation  .Location:PleasantPath
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Set   *GF_Map_PleasantPath  .True
    80:  If  *GB_StoryProgress  ==  .Story:Ch1_StarSpritDeparted % FFFFFFB5
@@ -2638,7 +2646,7 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
 #new:Script $Script_802433A4
 {
     0:  Loop
-    C:  	Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos     ( .NpcID:JrTroopa_05 *Var0 *Var1 *Var2 )
    28:  	Call  PlayEffect    ( ~FX:Steam:SmallOutward *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
    6C:  	Wait  3`
    78:  EndLoop
@@ -2669,7 +2677,7 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
    68:  ChildThread
    70:  	Label  A
    7C:  	Wait  3`
-   88:  	Call  PlayerFaceNpc ( .Npc:Self 00000000 )
+   88:  	Call  PlayerFaceNpc ( .Npc:Self .False )
    9C:  	Wait  1`
    A8:  	Goto  A
    B4:  EndChildThread
@@ -2677,24 +2685,24 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
    C8:  Call  SpeakToPlayer     ( .Npc:Self 00210016 00210003 00000005 000C011E ) % Hold it right there, Mario! I've been waiting for  ...
    E8:  Wait  15`
    F4:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-  108:  Call  SetCamProperties  ( .Cam:Default *Fixed[90.0] FFFFFF42 00000000 FFFFFFD8 000000C8 *Fixed[15.0] *Fixed[-8.5] )
+  108:  Call  SetCamProperties  ( .Cam:Default *Fixed[90.0]  -190`  0`  -40`  200` *Fixed[15.0] *Fixed[-8.5] )
   134:  Wait  15`
   140:  Set   *Var0  $???_8024343C
   150:  Exec  $Script_SearchBush_80242A40
   15C:  Wait  15`
   168:  Call  PlaySoundAtNpc    ( .Npc:Self 0000032C 00000000 )
   180:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
-  194:  Call  NpcJump0  ( .Npc:Self FFFFFF1A 00000000 FFFFFF63 0000000F )
+  194:  Call  NpcJump0  ( .Npc:Self  -230`  0`  -157`  15` )
   1B4:  Call  NpcFacePlayer     ( .Npc:Self 00000000 )
   1C8:  Wait  15`
   1D4:  Call  SpeakToPlayer     ( .Npc:Self 0021001A 0021001B 00000000 000C011F ) % I told you I'd be back! Now I'll get my revenge! H ...
-  1F4:  Call  SetCamProperties  ( .Cam:Default *Fixed[4.0] FFFFFF74 00000000 FFFFFFD8 00000190 *Fixed[15.0] *Fixed[-5.0] )
+  1F4:  Call  SetCamProperties  ( .Cam:Default *Fixed[4.0]  -140`  0`  -40`  400` *Fixed[15.0] *Fixed[-5.0] )
   220:  Call  SetNpcAnimation   ( .Npc:Self 0021000A )
   234:  Wait  10`
   240:  Thread
   248:  	Wait  10`
   254:  	Call  SetNpcAnimation   ( .Npc:Self 00210021 )
-  268:  	Call  ShowMessageAtScreenPos    ( 000C0120 000000A0 00000028 ) % Dwaaaahhhhhh!
+  268:  	Call  ShowMessageAtScreenPos    ( 000C0120  160`  40` ) % Dwaaaahhhhhh!
   280:  EndThread
   288:  Thread
   290:  EndThread
@@ -2706,12 +2714,12 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
   318:  		Wait  2`
   324:  	EndLoop
   32C:  EndThread
-  334:  Call  NpcMoveTo ( .Npc:Self FFFFFF37 FFFFFFBD 0000000A )
+  334:  Call  NpcMoveTo ( .Npc:Self  -201`  -67`  10` )
   350:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[2.0] )
-  364:  Call  NpcJump1  ( .Npc:Self FFFFFF41 00000000 FFFFFFE0 00000005 )
+  364:  Call  NpcJump1  ( .Npc:Self  -191`  0`  -32` 00000005 )
   384:  Exec  $Script_802433A4 *VarA
   394:  Call  PlaySoundAtNpc    ( .Npc:Self 00000167 00000000 )
-  3AC:  Call  NpcMoveTo ( .Npc:Self FFFFFF5B 00000032 0000000F )
+  3AC:  Call  NpcMoveTo ( .Npc:Self  -165`  50`  15` )
   3C8:  Kill  *VarA
   3D4:  Call  StopSound ( 00000167 )
   3E4:  Wait  5`
@@ -2740,23 +2748,23 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
   6A0:  EndThread
   6A8:  Call  PlaySoundAtNpc    ( .Npc:Self 00000301 00000000 )
   6C0:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.5] )
-  6D4:  Call  NpcJump0  ( .Npc:Self FFFFFF5B FFFFFFA6 00000032 00000014 )
+  6D4:  Call  NpcJump0  ( .Npc:Self  -165`  -90`  50`  20` )
   6F4:  Wait  30`
   700:  Call  PlaySoundAtNpc    ( .Npc:Self 00000074 00000000 )
   718:  Call  SetNpcAnimation   ( .Npc:Self 00210025 )
-  72C:  Call  SetNpcYaw ( .Npc:Self 0000010E )
+  72C:  Call  SetNpcYaw ( .Npc:Self  270` )
   740:  Thread
   748:  	Wait  85`
   754:  	Call  SetNpcAnimation   ( .Npc:Self 00210026 )
   768:  EndThread
   770:  Call  SetNpcJumpscale   ( .Npc:Self 00000000 )
-  784:  Call  NpcJump0  ( .Npc:Self FFFFFF5B 00000000 00000032 0000005A )
+  784:  Call  NpcJump0  ( .Npc:Self  -165`  0`  50`  90` )
   7A4:  Wait  30`
   7B0:  Call  SetNpcAnimation   ( .Npc:Self 0021000A )
-  7C4:  Call  NpcMoveTo ( .Npc:Self FFFFFF42 FFFFFFD3 0000000A )
+  7C4:  Call  NpcMoveTo ( .Npc:Self  -190`  -45`  10` )
   7E0:  Call  NpcFacePlayer     ( .Npc:Self 00000000 )
   7F4:  Call  SetNpcAnimation   ( .Npc:Self 0021001B )
-  808:  Call  SetCamProperties  ( .Cam:Default *Fixed[90.0] FFFFFF74 00000000 FFFFFFD8 000000FA *Fixed[15.0] *Fixed[-8.5] )
+  808:  Call  SetCamProperties  ( .Cam:Default *Fixed[90.0]  -140`  0`  -40`  250` *Fixed[15.0] *Fixed[-8.5] )
   834:  Call  SpeakToPlayer     ( .Npc:Self 0021001A 0021001B 00000000 000C0121 ) % Mario! I'm talking to you! I promise you, this fig ...
   854:  Call  DisablePartnerAI  ( 00000000 )
   864:  Call  GetCurrentPartnerID   ( *Var0 )
@@ -2799,7 +2807,7 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
 #new:Script $Script_Idle_80243E6C
 {
     0:  Loop
-    C:  	Call  GetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos ( .NpcID:JrTroopa_05 *Var0 *Var1 *Var2 )
    28:  	Call  SetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    44:  	Wait  1`
    50:  EndLoop
@@ -2827,16 +2835,16 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
     0:  Call  ClearDefeatedEnemies ( )
     C:  Call  SetNpcAnimation       ( .Npc:Self 00210014 )
    20:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-   3C:  Call  SetNpcPos ( 00000006 *Var0 *Var1 *Var2 )
-   58:  Call  SetNpcCollisionSize   ( .Npc:Self 00000018 00000020 )
-   70:  Call  SetNpcCollisionSize   ( 00000006 00000018 00000020 )
+   3C:  Call  SetNpcPos ( .NpcID:JrTroopa_06 *Var0 *Var1 *Var2 )
+   58:  Call  SetNpcCollisionSize   ( .Npc:Self  24`  32` )
+   70:  Call  SetNpcCollisionSize   ( .NpcID:JrTroopa_06  24`  32` )
    88:  Set   *GB_StoryProgress  .Story:Ch1_DefeatedJrTroopa
    98:  Thread
    A0:  	Wait  4`
    AC:  	Exec  $Script_80241FB0
    B8:  EndThread
    C0:  Call  BindNpcAI ( .Npc:Self $Script_NpcAI_80243E2C )
-   D4:  Call  SetNpcFlagBits    ( 00000006 00000002 .True )
+   D4:  Call  SetNpcFlagBits    ( .NpcID:JrTroopa_06 00000002 .True )
    EC:  Call  ResetCam  ( .Cam:Default *Fixed[90.0] )
   100:  Call  DisablePlayerInput    ( .False )
   110:  Return
@@ -2874,14 +2882,14 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
    E4:  Call  DisablePlayerInput    ( .True )
    F4:  Call  802D2B6C ( )
   100:  Call  SetMusicTrack ( 00000000 .Song:MinibossBattle 00000000 00000008 )
-  11C:  Call  SpeakToPlayer ( 00000008 00470002 00470001 00000000 000C012C ) % Hey, you in the hat! Wait!
+  11C:  Call  SpeakToPlayer ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C012C ) % Hey, you in the hat! Wait!
   13C:  If  *AreaByte[2]  ==  00000000
   14C:  	Set   *Var0  00000014
   15C:  Else
   164:  	Set   *Var0  FFFFFFEC
   174:  EndIf
   17C:  Call  AdjustCam     ( .Cam:Default *Fixed[5.0] *Var0 *Fixed[275.0] *Fixed[17.5] *Fixed[-12.0] )
-  1A0:  Call  SpeakToPlayer ( 00000008 00470002 00470001 00000000 000C012D ) % It's fine weather, isn't it? My name is Kent C. Ko ...
+  1A0:  Call  SpeakToPlayer ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C012D ) % It's fine weather, isn't it? My name is Kent C. Ko ...
   1C0:  Label  F
   1CC:  Call  ShowCoinCounter   ( .True )
   1DC:  Call  ShowChoice    ( 001E0045 ) % Pay Don't pay Fight
@@ -2897,7 +2905,7 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
   25C:  	Set   *Var0  FFFFFFEC
   26C:  EndIf
   274:  Call  ShowCoinCounter   ( .False )
-  284:  Call  ContinueSpeech    ( 00000008 00470002 00470001 00000000 000C012E ) % You want to fight? You're nuts! Look at me! I'll c ...
+  284:  Call  ContinueSpeech    ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C012E ) % You want to fight? You're nuts! Look at me! I'll c ...
   2A4:  Call  ShowCoinCounter   ( .True )
   2B4:  Call  ShowChoice        ( 001E0045 ) % Pay Don't pay Fight
   2C4:  If  *Var0  ==  00000000
@@ -2908,30 +2916,30 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
   304:  EndIf
   30C:  Call  ShowCoinCounter   ( .False )
   31C:  Label  14
-  328:  Call  ContinueSpeech    ( 00000008 00470002 00470001 00000000 000C0135 ) % Well, I have no choice... I warned you, though. Th ...
+  328:  Call  ContinueSpeech    ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C0135 ) % Well, I have no choice... I warned you, though. Th ...
   348:  Call  StartBossBattle   ( .Song:SpecialBattle )
   358:  If  *AreaByte[2]  ==  00000000
   368:  	Set   *Var0  00000014
   378:  Else
   380:  	Set   *Var0  FFFFFFEC
   390:  EndIf
-  398:  Call  SpeakToPlayer     ( 00000008 00470002 00470001 00000000 000C0136 ) % Wow. You must be really strong. I mean, beating a  ...
-  3B8:  Call  SetNpcAnimation   ( 00000008 00470005 )
+  398:  Call  SpeakToPlayer     ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C0136 ) % Wow. You must be really strong. I mean, beating a  ...
+  3B8:  Call  SetNpcAnimation   ( .NpcID:KentCKoopa_08 00470005 )
   3CC:  If  *AreaByte[2]  ==  00000000
   3DC:  	Set   *Var0  0000005A
   3EC:  Else
   3F4:  	Set   *Var0  0000010E
   404:  EndIf
-  40C:  Call  InterpNpcYaw  ( 00000008 *Var0 00000000 )
+  40C:  Call  InterpNpcYaw  ( .NpcID:KentCKoopa_08 *Var0  0` )
   424:  Wait  30`
   430:  If  *AreaByte[2]  ==  00000000
   440:  	Set   *Var0  0000007D
   450:  Else
   458:  	Set   *Var0  FFFFFE52
   468:  EndIf
-  470:  Call  NpcMoveTo ( 00000008 *Var0 FFFFFFDB 00000028 )
-  48C:  Call  SetNpcPos ( 00000008 00000000 FFFFFC18 00000000 )
-  4A8:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  470:  Call  NpcMoveTo ( .NpcID:KentCKoopa_08 *Var0  -37`  40` )
+  48C:  Call  SetNpcPos ( .NpcID:KentCKoopa_08  0`  -1000`  0` )
+  4A8:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   4C4:  Call  ResetCam  ( .Cam:Default *Fixed[5.0] )
   4D8:  Goto  64
   4E4:  Label  1E
@@ -2946,32 +2954,32 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
   564:  Else
   56C:  	Set   *Var0  FFFFFF9C
   57C:  EndIf
-  584:  Call  SetNpcAnimation   ( 00000008 00470003 )
-  598:  Call  NpcMoveTo ( 00000008 *Var0 *Var2 00000014 )
-  5B4:  Call  SetNpcAnimation   ( 00000008 00470001 )
+  584:  Call  SetNpcAnimation   ( .NpcID:KentCKoopa_08 00470003 )
+  598:  Call  NpcMoveTo ( .NpcID:KentCKoopa_08 *Var0 *Var2  20` )
+  5B4:  Call  SetNpcAnimation   ( .NpcID:KentCKoopa_08 00470001 )
   5C8:  Call  $Function_80241F30 ( )
   5D4:  Call  ShowCoinCounter   ( .False )
-  5E4:  Call  SpeakToPlayer     ( 00000008 00470002 00470001 00000000 000C0133 ) % Good doing business with you! Oh, the jingle of co ...
+  5E4:  Call  SpeakToPlayer     ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C0133 ) % Good doing business with you! Oh, the jingle of co ...
   604:  Wait  20`
-  610:  Call  SetNpcAnimation   ( 00000008 00470003 )
-  624:  Call  NpcMoveTo ( 00000008 FFFFFF59 FFFFFF9C 00000014 )
-  640:  Call  SetNpcFlagBits    ( 00000008 00000100 .False )
-  658:  Call  BindNpcInteract   ( 00000008 $Script_Interact_8024408C )
-  66C:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
-  688:  Call  SetNpcAnimation   ( 00000008 00470001 )
+  610:  Call  SetNpcAnimation   ( .NpcID:KentCKoopa_08 00470003 )
+  624:  Call  NpcMoveTo ( .NpcID:KentCKoopa_08  -167`  -100`  20` )
+  640:  Call  SetNpcFlagBits    ( .NpcID:KentCKoopa_08 00000100 .False )
+  658:  Call  BindNpcInteract   ( .NpcID:KentCKoopa_08 $Script_Interact_8024408C )
+  66C:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
+  688:  Call  SetNpcAnimation   ( .NpcID:KentCKoopa_08 00470001 )
   69C:  If  *AreaByte[2]  ==  00000000
   6AC:  	Set   *Var0  0000010E
   6BC:  Else
   6C4:  	Set   *Var0  0000005A
   6D4:  EndIf
-  6DC:  Call  InterpNpcYaw  ( 00000008 *Var0 00000000 )
+  6DC:  Call  InterpNpcYaw  ( .NpcID:KentCKoopa_08 *Var0  0` )
   6F4:  Wait  10`
-  700:  Call  SpeakToPlayer ( 00000008 00470002 00470001 00000000 000C0134 ) % Here, go ahead. See you again sometime!
+  700:  Call  SpeakToPlayer ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C0134 ) % Here, go ahead. See you again sometime!
   720:  Call  ResetCam      ( .Cam:Default *Fixed[5.0] )
   734:  Goto  64
   740:  Label  28
   74C:  Call  ShowCoinCounter       ( .False )
-  75C:  Call  ContinueSpeech        ( 00000008 00470002 00470001 00000000 000C012F ) % Oh, you don't have any coins? Then you can't go th ...
+  75C:  Call  ContinueSpeech        ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C012F ) % Oh, you don't have any coins? Then you can't go th ...
   77C:  Call  ResetCam      ( .Cam:Default *Fixed[5.0] )
   790:  Exec  $Script_80241FB0
   79C:  Wait  30`
@@ -3000,14 +3008,14 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
   8BC:  Call  DisablePlayerInput    ( .True )
   8CC:  Call  802D2B6C ( )
   8D8:  Call  SetPlayerPos      ( *Var3 *Var1 *Var2 )
-  8F0:  Call  SpeakToPlayer     ( 00000008 00470002 00470001 00000000 000C0130 ) % Bring some coins next time.
+  8F0:  Call  SpeakToPlayer     ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C0130 ) % Bring some coins next time.
   910:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   928:  Call  SetPlayerPos      ( *Var3 *Var1 *Var2 )
   940:  Call  DisablePlayerInput    ( .False )
   950:  Goto  29
   95C:  Label  32
   968:  Call  ShowCoinCounter   ( .False )
-  978:  Call  ContinueSpeech    ( 00000008 00470002 00470001 00000000 000C0131 ) % Then you can't go through here. Tough luck. Take o ...
+  978:  Call  ContinueSpeech    ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C0131 ) % Then you can't go through here. Tough luck. Take o ...
   998:  Call  ResetCam  ( .Cam:Default *Fixed[5.0] )
   9AC:  Exec  $Script_80241FB0
   9B8:  Wait  30`
@@ -3037,7 +3045,7 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
   AE8:  Call  802D2B6C ( )
   AF4:  Call  SetMusicTrack ( 00000000 .Song:MinibossBattle 00000000 00000008 )
   B10:  Call  SetPlayerPos  ( *Var3 *Var1 *Var2 )
-  B28:  Call  SpeakToPlayer ( 00000008 00470002 00470001 00000000 000C0132 ) % Oh, you changed your mind, and now you'll pay the  ...
+  B28:  Call  SpeakToPlayer ( .NpcID:KentCKoopa_08 00470002 00470001 00000000 000C0132 ) % Oh, you changed your mind, and now you'll pay the  ...
   B48:  If  *AreaByte[2]  ==  00000000
   B58:  	Set   *Var0  00000014
   B68:  Else
@@ -3072,32 +3080,32 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
 
 #new:NpcGroup $NpcGroup_80244D30
 {
-	00000000 $NpcSettings_8024285C ~Vec3f:NPC_80244D30 % -350 0 -30
+	.NpcID:KoopaTroopa_00 $NpcSettings_8024285C ~Vec3f:NPC_KoopaTroopa_00 % -350 0 -30
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:5:Mushroom:3:KoopaLeaf:7
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_80244D30
-	~AnimationTable:NPC_80244D30 % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_00
+	~AnimationTable:NPC_KoopaTroopa_00 % .Sprite:KoopaTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244F20
 {
-	00000002 $NpcSettings_80242940 ~Vec3f:NPC_80244F20 % 0 60 -30
+	.NpcID:Paragoomba_02 $NpcSettings_80242940 ~Vec3f:NPC_Paragoomba_02 % 0 60 -30
 	00000500 00000000 00000000 00000000 00000000
 	~Items:5:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80244F20
-	~AnimationTable:NPC_80244F20 % .Sprite:Paragoomba
+	~Movement:NPC_Paragoomba_02
+	~AnimationTable:NPC_Paragoomba_02 % .Sprite:Paragoomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245110
 {
-	00000004 $NpcSettings_802429BC ~Vec3f:NPC_80245110 % 430 0 -27
+	.NpcID:SpikedGoomba_04 $NpcSettings_802429BC ~Vec3f:NPC_SpikedGoomba_04 % 430 0 -27
 	00002C00 00000000 00000000 00000000 0000010E
 	~Items:5:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80245110
-	~AnimationTable:NPC_80245110 % .Sprite:SpikedGoomba
+	~Movement:NPC_SpikedGoomba_04
+	~AnimationTable:NPC_SpikedGoomba_04 % .Sprite:SpikedGoomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -3122,19 +3130,19 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
 
 #new:NpcGroup $NpcGroup_802453B4
 {
-	00000005 $NpcSettings_802429E8 ~Vec3f:NPC_802453B4 % -170 0 -155
+	.NpcID:JrTroopa_05 $NpcSettings_802429E8 ~Vec3f:NPC_JrTroopa_05 % -170 0 -155
 	00640D0D $Script_Init_80245300 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802453B4
-	~AnimationTable:NPC_802453B4 % .Sprite:JrTroopa
+	~Movement:NPC_JrTroopa_05
+	~AnimationTable:NPC_JrTroopa_05 % .Sprite:JrTroopa
 	00000000 00000000 00000000 001A0006 % That's Jr. Troopa. He used to boot us out of the f ...
 	%
 	% $NpcGroup_802453B4[1F0]
-	00000006 $NpcSettings_802429E8 ~Vec3f:NPC_802455A4 % -170 0 -155
+	.NpcID:JrTroopa_06 $NpcSettings_802429E8 ~Vec3f:NPC_JrTroopa_06 % -170 0 -155
 	21F40F0C $Script_Init_8024534C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802455A4
-	~AnimationTable:NPC_802455A4 % .Sprite:JrTroopa
+	~Movement:NPC_JrTroopa_06
+	~AnimationTable:NPC_JrTroopa_06 % .Sprite:JrTroopa
 	00000000 00000000 00000000 001A0006 % That's Jr. Troopa. He used to boot us out of the f ...
 }
 
@@ -3155,9 +3163,9 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
    14:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
    2C:  Call  GetEntryID        ( *Var3 )
    3C:  If  *Var3  ==  ~Entry:Entry0
-   4C:  	Call  SetNpcYaw ( .Npc:Self 0000010E )
+   4C:  	Call  SetNpcYaw ( .Npc:Self  270` )
    60:  Else
-   68:  	Call  SetNpcYaw ( .Npc:Self 0000005A )
+   68:  	Call  SetNpcYaw ( .Npc:Self  90` )
    7C:  EndIf
    84:  Return
    8C:  End
@@ -3165,19 +3173,19 @@ MISSING: 80242790 to 802427BC (00002790 to 000027BC)
 
 #new:NpcGroup $NpcGroup_8024589C
 {
-	00000007 $NpcSettings_80242A14 ~Vec3f:NPC_8024589C % -164 0 -37
+	.NpcID:KentCKoopa_07 $NpcSettings_80242A14 ~Vec3f:NPC_KentCKoopa_07 % -164 0 -37
 	00B44D04 $Script_Init_80245794 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024589C
-	~AnimationTable:NPC_8024589C % .Sprite:KentCKoopa
+	~Movement:NPC_KentCKoopa_07
+	~AnimationTable:NPC_KentCKoopa_07 % .Sprite:KentCKoopa
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_8024589C[1F0]
-	00000008 $NpcSettings_80242A14 ~Vec3f:NPC_80245A8C % -164 0 -37
+	.NpcID:KentCKoopa_08 $NpcSettings_80242A14 ~Vec3f:NPC_KentCKoopa_08 % -164 0 -37
 	00F00D05 $Script_Init_80245808 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80245A8C
-	~AnimationTable:NPC_80245A8C % .Sprite:KentCKoopa
+	~Movement:NPC_KentCKoopa_08
+	~AnimationTable:NPC_KentCKoopa_08 % .Sprite:KentCKoopa
 	00000000 00000000 00000000 001A0082 % This is Kent C. Koopa. He's... pretty large and gr ...
 }
 

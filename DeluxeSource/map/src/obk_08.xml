@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Map name="obk_08" background="obk_bg" textures="obk_tex">
 	<ModelTree>
 		<Node name="Root" id="5A">
@@ -178,19 +178,19 @@
 				<Node name="Entry0" id="FFFFFFFF"/>
 			</Node>
 			<Node name="NPCs" id="E">
-				<Node name="NPC_80243E7C" id="1"/>
-				<Node name="NPC_8024406C" id="2"/>
-				<Node name="NPC_8024425C" id="3"/>
-				<Node name="NPC_8024444C" id="4"/>
-				<Node name="NPC_8024463C" id="5"/>
-				<Node name="NPC_8024482C" id="6"/>
-				<Node name="NPC_80244A1C" id="7"/>
-				<Node name="NPC_80244C0C" id="8"/>
-				<Node name="NPC_80244DFC" id="9"/>
-				<Node name="NPC_802450E8" id="A"/>
-				<Node name="NPC_802452D8" id="B"/>
-				<Node name="NPC_80245500" id="C"/>
-				<Node name="NPC_802456F0" id="D"/>
+				<Node name="Boo_00" id="1"/>
+				<Node name="Boo_01" id="2"/>
+				<Node name="Boo_02" id="3"/>
+				<Node name="Boo_03" id="4"/>
+				<Node name="Boo_04" id="5"/>
+				<Node name="Boo_05" id="6"/>
+				<Node name="Boo_06" id="7"/>
+				<Node name="Boo_07" id="8"/>
+				<Node name="Boo_08" id="9"/>
+				<Node name="Boo_09" id="A"/>
+				<Node name="Boo_10" id="B"/>
+				<Node name="Boo_11" id="C"/>
+				<Node name="Boo_12" id="D"/>
 			</Node>
 			<Node name="Entities" id="13">
 				<Node name="Entity80243514" id="F"/>
@@ -3379,15 +3379,15 @@
 		</Marker>
 		<Marker ver="4" type="Entity" pos="0,0,-20" yaw="0.000000">
 			<MapObject name="Item8024662C" id="12"/>
-			<Entity type="FFFFFFFF" flag="*GF_OBK08_Item_Record" item="Record" itemSpawnMode="Fixed_NeverVanish"/>
+			<Entity type="FFFFFFFF" flag="*GF_OBK08_Item_Record" item="BooRecord" itemSpawnMode="Fixed_NeverVanish"/>
 		</Marker>
 		<Marker ver="4" type="Entity" pos="0,-1000,0" yaw="0.000000">
 			<MapObject name="Item802434CC" id="11"/>
-			<Entity type="FFFFFFFF" flag="0" item="Record" itemSpawnMode="Decoration"/>
+			<Entity type="FFFFFFFF" flag="0" item="BooRecord" itemSpawnMode="Decoration"/>
 		</Marker>
 		<Marker ver="4" type="Entity" pos="0,0,-20" yaw="0.000000">
 			<MapObject name="Item802434A0" id="10"/>
-			<Entity type="FFFFFFFF" flag="*GF_OBK08_Item_Record" item="Record" itemSpawnMode="Fixed_NeverVanish"/>
+			<Entity type="FFFFFFFF" flag="*GF_OBK08_Item_Record" item="BooRecord" itemSpawnMode="Fixed_NeverVanish"/>
 		</Marker>
 		<Marker ver="4" type="Entity" desc="Entity:HiddenPanel" pos="0,0,0" yaw="0.000000">
 			<MapObject name="Entity80243514" id="F"/>
@@ -3397,67 +3397,67 @@
 			<MapObject name="NPCs" id="E"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,-1000,0" yaw="0.000000">
-			<MapObject name="NPC_802456F0" id="D"/>
+			<MapObject name="Boo_12" id="D"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,-1000,0" yaw="0.000000">
-			<MapObject name="NPC_80245500" id="C"/>
+			<MapObject name="Boo_11" id="C"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="473,-122,247" yaw="0.000000">
-			<MapObject name="NPC_802452D8" id="B"/>
+			<MapObject name="Boo_10" id="B"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="523,-139,193" yaw="0.000000">
-			<MapObject name="NPC_802450E8" id="A"/>
+			<MapObject name="Boo_09" id="A"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-268,52,0" yaw="0.000000">
-			<MapObject name="NPC_80244DFC" id="9"/>
+			<MapObject name="Boo_08" id="9"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-268,52,0" yaw="0.000000">
-			<MapObject name="NPC_80244C0C" id="8"/>
+			<MapObject name="Boo_07" id="8"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-268,52,0" yaw="0.000000">
-			<MapObject name="NPC_80244A1C" id="7"/>
+			<MapObject name="Boo_06" id="7"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-268,52,0" yaw="0.000000">
-			<MapObject name="NPC_8024482C" id="6"/>
+			<MapObject name="Boo_05" id="6"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-268,52,0" yaw="0.000000">
-			<MapObject name="NPC_8024463C" id="5"/>
+			<MapObject name="Boo_04" id="5"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-268,52,0" yaw="0.000000">
-			<MapObject name="NPC_8024444C" id="4"/>
+			<MapObject name="Boo_03" id="4"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-268,52,0" yaw="0.000000">
-			<MapObject name="NPC_8024425C" id="3"/>
+			<MapObject name="Boo_02" id="3"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-268,52,0" yaw="0.000000">
-			<MapObject name="NPC_8024406C" id="2"/>
+			<MapObject name="Boo_01" id="2"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,-1000,0" yaw="0.000000">
-			<MapObject name="NPC_80243E7C" id="1"/>
+			<MapObject name="Boo_00" id="1"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>

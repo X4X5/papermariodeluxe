@@ -1,6 +1,8 @@
 % Script File: pra_04.mscr
 % Decoded from: 0 to 1520 (pra_04)
 
+#define .NpcID:Swooper_00           00
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -739,8 +741,8 @@ PADDING: 802409EC to 802409F0 (000009EC to 000009F0)
 {
     0:  Set   *GB_WorldLocation  .Location:CrystalPalace
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000018 00000018 00000028 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  24`  24`  40` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80241498 )
@@ -883,11 +885,11 @@ MISSING: 80241250 to 8024127C (00001250 to 0000127C)
 
 #new:NpcGroup $NpcGroup_802412A8
 {
-	00000000 $NpcSettings_8024127C ~Vec3f:NPC_802412A8 % 50 130 75
+	.NpcID:Swooper_00 $NpcSettings_8024127C ~Vec3f:NPC_Swooper_00 % 50 130 75
 	00200C00 00000000 00000000 00000000 0000005A
 	~Items:5:VoltShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:4
-	~Movement:NPC_802412A8
-	~AnimationTable:NPC_802412A8 % .Sprite:Swooper
+	~Movement:NPC_Swooper_00
+	~AnimationTable:NPC_Swooper_00 % .Sprite:Swooper
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

@@ -1,7 +1,28 @@
 % Script File: mgm_02.mscr
 % Decoded from: 0 to 8600 (mgm_02)
 
-% Origin: HEURISTIC
+#define .NpcID:Toad_00              00
+#define .NpcID:Fuzzy_10             0A
+#define .NpcID:Fuzzy_11             0B
+#define .NpcID:Fuzzy_12             0C
+#define .NpcID:Fuzzy_13             0D
+#define .NpcID:Fuzzy_14             0E
+#define .NpcID:Bombomb_30           1E
+#define .NpcID:Bombomb_31           1F
+#define .NpcID:Bombomb_32           20
+#define .NpcID:Bombomb_33           21
+#define .NpcID:Bombomb_34           22
+#define .NpcID:Luigi_100            64
+#define .NpcID:Luigi_101            65
+#define .NpcID:Luigi_102            66
+#define .NpcID:Luigi_103            67
+#define .NpcID:Luigi_104            68
+#define .NpcID:Luigi_105            69
+#define .NpcID:Luigi_106            6A
+#define .NpcID:Luigi_107            6B
+#define .NpcID:Luigi_108            6C
+#define .NpcID:Luigi_109            6D
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FF90
@@ -274,7 +295,6 @@
   42C:  ADDIU     SP, SP, 70
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240430
 {
     0:  ADDIU     SP, SP, FFD8
@@ -306,7 +326,7 @@
    24:  BEQ       S0, R0, .oC0
    28:  NOP
    2C:  LA        A1, $Function_80240430
-   34:  JAL       ~Func:create_dynamic_entity_world
+   34:  JAL       ~Func:create_generic_entity_world
    38:  CLEAR     A0
    3C:  LA        S1, 80108B28
    44:  COPY      A0, S1
@@ -1267,7 +1287,7 @@
   788:  SW        R0, 14 (SP)
   78C:  LW        A1, 38 (S3)
   790:  MFC1      A3, F2
-  794:  JAL       ~Func:fx_walk_normal
+  794:  JAL       ~Func:fx_walk
   798:  LI        A0, 1
   79C:  BEQ       R0, R0, .oF8C
   7A0:  ADDIU     S4, S4, 1C
@@ -1474,7 +1494,7 @@
   ADC:  LW        A1, 38 (S3)
   AE0:  LW        A2, 3C (S3)
   AE4:  MFC1      A3, F2
-  AE8:  JAL       800701F0
+  AE8:  JAL       ~Func:playFX_19
   AEC:  CLEAR     A0
   AF0:  LI        A0, 2076
   AF4:  LI        V0, 1E
@@ -1891,14 +1911,14 @@
  10F4:  NOP
  10F8:  JAL       ~Func:disable_player_input
  10FC:  NOP
- 1100:  JAL       800EF628
+ 1100:  JAL       ~Func:partner_disable_input
  1104:  NOP
  1108:  BEQ       R0, R0, .o1120
  110C:  NOP
         .o1110
  1110:  JAL       ~Func:enable_player_input
  1114:  NOP
- 1118:  JAL       800EF600
+ 1118:  JAL       ~Func:partner_enable_input
  111C:  NOP
         .o1120
  1120:  LW        T0, 88 (SP)
@@ -1927,7 +1947,7 @@
  1178:  NOP
  117C:  JAL       ~Func:enable_player_input
  1180:  NOP
- 1184:  JAL       800EF600
+ 1184:  JAL       ~Func:partner_enable_input
  1188:  NOP
         .o118C
  118C:  LA        S0, 800F7B30
@@ -2175,7 +2195,7 @@
    D8:  LW        A1, 38 (S0)
    DC:  LW        A2, 3C (S0)
    E0:  LW        A3, 40 (S0)
-   E4:  JAL       ~Func:fx_walk_normal
+   E4:  JAL       ~Func:fx_walk
    E8:  LI        A0, 1
    EC:  JAL       ~Func:sfx_play_sound
    F0:  LI        A0, 283
@@ -2326,7 +2346,7 @@
     C:  JAL       ~Func:get_enemy
    10:  SW        S0, 10 (SP)
    14:  LW        S0, 6C (V0)
-   18:  JAL       ~Func:free_dynamic_entity
+   18:  JAL       ~Func:free_generic_entity
    1C:  LW        A0, 0 (S0)
    20:  JAL       ~Func:free_hud_element
    24:  LW        A0, C (S0)
@@ -2429,14 +2449,14 @@ PADDING: 802423F8 to 80242400 (000023F8 to 00002400)
 
 #new:Script $Script_80242450
 {
-    0:  Call  UseSettingsFrom       ( .Cam:Default FFFFFED4 FFFFFFEC 000000C8 )
-   1C:  Call  SetPanTarget  ( .Cam:Default 000000FA FFFFFFEC 000000DC )
+    0:  Call  UseSettingsFrom       ( .Cam:Default  -300`  -20`  200` )
+   1C:  Call  SetPanTarget  ( .Cam:Default  250`  -20`  220` )
    38:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    4C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    64:  Call  DisablePlayerInput    ( .True )
-   74:  Call  SetPlayerPos  ( 000000FA 000000C8 000000DC )
-   8C:  Call  SetNpcPos     ( .Npc:Partner 000000FA 000000C8 000000DC )
-   A8:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
+   74:  Call  SetPlayerPos  (  250`  200`  220` )
+   8C:  Call  SetNpcPos     ( .Npc:Partner  250`  200`  220` )
+   A8:  Call  InterpPlayerYaw       (  90`  0` )
    BC:  Label  A
    C8:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    E0:  If  *Var1  !=  FFFFFFEC
@@ -2451,8 +2471,8 @@ PADDING: 802423F8 to 80242400 (000023F8 to 00002400)
 
 #new:Script_Main $Script_Main
 {
-    0:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   20:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+    0:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   20:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    3C:  Call  SetCamEnabled     ( .Cam:Default .True )
    50:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    64:  Exec  $Script_80242450
@@ -2554,7 +2574,7 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
 {
     0:  Call  DisablePlayerInput        ( .True )
    10:  Call  $Function_802423D0 ( )
-   1C:  Call  ShowMessageAtScreenPos    ( 00080046 000000A0 00000028 ) % Rules for Smash Attack When the game starts, block ...
+   1C:  Call  ShowMessageAtScreenPos    ( 00080046  160`  40` ) % Rules for Smash Attack When the game starts, block ...
    34:  Call  DisablePlayerInput        ( .False )
    44:  Return
    4C:  End
@@ -3120,39 +3140,39 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
    34:  Call  SetSelfVar    ( 00000003 00000003 )
    48:  Call  PopSong ( )
    54:  Exec  $Script_80244A44
-   60:  Call  ShowMessageAtScreenPos    ( 00080041 000000A0 00000028 ) % Game Over
+   60:  Call  ShowMessageAtScreenPos    ( 00080041  160`  40` ) % Game Over
    78:  Wait  5`
    84:  Call  SetSelfVar    ( 00000003 00000004 )
    98:  Exec  $Script_80243E9C
    A4:  Exec  $Script_80243274
    B0:  Wait  15`
    BC:  Thread
-   C4:  	Call  UseSettingsFrom   ( .Cam:Default 00000166 FFFFFFEC 000000B9 )
-   E0:  	Call  SetPanTarget  ( .Cam:Default 00000166 FFFFFFEC 000000B9 )
+   C4:  	Call  UseSettingsFrom   ( .Cam:Default  358`  -20`  185` )
+   E0:  	Call  SetPanTarget  ( .Cam:Default  358`  -20`  185` )
    FC:  	Call  SetCamDistance    ( .Cam:Default *Fixed[400.0] )
   110:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
   124:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   13C:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   150:  EndThread
-  158:  Call  SetNpcFlagBits    ( 00000000 00000100 .True )
+  158:  Call  SetNpcFlagBits    ( .NpcID:Toad_00 00000100 .True )
   170:  Call  $Function_802405D0 ( )
   17C:  Call  PlayEffect        ( ~FX:Steam:SmallPuff 00000163 0000002D FFFFFF51 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   1C0:  Thread
-  1C8:  	Call  SetNpcPos ( 00000000 00000166 FFFFFFEC 000000B9 )
-  1E4:  	Call  EnableNpcShadow   ( 00000000 .True )
+  1C8:  	Call  SetNpcPos ( .NpcID:Toad_00  358`  -20`  185` )
+  1E4:  	Call  EnableNpcShadow   ( .NpcID:Toad_00 .True )
   1F8:  	Call  PlayEffect        ( ~FX:Steam:SmallPuff 00000166 00000005 000000BD 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   23C:  	Call  SetSelfEnemyFlagBits  ( 19000000 00000000 )
   250:  EndThread
   258:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  270:  Call  GetNpcPos     ( 00000000 *Var3 *Var4 *Var5 )
+  270:  Call  GetNpcPos     ( .NpcID:Toad_00 *Var3 *Var4 *Var5 )
   28C:  Call  GetDist2D     ( *VarA *Var0 *Var2 *Var3 *Var5 )
   2AC:  Div   *VarA  00000008
   2BC:  If  *VarA  <  00000003
   2CC:  	Set   *VarA  00000003
   2DC:  EndIf
-  2E4:  Call  PlayerMoveTo      ( 0000014A 000000B9 *VarA )
+  2E4:  Call  PlayerMoveTo      (  330`  185` *VarA )
   2FC:  Call  WaitForPlayerMoveToComplete ( )
-  308:  Call  SetNpcFlagBits    ( 00000000 00000100 .False )
+  308:  Call  SetNpcFlagBits    ( .NpcID:Toad_00 00000100 .False )
   320:  Wait  5`
   32C:  Call  SetSelfVar        ( 00000003 00000005 )
   340:  Call  $Function_CalculateScore ( )
@@ -3172,7 +3192,7 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
   434:  		Call  ShowCoinCounter   ( .False )
   444:  		Call  SetSelfVar        ( 00000003 00000000 )
   458:  		Wait  5`
-  464:  		Call  ContinueSpeech    ( 00000000 00830004 00830001 00000000 00080045 ) % Please come again.
+  464:  		Call  ContinueSpeech    ( .NpcID:Toad_00 00830004 00830001 00000000 00080045 ) % Please come again.
   484:  EndSwitch
   48C:  Wait  5`
   498:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -3219,7 +3239,7 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
    7C:  Call  ShowCoinCounter   ( .True )
    8C:  Call  $Function_80242314 ( )
    98:  If  *VarA  <  0000000A
-   A8:  	Call  ContinueSpeech    ( 00000000 00830004 00830001 00000000 0008003E ) % ...Mario, you don't have ten coins. Please bring m ...
+   A8:  	Call  ContinueSpeech    ( .NpcID:Toad_00 00830004 00830001 00000000 0008003E ) % ...Mario, you don't have ten coins. Please bring m ...
    C8:  	Call  $Function_802423A4 ( )
    D4:  	Wait  12`
    E0:  	Exec  $Script_8024502C
@@ -3238,12 +3258,12 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
   194:  		Thread
   19C:  			Call  $Function_MonitorGame ( )
   1A8:  		EndThread
-  1B0:  		Call  ContinueSpeech    ( 00000000 00830004 00830001 00000000 0008003F ) % Ready to get ten Peach Panels? Get set to... SMASH ...
+  1B0:  		Call  ContinueSpeech    ( .NpcID:Toad_00 00830004 00830001 00000000 0008003F ) % Ready to get ten Peach Panels? Get set to... SMASH ...
   1D0:  		Call  $Function_802423A4 ( )
   1DC:  	Default
   1E4:  		Call  $Function_802423A4 ( )
   1F0:  		Wait  5`
-  1FC:  		Call  ContinueSpeech    ( 00000000 00830004 00830001 00000000 00080040 ) % Another time, perhaps.
+  1FC:  		Call  ContinueSpeech    ( .NpcID:Toad_00 00830004 00830001 00000000 00080040 ) % Another time, perhaps.
   21C:  		Exec  $Script_8024502C
   228:  		Call  GotoMap   ( $ASCII_802485F0 00000002 ) % mgm_00
   23C:  		Wait  100`
@@ -3253,9 +3273,9 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
   260:  	Call  DisablePartnerAI  ( 00000000 )
   270:  	Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   288:  	Sub   *Var2  00000003
-  298:  	Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2 0000000A )
+  298:  	Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2  10` )
   2B4:  EndThread
-  2BC:  Call  EndSpeech ( 00000000 00830004 00830001 00000005 )
+  2BC:  Call  EndSpeech ( .NpcID:Toad_00 00830004 00830001 00000005 )
   2D8:  Call  SetSelfVar    ( 00000003 00000001 )
   2EC:  Call  PlaySoundWithVolume   ( 00002108 00000050 )
   300:  Exec  $Script_80243888
@@ -3264,15 +3284,15 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
   324:  Thread
   32C:  	Wait  12`
   338:  	Call  PlayEffect    ( ~FX:Steam:SmallPuff 00000166 FFFFFFF6 000000B9 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  37C:  	Call  SetNpcPos     ( 00000000 00000166 000001F4 000000B9 )
-  398:  	Call  EnableNpcShadow   ( 00000000 .False )
+  37C:  	Call  SetNpcPos     ( .NpcID:Toad_00  358`  500`  185` )
+  398:  	Call  EnableNpcShadow   ( .NpcID:Toad_00 .False )
   3AC:  	Call  $Function_802405A4 ( )
   3B8:  	Call  PlayEffect    ( ~FX:Steam:SmallPuff 00000163 0000001E FFFFFF4C 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   3FC:  EndThread
-  404:  Call  EndSpeech ( 00000000 00830004 00830001 00000005 )
+  404:  Call  EndSpeech ( .NpcID:Toad_00 00830004 00830001 00000005 )
   420:  Call  PushSong  ( 00000085 00000000 )
   434:  Wait  8`
-  440:  Call  EndSpeech ( 00000000 00830004 00830001 00000005 )
+  440:  Call  EndSpeech ( .NpcID:Toad_00 00830004 00830001 00000005 )
   45C:  Call  EnablePartnerAI ( )
   468:  Call  SetSelfVar    ( 00000003 00000002 )
   47C:  Exec  $Script_80244A60
@@ -3282,7 +3302,7 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
 
 #new:Script $Script_Init_802454E0
 {
-    0:  Call  SetNpcPos     ( 00000000 00000166 FFFFFFEC 000000B9 )
+    0:  Call  SetNpcPos     ( .NpcID:Toad_00  358`  -20`  185` )
    1C:  Call  SetSelfVar    ( 00000004 00000000 )
    30:  Call  SetSelfVar    ( 00000003 00000000 )
    44:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80245048 )
@@ -3292,11 +3312,11 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
 
 #new:NpcGroup $NpcGroup_80245548
 {
-	00000000 $NpcSettings_80242660 ~Vec3f:NPC_80245548 % 353 -20 185
+	.NpcID:Toad_00 $NpcSettings_80242660 ~Vec3f:NPC_Toad_00 % 353 -20 185
 	00002D01 $Script_Init_802454E0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80245548
-	~AnimationTable:NPC_80245548 % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
@@ -3322,9 +3342,9 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
   118:  Call  EnableNpcShadow   ( .Npc:Self .False )
   12C:  Call  RandInt   ( 00000064 *Var0 )
   140:  If  *Var0  <  00000032
-  150:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+  150:  	Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
   168:  Else
-  170:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+  170:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
   188:  EndIf
   190:  Return
   198:  End
@@ -3350,9 +3370,9 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
   104:  EndSwitch
   10C:  Call  RandInt   ( 00000064 *Var0 )
   120:  If  *Var0  <  00000032
-  130:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+  130:  	Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
   148:  Else
-  150:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+  150:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
   168:  EndIf
   170:  Return
   178:  End
@@ -3367,9 +3387,9 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
    58:  Call  EnableNpcShadow   ( .Npc:Self .False )
    6C:  Call  RandInt   ( 00000064 *Var0 )
    80:  If  *Var0  <  00000032
-   90:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+   90:  	Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
    A8:  Else
-   B0:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+   B0:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
    C8:  EndIf
    D0:  Return
    D8:  End
@@ -3377,183 +3397,183 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
 
 #new:NpcGroup $NpcGroup_80245B38
 {
-	0000000A $NpcSettings_802426E4 ~Vec3f:NPC_80245B38 % 0 -1000 0
+	.NpcID:Fuzzy_10 $NpcSettings_802426E4 ~Vec3f:NPC_Fuzzy_10 % 0 -1000 0
 	3F200F01 $Script_Init_80245738 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245B38
-	~AnimationTable:NPC_80245B38 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_10
+	~AnimationTable:NPC_Fuzzy_10 % .Sprite:Fuzzy
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_80245D28
 {
-	0000000B $NpcSettings_802426E4 ~Vec3f:NPC_80245D28 % 0 -1000 0
+	.NpcID:Fuzzy_11 $NpcSettings_802426E4 ~Vec3f:NPC_Fuzzy_11 % 0 -1000 0
 	3F200F01 $Script_Init_80245738 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245D28
-	~AnimationTable:NPC_80245D28 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_11
+	~AnimationTable:NPC_Fuzzy_11 % .Sprite:Fuzzy
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_80245F18
 {
-	0000000C $NpcSettings_802426E4 ~Vec3f:NPC_80245F18 % 0 -1000 0
+	.NpcID:Fuzzy_12 $NpcSettings_802426E4 ~Vec3f:NPC_Fuzzy_12 % 0 -1000 0
 	3F200F01 $Script_Init_80245738 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245F18
-	~AnimationTable:NPC_80245F18 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_12
+	~AnimationTable:NPC_Fuzzy_12 % .Sprite:Fuzzy
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_80246108
 {
-	0000000D $NpcSettings_802426E4 ~Vec3f:NPC_80246108 % 0 -1000 0
+	.NpcID:Fuzzy_13 $NpcSettings_802426E4 ~Vec3f:NPC_Fuzzy_13 % 0 -1000 0
 	3F200F01 $Script_Init_80245738 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80246108
-	~AnimationTable:NPC_80246108 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_13
+	~AnimationTable:NPC_Fuzzy_13 % .Sprite:Fuzzy
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_802462F8
 {
-	0000000E $NpcSettings_802426E4 ~Vec3f:NPC_802462F8 % 0 -1000 0
+	.NpcID:Fuzzy_14 $NpcSettings_802426E4 ~Vec3f:NPC_Fuzzy_14 % 0 -1000 0
 	3F200F01 $Script_Init_80245738 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802462F8
-	~AnimationTable:NPC_802462F8 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_14
+	~AnimationTable:NPC_Fuzzy_14 % .Sprite:Fuzzy
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_802464E8
 {
-	0000001E $NpcSettings_80242710 ~Vec3f:NPC_802464E8 % 0 -1000 0
+	.NpcID:Bombomb_30 $NpcSettings_80242710 ~Vec3f:NPC_Bombomb_30 % 0 -1000 0
 	3F200F01 $Script_Init_802458D8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802464E8
-	~AnimationTable:NPC_802464E8 % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_30
+	~AnimationTable:NPC_Bombomb_30 % .Sprite:Bombomb
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_802466D8
 {
-	0000001F $NpcSettings_80242710 ~Vec3f:NPC_802466D8 % 0 -1000 0
+	.NpcID:Bombomb_31 $NpcSettings_80242710 ~Vec3f:NPC_Bombomb_31 % 0 -1000 0
 	3F200F01 $Script_Init_802458D8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802466D8
-	~AnimationTable:NPC_802466D8 % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_31
+	~AnimationTable:NPC_Bombomb_31 % .Sprite:Bombomb
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_802468C8
 {
-	00000020 $NpcSettings_80242710 ~Vec3f:NPC_802468C8 % 0 -1000 0
+	.NpcID:Bombomb_32 $NpcSettings_80242710 ~Vec3f:NPC_Bombomb_32 % 0 -1000 0
 	3F200F01 $Script_Init_802458D8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802468C8
-	~AnimationTable:NPC_802468C8 % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_32
+	~AnimationTable:NPC_Bombomb_32 % .Sprite:Bombomb
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_80246AB8
 {
-	00000021 $NpcSettings_80242710 ~Vec3f:NPC_80246AB8 % 0 -1000 0
+	.NpcID:Bombomb_33 $NpcSettings_80242710 ~Vec3f:NPC_Bombomb_33 % 0 -1000 0
 	3F200F01 $Script_Init_802458D8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80246AB8
-	~AnimationTable:NPC_80246AB8 % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_33
+	~AnimationTable:NPC_Bombomb_33 % .Sprite:Bombomb
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_80246CA8
 {
-	00000022 $NpcSettings_80242710 ~Vec3f:NPC_80246CA8 % 0 -1000 0
+	.NpcID:Bombomb_34 $NpcSettings_80242710 ~Vec3f:NPC_Bombomb_34 % 0 -1000 0
 	3F200F01 $Script_Init_802458D8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80246CA8
-	~AnimationTable:NPC_80246CA8 % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_34
+	~AnimationTable:NPC_Bombomb_34 % .Sprite:Bombomb
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
 #new:NpcGroup $NpcGroup_80246E98
 {
-	00000064 $NpcSettings_802426B8 ~Vec3f:NPC_80246E98 % 0 -1000 0
+	.NpcID:Luigi_100 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_100 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80246E98
-	~AnimationTable:NPC_80246E98 % .Sprite:Luigi
+	~Movement:NPC_Luigi_100
+	~AnimationTable:NPC_Luigi_100 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 	%
 	% $NpcGroup_80246E98[1F0]
-	00000065 $NpcSettings_802426B8 ~Vec3f:NPC_80247088 % 0 -1000 0
+	.NpcID:Luigi_101 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_101 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80247088
-	~AnimationTable:NPC_80247088 % .Sprite:Luigi
+	~Movement:NPC_Luigi_101
+	~AnimationTable:NPC_Luigi_101 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 	%
 	% $NpcGroup_80246E98[3E0]
-	00000066 $NpcSettings_802426B8 ~Vec3f:NPC_80247278 % 0 -1000 0
+	.NpcID:Luigi_102 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_102 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80247278
-	~AnimationTable:NPC_80247278 % .Sprite:Luigi
+	~Movement:NPC_Luigi_102
+	~AnimationTable:NPC_Luigi_102 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 	%
 	% $NpcGroup_80246E98[5D0]
-	00000067 $NpcSettings_802426B8 ~Vec3f:NPC_80247468 % 0 -1000 0
+	.NpcID:Luigi_103 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_103 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80247468
-	~AnimationTable:NPC_80247468 % .Sprite:Luigi
+	~Movement:NPC_Luigi_103
+	~AnimationTable:NPC_Luigi_103 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 	%
 	% $NpcGroup_80246E98[7C0]
-	00000068 $NpcSettings_802426B8 ~Vec3f:NPC_80247658 % 0 -1000 0
+	.NpcID:Luigi_104 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_104 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80247658
-	~AnimationTable:NPC_80247658 % .Sprite:Luigi
+	~Movement:NPC_Luigi_104
+	~AnimationTable:NPC_Luigi_104 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 	%
 	% $NpcGroup_80246E98[9B0]
-	00000069 $NpcSettings_802426B8 ~Vec3f:NPC_80247848 % 0 -1000 0
+	.NpcID:Luigi_105 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_105 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80247848
-	~AnimationTable:NPC_80247848 % .Sprite:Luigi
+	~Movement:NPC_Luigi_105
+	~AnimationTable:NPC_Luigi_105 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 	%
 	% $NpcGroup_80246E98[BA0]
-	0000006A $NpcSettings_802426B8 ~Vec3f:NPC_80247A38 % 0 -1000 0
+	.NpcID:Luigi_106 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_106 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80247A38
-	~AnimationTable:NPC_80247A38 % .Sprite:Luigi
+	~Movement:NPC_Luigi_106
+	~AnimationTable:NPC_Luigi_106 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 	%
 	% $NpcGroup_80246E98[D90]
-	0000006B $NpcSettings_802426B8 ~Vec3f:NPC_80247C28 % 0 -1000 0
+	.NpcID:Luigi_107 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_107 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80247C28
-	~AnimationTable:NPC_80247C28 % .Sprite:Luigi
+	~Movement:NPC_Luigi_107
+	~AnimationTable:NPC_Luigi_107 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 	%
 	% $NpcGroup_80246E98[F80]
-	0000006C $NpcSettings_802426B8 ~Vec3f:NPC_80247E18 % 0 -1000 0
+	.NpcID:Luigi_108 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_108 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80247E18
-	~AnimationTable:NPC_80247E18 % .Sprite:Luigi
+	~Movement:NPC_Luigi_108
+	~AnimationTable:NPC_Luigi_108 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 	%
 	% $NpcGroup_80246E98[1170]
-	0000006D $NpcSettings_802426B8 ~Vec3f:NPC_80248008 % 0 -1000 0
+	.NpcID:Luigi_109 $NpcSettings_802426B8 ~Vec3f:NPC_Luigi_109 % 0 -1000 0
 	3F200F09 $Script_Init_80245A58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80248008
-	~AnimationTable:NPC_80248008 % .Sprite:Luigi
+	~Movement:NPC_Luigi_109
+	~AnimationTable:NPC_Luigi_109 % .Sprite:Luigi
 	00000000 00000000 00000000 001A0062 % This Toad both explains and judges the Playroom ga ...
 }
 
@@ -3577,7 +3597,6 @@ MISSING: 8024268C to 802426B8 (0000268C to 000026B8)
 PADDING: 80248294 to 802482A0 (00008294 to 000082A0)
 00000000 00000000 00000000
 
-% Origin: HEURISTIC
 #new:Unknown $???_802482A0
 {
 	CCCCCCCC CCCCCCCC CCCCCCCC CCCCCCC3 C3333333 33333333 33333333 33333C33
@@ -3598,7 +3617,6 @@ PADDING: 80248294 to 802482A0 (00008294 to 000082A0)
 	C3333333 33333333 33333333 33333333 33333333 33333333 33333333 33333333
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802484A0
 {
 	7A8B63ED 934593C1 B2CB9B93 D509DC93 D419DDD1 D649D615 F691ED61 EF27E731
@@ -3609,7 +3627,6 @@ PADDING: 80248294 to 802482A0 (00008294 to 000082A0)
 	$???_802482A0 $???_802484A0 00200020 00000002 00000000 00000000 00000000 00000000
 }
 
-% Origin: HEURISTIC
 #new:ConstDouble $ConstDouble_802484E0
 {
 	59.000000d

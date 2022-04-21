@@ -1,6 +1,9 @@
 % Script File: dgb_18.mscr
 % Decoded from: 0 to 3A90 (dgb_18)
 
+#define .NpcID:WorldTubba_00        00
+#define .NpcID:Yakkey_01            01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFB8
@@ -1016,7 +1019,7 @@
     8:  JAL       ~Func:increment_status_menu_disabled
     C:  NOP
    10:  LUI       A1, 437F
-   14:  JAL       ~Func:set_transition_stencil_zoom_1
+   14:  JAL       ~Func:set_screen_overlay_params_back
    18:  CLEAR     A0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -1351,8 +1354,8 @@ PADDING: 80241358 to 80241360 (00001358 to 00001360)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_802436B4 )
@@ -1412,32 +1415,32 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
    88:  Wait  10`
    94:  Thread
    9C:  	Wait  10`
-   A8:  	Call  InterpPlayerYaw   ( 0000010E 00000000 )
+   A8:  	Call  InterpPlayerYaw   (  270`  0` )
    BC:  EndThread
    C4:  Call  FadeOutMusic  ( 00000000 000001F4 )
    D8:  Loop  00000003
    E4:  	Call  SetPlayerAnimation    ( 0008001E )
    F4:  	Call  PlaySoundAt   ( 000020F6 00000000 0000017E 00000000 000000DA )
-  114:  	Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+  114:  	Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[1.0] )
   130:  	Wait  20`
   13C:  	Call  SetPlayerAnimation    ( 00010002 )
   14C:  	Wait  10`
   158:  EndLoop
   160:  Loop  00000002
-  16C:  	Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  16C:  	Call  InterpPlayerYaw   (  270`  0` )
   180:  	Wait  10`
-  18C:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  18C:  	Call  InterpPlayerYaw   (  90`  0` )
   1A0:  	Wait  10`
   1AC:  EndLoop
-  1B4:  Call  UseSettingsFrom       ( .Cam:Default FFFFFFD8 00000000 000000B4 )
+  1B4:  Call  UseSettingsFrom       ( .Cam:Default  -40`  0`  180` )
   1D0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-  1E4:  Call  SetPanTarget  ( .Cam:Default FFFFFFD8 00000000 000000B4 )
+  1E4:  Call  SetPanTarget  ( .Cam:Default  -40`  0`  180` )
   200:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   218:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  22C:  Call  SetPlayerPos  ( 000002E4 00000000 000000B4 )
-  244:  Call  SetNpcPos     ( .Npc:Partner 000002FD 00000000 000000B4 )
-  260:  Call  InterpPlayerYaw       ( 0000010E 00000000 )
-  274:  Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000000 )
+  22C:  Call  SetPlayerPos  (  740`  0`  180` )
+  244:  Call  SetNpcPos     ( .Npc:Partner  765`  0`  180` )
+  260:  Call  InterpPlayerYaw       (  270`  0` )
+  274:  Call  InterpNpcYaw  ( .Npc:Partner  270`  0` )
   28C:  Call  SetPlayerAnimation    ( 0008000C )
   29C:  Call  PlaySoundAtCollider   ( ~Collider:deilittw .Sound:CreakyDoorOpen 00000000 )
   2B4:  Call  MakeLerp      ( 00000000 00000050 0000000A .Easing:Linear )
@@ -1453,14 +1456,14 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   35C:  Thread
   364:  	Loop  00000003
   370:  		Call  PlaySoundAtNpc    ( .Npc:Self 000020F6 00000000 )
-  388:  		Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.3] )
+  388:  		Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.3] )
   3A4:  		Wait  5`
   3B0:  	EndLoop
   3B8:  EndThread
   3C0:  Call  SetMusicTrack     ( 00000000 .Song:TubbaBlubbaTheme 00000000 00000008 )
   3DC:  Call  SetNpcAnimation   ( .Npc:Self 006A0009 )
-  3F0:  Call  SetNpcPos ( .Npc:Self FFFFFF2E 00000000 000000B4 )
-  40C:  Call  NpcMoveTo ( .Npc:Self FFFFFFC4 000000B4 0000001E )
+  3F0:  Call  SetNpcPos ( .Npc:Self  -210`  0`  180` )
+  40C:  Call  NpcMoveTo ( .Npc:Self  -60`  180`  30` )
   428:  Call  SetNpcAnimation   ( .Npc:Self 006A0006 )
   43C:  Thread
   444:  	Call  MakeLerp  ( 00000050 00000000 0000000A .Easing:Linear )
@@ -1487,14 +1490,14 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   5A4:  			BreakLoop
   5AC:  		EndIf
   5B4:  		Call  PlaySoundAtNpc    ( .Npc:Self 000020F6 00000000 )
-  5CC:  		Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.3] )
+  5CC:  		Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.3] )
   5E8:  		Wait  9`
   5F4:  		Call  GetSelfVar        ( 00000000 *Var0 )
   608:  		If  *Var0  ==  00000001
   618:  			BreakLoop
   620:  		EndIf
   628:  		Call  PlaySoundAtNpc    ( .Npc:Self 000020F6 00000000 )
-  640:  		Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[0.15] )
+  640:  		Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[0.15] )
   65C:  		Wait  12`
   668:  	EndLoop
   670:  EndThread
@@ -1510,9 +1513,9 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   704:  	EndLoop
   70C:  EndThread
   714:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[4.0] )
-  728:  Call  NpcMoveTo     ( .Npc:Self 0000002D 000000D7 00000000 )
-  744:  Call  NpcMoveTo     ( .Npc:Self 0000008C 000000F5 00000000 )
-  760:  Call  NpcMoveTo     ( .Npc:Self 00000267 000000F5 00000000 )
+  728:  Call  NpcMoveTo     ( .Npc:Self  45`  215`  0` )
+  744:  Call  NpcMoveTo     ( .Npc:Self  140`  245`  0` )
+  760:  Call  NpcMoveTo     ( .Npc:Self  615`  245`  0` )
   77C:  Call  SetSelfVar    ( 00000000 00000001 )
   790:  Call  SetNpcAnimation   ( .Npc:Self 006A0006 )
   7A4:  Wait  15`
@@ -1529,9 +1532,9 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   850:  EndThread
   858:  Wait  5`
   864:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.7] )
-  878:  Call  NpcJump0  ( .Npc:Self 00000258 00000032 00000073 00000014 )
+  878:  Call  NpcJump0  ( .Npc:Self  600`  50`  115`  20` )
   898:  Thread
-  8A0:  	Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.3] )
+  8A0:  	Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.3] )
   8BC:  EndThread
   8C4:  Call  SetNpcAnimation   ( .Npc:Self 006A0005 )
   8D8:  Call  SetNpcScale   ( .Npc:Self *Fixed[1.25] *Fixed[1.2] *Fixed[1.25] )
@@ -1547,7 +1550,7 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   9A0:  Call  GetNpcPos     ( .Npc:Self *Var3 *Var4 *Var5 )
   9BC:  Thread
   9C4:  	Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.5] )
-  9D8:  	Call  NpcJump0  ( .Npc:Self *Var3 0000001E *Var5 00000017 )
+  9D8:  	Call  NpcJump0  ( .Npc:Self *Var3  30` *Var5  23` )
   9F8:  EndThread
   A00:  Wait  2`
   A0C:  Thread
@@ -1571,7 +1574,7 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   B0C:  	EndIf
   B14:  EndLoop
   B1C:  Thread
-  B24:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.4] )
+  B24:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.4] )
   B40:  EndThread
   B48:  Wait  5`
   B54:  Call  FadeOutMusic      ( 00000000 000003E8 )
@@ -1595,7 +1598,7 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   C90:  		Call  PlaySoundAtNpc    ( .Npc:Self 00002039 00000000 )
   CA8:  		Call  RandInt   ( 0000000A *Var1 )
   CBC:  		Add   *Var1  0000000F
-  CCC:  		Call  ShowSleepBubble   ( 00000000 00000000 00000000 00000002 00000274 00000079 0000007F *Var1 *Var0 )
+  CCC:  		Call  ShowSleepBubble   ( .NpcID:WorldTubba_00 00000000 00000000 00000002 00000274 00000079 0000007F *Var1 *Var0 )
   CFC:  		Wait  48`
   D08:  		Call  PlaySoundAtNpc    ( .Npc:Self 00002038 00000000 )
   D20:  		Call  RandInt   ( 0000000A *Var1 )
@@ -1620,7 +1623,7 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
 #new:Script $Script_Idle_80242494
 {
     0:  Call  SetNpcScale       ( .Npc:Self *Fixed[1.25] *Fixed[1.25] *Fixed[1.25] )
-   1C:  Call  SetNpcPos ( .Npc:Self 00000258 00000032 00000073 )
+   1C:  Call  SetNpcPos ( .Npc:Self  600`  50`  115` )
    38:  Call  802CDE68  ( FFFFFFFF 00000000 )
    4C:  Call  SetNpcRotation    ( .Npc:Self 00000000 00000000 00000000 )
    68:  Call  SetNpcAnimation   ( .Npc:Self 006A0002 )
@@ -1639,7 +1642,7 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   128:  		Call  PlaySoundAtNpc    ( .Npc:Self 00002039 00000000 )
   140:  		Call  RandInt   ( 0000000A *Var1 )
   154:  		Add   *Var1  0000000F
-  164:  		Call  ShowSleepBubble   ( 00000000 00000000 00000000 00000002 00000274 00000079 0000007F *Var1 *Var0 )
+  164:  		Call  ShowSleepBubble   ( .NpcID:WorldTubba_00 00000000 00000000 00000002 00000274 00000079 0000007F *Var1 *Var0 )
   194:  		Wait  48`
   1A0:  		Call  PlaySoundAtNpc    ( .Npc:Self 00002038 00000000 )
   1B8:  		Call  RandInt   ( 0000000A *Var1 )
@@ -1656,7 +1659,7 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
 {
     0:  SetGroup  0000000B
     C:  Call  PlaySoundAtNpc    ( .Npc:Self 00002039 00000000 )
-   24:  Call  ShowSleepBubble   ( 00000000 00000000 00000032 00000002 00000228 0000006F 00000080 0000001E *Var0 )
+   24:  Call  ShowSleepBubble   ( .NpcID:WorldTubba_00 00000000 00000032 00000002 00000228 0000006F 00000080 0000001E *Var0 )
    54:  Wait  360`
    60:  Call  802D8248  ( *Var0 00000014 )
    74:  Call  SetNpcVar ( .Npc:Self 00000001 00000002 )
@@ -1665,7 +1668,7 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
    B0:  Call  SetNpcAnimation   ( .Npc:Self 006A0019 )
    C4:  Wait  30`
    D0:  Thread
-   D8:  	Call  NpcJump0  ( .Npc:Self 0000028A 00000000 000000FA 00000019 )
+   D8:  	Call  NpcJump0  ( .Npc:Self  650`  0`  250`  25` )
    F8:  EndThread
   100:  Call  SetNpcAnimation   ( .Npc:Self 006A001A )
   114:  Wait  10`
@@ -1673,7 +1676,7 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   134:  Wait  12`
   140:  Call  SetNpcAnimation   ( .Npc:Self 006A001C )
   154:  Wait  5`
-  160:  Call  BindNpcAI ( 00000000 $Script_NpcAI_80242834 )
+  160:  Call  BindNpcAI ( .NpcID:WorldTubba_00 $Script_NpcAI_80242834 )
   174:  Return
   17C:  End
 }
@@ -1681,12 +1684,12 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
 #new:Script $Script_NpcAI_80242834
 {
     0:  SetGroup  0000000B
-    C:  Call  SetNpcAnimation   ( 00000000 006A000D )
+    C:  Call  SetNpcAnimation   ( .NpcID:WorldTubba_00 006A000D )
    20:  Thread
    28:  	Loop
-   34:  		Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[2.0] )
+   34:  		Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[2.0] )
    50:  		Wait  5`
-   5C:  		Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[1.0] )
+   5C:  		Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[1.0] )
    78:  		Wait  8`
    84:  	EndLoop
    8C:  EndThread
@@ -1714,8 +1717,8 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
    5C:  	Case  <  .Story:Ch3_TubbaWokeUp % FFFFFFE3
    68:  		Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80242494 )
    7C:  	Case  <  .Story:Ch3_TubbaSmashedTheBridges % FFFFFFE4
-   88:  		Call  SetNpcPos     ( .Npc:Self 000000F5 00000000 000000FA )
-   A4:  		Call  SetNpcYaw     ( .Npc:Self 0000010E )
+   88:  		Call  SetNpcPos     ( .Npc:Self  245`  0`  250` )
+   A4:  		Call  SetNpcYaw     ( .Npc:Self  270` )
    B8:  		Call  BindNpcIdle   ( .Npc:Self $Script_NpcAI_80242834 )
    CC:  	Case  <  .Story:Ch3_TubbaChasedMarioInFoyer % FFFFFFE6
    D8:  		Call  RemoveNpc ( .Npc:Self )
@@ -1736,16 +1739,16 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
    54:  Call  DisablePlayerInput    ( .True )
    64:  Wait  40`
    70:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
-   88:  Call  SetNpcPos     ( .Npc:Self 0000034D 00000000 0000008C )
+   88:  Call  SetNpcPos     ( .Npc:Self  845`  0`  140` )
    A4:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.8] )
-   B8:  Call  NpcJump1      ( .Npc:Self 0000034D 00000023 00000091 0000000F )
-   D8:  Call  PlayerFaceNpc ( .Npc:Self 00000000 )
+   B8:  Call  NpcJump1      ( .Npc:Self  845`  35`  145` 0000000F )
+   D8:  Call  PlayerFaceNpc ( .Npc:Self .False )
    EC:  Wait  15`
    F8:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   110:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   12C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-  140:  Call  SetCamDistance    ( .Cam:Default 0000012C )
-  154:  Call  SetCamPosB    ( .Cam:Default 00000320 000000F5 )
+  140:  Call  SetCamDistance    ( .Cam:Default  300` )
+  154:  Call  SetCamPosB    ( .Cam:Default  800`  245` )
   16C:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   188:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1A0:  Call  SpeakToPlayer ( .Npc:Self 00C00002 00C00001 00000005 000E00F6 ) % Hi there! I'm Yakkey... ...a faithful and chatty f ...
@@ -1759,10 +1762,10 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   254:  EndIf
   25C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   274:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
-  288:  Call  UseSettingsFrom   ( .Cam:Default 000002E4 *Var1 *Var2 )
-  2A4:  Call  SetCamDistance    ( .Cam:Default 00000258 )
-  2B8:  Call  SetCamPosB    ( .Cam:Default 00000320 000000F5 )
-  2D0:  Call  SetPanTarget  ( .Cam:Default 000002E4 *Var1 *Var2 )
+  288:  Call  UseSettingsFrom   ( .Cam:Default  740` *Var1 *Var2 )
+  2A4:  Call  SetCamDistance    ( .Cam:Default  600` )
+  2B8:  Call  SetCamPosB    ( .Cam:Default  800`  245` )
+  2D0:  Call  SetPanTarget  ( .Cam:Default  740` *Var1 *Var2 )
   2EC:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   300:  Thread
   308:  	Set   *MapFlag[00]  .False
@@ -1774,23 +1777,23 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   384:  Loop
   390:  	Call  SetCamDistance    ( .Cam:Default *Fixed[550.0] )
   3A4:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-  3B8:  	Call  SetPanTarget  ( .Cam:Default 000002E4 *Var1 *Var2 )
+  3B8:  	Call  SetPanTarget  ( .Cam:Default  740` *Var1 *Var2 )
   3D4:  	Wait  1`
   3E0:  	Call  SetCamDistance    ( .Cam:Default *Fixed[600.0] )
   3F4:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-  408:  	Call  SetPanTarget  ( .Cam:Default 000002E4 *Var1 *Var2 )
+  408:  	Call  SetPanTarget  ( .Cam:Default  740` *Var1 *Var2 )
   424:  	Wait  1`
   430:  	If  *MapFlag[00]  ==  .True
   440:  		BreakLoop
   448:  	EndIf
   450:  EndLoop
   458:  Call  SetMusicTrack     ( 00000000 .Song:TubbaEscape 00000000 00000008 )
-  474:  Call  SetNpcVar ( 00000000 00000001 00000001 )
+  474:  Call  SetNpcVar ( .NpcID:WorldTubba_00 00000001 00000001 )
   48C:  Wait  15`
-  498:  Call  SetNpcAnimation   ( 00000000 006A0025 )
+  498:  Call  SetNpcAnimation   ( .NpcID:WorldTubba_00 006A0025 )
   4AC:  Thread
   4B4:  	Loop
-  4C0:  		Call  GetNpcVar ( 00000000 00000001 *Var0 )
+  4C0:  		Call  GetNpcVar ( .NpcID:WorldTubba_00 00000001 *Var0 )
   4D8:  		If  *Var0  ==  00000002
   4E8:  			BreakLoop
   4F0:  		EndIf
@@ -1803,8 +1806,8 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   590:  	EndLoop
   598:  EndThread
   5A0:  Wait  15`
-  5AC:  Call  SetNpcAnimation   ( 00000000 006A0005 )
-  5C0:  Call  SpeakToPlayer     ( 00000000 006A0013 006A0005 00000005 000E00FB ) % Grrrgh? Hmmmph? What's all the noise? Five more mi ...
+  5AC:  Call  SetNpcAnimation   ( .NpcID:WorldTubba_00 006A0005 )
+  5C0:  Call  SpeakToPlayer     ( .NpcID:WorldTubba_00 006A0013 006A0005 00000005 000E00FB ) % Grrrgh? Hmmmph? What's all the noise? Five more mi ...
   5E0:  Wait  15`
   5EC:  Call  DisablePartnerAI  ( 00000000 )
   5FC:  Call  GetCurrentPartnerID   ( *Var0 )
@@ -1822,7 +1825,7 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   6F4:  EndSwitch
   6FC:  Call  EnablePartnerAI ( )
   708:  Wait  15`
-  714:  Call  BindNpcAI     ( 00000000 $Script_NpcAI_802426B0 )
+  714:  Call  BindNpcAI     ( .NpcID:WorldTubba_00 $Script_NpcAI_802426B0 )
   728:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   740:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   75C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
@@ -1833,8 +1836,8 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
   7D0:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
   7E4:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
   7FC:  Sub   *Var1  0000000A
-  80C:  Call  NpcJump0      ( .Npc:Self *Var0 *Var1 *Var2 0000000A )
-  82C:  Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  80C:  Call  NpcJump0      ( .Npc:Self *Var0 *Var1 *Var2  10` )
+  82C:  Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   848:  Set   *GB_StoryProgress  .Story:Ch3_TubbaWokeUp
   858:  Call  DisablePlayerInput    ( .False )
   868:  Return
@@ -1851,21 +1854,21 @@ MISSING: 802415D0 to 802415FC (000015D0 to 000015FC)
 
 #new:NpcGroup $NpcGroup_802432D4
 {
-	00000000 $NpcSettings_802415FC ~Vec3f:NPC_802432D4 % 0 -1000 0
+	.NpcID:WorldTubba_00 $NpcSettings_802415FC ~Vec3f:NPC_WorldTubba_00 % 0 -1000 0
 	00A40800 $Script_Init_80242924 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802432D4
-	~AnimationTable:NPC_802432D4 % .Sprite:WorldTubba
+	~Movement:NPC_WorldTubba_00
+	~AnimationTable:NPC_WorldTubba_00 % .Sprite:WorldTubba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802434C4
 {
-	00000001 $NpcSettings_80241628 ~Vec3f:NPC_802434C4 % 0 -1000 0
+	.NpcID:Yakkey_01 $NpcSettings_80241628 ~Vec3f:NPC_Yakkey_01 % 0 -1000 0
 	00000801 $Script_Init_8024329C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802434C4
-	~AnimationTable:NPC_802434C4 % .Sprite:Yakkey
+	~Movement:NPC_Yakkey_01
+	~AnimationTable:NPC_Yakkey_01 % .Sprite:Yakkey
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1924,7 +1927,7 @@ PADDING: 802436D8 to 802436E0 (000036D8 to 000036E0)
 {
     0:  Set   *GF_DGB18_Chest_MysticalKey  .True
    10:  Call  AddKeyItem    ( .Item:MysticalKey )
-   20:  Call  SetNpcVar     ( 00000001 00000000 00000001 )
+   20:  Call  SetNpcVar     ( .NpcID:Yakkey_01 00000000 00000001 )
    38:  Return
    40:  End
 }

@@ -1,6 +1,9 @@
 % Script File: kpa_70.mscr
 % Decoded from: 0 to 3C50 (kpa_70)
 
+#define .NpcID:WorldKoopatrol_00    00
+#define .NpcID:WorldKoopatrol_01    01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -943,8 +946,8 @@ PADDING: 80240BC8 to 80240BD0 (00000BC8 to 00000BD0)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_802417AC )
    84:  Call  InitAnimatedModels ( )
@@ -1016,21 +1019,21 @@ PADDING: 802412FC to 80241300 (000012FC to 00001300)
 
 #new:NpcGroup $NpcGroup_802413CC
 {
-	00000000 $NpcSettings_802413A0 ~Vec3f:NPC_802413CC % 435 10 125
+	.NpcID:WorldKoopatrol_00 $NpcSettings_802413A0 ~Vec3f:NPC_WorldKoopatrol_00 % 435 10 125
 	00000400 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802413CC
-	~AnimationTable:NPC_802413CC % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_00
+	~AnimationTable:NPC_WorldKoopatrol_00 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802415BC
 {
-	00000001 $NpcSettings_802413A0 ~Vec3f:NPC_802415BC % 815 10 125
+	.NpcID:WorldKoopatrol_01 $NpcSettings_802413A0 ~Vec3f:NPC_WorldKoopatrol_01 % 815 10 125
 	00000400 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802415BC
-	~AnimationTable:NPC_802415BC % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_01
+	~AnimationTable:NPC_WorldKoopatrol_01 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

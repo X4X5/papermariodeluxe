@@ -1,6 +1,18 @@
 % Script File: omo_14.mscr
 % Decoded from: 0 to 30C0 (omo_14)
 
+#define .NpcID:ShyGuy_00            00
+#define .NpcID:ShyGuy_01            01
+#define .NpcID:ShyGuy_02            02
+#define .NpcID:ShyGuy_03            03
+#define .NpcID:ShyGuy_04            04
+#define .NpcID:ShyGuy_05            05
+#define .NpcID:ShyGuy_06            06
+#define .NpcID:ShyGuy_07            07
+#define .NpcID:ShyGuy_08            08
+#define .NpcID:ShyGuy_09            09
+#define .NpcID:ShyGuy_10            0A
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -30,7 +42,7 @@
    68:  MFC1      A2, F6
    6C:  TRUNC.W.S F6, F0
    70:  MFC1      A3, F6
-   74:  JAL       ~Func:set_transition_stencil_center_worldpos
+   74:  JAL       ~Func:set_screen_overlay_center_worldpos
    78:  COPY      A1, A0
    7C:  LAB       V0, 8010EBB0
    84:  BEQ       V0, R0, .oD0
@@ -79,10 +91,10 @@
   11C:  LWC1      F6, 70 (S0)
   120:  CVT.S.W   F6, F6
   124:  MFC1      A1, F6
-  128:  JAL       ~Func:set_transition_stencil_alpha
+  128:  JAL       ~Func:set_screen_overlay_alpha
   12C:  LI        A0, 1
   130:  LUI       A1, 437F
-  134:  JAL       ~Func:set_transition_stencil_zoom_1
+  134:  JAL       ~Func:set_screen_overlay_params_back
   138:  ADDIU     A0, R0, B
   13C:  LW        RA, 24 (SP)
   140:  LW        S2, 20 (SP)
@@ -443,14 +455,14 @@ PADDING: 8024064C to 80240650 (0000064C to 00000650)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80243080 )
    98:  Exec  $Script_80240620
    A4:  If  *GB_StoryProgress  <  .Story:Ch4_OpenedGeneralGuyRoom % 3
-   B4:  	Call  PlaySoundAtNpc    ( 00000000 8000004C 00000000 )
+   B4:  	Call  PlaySoundAtNpc    ( .NpcID:ShyGuy_00 8000004C 00000000 )
    CC:  EndIf
    D4:  Exec  $Script_80240650
    E0:  If  *GB_StoryProgress  >=  .Story:Ch4_OpenedGeneralGuyRoom % 3
@@ -503,19 +515,19 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   10C:  						Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   124:  						If  *Var1  ==  00000000
   134:  							Call  PlaySound ( 000003ED )
-  144:  							Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 0000000A )
+  144:  							Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  10` )
   164:  							Thread
-  16C:  								Call  ShakeCam  ( .Cam:Default 00000001 00000004 *Fixed[1.0] )
+  16C:  								Call  ShakeCam  ( .Cam:Default 00000001  4` *Fixed[1.0] )
   188:  							EndThread
   190:  							Wait  3`
   19C:  							Call  SetPlayerAnimation    ( .PlayerAnim:RunPanic )
   1AC:  							Call  SetPlayerJumpscale    ( *Fixed[1.0] )
   1BC:  							Call  PlaySound ( 000003EE )
-  1CC:  							Call  PlayerJump1   ( *Var0 *Var1 *Var2 0000000F )
+  1CC:  							Call  PlayerJump1   ( *Var0 *Var1 *Var2  15` )
   1E8:  							Call  SetPlayerAnimation    ( 00010002 )
   1F8:  						Else
   200:  							Call  GetNpcPos ( .Npc:Self *Var3 *Var4 *Var5 )
-  21C:  							Call  NpcJump0  ( .Npc:Self *Var3 *Var4 *Var5 0000000A )
+  21C:  							Call  NpcJump0  ( .Npc:Self *Var3 *Var4 *Var5  10` )
   23C:  						EndIf
   244:  						Set   *VarE  00000000
   254:  					EndIf
@@ -528,7 +540,7 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   2C4:  						If  *Var9  !=  00000006
   2D4:  							Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
   2F0:  							Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
-  304:  							Call  NpcJump0  ( .Npc:Self *Var0 00000000 *Var2 0000000F )
+  304:  							Call  NpcJump0  ( .Npc:Self *Var0  0` *Var2  15` )
   324:  						EndIf
   32C:  						If  *AreaFlag[011]  ==  .False
   33C:  							Set   *AreaFlag[011]  .True
@@ -541,12 +553,12 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   3A0:  						Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   3B8:  						If  *Var0  <  00000096
   3C8:  							Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
-  3DC:  							Call  NpcJump0  ( .Npc:Self *Var3 00000000 *Var4 0000000F )
+  3DC:  							Call  NpcJump0  ( .Npc:Self *Var3  0` *Var4  15` )
   3FC:  							Wait  30`
   408:  						Else
   410:  							Call  DisablePlayerInput    ( .True )
   420:  							Call  SetNpcJumpscale       ( .Npc:Self *Fixed[1.0] )
-  434:  							Call  NpcJump0  ( .Npc:Self *Var3 00000000 *Var4 0000000F )
+  434:  							Call  NpcJump0  ( .Npc:Self *Var3  0` *Var4  15` )
   454:  							Wait  30`
   460:  							Call  DisablePlayerInput    ( .False )
   470:  						EndIf
@@ -577,9 +589,9 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   5D4:  			Call  SpeakToPlayer ( .Npc:Self FFFFFFFF FFFFFFFF 00000005 000F005D ) % Run! Run for it!!
   5F4:  			Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   610:  			Call  SetNpcJumpscale       ( .Npc:Self *Fixed[1.0] )
-  624:  			Call  NpcJump0      ( .Npc:Self *Var0 00000000 *Var2 0000000F )
+  624:  			Call  NpcJump0      ( .Npc:Self *Var0  0` *Var2  15` )
   644:  			Call  SetNpcSpeed   ( .Npc:Self *Fixed[4.0] )
-  658:  			Call  NpcMoveTo     ( .Npc:Self 000000E6 00000000 00000000 )
+  658:  			Call  NpcMoveTo     ( .Npc:Self  230`  0`  0` )
   674:  			Call  SetNpcSpeed   ( .Npc:Self *VarA )
   688:  			Set   *Var0  00000001
   698:  			Loop  0000000A
@@ -590,7 +602,7 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   6E0:  			Call  StopSound     ( 8000004C )
   6F0:  			Call  SpeakToPlayer ( .Npc:Self FFFFFFFF FFFFFFFF 00000005 000F005E ) % Waaah! Help me!!
   710:  			Thread
-  718:  				Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[1.0] )
+  718:  				Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[1.0] )
   734:  			EndThread
   73C:  			Call  PlaySoundAtCollider   ( ~Collider:tt1 000001E4 00000000 )
   754:  			Call  PlayEffect    ( 00000042 00000000 00000025 00000025 00000001 0000000A 0000001E 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
@@ -605,10 +617,10 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   820:  			EndLoop
   828:  			Call  ModifyColliderFlags   ( 00000000 ~Collider:tt1 7FFFFE00 )
   840:  			Wait  40`
-  84C:  			Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+  84C:  			Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
   864:  			Wait  20`
   870:  			Call  SetNpcSpeed   ( .Npc:Self *Fixed[4.0] )
-  884:  			Call  NpcMoveTo     ( .Npc:Self 0000012C 00000000 00000000 )
+  884:  			Call  NpcMoveTo     ( .Npc:Self  300`  0`  0` )
   8A0:  			Set   *GB_StoryProgress  .Story:Ch4_OpenedGeneralGuyRoom
   8B0:  			Wait  30`
   8BC:  			Call  DisablePlayerInput    ( .False )
@@ -643,10 +655,10 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   10C:  						Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
   120:  						Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   138:  						If  *Var1  ==  00000000
-  148:  							Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 0000000A )
+  148:  							Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  10` )
   168:  						Else
   170:  							Call  GetNpcPos ( .Npc:Self *Var3 *Var4 *Var5 )
-  18C:  							Call  NpcJump0  ( .Npc:Self *Var3 *Var4 *Var5 0000000A )
+  18C:  							Call  NpcJump0  ( .Npc:Self *Var3 *Var4 *Var5  10` )
   1AC:  						EndIf
   1B4:  						Set   *VarE  00000000
   1C4:  					EndIf
@@ -655,7 +667,7 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   1EC:  					Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   208:  					If  *Var9  !=  00000006
   218:  						Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
-  22C:  						Call  NpcJump0  ( .Npc:Self *Var0 00000000 *Var2 0000000F )
+  22C:  						Call  NpcJump0  ( .Npc:Self *Var0  0` *Var2  15` )
   24C:  					EndIf
   254:  					Call  GetSelfNpcID  ( *Var5 )
   264:  					UseIntBuffer  $IntTable_8024091C
@@ -670,7 +682,7 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   2DC:  					Set   *VarF  *Var0
   2EC:  					Call  SetNpcSpeed   ( .Npc:Self *Fixed[7.0] )
   300:  					Call  $Function_802403FC    ( *Var3 *Var4 )
-  314:  					Call  GetNpcVar ( 00000000 00000000 *Var0 )
+  314:  					Call  GetNpcVar ( .NpcID:ShyGuy_00 00000000 *Var0 )
   32C:  					If  *Var0  ==  00000001
   33C:  						Call  SetSelfVar    ( 00000000 00000001 )
   350:  					EndIf
@@ -690,14 +702,14 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   414:  	Case  ==  00000001
   420:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   438:  		Call  RandInt       ( 00000168 *Var0 )
-  44C:  		Call  InterpNpcYaw  ( .Npc:Self *Var0 00000000 )
+  44C:  		Call  InterpNpcYaw  ( .Npc:Self *Var0  0` )
   464:  		Call  RandInt       ( 00000014 *Var0 )
   478:  		Add   *Var0  00000001
   488:  		Wait  *Var0
-  494:  		Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+  494:  		Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
   4AC:  		Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   4C8:  		Call  SetNpcJumpscale   ( .Npc:Self 00000002 )
-  4DC:  		Call  NpcJump0      ( .Npc:Self *Var0 *Var1 *Var2 0000000C )
+  4DC:  		Call  NpcJump0      ( .Npc:Self *Var0 *Var1 *Var2  12` )
   4FC:  		Call  GetSelfVar    ( 00000000 *Var0 )
   510:  		If  *Var0  ==  00000001
   520:  			Call  $Function_80240564 ( )
@@ -709,17 +721,17 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
   56C:  		Call  RandInt       ( 0000000F *Var0 )
   580:  		Add   *Var0  00000001
   590:  		Wait  *Var0
-  59C:  		Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+  59C:  		Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
   5B4:  		Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   5D0:  		Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
-  5E4:  		Call  NpcJump0      ( .Npc:Self 000000EB *Var1 *Var2 00000014 )
+  5E4:  		Call  NpcJump0      ( .Npc:Self  235` *Var1 *Var2  20` )
   604:  		Wait  30`
   610:  		Call  SetSelfVar    ( 00000000 00000003 )
   624:  	Case  ==  00000003
   630:  		Call  SetNpcFlagBits    ( .Npc:Self 00000040 .True )
   648:  		Call  SetNpcSpeed   ( .Npc:Self *Fixed[4.0] )
-  65C:  		Call  NpcMoveTo     ( .Npc:Self 000000EB 00000000 00000000 )
-  678:  		Call  NpcMoveTo     ( .Npc:Self 0000012C 00000000 00000000 )
+  65C:  		Call  NpcMoveTo     ( .Npc:Self  235`  0`  0` )
+  678:  		Call  NpcMoveTo     ( .Npc:Self  300`  0`  0` )
   694:  		Call  RemoveNpc     ( .Npc:Self )
   6A4:  EndSwitch
   6AC:  Wait  1`
@@ -732,7 +744,7 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
 {
     0:  If  *GB_StoryProgress  <  .Story:Ch4_OpenedGeneralGuyRoom % 3
    10:  	Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80240974 )
-   24:  	Call  SetNpcPos ( .Npc:Self 00000078 00000000 00000000 )
+   24:  	Call  SetNpcPos ( .Npc:Self  120`  0`  0` )
    40:  	Call  SetNpcAnimation   ( .Npc:Self 003B0002 )
    54:  Else
    5C:  	Call  RemoveNpc ( .Npc:Self )
@@ -770,93 +782,93 @@ PADDING: 802408EC to 802408F0 (000008EC to 000008F0)
 
 #new:NpcGroup $NpcGroup_80241B30
 {
-	00000000 $NpcSettings_802408F0 ~Vec3f:NPC_80241B30 % 0 -1000 0
+	.NpcID:ShyGuy_00 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_00 % 0 -1000 0
 	00000301 $Script_Init_8024195C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241B30
-	~AnimationTable:NPC_80241B30 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_00
+	~AnimationTable:NPC_ShyGuy_00 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241D20
 {
-	00000001 $NpcSettings_802408F0 ~Vec3f:NPC_80241D20 % 0 -1000 0
+	.NpcID:ShyGuy_01 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_01 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241D20
-	~AnimationTable:NPC_80241D20 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_01
+	~AnimationTable:NPC_ShyGuy_01 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241D20[1F0]
-	00000002 $NpcSettings_802408F0 ~Vec3f:NPC_80241F10 % 0 -1000 0
+	.NpcID:ShyGuy_02 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_02 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241F10
-	~AnimationTable:NPC_80241F10 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_02
+	~AnimationTable:NPC_ShyGuy_02 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241D20[3E0]
-	00000003 $NpcSettings_802408F0 ~Vec3f:NPC_80242100 % 0 -1000 0
+	.NpcID:ShyGuy_03 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_03 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242100
-	~AnimationTable:NPC_80242100 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_03
+	~AnimationTable:NPC_ShyGuy_03 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241D20[5D0]
-	00000004 $NpcSettings_802408F0 ~Vec3f:NPC_802422F0 % 0 -1000 0
+	.NpcID:ShyGuy_04 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_04 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802422F0
-	~AnimationTable:NPC_802422F0 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_04
+	~AnimationTable:NPC_ShyGuy_04 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241D20[7C0]
-	00000005 $NpcSettings_802408F0 ~Vec3f:NPC_802424E0 % 0 -1000 0
+	.NpcID:ShyGuy_05 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_05 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802424E0
-	~AnimationTable:NPC_802424E0 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_05
+	~AnimationTable:NPC_ShyGuy_05 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241D20[9B0]
-	00000006 $NpcSettings_802408F0 ~Vec3f:NPC_802426D0 % 0 -1000 0
+	.NpcID:ShyGuy_06 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_06 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802426D0
-	~AnimationTable:NPC_802426D0 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_06
+	~AnimationTable:NPC_ShyGuy_06 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241D20[BA0]
-	00000007 $NpcSettings_802408F0 ~Vec3f:NPC_802428C0 % 0 -1000 0
+	.NpcID:ShyGuy_07 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_07 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802428C0
-	~AnimationTable:NPC_802428C0 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_07
+	~AnimationTable:NPC_ShyGuy_07 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241D20[D90]
-	00000008 $NpcSettings_802408F0 ~Vec3f:NPC_80242AB0 % 0 -1000 0
+	.NpcID:ShyGuy_08 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_08 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242AB0
-	~AnimationTable:NPC_80242AB0 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_08
+	~AnimationTable:NPC_ShyGuy_08 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241D20[F80]
-	00000009 $NpcSettings_802408F0 ~Vec3f:NPC_80242CA0 % 0 -1000 0
+	.NpcID:ShyGuy_09 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_09 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242CA0
-	~AnimationTable:NPC_80242CA0 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_09
+	~AnimationTable:NPC_ShyGuy_09 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241D20[1170]
-	0000000A $NpcSettings_802408F0 ~Vec3f:NPC_80242E90 % 0 -1000 0
+	.NpcID:ShyGuy_10 $NpcSettings_802408F0 ~Vec3f:NPC_ShyGuy_10 % 0 -1000 0
 	00000201 $Script_Init_80241A58 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242E90
-	~AnimationTable:NPC_80242E90 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_10
+	~AnimationTable:NPC_ShyGuy_10 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

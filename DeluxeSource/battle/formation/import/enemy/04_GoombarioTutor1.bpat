@@ -148,14 +148,14 @@
    14:  Call  EnableIdleScript  ( .Actor:Self 00000000 )
    28:  Call  SetTargetActor    ( .Actor:Self .Actor:Player )
    3C:  Call  UseBattleCamPreset    ( 0000003F )
-   4C:  Call  SetBattleCamZoom  ( 00000190 )
-   5C:  Call  SetBattleCamOffsetZ   ( 00000028 )
+   4C:  Call  SetBattleCamZoom  (  400` )
+   5C:  Call  SetBattleCamOffsetZ   (  40` )
    6C:  Call  BattleCamTargetActor  ( .Actor:Self )
    7C:  Call  SetAnimation      ( .Actor:Self 00000001 00090003 )
    94:  Call  SetGoalToTarget   ( .Actor:Self )
-   A4:  Call  AddGoalPos        ( .Actor:Self 00000032 00000000 00000000 )
+   A4:  Call  AddGoalPos        ( .Actor:Self  50`  0`  0` )
    C0:  Call  SetActorSpeed     ( .Actor:Self *Fixed[6.0] )
-   D4:  Call  RunToGoal ( .Actor:Self 00000000 .False )
+   D4:  Call  RunToGoal ( .Actor:Self  0` .False )
    EC:  Call  SetAnimation      ( .Actor:Self 00000001 00090001 )
   104:  Call  SetActorDispOffset    ( .Actor:Self 00000000 FFFFFFFF 00000000 )
   120:  Wait  1`
@@ -164,15 +164,15 @@
   154:  Call  SetActorDispOffset    ( .Actor:Self 00000000 0000000A 00000000 )
   170:  Call  SetAnimation      ( .Actor:Self 00000001 00090006 )
   188:  Call  UseBattleCamPreset    ( 00000042 )
-  198:  Call  SetBattleCamZoom  ( 00000190 )
-  1A8:  Call  SetBattleCamOffsetZ   ( 00000028 )
+  198:  Call  SetBattleCamZoom  (  400` )
+  1A8:  Call  SetBattleCamOffsetZ   (  40` )
   1B8:  Call  8024ECF8  ( FFFFFFFF 00000001 00000000 )
   1D0:  Call  BattleCamTargetActor  ( .Actor:Self )
   1E0:  Call  SetGoalToTarget   ( .Actor:Self )
-  1F0:  Call  AddGoalPos        ( .Actor:Self FFFFFFF6 00000000 00000000 )
+  1F0:  Call  AddGoalPos        ( .Actor:Self  -10`  0`  0` )
   20C:  Call  GetBattleFlags2   ( *Var0 )
   21C:  If  *Var0  &  00000200 
-  22C:  	Call  AddGoalPos    ( .Actor:Self 00000005 0000000A 00000000 )
+  22C:  	Call  AddGoalPos    ( .Actor:Self  5`  10`  0` )
   248:  EndIf
   250:  Call  SetActorJumpGravity   ( .Actor:Self *Fixed[1.1] )
   264:  Thread
@@ -193,7 +193,7 @@
   334:  	Call  802A9120  ( 0000000C 00000003 )
   348:  EndThread
   350:  Call  PlaySound     ( 000003E2 )
-  360:  Call  JumpToGoal    ( .Actor:Self 00000016 .False .True .False )
+  360:  Call  JumpToGoal    ( .Actor:Self  22` .False .True .False )
   380:  Call  SetAnimation  ( .Actor:Self 00000001 00090006 )
   398:  Call  SetActorScale ( .Actor:Self *Fixed[1.1] *Fixed[0.8] *Fixed[1.0] )
   3B4:  Wait  1`
@@ -220,7 +220,7 @@
   4F0:  Set   *VarF  *Var0 
   500:  Switch  *VarF 
   50C:  	CaseOR  ==  .HitResult:Hit % 0
-  518:  	CaseOR  ==  00000002 % 2
+  518:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   524:  	CaseOR  ==  0000000A % A
   530:  		Call  SetActorScale ( .Actor:Self *Fixed[1.1] *Fixed[0.8] *Fixed[1.0] )
   54C:  		Wait  1`
@@ -234,15 +234,15 @@
   5FC:  		Set   *Var1  00000000 
   60C:  		Call  SetActorJumpGravity   ( .Actor:Self *Fixed[1.8] )
   620:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  63C:  		Call  JumpToGoal    ( .Actor:Self 0000000A .False .True .False )
+  63C:  		Call  JumpToGoal    ( .Actor:Self  10` .False .True .False )
   65C:  		Add   *Var0  0000001E 
   66C:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  688:  		Call  JumpToGoal    ( .Actor:Self 00000008 .False .True .False )
+  688:  		Call  JumpToGoal    ( .Actor:Self  8` .False .True .False )
   6A8:  		Add   *Var0  00000014 
   6B8:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  6D4:  		Call  JumpToGoal    ( .Actor:Self 00000006 .False .True .False )
+  6D4:  		Call  JumpToGoal    ( .Actor:Self  6` .False .True .False )
   6F4:  		Sub   *Var0  0000000A 
-  704:  		Call  JumpToGoal    ( .Actor:Self 00000004 .False .True .False )
+  704:  		Call  JumpToGoal    ( .Actor:Self  4` .False .True .False )
   724:  		Call  SetAnimation  ( .Actor:Self 00000001 00090001 )
   73C:  		Wait  8`
   748:  		Call  UseBattleCamPreset    ( 00000002 )
@@ -251,7 +251,7 @@
   77C:  		Call  SetGoalToHome ( .Actor:Self )
   78C:  		Call  SetActorSpeed ( .Actor:Self *Fixed[4.0] )
   7A0:  		Call  SetAnimation  ( .Actor:Self 00000001 00090003 )
-  7B8:  		Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  7B8:  		Call  RunToGoal     ( .Actor:Self  0` .False )
   7D0:  		Call  SetAnimation  ( .Actor:Self 00000001 00090001 )
   7E8:  	EndCaseGroup
   7F0:  EndSwitch
@@ -271,7 +271,7 @@
    68:  Call  SetActorJumpGravity   ( .Actor:Partner *Fixed[1.0] )
    7C:  Call  GetActorPos       ( .Actor:Partner *Var0 *Var1 *Var2 )
    98:  Call  SetGoalPos        ( .Actor:Partner *Var0 *Var1 *Var2 )
-   B4:  Call  JumpToGoal        ( .Actor:Partner 0000000A .False .False .False )
+   B4:  Call  JumpToGoal        ( .Actor:Partner  10` .False .False .False )
    D4:  Call  UseIdleAnimation  ( .Actor:Partner .False )
    E8:  Call  ActorSpeak        ( 000A0019 .Actor:Partner 00000001 00200009 00200005 ) % First, Mario, choose the Jump command and then dec ...
   108:  Call  UseIdleAnimation  ( .Actor:Partner .True )
@@ -280,8 +280,8 @@
   13C:  Call  WaitForState      ( .BattleState:PlayerMove )
   14C:  Call  UseBattleCamPreset    ( 00000002 )
   15C:  Wait  15`
-  168:  Call  SetGoalPos        ( .Actor:Partner FFFFFFB7 00000028 000000CA )
-  184:  Call  FlyToGoal ( .Actor:Partner 00000014 00000014 .Easing:CosInOut )
+  168:  Call  SetGoalPos        ( .Actor:Partner  -73`  40`  202` )
+  184:  Call  FlyToGoal ( .Actor:Partner  20`  20` .Easing:CosInOut )
   1A0:  Call  UseIdleAnimation  ( .Actor:Partner .False )
   1B4:  Call  ActorSpeak        ( 000A001A .Actor:Partner 00000001 00200009 00200005 ) % Once you decide on the enemy, the explanation of t ...
   1D4:  Call  UseIdleAnimation  ( .Actor:Partner .True )
@@ -296,7 +296,7 @@
   254:  EndThread
   25C:  Wait  15`
   268:  Call  SetGoalToHome ( .Actor:Partner )
-  278:  Call  FlyToGoal ( .Actor:Partner 00000014 00000014 .Easing:CosInOut )
+  278:  Call  FlyToGoal ( .Actor:Partner  20`  20` .Easing:CosInOut )
   294:  Call  SetActionCommandMode  ( 00000002 )
   2A4:  Call  WaitForState  ( .BattleState:None )
   2B4:  Call  SetBattleFlagBits2    ( 00000200 .True )
@@ -487,7 +487,7 @@
   E2C:  		Call  ActorSpeak    ( 000A0029 .Actor:Partner 00000001 00200009 00200005 ) % Well done, Mario!! You successfully used the actio ...
   E4C:  EndSwitch
   E54:  Call  UseIdleAnimation  ( .Actor:Partner .True )
-  E68:  Call  SetEnemyHP        ( .Actor:Enemy0 00000063 )
+  E68:  Call  SetEnemyHP        ( .Actor:Enemy0  99` )
   E7C:  Call  SetActorFlagBits  ( .Actor:Enemy0 00200000 .False )
   E94:  Call  SetActionCommandMode  ( 00000001 )
   EA4:  Call  WaitForState      ( .BattleState:EndTurn )

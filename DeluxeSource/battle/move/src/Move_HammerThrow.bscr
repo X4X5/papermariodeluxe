@@ -60,7 +60,7 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
 {
     0:  Call  InitTargetIterator ( )
     C:  Call  SetGoalToTarget       ( .Actor:Player )
-   1C:  Call  AddGoalPos    ( .Actor:Player 00000000 00000000 00000000 )
+   1C:  Call  AddGoalPos    ( .Actor:Player  0`  0`  0` )
    38:  Call  GetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
    54:  Sub   *Var0  00000020
    64:  Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
@@ -75,7 +75,7 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
 % Origin: HEURISTIC
 #new:Script $Script_802A118C
 {
-    0:  Call  SetGoalPos        ( .Actor:Player FFFFFFDF 00000000 00000000 )
+    0:  Call  SetGoalPos        ( .Actor:Player  -33`  0`  0` )
    1C:  Call  UseBattleCamPreset    ( 0000001A )
    2C:  Call  SetActorSpeed     ( .Actor:Player *Fixed[5.0] )
    40:  Call  SetAnimation      ( .Actor:Player 00000000 00010005 )
@@ -88,7 +88,7 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
 #new:Script $Script_802A1204
 {
     0:  Call  SetGoalToTarget   ( .Actor:Player )
-   10:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   10:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    2C:  Set   *Var1  00000000
    3C:  Loop  0000000A
    48:  	Call  CheckButtonDown   ( ~Flags:Buttons::40000 *Var0 )
@@ -121,7 +121,7 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
 #new:Script $Script_802A1388
 {
     0:  Call  SetGoalToTarget   ( .Actor:Player )
-   10:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   10:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    2C:  Set   *Var1  00000000
    3C:  Loop  0000000A
    48:  	Call  CheckButtonDown   ( ~Flags:Buttons::40000 *Var0 )
@@ -154,7 +154,7 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
 #new:Script $Script_802A150C
 {
     0:  Call  SetGoalToTarget   ( .Actor:Player )
-   10:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   10:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    2C:  Set   *Var1  00000000
    3C:  Loop  0000000A
    48:  	Call  CheckButtonDown   ( ~Flags:Buttons::40000 *Var0 )
@@ -187,7 +187,7 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
 #new:Script $Script_802A1690
 {
     0:  Call  UseBattleCamPreset    ( 0000002B )
-   10:  Call  SetBattleCamOffsetZ   ( 00000008 )
+   10:  Call  SetBattleCamOffsetZ   (  8` )
    20:  Call  InitTargetIterator ( )
    2C:  Call  PlaySoundAtActor  ( .Actor:Player 0000010B )
    40:  Call  SetAnimation      ( .Actor:Player 00000000 0003000E )
@@ -228,7 +228,7 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
 {
     0:  Call  80276EFC ( )
     C:  Call  UseBattleCamPreset    ( 00000004 )
-   1C:  Call  MoveBattleCamOver ( 00000005 )
+   1C:  Call  MoveBattleCamOver (  5` )
    2C:  Call  802693F0 ( )
    38:  Wait  20`
    44:  Call  EnablePlayerBlur  ( FFFFFFFF )
@@ -286,11 +286,11 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
    10:  Call  802A9000 ( )
    1C:  ExecWait  $Script_802A10B0
    28:  Call  SetGoalToTarget   ( .Actor:Player )
-   38:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   38:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    54:  ExecWait  $Script_802A1204
    60:  Call  PlayerTestEnemy   ( *Var0 ~Flags:DamageType:Smash 00000000 00000000 00000000 00000010 )
    84:  Call  UseBattleCamPreset    ( 0000002B )
-   94:  Call  SetBattleCamOffsetZ   ( 00000008 )
+   94:  Call  SetBattleCamOffsetZ   (  8` )
    A4:  Call  InitTargetIterator ( )
    B0:  Call  PlaySoundAtActor  ( .Actor:Player 0000010B )
    C4:  Call  SetAnimation      ( .Actor:Player 00000000 0003000E )
@@ -374,11 +374,11 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
    10:  Call  802A9000 ( )
    1C:  ExecWait  $Script_802A10B0
    28:  Call  SetGoalToTarget   ( .Actor:Player )
-   38:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   38:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    54:  ExecWait  $Script_802A1388
    60:  Call  PlayerTestEnemy   ( *Var0 ~Flags:DamageType:Smash 00000000 00000000 00000000 00000010 )
    84:  Call  UseBattleCamPreset    ( 0000002B )
-   94:  Call  SetBattleCamOffsetZ   ( 00000008 )
+   94:  Call  SetBattleCamOffsetZ   (  8` )
    A4:  Call  InitTargetIterator ( )
    B0:  Call  PlaySoundAtActor  ( .Actor:Player 0000010B )
    C4:  Call  SetAnimation      ( .Actor:Player 00000000 00030015 )
@@ -445,11 +445,11 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
    10:  Call  802A9000 ( )
    1C:  ExecWait  $Script_802A10B0
    28:  Call  SetGoalToTarget   ( .Actor:Player )
-   38:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   38:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    54:  ExecWait  $Script_802A150C
    60:  Call  PlayerTestEnemy   ( *Var0 ~Flags:DamageType:Smash 00000000 00000000 00000000 00000010 )
    84:  Call  UseBattleCamPreset    ( 0000002B )
-   94:  Call  SetBattleCamOffsetZ   ( 00000008 )
+   94:  Call  SetBattleCamOffsetZ   (  8` )
    A4:  Call  InitTargetIterator ( )
    B0:  Call  PlaySoundAtActor  ( .Actor:Player 0000010B )
    C4:  Call  SetAnimation      ( .Actor:Player 00000000 0003001C )
@@ -517,10 +517,10 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
    24:  Call  802A9000 ( )
    30:  ExecWait  $Script_802A118C
    3C:  Call  SetGoalToTarget   ( .Actor:Player )
-   4C:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   4C:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    68:  ExecWait  $Script_802A1204
    74:  Call  UseBattleCamPreset    ( 0000002B )
-   84:  Call  AddBattleCamZoom  ( 00000050 )
+   84:  Call  AddBattleCamZoom  (  80` )
    94:  Call  InitTargetIterator ( )
    A0:  Call  PlaySoundAtActor  ( .Actor:Player 0000010B )
    B4:  Call  SetAnimation      ( .Actor:Player 00000000 0003000E )
@@ -577,10 +577,10 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
    24:  Call  802A9000 ( )
    30:  ExecWait  $Script_802A118C
    3C:  Call  SetGoalToTarget   ( .Actor:Player )
-   4C:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   4C:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    68:  ExecWait  $Script_802A1388
    74:  Call  UseBattleCamPreset    ( 0000002B )
-   84:  Call  AddBattleCamZoom  ( 00000050 )
+   84:  Call  AddBattleCamZoom  (  80` )
    94:  Call  InitTargetIterator ( )
    A0:  Call  PlaySoundAtActor  ( .Actor:Player 0000010B )
    B4:  Call  SetAnimation      ( .Actor:Player 00000000 00030015 )
@@ -628,10 +628,10 @@ PADDING: 802A10A4 to 802A10B0 (007524F4 to 00752500)
    24:  Call  802A9000 ( )
    30:  ExecWait  $Script_802A118C
    3C:  Call  SetGoalToTarget   ( .Actor:Player )
-   4C:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   4C:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    68:  ExecWait  $Script_802A150C
    74:  Call  UseBattleCamPreset    ( 0000002B )
-   84:  Call  AddBattleCamZoom  ( 00000050 )
+   84:  Call  AddBattleCamZoom  (  80` )
    94:  Call  InitTargetIterator ( )
    A0:  Call  PlaySoundAtActor  ( .Actor:Player 0000010B )
    B4:  Call  SetAnimation      ( .Actor:Player 00000000 0003001C )
@@ -972,7 +972,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
     0:  Call  802694A4  ( 00000001 )
    10:  Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
    28:  Switch  *Var1
-   34:  	Case  ==  00000000 % 0
+   34:  	Case  ==  .Item:Nothing % 0
    40:  		Set   *VarD  00000032
    50:  		Set   *VarE  00000001
    60:  		Set   *VarF  00000002
@@ -995,7 +995,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
 #new:Script $Script_802A3E5C
 {
     0:  Call  SetGoalToTarget   ( .Actor:Player )
-   10:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   10:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    2C:  Set   *Var1  00000000
    3C:  Loop  0000000A
    48:  	Call  CheckButtonDown   ( ~Flags:Buttons::40000 *Var0 )
@@ -1027,7 +1027,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
 #new:Script $Script_802A3FE0
 {
     0:  Call  SetGoalToTarget   ( .Actor:Player )
-   10:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   10:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    2C:  Set   *Var1  00000000
    3C:  Loop  0000000A
    48:  	Call  CheckButtonDown   ( ~Flags:Buttons::40000 *Var0 )
@@ -1059,7 +1059,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
 #new:Script $Script_802A4164
 {
     0:  Call  SetGoalToTarget   ( .Actor:Player )
-   10:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   10:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    2C:  Set   *Var1  00000000
    3C:  Loop  0000000A
    48:  	Call  CheckButtonDown   ( ~Flags:Buttons::40000 *Var0 )
@@ -1099,10 +1099,10 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
    74:  Call  SetGoalPos        ( .Actor:Player *Var0 *Var1 *Var2 )
    90:  Call  PlayerRunToGoal   ( 00000000 )
    A0:  Call  SetGoalToTarget   ( .Actor:Player )
-   B0:  Call  AddGoalPos        ( .Actor:Player 00000000 00000000 00000000 )
+   B0:  Call  AddGoalPos        ( .Actor:Player  0`  0`  0` )
    CC:  Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
    E4:  Switch  *Var1
-   F0:  	Case  ==  00000000 % 0
+   F0:  	Case  ==  .Item:Nothing % 0
    FC:  		ExecWait  $Script_802A3E5C
   108:  	Case  ==  .Item:Jump % 1
   114:  		ExecWait  $Script_802A3FE0
@@ -1111,12 +1111,12 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   138:  EndSwitch
   140:  Call  InitTargetIterator ( )
   14C:  Call  UseBattleCamPreset    ( 0000001A )
-  15C:  Call  AddBattleCamZoom  ( 00000032 )
-  16C:  Call  MoveBattleCamOver ( 00000014 )
+  15C:  Call  AddBattleCamZoom  (  50` )
+  16C:  Call  MoveBattleCamOver (  20` )
   17C:  Call  PlaySoundAtActor  ( .Actor:Player 0000010B )
   190:  Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
   1A8:  Switch  *Var1
-  1B4:  	Case  ==  00000000 % 0
+  1B4:  	Case  ==  .Item:Nothing % 0
   1C0:  		Call  SetAnimation  ( .Actor:Player 00000000 00040017 )
   1D8:  		Wait  4`
   1E4:  		Call  SetAnimation  ( .Actor:Player 00000000 00040018 )
@@ -1152,7 +1152,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   3AC:  			If  *Var1  !=  00000001
   3BC:  				Call  GetMenuSelection  ( *Var3 *Var4 *Var5 )
   3D4:  				Switch  *Var4
-  3E0:  					Case  ==  00000000 % 0
+  3E0:  					Case  ==  .Item:Nothing % 0
   3EC:  						Call  SetAnimation  ( .Actor:Player 00000000 00040019 )
   404:  					Case  ==  .Item:Jump % 1
   410:  						Call  SetAnimation  ( .Actor:Player 00000000 0004001F )
@@ -1171,7 +1171,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   4B8:  	Wait  10`
   4C4:  	Call  GetMenuSelection  ( *Var3 *Var4 *Var5 )
   4DC:  	Switch  *Var4
-  4E8:  		Case  ==  00000000 % 0
+  4E8:  		Case  ==  .Item:Nothing % 0
   4F4:  			Call  SetAnimation  ( .Actor:Player 00000000 00040019 )
   50C:  		Case  ==  .Item:Jump % 1
   518:  			Call  SetAnimation  ( .Actor:Player 00000000 0004001F )
@@ -1192,7 +1192,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   5E0:  EndIf
   5E8:  Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
   600:  Switch  *Var1
-  60C:  	Case  ==  00000000 % 0
+  60C:  	Case  ==  .Item:Nothing % 0
   618:  		Call  SetAnimation      ( .Actor:Player 00000000 0004001B )
   630:  		Call  PlaySoundAtActor  ( .Actor:Player 00002115 )
   644:  	Case  ==  .Item:Jump % 1
@@ -1205,7 +1205,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   6BC:  Wait  3`
   6C8:  Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
   6E0:  Switch  *Var1
-  6EC:  	Case  ==  00000000 % 0
+  6EC:  	Case  ==  .Item:Nothing % 0
   6F8:  		Call  CreateVirtualEntity   ( *VarA $EntityModelScript_802A3CE4 )
   70C:  	Case  ==  .Item:Jump % 1
   718:  		Call  CreateVirtualEntity   ( *VarA $EntityModelScript_802A3D00 )
@@ -1234,7 +1234,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   89C:  		EndThread
   8A4:  		Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[1.3] )
   8B8:  		Add   *Var2  00000005
-  8C8:  		Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 0000000B )
+  8C8:  		Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  11` )
   8E8:  	Default
   8F0:  		Thread
   8F8:  			Set   *Var0  00000000
@@ -1246,7 +1246,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   954:  		EndThread
   95C:  		Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[0.7] )
   970:  		Add   *Var2  00000005
-  980:  		Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000014 )
+  980:  		Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  20` )
   9A0:  EndSwitch
   9A8:  Call  SetAnimation      ( .Actor:Player 00000000 00010002 )
   9C0:  Call  PlayerTestEnemy   ( *Var3 ~Flags:DamageType:NoContact|Smash 00000019 00000000 00000000 00000010 )
@@ -1263,13 +1263,13 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   A60:  			Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[1.4] )
   A74:  			Add   *Var0  0000003C
   A84:  			Add   *Var1  00000000
-  A94:  			Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 0000000A )
+  A94:  			Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  10` )
   AB4:  			Call  DeleteVirtualEntity   ( *VarA )
   AC4:  		Default
   ACC:  			Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[0.8] )
   AE0:  			Add   *Var0  00000028
   AF0:  			Add   *Var1  00000000
-  B00:  			Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 0000000F )
+  B00:  			Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  15` )
   B20:  			Call  DeleteVirtualEntity   ( *VarA )
   B30:  	EndSwitch
   B38:  EndThread
@@ -1278,47 +1278,47 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   B5C:  	Case  >  .False
   B68:  		Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
   B80:  		Switch  *Var1
-  B8C:  			Case  ==  00000000 % 0
+  B8C:  			Case  ==  .Item:Nothing % 0
   B98:  				Call  StartRumble   ( 00000007 )
   BA8:  				Thread
-  BB0:  					Call  ShakeCam  ( .Cam:Battle 00000000 0000000A *Fixed[1.3] )
+  BB0:  					Call  ShakeCam  ( .Cam:Battle 00000000  10` *Fixed[1.3] )
   BCC:  				EndThread
   BD4:  			Case  ==  .Item:Jump % 1
   BE0:  				Call  StartRumble   ( 00000008 )
   BF0:  				Thread
-  BF8:  					Call  ShakeCam  ( .Cam:Battle 00000000 0000000A *Fixed[1.6] )
+  BF8:  					Call  ShakeCam  ( .Cam:Battle 00000000  10` *Fixed[1.6] )
   C14:  				EndThread
   C1C:  			Case  ==  .Item:SpinJump % 2
   C28:  				Call  StartRumble   ( 00000009 )
   C38:  				Thread
-  C40:  					Call  ShakeCam  ( .Cam:Battle 00000000 0000000A *Fixed[1.9] )
+  C40:  					Call  ShakeCam  ( .Cam:Battle 00000000  10` *Fixed[1.9] )
   C5C:  				EndThread
   C64:  		EndSwitch
   C6C:  	Default
   C74:  		Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
   C8C:  		Switch  *Var1
-  C98:  			Case  ==  00000000 % 0
+  C98:  			Case  ==  .Item:Nothing % 0
   CA4:  				Call  StartRumble   ( 00000007 )
   CB4:  				Thread
-  CBC:  					Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.3] )
+  CBC:  					Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.3] )
   CD8:  				EndThread
   CE0:  			Case  ==  .Item:Jump % 1
   CEC:  				Call  StartRumble   ( 00000008 )
   CFC:  				Thread
-  D04:  					Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.6] )
+  D04:  					Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.6] )
   D20:  				EndThread
   D28:  			Case  ==  .Item:SpinJump % 2
   D34:  				Call  StartRumble   ( 00000009 )
   D44:  				Thread
-  D4C:  					Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.9] )
+  D4C:  					Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.9] )
   D68:  				EndThread
   D70:  		EndSwitch
   D78:  EndSwitch
   D80:  Call  UseBattleCamPreset    ( 0000002C )
-  D90:  Call  MoveBattleCamOver     ( 0000000A )
+  D90:  Call  MoveBattleCamOver     (  10` )
   DA0:  Call  GetMenuSelection      ( *Var0 *Var1 *Var2 )
   DB8:  Switch  *Var1
-  DC4:  	Case  ==  00000000 % 0
+  DC4:  	Case  ==  .Item:Nothing % 0
   DD0:  		Call  PlaySoundAtActor  ( .Actor:Player 0000210A )
   DE4:  	Case  ==  .Item:Jump % 1
   DF0:  		Call  PlaySoundAtActor  ( .Actor:Player 0000210B )
@@ -1330,25 +1330,25 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   E48:  	Case  >  .False
   E54:  		Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
   E6C:  		Switch  *Var1
-  E78:  			Case  ==  00000000 % 0
+  E78:  			Case  ==  .Item:Nothing % 0
   E84:  				Call  PlaySoundAtActor  ( .Actor:Player 000000E9 )
   E98:  			Case  ==  .Item:Jump % 1
   EA4:  				Call  PlaySoundAtActor  ( .Actor:Player 0000010E )
   EB8:  			Case  ==  .Item:SpinJump % 2
   EC4:  				Call  PlaySoundAtActor  ( .Actor:Player 0000010E )
   ED8:  		EndSwitch
-  EE0:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:NoContact|Throw 00000019 00000000 *VarF 00000070 )
+  EE0:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Throw|NoContact 00000019 00000000 *VarF 00000070 )
   F04:  	Default
   F0C:  		Call  GetMenuSelection  ( *Var0 *Var1 *Var2 )
   F24:  		Switch  *Var1
-  F30:  			Case  ==  00000000 % 0
+  F30:  			Case  ==  .Item:Nothing % 0
   F3C:  				Call  PlaySoundAtActor  ( .Actor:Player 000000E9 )
   F50:  			Case  ==  .Item:Jump % 1
   F5C:  				Call  PlaySoundAtActor  ( .Actor:Player 0000010E )
   F70:  			Case  ==  .Item:SpinJump % 2
   F7C:  				Call  PlaySoundAtActor  ( .Actor:Player 0000010E )
   F90:  		EndSwitch
-  F98:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:NoContact|Throw 00000019 00000000 *VarE 00000030 )
+  F98:  		Call  PlayerDamageEnemy ( *Var0 ~Flags:DamageType:Throw|NoContact 00000019 00000000 *VarE 00000030 )
   FBC:  EndSwitch
   FC4:  Switch  *Var0
   FD0:  	CaseOR  ==  00000001 % 1
@@ -1356,7 +1356,7 @@ PADDING: 802A3D34 to 802A3D38 (00755184 to 00755188)
   FE8:  		ExecWait  $Script_802A18AC
   FF4:  	EndCaseGroup
   FFC:  	CaseOR  ==  .HitResult:Hit % 0
- 1008:  	CaseOR  ==  00000002 % 2
+ 1008:  	CaseOR  ==  .HitResult:QuakeImmune % 2
  1014:  		ExecWait  $Script_802A1A64
  1020:  	EndCaseGroup
  1028:  EndSwitch

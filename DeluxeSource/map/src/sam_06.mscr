@@ -1,6 +1,22 @@
 % Script File: sam_06.mscr
 % Decoded from: 0 to BEA0 (sam_06)
 
+#define .NpcID:Merle_00             00
+#define .NpcID:ShiverToad_01        01
+#define .NpcID:ShiverToad_02        02
+#define .NpcID:ShiverToad_03        03
+#define .NpcID:Ninji_04             04
+#define .NpcID:Ninji_05             05
+#define .NpcID:Ninji_06             06
+#define .NpcID:Ninji_07             07
+#define .NpcID:Twink_08             08
+#define .NpcID:Twink_09             09
+#define .NpcID:Twink_10             0A
+#define .NpcID:Twink_11             0B
+#define .NpcID:Twink_12             0C
+#define .NpcID:Twink_13             0D
+#define .NpcID:ShiverToad_14        0E
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -2199,13 +2215,13 @@ PADDING: 80240548 to 80240550 (00000548 to 00000550)
    38:  COPY      A1, A0
    3C:  COPY      S0, V0
    40:  LI        A2, BE
-   44:  JAL       ~Func:set_transition_stencil_center
+   44:  JAL       ~Func:set_screen_overlay_center
    48:  LI        A3, 91
    4C:  MTC1      S0, F0
    50:  NOP
    54:  CVT.S.W   F0, F0
    58:  MFC1      A1, F0
-   5C:  JAL       ~Func:set_transition_stencil_zoom_0
+   5C:  JAL       ~Func:set_screen_overlay_params_front
    60:  ANDI      A0, S1, FF
    64:  LW        RA, 18 (SP)
    68:  LW        S1, 14 (SP)
@@ -2321,7 +2337,7 @@ MISSING: 802420C4 to 80242110 (000020C4 to 00002110)
    4C:  CLEAR     A0
    50:  ANDI      A1, S2, FF
    54:  ANDI      A2, S0, FF
-   58:  JAL       ~Func:set_transition_stencil_color
+   58:  JAL       ~Func:set_screen_overlay_color
    5C:  ANDI      A3, V0, FF
    60:  LW        RA, 1C (SP)
    64:  LW        S2, 18 (SP)
@@ -2340,7 +2356,7 @@ MISSING: 802420C4 to 80242110 (000020C4 to 00002110)
     C:  LAB       A2, 8010F2A2
    14:  JAL       ~Func:set_variable
    18:  LW        A1, 0 (V0)
-   1C:  JAL       800EB168
+   1C:  JAL       ~Func:switch_to_partner
    20:  CLEAR     A0
    24:  LW        RA, 10 (SP)
    28:  LI        V0, 2
@@ -2356,7 +2372,7 @@ MISSING: 802420C4 to 80242110 (000020C4 to 00002110)
     C:  JAL       ~Func:get_variable
    10:  LW        A1, 0 (V0)
    14:  SLL       V0, V0, 18
-   18:  JAL       800EB168
+   18:  JAL       ~Func:switch_to_partner
    1C:  SRA       A0, V0, 18
    20:  LW        RA, 10 (SP)
    24:  LI        V0, 2
@@ -3045,8 +3061,8 @@ PADDING: 802426C8 to 802426D0 (000026C8 to 000026D0)
 {
     0:  Set   *GB_WorldLocation  .Location:StarbornValley
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer      ( .Cam:Default .False )
    84:  Set   *GF_Map_StarbornValley  .True
@@ -3057,8 +3073,8 @@ PADDING: 802426C8 to 802426D0 (000026C8 to 000026D0)
    CC:  Exec  $Script_8024325C
    D8:  Exec  $Script_8024334C
    E4:  ExecWait  $Script_80243EDC
-   F0:  Call  SetRenderMode ( ~Model:h_yuki2 00000015 )
-  104:  Call  SetRenderMode ( ~Model:khm_y2 00000015 )
+   F0:  Call  SetRenderMode ( ~Model:h_yuki2 .RenderMode:Surf_XLU_ZB_ZUPD )
+  104:  Call  SetRenderMode ( ~Model:khm_y2 .RenderMode:Surf_XLU_ZB_ZUPD )
   118:  Call  ModifyColliderFlags   ( 00000003 ~Collider:ground 00000008 )
   130:  Call  ModifyColliderFlags   ( 00000003 ~Collider:deilisw 00000008 )
   148:  Call  ModifyColliderFlags   ( 00000003 ~Collider:kabe 00000008 )
@@ -3966,7 +3982,7 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   114:  	Return
   11C:  EndIf
   124:  Call  ContinueSpeech        ( .Npc:Self 00830004 00830001 00000000 *VarA ) % variable string ID
-  144:  Call  SetPlayerJumpscale    ( 00000001 )
+  144:  Call  SetPlayerJumpscale    (  1` )
   154:  Call  DisablePlayerPhysics  ( .True )
   164:  Call  SetNpcFlagBits        ( .Npc:Self 00000100 .True )
   17C:  Call  $Function_80241F50 ( )
@@ -4057,7 +4073,7 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -4097,7 +4113,7 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -4154,15 +4170,15 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
 {
     0:  Switch  *GB_StoryProgress
     C:  	Case  <  .Story:Ch7_UnlockedShiverMountain % 4A
-   18:  		Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200F4 ) % Mayor Penguin of Shiver City should have the other ...
+   18:  		Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200F4 ) % Mayor Penguin of Shiver City should have the other ...
    38:  	Case  <  .Story:Ch7_StarSpritDeparted % 59
-   44:  		Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200F5 ) % My dream told me that a Star Spirit waits in Cryst ...
+   44:  		Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200F5 ) % My dream told me that a Star Spirit waits in Cryst ...
    64:  	Case  >=  .Story:Ch7_StarSpritDeparted % 59
    70:  		If  *GF_SAM06_Merle_HeardLongerMessage  ==  .False
-   80:  			Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200F6 ) % Mario! You have saved the last imprisoned Star Spi ...
+   80:  			Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200F6 ) % Mario! You have saved the last imprisoned Star Spi ...
    A0:  			Set   *GF_SAM06_Merle_HeardLongerMessage  .True
    B0:  		Else
-   B8:  			Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200F7 ) % Mario... I have a wish... My wish is for you to re ...
+   B8:  			Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200F7 ) % Mario... I have a wish... My wish is for you to re ...
    D8:  		EndIf
    E0:  EndSwitch
    E8:  Return
@@ -4172,10 +4188,10 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
 #new:Script $Script_80247698
 {
     0:  Label  0
-    C:  Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+    C:  Call  GetNpcPos ( .NpcID:Merle_00 *Var0 *Var1 *Var2 )
    28:  Add   *Var0  00000005
    38:  Add   *Var1  0000000F
-   48:  Call  GetNpcYaw ( 00000000 *Var3 )
+   48:  Call  GetNpcYaw ( .NpcID:Merle_00 *Var3 )
    5C:  If  *Var3  >=  0000005A
    6C:  	If  *Var3  <=  0000010E
    7C:  		Add   *Var2  0000000A
@@ -4196,10 +4212,10 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
 {
     0:  Set   *Var4  0000000A
    10:  Loop  0000000A
-   1C:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+   1C:  	Call  GetNpcPos ( .NpcID:Merle_00 *Var0 *Var1 *Var2 )
    38:  	Add   *Var0  00000005
    48:  	Add   *Var1  0000000F
-   58:  	Call  GetNpcYaw ( 00000000 *Var3 )
+   58:  	Call  GetNpcYaw ( .NpcID:Merle_00 *Var3 )
    6C:  	If  *Var3  >=  0000005A
    7C:  		If  *Var3  <=  0000010E
    8C:  			Add   *Var2  *Var4
@@ -4228,10 +4244,10 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
    50:  EndIf
    58:  Call  DisablePlayerInput    ( .True )
    68:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-   78:  Call  PlayerMoveTo  ( FFFFFF10 0000012C 00000000 )
-   90:  Call  PlayerFaceNpc ( 00000000 00000000 )
-   A4:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200E9 ) % Ah. You're Mario, yes? Thank you for coming.
-   C4:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+   78:  Call  PlayerMoveTo  (  -240`  300`  0` )
+   90:  Call  PlayerFaceNpc ( .NpcID:Merle_00 .False )
+   A4:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200E9 ) % Ah. You're Mario, yes? Thank you for coming.
+   C4:  Call  GetNpcPos     ( .NpcID:Merle_00 *Var0 *Var1 *Var2 )
    E0:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    FC:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   118:  Call  SetCamDistance    ( .Cam:Default *Fixed[250.0] )
@@ -4239,19 +4255,19 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   144:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   158:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   170:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  184:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200EA ) % How do you do? I'm called Merle. I care for the St ...
-  1A4:  Call  UseSettingsFrom   ( .Cam:Default FFFFFF06 00000000 0000012C )
-  1C0:  Call  SetPanTarget  ( .Cam:Default FFFFFF06 00000000 0000012C )
+  184:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200EA ) % How do you do? I'm called Merle. I care for the St ...
+  1A4:  Call  UseSettingsFrom   ( .Cam:Default  -250`  0`  300` )
+  1C0:  Call  SetPanTarget  ( .Cam:Default  -250`  0`  300` )
   1DC:  Call  SetCamDistance    ( .Cam:Default *Fixed[500.0] )
   1F0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   208:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  21C:  Call  SetNpcAnimation   ( 00000000 00D20002 )
-  230:  Call  SetNpcSpeed   ( 00000000 *Fixed[3.0] )
-  244:  Call  NpcMoveTo     ( 00000000 FFFFFF92 0000012C 00000000 )
-  260:  Call  SetNpcAnimation   ( 00000000 00D20001 )
-  274:  Call  GetAngleToPlayer  ( 00000000 *Var0 )
-  288:  Call  InterpNpcYaw  ( 00000000 *Var0 00000000 )
-  2A0:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200EB ) % This way. Please follow me.
+  21C:  Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  230:  Call  SetNpcSpeed   ( .NpcID:Merle_00 *Fixed[3.0] )
+  244:  Call  NpcMoveTo     ( .NpcID:Merle_00  -110`  300`  0` )
+  260:  Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
+  274:  Call  GetAngleToPlayer  ( .NpcID:Merle_00 *Var0 )
+  288:  Call  InterpNpcYaw  ( .NpcID:Merle_00 *Var0  0` )
+  2A0:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200EB ) % This way. Please follow me.
   2C0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   2D8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   2EC:  Set   *AreaFlag[005]  .True
@@ -4259,22 +4275,22 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   30C:  Call  DisablePlayerInput    ( .False )
   31C:  Set   *MapFlag[00]  .False
   32C:  Thread
-  334:  	Call  BindNpcInteract   ( 00000000 00000000 )
-  348:  	Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-  360:  	Call  SetNpcAnimation   ( 00000000 00D20002 )
-  374:  	Call  SetNpcSpeed       ( 00000000 *Fixed[2.0] )
-  388:  	Call  NpcMoveTo ( 00000000 FFFFFFB2 0000011F 00000000 )
-  3A4:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[0.5] )
-  3B8:  	Call  NpcJump0  ( 00000000 FFFFFFE7 00000014 000000FD 00000011 )
-  3D8:  	Call  SetNpcAnimation   ( 00000000 00D20001 )
+  334:  	Call  BindNpcInteract   ( .NpcID:Merle_00 00000000 )
+  348:  	Call  SetNpcFlagBits    ( .NpcID:Merle_00 00000100 .True )
+  360:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  374:  	Call  SetNpcSpeed       ( .NpcID:Merle_00 *Fixed[2.0] )
+  388:  	Call  NpcMoveTo ( .NpcID:Merle_00  -78`  287`  0` )
+  3A4:  	Call  SetNpcJumpscale   ( .NpcID:Merle_00 *Fixed[0.5] )
+  3B8:  	Call  NpcJump0  ( .NpcID:Merle_00  -25`  20`  253`  17` )
+  3D8:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   3EC:  	Wait  10`
-  3F8:  	Call  SetNpcAnimation   ( 00000000 00D20002 )
-  40C:  	Call  NpcJump0  ( 00000000 FFFFFFD8 0000002D 000000BC 00000011 )
-  42C:  	Call  SetNpcAnimation   ( 00000000 00D20001 )
+  3F8:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  40C:  	Call  NpcJump0  ( .NpcID:Merle_00  -40`  45`  188`  17` )
+  42C:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   440:  	Wait  10`
-  44C:  	Call  SetNpcAnimation   ( 00000000 00D20002 )
-  460:  	Call  NpcMoveTo ( 00000000 FFFFFFA6 000000BE 00000000 )
-  47C:  	Call  SetNpcAnimation   ( 00000000 00D20001 )
+  44C:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  460:  	Call  NpcMoveTo ( .NpcID:Merle_00  -90`  190`  0` )
+  47C:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   490:  	Set   *MapFlag[00]  .True
   4A0:  EndThread
   4A8:  Return
@@ -4314,25 +4330,25 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   16C:  		BreakLoop
   174:  	EndIf
   17C:  EndLoop
-  184:  Call  PlayerFaceNpc ( 00000000 00000000 )
-  198:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200EC ) % I must apologize for the rude reception of the Sta ...
+  184:  Call  PlayerFaceNpc ( .NpcID:Merle_00 .False )
+  198:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200EC ) % I must apologize for the rude reception of the Sta ...
   1B8:  Set   *GB_StoryProgress  .Story:Ch7_MerleApologized
   1C8:  Call  DisablePlayerInput    ( .False )
   1D8:  Set   *MapFlag[00]  .False
   1E8:  Thread
-  1F0:  	Call  SetNpcAnimation   ( 00000000 00D20002 )
-  204:  	Call  NpcMoveTo ( 00000000 FFFFFF92 00000091 00000000 )
-  220:  	Call  NpcJump0  ( 00000000 FFFFFF7D 0000003C 0000005B 00000014 )
-  240:  	Call  SetNpcAnimation   ( 00000000 00D20001 )
+  1F0:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  204:  	Call  NpcMoveTo ( .NpcID:Merle_00  -110`  145`  0` )
+  220:  	Call  NpcJump0  ( .NpcID:Merle_00  -131`  60`  91`  20` )
+  240:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   254:  	Wait  10`
-  260:  	Call  SetNpcAnimation   ( 00000000 00D20002 )
-  274:  	Call  NpcJump0  ( 00000000 FFFFFF8B 0000005A 00000007 00000014 )
-  294:  	Call  SetNpcAnimation   ( 00000000 00D20001 )
+  260:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  274:  	Call  NpcJump0  ( .NpcID:Merle_00  -117`  90`  7`  20` )
+  294:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   2A8:  	Wait  10`
-  2B4:  	Call  SetNpcAnimation   ( 00000000 00D20002 )
-  2C8:  	Call  NpcMoveTo ( 00000000 00000000 FFFFFF71 00000000 )
-  2E4:  	Call  InterpNpcYaw      ( 00000000 0000010E 00000000 )
-  2FC:  	Call  SetNpcAnimation   ( 00000000 00D20001 )
+  2B4:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  2C8:  	Call  NpcMoveTo ( .NpcID:Merle_00  0`  -143`  0` )
+  2E4:  	Call  InterpNpcYaw      ( .NpcID:Merle_00  270`  0` )
+  2FC:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   310:  	Set   *MapFlag[00]  .True
   320:  EndThread
   328:  Return
@@ -4356,14 +4372,14 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
    A4:  	EndIf
    AC:  EndLoop
    B4:  Set   *MapFlag[00]  .False
-   C4:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200ED ) % Come in, please.
+   C4:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200ED ) % Come in, please.
    E4:  Thread
-   EC:  	Call  SetNpcAnimation   ( 00000000 00D20002 )
-  100:  	Call  SetNpcSpeed       ( 00000000 *Fixed[3.0] )
-  114:  	Call  NpcMoveTo ( 00000000 0000001B FFFFFF88 00000000 )
+   EC:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  100:  	Call  SetNpcSpeed       ( .NpcID:Merle_00 *Fixed[3.0] )
+  114:  	Call  NpcMoveTo ( .NpcID:Merle_00  27`  -120`  0` )
   130:  EndThread
   138:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  148:  Call  PlayerMoveTo      ( 0000000F FFFFFFA6 00000000 )
+  148:  Call  PlayerMoveTo      (  15`  -90`  0` )
   160:  Call  SetGroupEnabled   ( ~Model:k_naiso 00000001 )
   174:  Call  PlaySoundAtCollider   ( ~Collider:k_d1 .Sound:BasicDoorOpen 00000000 )
   18C:  Call  MakeLerp  ( 00000000 0000005A 0000000A .Easing:QuadraticOut )
@@ -4377,20 +4393,20 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   210:  Set   *AreaFlag[001]  .False
   220:  Call  SetGroupEnabled   ( ~Model:k_naiso 00000001 )
   234:  Thread
-  23C:  	Call  SetNpcAnimation   ( 00000000 00D20002 )
-  250:  	Call  SetNpcSpeed       ( 00000000 *Fixed[4.0] )
-  264:  	Call  NpcMoveTo ( 00000000 00000000 FFFFFEB6 00000000 )
-  280:  	Call  SetNpcAnimation   ( 00000000 00D20001 )
+  23C:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  250:  	Call  SetNpcSpeed       ( .NpcID:Merle_00 *Fixed[4.0] )
+  264:  	Call  NpcMoveTo ( .NpcID:Merle_00  0`  -330`  0` )
+  280:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   294:  EndThread
   29C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.8] )
   2B0:  Call  ModifyColliderFlags   ( 00000000 ~Collider:k_d1 7FFFFE00 )
   2C8:  Call  ModifyColliderFlags   ( 00000000 ~Collider:k_d2 7FFFFE00 )
-  2E0:  Call  PlayerMoveTo  ( 00000000 FFFFFF38 00000000 )
+  2E0:  Call  PlayerMoveTo  (  0`  -200`  0` )
   2F8:  Thread
   300:  	Set   *Var0  00000000
   310:  	Set   *VarF  0000005E
-  320:  	Call  SetNpcFlagBits    ( 00000000 00800000 .False )
-  338:  	Call  SetNpcFlagBits    ( 0000000A 00800000 .True )
+  320:  	Call  SetNpcFlagBits    ( .NpcID:Merle_00 00800000 .False )
+  338:  	Call  SetNpcFlagBits    ( .NpcID:Twink_10 00800000 .True )
   350:  	Call  $Function_80242538 ( )
   35C:  EndThread
   364:  Thread
@@ -4409,15 +4425,15 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   450:  	Call  SetGroupEnabled       ( ~Model:km_sita 00000000 )
   464:  	Call  PlaySoundAtCollider   ( ~Collider:k_d1 .Sound:BasicDoorClose 00000000 )
   47C:  EndThread
-  484:  Call  PlayerMoveTo  ( 00000000 FFFFFF10 00000000 )
+  484:  Call  PlayerMoveTo  (  0`  -240`  0` )
   49C:  Call  ModifyColliderFlags   ( 00000001 ~Collider:k_d1 7FFFFE00 )
   4B4:  Call  ModifyColliderFlags   ( 00000001 ~Collider:k_d2 7FFFFE00 )
   4CC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   4E0:  Wait  30`
-  4EC:  Call  GetAngleToPlayer  ( 00000000 *Var0 )
-  500:  Call  InterpNpcYaw  ( 00000000 *Var0 00000000 )
-  518:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200EE ) % Now. Mario. You must heed well what I'm about to t ...
-  538:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  4EC:  Call  GetAngleToPlayer  ( .NpcID:Merle_00 *Var0 )
+  500:  Call  InterpNpcYaw  ( .NpcID:Merle_00 *Var0  0` )
+  518:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200EE ) % Now. Mario. You must heed well what I'm about to t ...
+  538:  Call  GetNpcPos     ( .NpcID:Merle_00 *Var0 *Var1 *Var2 )
   554:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   570:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   58C:  Call  SetCamDistance    ( .Cam:Default *Fixed[250.0] )
@@ -4428,11 +4444,11 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   5FC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   614:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   628:  Wait  5`
-  634:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200EF ) % This frozen area is called Starborn Valley. It is  ...
+  634:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200EF ) % This frozen area is called Starborn Valley. It is  ...
   654:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   66C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   680:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  694:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200F0 ) % I sent a Ninji to my father, Merlon, hoping that I ...
+  694:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200F0 ) % I sent a Ninji to my father, Merlon, hoping that I ...
   6B4:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   6CC:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   6E8:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -4442,36 +4458,36 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   748:  Call  SetCamPitch   ( .Cam:Default *Fixed[21.0] *Fixed[-14.0] )
   760:  Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
   774:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
-  78C:  Call  SetNpcSpeed   ( 00000000 *Fixed[2.0] )
-  7A0:  Call  SetNpcAnimation   ( 00000000 00D20002 )
+  78C:  Call  SetNpcSpeed   ( .NpcID:Merle_00 *Fixed[2.0] )
+  7A0:  Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
   7B4:  Exec  $Script_80247698 *VarA
-  7C4:  Call  NpcMoveTo     ( 00000000 00000000 FFFFFEED 00000000 )
+  7C4:  Call  NpcMoveTo     ( .NpcID:Merle_00  0`  -275`  0` )
   7E0:  Kill  *VarA
   7EC:  Exec  $Script_802477A8 *VarA
   7FC:  Wait  20`
   808:  Kill  *VarA
   814:  Call  SetItemPos    ( *MapVar[0] 00000000 FFFFFC18 00000000 )
-  830:  Call  SetNpcAnimation   ( 00000000 00D20001 )
+  830:  Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   844:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   858:  Set   *Var0  00000032
   868:  Set   *Var1  00000001
   878:  ExecWait  $Script_802443D4
-  884:  Call  AddKeyItem    ( .Item:Scarf )
-  894:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200F1 ) % This Scarf has been passed down through many gener ...
+  884:  Call  AddKeyItem    ( .Item:SnowmanScarf )
+  894:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200F1 ) % This Scarf has been passed down through many gener ...
   8B4:  Wait  10`
   8C0:  Call  SetCamPosA    ( .Cam:Default *Fixed[200.7] *Fixed[-321.0] )
   8D8:  Call  SetCamPosB    ( .Cam:Default *Fixed[0.7] *Fixed[-321.0] )
   8F0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.7] )
   904:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
-  91C:  Call  SetNpcSpeed   ( 00000000 *Fixed[2.0] )
-  930:  Call  SetNpcAnimation   ( 00000000 00D20002 )
-  944:  Call  NpcMoveTo     ( 00000000 00000000 FFFFFEB6 00000000 )
-  960:  Call  SetNpcAnimation   ( 00000000 00D20001 )
-  974:  Call  GetAngleToPlayer  ( 00000000 *Var0 )
-  988:  Call  InterpNpcYaw  ( 00000000 *Var0 00000000 )
+  91C:  Call  SetNpcSpeed   ( .NpcID:Merle_00 *Fixed[2.0] )
+  930:  Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  944:  Call  NpcMoveTo     ( .NpcID:Merle_00  0`  -330`  0` )
+  960:  Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
+  974:  Call  GetAngleToPlayer  ( .NpcID:Merle_00 *Var0 )
+  988:  Call  InterpNpcYaw  ( .NpcID:Merle_00 *Var0  0` )
   9A0:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   9B4:  Wait  15`
-  9C0:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200F2 ) % If things remain as they are, Star Kids will never ...
+  9C0:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200F2 ) % If things remain as they are, Star Kids will never ...
   9E0:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   9F8:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   A14:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -4479,8 +4495,8 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   A44:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   A5C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   A70:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
-  A88:  Call  BindNpcInteract   ( 00000000 $Script_Interact_802475A0 )
-  A9C:  Call  SetNpcFlagBits    ( 00000000 00000100 .False )
+  A88:  Call  BindNpcInteract   ( .NpcID:Merle_00 $Script_Interact_802475A0 )
+  A9C:  Call  SetNpcFlagBits    ( .NpcID:Merle_00 00000100 .False )
   AB4:  Call  DisablePlayerInput    ( .False )
   AC4:  Return
   ACC:  End
@@ -4496,16 +4512,16 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
    40:  	Return
    48:  EndIf
    50:  If  *GB_StoryProgress  ==  .Story:Ch7_ArrivedAtStarbornValley % 46
-   60:  	Call  SetNpcPos     ( 00000000 FFFFFFA6 0000002D 000000BE )
-   7C:  	Call  InterpNpcYaw  ( 00000000 0000010E 00000000 )
+   60:  	Call  SetNpcPos     ( .NpcID:Merle_00  -90`  45`  190` )
+   7C:  	Call  InterpNpcYaw  ( .NpcID:Merle_00  270`  0` )
    94:  	Set   *MapFlag[00]  .True
    A4:  	ExecWait  $Script_80247D8C
    B0:  	ExecWait  $Script_802480C4
    BC:  	Return
    C4:  EndIf
    CC:  If  *GB_StoryProgress  ==  .Story:Ch7_MerleApologized % 47
-   DC:  	Call  SetNpcPos     ( 00000000 00000000 0000005A FFFFFF71 )
-   F8:  	Call  InterpNpcYaw  ( 00000000 0000010E 00000000 )
+   DC:  	Call  SetNpcPos     ( .NpcID:Merle_00  0`  90`  -143` )
+   F8:  	Call  InterpNpcYaw  ( .NpcID:Merle_00  270`  0` )
   110:  	Set   *MapFlag[00]  .True
   120:  	ExecWait  $Script_802480C4
   12C:  	Return
@@ -4519,14 +4535,14 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
     0:  Thread
     8:  	Call  DisablePartnerAI  ( 00000000 )
    18:  	Call  SetNpcSpeed       ( .Npc:Partner *Fixed[3.0] )
-   2C:  	Call  NpcMoveTo ( .Npc:Partner FFFFFFE4 FFFFFFB0 00000000 )
+   2C:  	Call  NpcMoveTo ( .Npc:Partner  -28`  -80`  0` )
    48:  	Call  EnablePartnerAI ( )
    54:  EndThread
    5C:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-   6C:  Call  PlayerMoveTo      ( 00000000 FFFFFF9C 00000000 )
+   6C:  Call  PlayerMoveTo      (  0`  -100`  0` )
    84:  Call  SetGroupEnabled   ( ~Model:k_naiso 00000001 )
    98:  Call  SetGroupEnabled   ( ~Model:km_sita 00000001 )
-   AC:  Call  SetNpcPos ( 00000000 00000000 0000005A FFFFFF4C )
+   AC:  Call  SetNpcPos ( .NpcID:Merle_00  0`  90`  -180` )
    C8:  Call  PlaySoundAtCollider   ( ~Collider:k_d1 .Sound:BasicDoorOpen 00000000 )
    E0:  Call  MakeLerp  ( 00000000 0000005A 0000000A .Easing:QuadraticIn )
    FC:  Label  0
@@ -4536,10 +4552,10 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   140:  If  *Var1  ==  00000001
   150:  	Goto  0
   15C:  EndIf
-  164:  Call  SetNpcSpeed   ( 00000000 *Fixed[3.0] )
-  178:  Call  SetNpcAnimation   ( 00000000 00D20002 )
-  18C:  Call  NpcMoveTo     ( 00000000 00000028 FFFFFF74 00000000 )
-  1A8:  Call  SetNpcAnimation   ( 00000000 00D20001 )
+  164:  Call  SetNpcSpeed   ( .NpcID:Merle_00 *Fixed[3.0] )
+  178:  Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  18C:  Call  NpcMoveTo     ( .NpcID:Merle_00  40`  -140`  0` )
+  1A8:  Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   1BC:  Call  MakeLerp      ( 0000005A 00000000 0000000A .Easing:QuadraticIn )
   1D8:  Label  1
   1E4:  Call  UpdateLerp ( )
@@ -4550,10 +4566,10 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   238:  EndIf
   240:  Call  PlaySoundAtCollider   ( ~Collider:k_d1 .Sound:BasicDoorClose 00000000 )
   258:  Call  SetGroupEnabled   ( ~Model:k_naiso 00000000 )
-  26C:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
-  288:  Call  PlayerFaceNpc ( 00000000 00000000 )
+  26C:  Call  GetNpcPos     ( .NpcID:Merle_00 *Var0 *Var1 *Var2 )
+  288:  Call  PlayerFaceNpc ( .NpcID:Merle_00 .False )
   29C:  Call  DisablePartnerAI  ( 00000000 )
-  2AC:  Call  NpcFaceNpc    ( .Npc:Partner 00000000 00000000 )
+  2AC:  Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Merle_00 00000000 )
   2C4:  Call  EnablePartnerAI ( )
   2D0:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   2EC:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -4561,7 +4577,7 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   31C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   330:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   348:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  35C:  Call  SpeakToPlayer ( 00000000 00D20004 00D20001 00000000 001200F3 ) % Oh yes... Mario! I'd almost forgotten! There is su ...
+  35C:  Call  SpeakToPlayer ( .NpcID:Merle_00 00D20004 00D20001 00000000 001200F3 ) % Oh yes... Mario! I'd almost forgotten! There is su ...
   37C:  Call  SetGroupEnabled   ( ~Model:k_naiso 00000001 )
   390:  Call  PlaySoundAtCollider   ( ~Collider:k_d1 .Sound:BasicDoorOpen 00000000 )
   3A8:  Call  MakeLerp      ( 00000000 0000005A 0000000A .Easing:QuadraticIn )
@@ -4572,12 +4588,12 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
   408:  If  *Var1  ==  00000001
   418:  	Goto  2
   424:  EndIf
-  42C:  Call  SetNpcSpeed       ( 00000000 *Fixed[3.0] )
-  440:  Call  SetNpcAnimation   ( 00000000 00D20002 )
-  454:  Call  NpcMoveTo ( 00000000 00000000 FFFFFF4C 00000000 )
+  42C:  Call  SetNpcSpeed       ( .NpcID:Merle_00 *Fixed[3.0] )
+  440:  Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20002 )
+  454:  Call  NpcMoveTo ( .NpcID:Merle_00  0`  -180`  0` )
   470:  Thread
-  478:  	Call  NpcMoveTo ( 00000000 00000000 FFFFFED4 00000000 )
-  494:  	Call  SetNpcAnimation   ( 00000000 00D20001 )
+  478:  	Call  NpcMoveTo ( .NpcID:Merle_00  0`  -300`  0` )
+  494:  	Call  SetNpcAnimation   ( .NpcID:Merle_00 00D20001 )
   4A8:  EndThread
   4B0:  Call  MakeLerp      ( 0000005A 00000000 0000000A .Easing:QuadraticIn )
   4CC:  Label  3
@@ -4790,7 +4806,7 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
 {
     0:  Exec  $Script_8024269C
     C:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-   1C:  Call  PlayerMoveTo      ( FFFFFEB0 FFFFFFD0 00000000 )
+   1C:  Call  PlayerMoveTo      (  -336`  -48`  0` )
    34:  Thread
    3C:  	Wait  15`
    48:  	Call  $Function_80242014    ( 00000000 *Fixed[40.0] )
@@ -4803,8 +4819,8 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
    E8:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    FC:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   114:  EndThread
-  11C:  Call  PlayerMoveTo      ( FFFFFEA5 FFFFFF8E 00000000 )
-  134:  Call  InterpPlayerYaw   ( 000000E5 00000001 )
+  11C:  Call  PlayerMoveTo      (  -347`  -114`  0` )
+  134:  Call  InterpPlayerYaw   (  229`  1` )
   148:  Call  HidePlayerShadow  ( .True )
   158:  Call  SetPlayerAnimation    ( 00010002 )
   168:  Call  802D286C  ( 00000800 )
@@ -4831,9 +4847,9 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
     0:  Exec  $Script_80242670
     C:  Call  HidePlayerShadow  ( .False )
    1C:  Call  802D2520  ( 00010002 00000000 00000000 00000000 00000000 00000000 )
-   40:  Call  PlayerMoveTo      ( FFFFFEA5 FFFFFF8E 00000000 )
+   40:  Call  PlayerMoveTo      (  -347`  -114`  0` )
    58:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-   68:  Call  PlayerMoveTo      ( FFFFFECB FFFFFFF0 00000000 )
+   68:  Call  PlayerMoveTo      (  -309`  -16`  0` )
    80:  Return
    88:  End
 }
@@ -4844,10 +4860,10 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
    14:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80248B98 )
    28:  Switch  *GB_StoryProgress
    34:  	Case  <  .Story:Ch7_GotSnowmanScarf % 48
-   40:  		Call  SetNpcPos ( .Npc:Self FFFFFF38 00000000 0000012C )
+   40:  		Call  SetNpcPos ( .Npc:Self  -200`  0`  300` )
    5C:  	Case  >=  .Story:Ch7_GotSnowmanScarf % 48
-   68:  		Call  SetNpcPos     ( .Npc:Self 00000000 0000005A FFFFFED4 )
-   84:  		Call  InterpNpcYaw  ( .Npc:Self 000000B4 00000000 )
+   68:  		Call  SetNpcPos     ( .Npc:Self  0`  90`  -300` )
+   84:  		Call  InterpNpcYaw  ( .Npc:Self  180`  0` )
    9C:  EndSwitch
    A4:  Return
    AC:  End
@@ -4956,123 +4972,123 @@ MISSING: 8024434C to 80244378 (0000434C to 00004378)
 
 #new:NpcGroup $NpcGroup_8024A08C
 {
-	00000000 $NpcSettings_80244160 ~Vec3f:NPC_8024A08C % 0 90 -300
+	.NpcID:Merle_00 $NpcSettings_80244160 ~Vec3f:NPC_Merle_00 % 0 90 -300
 	00400D09 $Script_Init_80249DAC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024A08C
-	~AnimationTable:NPC_8024A08C % .Sprite:Merle
+	~Movement:NPC_Merle_00
+	~AnimationTable:NPC_Merle_00 % .Sprite:Merle
 	00000000 00000000 00000000 001A00FB % He's Merle, the person who controls this valley. H ...
 	%
 	% $NpcGroup_8024A08C[1F0]
-	00000001 $NpcSettings_802443A4 ~Vec3f:NPC_8024A27C % -376 60 112
+	.NpcID:ShiverToad_01 $NpcSettings_802443A4 ~Vec3f:NPC_ShiverToad_01 % -376 60 112
 	00402D09 $Script_Init_80249E60 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024A27C
-	~AnimationTable:NPC_8024A27C % .Sprite:ShiverToad
+	~Movement:NPC_ShiverToad_01
+	~AnimationTable:NPC_ShiverToad_01 % .Sprite:ShiverToad
 	00000000 00000000 00000000 001A00FC % This Toad is taking care of the Star Kids. He's dr ...
 	%
 	% $NpcGroup_8024A08C[3E0]
-	00000002 $NpcSettings_80244134 ~Vec3f:NPC_8024A46C % 208 80 150
+	.NpcID:ShiverToad_02 $NpcSettings_80244134 ~Vec3f:NPC_ShiverToad_02 % 208 80 150
 	00402D09 $Script_Init_80249E84 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024A46C
-	~AnimationTable:NPC_8024A46C % .Sprite:ShiverToad
+	~Movement:NPC_ShiverToad_02
+	~AnimationTable:NPC_ShiverToad_02 % .Sprite:ShiverToad
 	00000000 00000000 00000000 001A00FD % This Toad is taking care of the Star Kids. It must ...
 	%
 	% $NpcGroup_8024A08C[5D0]
-	00000003 $NpcSettings_802443A4 ~Vec3f:NPC_8024A65C % 127 0 445
+	.NpcID:ShiverToad_03 $NpcSettings_802443A4 ~Vec3f:NPC_ShiverToad_03 % 127 0 445
 	00402D09 $Script_Init_80249EA8 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024A65C
-	~AnimationTable:NPC_8024A65C % .Sprite:ShiverToad
+	~Movement:NPC_ShiverToad_03
+	~AnimationTable:NPC_ShiverToad_03 % .Sprite:ShiverToad
 	00000000 00000000 00000000 001A00FE % This Toad is taking care of the Star Kids. Some pe ...
 	%
 	% $NpcGroup_8024A08C[7C0]
-	00000004 $NpcSettings_802440B8 ~Vec3f:NPC_8024A84C % -99 90 -90
+	.NpcID:Ninji_04 $NpcSettings_802440B8 ~Vec3f:NPC_Ninji_04 % -99 90 -90
 	00402D09 $Script_Init_80249ECC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024A84C
-	~AnimationTable:NPC_8024A84C % .Sprite:Ninji
+	~Movement:NPC_Ninji_04
+	~AnimationTable:NPC_Ninji_04 % .Sprite:Ninji
 	00000000 00000000 00000000 001A00FF % He's one of the Ninjis. The Ninjis are taking care ...
 	%
 	% $NpcGroup_8024A08C[9B0]
-	00000005 $NpcSettings_802440B8 ~Vec3f:NPC_8024AA3C % -48 0 400
+	.NpcID:Ninji_05 $NpcSettings_802440B8 ~Vec3f:NPC_Ninji_05 % -48 0 400
 	00402D09 $Script_Init_80249EF0 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024AA3C
-	~AnimationTable:NPC_8024AA3C % .Sprite:Ninji
+	~Movement:NPC_Ninji_05
+	~AnimationTable:NPC_Ninji_05 % .Sprite:Ninji
 	00000000 00000000 00000000 001A0100 % He's one of the Ninjis. Because the Ninjis are so  ...
 	%
 	% $NpcGroup_8024A08C[BA0]
-	00000006 $NpcSettings_80244378 ~Vec3f:NPC_8024AC2C % 239 50 315
+	.NpcID:Ninji_06 $NpcSettings_80244378 ~Vec3f:NPC_Ninji_06 % 239 50 315
 	00402D09 $Script_Init_80249F14 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024AC2C
-	~AnimationTable:NPC_8024AC2C % .Sprite:Ninji
+	~Movement:NPC_Ninji_06
+	~AnimationTable:NPC_Ninji_06 % .Sprite:Ninji
 	00000000 00000000 00000000 001A0101 % He's one of the Ninjis. The Ninjis are excellent b ...
 	%
 	% $NpcGroup_8024A08C[D90]
-	00000007 $NpcSettings_80244378 ~Vec3f:NPC_8024AE1C % 390 80 50
+	.NpcID:Ninji_07 $NpcSettings_80244378 ~Vec3f:NPC_Ninji_07 % 390 80 50
 	00402D09 $Script_Init_80249F38 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024AE1C
-	~AnimationTable:NPC_8024AE1C % .Sprite:Ninji
+	~Movement:NPC_Ninji_07
+	~AnimationTable:NPC_Ninji_07 % .Sprite:Ninji
 	00000000 00000000 00000000 001A0106 % He's one of the Ninjis. The Ninjis take care of th ...
 	%
 	% $NpcGroup_8024A08C[F80]
-	00000008 $NpcSettings_8024429C ~Vec3f:NPC_8024B00C % -166 10 390
+	.NpcID:Twink_08 $NpcSettings_8024429C ~Vec3f:NPC_Twink_08 % -166 10 390
 	00400D09 $Script_Init_80249F5C 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024B00C
-	~AnimationTable:NPC_8024B00C % .Sprite:Twink
+	~Movement:NPC_Twink_08
+	~AnimationTable:NPC_Twink_08 % .Sprite:Twink
 	00000000 00000000 00000000 001A0102 % He's a Star Kid who isn't allowed to go up to the  ...
 	%
 	% $NpcGroup_8024A08C[1170]
-	00000009 $NpcSettings_80244320 ~Vec3f:NPC_8024B1FC % 3 60 137
+	.NpcID:Twink_09 $NpcSettings_80244320 ~Vec3f:NPC_Twink_09 % 3 60 137
 	00400D09 $Script_Init_80249F80 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024B1FC
-	~AnimationTable:NPC_8024B1FC % .Sprite:Twink
+	~Movement:NPC_Twink_09
+	~AnimationTable:NPC_Twink_09 % .Sprite:Twink
 	00000000 00000000 00000000 001A0103 % It's one of the Star Kids. Hey, maybe if we make f ...
 	%
 	% $NpcGroup_8024A08C[1360]
-	0000000A $NpcSettings_80244320 ~Vec3f:NPC_8024B3EC % 120 100 -210
+	.NpcID:Twink_10 $NpcSettings_80244320 ~Vec3f:NPC_Twink_10 % 120 100 -210
 	00400D09 $Script_Init_80249FA4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024B3EC
-	~AnimationTable:NPC_8024B3EC % .Sprite:Twink
+	~Movement:NPC_Twink_10
+	~AnimationTable:NPC_Twink_10 % .Sprite:Twink
 	00000000 00000000 00000000 001A0104 % This Star Kid thinks he's made himself invisible.  ...
 	%
 	% $NpcGroup_8024A08C[1550]
-	0000000B $NpcSettings_80244320 ~Vec3f:NPC_8024B5DC % 369 90 9
+	.NpcID:Twink_11 $NpcSettings_80244320 ~Vec3f:NPC_Twink_11 % 369 90 9
 	00400D09 $Script_Init_80249FFC 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024B5DC
-	~AnimationTable:NPC_8024B5DC % .Sprite:Twink
+	~Movement:NPC_Twink_11
+	~AnimationTable:NPC_Twink_11 % .Sprite:Twink
 	00000000 00000000 00000000 001A0107 % It's a Star Kid--just a baby. Star Kids are so ful ...
 	%
 	% $NpcGroup_8024A08C[1740]
-	0000000C $NpcSettings_80244320 ~Vec3f:NPC_8024B7CC % 405 90 -19
+	.NpcID:Twink_12 $NpcSettings_80244320 ~Vec3f:NPC_Twink_12 % 405 90 -19
 	00400D09 $Script_Init_8024A020 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024B7CC
-	~AnimationTable:NPC_8024B7CC % .Sprite:Twink
+	~Movement:NPC_Twink_12
+	~AnimationTable:NPC_Twink_12 % .Sprite:Twink
 	00000000 00000000 00000000 001A0108 % It's a Star Kid. She's so cute! She reminds me of  ...
 	%
 	% $NpcGroup_8024A08C[1930]
-	0000000D $NpcSettings_80244320 ~Vec3f:NPC_8024B9BC % 364 90 -47
+	.NpcID:Twink_13 $NpcSettings_80244320 ~Vec3f:NPC_Twink_13 % 364 90 -47
 	00400D09 $Script_Init_8024A044 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024B9BC
-	~AnimationTable:NPC_8024B9BC % .Sprite:Twink
+	~Movement:NPC_Twink_13
+	~AnimationTable:NPC_Twink_13 % .Sprite:Twink
 	00000000 00000000 00000000 001A0109 % It's a Star kid. He wants a younger brother. Hey,  ...
 	%
 	% $NpcGroup_8024A08C[1B20]
-	0000000E $NpcSettings_802443A4 ~Vec3f:NPC_8024BBAC % -274 60 -28
+	.NpcID:ShiverToad_14 $NpcSettings_802443A4 ~Vec3f:NPC_ShiverToad_14 % -274 60 -28
 	00402D09 $Script_Init_8024A068 00000000 00000000 000000B4
 	~NoDrops
-	~Movement:NPC_8024BBAC
-	~AnimationTable:NPC_8024BBAC % .Sprite:ShiverToad
+	~Movement:NPC_ShiverToad_14
+	~AnimationTable:NPC_ShiverToad_14 % .Sprite:ShiverToad
 	00000000 00000000 00000000 001A0105 % He's a Toad. He was sent here from Princess Peach' ...
 }
 
@@ -5088,7 +5104,7 @@ PADDING: 8024BDB4 to 8024BDC0 (0000BDB4 to 0000BDC0)
 #new:Script $Script_MakeEntities
 {
     0:  Call  MakeEntity        ( .Entity:SavePoint ~Vec4d:Entity8024BDC0 80000000 )
-   24:  Call  MakeItemEntity    ( .Item:Scarf ~Vec3d:Item8024BDE4 .ItemSpawnMode:Decoration 00000000 )
+   24:  Call  MakeItemEntity    ( .Item:SnowmanScarf ~Vec3d:Item8024BDE4 .ItemSpawnMode:Decoration 00000000 )
    48:  Set   *MapVar[0]  *Var0
    58:  Return
    60:  End

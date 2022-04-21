@@ -1,6 +1,14 @@
 % Script File: sam_04.mscr
 % Decoded from: 0 to 5210 (sam_04)
 
+#define .NpcID:Penguin_00           00
+#define .NpcID:Penguin_01           01
+#define .NpcID:Penguin_02           02
+#define .NpcID:Penguin_03           03
+#define .NpcID:Penguin_04           04
+#define .NpcID:Penguin_05           05
+#define .NpcID:Penguin_06           06
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD0
@@ -769,7 +777,7 @@ PADDING: 802407AC to 802407B0 (000007AC to 000007B0)
 #new:Script $Script_80241390
 {
     0:  Loop
-    C:  	Call  GetNpcPos     ( 00000006 *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos     ( .NpcID:Penguin_06 *Var0 *Var1 *Var2 )
    28:  	Call  SetItemPos    ( *MapVar[0] *Var0 *Var1 *Var2 )
    44:  	Wait  1`
    50:  EndLoop
@@ -797,18 +805,18 @@ PADDING: 802407AC to 802407B0 (000007AC to 000007B0)
    D0:  			If  *MapVar[1]  ==  00000000
    E0:  				Set   *MapVar[1]  00000001
    F0:  				Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  108:  				Call  SetNpcPos     ( 00000006 FFFFFEDE 00000046 0000006E )
+  108:  				Call  SetNpcPos     ( .NpcID:Penguin_06  -290`  70`  110` )
   124:  				Exec  $Script_80241390 *VarA
   134:  				If  *Var0  <=  FFFFFED9
   144:  					Set   *Var0  FFFFFEF4
   154:  				Else
   15C:  					Set   *Var0  FFFFFEC4
   16C:  				EndIf
-  174:  				Call  SetNpcJumpscale   ( 00000006 *Fixed[2.0] )
-  188:  				Call  NpcJump0  ( 00000006 *Var0 00000000 0000008D 00000014 )
+  174:  				Call  SetNpcJumpscale   ( .NpcID:Penguin_06 *Fixed[2.0] )
+  188:  				Call  NpcJump0  ( .NpcID:Penguin_06 *Var0  0`  141`  20` )
   1A8:  				Kill  *VarA
   1B4:  				Wait  1`
-  1C0:  				Call  SetNpcPos ( 00000006 00000000 FFFFFC18 00000000 )
+  1C0:  				Call  SetNpcPos ( .NpcID:Penguin_06  0`  -1000`  0` )
   1DC:  			EndIf
   1E4:  		EndIf
   1EC:  EndSwitch
@@ -954,8 +962,8 @@ PADDING: 802407AC to 802407B0 (000007AC to 000007B0)
 {
     0:  Set   *GB_WorldLocation  .Location:ShiverSnowfield
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80245120 )
@@ -1109,7 +1117,7 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
 {
     0:  Wait  20`
     C:  If  *Var0  ==  00000000
-   1C:  	Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+   1C:  	Call  GetNpcPos     ( .NpcID:Penguin_02 *Var0 *Var1 *Var2 )
    38:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    54:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
    70:  	Call  SetCamDistance    ( .Cam:Default *Fixed[300.0] )
@@ -1117,16 +1125,16 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
    9C:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[10.0] )
    B0:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    C8:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-   DC:  	Call  SpeakToPlayer ( 00000002 00830001 00830001 00000000 0012011B ) % A warm scarf! Thank you!
-   FC:  	Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+   DC:  	Call  SpeakToPlayer ( .NpcID:Penguin_02 00830001 00830001 00000000 0012011B ) % A warm scarf! Thank you!
+   FC:  	Call  GetNpcPos     ( .NpcID:Penguin_05 *Var0 *Var1 *Var2 )
   118:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   134:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   148:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   160:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   174:  	Wait  15`
-  180:  	Call  SpeakToPlayer ( 00000005 00830001 00830001 00000000 0012011C ) % A cool bucket hat! Thank you!
+  180:  	Call  SpeakToPlayer ( .NpcID:Penguin_05 00830001 00830001 00000000 0012011C ) % A cool bucket hat! Thank you!
   1A0:  Else
-  1A8:  	Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+  1A8:  	Call  GetNpcPos     ( .NpcID:Penguin_05 *Var0 *Var1 *Var2 )
   1C4:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   1E0:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   1FC:  	Call  SetCamDistance    ( .Cam:Default *Fixed[300.0] )
@@ -1134,27 +1142,27 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
   228:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[10.0] )
   23C:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   254:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  268:  	Call  SpeakToPlayer ( 00000005 00830001 00830001 00000000 0012011C ) % A cool bucket hat! Thank you!
-  288:  	Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+  268:  	Call  SpeakToPlayer ( .NpcID:Penguin_05 00830001 00830001 00000000 0012011C ) % A cool bucket hat! Thank you!
+  288:  	Call  GetNpcPos     ( .NpcID:Penguin_02 *Var0 *Var1 *Var2 )
   2A4:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   2C0:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   2D4:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   2EC:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   300:  	Wait  15`
-  30C:  	Call  SpeakToPlayer ( 00000002 00830001 00830001 00000000 0012011B ) % A warm scarf! Thank you!
+  30C:  	Call  SpeakToPlayer ( .NpcID:Penguin_02 00830001 00830001 00000000 0012011B ) % A warm scarf! Thank you!
   32C:  EndIf
-  334:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 FFFFFF74 )
-  350:  Call  SetPanTarget      ( .Cam:Default 00000000 00000000 FFFFFF9C )
+  334:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  -140` )
+  350:  Call  SetPanTarget      ( .Cam:Default  0`  0`  -100` )
   36C:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   380:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   398:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
-  3AC:  Call  ShowMessageAtScreenPos    ( 0012011D 000000A0 00000028 ) % What a kind man you are! We thank you. As a reward ...
-  3C4:  Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-  3DC:  Call  SetNpcFlagBits    ( 00000001 00000100 .True )
-  3F4:  Call  SetNpcFlagBits    ( 00000002 00000100 .True )
-  40C:  Call  SetNpcFlagBits    ( 00000003 00000100 .True )
-  424:  Call  SetNpcFlagBits    ( 00000004 00000100 .True )
-  43C:  Call  SetNpcFlagBits    ( 00000005 00000100 .True )
+  3AC:  Call  ShowMessageAtScreenPos    ( 0012011D  160`  40` ) % What a kind man you are! We thank you. As a reward ...
+  3C4:  Call  SetNpcFlagBits    ( .NpcID:Penguin_00 00000100 .True )
+  3DC:  Call  SetNpcFlagBits    ( .NpcID:Penguin_01 00000100 .True )
+  3F4:  Call  SetNpcFlagBits    ( .NpcID:Penguin_02 00000100 .True )
+  40C:  Call  SetNpcFlagBits    ( .NpcID:Penguin_03 00000100 .True )
+  424:  Call  SetNpcFlagBits    ( .NpcID:Penguin_04 00000100 .True )
+  43C:  Call  SetNpcFlagBits    ( .NpcID:Penguin_05 00000100 .True )
   454:  Wait  1`
   460:  Thread
   468:  	Wait  22`
@@ -1173,14 +1181,14 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
   564:  		SetF  *Var7  *Var2
   574:  		Call  AddVectorPolar    ( *Var6 *Var7 *Fixed[20.0] *Var8 )
   590:  		Call  SetPlayerJumpscale    ( *Fixed[2.0] )
-  5A0:  		Call  PlayerJump1       ( *Var6 00000000 *Var7 00000010 )
+  5A0:  		Call  PlayerJump1       ( *Var6  0` *Var7  16` )
   5BC:  		AddF  *Var8  *Fixed[180.0]
   5CC:  		Wait  6`
   5D8:  	EndLoop
   5E0:  	Call  SetPlayerJumpscale    ( *Fixed[2.0] )
-  5F0:  	Call  PlayerJump1   ( 00000000 00000000 00000000 00000010 )
+  5F0:  	Call  PlayerJump1   (  0`  0`  0`  16` )
   60C:  	Call  SetPlayerAnimation    ( 00010002 )
-  61C:  	Call  InterpPlayerYaw       ( 00000000 00000000 )
+  61C:  	Call  InterpPlayerYaw       (  0`  0` )
   630:  	Call  DisablePlayerPhysics  ( .False )
   640:  EndThread
   648:  Thread
@@ -1188,14 +1196,14 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
   65C:  	Call  DisablePartnerAI  ( 00000000 )
   66C:  	Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
   680:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.0] )
-  694:  	Call  NpcJump1  ( .Npc:Partner 00000032 00000000 00000000 00000016 )
+  694:  	Call  NpcJump1  ( .Npc:Partner  50`  0`  0` 00000016 )
   6B4:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   6C8:  	Wait  110`
   6D4:  EndThread
   6DC:  Thread
   6E4:  	Wait  22`
   6F0:  	Loop  00000005
-  6FC:  		Call  ShakeCam  ( .Cam:Default 00000000 00000006 *Fixed[2.0] )
+  6FC:  		Call  ShakeCam  ( .Cam:Default 00000000  6` *Fixed[2.0] )
   718:  		Wait  16`
   724:  	EndLoop
   72C:  EndThread
@@ -1238,7 +1246,7 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
   95C:  ExecWait  $Script_80241D90
   968:  Wait  80`
   974:  Thread
-  97C:  	Call  ShakeCam  ( .Cam:Default 00000000 000000C8 *Fixed[1.0] )
+  97C:  	Call  ShakeCam  ( .Cam:Default 00000000  200` *Fixed[1.0] )
   998:  EndThread
   9A0:  Thread
   9A8:  	Loop  0000000A
@@ -1252,8 +1260,8 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
   A40:  EndThread
   A48:  Thread
   A50:  	Wait  40`
-  A5C:  	Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 FFFFFF10 )
-  A78:  	Call  SetPanTarget      ( .Cam:Default 00000000 00000000 FFFFFF10 )
+  A5C:  	Call  UseSettingsFrom   ( .Cam:Default  0`  0`  -240` )
+  A78:  	Call  SetPanTarget      ( .Cam:Default  0`  0`  -240` )
   A94:  	Call  SetCamDistance    ( .Cam:Default *Fixed[300.0] )
   AA8:  	Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   ABC:  	Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
@@ -1271,7 +1279,7 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
   BAC:  EndIf
   BB4:  Wait  60`
   BC0:  Thread
-  BC8:  	Call  ShakeCam  ( .Cam:Default 00000000 00000064 *Fixed[0.3] )
+  BC8:  	Call  ShakeCam  ( .Cam:Default 00000000  100` *Fixed[0.3] )
   BE4:  EndThread
   BEC:  Thread
   BF4:  	Call  GetModelCenter    ( ~Model:o65 )
@@ -1297,23 +1305,23 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
   DD8:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
   DEC:  Call  SetCamSpeed       ( .Cam:Default *Fixed[1.0] )
   E00:  Wait  30`
-  E0C:  Call  ShowMessageAtScreenPos    ( 0012011E 000000A0 00000028 ) % Please pass through here... With many thanks and b ...
+  E0C:  Call  ShowMessageAtScreenPos    ( 0012011E  160`  40` ) % Please pass through here... With many thanks and b ...
   E24:  Call  EnablePartnerAI ( )
   E30:  Call  UpdateColliderTransform   ( ~Collider:o78 )
   E40:  Call  UpdateColliderTransform   ( ~Collider:o79 )
   E50:  Call  UpdateColliderTransform   ( ~Collider:o80 )
-  E60:  Call  SetNpcFlagBits    ( 00000000 00000100 .False )
-  E78:  Call  SetNpcFlagBits    ( 00000001 00000100 .False )
-  E90:  Call  SetNpcFlagBits    ( 00000002 00000100 .False )
-  EA8:  Call  SetNpcFlagBits    ( 00000003 00000100 .False )
-  EC0:  Call  SetNpcFlagBits    ( 00000004 00000100 .False )
-  ED8:  Call  SetNpcFlagBits    ( 00000005 00000100 .False )
-  EF0:  Call  BindNpcInteract   ( 00000000 00000000 )
-  F04:  Call  BindNpcInteract   ( 00000001 00000000 )
-  F18:  Call  BindNpcInteract   ( 00000002 00000000 )
-  F2C:  Call  BindNpcInteract   ( 00000003 00000000 )
-  F40:  Call  BindNpcInteract   ( 00000004 00000000 )
-  F54:  Call  BindNpcInteract   ( 00000005 00000000 )
+  E60:  Call  SetNpcFlagBits    ( .NpcID:Penguin_00 00000100 .False )
+  E78:  Call  SetNpcFlagBits    ( .NpcID:Penguin_01 00000100 .False )
+  E90:  Call  SetNpcFlagBits    ( .NpcID:Penguin_02 00000100 .False )
+  EA8:  Call  SetNpcFlagBits    ( .NpcID:Penguin_03 00000100 .False )
+  EC0:  Call  SetNpcFlagBits    ( .NpcID:Penguin_04 00000100 .False )
+  ED8:  Call  SetNpcFlagBits    ( .NpcID:Penguin_05 00000100 .False )
+  EF0:  Call  BindNpcInteract   ( .NpcID:Penguin_00 00000000 )
+  F04:  Call  BindNpcInteract   ( .NpcID:Penguin_01 00000000 )
+  F18:  Call  BindNpcInteract   ( .NpcID:Penguin_02 00000000 )
+  F2C:  Call  BindNpcInteract   ( .NpcID:Penguin_03 00000000 )
+  F40:  Call  BindNpcInteract   ( .NpcID:Penguin_04 00000000 )
+  F54:  Call  BindNpcInteract   ( .NpcID:Penguin_05 00000000 )
   F68:  Call  ModifyColliderFlags   ( 00000000 ~Collider:o103 7FFFFE00 )
   F80:  Call  ModifyColliderFlags   ( 00000001 ~Collider:o106 7FFFFE00 )
   F98:  Call  ModifyColliderFlags   ( 00000001 ~Collider:o118 7FFFFE00 )
@@ -1449,12 +1457,12 @@ PADDING: 80241A38 to 80241A40 (00001A38 to 00001A40)
   858:  	Call  UpdateColliderTransform   ( ~Collider:o78 )
   868:  	Call  UpdateColliderTransform   ( ~Collider:o79 )
   878:  	Call  UpdateColliderTransform   ( ~Collider:o80 )
-  888:  	Call  BindNpcInteract   ( 00000000 00000000 )
-  89C:  	Call  BindNpcInteract   ( 00000001 00000000 )
-  8B0:  	Call  BindNpcInteract   ( 00000002 00000000 )
-  8C4:  	Call  BindNpcInteract   ( 00000003 00000000 )
-  8D8:  	Call  BindNpcInteract   ( 00000004 00000000 )
-  8EC:  	Call  BindNpcInteract   ( 00000005 00000000 )
+  888:  	Call  BindNpcInteract   ( .NpcID:Penguin_00 00000000 )
+  89C:  	Call  BindNpcInteract   ( .NpcID:Penguin_01 00000000 )
+  8B0:  	Call  BindNpcInteract   ( .NpcID:Penguin_02 00000000 )
+  8C4:  	Call  BindNpcInteract   ( .NpcID:Penguin_03 00000000 )
+  8D8:  	Call  BindNpcInteract   ( .NpcID:Penguin_04 00000000 )
+  8EC:  	Call  BindNpcInteract   ( .NpcID:Penguin_05 00000000 )
   900:  EndIf
   908:  Return
   910:  End
@@ -1556,40 +1564,40 @@ PADDING: 8024384C to 80243850 (0000384C to 00003850)
 
 #new:ItemList $ItemList_80243B9C
 {
-	.Item:Bucket
+	.Item:SnowmanBucket
 	00000000
 }
 
 #new:ItemList $ItemList_80243BA4
 {
-	.Item:Scarf
+	.Item:SnowmanScarf
 	00000000
 }
 
 #new:Script $Script_Interact_80243BAC
 {
-    0:  Call  ShowMessageAtScreenPos    ( 001D015D 000000A0 00000028 ) % It's a snowman.
+    0:  Call  ShowMessageAtScreenPos    ( 001D015D  160`  40` ) % It's a snowman.
    18:  Return
    20:  End
 }
 
 #new:Script $Script_Interact_80243BD4
 {
-    0:  Call  ShowMessageAtScreenPos    ( 001D015D 000000A0 00000028 ) % It's a snowman.
+    0:  Call  ShowMessageAtScreenPos    ( 001D015D  160`  40` ) % It's a snowman.
    18:  Return
    20:  End
 }
 
 #new:Script $Script_Interact_80243BFC
 {
-    0:  Call  ShowMessageAtScreenPos    ( 001D015D 000000A0 00000028 ) % It's a snowman.
+    0:  Call  ShowMessageAtScreenPos    ( 001D015D  160`  40` ) % It's a snowman.
    18:  Return
    20:  End
 }
 
 #new:Script $Script_Interact_80243C24
 {
-    0:  Call  ShowMessageAtScreenPos    ( 001D015D 000000A0 00000028 ) % It's a snowman.
+    0:  Call  ShowMessageAtScreenPos    ( 001D015D  160`  40` ) % It's a snowman.
    18:  Return
    20:  End
 }
@@ -1597,7 +1605,7 @@ PADDING: 8024384C to 80243850 (0000384C to 00003850)
 #new:Script $Script_80243C4C
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  FindKeyItem   ( .Item:Scarf *Var0 )
+   10:  Call  FindKeyItem   ( .Item:SnowmanScarf *Var0 )
    24:  If  *Var0  !=  FFFFFFFF
    34:  	Call  ShowKeyChoicePopup ( )
    40:  	Call  CloseChoicePopup ( )
@@ -1609,7 +1617,7 @@ PADDING: 8024384C to 80243850 (0000384C to 00003850)
    88:  			Call  RemoveKeyItemAt   ( *Var1 )
    98:  			Call  EnableModel       ( 0000271B .True )
    AC:  			If  *GF_SAM04_PlacedBucket  ==  .True
-   BC:  				Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+   BC:  				Call  GetNpcPos     ( .NpcID:Penguin_02 *Var0 *Var1 *Var2 )
    D8:  				Add   *Var1  0000001E
    E8:  				Add   *Var2  00000014
    F8:  				Call  PlaySoundAt   ( 00002043 00000000 *Var0 *Var1 *Var2 )
@@ -1621,7 +1629,7 @@ PADDING: 8024384C to 80243850 (0000384C to 00003850)
   194:  			EndIf
   19C:  	EndSwitch
   1A4:  Else
-  1AC:  	Call  ShowMessageAtScreenPos    ( 001D015D 000000A0 00000028 ) % It's a snowman.
+  1AC:  	Call  ShowMessageAtScreenPos    ( 001D015D  160`  40` ) % It's a snowman.
   1C4:  EndIf
   1CC:  Unbind
   1D4:  Call  DisablePlayerInput    ( .False )
@@ -1639,7 +1647,7 @@ PADDING: 8024384C to 80243850 (0000384C to 00003850)
 #new:Script $Script_80243E70
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  FindKeyItem   ( .Item:Bucket *Var0 )
+   10:  Call  FindKeyItem   ( .Item:SnowmanBucket *Var0 )
    24:  If  *Var0  !=  FFFFFFFF
    34:  	Call  ShowKeyChoicePopup ( )
    40:  	Call  CloseChoicePopup ( )
@@ -1651,7 +1659,7 @@ PADDING: 8024384C to 80243850 (0000384C to 00003850)
    88:  			Call  RemoveKeyItemAt   ( *Var1 )
    98:  			Call  EnableModel       ( ~Model:baketu .True )
    AC:  			If  *GF_SAM04_PlacedScarf  ==  .True
-   BC:  				Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+   BC:  				Call  GetNpcPos     ( .NpcID:Penguin_05 *Var0 *Var1 *Var2 )
    D8:  				Add   *Var1  0000003C
    E8:  				Add   *Var2  00000014
    F8:  				Call  PlaySoundAt   ( 00002043 00000000 *Var0 *Var1 *Var2 )
@@ -1663,7 +1671,7 @@ PADDING: 8024384C to 80243850 (0000384C to 00003850)
   194:  			EndIf
   19C:  	EndSwitch
   1A4:  Else
-  1AC:  	Call  ShowMessageAtScreenPos    ( 001D015D 000000A0 00000028 ) % It's a snowman.
+  1AC:  	Call  ShowMessageAtScreenPos    ( 001D015D  160`  40` ) % It's a snowman.
   1C4:  EndIf
   1CC:  Unbind
   1D4:  Call  DisablePlayerInput    ( .False )
@@ -1785,61 +1793,61 @@ PADDING: 8024384C to 80243850 (0000384C to 00003850)
 
 #new:NpcGroup $NpcGroup_80244390
 {
-	00000000 $NpcSettings_80243850 ~Vec3f:NPC_80244390 % 0 -1000 0
+	.NpcID:Penguin_00 $NpcSettings_80243850 ~Vec3f:NPC_Penguin_00 % 0 -1000 0
 	00400D09 $Script_Init_802440F4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244390
-	~AnimationTable:NPC_80244390 % .Sprite:Penguin
+	~Movement:NPC_Penguin_00
+	~AnimationTable:NPC_Penguin_00 % .Sprite:Penguin
 	00000000 00000000 00000000 001A010A % It's a snowman. There're so many of snowmen! They  ...
 	%
 	% $NpcGroup_80244390[1F0]
-	00000001 $NpcSettings_80243850 ~Vec3f:NPC_80244580 % 0 -1000 0
+	.NpcID:Penguin_01 $NpcSettings_80243850 ~Vec3f:NPC_Penguin_01 % 0 -1000 0
 	00400D09 $Script_Init_80244160 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244580
-	~AnimationTable:NPC_80244580 % .Sprite:Penguin
+	~Movement:NPC_Penguin_01
+	~AnimationTable:NPC_Penguin_01 % .Sprite:Penguin
 	00000000 00000000 00000000 001A010A % It's a snowman. There're so many of snowmen! They  ...
 	%
 	% $NpcGroup_80244390[3E0]
-	00000002 $NpcSettings_80243850 ~Vec3f:NPC_80244770 % 0 -1000 0
+	.NpcID:Penguin_02 $NpcSettings_80243850 ~Vec3f:NPC_Penguin_02 % 0 -1000 0
 	00400D09 $Script_Init_802441C4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244770
-	~AnimationTable:NPC_80244770 % .Sprite:Penguin
+	~Movement:NPC_Penguin_02
+	~AnimationTable:NPC_Penguin_02 % .Sprite:Penguin
 	00000000 00000000 00000000 001A010A % It's a snowman. There're so many of snowmen! They  ...
 	%
 	% $NpcGroup_80244390[5D0]
-	00000003 $NpcSettings_80243850 ~Vec3f:NPC_80244960 % 0 -1000 0
+	.NpcID:Penguin_03 $NpcSettings_80243850 ~Vec3f:NPC_Penguin_03 % 0 -1000 0
 	00400D09 $Script_Init_80244228 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244960
-	~AnimationTable:NPC_80244960 % .Sprite:Penguin
+	~Movement:NPC_Penguin_03
+	~AnimationTable:NPC_Penguin_03 % .Sprite:Penguin
 	00000000 00000000 00000000 001A010A % It's a snowman. There're so many of snowmen! They  ...
 	%
 	% $NpcGroup_80244390[7C0]
-	00000004 $NpcSettings_80243850 ~Vec3f:NPC_80244B50 % 0 -1000 0
+	.NpcID:Penguin_04 $NpcSettings_80243850 ~Vec3f:NPC_Penguin_04 % 0 -1000 0
 	00400D09 $Script_Init_8024428C 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244B50
-	~AnimationTable:NPC_80244B50 % .Sprite:Penguin
+	~Movement:NPC_Penguin_04
+	~AnimationTable:NPC_Penguin_04 % .Sprite:Penguin
 	00000000 00000000 00000000 001A010A % It's a snowman. There're so many of snowmen! They  ...
 	%
 	% $NpcGroup_80244390[9B0]
-	00000005 $NpcSettings_80243850 ~Vec3f:NPC_80244D40 % 0 -1000 0
+	.NpcID:Penguin_05 $NpcSettings_80243850 ~Vec3f:NPC_Penguin_05 % 0 -1000 0
 	00400D09 $Script_Init_802442F0 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244D40
-	~AnimationTable:NPC_80244D40 % .Sprite:Penguin
+	~Movement:NPC_Penguin_05
+	~AnimationTable:NPC_Penguin_05 % .Sprite:Penguin
 	00000000 00000000 00000000 001A010A % It's a snowman. There're so many of snowmen! They  ...
 }
 
 #new:NpcGroup $NpcGroup_80244F30
 {
-	00000006 $NpcSettings_80243850 ~Vec3f:NPC_80244F30 % 0 -1000 0
+	.NpcID:Penguin_06 $NpcSettings_80243850 ~Vec3f:NPC_Penguin_06 % 0 -1000 0
 	00404F09 $Script_Init_80244354 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244F30
-	~AnimationTable:NPC_80244F30 % .Sprite:Penguin
+	~Movement:NPC_Penguin_06
+	~AnimationTable:NPC_Penguin_06 % .Sprite:Penguin
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

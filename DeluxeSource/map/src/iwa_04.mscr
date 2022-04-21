@@ -1,6 +1,9 @@
 % Script File: iwa_04.mscr
 % Decoded from: 0 to 2C90 (iwa_04)
 
+#define .NpcID:Cleft_00             00
+#define .NpcID:Buzzar_01            01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -525,7 +528,7 @@
    A8:  LW        A2, 3C (S0)
    AC:  LW        A1, 38 (S0)
    B0:  MFC1      A3, F2
-   B4:  JAL       ~Func:fx_walk_normal
+   B4:  JAL       ~Func:fx_walk
    B8:  LI        A0, 2
         .oBC
    BC:  LHU       V0, 8E (S0)
@@ -1204,8 +1207,8 @@ PADDING: 8024116C to 80241170 (0000116C to 00001170)
 {
     0:  Set   *GB_WorldLocation  .Location:MtRugged
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer      ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80242B50 )
@@ -1248,10 +1251,10 @@ PADDING: 8024116C to 80241170 (0000116C to 00001170)
    3C:  Exec  $Script_80241420 *VarA
    4C:  If  *MapVar[9]  ==  00000000
    5C:  	Call  SetPlayerJumpscale    ( *Fixed[1.4] )
-   6C:  	Call  PlayerJump    ( ~Vec3d:JumpDest_802414F0 0000000F )
+   6C:  	Call  PlayerJump    ( ~Vec3d:JumpDest_802414F0  15` )
    88:  Else
    90:  	Call  SetPlayerJumpscale    ( *Fixed[0.7] )
-   A0:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80241524 00000028 )
+   A0:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80241524  40` )
    BC:  EndIf
    C4:  Kill  *VarA
    D0:  Call  SetPlayerActionState  ( .ActionState:Idle )
@@ -1349,7 +1352,7 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
    10:  	Call  RemoveNpc ( .Npc:Self )
    20:  Else
    28:  	Exec  $Script_80241788
-   34:  	Call  SetNpcPos ( .Npc:Self 0000000A 00000060 FFFFFEA5 )
+   34:  	Call  SetNpcPos ( .Npc:Self  10`  96`  -347` )
    50:  	Call  EnableNpcShadow   ( .Npc:Self .False )
    64:  EndIf
    6C:  Return
@@ -1360,11 +1363,11 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
 {
     0:  Loop
     C:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   24:  	Call  GetNpcPos     ( 00000001 *Var3 *Var4 *Var5 )
+   24:  	Call  GetNpcPos     ( .NpcID:Buzzar_01 *Var3 *Var4 *Var5 )
    40:  	If  *Var0  <  *Var3
-   50:  		Call  InterpNpcYaw  ( 00000001 0000010E 00000000 )
+   50:  		Call  InterpNpcYaw  ( .NpcID:Buzzar_01  270`  0` )
    68:  	Else
-   70:  		Call  InterpNpcYaw  ( 00000001 0000005A 00000000 )
+   70:  		Call  InterpNpcYaw  ( .NpcID:Buzzar_01  90`  0` )
    88:  	EndIf
    90:  	If  *Var0  >=  00000190
    A0:  		If  *Var0  <  000001C2
@@ -1383,18 +1386,18 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
   14C:  	Wait  5`
   158:  EndIf
   160:  Call  NpcFacePlayer ( .Npc:Self 00000000 )
-  174:  Call  ShowMessageAtScreenPos    ( 000D0030 000000A0 00000028 ) % Hey there! Hold up a sec, pardner!
+  174:  Call  ShowMessageAtScreenPos    ( 000D0030  160`  40` ) % Hey there! Hold up a sec, pardner!
   18C:  Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   1A8:  Add   *Var1  0000000F
   1B8:  Call  SetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   1D4:  Call  GetAngleToPlayer  ( .Npc:Self *VarA )
   1E8:  Wait  4`
-  1F4:  Call  UseSettingsFrom   ( .Cam:Default 000001AE 00000000 FFFFFFE7 )
+  1F4:  Call  UseSettingsFrom   ( .Cam:Default  430`  0`  -25` )
   210:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   228:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   244:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   25C:  Wait  1`
-  268:  Call  SetPanTarget  ( .Cam:Default 0000001E 000000B4 FFFFFDA8 )
+  268:  Call  SetPanTarget  ( .Cam:Default  30`  180`  -600` )
   284:  Call  SetCamDistance    ( .Cam:Default *Fixed[100.0] )
   298:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
   2AC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -1413,16 +1416,16 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
   3B4:  		BreakLoop
   3BC:  	EndIf
   3C4:  EndLoop
-  3CC:  Call  SetPlayerPos  ( 000001AE 00000000 FFFFFFE7 )
+  3CC:  Call  SetPlayerPos  (  430`  0`  -25` )
   3E4:  Call  802CF56C      ( 00000002 )
-  3F4:  Call  SetNpcPos     ( .Npc:Self 0000021A 000000C8 FFFFFFE7 )
+  3F4:  Call  SetNpcPos     ( .Npc:Self  538`  200`  -25` )
   410:  Call  EnableNpcShadow   ( .Npc:Self .True )
   424:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   43C:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   458:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  474:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
-  48C:  Call  SetCamPosB    ( .Cam:Default 00000064 FFFFFF9C )
-  4A4:  Call  SetCamDistance    ( .Cam:Default 00000258 )
+  474:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
+  48C:  Call  SetCamPosB    ( .Cam:Default  100`  -100` )
+  4A4:  Call  SetCamDistance    ( .Cam:Default  600` )
   4B8:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   4CC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   4E4:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -1431,13 +1434,13 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
   518:  	Add   *Var0  00000028
   528:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   544:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  560:  	Call  SetCamDistance    ( .Cam:Default 000001F4 )
+  560:  	Call  SetCamDistance    ( .Cam:Default  500` )
   574:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   588:  	Call  PanToTarget   ( .Cam:Default *Fixed[0.5] 00000001 )
   5A0:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   5B4:  	Call  802CF56C      ( 00000002 )
   5C4:  EndThread
-  5CC:  Call  PlayerFaceNpc ( .Npc:Self 00000000 )
+  5CC:  Call  PlayerFaceNpc ( .Npc:Self .False )
   5E0:  Call  SetPlayerAnimation    ( 0001002A )
   5F0:  Call  NpcFacePlayer ( .Npc:Self 00000000 )
   604:  Call  GetNpcPos     ( .Npc:Self *Var2 *Var3 *Var4 )
@@ -1452,29 +1455,29 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
   6AC:  		BreakLoop
   6B4:  	EndIf
   6BC:  EndLoop
-  6C4:  Call  SetNpcAnimation   ( 00000001 00670001 )
+  6C4:  Call  SetNpcAnimation   ( .NpcID:Buzzar_01 00670001 )
   6D8:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
   6EC:  Wait  30`
-  6F8:  Call  SetNpcAnimation   ( 00000001 00670007 )
+  6F8:  Call  SetNpcAnimation   ( .NpcID:Buzzar_01 00670007 )
   70C:  Wait  30`
-  718:  Call  SetNpcAnimation   ( 00000001 00670008 )
+  718:  Call  SetNpcAnimation   ( .NpcID:Buzzar_01 00670008 )
   72C:  Wait  30`
-  738:  Call  SetNpcAnimation   ( 00000001 00670009 )
+  738:  Call  SetNpcAnimation   ( .NpcID:Buzzar_01 00670009 )
   74C:  Wait  30`
-  758:  Call  SetNpcAnimation   ( 00000001 0067000A )
+  758:  Call  SetNpcAnimation   ( .NpcID:Buzzar_01 0067000A )
   76C:  Wait  30`
-  778:  Call  SetNpcAnimation   ( 00000001 00670001 )
+  778:  Call  SetNpcAnimation   ( .NpcID:Buzzar_01 00670001 )
   78C:  Wait  30`
   798:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-  7B4:  Call  UseSettingsFrom   ( .Cam:Default *Var0 00000000 *Var2 )
+  7B4:  Call  UseSettingsFrom   ( .Cam:Default *Var0  0` *Var2 )
   7D0:  Add   *Var1  00000014
   7E0:  Call  SetPanTarget      ( .Cam:Default *Var0 *Var1 *Var2 )
-  7FC:  Call  SetCamDistance    ( .Cam:Default 00000113 )
+  7FC:  Call  SetCamDistance    ( .Cam:Default  275` )
   810:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   824:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   83C:  Wait  10`
   848:  Call  SpeakToPlayer     ( .Npc:Self 00670003 00670001 00000000 000D0032 ) % Yep, verrrry similar! You look a lot like this fel ...
-  868:  Call  AdjustCam ( .Cam:Default *Fixed[90.0] 00000032 0000015E *Fixed[15.0] *Fixed[-12.0] )
+  868:  Call  AdjustCam ( .Cam:Default *Fixed[90.0]  50`  350` *Fixed[15.0] *Fixed[-12.0] )
   88C:  Call  ShowChoice        ( 001E0017 ) % Mario Luigi Princess Peach
   89C:  Call  EndSpeech ( .Npc:Self 00670003 00670001 00000000 )
   8B8:  Set   *VarA  *Var0
@@ -1491,10 +1494,10 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
   958:  EndSwitch
   960:  Wait  10`
   96C:  Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
-  988:  Call  UseSettingsFrom   ( .Cam:Default *Var0 00000000 *Var2 )
+  988:  Call  UseSettingsFrom   ( .Cam:Default *Var0  0` *Var2 )
   9A4:  Add   *Var1  00000014
   9B4:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  9D0:  Call  SetCamDistance    ( .Cam:Default 00000113 )
+  9D0:  Call  SetCamDistance    ( .Cam:Default  275` )
   9E4:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   9F8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   A10:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -1519,7 +1522,7 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
   B74:  			BreakLoop
   B7C:  		EndIf
   B84:  	EndLoop
-  B8C:  	Call  SetNpcPos ( .Npc:Self 0000000A 00000060 FFFFFEA5 )
+  B8C:  	Call  SetNpcPos ( .Npc:Self  10`  96`  -347` )
   BA8:  	Call  EnableNpcShadow   ( .Npc:Self .False )
   BBC:  	Call  SetNpcAnimation   ( .Npc:Self 00670005 )
   BD0:  	Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
@@ -1544,9 +1547,9 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Set   *GF_IWA04_Defeated_Buzzar  .True
    38:  		Exec  $Script_80241140
-   44:  		Call  SetNpcPos     ( .Npc:Self 00000212 0000000F FFFFFFEC )
+   44:  		Call  SetNpcPos     ( .Npc:Self  530`  15`  -20` )
    60:  		Call  SetNpcAnimation   ( .Npc:Self 0067000B )
-   74:  		Call  AdjustCam     ( .Cam:Default *Fixed[90.0] 00000032 0000015E *Fixed[15.0] *Fixed[-12.0] )
+   74:  		Call  AdjustCam     ( .Cam:Default *Fixed[90.0]  50`  350` *Fixed[15.0] *Fixed[-12.0] )
    98:  		Wait  10`
    A4:  		Call  SpeakToPlayer ( .Npc:Self FFFFFFFF FFFFFFFF 00000000 000D0036 ) % Yow! I got whupped!
    C4:  		Thread
@@ -1558,8 +1561,8 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
   124:  			EndLoop
   12C:  		EndThread
   134:  		Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.75] )
-  148:  		Call  NpcJump1  ( .Npc:Self 00000190 FFFFFF38 FFFFFED4 0000003C )
-  168:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  148:  		Call  NpcJump1  ( .Npc:Self  400`  -200`  -300` 0000003C )
+  168:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   184:  		Call  ResetCam  ( .Cam:Default *Fixed[2.5] )
   198:  	Case  ==  .Outcome:PlayerLost % 1
   1A4:  	Case  ==  .Outcome:PlayerFled % 2
@@ -1576,21 +1579,21 @@ PADDING: 802416B8 to 802416C0 (000016B8 to 000016C0)
 
 #new:NpcGroup $NpcGroup_80242770
 {
-	00000000 $NpcSettings_80241714 ~Vec3f:NPC_80242770 % -412 -250 143
+	.NpcID:Cleft_00 $NpcSettings_80241714 ~Vec3f:NPC_Cleft_00 % -412 -250 143
 	00000900 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:3
-	~Movement:NPC_80242770
-	~AnimationTable:NPC_80242770 % .Sprite:Cleft
+	~Movement:NPC_Cleft_00
+	~AnimationTable:NPC_Cleft_00 % .Sprite:Cleft
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242960
 {
-	00000001 $NpcSettings_80242744 ~Vec3f:NPC_80242960 % 0 -1000 0
+	.NpcID:Buzzar_01 $NpcSettings_80242744 ~Vec3f:NPC_Buzzar_01 % 0 -1000 0
 	00A40D04 00000000 00000000 00000000 0000010E
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:3
-	~Movement:NPC_80242960
-	~AnimationTable:NPC_80242960 % .Sprite:Buzzar
+	~Movement:NPC_Buzzar_01
+	~AnimationTable:NPC_Buzzar_01 % .Sprite:Buzzar
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

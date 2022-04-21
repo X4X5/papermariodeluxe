@@ -1,6 +1,13 @@
 % Script File: dgb_03.mscr
 % Decoded from: 0 to 5050 (dgb_03)
 
+#define .NpcID:WorldClubba_00       00
+#define .NpcID:WorldClubba_01       01
+#define .NpcID:WorldClubba_02       02
+#define .NpcID:WorldClubba_03       03
+#define .NpcID:WorldClubba_04       04
+#define .NpcID:WorldClubba_05       05
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -2976,7 +2983,7 @@ PADDING: 80242908 to 80242910 (00002908 to 00002910)
 
 #new:ItemList $ItemList_80242F28
 {
-	.Item:CastleKey1
+	.Item:TubbaCastleKey
 	00000000
 }
 
@@ -2984,8 +2991,8 @@ PADDING: 80242908 to 80242910 (00002908 to 00002910)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GB_StoryProgress  <  .Story:Ch3_StarSpiritRescued % FFFFFFF1
    80:  	Call  MakeNpcs  ( .True $NpcGroupList_80244988 )
@@ -3024,7 +3031,7 @@ PADDING: 802430D8 to 802430E0 (000030D8 to 000030E0)
    78:  		Set   *Var8  FFFFFFFF
    88:  		Return
    90:  	Else
-   98:  		Call  SetPlayerActionState  ( 00000014 )
+   98:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
    A8:  	EndIf
    B0:  	Wait  1`
    BC:  EndLoop
@@ -3035,15 +3042,15 @@ PADDING: 802430D8 to 802430E0 (000030D8 to 000030E0)
    FC:  EndIf
   104:  Call  DisablePlayerInput    ( .True )
   114:  Thread
-  11C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000064 *Fixed[0.6] )
+  11C:  	Call  ShakeCam  ( .Cam:Default 00000000  100` *Fixed[0.6] )
   138:  EndThread
   140:  Thread
   148:  	If  *Var6  >=  *Var7
-  158:  		Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  158:  		Call  InterpPlayerYaw   (  270`  0` )
   16C:  	Else
-  174:  		Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  174:  		Call  InterpPlayerYaw   (  90`  0` )
   188:  	EndIf
-  190:  	Call  SetPlayerActionState  ( 00000014 )
+  190:  	Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   1A0:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   1B8:  	Set   *Var1  *Var0
   1C8:  	Set   *Var2  *Var7
@@ -3051,7 +3058,7 @@ PADDING: 802430D8 to 802430E0 (000030D8 to 000030E0)
   1E8:  	Add   *Var1  *Var2
   1F8:  	Call  MakeLerp  ( *Var0 *Var1 00000064 .Easing:Linear )
   214:  	Loop
-  220:  		Call  SetPlayerActionState  ( 00000014 )
+  220:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   230:  		Call  UpdateLerp ( )
   23C:  		Call  $Function_802400BC ( )
   248:  		Wait  1`
@@ -3152,7 +3159,7 @@ PADDING: 80243738 to 80243740 (00003738 to 00003740)
     C:  SuspendAll  00000001
    18:  Call  ShowKeyChoicePopup ( )
    24:  If  *Var0  ==  00000000
-   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    4C:  	Call  CloseChoicePopup ( )
    58:  	ResumeAll  00000001
    64:  	Return
@@ -3162,7 +3169,7 @@ PADDING: 80243738 to 80243740 (00003738 to 00003740)
    90:  	ResumeAll  00000001
    9C:  	Return
    A4:  EndIf
-   AC:  Call  FindKeyItem       ( .Item:CastleKey1 *Var0 )
+   AC:  Call  FindKeyItem       ( .Item:TubbaCastleKey *Var0 )
    C0:  Call  RemoveKeyItemAt   ( *Var0 )
    D0:  Call  CloseChoicePopup ( )
    DC:  Set   *GF_DGB03_UnlockedThirdFloor  .True
@@ -3205,7 +3212,7 @@ PADDING: 80243964 to 80243970 (00003964 to 00003970)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -3347,7 +3354,7 @@ MISSING: 80243A2C to 80243A54 (00003A2C to 00003A54)
 {
     0:  Call  GetEntryID    ( *Var0 )
    10:  If  *Var0  ==  ~Entry:Entry3
-   20:  	Call  SetNpcPos ( .Npc:Self FFFFFEB6 000000D2 FFFFFFEC )
+   20:  	Call  SetNpcPos ( .Npc:Self  -330`  210`  -20` )
    3C:  EndIf
    44:  Return
    4C:  End
@@ -3355,55 +3362,55 @@ MISSING: 80243A2C to 80243A54 (00003A2C to 00003A54)
 
 #new:NpcGroup $NpcGroup_80243DE8
 {
-	00000000 $NpcSettings_80243AFC ~Vec3f:NPC_80243DE8 % 180 0 -122
+	.NpcID:WorldClubba_00 $NpcSettings_80243AFC ~Vec3f:NPC_WorldClubba_00 % 180 0 -122
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80243DE8
-	~AnimationTable:NPC_80243DE8 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_00
+	~AnimationTable:NPC_WorldClubba_00 % .Sprite:WorldClubba
 	00000002 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DE8[1F0]
-	00000001 $NpcSettings_80243D68 ~Vec3f:NPC_80243FD8 % 0 -1000 0
+	.NpcID:WorldClubba_01 $NpcSettings_80243D68 ~Vec3f:NPC_WorldClubba_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243FD8
-	~AnimationTable:NPC_80243FD8 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_01
+	~AnimationTable:NPC_WorldClubba_01 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_80243A54 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802441C8
 {
-	00000002 $NpcSettings_80243BC8 ~Vec3f:NPC_802441C8 % -272 0 -135
+	.NpcID:WorldClubba_02 $NpcSettings_80243BC8 ~Vec3f:NPC_WorldClubba_02 % -272 0 -135
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_802441C8
-	~AnimationTable:NPC_802441C8 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_02
+	~AnimationTable:NPC_WorldClubba_02 % .Sprite:WorldClubba
 	00000002 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802441C8[1F0]
-	00000003 $NpcSettings_80243D68 ~Vec3f:NPC_802443B8 % 0 -1000 0
+	.NpcID:WorldClubba_03 $NpcSettings_80243D68 ~Vec3f:NPC_WorldClubba_03 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802443B8
-	~AnimationTable:NPC_802443B8 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_03
+	~AnimationTable:NPC_WorldClubba_03 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_80243A54 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802445A8
 {
-	00000004 $NpcSettings_80243C94 ~Vec3f:NPC_802445A8 % -326 210 80
+	.NpcID:WorldClubba_04 $NpcSettings_80243C94 ~Vec3f:NPC_WorldClubba_04 % -326 210 80
 	00000C00 $Script_Init_80243D94 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_802445A8
-	~AnimationTable:NPC_802445A8 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_04
+	~AnimationTable:NPC_WorldClubba_04 % .Sprite:WorldClubba
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802445A8[1F0]
-	00000005 $NpcSettings_80243D68 ~Vec3f:NPC_80244798 % 0 -1000 0
+	.NpcID:WorldClubba_05 $NpcSettings_80243D68 ~Vec3f:NPC_WorldClubba_05 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244798
-	~AnimationTable:NPC_80244798 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_05
+	~AnimationTable:NPC_WorldClubba_05 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_80243A54 00000000 % no tattle string
 }
 

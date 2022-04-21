@@ -1,6 +1,11 @@
 % Script File: flo_09.mscr
 % Decoded from: 0 to 4200 (flo_09)
 
+#define .NpcID:Dayzee_00            00
+#define .NpcID:Dayzee_01            01
+#define .NpcID:Bzzap_02             02
+#define .NpcID:Bzzap_03             03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -10,7 +15,7 @@
    10:  COPY      A3, A1
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -1738,8 +1743,8 @@ PADDING: 80241818 to 80241820 (00001818 to 00001820)
 {
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_8024414C )
    84:  Exec  $Script_802425DC
@@ -2123,11 +2128,11 @@ PADDING: 80242874 to 80242880 (00002874 to 00002880)
 
 #new:Script $Script_802431E4
 {
-    0:  Call  GetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
+    0:  Call  GetNpcPos ( .NpcID:Bzzap_03 *Var0 *Var1 *Var2 )
    1C:  If  *Var1  <  00000000
    2C:  	Call  GetModelCenter    ( *Var9 )
    3C:  	Add   *Var2  00000023
-   4C:  	Call  SetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
+   4C:  	Call  SetNpcPos ( .NpcID:Bzzap_03 *Var0 *Var1 *Var2 )
    68:  EndIf
    70:  Return
    78:  End
@@ -2349,14 +2354,14 @@ PADDING: 80242874 to 80242880 (00002874 to 00002880)
    54:  			If  *Var1  >  00000000
    64:  				Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    7C:  				Call  SetNpcJumpscale   ( .Npc:Self 00000000 )
-   90:  				Call  NpcJump0      ( .Npc:Self *Var0 00000032 *Var2 0000000F )
+   90:  				Call  NpcJump0      ( .Npc:Self *Var0  50` *Var2  15` )
    B0:  				Call  SetSelfVar    ( 00000000 00000001 )
    C4:  				Call  BindNpcAI     ( .Npc:Self $Script_NpcAI_80243674 )
    D8:  			EndIf
    E0:  		Case  ==  00000002
    EC:  			Call  DisablePlayerInput    ( .True )
    FC:  			Wait  25`
-  108:  			Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  108:  			Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   124:  			Call  SetNpcFlagBits        ( .Npc:Self 00000002 .False )
   13C:  			Call  SetSelfVar    ( 00000000 00000000 )
   150:  			Call  DisablePlayerInput    ( .False )
@@ -2392,45 +2397,45 @@ PADDING: 80242874 to 80242880 (00002874 to 00002880)
 
 #new:NpcGroup $NpcGroup_8024398C
 {
-	00000000 $NpcSettings_80243600 ~Vec3f:NPC_8024398C % -350 0 40
+	.NpcID:Dayzee_00 $NpcSettings_80243600 ~Vec3f:NPC_Dayzee_00 % -350 0 40
 	00002D00 00000000 00000000 00000000 0000005A
 	~Items:15:MapleSyrup:6:HoneySyrup:4
 	~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:0:3
-	~Movement:NPC_8024398C
-	~AnimationTable:NPC_8024398C % .Sprite:Dayzee
+	~Movement:NPC_Dayzee_00
+	~AnimationTable:NPC_Dayzee_00 % .Sprite:Dayzee
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243B7C
 {
-	00000001 $NpcSettings_80243600 ~Vec3f:NPC_80243B7C % 260 0 75
+	.NpcID:Dayzee_01 $NpcSettings_80243600 ~Vec3f:NPC_Dayzee_01 % 260 0 75
 	00002D00 00000000 00000000 00000000 0000010E
 	~Items:15:MapleSyrup:6:HoneySyrup:4
 	~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:0:3
-	~Movement:NPC_80243B7C
-	~AnimationTable:NPC_80243B7C % .Sprite:Dayzee
+	~Movement:NPC_Dayzee_01
+	~AnimationTable:NPC_Dayzee_01 % .Sprite:Dayzee
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243D6C
 {
-	00000002 $NpcSettings_802436E4 ~Vec3f:NPC_80243D6C % -50 55 90
+	.NpcID:Bzzap_02 $NpcSettings_802436E4 ~Vec3f:NPC_Bzzap_02 % -50 55 90
 	00002D00 00000000 00000000 00000000 0000005A
 	~Items:15:MapleSyrup:6:HoneySyrup:4
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:4
-	~Movement:NPC_80243D6C
-	~AnimationTable:NPC_80243D6C % .Sprite:Bzzap
+	~Movement:NPC_Bzzap_02
+	~AnimationTable:NPC_Bzzap_02 % .Sprite:Bzzap
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243F5C
 {
-	00000003 $NpcSettings_80243710 ~Vec3f:NPC_80243F5C % 0 -1000 0
+	.NpcID:Bzzap_03 $NpcSettings_80243710 ~Vec3f:NPC_Bzzap_03 % 0 -1000 0
 	00002D04 $Script_Init_80243954 00000000 00000000 0000005A
 	~Items:15:MapleSyrup:6:HoneySyrup:4
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:4
-	~Movement:NPC_80243F5C
-	~AnimationTable:NPC_80243F5C % .Sprite:Bzzap
+	~Movement:NPC_Bzzap_03
+	~AnimationTable:NPC_Bzzap_03 % .Sprite:Bzzap
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 

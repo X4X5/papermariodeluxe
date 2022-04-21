@@ -1,6 +1,10 @@
 % Script File: mim_02.mscr
 % Decoded from: 0 to 3880 (mim_02)
 
+#define .NpcID:Oaklie_00            00
+#define .NpcID:Fuzzy_01             01
+#define .NpcID:Fuzzy_02             02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -730,7 +734,7 @@ PADDING: 80240068 to 80240070 (00000068 to 00000070)
   20C:  LW        A1, 38 (S3)
   210:  LW        A2, 3C (S3)
   214:  LW        A3, 40 (S3)
-  218:  JAL       ~Func:fx_walk_normal
+  218:  JAL       ~Func:fx_walk
   21C:  LI        A0, 2
   220:  COPY      A0, S7
   224:  LI        V0, C
@@ -1283,8 +1287,8 @@ PADDING: 8024129C to 802412A0 (0000129C to 000012A0)
 {
     0:  Set   *GB_WorldLocation  .Location:ForeverForest
    10:  Call  SetSpriteShading  ( .Shading:mim_02 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 0000028A )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  650` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Set   *AreaByte[2]  *GB_MIM_CurrentMapID
@@ -1396,34 +1400,34 @@ MISSING: 802416A4 to 802416AC (000016A4 to 000016AC)
 #new:Script $Script_Interact_80241848
 {
     0:  If  *GB_StoryProgress  <  .Story:Ch3_InvitedToBoosMansion % FFFFFFCE
-   10:  	Call  SpeakToPlayer ( 00000000 00BE0002 00BE0001 00000000 000E0006 ) % I'm called Oaklie. This forest is my home. I try t ...
+   10:  	Call  SpeakToPlayer ( .NpcID:Oaklie_00 00BE0002 00BE0001 00000000 000E0006 ) % I'm called Oaklie. This forest is my home. I try t ...
    30:  	Return
    38:  EndIf
-   40:  Call  SpeakToPlayer     ( 00000000 00BE0002 00BE0001 00000000 000E0007 ) % Um-kay. So that's your story. You're invited to Bo ...
-   60:  Call  SetNpcFlagBits    ( 00000000 00000100 .True )
+   40:  Call  SpeakToPlayer     ( .NpcID:Oaklie_00 00BE0002 00BE0001 00000000 000E0007 ) % Um-kay. So that's your story. You're invited to Bo ...
+   60:  Call  SetNpcFlagBits    ( .NpcID:Oaklie_00 00000100 .True )
    78:  Wait  5`
    84:  Thread
-   8C:  	Call  SetNpcAnimation   ( 00000000 00BE0003 )
+   8C:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0003 )
    A0:  	Wait  15`
-   AC:  	Call  SetNpcAnimation   ( 00000000 00BE0004 )
+   AC:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0004 )
    C0:  EndThread
    C8:  Thread
    D0:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    E8:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-  104:  	Call  SetPanTarget  ( .Cam:Default FFFFFE56 0000003A FFFFFFBA )
+  104:  	Call  SetPanTarget  ( .Cam:Default  -426`  58`  -70` )
   120:  	Call  SetCamPitch   ( .Cam:Default *Fixed[6.0] *Fixed[-6.0] )
-  138:  	Call  SetCamDistance    ( .Cam:Default 000000FA )
+  138:  	Call  SetCamDistance    ( .Cam:Default  250` )
   14C:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   160:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   178:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   18C:  EndThread
-  194:  Call  PlaySoundAtNpc    ( 00000000 0000032C 00000000 )
-  1AC:  Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  1C0:  Call  NpcJump0  ( 00000000 FFFFFE56 0000003A FFFFFFBA 00000014 )
-  1E0:  Call  SetNpcAnimation   ( 00000000 00BE0005 )
+  194:  Call  PlaySoundAtNpc    ( .NpcID:Oaklie_00 0000032C 00000000 )
+  1AC:  Call  SetNpcJumpscale   ( .NpcID:Oaklie_00 *Fixed[1.0] )
+  1C0:  Call  NpcJump0  ( .NpcID:Oaklie_00  -426`  58`  -70`  20` )
+  1E0:  Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0005 )
   1F4:  Wait  5`
-  200:  Call  SetNpcAnimation   ( 00000000 00BE0001 )
-  214:  Call  SpeakToPlayer     ( 00000000 00BE0002 00BE0001 00000000 000E0008 ) % Listen carefully... If you want to get through thi ...
+  200:  Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0001 )
+  214:  Call  SpeakToPlayer     ( .NpcID:Oaklie_00 00BE0002 00BE0001 00000000 000E0008 ) % Listen carefully... If you want to get through thi ...
   234:  Wait  5`
   240:  Thread
   248:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -1434,42 +1438,42 @@ MISSING: 802416A4 to 802416AC (000016A4 to 000016AC)
   2C4:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   2D8:  EndThread
   2E0:  Thread
-  2E8:  	Call  SetNpcAnimation   ( 00000000 00BE0003 )
+  2E8:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0003 )
   2FC:  	Wait  15`
-  308:  	Call  SetNpcAnimation   ( 00000000 00BE0004 )
+  308:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0004 )
   31C:  EndThread
-  324:  Call  PlaySoundAtNpc    ( 00000000 0000032C 00000000 )
-  33C:  Call  NpcJump0  ( 00000000 FFFFFEB3 00000000 FFFFFFAF 00000014 )
-  35C:  Call  SetNpcAnimation   ( 00000000 00BE0005 )
+  324:  Call  PlaySoundAtNpc    ( .NpcID:Oaklie_00 0000032C 00000000 )
+  33C:  Call  NpcJump0  ( .NpcID:Oaklie_00  -333`  0`  -81`  20` )
+  35C:  Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0005 )
   370:  Wait  5`
   37C:  Thread
-  384:  	Call  SetNpcAnimation   ( 00000000 00BE0003 )
+  384:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0003 )
   398:  	Wait  15`
-  3A4:  	Call  SetNpcAnimation   ( 00000000 00BE0004 )
+  3A4:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0004 )
   3B8:  EndThread
-  3C0:  Call  PlaySoundAtNpc    ( 00000000 0000032C 00000000 )
-  3D8:  Call  NpcJump0  ( 00000000 FFFFFED4 00000000 FFFFFF56 0000000F )
-  3F8:  Call  SetNpcAnimation   ( 00000000 00BE0005 )
+  3C0:  Call  PlaySoundAtNpc    ( .NpcID:Oaklie_00 0000032C 00000000 )
+  3D8:  Call  NpcJump0  ( .NpcID:Oaklie_00  -300`  0`  -170`  15` )
+  3F8:  Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0005 )
   40C:  Wait  5`
   418:  Thread
-  420:  	Call  SetNpcAnimation   ( 00000000 00BE0003 )
+  420:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0003 )
   434:  	Wait  15`
-  440:  	Call  SetNpcAnimation   ( 00000000 00BE0004 )
+  440:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0004 )
   454:  EndThread
-  45C:  Call  PlaySoundAtNpc    ( 00000000 0000032C 00000000 )
-  474:  Call  NpcJump0  ( 00000000 FFFFFF1E 00000000 FFFFFF0B 0000000F )
-  494:  Call  SetNpcAnimation   ( 00000000 00BE0005 )
+  45C:  Call  PlaySoundAtNpc    ( .NpcID:Oaklie_00 0000032C 00000000 )
+  474:  Call  NpcJump0  ( .NpcID:Oaklie_00  -226`  0`  -245`  15` )
+  494:  Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0005 )
   4A8:  Wait  5`
   4B4:  Thread
-  4BC:  	Call  SetNpcAnimation   ( 00000000 00BE0003 )
+  4BC:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0003 )
   4D0:  	Wait  15`
-  4DC:  	Call  SetNpcAnimation   ( 00000000 00BE0004 )
+  4DC:  	Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0004 )
   4F0:  EndThread
-  4F8:  Call  PlaySoundAtNpc    ( 00000000 0000032C 00000000 )
-  510:  Call  NpcJump0  ( 00000000 FFFFFF60 00000000 FFFFFED8 0000000F )
-  530:  Call  SetNpcAnimation   ( 00000000 00BE0005 )
+  4F8:  Call  PlaySoundAtNpc    ( .NpcID:Oaklie_00 0000032C 00000000 )
+  510:  Call  NpcJump0  ( .NpcID:Oaklie_00  -160`  0`  -296`  15` )
+  530:  Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0005 )
   544:  Wait  5`
-  550:  Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+  550:  Call  SetNpcPos ( .NpcID:Oaklie_00  0`  -1000`  0` )
   56C:  Set   *GB_StoryProgress  .Story:Ch3_AllowedIntoForeverForest
   57C:  ExecWait  $Script_80243620
   588:  Return
@@ -1487,16 +1491,16 @@ MISSING: 802416A4 to 802416AC (000016A4 to 000016AC)
    68:  		Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
    84:  		Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
    A0:  		Call  SetCamPitch   ( .Cam:Default *Fixed[6.0] *Fixed[-6.0] )
-   B8:  		Call  SetCamDistance        ( .Cam:Default 0000012C )
+   B8:  		Call  SetCamDistance        ( .Cam:Default  300` )
    CC:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
    E0:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    F8:  		Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  10C:  		Call  SpeakToPlayer ( 00000000 00BE0002 00BE0001 00000000 000E0003 ) % Hmm... What do you think you're doing?
+  10C:  		Call  SpeakToPlayer ( .NpcID:Oaklie_00 00BE0002 00BE0001 00000000 000E0003 ) % Hmm... What do you think you're doing?
   12C:  		Wait  10`
   138:  		Thread
-  140:  			Call  SetNpcAnimation   ( 00000000 00BE0003 )
+  140:  			Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0003 )
   154:  			Wait  5`
-  160:  			Call  SetNpcAnimation   ( 00000000 00BE0004 )
+  160:  			Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0004 )
   174:  		EndThread
   17C:  		Thread
   184:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -1506,17 +1510,17 @@ MISSING: 802416A4 to 802416AC (000016A4 to 000016AC)
   1E8:  			Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   200:  			Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   214:  		EndThread
-  21C:  		Call  PlaySoundAtNpc    ( 00000000 0000032C 00000000 )
+  21C:  		Call  PlaySoundAtNpc    ( .NpcID:Oaklie_00 0000032C 00000000 )
   234:  		Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
-  248:  		Call  NpcJump0  ( .Npc:Self FFFFFE39 00000000 00000000 00000014 )
-  268:  		Call  SetNpcAnimation   ( 00000000 00BE0005 )
+  248:  		Call  NpcJump0  ( .Npc:Self  -455`  0`  0`  20` )
+  268:  		Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0005 )
   27C:  		Wait  5`
-  288:  		Call  SetNpcAnimation   ( 00000000 00BE0001 )
+  288:  		Call  SetNpcAnimation   ( .NpcID:Oaklie_00 00BE0001 )
   29C:  		Wait  15`
   2A8:  		If  *GB_StoryProgress  <  .Story:Ch1_ReturnedToToadTown % FFFFFFB7
-  2B8:  			Call  SpeakToPlayer ( 00000000 00BE0002 00BE0001 00000000 000E0004 ) % This is Forever Forest... The path ahead of here i ...
+  2B8:  			Call  SpeakToPlayer ( .NpcID:Oaklie_00 00BE0002 00BE0001 00000000 000E0004 ) % This is Forever Forest... The path ahead of here i ...
   2D8:  		Else
-  2E0:  			Call  SpeakToPlayer ( 00000000 00BE0002 00BE0001 00000000 000E0005 ) % This is Forever Forest... The path ahead of here i ...
+  2E0:  			Call  SpeakToPlayer ( .NpcID:Oaklie_00 00BE0002 00BE0001 00000000 000E0005 ) % This is Forever Forest... The path ahead of here i ...
   300:  		EndIf
   308:  		Call  DisablePlayerInput    ( .False )
   318:  EndSwitch
@@ -1530,7 +1534,7 @@ MISSING: 802416A4 to 802416AC (000016A4 to 000016AC)
    14:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80241DE0 )
    28:  Switch  *GB_StoryProgress
    34:  	Case  >=  .Story:Ch3_AllowedIntoForeverForest % FFFFFFCF
-   40:  		Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+   40:  		Call  SetNpcPos ( .NpcID:Oaklie_00  0`  -1000`  0` )
    5C:  EndSwitch
    64:  Return
    6C:  End
@@ -1538,31 +1542,31 @@ MISSING: 802416A4 to 802416AC (000016A4 to 000016AC)
 
 #new:NpcGroup $NpcGroup_80242184
 {
-	00000000 $NpcSettings_802415E0 ~Vec3f:NPC_80242184 % -426 58 -70
+	.NpcID:Oaklie_00 $NpcSettings_802415E0 ~Vec3f:NPC_Oaklie_00 % -426 58 -70
 	00400901 $Script_Init_80242110 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242184
-	~AnimationTable:NPC_80242184 % .Sprite:Oaklie
+	~Movement:NPC_Oaklie_00
+	~AnimationTable:NPC_Oaklie_00 % .Sprite:Oaklie
 	00000000 00000000 00000000 001A00A1 % This is Oaklie. He lives in Forever Forest. He gua ...
 }
 
 #new:NpcGroup $NpcGroup_80242374
 {
-	00000001 $NpcSettings_80241678 ~Vec3f:NPC_80242374 % 300 0 130
+	.NpcID:Fuzzy_01 $NpcSettings_80241678 ~Vec3f:NPC_Fuzzy_01 % 300 0 130
 	00000000 00000000 00000000 00000000 00000000
 	~Items:5:ThunderBolt:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80242374
-	~AnimationTable:NPC_80242374 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_01
+	~AnimationTable:NPC_Fuzzy_01 % .Sprite:Fuzzy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242564
 {
-	00000002 $NpcSettings_80241678 ~Vec3f:NPC_80242564 % -100 0 -320
+	.NpcID:Fuzzy_02 $NpcSettings_80241678 ~Vec3f:NPC_Fuzzy_02 % -100 0 -320
 	00000000 00000000 00000000 00000000 00000000
 	~Items:5:ThunderBolt:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80242564
-	~AnimationTable:NPC_80242564 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_02
+	~AnimationTable:NPC_Fuzzy_02 % .Sprite:Fuzzy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1675,7 +1679,7 @@ PADDING: 80242784 to 80242790 (00002784 to 00002790)
   11C:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   134:  			Add   *Var0  *Var7
   144:  			Add   *Var2  *Var8
-  154:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  154:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   16C:  		EndThread
   174:  		Set   *Var1  00000001
   184:  		Exec  $Script_80242790
@@ -1708,7 +1712,7 @@ PADDING: 80242784 to 80242790 (00002784 to 00002790)
   314:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   32C:  			Sub   *Var0  *Var7
   33C:  			Sub   *Var2  *Var8
-  34C:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  34C:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   364:  		EndThread
   36C:  		Set   *Var1  00000002
   37C:  		Exec  $Script_80242790
@@ -1739,7 +1743,7 @@ PADDING: 80242784 to 80242790 (00002784 to 00002790)
   4F0:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   508:  			Add   *Var0  *Var7
   518:  			Add   *Var2  *Var8
-  528:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  528:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   540:  		EndThread
   548:  		Set   *Var1  00000001
   558:  		Exec  $Script_80242790

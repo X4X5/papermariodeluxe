@@ -1,6 +1,8 @@
 % Script File: osr_01.mscr
 % Decoded from: 0 to 2180 (osr_01)
 
+#define .NpcID:Toad_00              00
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V0, 8007419C
@@ -905,8 +907,8 @@ PADDING: 80240C1C to 80240C20 (00000C1C to 00000C20)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachCastleGrounds
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Set   *AreaFlag[001]  .False
@@ -1058,7 +1060,7 @@ MISSING: 8024118C to 802411B8 (0000118C to 000011B8)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -1098,7 +1100,7 @@ MISSING: 8024118C to 802411B8 (0000118C to 000011B8)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -1144,15 +1146,15 @@ MISSING: 8024118C to 802411B8 (0000118C to 000011B8)
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  SetPlayerActionState  ( .ActionState:Land )
    30:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   48:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000190 )
-   64:  Call  SetPanTarget      ( .Cam:Default 00000000 00000000 00000190 )
+   48:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  400` )
+   64:  Call  SetPanTarget      ( .Cam:Default  0`  0`  400` )
    80:  Call  SetCamDistance    ( .Cam:Default *Fixed[400.0] )
    94:  Call  SetCamPitch       ( .Cam:Default *Fixed[3.0] *Fixed[-10.0] )
    AC:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    C0:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    D8:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
    EC:  Wait  30`
-   F8:  Call  SpeakToPlayer     ( 00000000 00830004 00830001 00000000 000A006F ) % I want to see the princess... I want to see the pr ...
+   F8:  Call  SpeakToPlayer     ( .NpcID:Toad_00 00830004 00830001 00000000 000A006F ) % I want to see the princess... I want to see the pr ...
   118:  Wait  10`
   124:  Call  GotoMap   ( $ASCII_80242178 00000004 ) % mac_04
   138:  Wait  100`
@@ -1222,8 +1224,8 @@ MISSING: 8024118C to 802411B8 (0000118C to 000011B8)
     0:  Call  GetEntryID    ( *Var0 )
    10:  Switch  *Var0
    1C:  	Case  ==  ~Entry:Entry3
-   28:  		Call  SetNpcPos ( .Npc:Self 00000000 00000000 00000190 )
-   44:  		Call  SetNpcYaw ( .Npc:Self 0000005A )
+   28:  		Call  SetNpcPos ( .Npc:Self  0`  0`  400` )
+   44:  		Call  SetNpcYaw ( .Npc:Self  90` )
    58:  	Default
    60:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80241C20 )
    74:  EndSwitch
@@ -1233,11 +1235,11 @@ MISSING: 8024118C to 802411B8 (0000118C to 000011B8)
 
 #new:NpcGroup $NpcGroup_80241F4C
 {
-	00000000 $NpcSettings_80241160 ~Vec3f:NPC_80241F4C % 25 0 130
+	.NpcID:Toad_00 $NpcSettings_80241160 ~Vec3f:NPC_Toad_00 % 25 0 130
 	00112D09 $Script_Init_80241EC0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241F4C
-	~AnimationTable:NPC_80241F4C % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 001A000C % He's a Toad. He never fails to go for a walk, even ...
 }
 

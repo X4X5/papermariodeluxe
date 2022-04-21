@@ -1,7 +1,7 @@
 % index X for GameByte[X] = engine name = semantic name
 
 000 = Byte_EVT_00 = GB_StoryProgress
-001 = Byte_EVT_01 % copied from GameStaus->unk_A9 by Function_80035E54 during save file load
+001 = Byte_EVT_01 = unused % copied from GameStaus->unk_A9 by Function_80035E54 during save file load
 002 = Byte_EVT_02 = unused
 003 = Byte_EVT_03 = unused
 004 = Byte_EVT_04 = unused
@@ -12,11 +12,11 @@
 009 = Byte_EVT_09 = unused
 00A = Byte_EVT_0A = unused
 00B = Byte_EVT_0B = unused
-00C = Byte_KMR_00
-00D = Byte_KMR_01
+00C = Byte_KMR_00 = unused
+00D = Byte_KMR_01 = unused
 00E = Byte_KMR_02 = GB_KMR20_MarioReadLetterFlags_00
 00F = Byte_KMR_03 = GB_KMR20_MarioReadLetterFlags_01
-010 = Byte_KMR_04
+010 = Byte_KMR_04 = unused
 011 = Byte_KMR_05 = unused
 012 = Byte_KMR_06 = unused
 013 = Byte_KMR_07 = unused
@@ -77,7 +77,7 @@
 04A = Byte_KGR_07 = unused
 04B = Byte_KGR_08 = unused
 04C = Byte_KGR_09 = unused
-04D = Byte_KKJ_00
+04D = Byte_KKJ_00 = unused
 04E = Byte_KKJ_01 = GB_KKJ_LastPartner % peach missions need to remember Mario's last partner
 04F = Byte_KKJ_02 = GB_KKJ_CaughtCount % how many times peach is caught for each mission
 050 = Byte_KKJ_03 = unused
@@ -100,8 +100,8 @@
 061 = Byte_HOS_07 = unused
 062 = Byte_HOS_08 = unused
 063 = Byte_HOS_09 = unused
-064 = Byte_NOK_00
-065 = Byte_NOK_01
+064 = Byte_NOK_00 = unused
+065 = Byte_NOK_01 = unused
 066 = Byte_NOK_02 = unused
 067 = Byte_NOK_03 = unused
 068 = Byte_NOK_04 = unused
@@ -136,7 +136,7 @@
 085 = Byte_IWA_0B = unused
 086 = Byte_DRO_00 = GB_DRO02_SheekGiftCount
 087 = Byte_DRO_01 = GB_DRO02_SheekLemonGiftCount
-088 = Byte_DRO_02 = unused 
+088 = Byte_DRO_02 = unused
 089 = Byte_DRO_03 = unused
 08A = Byte_DRO_04 = unused
 08B = Byte_DRO_05 = unused
@@ -249,9 +249,9 @@
 0F6 = Byte_KZN_07 = unused
 0F7 = Byte_KZN_08 = unused
 0F8 = Byte_KZN_09 = unused
-0F9 = Byte_FLO_00
-0FA = Byte_FLO_01
-0FB = Byte_FLO_02
+0F9 = Byte_FLO_00 = unused
+0FA = Byte_FLO_01 = unused
+0FB = Byte_FLO_02 = unused
 0FC = Byte_FLO_03 = GB_FLO18_MachineDamage_Left
 0FD = Byte_FLO_04 = GB_FLO18_MachineDamage_Right
 0FE = Byte_FLO_05 = unused
@@ -283,7 +283,7 @@
 118 = Byte_SAM_10 = unused
 119 = Byte_SAM_11 = unused
 11A = Byte_SAM_12 = unused
-11B = Byte_PRA_00
+11B = Byte_PRA_00 = unused
 11C = Byte_PRA_01 = GB_PRA18_ClubbasDefeated
 11D = Byte_PRA_02 = GB_PRA19_TutorialState % 0/1/2 for the action performed by the reflection
 11E = Byte_PRA_03 = GB_PRA_TwinStatueState % 0/1/2
@@ -436,79 +436,79 @@
 1B1 = Byte_MAP_08 = unused
 1B2 = Byte_MAP_09 = unused
 1B3 = Byte_MAP_0A = unused
-1B4 = GameByte[1B4]
-1B5 = GameByte[1B5]
-1B6 = GameByte[1B6]
-1B7 = GameByte[1B7]
-1B8 = GameByte[1B8]
-1B9 = GameByte[1B9]
-1BA = GameByte[1BA]
-1BB = GameByte[1BB]
-1BC = GameByte[1BC]
-1BD = GameByte[1BD]
-1BE = GameByte[1BE]
-1BF = GameByte[1BF]
-1C0 = GameByte[1C0]
-1C1 = GameByte[1C1]
-1C2 = GameByte[1C2]
-1C3 = GameByte[1C3]
-1C4 = GameByte[1C4]
-1C5 = GameByte[1C5]
-1C6 = GameByte[1C6]
-1C7 = GameByte[1C7]
-1C8 = GameByte[1C8]
-1C9 = GameByte[1C9]
-1CA = GameByte[1CA]
-1CB = GameByte[1CB]
-1CC = GameByte[1CC]
-1CD = GameByte[1CD]
-1CE = GameByte[1CE]
-1CF = GameByte[1CF]
-1D0 = GameByte[1D0]
-1D1 = GameByte[1D1]
-1D2 = GameByte[1D2]
-1D3 = GameByte[1D3]
-1D4 = GameByte[1D4]
-1D5 = GameByte[1D5]
-1D6 = GameByte[1D6]
-1D7 = GameByte[1D7]
-1D8 = GameByte[1D8]
-1D9 = GameByte[1D9]
-1DA = GameByte[1DA]
-1DB = GameByte[1DB]
-1DC = GameByte[1DC]
-1DD = GameByte[1DD]
-1DE = GameByte[1DE]
-1DF = GameByte[1DF]
-1E0 = GameByte[1E0]
-1E1 = GameByte[1E1]
-1E2 = GameByte[1E2]
-1E3 = GameByte[1E3]
-1E4 = GameByte[1E4]
-1E5 = GameByte[1E5]
-1E6 = GameByte[1E6]
-1E7 = GameByte[1E7]
-1E8 = GameByte[1E8]
-1E9 = GameByte[1E9]
-1EA = GameByte[1EA]
-1EB = GameByte[1EB]
-1EC = GameByte[1EC]
-1ED = GameByte[1ED]
-1EE = GameByte[1EE]
-1EF = GameByte[1EF]
-1F0 = GameByte[1F0]
-1F1 = GameByte[1F1]
-1F2 = GameByte[1F2]
-1F3 = GameByte[1F3]
-1F4 = GameByte[1F4]
-1F5 = GameByte[1F5]
-1F6 = GameByte[1F6]
-1F7 = GameByte[1F7]
-1F8 = GameByte[1F8]
-1F9 = GameByte[1F9]
-1FA = GameByte[1FA]
-1FB = GameByte[1FB]
-1FC = GameByte[1FC]
-1FD = GameByte[1FD]
-1FE = GameByte[1FE]
-1FF = GameByte[1FF]
+1B4 = GameByte[1B4] = unused
+1B5 = GameByte[1B5] = unused
+1B6 = GameByte[1B6] = unused
+1B7 = GameByte[1B7] = unused
+1B8 = GameByte[1B8] = unused
+1B9 = GameByte[1B9] = unused
+1BA = GameByte[1BA] = unused
+1BB = GameByte[1BB] = unused
+1BC = GameByte[1BC] = unused
+1BD = GameByte[1BD] = unused
+1BE = GameByte[1BE] = unused
+1BF = GameByte[1BF] = unused
+1C0 = GameByte[1C0] = unused
+1C1 = GameByte[1C1] = unused
+1C2 = GameByte[1C2] = unused
+1C3 = GameByte[1C3] = unused
+1C4 = GameByte[1C4] = unused
+1C5 = GameByte[1C5] = unused
+1C6 = GameByte[1C6] = unused
+1C7 = GameByte[1C7] = unused
+1C8 = GameByte[1C8] = unused
+1C9 = GameByte[1C9] = unused
+1CA = GameByte[1CA] = unused
+1CB = GameByte[1CB] = unused
+1CC = GameByte[1CC] = unused
+1CD = GameByte[1CD] = unused
+1CE = GameByte[1CE] = unused
+1CF = GameByte[1CF] = unused
+1D0 = GameByte[1D0] = unused
+1D1 = GameByte[1D1] = unused
+1D2 = GameByte[1D2] = unused
+1D3 = GameByte[1D3] = unused
+1D4 = GameByte[1D4] = unused
+1D5 = GameByte[1D5] = unused
+1D6 = GameByte[1D6] = unused
+1D7 = GameByte[1D7] = unused
+1D8 = GameByte[1D8] = unused
+1D9 = GameByte[1D9] = unused
+1DA = GameByte[1DA] = unused
+1DB = GameByte[1DB] = unused
+1DC = GameByte[1DC] = unused
+1DD = GameByte[1DD] = unused
+1DE = GameByte[1DE] = unused
+1DF = GameByte[1DF] = unused
+1E0 = GameByte[1E0] = unused
+1E1 = GameByte[1E1] = unused
+1E2 = GameByte[1E2] = unused
+1E3 = GameByte[1E3] = unused
+1E4 = GameByte[1E4] = unused
+1E5 = GameByte[1E5] = unused
+1E6 = GameByte[1E6] = unused
+1E7 = GameByte[1E7] = unused
+1E8 = GameByte[1E8] = unused
+1E9 = GameByte[1E9] = unused
+1EA = GameByte[1EA] = unused
+1EB = GameByte[1EB] = unused
+1EC = GameByte[1EC] = unused
+1ED = GameByte[1ED] = unused
+1EE = GameByte[1EE] = unused
+1EF = GameByte[1EF] = unused
+1F0 = GameByte[1F0] = unused
+1F1 = GameByte[1F1] = unused
+1F2 = GameByte[1F2] = unused
+1F3 = GameByte[1F3] = unused
+1F4 = GameByte[1F4] = unused
+1F5 = GameByte[1F5] = unused
+1F6 = GameByte[1F6] = unused
+1F7 = GameByte[1F7] = unused
+1F8 = GameByte[1F8] = unused
+1F9 = GameByte[1F9] = unused
+1FA = GameByte[1FA] = unused
+1FB = GameByte[1FB] = unused
+1FC = GameByte[1FC] = unused
+1FD = GameByte[1FD] = unused
+1FE = GameByte[1FE] = unused
+1FF = GameByte[1FF] = unused

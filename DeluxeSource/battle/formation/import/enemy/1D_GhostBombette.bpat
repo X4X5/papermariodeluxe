@@ -173,10 +173,10 @@
 
 #new:Script $Script_802204DC_1D {
     0:  Thread
-    8:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.75] )
-   24:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000005 *Fixed[3.0] )
-   40:  	Call  ShakeCam  ( .Cam:Battle 00000000 0000000A *Fixed[4.5] )
-   5C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000005 *Fixed[3.0] )
+    8:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.75] )
+   24:  	Call  ShakeCam  ( .Cam:Battle 00000000  5` *Fixed[3.0] )
+   40:  	Call  ShakeCam  ( .Cam:Battle 00000000  10` *Fixed[4.5] )
+   5C:  	Call  ShakeCam  ( .Cam:Battle 00000000  5` *Fixed[3.0] )
    78:  EndThread
    80:  Call  GetActorPos   ( .Actor:Self *Var0 *Var1 *Var2 )
    9C:  Add   *Var2  00000002 
@@ -318,10 +318,10 @@
    44:  Call  BattleCamTargetActor  ( .Actor:Self )
    54:  Call  SetTargetActor    ( .Actor:Self .Actor:Player )
    68:  Call  SetGoalToTarget   ( .Actor:Self )
-   78:  Call  AddGoalPos        ( .Actor:Self 00000028 00000000 00000000 )
-   94:  Call  MoveBattleCamOver ( 0000001E )
+   78:  Call  AddGoalPos        ( .Actor:Self  40`  0`  0` )
+   94:  Call  MoveBattleCamOver (  30` )
    A4:  Call  SetAnimation      ( .Actor:Self 00000001 000B0008 )
-   BC:  Call  RunToGoal ( .Actor:Self 0000001E .False )
+   BC:  Call  RunToGoal ( .Actor:Self  30` .False )
    D4:  Call  SetAnimation      ( .Actor:Self 00000001 000B0004 )
    EC:  Call  SetAnimation      ( .Actor:Self 00000001 000B000F )
   104:  Wait  15`
@@ -333,9 +333,9 @@
   17C:  	CaseOR  ==  .HitResult:Lucky % 5
   188:  		Set   *VarA  *Var0 
   198:  		Call  SetGoalToTarget   ( .Actor:Self )
-  1A8:  		Call  AddGoalPos    ( .Actor:Self FFFFFFF6 00000000 00000000 )
+  1A8:  		Call  AddGoalPos    ( .Actor:Self  -10`  0`  0` )
   1C4:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0010 )
-  1DC:  		Call  RunToGoal     ( .Actor:Self 00000005 .False )
+  1DC:  		Call  RunToGoal     ( .Actor:Self  5` .False )
   1F4:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0004 )
   20C:  		Thread
   214:  			Call  SetActorRotationOffset    ( .Actor:Self 00000000 0000000F 00000000 )
@@ -347,8 +347,8 @@
   284:  			EndLoop
   28C:  			Call  SetActorRotationOffset    ( .Actor:Self 00000000 00000000 00000000 )
   2A8:  		EndThread
-  2B0:  		Call  AddGoalPos    ( .Actor:Self FFFFFFC4 00000000 00000000 )
-  2CC:  		Call  RunToGoal     ( .Actor:Self 0000000A .False )
+  2B0:  		Call  AddGoalPos    ( .Actor:Self  -60`  0`  0` )
+  2CC:  		Call  RunToGoal     ( .Actor:Self  10` .False )
   2E4:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0004 )
   2FC:  		Thread
   304:  			Call  $Function_80218D64_1D ( )
@@ -362,7 +362,7 @@
   37C:  		Call  SetAnimation      ( .Actor:Self 00000001 000B0008 )
   394:  		Call  SetGoalToHome     ( .Actor:Self )
   3A4:  		Call  SetActorSpeed     ( .Actor:Self *Fixed[5.0] )
-  3B8:  		Call  RunToGoal ( .Actor:Self 00000000 .False )
+  3B8:  		Call  RunToGoal ( .Actor:Self  0` .False )
   3D0:  		Call  EnableIdleScript  ( .Actor:Self 00000001 )
   3E4:  		Call  UseIdleAnimation  ( .Actor:Self .True )
   3F8:  		Return
@@ -371,7 +371,7 @@
   410:  Set   *VarA  *Var0 
   420:  Call  SetGoalToTarget   ( .Actor:Self )
   430:  Call  SetAnimation  ( .Actor:Self 00000001 000B0010 )
-  448:  Call  RunToGoal     ( .Actor:Self 00000004 .False )
+  448:  Call  RunToGoal     ( .Actor:Self  4` .False )
   460:  Call  GetActorVar   ( .Actor:Self 00000001 *Var9 )
   478:  Switch  *Var9 
   484:  	Case  ==  00000000 
@@ -386,35 +386,35 @@
   544:  EndSwitch
   54C:  Switch  *Var0 
   558:  	CaseOR  ==  .HitResult:Hit % 0
-  564:  	CaseOR  ==  00000002 % 2
+  564:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   570:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0004 )
   588:  		Call  UseBattleCamPreset    ( 00000002 )
-  598:  		Call  MoveBattleCamOver     ( 00000008 )
+  598:  		Call  MoveBattleCamOver     (  8` )
   5A8:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0011 )
   5C0:  		Call  GetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
   5DC:  		Add   *Var0  00000028 
   5EC:  		Set   *Var1  00000000 
   5FC:  		Call  SetActorJumpGravity   ( .Actor:Self *Fixed[1.4] )
   610:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  62C:  		Call  JumpToGoal    ( .Actor:Self 00000014 .False .True .False )
+  62C:  		Call  JumpToGoal    ( .Actor:Self  20` .False .True .False )
   64C:  		Call  SetAnimation  ( .Actor:Self 00000001 000B000E )
   664:  		Wait  1`
   670:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0011 )
   688:  		Add   *Var0  00000028 
   698:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  6B4:  		Call  JumpToGoal    ( .Actor:Self 00000008 .False .True .False )
+  6B4:  		Call  JumpToGoal    ( .Actor:Self  8` .False .True .False )
   6D4:  		Call  SetAnimation  ( .Actor:Self 00000001 000B000E )
   6EC:  		Wait  1`
   6F8:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0011 )
   710:  		Add   *Var0  00000014 
   720:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  73C:  		Call  JumpToGoal    ( .Actor:Self 00000006 .False .True .False )
+  73C:  		Call  JumpToGoal    ( .Actor:Self  6` .False .True .False )
   75C:  		Call  SetAnimation  ( .Actor:Self 00000001 000B000E )
   774:  		Wait  1`
   780:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0011 )
   798:  		Add   *Var0  0000000A 
   7A8:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  7C4:  		Call  JumpToGoal    ( .Actor:Self 00000004 .False .True .False )
+  7C4:  		Call  JumpToGoal    ( .Actor:Self  4` .False .True .False )
   7E4:  		Call  SetAnimation  ( .Actor:Self 00000001 000B000E )
   7FC:  		Wait  1`
   808:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0004 )
@@ -423,7 +423,7 @@
   838:  		Call  SetAnimation  ( .Actor:Self 00000001 000B0008 )
   850:  		Call  SetGoalToHome ( .Actor:Self )
   860:  		Call  SetActorSpeed ( .Actor:Self *Fixed[5.0] )
-  874:  		Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  874:  		Call  RunToGoal     ( .Actor:Self  0` .False )
   88C:  	EndCaseGroup
   894:  EndSwitch
   89C:  Call  EnableIdleScript  ( .Actor:Self 00000001 )

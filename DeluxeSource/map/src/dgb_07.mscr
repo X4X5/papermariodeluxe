@@ -1,6 +1,9 @@
 % Script File: dgb_07.mscr
 % Decoded from: 0 to 21C0 (dgb_07)
 
+#define .NpcID:WorldClubba_00       00
+#define .NpcID:WorldClubba_01       01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -1483,8 +1486,8 @@ PADDING: 80241528 to 80241530 (00001528 to 00001530)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  If  *GB_StoryProgress  <  .Story:Ch3_StarSpiritRescued % FFFFFFF1
@@ -1517,7 +1520,7 @@ PADDING: 802417E4 to 802417F0 (000017E4 to 000017F0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1593,19 +1596,19 @@ PADDING: 802417E4 to 802417F0 (000017E4 to 000017F0)
 
 #new:NpcGroup $NpcGroup_80241A7C
 {
-	00000000 $NpcSettings_8024197C ~Vec3f:NPC_80241A7C % -500 0 -240
+	.NpcID:WorldClubba_00 $NpcSettings_8024197C ~Vec3f:NPC_WorldClubba_00 % -500 0 -240
 	00000800 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80241A7C
-	~AnimationTable:NPC_80241A7C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_00
+	~AnimationTable:NPC_WorldClubba_00 % .Sprite:WorldClubba
 	00000002 00000000 $ExtraAnimationList_802418AC 00000000 % no tattle string
 	%
 	% $NpcGroup_80241A7C[1F0]
-	00000001 $NpcSettings_80241A50 ~Vec3f:NPC_80241C6C % 0 -1000 0
+	.NpcID:WorldClubba_01 $NpcSettings_80241A50 ~Vec3f:NPC_WorldClubba_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241C6C
-	~AnimationTable:NPC_80241C6C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_01
+	~AnimationTable:NPC_WorldClubba_01 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802418D4 00000000 % no tattle string
 }
 

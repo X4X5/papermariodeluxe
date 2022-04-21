@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Map name="kpa_11" textures="kpa_tex">
 	<ModelTree>
 		<Node name="Root" id="BB">
@@ -372,10 +372,10 @@
 				<Node name="Entry4" id="3"/>
 			</Node>
 			<Node name="NPCs" id="9">
-				<Node name="NPC_80241814" id="5"/>
-				<Node name="NPC_80241A14" id="6"/>
-				<Node name="NPC_80241C04" id="7"/>
-				<Node name="NPC_80241DF4" id="8"/>
+				<Node name="WorldKoopatrol_00" id="5"/>
+				<Node name="Toad_01" id="6"/>
+				<Node name="Toad_02" id="7"/>
+				<Node name="ToadGuard_03" id="8"/>
 			</Node>
 			<Node name="Entities" id="D">
 				<Node name="Entity802414C0" id="A"/>
@@ -11036,7 +11036,7 @@
 		</Marker>
 		<Marker ver="4" type="Entity" pos="550,30,-145" yaw="0.000000">
 			<MapObject name="Item802414F4" id="C"/>
-			<Entity type="FFFFFFFF" flag="*GF_KPA11_Item_CastleKey2" item="CastleKey2" itemSpawnMode="Fixed_NeverVanish"/>
+			<Entity type="FFFFFFFF" flag="*GF_KPA11_Item_CastleKey2" item="BowserCastleKey" itemSpawnMode="Fixed_NeverVanish"/>
 		</Marker>
 		<Marker ver="4" type="Entity" desc="Entity:YellowBlock" pos="1400,90,-375" yaw="0.000000">
 			<MapObject name="Entity80241520" id="B"/>
@@ -11050,22 +11050,22 @@
 			<MapObject name="NPCs" id="9"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="900,30,-285" yaw="0.000000">
-			<MapObject name="NPC_80241DF4" id="8"/>
+			<MapObject name="ToadGuard_03" id="8"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="87" palette="3" animations="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="872,30,-315" yaw="0.000000">
-			<MapObject name="NPC_80241C04" id="7"/>
+			<MapObject name="Toad_02" id="7"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="83" palette="2" animations="1,2,3,3,1,1,6,6,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="845,30,-285" yaw="0.000000">
-			<MapObject name="NPC_80241A14" id="6"/>
+			<MapObject name="Toad_01" id="6"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="83" palette="0" animations="1,2,3,3,1,1,6,6,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="550,30,-145" yaw="270.000000">
-			<MapObject name="NPC_80241814" id="5"/>
+			<MapObject name="WorldKoopatrol_00" id="5"/>
 			<Movement type="Wander" data="226,1E,FFFFFF6F,1E,0,FFFF8001,0,226,1E,FFFFFF6F,C8,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="58" palette="0" animations="1,4,6,6,1,1,10,10,C,B,D,1,1,1,1,1"/>
 		</Marker>

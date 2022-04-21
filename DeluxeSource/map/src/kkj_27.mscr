@@ -1,6 +1,7 @@
 % Script File: kkj_27.mscr
 % Decoded from: 0 to 1130 (kkj_27)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -461,8 +462,8 @@ PADDING: 8024066C to 80240670 (0000066C to 00000670)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachsCastle
    10:  Call  SetSpriteShading  ( .Shading:kkj_27 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Exec  $Script_80241018
@@ -485,9 +486,9 @@ PADDING: 8024066C to 80240670 (0000066C to 00000670)
   184:  	Set   *VarC  00000000
   194:  	Exec  $Script_UpdateTexturePan_802405D0
   1A0:  EndThread
-  1A8:  Call  802C90FC      ( 00000020 00000000 FFFFFFFF )
-  1C0:  Call  802C9428      ( 00000000 $DisplayList_80240670 00000000 )
-  1D8:  Call  SetTexPanner  ( ~Model:o209 00000000 )
+  1A8:  Call  SetModelCustomGfx ( ~Model:o207 00000000 FFFFFFFF )
+  1C0:  Call  SetCustomGfx      ( 00000000 $DisplayList_80240670 00000000 )
+  1D8:  Call  SetTexPanner      ( ~Model:o209 00000000 )
   1EC:  Thread
   1F4:  	Set   *Var0  00000000
   204:  	Set   *Var1  00000000
@@ -504,9 +505,9 @@ PADDING: 8024066C to 80240670 (0000066C to 00000670)
   2B4:  	Set   *VarC  00000000
   2C4:  	Exec  $Script_UpdateTexturePan_802405D0
   2D0:  EndThread
-  2D8:  Call  802C90FC      ( 00000025 00000000 FFFFFFFF )
-  2F0:  Call  802C9428      ( 00000000 $DisplayList_80240670 00000000 )
-  308:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
+  2D8:  Call  SetModelCustomGfx ( ~Model:o209 00000000 FFFFFFFF )
+  2F0:  Call  SetCustomGfx      ( 00000000 $DisplayList_80240670 00000000 )
+  308:  Call  SetCamSpeed       ( .Cam:Default *Fixed[3.0] )
   31C:  Return
   324:  End
 }
@@ -562,8 +563,8 @@ PADDING: 8024066C to 80240670 (0000066C to 00000670)
 {
     0:  SetGroup  0000001B
     C:  Call  DisablePlayerInput    ( .True )
-   1C:  Call  PlayerMoveTo  ( FFFFFF33 FFFFFFF6 0000000F )
-   34:  Call  InterpPlayerYaw       ( 0000010E 00000005 )
+   1C:  Call  PlayerMoveTo  (  -205`  -10`  15` )
+   34:  Call  InterpPlayerYaw       (  270`  5` )
    48:  Wait  10`
    54:  Call  SetPlayerAnimation    ( 000D0013 )
    64:  Wait  10`
@@ -572,7 +573,7 @@ PADDING: 8024066C to 80240670 (0000066C to 00000670)
    98:  Wait  10`
    A4:  Call  SetPlayerAnimation    ( 000D0015 )
    B4:  Wait  10`
-   C0:  Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[1.0] )
+   C0:  Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[1.0] )
    DC:  ExecWait  $Script_80240B04
    E8:  Call  DisablePlayerInput    ( .False )
    F8:  Return
@@ -596,16 +597,16 @@ PADDING: 8024066C to 80240670 (0000066C to 00000670)
    B4:  	Call  DisablePartnerAI  ( 00000000 )
    C4:  	Call  SetNpcAnimation   ( .Npc:Partner 0020000E )
    D8:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-   F4:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+   F4:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   114:  	Call  EnablePartnerAI ( )
   120:  EndThread
   128:  Thread
-  130:  	Call  InterpPlayerYaw       ( 0000010E 00000000 )
+  130:  	Call  InterpPlayerYaw       (  270`  0` )
   144:  	Wait  10`
   150:  	Call  SetPlayerAnimation    ( 000C0011 )
   160:  	Call  SpeakToPlayer ( .Npc:Player 000C0005 000C0006 00000005 00140048 ) % Ohhhh!!!
   180:  EndThread
-  188:  Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+  188:  Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[1.0] )
   1A4:  ExecWait  $Script_80240B04
   1B0:  Call  DisablePlayerInput    ( .False )
   1C0:  Return
@@ -614,13 +615,13 @@ PADDING: 8024066C to 80240670 (0000066C to 00000670)
 
 #new:Script $Script_80241018
 {
-    0:  Call  EnableModel   ( ~Model:o182 .False )
-   14:  Call  EnableModel   ( ~Model:o184 .False )
-   28:  Call  EnableModel   ( ~Model:o186 .False )
-   3C:  Call  802C90FC      ( 00000006 00000001 FFFFFFFF )
-   54:  Call  802C90FC      ( 00000009 00000001 FFFFFFFF )
-   6C:  Call  802C90FC      ( 0000000B 00000001 FFFFFFFF )
-   84:  Call  802C94A0      ( 00000001 $Function_80240448 00000000 )
+    0:  Call  EnableModel       ( ~Model:o182 .False )
+   14:  Call  EnableModel       ( ~Model:o184 .False )
+   28:  Call  EnableModel       ( ~Model:o186 .False )
+   3C:  Call  SetModelCustomGfx ( ~Model:o182 00000001 FFFFFFFF )
+   54:  Call  SetModelCustomGfx ( ~Model:o184 00000001 FFFFFFFF )
+   6C:  Call  SetModelCustomGfx ( ~Model:o186 00000001 FFFFFFFF )
+   84:  Call  SetCustomGfxBuilders  ( 00000001 $Function_80240448 00000000 )
    9C:  If  *GB_StoryProgress  ==  .Story:Ch1_BeganPeachMission % FFFFFFB4
    AC:  	Bind  $Script_80240E48 .Trigger:WallPressA ~Collider:o193 00000001 00000000
    C8:  Else

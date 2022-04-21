@@ -1,6 +1,20 @@
 % Script File: osr_00.mscr
 % Decoded from: 0 to 37C0 (osr_00)
 
+#define .NpcID:Yoshi_01             01
+#define .NpcID:YoshiKid_02          02
+#define .NpcID:MayorPenguin_03      03
+#define .NpcID:MayorPenguinWife_04  04
+#define .NpcID:Penguin_05           05
+#define .NpcID:Penguin_06           06
+#define .NpcID:Moustafa_07          07
+#define .NpcID:Mouser_08            08
+#define .NpcID:Boo_09               09
+#define .NpcID:Boo_10               0A
+#define .NpcID:Toad_12              0C
+#define .NpcID:ToadGuard_13         0D
+#define .NpcID:ToadGuard_14         0E
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -243,7 +257,7 @@
    14:  SW        R0, 14 (SP)
    18:  SWC1      F0, 10 (SP)
    1C:  COPY      A2, A1
-   20:  JAL       80072950
+   20:  JAL       ~Func:playFX_82
    24:  COPY      A3, A1
    28:  LW        RA, 18 (SP)
    2C:  LI        V0, 2
@@ -261,7 +275,7 @@
    14:  SW        R0, 14 (SP)
    18:  SWC1      F0, 10 (SP)
    1C:  COPY      A2, A1
-   20:  JAL       80072950
+   20:  JAL       ~Func:playFX_82
    24:  COPY      A3, A1
    28:  LW        RA, 18 (SP)
    2C:  LI        V0, 2
@@ -297,7 +311,7 @@ PADDING: 8024037C to 80240380 (0000037C to 00000380)
    50:  LI        V0, FFFF
    54:  BNE       S0, V0, .o6C
    58:  LI        V0, 1
-   5C:  JAL       8011D82C
+   5C:  JAL       ~Func:mdl_set_all_fog_mode
    60:  COPY      A0, S1
    64:  BEQ       R0, R0, .o10C
    68:  LI        V0, 2
@@ -325,7 +339,7 @@ PADDING: 8024037C to 80240380 (0000037C to 00000380)
    B4:  COPY      A0, V0
    B8:  COPY      A0, V0
    BC:  LI        A1, FFFF
-   C0:  JAL       8011BC7C
+   C0:  JAL       ~Func:set_mdl_custom_gfx_set
    C4:  COPY      A2, S1
    C8:  BEQ       R0, R0, .o9C
    CC:  NOP
@@ -711,8 +725,8 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachCastleGrounds
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Switch  *GB_StoryProgress
@@ -992,12 +1006,12 @@ MISSING: 8024127C to 802412A8 (0000127C to 000012A8)
 #new:Script $Script_80241744
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  NpcFacePlayer     ( 0000000E 00000000 )
+   10:  Call  NpcFacePlayer     ( .NpcID:ToadGuard_14 00000000 )
    24:  Wait  5`
-   30:  Call  SpeakToPlayer     ( 0000000E 00870304 00870301 00000000 0001005C ) % Where are you going, Mario? Princess Peach awaits  ...
+   30:  Call  SpeakToPlayer     ( .NpcID:ToadGuard_14 00870304 00870301 00000000 0001005C ) % Where are you going, Mario? Princess Peach awaits  ...
    50:  Wait  10`
    5C:  Call  SetPlayerSpeed    ( *Fixed[4.0] )
-   6C:  Call  PlayerMoveTo      ( 00000262 0000006E 00000000 )
+   6C:  Call  PlayerMoveTo      (  610`  110`  0` )
    84:  Call  DisablePlayerInput    ( .False )
    94:  Return
    9C:  End
@@ -1043,19 +1057,19 @@ MISSING: 8024127C to 802412A8 (0000127C to 000012A8)
 	00000000 00000000 $ExtraAnimationList_80241858 001A00BC % He's the Village Leader. He's very dignified. Does ...
 	%
 	% $NpcGroup_80241888[1F0]
-	00000001 $NpcSettings_802411CC ~Vec3f:NPC_80241A78 % 70 0 400
+	.NpcID:Yoshi_01 $NpcSettings_802411CC ~Vec3f:NPC_Yoshi_01 % 70 0 400
 	00002D09 $Script_Init_80241384 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241A78
-	~AnimationTable:NPC_80241A78 % .Sprite:Yoshi
+	~Movement:NPC_Yoshi_01
+	~AnimationTable:NPC_Yoshi_01 % .Sprite:Yoshi
 	00000000 00000000 $ExtraAnimationList_80241868 001A00C1 % A Yoshi. I've seen pictures in books of these guys ...
 	%
 	% $NpcGroup_80241888[3E0]
-	00000002 $NpcSettings_802411F8 ~Vec3f:NPC_80241C68 % 160 0 540
+	.NpcID:YoshiKid_02 $NpcSettings_802411F8 ~Vec3f:NPC_YoshiKid_02 % 160 0 540
 	00002D09 $Script_Init_802413D8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241C68
-	~AnimationTable:NPC_80241C68 % .Sprite:YoshiKid
+	~Movement:NPC_YoshiKid_02
+	~AnimationTable:NPC_YoshiKid_02 % .Sprite:YoshiKid
 	00000000 00000000 $ExtraAnimationList_80241878 001A00C3 % He's a green Yoshi kid. He's an excitable rascal,  ...
 }
 
@@ -1076,35 +1090,35 @@ MISSING: 8024127C to 802412A8 (0000127C to 000012A8)
 
 #new:NpcGroup $NpcGroup_80241E88
 {
-	00000003 $NpcSettings_80241224 ~Vec3f:NPC_80241E88 % 150 0 105
+	.NpcID:MayorPenguin_03 $NpcSettings_80241224 ~Vec3f:NPC_MayorPenguin_03 % 150 0 105
 	00002D09 $Script_Init_8024142C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241E88
-	~AnimationTable:NPC_80241E88 % .Sprite:MayorPenguin
+	~Movement:NPC_MayorPenguin_03
+	~AnimationTable:NPC_MayorPenguin_03 % .Sprite:MayorPenguin
 	00000000 00000000 $ExtraAnimationList_80241E58 001A00E6 % This is the mayor of Shiver City, Mayor Penguin. H ...
 	%
 	% $NpcGroup_80241E88[1F0]
-	00000004 $NpcSettings_80241224 ~Vec3f:NPC_80242078 % 200 0 105
+	.NpcID:MayorPenguinWife_04 $NpcSettings_80241224 ~Vec3f:NPC_MayorPenguinWife_04 % 200 0 105
 	00002D09 $Script_Init_80241480 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242078
-	~AnimationTable:NPC_80242078 % .Sprite:MayorPenguinWife
+	~Movement:NPC_MayorPenguinWife_04
+	~AnimationTable:NPC_MayorPenguinWife_04 % .Sprite:MayorPenguinWife
 	00000000 00000000 $ExtraAnimationList_80241E68 001A00E5 % She's the wife of Mayor Penguin, who's the mayor o ...
 	%
 	% $NpcGroup_80241E88[3E0]
-	00000005 $NpcSettings_80241224 ~Vec3f:NPC_80242268 % 115 0 540
+	.NpcID:Penguin_05 $NpcSettings_80241224 ~Vec3f:NPC_Penguin_05 % 115 0 540
 	00000D0D $Script_Init_802414D4 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242268
-	~AnimationTable:NPC_80242268 % .Sprite:Penguin
+	~Movement:NPC_Penguin_05
+	~AnimationTable:NPC_Penguin_05 % .Sprite:Penguin
 	00000000 00000000 $ExtraAnimationList_80241E78 00000000 % no tattle string
 	%
 	% $NpcGroup_80241E88[5D0]
-	00000006 $NpcSettings_80241224 ~Vec3f:NPC_80242458 % 208 0 540
+	.NpcID:Penguin_06 $NpcSettings_80241224 ~Vec3f:NPC_Penguin_06 % 208 0 540
 	00000D0D $Script_Init_80241528 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242458
-	~AnimationTable:NPC_80242458 % .Sprite:Penguin
+	~Movement:NPC_Penguin_06
+	~AnimationTable:NPC_Penguin_06 % .Sprite:Penguin
 	00000000 00000000 $ExtraAnimationList_80241E78 00000000 % no tattle string
 }
 
@@ -1120,19 +1134,19 @@ MISSING: 8024127C to 802412A8 (0000127C to 000012A8)
 
 #new:NpcGroup $NpcGroup_80242668
 {
-	00000007 $NpcSettings_802412D4 ~Vec3f:NPC_80242668 % -60 0 -20
+	.NpcID:Moustafa_07 $NpcSettings_802412D4 ~Vec3f:NPC_Moustafa_07 % -60 0 -20
 	00002D09 $Script_Init_8024157C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242668
-	~AnimationTable:NPC_80242668 % .Sprite:Moustafa
+	~Movement:NPC_Moustafa_07
+	~AnimationTable:NPC_Moustafa_07 % .Sprite:Moustafa
 	00000000 00000000 $ExtraAnimationList_80242648 001A0099 % Da Da Da Duuum! Sheek revealed his true self! ...I ...
 	%
 	% $NpcGroup_80242668[1F0]
-	00000008 $NpcSettings_802412D4 ~Vec3f:NPC_80242858 % -100 0 -50
+	.NpcID:Mouser_08 $NpcSettings_802412D4 ~Vec3f:NPC_Mouser_08 % -100 0 -50
 	00002D09 $Script_Init_802415D0 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242858
-	~AnimationTable:NPC_80242858 % .Sprite:Mouser
+	~Movement:NPC_Mouser_08
+	~AnimationTable:NPC_Mouser_08 % .Sprite:Mouser
 	00000000 00000000 $ExtraAnimationList_80242658 00000000 % no tattle string
 }
 
@@ -1143,19 +1157,19 @@ MISSING: 8024127C to 802412A8 (0000127C to 000012A8)
 
 #new:NpcGroup $NpcGroup_80242A58
 {
-	00000009 $NpcSettings_802412A8 ~Vec3f:NPC_80242A58 % 270 20 175
+	.NpcID:Boo_09 $NpcSettings_802412A8 ~Vec3f:NPC_Boo_09 % 270 20 175
 	00000D09 $Script_Init_80241624 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242A58
-	~AnimationTable:NPC_80242A58 % .Sprite:Boo
+	~Movement:NPC_Boo_09
+	~AnimationTable:NPC_Boo_09 % .Sprite:Boo
 	00000000 00000000 $ExtraAnimationList_80242A48 00000000 % no tattle string
 	%
 	% $NpcGroup_80242A58[1F0]
-	0000000A $NpcSettings_802412A8 ~Vec3f:NPC_80242C48 % 320 20 200
+	.NpcID:Boo_10 $NpcSettings_802412A8 ~Vec3f:NPC_Boo_10 % 320 20 200
 	00000D09 $Script_Init_80241678 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242C48
-	~AnimationTable:NPC_80242C48 % .Sprite:Boo
+	~Movement:NPC_Boo_10
+	~AnimationTable:NPC_Boo_10 % .Sprite:Boo
 	00000000 00000000 $ExtraAnimationList_80242A48 00000000 % no tattle string
 }
 
@@ -1171,27 +1185,27 @@ MISSING: 8024127C to 802412A8 (0000127C to 000012A8)
 
 #new:NpcGroup $NpcGroup_80242E58
 {
-	0000000C $NpcSettings_80241250 ~Vec3f:NPC_80242E58 % -25 0 200
+	.NpcID:Toad_12 $NpcSettings_80241250 ~Vec3f:NPC_Toad_12 % -25 0 200
 	00002D09 $Script_Init_802416CC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242E58
-	~AnimationTable:NPC_80242E58 % .Sprite:Toad
+	~Movement:NPC_Toad_12
+	~AnimationTable:NPC_Toad_12 % .Sprite:Toad
 	00000000 00000000 $ExtraAnimationList_80242E38 00000000 % no tattle string
 	%
 	% $NpcGroup_80242E58[1F0]
-	0000000D $NpcSettings_80241250 ~Vec3f:NPC_80243048 % -50 0 -200
+	.NpcID:ToadGuard_13 $NpcSettings_80241250 ~Vec3f:NPC_ToadGuard_13 % -50 0 -200
 	00002D09 $Script_Init_80241720 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243048
-	~AnimationTable:NPC_80243048 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_13
+	~AnimationTable:NPC_ToadGuard_13 % .Sprite:ToadGuard
 	00000000 00000000 $ExtraAnimationList_80242E48 00000000 % no tattle string
 	%
 	% $NpcGroup_80242E58[3E0]
-	0000000E $NpcSettings_80241250 ~Vec3f:NPC_80243238 % 560 20 100
+	.NpcID:ToadGuard_14 $NpcSettings_80241250 ~Vec3f:NPC_ToadGuard_14 % 560 20 100
 	00002D09 $Script_Init_80241818 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243238
-	~AnimationTable:NPC_80243238 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_14
+	~AnimationTable:NPC_ToadGuard_14 % .Sprite:ToadGuard
 	00000000 00000000 $ExtraAnimationList_80242E48 00000000 % no tattle string
 }
 
@@ -1208,20 +1222,20 @@ MISSING: 8024127C to 802412A8 (0000127C to 000012A8)
 #new:Script $Script_80243470
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  UseSettingsFrom       ( .Cam:Default 00000000 00000000 00000000 )
-   2C:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+   10:  Call  UseSettingsFrom       ( .Cam:Default  0`  0`  0` )
+   2C:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
    48:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-   5C:  Call  SetCamDistance        ( .Cam:Default 00000307 )
-   70:  Call  SetCamPitch   ( .Cam:Default 00000014 FFFFFFED )
+   5C:  Call  SetCamDistance        ( .Cam:Default  775` )
+   70:  Call  SetCamPitch   ( .Cam:Default  20`  -19` )
    88:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    A0:  Call  $Function_80240380    ( 00000002 00000000 00000003 )
    B8:  Call  $Function_80240380    ( 00000001 FFFFFFFF 00000003 )
    D0:  Call  $Function_80240678    ( 000000C8 000000C8 000000C8 00000028 00000028 00000028 )
    F4:  Call  $Function_802406E0 ( )
   100:  Wait  15`
-  10C:  Call  ShowMessageAtScreenPos    ( 00000022 000000A0 00000028 ) %
+  10C:  Call  ShowMessageAtScreenPos    ( 00000022  160`  40` ) %
   124:  Wait  12`
-  130:  Call  ShowMessageAtScreenPos    ( 00000023 000000A0 00000028 ) % I'm throwing a party at my castle today! Mario and ...
+  130:  Call  ShowMessageAtScreenPos    ( 00000023  160`  40` ) % I'm throwing a party at my castle today! Mario and ...
   148:  Wait  3`
   154:  Call  GotoMapSpecial        ( $ASCII_802437B0 00000001 00000007 ) % kmr_20
   16C:  Wait  40`
@@ -1232,20 +1246,20 @@ MISSING: 8024127C to 802412A8 (0000127C to 000012A8)
 #new:Script $Script_802435F8
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  UseSettingsFrom       ( .Cam:Default 00000000 00000000 00000000 )
-   2C:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+   10:  Call  UseSettingsFrom       ( .Cam:Default  0`  0`  0` )
+   2C:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
    48:  Call  SetCamDistance        ( .Cam:Default *Fixed[675.0] )
    5C:  Call  SetCamPitch   ( .Cam:Default *Fixed[3.5] *Fixed[-6.0] )
-   74:  Call  SetCamPosA    ( .Cam:Default *Fixed[60.0] 00000000 )
+   74:  Call  SetCamPosA    ( .Cam:Default *Fixed[60.0]  0` )
    8C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    A0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    B8:  Thread
-   C0:  	Call  PlayerMoveTo  ( 00000000 FFFFFF06 00000096 )
+   C0:  	Call  PlayerMoveTo  (  0`  -250`  150` )
    D8:  EndThread
    E0:  Thread
    E8:  	Call  SetNpcAnimation   ( 00000000 0082001E )
-   FC:  	Call  SetNpcPos ( 00000000 00000000 00000000 0000015E )
-  118:  	Call  NpcMoveTo ( 00000000 00000000 FFFFFF38 00000096 )
+   FC:  	Call  SetNpcPos ( 00000000  0`  0`  350` )
+  118:  	Call  NpcMoveTo ( 00000000  0`  -200`  150` )
   134:  	Call  SetNpcAnimation   ( 00000000 0082001C )
   148:  EndThread
   150:  Wait  100`

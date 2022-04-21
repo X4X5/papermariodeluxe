@@ -1,6 +1,12 @@
 % Script File: dgb_09.mscr
 % Decoded from: 0 to 57B0 (dgb_09)
 
+#define .NpcID:WorldClubba_00       00
+#define .NpcID:WorldClubba_01       01
+#define .NpcID:WorldClubba_02       02
+#define .NpcID:WorldClubba_03       03
+#define .NpcID:Sentinel_04          04
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -3184,7 +3190,7 @@
   254:  LI        V0, 10
   258:  JAL       ~Func:disable_player_input
   25C:  NOP
-  260:  JAL       800EF628
+  260:  JAL       ~Func:partner_disable_input
   264:  NOP
   268:  LI        V0, 14
   26C:  BEQ       R0, R0, .o278
@@ -3399,7 +3405,7 @@
         .o58
    58:  JAL       ~Func:enable_player_input
    5C:  NOP
-   60:  JAL       800EF600
+   60:  JAL       ~Func:partner_enable_input
    64:  NOP
    68:  LI        V0, 10
         .o6C
@@ -3975,8 +3981,8 @@ PADDING: 80243918 to 80243920 (00003918 to 00003920)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GB_StoryProgress  <  .Story:Ch3_StarSpiritRescued % FFFFFFF1
    80:  	Call  MakeNpcs  ( .True $NpcGroupList_8024533C )
@@ -4041,7 +4047,7 @@ PADDING: 80243FF8 to 80244000 (00003FF8 to 00004000)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -4225,13 +4231,13 @@ PADDING: 80243FF8 to 80244000 (00003FF8 to 00004000)
   2D8:  Thread
   2E0:  	Call  SetNpcAnimation   ( .Npc:Partner 00000108 )
   2F4:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  310:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  310:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   330:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  34C:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  34C:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   36C:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  388:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  388:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   3A8:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  3C4:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  3C4:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   3E4:  EndThread
   3EC:  Wait  30`
   3F8:  Call  GotoMap   ( $ASCII_802457A8 00000002 ) % dgb_00
@@ -4279,19 +4285,19 @@ PADDING: 80243FF8 to 80244000 (00003FF8 to 00004000)
 
 #new:NpcGroup $NpcGroup_80244920
 {
-	00000000 $NpcSettings_8024418C ~Vec3f:NPC_80244920 % -350 0 180
+	.NpcID:WorldClubba_00 $NpcSettings_8024418C ~Vec3f:NPC_WorldClubba_00 % -350 0 180
 	00000D00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80244920
-	~AnimationTable:NPC_80244920 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_00
+	~AnimationTable:NPC_WorldClubba_00 % .Sprite:WorldClubba
 	00000002 00000000 $ExtraAnimationList_802440BC 00000000 % no tattle string
 	%
 	% $NpcGroup_80244920[1F0]
-	00000001 $NpcSettings_8024432C ~Vec3f:NPC_80244B10 % 0 -1000 0
+	.NpcID:WorldClubba_01 $NpcSettings_8024432C ~Vec3f:NPC_WorldClubba_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244B10
-	~AnimationTable:NPC_80244B10 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_01
+	~AnimationTable:NPC_WorldClubba_01 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802440E4 00000000 % no tattle string
 }
 
@@ -4299,8 +4305,8 @@ PADDING: 80243FF8 to 80244000 (00003FF8 to 00004000)
 {
     0:  Call  GetEntryID    ( *Var0 )
    10:  If  *Var0  ==  ~Entry:Entry3
-   20:  	Call  SetNpcPos     ( .Npc:Self 000000F0 00000000 00000058 )
-   3C:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+   20:  	Call  SetNpcPos     ( .Npc:Self  240`  0`  88` )
+   3C:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
    54:  EndIf
    5C:  Return
    64:  End
@@ -4308,29 +4314,29 @@ PADDING: 80243FF8 to 80244000 (00003FF8 to 00004000)
 
 #new:NpcGroup $NpcGroup_80244D6C
 {
-	00000002 $NpcSettings_80244258 ~Vec3f:NPC_80244D6C % 310 0 88
+	.NpcID:WorldClubba_02 $NpcSettings_80244258 ~Vec3f:NPC_WorldClubba_02 % 310 0 88
 	00000D00 $Script_Init_80244D00 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80244D6C
-	~AnimationTable:NPC_80244D6C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_02
+	~AnimationTable:NPC_WorldClubba_02 % .Sprite:WorldClubba
 	00000002 00000000 $ExtraAnimationList_802440BC 00000000 % no tattle string
 	%
 	% $NpcGroup_80244D6C[1F0]
-	00000003 $NpcSettings_8024432C ~Vec3f:NPC_80244F5C % 0 -1000 0
+	.NpcID:WorldClubba_03 $NpcSettings_8024432C ~Vec3f:NPC_WorldClubba_03 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244F5C
-	~AnimationTable:NPC_80244F5C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_03
+	~AnimationTable:NPC_WorldClubba_03 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802440E4 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024514C
 {
-	00000004 $NpcSettings_802448F4 ~Vec3f:NPC_8024514C % -20 100 180
+	.NpcID:Sentinel_04 $NpcSettings_802448F4 ~Vec3f:NPC_Sentinel_04 % -20 100 180
 	00000400 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024514C
-	~AnimationTable:NPC_8024514C % .Sprite:Sentinel
+	~Movement:NPC_Sentinel_04
+	~AnimationTable:NPC_Sentinel_04 % .Sprite:Sentinel
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

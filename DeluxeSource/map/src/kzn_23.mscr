@@ -1,6 +1,9 @@
 % Script File: kzn_23.mscr
 % Decoded from: 0 to 1C20 (kzn_23)
 
+#define .NpcID:Kolorado_00          00
+#define .NpcID:WorldMisstar_01      01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -602,8 +605,8 @@ PADDING: 802406AC to 802406B0 (000006AC to 000006B0)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading  ( .Shading:kzn_23 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80241BE0 )
    84:  Exec  $Script_80240670
@@ -646,7 +649,7 @@ MISSING: 80240D78 to 80240DD0 (00000D78 to 00000DD0)
 
 #new:Script $Script_Init_80240E0C
 {
-    0:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000001 )
+    0:  Call  InterpNpcYaw      ( .Npc:Self  90`  1` )
    18:  Wait  1`
    24:  Call  802CDE68  ( FFFFFFFF 0000000A )
    38:  Call  SetNpcRotation    ( .Npc:Self 00000000 00000000 000000B4 )
@@ -660,7 +663,7 @@ MISSING: 80240D78 to 80240DD0 (00000D78 to 00000DD0)
 {
     0:  Label  0
     C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-   20:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+   20:  Call  GetNpcPos     ( .NpcID:WorldMisstar_01 *Var0 *Var1 *Var2 )
    3C:  Add   *Var1  0000003C
    4C:  Call  SetCamTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
    68:  If  *Var1  <  00000AB4
@@ -796,11 +799,11 @@ MISSING: 80240D78 to 80240DD0 (00000D78 to 00000DD0)
    D4:  	Loop
    E0:  		Call  UpdateLerp ( )
    EC:  		Sub   *Var0  00000064
-   FC:  		Call  SetNpcPos ( .Npc:Self 00000000 *Var0 00000000 )
-  118:  		Call  SetNpcPos ( 00000000 0000000A *Var0 FFFFFFFB )
-  134:  		Call  SetPlayerPos  ( FFFFFFF6 *Var0 00000005 )
+   FC:  		Call  SetNpcPos ( .Npc:Self  0` *Var0  0` )
+  118:  		Call  SetNpcPos ( .NpcID:Kolorado_00  10` *Var0  -5` )
+  134:  		Call  SetPlayerPos  (  -10` *Var0  5` )
   14C:  		Add   *Var0  00000014
-  15C:  		Call  SetNpcPos ( .Npc:Partner FFFFFFF6 *Var0 00000000 )
+  15C:  		Call  SetNpcPos ( .Npc:Partner  -10` *Var0  0` )
   178:  		If  *Var0  >  00000B18
   188:  			Call  SetSelfVar    ( 00000000 00000001 )
   19C:  		EndIf
@@ -844,7 +847,7 @@ MISSING: 80240D78 to 80240DD0 (00000D78 to 00000DD0)
 
 #new:Script $Script_Init_802417AC
 {
-    0:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFF9C 00000000 )
+    0:  Call  SetNpcPos ( .Npc:Self  0`  -100`  0` )
    1C:  Call  SetNpcAnimation   ( .Npc:Self 00160008 )
    30:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80241418 )
    44:  Return
@@ -853,21 +856,21 @@ MISSING: 80240D78 to 80240DD0 (00000D78 to 00000DD0)
 
 #new:NpcGroup $NpcGroup_80241800
 {
-	00000000 $NpcSettings_80240D20 ~Vec3f:NPC_80241800 % 0 -1000 0
+	.NpcID:Kolorado_00 $NpcSettings_80240D20 ~Vec3f:NPC_Kolorado_00 % 0 -1000 0
 	00110709 $Script_Init_80240E0C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80241800
-	~AnimationTable:NPC_80241800 % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_00
+	~AnimationTable:NPC_Kolorado_00 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 }
 
 #new:NpcGroup $NpcGroup_802419F0
 {
-	00000001 $NpcSettings_80240D4C ~Vec3f:NPC_802419F0 % 0 -1000 0
+	.NpcID:WorldMisstar_01 $NpcSettings_80240D4C ~Vec3f:NPC_WorldMisstar_01 % 0 -1000 0
 	19100004 $Script_Init_802417AC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802419F0
-	~AnimationTable:NPC_802419F0 % .Sprite:WorldMisstar
+	~Movement:NPC_WorldMisstar_01
+	~AnimationTable:NPC_WorldMisstar_01 % .Sprite:WorldMisstar
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

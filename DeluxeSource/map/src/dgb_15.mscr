@@ -1,6 +1,8 @@
 % Script File: dgb_15.mscr
 % Decoded from: 0 to 3030 (dgb_15)
 
+#define .NpcID:WorldTubba_00        00
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -1638,7 +1640,7 @@
     8:  JAL       ~Func:increment_status_menu_disabled
     C:  NOP
    10:  LUI       A1, 437F
-   14:  JAL       ~Func:set_transition_stencil_zoom_1
+   14:  JAL       ~Func:set_screen_overlay_params_back
    18:  CLEAR     A0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -1752,7 +1754,7 @@ PADDING: 802419B4 to 802419C0 (000019B4 to 000019C0)
 
 #new:ItemList $ItemList_802419C0
 {
-	.Item:CastleKey1
+	.Item:TubbaCastleKey
 	00000000
 }
 
@@ -1850,8 +1852,8 @@ PADDING: 802419B4 to 802419C0 (000019B4 to 000019C0)
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Set   *AreaFlag[001]  .False
-   30:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   50:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   30:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   50:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    6C:  Call  SetCamEnabled     ( .Cam:Default .True )
    80:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    94:  If  *GF_DGB16_EscapedFromTubba  ==  .False
@@ -1875,7 +1877,7 @@ PADDING: 80241E94 to 80241EA0 (00001E94 to 00001EA0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1945,7 +1947,7 @@ MISSING: 80242158 to 80242184 (00002158 to 00002184)
 {
     0:  Loop
     C:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   24:  	Call  GetNpcPos     ( 00000000 *Var1 *Var2 *Var3 )
+   24:  	Call  GetNpcPos     ( .NpcID:WorldTubba_00 *Var1 *Var2 *Var3 )
    40:  	Sub   *Var1  *Var0
    50:  	If  *Var1  <  00000096
    60:  		BreakLoop
@@ -1971,16 +1973,16 @@ MISSING: 80242158 to 80242184 (00002158 to 00002184)
    68:  Call  SetMusicTrack ( 00000000 .Song:TubbaBlubbaTheme 00000000 00000008 )
    84:  Wait  15`
    90:  Thread
-   98:  	Call  UseSettingsFrom   ( .Cam:Default FFFFFFCE 00000000 000000B4 )
+   98:  	Call  UseSettingsFrom   ( .Cam:Default  -50`  0`  180` )
    B4:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
-   C8:  	Call  SetPanTarget  ( .Cam:Default FFFFFFCE 00000000 000000B4 )
+   C8:  	Call  SetPanTarget  ( .Cam:Default  -50`  0`  180` )
    E4:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    FC:  EndThread
   104:  Set   *GB_ARN_Tubba_MapID  0000000F
-  114:  Call  SetNpcPos     ( .Npc:Self 00000000 00000000 00000058 )
-  130:  Call  SetNpcAnimation   ( 00000000 006A0009 )
-  144:  Call  SetNpcYaw     ( .Npc:Self 0000010E )
-  158:  Call  NpcMoveTo     ( .Npc:Self FFFFFFCB 000000B4 0000003C )
+  114:  Call  SetNpcPos     ( .Npc:Self  0`  0`  88` )
+  130:  Call  SetNpcAnimation   ( .NpcID:WorldTubba_00 006A0009 )
+  144:  Call  SetNpcYaw     ( .Npc:Self  270` )
+  158:  Call  NpcMoveTo     ( .Npc:Self  -53`  180`  60` )
   174:  Call  SetMusicTrack ( 00000000 .Song:TubbaBlubbaTheme 00000000 00000008 )
   190:  Call  SetNpcAnimation   ( .Npc:Self 006A0006 )
   1A4:  Wait  15`
@@ -2013,21 +2015,21 @@ MISSING: 80242158 to 80242184 (00002158 to 00002184)
    B0:  		Switch  *VarA
    BC:  			Case  <  000000C8
    C8:  				Thread
-   D0:  					Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[1.6] )
+   D0:  					Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[1.6] )
    EC:  					Wait  5`
-   F8:  					Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[0.8] )
+   F8:  					Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[0.8] )
   114:  				EndThread
   11C:  			Case  <  0000012C
   128:  				Thread
-  130:  					Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.6] )
+  130:  					Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.6] )
   14C:  					Wait  5`
-  158:  					Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[0.3] )
+  158:  					Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[0.3] )
   174:  				EndThread
   17C:  			Case  >=  0000012C
   188:  				Thread
-  190:  					Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.1] )
+  190:  					Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.1] )
   1AC:  					Wait  5`
-  1B8:  					Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[0.05] )
+  1B8:  					Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[0.05] )
   1D4:  				EndThread
   1DC:  		EndSwitch
   1E4:  		Wait  12`
@@ -2059,7 +2061,7 @@ MISSING: 80242158 to 80242184 (00002158 to 00002184)
 {
     0:  Exec  $Script_80242184
     C:  Call  SetNpcFlagBits        ( .Npc:Self 00000200 .True )
-   24:  Call  SetNpcAnimation       ( 00000000 006A000C )
+   24:  Call  SetNpcAnimation       ( .NpcID:WorldTubba_00 006A000C )
    38:  Exec  $Script_802424E8
    44:  Call  $Function_80241464    ( $AISettings_8024271C )
    54:  Return
@@ -2085,7 +2087,7 @@ MISSING: 80242158 to 80242184 (00002158 to 00002184)
    4C:  If  *GB_ARN_Tubba_MapID  !=  0000000F
    5C:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80242238 )
    70:  Else
-   78:  	Call  SetNpcPos     ( .Npc:Self FFFFFECA 00000000 000000B4 )
+   78:  	Call  SetNpcPos     ( .Npc:Self  -310`  0`  180` )
    94:  	Call  BindNpcIdle   ( .Npc:Self $Script_NpcAI_8024274C )
    A8:  EndIf
    B0:  Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_802427B0 )
@@ -2095,11 +2097,11 @@ MISSING: 80242158 to 80242184 (00002158 to 00002184)
 
 #new:NpcGroup $NpcGroup_802428C0
 {
-	00000000 $NpcSettings_8024212C ~Vec3f:NPC_802428C0 % 0 -1000 0
+	.NpcID:WorldTubba_00 $NpcSettings_8024212C ~Vec3f:NPC_WorldTubba_00 % 0 -1000 0
 	00A40900 $Script_Init_802427EC 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_802428C0
-	~AnimationTable:NPC_802428C0 % .Sprite:WorldTubba
+	~Movement:NPC_WorldTubba_00
+	~AnimationTable:NPC_WorldTubba_00 % .Sprite:WorldTubba
 	00000002 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2118,7 +2120,7 @@ PADDING: 80242AC8 to 80242AD0 (00002AC8 to 00002AD0)
     C:  SuspendAll  00000001
    18:  Call  ShowKeyChoicePopup ( )
    24:  If  *Var0  ==  00000000
-   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    4C:  	Call  CloseChoicePopup ( )
    58:  	ResumeAll  00000001
    64:  	Return
@@ -2128,7 +2130,7 @@ PADDING: 80242AC8 to 80242AD0 (00002AC8 to 00002AD0)
    90:  	ResumeAll  00000001
    9C:  	Return
    A4:  EndIf
-   AC:  Call  FindKeyItem       ( .Item:CastleKey1 *Var0 )
+   AC:  Call  FindKeyItem       ( .Item:TubbaCastleKey *Var0 )
    C0:  Call  RemoveKeyItemAt   ( *Var0 )
    D0:  Call  CloseChoicePopup ( )
    DC:  Set   *GF_DGB15_UnlockedUpperFoyer  .True

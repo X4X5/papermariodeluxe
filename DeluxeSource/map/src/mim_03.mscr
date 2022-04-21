@@ -1,6 +1,8 @@
 % Script File: mim_03.mscr
 % Decoded from: 0 to 24E0 (mim_03)
 
+#define .NpcID:Oaklie_00            00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -443,8 +445,8 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
 {
     0:  Set   *GB_WorldLocation  .Location:ForeverForest
    10:  Call  SetSpriteShading  ( .Shading:mim_03 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 0000028A )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  650` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Set   *AreaByte[2]  *GB_MIM_CurrentMapID
@@ -746,7 +748,7 @@ PADDING: 802409AC to 802409B0 (000009AC to 000009B0)
   11C:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   134:  			Add   *Var0  *Var7
   144:  			Add   *Var2  *Var8
-  154:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  154:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   16C:  		EndThread
   174:  		Set   *Var1  00000001
   184:  		Exec  $Script_80241200
@@ -779,7 +781,7 @@ PADDING: 802409AC to 802409B0 (000009AC to 000009B0)
   314:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   32C:  			Sub   *Var0  *Var7
   33C:  			Sub   *Var2  *Var8
-  34C:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  34C:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   364:  		EndThread
   36C:  		Set   *Var1  00000002
   37C:  		Exec  $Script_80241200
@@ -810,7 +812,7 @@ PADDING: 802409AC to 802409B0 (000009AC to 000009B0)
   4F0:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   508:  			Add   *Var0  *Var7
   518:  			Add   *Var2  *Var8
-  528:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  528:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   540:  		EndThread
   548:  		Set   *Var1  00000001
   558:  		Exec  $Script_80241200
@@ -964,11 +966,11 @@ PADDING: 80242078 to 80242080 (00002078 to 00002080)
 
 #new:NpcGroup $NpcGroup_802422B8
 {
-	00000000 $NpcSettings_80242080 ~Vec3f:NPC_802422B8 % 0 32 0
+	.NpcID:Oaklie_00 $NpcSettings_80242080 ~Vec3f:NPC_Oaklie_00 % 0 32 0
 	00000801 $Script_Init_80242294 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802422B8
-	~AnimationTable:NPC_802422B8 % .Sprite:Oaklie
+	~Movement:NPC_Oaklie_00
+	~AnimationTable:NPC_Oaklie_00 % .Sprite:Oaklie
 	00000000 00000000 00000000 001A00A1 % This is Oaklie. He lives in Forever Forest. He gua ...
 }
 

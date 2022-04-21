@@ -1,6 +1,8 @@
 % Script File: tik_12.mscr
 % Decoded from: 0 to 4A30 (tik_12)
 
+#define .NpcID:BuzzyBeetle_00       00
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -1160,7 +1162,7 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
     8:  LW        V0, C (A0)
     C:  JAL       ~Func:get_variable
    10:  LW        A1, 0 (V0)
-   14:  JAL       800EB168
+   14:  JAL       ~Func:switch_to_partner
    18:  COPY      A0, V0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -1206,7 +1208,7 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
    54:  LW        A1, 48 (V0)
    58:  LW        A3, 50 (V0)
    5C:  MFC1      A2, F4
-   60:  JAL       80071750
+   60:  JAL       ~Func:playFX_52
    64:  CLEAR     A0
    68:  COPY      A0, S1
    6C:  COPY      A1, S0
@@ -1256,7 +1258,7 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
    40:  LW        A1, 48 (V0)
    44:  LW        A3, 50 (V0)
    48:  MFC1      A2, F2
-   4C:  JAL       80070BB0
+   4C:  JAL       ~Func:playFX_33
    50:  LI        A0, 4
    54:  LW        RA, 18 (SP)
    58:  LI        V0, 2
@@ -1280,7 +1282,7 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
    34:  LW        A1, 38 (V0)
    38:  LW        A3, 40 (V0)
    3C:  MFC1      A2, F4
-   40:  JAL       80070BB0
+   40:  JAL       ~Func:playFX_33
    44:  LI        A0, 9
    48:  LW        RA, 18 (SP)
    4C:  LI        V0, 2
@@ -1348,7 +1350,7 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
    EC:  LW        A1, 48 (V0)
    F0:  LW        A3, 50 (V0)
    F4:  MFC1      A2, F0
-   F8:  JAL       800716F0
+   F8:  JAL       ~Func:playFX_51
    FC:  ADDIU     S1, S1, 1
   100:  SW        V0, 8 (S0)
   104:  SWC1      F20, 2C (S0)
@@ -1658,7 +1660,7 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
    4C:  COPY      A3, A1
    50:  SW        V0, 88 (S1)
    54:  SW        R0, 70 (S1)
-   58:  JAL       ~Func:set_transition_stencil_color
+   58:  JAL       ~Func:set_screen_overlay_color
    5C:  SW        R0, 74 (S1)
         .o60
    60:  LW        V1, 70 (S1)
@@ -1715,7 +1717,7 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
   110:  LWC1      F0, 74 (S1)
   114:  CVT.S.W   F0, F0
   118:  MFC1      A1, F0
-  11C:  JAL       ~Func:set_transition_stencil_zoom_0
+  11C:  JAL       ~Func:set_screen_overlay_params_front
   120:  LI        A0, 1
   124:  COPY      V0, S2
   128:  LW        RA, 1C (SP)
@@ -1739,7 +1741,7 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 2
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -1760,7 +1762,7 @@ PADDING: 802405EC to 802405F0 (000005EC to 000005F0)
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 4
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -2459,13 +2461,13 @@ PADDING: 802422CC to 802422D0 (000022CC to 000022D0)
    50:  Call  GetCurrentPartnerID   ( *Var0 )
    60:  If  *Var0  !=  .Partner:None % 0
    70:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-   84:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   84:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    A0:  EndIf
    A8:  Call  GetEntryID    ( *Var0 )
    B8:  Call  $Function_802400F0 ( )
    C4:  Sub   *Var2  00000028
    D4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   EC:  Call  InterpPlayerYaw   ( *Var4 00000000 )
+   EC:  Call  InterpPlayerYaw   ( *Var4  0` )
   100:  Call  PlaySound     ( 00000163 )
   110:  Call  802D286C      ( 00000100 )
   120:  Call  802D2520      ( 00010000 00000005 00000002 00000001 00000001 00000000 )
@@ -2519,7 +2521,7 @@ PADDING: 802422CC to 802422D0 (000022CC to 000022D0)
    84:  Set   *Var7  *Var3
    94:  Add   *Var2  00000002
    A4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   BC:  Call  InterpPlayerYaw       ( *Var4 00000000 )
+   BC:  Call  InterpPlayerYaw       ( *Var4  0` )
    D0:  If  *Var4  ==  0000005A
    E0:  	Add   *Var5  00000028
    F0:  Else
@@ -2533,8 +2535,8 @@ PADDING: 802422CC to 802422D0 (000022CC to 000022D0)
   184:  If  *Var0  !=  .Partner:None % 0
   194:  	Call  DisablePartnerAI  ( 00000000 )
   1A4:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-  1B8:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
-  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000000 )
+  1B8:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
+  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0  0` )
   1EC:  EndIf
   1F4:  Wait  1`
   200:  Call  PlaySound ( 00000163 )
@@ -2603,13 +2605,13 @@ PADDING: 802422CC to 802422D0 (000022CC to 000022D0)
    28:  Call  HidePlayerShadow  ( .True )
    38:  Set   *Var0  *VarA
    48:  Call  $Function_802400F0 ( )
-   54:  Call  PlayerMoveTo      ( *Var1 *Var3 00000003 )
+   54:  Call  PlayerMoveTo      ( *Var1 *Var3  3` )
    6C:  Set   *Var0  *VarA
    7C:  Call  $Function_802400F0 ( )
    88:  Call  SetPlayerPos      ( *Var1 *Var2 *Var3 )
    A0:  Call  SetPlayerFlagBits ( 00200000 .True )
    B4:  Call  $Function_802401D0 ( )
-   C0:  Call  InterpPlayerYaw   ( *Var0 00000000 )
+   C0:  Call  InterpPlayerYaw   ( *Var0  0` )
    D4:  Wait  2`
    E0:  Call  SetPlayerFlagBits ( 00200000 .False )
    F4:  Call  PlaySound ( 00000163 )
@@ -2668,7 +2670,7 @@ PADDING: 802422CC to 802422D0 (000022CC to 000022D0)
   1B0:  If  *Var4  >=  00000168
   1C0:  	Sub   *Var4  00000168
   1D0:  EndIf
-  1D8:  Call  InterpPlayerYaw       ( *Var8 00000001 )
+  1D8:  Call  InterpPlayerYaw       ( *Var8  1` )
   1EC:  Wait  1`
   1F8:  Call  PlaySound     ( 00000163 )
   208:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -2746,8 +2748,8 @@ PADDING: 802422CC to 802422D0 (000022CC to 000022D0)
 {
     0:  Set   *GB_WorldLocation  .Location:ToadTownTunnels
    10:  Call  SetSpriteShading  ( .Shading:tik_12 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_802449A4 )
@@ -3034,7 +3036,7 @@ PADDING: 80243C34 to 80243C40 (00003C34 to 00003C40)
    E8:  Call  FindKeyItem   ( .Item:UltraStone *VarC )
    FC:  Call  $Function_80240D3C ( )
   108:  If  *Var0  ==  FFFFFFFF
-  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC 000000A0 00000028 ) % You have no member you can upgrade now.
+  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC  160`  40` ) % You have no member you can upgrade now.
   130:  	Wait  10`
   13C:  	Call  $Function_8024112C        ( *Var9 )
   14C:  	Call  DisablePlayerInput        ( .False )
@@ -3045,9 +3047,9 @@ PADDING: 80243C34 to 80243C40 (00003C34 to 00003C40)
   190:  EndIf
   198:  If  *GF_Tutorial_SuperBlock  ==  .False
   1A8:  	Set   *GF_Tutorial_SuperBlock  .True
-  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA 000000A0 00000028 ) % This is a Super Block. With this, you can upgrade  ...
+  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA  160`  40` ) % This is a Super Block. With this, you can upgrade  ...
   1D0:  Else
-  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB 000000A0 00000028 ) % With this, you can upgrade one of your party membe ...
+  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB  160`  40` ) % With this, you can upgrade one of your party membe ...
   1F0:  EndIf
   1F8:  Call  $Function_80240DE8 ( )
   204:  If  *Var0  ==  FFFFFFFF
@@ -3068,7 +3070,7 @@ PADDING: 80243C34 to 80243C40 (00003C34 to 00003C40)
   2D4:  	Call  802CF56C  ( 00000002 )
   2E4:  EndIf
   2EC:  Wait  10`
-  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF 000000A0 00000028 ) % Do you want to upgrade this member?
+  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF  160`  40` ) % Do you want to upgrade this member?
   310:  Call  ShowChoice    ( 001E000D ) % Yes No
   320:  Call  CloseMessage ( )
   32C:  If  *Var0  !=  00000000
@@ -3085,9 +3087,9 @@ PADDING: 80243C34 to 80243C40 (00003C34 to 00003C40)
   3C8:  Call  $Function_8024112C    ( *Var9 )
   3D8:  Call  $Function_80241064 ( )
   3E4:  If  *VarD  ==  00000001
-  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD 000000A0 00000028 ) % is upgraded to Super-rank!
+  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD  160`  40` ) % is upgraded to Super-rank!
   40C:  Else
-  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE 000000A0 00000028 ) % is upgraded to Ultra-rank!
+  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE  160`  40` ) % is upgraded to Ultra-rank!
   42C:  EndIf
   434:  Call  DisablePlayerInput        ( .False )
   444:  Call  EnablePartnerAI ( )
@@ -3229,11 +3231,11 @@ MISSING: 80244730 to 802447B4 (00004730 to 000047B4)
 
 #new:NpcGroup $NpcGroup_802447B4
 {
-	00000000 $NpcSettings_80244704 ~Vec3f:NPC_802447B4 % -6 -135 75
+	.NpcID:BuzzyBeetle_00 $NpcSettings_80244704 ~Vec3f:NPC_BuzzyBeetle_00 % -6 -135 75
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:5:SuperSoda:A ~HP:Standard:4 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_802447B4
-	~AnimationTable:NPC_802447B4 % .Sprite:BuzzyBeetle
+	~Movement:NPC_BuzzyBeetle_00
+	~AnimationTable:NPC_BuzzyBeetle_00 % .Sprite:BuzzyBeetle
 	00000002 00000000 00000000 00000000 % no tattle string
 }
 

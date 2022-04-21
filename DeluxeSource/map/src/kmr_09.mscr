@@ -1,6 +1,11 @@
 % Script File: kmr_09.mscr
 % Decoded from: 0 to 26D0 (kmr_09)
 
+#define .NpcID:Goomba_00            00
+#define .NpcID:Goomba_01            01
+#define .NpcID:Goomba_02            02
+#define .NpcID:Paragoomba_03        03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFC8
@@ -1491,8 +1496,8 @@ PADDING: 802415BC to 802415C0 (000015BC to 000015C0)
 {
     0:  Set   *GB_WorldLocation  .Location:GoombaRoad
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Set   *GF_Map_GoombaRoad  .True
    80:  Call  MakeNpcs  ( .False $NpcGroupList_8024256C )
@@ -1577,21 +1582,21 @@ PADDING: 802415BC to 802415C0 (000015BC to 000015C0)
 
 #new:NpcGroup $NpcGroup_80241950
 {
-	00000000 $NpcSettings_80241840 ~Vec3f:NPC_80241950 % 200 0 24
+	.NpcID:Goomba_00 $NpcSettings_80241840 ~Vec3f:NPC_Goomba_00 % 200 0 24
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:5:Mushroom:A ~HP:GenerousWhenLow:2 ~FP:GenerousWhenLow:2 ~NoCoinBonus
-	~Movement:NPC_80241950
-	~AnimationTable:NPC_80241950 % .Sprite:Goomba
+	~Movement:NPC_Goomba_00
+	~AnimationTable:NPC_Goomba_00 % .Sprite:Goomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241B40
 {
-	00000001 $NpcSettings_80241840 ~Vec3f:NPC_80241B40 % 250 0 35
+	.NpcID:Goomba_01 $NpcSettings_80241840 ~Vec3f:NPC_Goomba_01 % 250 0 35
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:5:Mushroom:A ~HP:GenerousWhenLow:2 ~FP:GenerousWhenLow:2 ~NoCoinBonus
-	~Movement:NPC_80241B40
-	~AnimationTable:NPC_80241B40 % .Sprite:Goomba
+	~Movement:NPC_Goomba_01
+	~AnimationTable:NPC_Goomba_01 % .Sprite:Goomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1600,14 +1605,14 @@ PADDING: 802415BC to 802415C0 (000015BC to 000015C0)
     0:  SetGroup  00000000
     C:  SuspendAll  00000001
    18:  Call  DisablePlayerInput        ( .True )
-   28:  Call  ShowMessageAtScreenPos    ( 001D0165 000000A0 00000028 ) % Beware of Goombas!
+   28:  Call  ShowMessageAtScreenPos    ( 001D0165  160`  40` ) % Beware of Goombas!
    40:  ResumeAll  00000001
    4C:  Set   *Flag[00]  .False
    5C:  Call  $Function_802414F8 ( )
    68:  If  *Var0  !=  00000000
-   78:  	Call  GetNpcVar ( 00000002 00000000 *Var0 )
+   78:  	Call  GetNpcVar ( .NpcID:Goomba_02 00000000 *Var0 )
    90:  	If  *Var0  ==  00000000
-   A0:  		Call  SetNpcVar ( 00000002 00000000 00000001 )
+   A0:  		Call  SetNpcVar ( .NpcID:Goomba_02 00000000 00000001 )
    B8:  		Set   *Flag[00]  .True
    C8:  		Wait  10`
    D4:  	EndIf
@@ -1652,9 +1657,9 @@ MISSING: 80241E4C to 80241E54 (00001E4C to 00001E54)
   1B4:  Call  PlaySoundAtNpc    ( .Npc:Self 0000032C 00000000 )
   1CC:  Call  EnableNpcShadow   ( .Npc:Self .True )
   1E0:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.6] )
-  1F4:  Call  NpcJump0  ( .Npc:Self FFFFFFDD 00000000 00000019 00000017 )
+  1F4:  Call  NpcJump0  ( .Npc:Self  -35`  0`  25`  23` )
   214:  Call  802CFD30  ( FFFFFFFF 00000000 00000000 00000000 00000000 00000000 )
-  238:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+  238:  Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
   250:  Call  SetNpcFlagBits    ( .Npc:Self 00000020 .True )
   268:  Call  SetNpcFlagBits    ( .Npc:Self 00000040 .False )
   280:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .True )
@@ -1676,21 +1681,21 @@ MISSING: 80241E4C to 80241E54 (00001E4C to 00001E54)
 
 #new:NpcGroup $NpcGroup_8024218C
 {
-	00000002 $NpcSettings_80241840 ~Vec3f:NPC_8024218C % -34 29 -32
+	.NpcID:Goomba_02 $NpcSettings_80241840 ~Vec3f:NPC_Goomba_02 % -34 29 -32
 	00000D00 $Script_Init_80242154 00000000 00000000 0000010E
 	~Items:5:Mushroom:A ~HP:GenerousWhenLow:2 ~FP:GenerousWhenLow:2 ~NoCoinBonus
-	~Movement:NPC_8024218C
-	~AnimationTable:NPC_8024218C % .Sprite:Goomba
+	~Movement:NPC_Goomba_02
+	~AnimationTable:NPC_Goomba_02 % .Sprite:Goomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024237C
 {
-	00000003 $NpcSettings_80241924 ~Vec3f:NPC_8024237C % 670 60 20
+	.NpcID:Paragoomba_03 $NpcSettings_80241924 ~Vec3f:NPC_Paragoomba_03 % 670 60 20
 	00000D00 00000000 00000000 00000000 0000010E
 	~Items:5:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024237C
-	~AnimationTable:NPC_8024237C % .Sprite:Paragoomba
+	~Movement:NPC_Paragoomba_03
+	~AnimationTable:NPC_Paragoomba_03 % .Sprite:Paragoomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

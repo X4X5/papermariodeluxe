@@ -1,6 +1,11 @@
 % Script File: jan_09.mscr
 % Decoded from: 0 to 68E0 (jan_09)
 
+#define .NpcID:JungleGuy_30         1E
+#define .NpcID:JungleGuy_31         1F
+#define .NpcID:MBush_70             46
+#define .NpcID:MBush_80             50
+
 #new:Function $Function_80240000
 {
     0:  LAW       V0, 800F7B30
@@ -1815,13 +1820,13 @@ PADDING: 8024191C to 80241920 (0000191C to 00001920)
    50:  Call  GetCurrentPartnerID   ( *Var0 )
    60:  If  *Var0  !=  .Partner:None % 0
    70:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-   84:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   84:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    A0:  EndIf
    A8:  Call  GetEntryID    ( *Var0 )
    B8:  Call  $Function_802400F0 ( )
    C4:  Sub   *Var2  00000028
    D4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   EC:  Call  InterpPlayerYaw   ( *Var4 00000000 )
+   EC:  Call  InterpPlayerYaw   ( *Var4  0` )
   100:  Call  PlaySound     ( 00000163 )
   110:  Call  802D286C      ( 00000100 )
   120:  Call  802D2520      ( 00010000 00000005 00000002 00000001 00000001 00000000 )
@@ -1876,7 +1881,7 @@ PADDING: 8024191C to 80241920 (0000191C to 00001920)
    84:  Set   *Var7  *Var3
    94:  Add   *Var2  00000002
    A4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   BC:  Call  InterpPlayerYaw       ( *Var4 00000000 )
+   BC:  Call  InterpPlayerYaw       ( *Var4  0` )
    D0:  If  *Var4  ==  0000005A
    E0:  	Add   *Var5  00000028
    F0:  Else
@@ -1890,8 +1895,8 @@ PADDING: 8024191C to 80241920 (0000191C to 00001920)
   184:  If  *Var0  !=  .Partner:None % 0
   194:  	Call  DisablePartnerAI  ( 00000000 )
   1A4:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-  1B8:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
-  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000000 )
+  1B8:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
+  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0  0` )
   1EC:  EndIf
   1F4:  Wait  1`
   200:  Call  PlaySound ( 00000163 )
@@ -1958,13 +1963,13 @@ PADDING: 8024191C to 80241920 (0000191C to 00001920)
    28:  Call  HidePlayerShadow  ( .True )
    38:  Set   *Var0  *VarA
    48:  Call  $Function_802400F0 ( )
-   54:  Call  PlayerMoveTo      ( *Var1 *Var3 00000003 )
+   54:  Call  PlayerMoveTo      ( *Var1 *Var3  3` )
    6C:  Set   *Var0  *VarA
    7C:  Call  $Function_802400F0 ( )
    88:  Call  SetPlayerPos      ( *Var1 *Var2 *Var3 )
    A0:  Call  SetPlayerFlagBits ( 00200000 .True )
    B4:  Call  $Function_802401D0 ( )
-   C0:  Call  InterpPlayerYaw   ( *Var0 00000000 )
+   C0:  Call  InterpPlayerYaw   ( *Var0  0` )
    D4:  Wait  2`
    E0:  Call  SetPlayerFlagBits ( 00200000 .False )
    F4:  Call  PlaySound ( 00000163 )
@@ -2023,7 +2028,7 @@ PADDING: 8024191C to 80241920 (0000191C to 00001920)
   1B0:  If  *Var4  >=  00000168
   1C0:  	Sub   *Var4  00000168
   1D0:  EndIf
-  1D8:  Call  InterpPlayerYaw       ( *Var8 00000001 )
+  1D8:  Call  InterpPlayerYaw       ( *Var8  1` )
   1EC:  Wait  1`
   1F8:  Call  PlaySound     ( 00000163 )
   208:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -2138,8 +2143,8 @@ PADDING: 8024191C to 80241920 (0000191C to 00001920)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer      ( .Cam:Default .False )
    84:  Call  SetZoneEnabled        ( ~Zone:o79 .False )
@@ -2164,10 +2169,10 @@ PADDING: 8024191C to 80241920 (0000191C to 00001920)
   1E4:  	Exec  $Script_802419A0
   1F0:  	Wait  1`
   1FC:  EndIf
-  204:  Call  SetMusicTrack     ( 00000000 .Song:JadeJungle 00000000 00000008 )
+  204:  Call  SetMusicTrack ( 00000000 .Song:JadeJungle 00000000 00000008 )
   220:  Call  ClearAmbientSounds    ( 000000FA )
-  230:  Call  802C971C  ( 00000077 )
-  240:  Call  EnableTexPanning  ( ~Model:o180 .True )
+  230:  Call  MakeTransformGroup    ( ~Model:g51 )
+  240:  Call  EnableTexPanning      ( ~Model:o180 .True )
   254:  Thread
   25C:  	Set   *Var0  00000001
   26C:  	Set   *Var1  FFFFFFB0
@@ -2591,7 +2596,7 @@ PADDING: 80242D14 to 80242D20 (00002D14 to 00002D20)
    2C:  Call  SetPlayerActionState  ( .ActionState:Idle )
    3C:  Set   *MapVar[5]  00000E10
    4C:  Loop  0000003C
-   58:  	Call  InterpPlayerYaw   ( *MapVar[5] 00000000 )
+   58:  	Call  InterpPlayerYaw   ( *MapVar[5]  0` )
    6C:  	Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
    84:  	AddF  *Var0  *Fixed[6.0]
    94:  	AddF  *Var1  *Fixed[3.0]
@@ -2602,13 +2607,13 @@ PADDING: 80242D14 to 80242D20 (00002D14 to 00002D20)
    E4:  	Call  SetPlayerPos      ( *Var0 *Var1 *Var2 )
    FC:  	Wait  1`
   108:  EndLoop
-  110:  Call  UseSettingsFrom       ( .Cam:Default FFFFFFE7 0000005A FFFFFEB6 )
-  12C:  Call  SetPanTarget  ( .Cam:Default FFFFFFE7 0000005A FFFFFEB6 )
+  110:  Call  UseSettingsFrom       ( .Cam:Default  -25`  90`  -330` )
+  12C:  Call  SetPanTarget  ( .Cam:Default  -25`  90`  -330` )
   148:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   160:  Call  SetPlayerJumpscale    ( *Fixed[0.296875] )
-  170:  Call  PlayerJump    ( ~Vec3d:JumpDest_80244230 0000003C )
-  18C:  Call  SetPlayerPos  ( FFFFFFE7 0000005A FFFFFEB6 )
-  1A4:  Call  SetCamTarget  ( .Cam:Default FFFFFFE7 0000005A FFFFFEB6 )
+  170:  Call  PlayerJump    ( ~Vec3d:JumpDest_80244230  60` )
+  18C:  Call  SetPlayerPos  (  -25`  90`  -330` )
+  1A4:  Call  SetCamTarget  ( .Cam:Default  -25`  90`  -330` )
   1C0:  Call  DisablePlayerPhysics  ( .False )
   1D0:  Call  DisablePlayerInput    ( .False )
   1E0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
@@ -3061,7 +3066,7 @@ PADDING: 80242D14 to 80242D20 (00002D14 to 00002D20)
   268:  EndThread
   270:  Thread
   278:  	Wait  6`
-  284:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  284:  	Call  InterpPlayerYaw   (  90`  0` )
   298:  EndThread
   2A0:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
   2B8:  Call  EnableNpcShadow   ( .Npc:Self .True )
@@ -3127,7 +3132,7 @@ MISSING: 80244ECC to 80244EF4 (00004ECC to 00004EF4)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -3192,41 +3197,41 @@ MISSING: 80244ECC to 80244EF4 (00004ECC to 00004EF4)
 
 #new:NpcGroup $NpcGroup_80245158
 {
-	0000001E $NpcSettings_80245058 ~Vec3f:NPC_80245158 % -200 90 -330
+	.NpcID:JungleGuy_30 $NpcSettings_80245058 ~Vec3f:NPC_JungleGuy_30 % -200 90 -330
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:5:SleepySheep:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80245158
-	~AnimationTable:NPC_80245158 % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_30
+	~AnimationTable:NPC_JungleGuy_30 % .Sprite:JungleGuy
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80245158[1F0]
-	0000001F $NpcSettings_8024512C ~Vec3f:NPC_80245348 % 0 -1000 0
+	.NpcID:JungleGuy_31 $NpcSettings_8024512C ~Vec3f:NPC_JungleGuy_31 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245348
-	~AnimationTable:NPC_80245348 % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_31
+	~AnimationTable:NPC_JungleGuy_31 % .Sprite:JungleGuy
 	00000000 00000000 $ExtraAnimationList_80244EF4 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245538
 {
-	00000046 $NpcSettings_80244EA0 ~Vec3f:NPC_80245538 % 335 0 -40
+	.NpcID:MBush_70 $NpcSettings_80244EA0 ~Vec3f:NPC_MBush_70 % 335 0 -40
 	00408D01 00000000 00000000 00000000 0000005A
 	~Items:10:TastyTonic:5:SuperSoda:5
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80245538
-	~AnimationTable:NPC_80245538 % .Sprite:MBush
+	~Movement:NPC_MBush_70
+	~AnimationTable:NPC_MBush_70 % .Sprite:MBush
 	00000000 00000000 00000000 001A00D4 % M. Bush. This bizarre creature is only found in th ...
 }
 
 #new:NpcGroup $NpcGroup_80245728
 {
-	00000050 $NpcSettings_80244EA0 ~Vec3f:NPC_80245728 % 415 0 -65
+	.NpcID:MBush_80 $NpcSettings_80244EA0 ~Vec3f:NPC_MBush_80 % 415 0 -65
 	00408D01 00000000 00000000 00000000 0000005A
 	~Items:10:TastyTonic:5:SuperSoda:5
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80245728
-	~AnimationTable:NPC_80245728 % .Sprite:MBush
+	~Movement:NPC_MBush_80
+	~AnimationTable:NPC_MBush_80 % .Sprite:MBush
 	00000000 00000000 00000000 001A00D4 % M. Bush. This bizarre creature is only found in th ...
 }
 
@@ -3545,7 +3550,7 @@ PADDING: 802464FC to 80246500 (000064FC to 00006500)
 #new:Script $Script_MakeEntities
 {
     0:  Call  MakeEntity    ( .Entity:SpinningFlower ~Vec4d:Entity80246500 FFFFFFDF 0000005A FFFFFEA5 80000000 )
-   30:  Call  MakeEntity    ( .Entity:SpongyFlower ~Vec4d:Entity80246530 80000000 )
+   30:  Call  MakeEntity    ( .Entity:Munchlesia ~Vec4d:Entity80246530 80000000 )
    54:  Return
    5C:  End
 }

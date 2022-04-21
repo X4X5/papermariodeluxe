@@ -1,6 +1,7 @@
 % Script File: sbk_61.mscr
 % Decoded from: 0 to 3C0 (sbk_61)
 
+
 #new:Function $Function_80240000
 {
     0:  MTC1      R0, F0
@@ -11,7 +12,7 @@
    14:  SW        R0, 14 (SP)
    18:  SWC1      F0, 10 (SP)
    1C:  COPY      A2, A1
-   20:  JAL       80072950
+   20:  JAL       ~Func:playFX_82
    24:  COPY      A3, A1
    28:  LW        RA, 18 (SP)
    2C:  LI        V0, 2
@@ -88,8 +89,8 @@ PADDING: 80240038 to 80240040 (00000038 to 00000040)
    20:  If  *GB_StoryProgress  ==  .Story:Ch2_GotPulseStone % FFFFFFC1
    30:  	Call  DisablePulseStone ( .False )
    40:  EndIf
-   48:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   68:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   48:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   68:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    84:  Call  SetCamEnabled     ( .Cam:Default .True )
    98:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    AC:  ExecWait  $Script_MakeEntities

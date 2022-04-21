@@ -1,6 +1,9 @@
 % Script File: kzn_08.mscr
 % Decoded from: 0 to 5860 (kzn_08)
 
+#define .NpcID:PutridPiranha_00     00
+#define .NpcID:PutridPiranha_01     01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFB0
@@ -37,7 +40,7 @@
    78:  COPY      A0, V0
    7C:  COPY      A0, V0
    80:  LI        A1, FFFF
-   84:  JAL       8011BC7C
+   84:  JAL       ~Func:set_mdl_custom_gfx_set
    88:  LI        A2, 2
    8C:  LHU       V0, 0 (S3)
    90:  SLT       V0, S0, V0
@@ -53,7 +56,7 @@
    B4:  BEQL      A0, R0, .oCC
    B8:  ADDIU     S0, S0, 1
    BC:  LI        A1, FFFF
-   C0:  JAL       8011BC7C
+   C0:  JAL       ~Func:set_mdl_custom_gfx_set
    C4:  LI        A2, 2
    C8:  ADDIU     S0, S0, 1
         .oCC
@@ -240,7 +243,7 @@
    48:  COPY      A0, V0
    4C:  COPY      A0, V0
    50:  LI        A1, FFFF
-   54:  JAL       8011BC7C
+   54:  JAL       ~Func:set_mdl_custom_gfx_set
    58:  CLEAR     A2
    5C:  LHU       V0, 0 (S2)
    60:  SLT       V0, S0, V0
@@ -256,7 +259,7 @@
    84:  BEQL      A0, R0, .o9C
    88:  ADDIU     S0, S0, 1
    8C:  LI        A1, FFFF
-   90:  JAL       8011BC7C
+   90:  JAL       ~Func:set_mdl_custom_gfx_set
    94:  CLEAR     A2
    98:  ADDIU     S0, S0, 1
         .o9C
@@ -4336,7 +4339,7 @@ PADDING: 80240A4C to 80240A50 (00000A4C to 00000A50)
    70:  MFC1      A2, F6
    74:  TRUNC.W.S F6, F0
    78:  MFC1      A3, F6
-   7C:  JAL       ~Func:set_transition_stencil_center_worldpos
+   7C:  JAL       ~Func:set_screen_overlay_center_worldpos
    80:  COPY      A1, A0
    84:  ADDIU     A0, SP, 28
    88:  ADDIU     A1, SP, 29
@@ -4385,7 +4388,7 @@ PADDING: 80240A4C to 80240A50 (00000A4C to 00000A50)
   138:  BC1F      .o158
   13C:  NOP
   140:  MFC1      A1, F20
-  144:  JAL       ~Func:set_transition_stencil_alpha
+  144:  JAL       ~Func:set_screen_overlay_alpha
   148:  LI        A0, 1
   14C:  MFC1      A1, F20
   150:  BEQ       R0, R0, .o210
@@ -4438,11 +4441,11 @@ PADDING: 80240A4C to 80240A50 (00000A4C to 00000A50)
   1F8:  LWC1      F6, 70 (S0)
   1FC:  CVT.S.W   F6, F6
   200:  MFC1      A1, F6
-  204:  JAL       ~Func:set_transition_stencil_alpha
+  204:  JAL       ~Func:set_screen_overlay_alpha
   208:  LI        A0, 1
   20C:  MFC1      A1, F22
         .o210
-  210:  JAL       ~Func:set_transition_stencil_zoom_1
+  210:  JAL       ~Func:set_screen_overlay_params_back
   214:  LI        A0, B
   218:  CLEAR     V0
   21C:  LW        RA, 44 (SP)
@@ -4668,8 +4671,8 @@ PADDING: 8024411C to 80244120 (0000411C to 00004120)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading  ( .Shading:kzn_08 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80245588 )
    84:  ExecWait  $Script_MakeEntities
@@ -4800,7 +4803,7 @@ MISSING: 80244E58 to 80244E84 (00004E58 to 00004E84)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -4885,19 +4888,19 @@ MISSING: 80244E58 to 80244E84 (00004E58 to 00004E84)
 
 #new:NpcGroup $NpcGroup_802451A8
 {
-	00000000 $NpcSettings_80245044 ~Vec3f:NPC_802451A8 % 80 0 135
+	.NpcID:PutridPiranha_00 $NpcSettings_80245044 ~Vec3f:NPC_PutridPiranha_00 % 80 0 135
 	00000500 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802451A8
-	~AnimationTable:NPC_802451A8 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_00
+	~AnimationTable:NPC_PutridPiranha_00 % .Sprite:PutridPiranha
 	00000002 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802451A8[1F0]
-	00000001 $NpcSettings_8024517C ~Vec3f:NPC_80245398 % 0 -1000 0
+	.NpcID:PutridPiranha_01 $NpcSettings_8024517C ~Vec3f:NPC_PutridPiranha_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245398
-	~AnimationTable:NPC_80245398 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_01
+	~AnimationTable:NPC_PutridPiranha_01 % .Sprite:PutridPiranha
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

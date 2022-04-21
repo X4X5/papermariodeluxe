@@ -153,7 +153,7 @@
     8:  COPY      S0, A0
     C:  BEQ       A1, R0, .o48
    10:  SW        RA, 14 (SP)
-   14:  JAL       8011D82C
+   14:  JAL       ~Func:mdl_set_all_fog_mode
    18:  LI        A0, 1
    1C:  CLEAR     A0
    20:  COPY      A1, A0
@@ -300,7 +300,7 @@
   110:  MTC1      S2, F0
   114:  NOP
   118:  CVT.S.W   F0, F0
-  11C:  JAL       80070CD0
+  11C:  JAL       ~Func:playFX_36
   120:  SWC1      F0, 14 (SP)
   124:  LI        V0, 2
         .o128
@@ -362,10 +362,10 @@
 #new:Script $Script_802A17A4
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -431,7 +431,7 @@
    1C:  ChildThread
    24:  	Wait  5`
    30:  	Call  UseBattleCamPreset    ( 00000002 )
-   40:  	Call  MoveBattleCamOver     ( 00000014 )
+   40:  	Call  MoveBattleCamOver     (  20` )
    50:  EndChildThread
    58:  Call  $Function_802A123C ( )
    64:  Call  PlaySound ( 00000365 )
@@ -446,10 +446,10 @@
    EC:  Call  $Function_802A1354 ( )
    F8:  Wait  5`
   104:  Call  StartRumble       ( 0000000A )
-  114:  Call  ShakeCam  ( .Cam:Battle 00000000 00000005 *Fixed[1.0] )
+  114:  Call  ShakeCam  ( .Cam:Battle 00000000  5` *Fixed[1.0] )
   130:  Call  SetGoalToTarget   ( .Actor:Self )
   140:  Call  GetItemPower      ( .Item:ThunderRage *Var0 *Var1 )
-  158:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:IgnoreDefense|NoContact|Unblockable|Electric 00000000 *Var0 00000020 )
+  158:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:IgnoreDefense|NoContact|NoOtherDamagePopups|Electric 00000000 *Var0 00000020 )
   178:  Label  1
   184:  Wait  5`
   190:  Call  ChooseNextTarget  ( .Iter:Next *Var0 )
@@ -457,7 +457,7 @@
   1B4:  	Goto  0
   1C0:  EndIf
   1C8:  Call  UseBattleCamPreset    ( 00000003 )
-  1D8:  Call  MoveBattleCamOver     ( 00000014 )
+  1D8:  Call  MoveBattleCamOver     (  20` )
   1E8:  Call  SetAnimation  ( .Actor:Player 00000000 00010002 )
   200:  Wait  30`
   20C:  Call  $Function_802A12D4 ( )

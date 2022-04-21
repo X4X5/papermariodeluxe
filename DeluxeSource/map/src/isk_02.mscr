@@ -1,6 +1,10 @@
 % Script File: isk_02.mscr
 % Decoded from: 0 to 1740 (isk_02)
 
+#define .NpcID:Pokey_00             00
+#define .NpcID:Pokey_01             01
+#define .NpcID:Pokey_02             02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -144,8 +148,8 @@ PADDING: 80240104 to 80240110 (00000104 to 00000110)
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_802416F8 )
@@ -179,7 +183,7 @@ PADDING: 8024046C to 80240470 (0000046C to 00000470)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf
@@ -213,7 +217,7 @@ PADDING: 8024046C to 80240470 (0000046C to 00000470)
 #new:Script $Script_80240640
 {
     0:  If  *GF_ISK02_UnlockedDoor  ==  .False
-   10:  	Call  802C971C  ( 00000043 )
+   10:  	Call  MakeTransformGroup    ( ~Model:g304 )
    20:  	BindLock  $Script_80240478 .Trigger:WallPressA 00004000 $ItemList_80240470 00000000 00000001
    40:  Else
    48:  	Call  EnableGroup   ( ~Model:g304 .False )
@@ -279,7 +283,7 @@ PADDING: 802406CC to 802406D0 (000006CC to 000006D0)
    58:  	EndIf
    60:  EndIf
    68:  Set   *AreaFlag[007]  .True
-   78:  Call  SetNpcFlagBits        ( 00000000 00000002 .False )
+   78:  Call  SetNpcFlagBits        ( .NpcID:Pokey_00 00000002 .False )
    90:  Set   *Var0  *AreaFlag[004]
    A0:  Set   *Var3  00000051
    B0:  ExecWait  $Script_8024077C
@@ -303,7 +307,7 @@ PADDING: 802406CC to 802406D0 (000006CC to 000006D0)
    60:  EndIf
    68:  Call  MakeItemEntity        ( .Item:SpikeShield ~Vec3d:Item80240A88 .ItemSpawnMode:Fixed_NeverVanish *GF_ISK02_Item_SpikeShield )
    8C:  Set   *AreaFlag[008]  .True
-   9C:  Call  SetNpcFlagBits        ( 00000001 00000002 .False )
+   9C:  Call  SetNpcFlagBits        ( .NpcID:Pokey_01 00000002 .False )
    B4:  Set   *Var0  *AreaFlag[005]
    C4:  Set   *Var3  0000005A
    D4:  ExecWait  $Script_8024077C
@@ -326,7 +330,7 @@ PADDING: 802406CC to 802406D0 (000006CC to 000006D0)
    58:  	EndIf
    60:  EndIf
    68:  Set   *AreaFlag[009]  .True
-   78:  Call  SetNpcFlagBits        ( 00000002 00000002 .False )
+   78:  Call  SetNpcFlagBits        ( .NpcID:Pokey_02 00000002 .False )
    90:  Set   *Var0  *AreaFlag[006]
    A0:  Set   *Var3  00000063
    B0:  ExecWait  $Script_8024077C
@@ -396,7 +400,7 @@ PADDING: 80240CDC to 80240CE0 (00000CDC to 00000CE0)
    68:  Wait  15`
    74:  Call  SetNpcFlagBits    ( .Npc:Self 00000040 .True )
    8C:  Call  SetSelfEnemyFlagBits  ( 17100000 00000000 )
-   A0:  Call  NpcMoveTo ( .Npc:Self FFFFFEC5 000001C7 0000000A )
+   A0:  Call  NpcMoveTo ( .Npc:Self  -315`  455`  10` )
    BC:  Call  SetNpcFlagBits    ( .Npc:Self 00000040 .False )
    D4:  Call  SetSelfEnemyFlagBits  ( 40000000 00000001 )
    E8:  Call  BindNpcAI ( .Npc:Self $Script_NpcAI_80240D10 )
@@ -416,7 +420,7 @@ PADDING: 80240CDC to 80240CE0 (00000CDC to 00000CE0)
    68:  Wait  15`
    74:  Call  SetNpcFlagBits    ( .Npc:Self 00000040 .True )
    8C:  Call  SetSelfEnemyFlagBits  ( 17100000 00000000 )
-   A0:  Call  NpcMoveTo ( .Npc:Self FFFFFF6F 00000217 0000000A )
+   A0:  Call  NpcMoveTo ( .Npc:Self  -145`  535`  10` )
    BC:  Call  SetNpcFlagBits    ( .Npc:Self 00000040 .False )
    D4:  Call  SetSelfEnemyFlagBits  ( 40000000 00000001 )
    E8:  Call  BindNpcAI ( .Npc:Self $Script_NpcAI_80240D10 )
@@ -436,7 +440,7 @@ PADDING: 80240CDC to 80240CE0 (00000CDC to 00000CE0)
    68:  Wait  15`
    74:  Call  SetNpcFlagBits    ( .Npc:Self 00000040 .True )
    8C:  Call  SetSelfEnemyFlagBits  ( 17100000 00000000 )
-   A0:  Call  NpcMoveTo ( .Npc:Self 00000032 00000226 0000000A )
+   A0:  Call  NpcMoveTo ( .Npc:Self  50`  550`  10` )
    BC:  Call  SetNpcFlagBits    ( .Npc:Self 00000040 .False )
    D4:  Call  SetSelfEnemyFlagBits  ( 40000000 00000001 )
    E8:  Call  BindNpcAI ( .Npc:Self $Script_NpcAI_80240D10 )
@@ -470,31 +474,31 @@ PADDING: 80240CDC to 80240CE0 (00000CDC to 00000CE0)
 
 #new:NpcGroup $NpcGroup_80241128
 {
-	00000000 $NpcSettings_80240D3C ~Vec3f:NPC_80241128 % -296 0 421
+	.NpcID:Pokey_00 $NpcSettings_80240D3C ~Vec3f:NPC_Pokey_00 % -296 0 421
 	00000A00 $Script_Init_8024108C 00000000 00000000 00000130
 	~Items:5:TastyTonic:A ~HP:Generous:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80241128
-	~AnimationTable:NPC_80241128 % .Sprite:Pokey
+	~Movement:NPC_Pokey_00
+	~AnimationTable:NPC_Pokey_00 % .Sprite:Pokey
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241318
 {
-	00000001 $NpcSettings_80240D3C ~Vec3f:NPC_80241318 % -133 0 497
+	.NpcID:Pokey_01 $NpcSettings_80240D3C ~Vec3f:NPC_Pokey_01 % -133 0 497
 	00000A00 $Script_Init_802410C0 00000000 00000000 0000011C
 	~Items:5:TastyTonic:A ~HP:Generous:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80241318
-	~AnimationTable:NPC_80241318 % .Sprite:Pokey
+	~Movement:NPC_Pokey_01
+	~AnimationTable:NPC_Pokey_01 % .Sprite:Pokey
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241508
 {
-	00000002 $NpcSettings_80240D3C ~Vec3f:NPC_80241508 % 45 0 505
+	.NpcID:Pokey_02 $NpcSettings_80240D3C ~Vec3f:NPC_Pokey_02 % 45 0 505
 	00000A00 $Script_Init_802410F4 00000000 00000000 00000108
 	~Items:5:TastyTonic:A ~HP:Generous:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80241508
-	~AnimationTable:NPC_80241508 % .Sprite:Pokey
+	~Movement:NPC_Pokey_02
+	~AnimationTable:NPC_Pokey_02 % .Sprite:Pokey
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

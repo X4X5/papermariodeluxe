@@ -1,6 +1,9 @@
 % Script File: omo_06.mscr
 % Decoded from: 0 to 59A0 (omo_06)
 
+#define .NpcID:TrainStationToad_00  00
+#define .NpcID:TrainStationToad_01  01
+
 #new:Function $Function_80240000
 {
     0:  LA        V1, 800B1D80
@@ -905,8 +908,8 @@ PADDING: 80240B2C to 80240B30 (00000B2C to 00000B30)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_802456A0 )
@@ -988,8 +991,8 @@ PADDING: 80240FCC to 80240FD0 (00000FCC to 00000FD0)
    A4:  Call  PlaySoundAt   ( 000001F1 00000000 FFFFFE75 00000000 FFFFFF47 )
    C4:  Call  ModifyColliderFlags   ( 00000001 ~Collider:o930 7FFFFE00 )
    DC:  Wait  20`
-   E8:  Call  UseSettingsFrom       ( .Cam:Default 000000DF 0000000A FFFFFF5B )
-  104:  Call  SetPanTarget  ( .Cam:Default 000000DF 0000000A FFFFFF5B )
+   E8:  Call  UseSettingsFrom       ( .Cam:Default  223`  10`  -165` )
+  104:  Call  SetPanTarget  ( .Cam:Default  223`  10`  -165` )
   120:  Call  SetCamDistance        ( .Cam:Default *Fixed[500.0] )
   134:  Call  SetCamPosA    ( .Cam:Default *Fixed[-500.0] *Fixed[-200.0] )
   14C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -1007,7 +1010,7 @@ PADDING: 80240FCC to 80240FD0 (00000FCC to 00000FD0)
   254:  	Goto  1
   260:  EndIf
   268:  Call  PlaySoundAt   ( 00000051 00000000 00000109 00000000 FFFFFF15 )
-  288:  Call  ShakeCam      ( .Cam:Default 00000000 0000000A *Fixed[1.0] )
+  288:  Call  ShakeCam      ( .Cam:Default 00000000  10` *Fixed[1.0] )
   2A4:  Call  GetModelCenter        ( ~Model:o897 )
   2B4:  Call  PlayEffect    ( ~FX:Steam:FloatingRings *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   2F8:  Wait  30`
@@ -1309,7 +1312,7 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
 {
     0:  Label  0
     C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   24:  Call  SetCamTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+   24:  Call  SetCamTarget  ( .Cam:Default *Var0  0` *Var2 )
    40:  Wait  1`
    4C:  Goto  0
    58:  Return
@@ -1348,7 +1351,7 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
    AC:  EndLoop
    B4:  Loop
    C0:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   D8:  	Call  SetCamTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+   D8:  	Call  SetCamTarget  ( .Cam:Default *Var0  0` *Var2 )
    F4:  	Wait  1`
   100:  EndLoop
   108:  Return
@@ -1357,7 +1360,7 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
 
 #new:Script $Script_80242B5C
 {
-    0:  Call  SetNpcFlagBits    ( 00000000 00000140 .True )
+    0:  Call  SetNpcFlagBits    ( .NpcID:TrainStationToad_00 00000140 .True )
    18:  Call  SetNpcFlagBits    ( .Npc:Partner 00000140 .True )
    30:  Thread
    38:  	UseIntBuffer  *Var0
@@ -1365,12 +1368,12 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
    58:  	Call  AddVectorPolar    ( *Var1 *Var2 *Fixed[15.0] *Var3 )
    74:  	Call  SetPlayerAnimation    ( .PlayerAnim:Walking )
    84:  	Call  SetPlayerSpeed    ( *Fixed[4.0] )
-   94:  	Call  PlayerMoveTo      ( *Var1 *Var2 00000000 )
+   94:  	Call  PlayerMoveTo      ( *Var1 *Var2  0` )
    AC:  	Call  SetPlayerSpeed    ( *Fixed[0.7] )
-   BC:  	Call  PlayerMoveTo      ( *Var1 *Var2 00000000 )
-   D4:  	Call  SetPlayerPos      ( *Var1 00000032 *Var2 )
+   BC:  	Call  PlayerMoveTo      ( *Var1 *Var2  0` )
+   D4:  	Call  SetPlayerPos      ( *Var1  50` *Var2 )
    EC:  	Call  SetPlayerAnimation    ( 00010002 )
-   FC:  	Call  InterpPlayerYaw   ( *Var3 00000000 )
+   FC:  	Call  InterpPlayerYaw   ( *Var3  0` )
   110:  EndThread
   118:  Wait  5`
   124:  UseIntBuffer  *Var0
@@ -1379,11 +1382,11 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
   154:  AddF  *Var3  *Fixed[180.0]
   164:  Call  AddVectorPolar    ( *Var1 *Var2 *Fixed[15.0] *Var3 )
   180:  Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.7] )
-  194:  Call  NpcJump0  ( .Npc:Partner *Var1 00000032 *Var2 0000000A )
+  194:  Call  NpcJump0  ( .Npc:Partner *Var1  50` *Var2  10` )
   1B4:  Call  SetNpcSpeed       ( .Npc:Partner *Fixed[0.5] )
-  1C8:  Call  NpcMoveTo ( .Npc:Partner *Var1 *Var2 00000000 )
+  1C8:  Call  NpcMoveTo ( .Npc:Partner *Var1 *Var2  0` )
   1E4:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
-  1F8:  Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  1F8:  Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   210:  Wait  5`
   21C:  UseIntBuffer  *Var0
   228:  Get3Int  *Var1 *Var2 *Var3
@@ -1397,15 +1400,15 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
   29C:  SetF  *Var5  *Var2
   2AC:  SetF  *Var6  *Var3
   2BC:  Call  AddVectorPolar    ( *Var1 *Var2 *Fixed[100.0] *Var3 )
-  2D8:  Call  SetNpcSpeed   ( 00000000 *Fixed[3.0] )
-  2EC:  Call  SetNpcAnimation   ( 00000000 008C0003 )
-  300:  Call  NpcMoveTo     ( 00000000 *Var1 *Var2 00000000 )
-  31C:  Call  SetNpcAnimation   ( 00000000 008C0001 )
+  2D8:  Call  SetNpcSpeed   ( .NpcID:TrainStationToad_00 *Fixed[3.0] )
+  2EC:  Call  SetNpcAnimation   ( .NpcID:TrainStationToad_00 008C0003 )
+  300:  Call  NpcMoveTo     ( .NpcID:TrainStationToad_00 *Var1 *Var2  0` )
+  31C:  Call  SetNpcAnimation   ( .NpcID:TrainStationToad_00 008C0001 )
   330:  Call  AddVectorPolar    ( *Var4 *Var5 *Fixed[20.0] *Var6 )
-  34C:  Call  SetNpcJumpscale   ( 00000000 *Fixed[0.7] )
-  360:  Call  NpcJump0      ( 00000000 *Var4 00000032 *Var5 0000000A )
-  380:  Call  InterpNpcYaw  ( 00000000 *VarA 00000000 )
-  398:  Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000005 000F0009 ) % We're leaving! All aboard!
+  34C:  Call  SetNpcJumpscale   ( .NpcID:TrainStationToad_00 *Fixed[0.7] )
+  360:  Call  NpcJump0      ( .NpcID:TrainStationToad_00 *Var4  50` *Var5  10` )
+  380:  Call  InterpNpcYaw  ( .NpcID:TrainStationToad_00 *VarA  0` )
+  398:  Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000005 000F0009 ) % We're leaving! All aboard!
   3B8:  Call  PlaySound     ( 00000083 )
   3C8:  Call  SetMusicTrack ( 00000000 .Song:ToyboxTrain 00000000 00000008 )
   3E4:  Wait  10`
@@ -1417,7 +1420,7 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
 {
     0:  Call  StopSound ( 00000083 )
    10:  Call  SetMusicTrack     ( 00000000 .Song:ShyGuyToybox 00000000 00000008 )
-   2C:  Call  SetNpcFlagBits    ( 00000000 00000140 .True )
+   2C:  Call  SetNpcFlagBits    ( .NpcID:TrainStationToad_00 00000140 .True )
    44:  Call  SetNpcFlagBits    ( .Npc:Partner 00000140 .True )
    5C:  SetF  *Var0  *MapVar[B]
    6C:  SetF  *Var1  *MapVar[C]
@@ -1429,16 +1432,16 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
    C4:  EndIf
    CC:  Call  AddVectorPolar    ( *Var0 *Var1 *Fixed[100.0] *Var2 )
    E8:  Thread
-   F0:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  104:  	Call  NpcJump0  ( 00000000 *Var0 00000032 *Var1 0000000A )
-  124:  	Call  SetNpcAnimation   ( 00000000 008C0003 )
-  138:  	Call  SetNpcSpeed       ( 00000000 *Fixed[2.0] )
+   F0:  	Call  SetNpcJumpscale   ( .NpcID:TrainStationToad_00 *Fixed[1.0] )
+  104:  	Call  NpcJump0  ( .NpcID:TrainStationToad_00 *Var0  50` *Var1  10` )
+  124:  	Call  SetNpcAnimation   ( .NpcID:TrainStationToad_00 008C0003 )
+  138:  	Call  SetNpcSpeed       ( .NpcID:TrainStationToad_00 *Fixed[2.0] )
   14C:  	UseIntBuffer  *Var9
   158:  	Get2Int  *Var3 *Var4
-  168:  	Call  NpcMoveTo ( 00000000 *Var3 *Var4 00000000 )
-  184:  	Call  SetNpcAnimation   ( 00000000 008C0001 )
-  198:  	Call  InterpNpcYaw      ( 00000000 0000010E 0000000F )
-  1B0:  	Call  SetNpcFlagBits    ( 00000000 00000140 .False )
+  168:  	Call  NpcMoveTo ( .NpcID:TrainStationToad_00 *Var3 *Var4  0` )
+  184:  	Call  SetNpcAnimation   ( .NpcID:TrainStationToad_00 008C0001 )
+  198:  	Call  InterpNpcYaw      ( .NpcID:TrainStationToad_00  270`  15` )
+  1B0:  	Call  SetNpcFlagBits    ( .NpcID:TrainStationToad_00 00000140 .False )
   1C8:  EndThread
   1D0:  Wait  10`
   1DC:  Thread
@@ -1446,14 +1449,14 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
   1F4:  	Call  AddVectorPolar        ( *Var0 *Var1 *Fixed[20.0] *Var2 )
   210:  	Call  SetPlayerAnimation    ( .PlayerAnim:Walking )
   220:  	Call  SetPlayerSpeed        ( *Fixed[3.0] )
-  230:  	Call  PlayerMoveTo  ( *Var0 *Var1 00000000 )
+  230:  	Call  PlayerMoveTo  ( *Var0 *Var1  0` )
   248:  	Call  SetPlayerAnimation    ( 00010002 )
   258:  EndThread
   260:  Wait  10`
   26C:  Sub   *Var1  0000001E
   27C:  Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
   290:  Call  SetNpcSpeed       ( .Npc:Partner *Fixed[2.5] )
-  2A4:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var1 00000000 )
+  2A4:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var1  0` )
   2C0:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   2D4:  Call  SetNpcFlagBits    ( .Npc:Partner 00000140 .False )
   2EC:  Return
@@ -1871,7 +1874,7 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
   130:  	Call  $Function_80240000 ( )
   13C:  	Set   *Var9  $???_80244160
   14C:  	ExecWait  $Script_80242F5C
-  158:  	Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F000F ) % Station stop: Pink Station! Welcome to Pink Statio ...
+  158:  	Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F000F ) % Station stop: Pink Station! Welcome to Pink Statio ...
   178:  	Call  ModifyColliderFlags   ( 00000001 ~Collider:o898 7FFFFE00 )
   190:  	Call  DisablePlayerPhysics  ( .False )
   1A0:  	Call  EnablePartnerAI ( )
@@ -1936,7 +1939,7 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
   130:  	Call  $Function_80240000 ( )
   13C:  	Set   *Var9  $???_80244160
   14C:  	ExecWait  $Script_80242F5C
-  158:  	Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F000F ) % Station stop: Pink Station! Welcome to Pink Statio ...
+  158:  	Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F000F ) % Station stop: Pink Station! Welcome to Pink Statio ...
   178:  	Call  ModifyColliderFlags   ( 00000001 ~Collider:o898 7FFFFE00 )
   190:  	Call  DisablePlayerPhysics  ( .False )
   1A0:  	Call  EnablePartnerAI ( )
@@ -1976,10 +1979,10 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
 #new:Script $Script_80244B10
 {
     0:  If  *MapFlag[01]  ==  .False
-   10:  	Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F0006 ) % Which way are you heading? Press one of those swit ...
+   10:  	Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0006 ) % Which way are you heading? Press one of those swit ...
    30:  Else
    38:  	If  *AreaFlag[002]  ==  .False
-   48:  		Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
+   48:  		Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
    68:  		If  *GF_OMO03_BlueSwitchActivated  ==  .False
    78:  			Call  ShowChoice    ( 001E003D ) % Blue Station Don't get on
    88:  			If  *Var0  !=  00000001
@@ -1992,7 +1995,7 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
    E0:  				Set   *AreaByte[6]  *Var1
    F0:  				ExecWait  $Script_80244338
    FC:  			Else
-  104:  				Call  ContinueSpeech    ( 00000000 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
+  104:  				Call  ContinueSpeech    ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
   124:  			EndIf
   12C:  		Else
   134:  			Call  ShowChoice    ( 001E003E ) % Blue Station Red Station Green Station Don't get o ...
@@ -2006,15 +2009,15 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
   19C:  				Set   *AreaByte[6]  *Var1
   1AC:  				ExecWait  $Script_80244338
   1B8:  			Else
-  1C0:  				Call  ContinueSpeech    ( 00000000 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
+  1C0:  				Call  ContinueSpeech    ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
   1E0:  			EndIf
   1E8:  		EndIf
   1F0:  	Else
   1F8:  		Switch  *GB_StoryProgress
   204:  			Case  <  .Story:Ch4_PulledSwitchSwitch % FFFFFFFF
-  210:  				Call  SpeakToPlayer ( 00000000 008C0006 008C0002 00000000 000F0012 ) % Oh, there's a track problem! We can't go that dire ...
+  210:  				Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0006 008C0002 00000000 000F0012 ) % Oh, there's a track problem! We can't go that dire ...
   230:  			Case  <  .Story:Ch4_SolvedColorPuzzle % 0
-  23C:  				Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
+  23C:  				Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
   25C:  				Call  ShowChoice    ( 001E003B ) % Green Station Don't get on
   26C:  				If  *Var0  !=  00000001
   27C:  					Call  CloseMessage ( )
@@ -2026,10 +2029,10 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
   2C4:  					Set   *AreaByte[6]  *Var1
   2D4:  					ExecWait  $Script_80244198
   2E0:  				Else
-  2E8:  					Call  ContinueSpeech    ( 00000000 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
+  2E8:  					Call  ContinueSpeech    ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
   308:  				EndIf
   310:  			Case  >=  .Story:Ch4_SolvedColorPuzzle % 0
-  31C:  				Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
+  31C:  				Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
   33C:  				Call  ShowChoice    ( 001E003C ) % Green Station Red Station Blue Station Don't get o ...
   34C:  				If  *Var0  !=  00000003
   35C:  					Call  CloseMessage ( )
@@ -2041,7 +2044,7 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
   3A4:  					Set   *AreaByte[6]  *Var1
   3B4:  					ExecWait  $Script_80244198
   3C0:  				Else
-  3C8:  					Call  ContinueSpeech    ( 00000000 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
+  3C8:  					Call  ContinueSpeech    ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
   3E8:  				EndIf
   3F0:  		EndSwitch
   3F8:  	EndIf
@@ -2145,19 +2148,19 @@ PADDING: 80241748 to 80241750 (00001748 to 00001750)
 
 #new:NpcGroup $NpcGroup_802452C0
 {
-	00000000 $NpcSettings_80245090 ~Vec3f:NPC_802452C0 % 50 50 45
+	.NpcID:TrainStationToad_00 $NpcSettings_80245090 ~Vec3f:NPC_TrainStationToad_00 % 50 50 45
 	00400D05 $Script_Init_802450F8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802452C0
-	~AnimationTable:NPC_802452C0 % .Sprite:TrainStationToad
+	~Movement:NPC_TrainStationToad_00
+	~AnimationTable:NPC_TrainStationToad_00 % .Sprite:TrainStationToad
 	00000000 00000000 00000000 001A00B8 % He's an employee of the Toy Box station. The emplo ...
 	%
 	% $NpcGroup_802452C0[1F0]
-	00000001 $NpcSettings_80245090 ~Vec3f:NPC_802454B0 % 55 0 240
+	.NpcID:TrainStationToad_01 $NpcSettings_80245090 ~Vec3f:NPC_TrainStationToad_01 % 55 0 240
 	00400D05 $Script_Init_8024529C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802454B0
-	~AnimationTable:NPC_802454B0 % .Sprite:TrainStationToad
+	~Movement:NPC_TrainStationToad_01
+	~AnimationTable:NPC_TrainStationToad_01 % .Sprite:TrainStationToad
 	00000000 00000000 00000000 001A00B8 % He's an employee of the Toy Box station. The emplo ...
 }
 

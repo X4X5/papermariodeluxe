@@ -1,6 +1,7 @@
 % Script File: pra_27.mscr
 % Decoded from: 0 to 18B0 (pra_27)
 
+
 #new:Function_Init $Function_Init
 {
     0:  ADDIU     SP, SP, FFE8
@@ -21,7 +22,6 @@
    4C:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240050
 {
     0:  LI        V0, FEFFFFFF
@@ -38,7 +38,6 @@
    30:  COPY      V0, A0
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240084
 {
     0:  SRA       V0, A0, 10
@@ -92,7 +91,7 @@
     8:  COPY      S0, A0
     C:  LA        A1, $Function_80240158
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  CLEAR     A0
    20:  LW        V1, 13C (S0)
    24:  SW        V0, 0 (V1)
@@ -103,7 +102,6 @@
    38:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240158
 {
     0:  ADDIU     SP, SP, FFB0
@@ -207,7 +205,7 @@
   18C:  SW        S1, 0 (A0)
   190:  SW        S0, 8 (A0)
   194:  LW        V0, 38 (SP)
-  198:  LA        V1, $Function_80240320
+  198:  LA        V1, $???_80240320
   1A0:  SW        V1, C (A0)
   1A4:  SUBU      V0, R0, V0
   1A8:  JAL       ~Func:queue_render_task
@@ -221,109 +219,22 @@
   1C4:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
-#new:Function $Function_80240320
+#new:Unknown $???_80240320
 {
-    0:  LAH       V1, 8009A634
-    8:  LUI       A3, BF80
-    C:  ADDIU     SP, SP, FEC0
-   10:  SDC1      F20, 128 (SP)
-   14:  MTC1      R0, F20
-   18:  SW        S1, 11C (SP)
-   1C:  COPY      S1, A0
-   20:  SW        S0, 118 (SP)
-   24:  ADDIU     S0, SP, 98
-   28:  SW        RA, 120 (SP)
-   2C:  SDC1      F24, 138 (SP)
-   30:  SDC1      F22, 130 (SP)
-   34:  SLL       V0, V1, 2
-   38:  ADDU      V0, V0, V1
-   3C:  SLL       V0, V0, 2
-   40:  SUBU      V0, V0, V1
-   44:  SLL       V1, V0, 3
-   48:  ADDU      V0, V0, V1
-   4C:  SLL       V0, V0, 3
-   50:  LTF       F22, V0 (800B1DEC)
-   5C:  MFC1      A2, F20
-   60:  NEG.S     F22, F22
-   64:  MFC1      A1, F22
-   68:  COPY      A0, S0
-   6C:  JAL       ~Func:guRotateF
-   70:  SWC1      F20, 10 (SP)
-   74:  LWC1      F12, 8C (S1)
-   78:  JAL       ~Func:clamp_angle
-   7C:  NOP
-   80:  MFC1      A1, F0
-   84:  MFC1      A2, F20
-   88:  MFC1      A3, F20
-   8C:  LIF       F24, 1.0
-   94:  ADDIU     A0, SP, 18
-   98:  JAL       ~Func:guRotateF
-   9C:  SWC1      F24, 10 (SP)
-   A0:  COPY      A0, S0
-   A4:  ADDIU     A1, SP, 18
-   A8:  JAL       ~Func:guMtxCatF
-   AC:  COPY      A2, A1
-   B0:  MFC1      A1, F22
-   B4:  MFC1      A2, F20
-   B8:  MFC1      A3, F24
-   BC:  COPY      A0, S0
-   C0:  JAL       ~Func:guRotateF
-   C4:  SWC1      F20, 10 (SP)
-   C8:  ADDIU     A0, SP, 18
-   CC:  COPY      A1, S0
-   D0:  JAL       ~Func:guMtxCatF
-   D4:  COPY      A2, A0
-   D8:  SWC1      F20, 10 (SP)
-   DC:  LW        A1, A8 (S1)
-   E0:  MFC1      A2, F20
-   E4:  MFC1      A3, F24
-   E8:  JAL       ~Func:guRotateF
-   EC:  COPY      A0, S0
-   F0:  ADDIU     A0, SP, 18
-   F4:  COPY      A1, S0
-   F8:  JAL       ~Func:guMtxCatF
-   FC:  COPY      A2, A0
-  100:  LIF       F0, 0.7103795
-  10C:  ADDIU     S0, SP, D8
-  110:  MFC1      A1, F0
-  114:  COPY      A0, S0
-  118:  COPY      A2, A1
-  11C:  JAL       ~Func:guScaleF
-  120:  COPY      A3, A1
-  124:  ADDIU     A0, SP, 18
-  128:  COPY      A1, S0
-  12C:  JAL       ~Func:guMtxCatF
-  130:  COPY      A2, A0
-  134:  ADDIU     S0, SP, 58
-  138:  LWC1      F0, 30 (S1)
-  13C:  LIF       F2, 3.0
-  144:  NEG.S     F0, F0
-  148:  SUB.S     F0, F0, F2
-  14C:  LW        A1, 28 (S1)
-  150:  LW        A2, 2C (S1)
-  154:  MFC1      A3, F0
-  158:  JAL       ~Func:guTranslateF
-  15C:  COPY      A0, S0
-  160:  ADDIU     A0, SP, 18
-  164:  COPY      A1, S0
-  168:  JAL       ~Func:guMtxCatF
-  16C:  COPY      A2, A0
-  170:  LI        A0, 2
-  174:  CLEAR     A1
-  178:  COPY      A2, A1
-  17C:  COPY      A3, A1
-  180:  ADDIU     V0, SP, 18
-  184:  JAL       ~Func:spr_draw_player_sprite
-  188:  SW        V0, 10 (SP)
-  18C:  LW        RA, 120 (SP)
-  190:  LW        S1, 11C (SP)
-  194:  LW        S0, 118 (SP)
-  198:  LDC1      F24, 138 (SP)
-  19C:  LDC1      F22, 130 (SP)
-  1A0:  LDC1      F20, 128 (SP)
-  1A4:  JR        RA
-  1A8:  ADDIU     SP, SP, 140
+	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
+	AFB00118 27B00098 AFBF0120 F7B80138 F7B60130 00031080 00431021 00021080
+	00431023 000218C0 00431021 000210C0 3C01800B 00220821 C4361DEC 4406A000
+	4600B587 4405B000 0200202D 0C019EC8 E7B40010 C62C008C 0C00A6C9 00000000
+	44050000 4406A000 4407A000 3C013F80 4481C000 27A40018 0C019EC8 E7B80010
+	0200202D 27A50018 0C019D80 00A0302D 4405B000 4406A000 4407C000 0200202D
+	0C019EC8 E7B40010 27A40018 0200282D 0C019D80 0080302D E7B40010 8E2500A8
+	4406A000 4407C000 0C019EC8 0200202D 27A40018 0200282D 0C019D80 0080302D
+	3C013F36 3421DB6E 44810000 27B000D8 44050000 0200202D 00A0302D 0C019DF0
+	00A0382D 27A40018 0200282D 0C019D80 0080302D 27B00058 C6200030 3C014040
+	44811000 46000007 46020001 8E250028 8E26002C 44070000 0C019E40 0200202D
+	27A40018 0200282D 0C019D80 0080302D 24040002 0000282D 00A0302D 00A0382D
+	27A20018 0C0B7710 AFA20010 8FBF0120 8FB1011C 8FB00118 D7B80138 D7B60130
+	D7B40128 03E00008 27BD0140
 }
 
 #new:Function $Function_802404CC
@@ -338,7 +249,7 @@
    1C:  BEQ       V0, R0, .o50
    20:  NOP
    24:  LA        A1, $Function_80240530
-   2C:  JAL       ~Func:create_dynamic_entity_world
+   2C:  JAL       ~Func:create_generic_entity_world
    30:  CLEAR     A0
    34:  LW        V1, 13C (S0)
    38:  SW        V0, 0 (V1)
@@ -354,7 +265,6 @@
    60:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240530
 {
     0:  ADDIU     SP, SP, FFB0
@@ -444,7 +354,7 @@
   154:  AND       V0, V0, V1
   158:  BNEL      V0, R0, .o16C
   15C:  SW        A0, C (S1)
-  160:  LA        A0, $Function_802406BC
+  160:  LA        A0, $???_802406BC
   168:  SW        A0, C (S1)
         .o16C
   16C:  JAL       ~Func:queue_render_task
@@ -458,125 +368,26 @@
   188:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
-#new:Function $Function_802406BC
+#new:Unknown $???_802406BC
 {
-    0:  LAH       V1, 8009A634
-    8:  LUI       A3, BF80
-    C:  ADDIU     SP, SP, FEC0
-   10:  SDC1      F20, 128 (SP)
-   14:  MTC1      R0, F20
-   18:  SW        S1, 11C (SP)
-   1C:  COPY      S1, A0
-   20:  SW        S0, 118 (SP)
-   24:  ADDIU     S0, SP, 98
-   28:  SW        RA, 120 (SP)
-   2C:  SDC1      F24, 138 (SP)
-   30:  SDC1      F22, 130 (SP)
-   34:  SLL       V0, V1, 2
-   38:  ADDU      V0, V0, V1
-   3C:  SLL       V0, V0, 2
-   40:  SUBU      V0, V0, V1
-   44:  SLL       V1, V0, 3
-   48:  ADDU      V0, V0, V1
-   4C:  SLL       V0, V0, 3
-   50:  LTF       F22, V0 (800B1DEC)
-   5C:  MFC1      A2, F20
-   60:  NEG.S     F22, F22
-   64:  MFC1      A1, F22
-   68:  COPY      A0, S0
-   6C:  JAL       ~Func:guRotateF
-   70:  SWC1      F20, 10 (SP)
-   74:  LWC1      F12, 8C (S1)
-   78:  JAL       ~Func:clamp_angle
-   7C:  NOP
-   80:  MFC1      A1, F0
-   84:  MFC1      A2, F20
-   88:  MFC1      A3, F20
-   8C:  LIF       F24, 1.0
-   94:  ADDIU     A0, SP, 18
-   98:  JAL       ~Func:guRotateF
-   9C:  SWC1      F24, 10 (SP)
-   A0:  COPY      A0, S0
-   A4:  ADDIU     A1, SP, 18
-   A8:  JAL       ~Func:guMtxCatF
-   AC:  COPY      A2, A1
-   B0:  MFC1      A1, F22
-   B4:  MFC1      A2, F20
-   B8:  MFC1      A3, F24
-   BC:  COPY      A0, S0
-   C0:  JAL       ~Func:guRotateF
-   C4:  SWC1      F20, 10 (SP)
-   C8:  ADDIU     A0, SP, 18
-   CC:  COPY      A1, S0
-   D0:  JAL       ~Func:guMtxCatF
-   D4:  COPY      A2, A0
-   D8:  SWC1      F20, 10 (SP)
-   DC:  LW        A1, A8 (S1)
-   E0:  MFC1      A2, F20
-   E4:  MFC1      A3, F24
-   E8:  JAL       ~Func:guRotateF
-   EC:  COPY      A0, S0
-   F0:  ADDIU     A0, SP, 18
-   F4:  COPY      A1, S0
-   F8:  JAL       ~Func:guMtxCatF
-   FC:  COPY      A2, A0
-  100:  ADDIU     S0, SP, D8
-  104:  LIF       F0, 0.7103795
-  110:  COPY      A0, S0
-  114:  MFC1      A1, F0
-  118:  LI        A2, BF36DB6E
-  120:  JAL       ~Func:guScaleF
-  124:  COPY      A3, A1
-  128:  ADDIU     A0, SP, 18
-  12C:  COPY      A1, S0
-  130:  JAL       ~Func:guMtxCatF
-  134:  COPY      A2, A0
-  138:  ADDIU     S0, SP, 58
-  13C:  LW        A1, 28 (S1)
-  140:  LWC1      F0, 2C (S1)
-  144:  LW        A3, 30 (S1)
-  148:  NEG.S     F0, F0
-  14C:  MFC1      A2, F0
-  150:  JAL       ~Func:guTranslateF
-  154:  COPY      A0, S0
-  158:  ADDIU     A0, SP, 18
-  15C:  COPY      A1, S0
-  160:  JAL       ~Func:guMtxCatF
-  164:  COPY      A2, A0
-  168:  LWC1      F2, A8 (S1)
-  16C:  LIF       F0, 90.0
-  174:  NOP
-  178:  C.LE.S    F0, F2
-  17C:  NOP
-  180:  BC1F      .o1AC
-  184:  LI        A0, 1
-  188:  LIF       F0, 270.0
-  190:  NOP
-  194:  C.LT.S    F2, F0
-  198:  NOP
-  19C:  BC1F      .o1B0
-  1A0:  ADDIU     V0, SP, 18
-  1A4:  LI        A0, 10000001
-        .o1AC
-  1AC:  ADDIU     V0, SP, 18
-        .o1B0
-  1B0:  CLEAR     A1
-  1B4:  COPY      A2, A1
-  1B8:  COPY      A3, A1
-  1BC:  JAL       ~Func:spr_draw_player_sprite
-  1C0:  SW        V0, 10 (SP)
-  1C4:  LW        RA, 120 (SP)
-  1C8:  LW        S1, 11C (SP)
-  1CC:  LW        S0, 118 (SP)
-  1D0:  LDC1      F24, 138 (SP)
-  1D4:  LDC1      F22, 130 (SP)
-  1D8:  LDC1      F20, 128 (SP)
-  1DC:  JR        RA
-  1E0:  ADDIU     SP, SP, 140
+	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
+	AFB00118 27B00098 AFBF0120 F7B80138 F7B60130 00031080 00431021 00021080
+	00431023 000218C0 00431021 000210C0 3C01800B 00220821 C4361DEC 4406A000
+	4600B587 4405B000 0200202D 0C019EC8 E7B40010 C62C008C 0C00A6C9 00000000
+	44050000 4406A000 4407A000 3C013F80 4481C000 27A40018 0C019EC8 E7B80010
+	0200202D 27A50018 0C019D80 00A0302D 4405B000 4406A000 4407C000 0200202D
+	0C019EC8 E7B40010 27A40018 0200282D 0C019D80 0080302D E7B40010 8E2500A8
+	4406A000 4407C000 0C019EC8 0200202D 27A40018 0200282D 0C019D80 0080302D
+	27B000D8 3C013F36 3421DB6E 44810000 0200202D 44050000 3C06BF36 34C6DB6E
+	0C019DF0 00A0382D 27A40018 0200282D 0C019D80 0080302D 27B00058 8E250028
+	C620002C 8E270030 46000007 44060000 0C019E40 0200202D 27A40018 0200282D
+	0C019D80 0080302D C62200A8 3C0142B4 44810000 00000000 4602003E 00000000
+	4500000A 24040001 3C014387 44810000 00000000 4600103C 00000000 45000004
+	27A20018 3C041000 34840001 27A20018 0000282D 00A0302D 00A0382D 0C0B7710
+	AFA20010 8FBF0120 8FB1011C 8FB00118 D7B80138 D7B60130 D7B40128 03E00008
+	27BD0140
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802408A0
 {
     0:  ADDIU     SP, SP, FE80
@@ -716,7 +527,7 @@
   224:  COPY      A0, S3
   228:  ADDIU     A1, SP, 120
   22C:  ADDIU     A2, SP, 124
-  230:  JAL       ~Func:player_get_spin_history
+  230:  JAL       ~Func:phys_get_spin_history
   234:  ADDIU     A3, SP, 128
   238:  LW        A2, 124 (SP)
   23C:  LUI       V0, 8000
@@ -924,7 +735,7 @@
         .o8C
    8C:  LA        A0, $Function_80240EE8
         .o94
-   94:  JAL       ~Func:create_dynamic_entity_world
+   94:  JAL       ~Func:create_generic_entity_world
    98:  CLEAR     A1
    9C:  LW        V1, 13C (S0)
    A0:  SW        V0, 4 (V1)
@@ -980,7 +791,6 @@
   144:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EB4
 {
     0:  ADDIU     SP, SP, FFE8
@@ -999,7 +809,6 @@
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EE8
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1018,7 +827,6 @@
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240F1C
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1348,8 +1156,8 @@ PADDING: 8024129C to 802412A0 (0000129C to 000012A0)
 {
     0:  Set   *GB_WorldLocation  .Location:CrystalPalace
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000018 00000018 00000028 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  24`  24`  40` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  ExecWait  $Script_MakeEntities
@@ -1407,7 +1215,7 @@ PADDING: 80241688 to 80241690 (00001688 to 00001690)
 
 #new:Script $Script_802417DC
 {
-    0:  Set   *VarA  .Item:PalaceKey % 14
+    0:  Set   *VarA  .Item:CrystalPalaceKey % 14
    10:  Set   *VarB  00000001
    20:  Set   *GF_PRA27_Chest_PalaceKey  .True
    30:  ExecWait  $Script_802416FC

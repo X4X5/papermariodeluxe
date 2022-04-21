@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Map name="sbk_32" background="sbk_bg" textures="sbk_tex">
 	<ModelTree>
 		<Node name="Root" id="19">
@@ -98,9 +98,9 @@
 				<Node name="Entry4" id="3"/>
 			</Node>
 			<Node name="NPCs" id="8">
-				<Node name="NPC_80240948" id="5"/>
-				<Node name="NPC_80240B38" id="6"/>
-				<Node name="NPC_80240D28" id="7"/>
+				<Node name="Pokey_00" id="5"/>
+				<Node name="Pokey_01" id="6"/>
+				<Node name="Bandit_02" id="7"/>
 			</Node>
 		</Node>
 	</MarkerTree>
@@ -1331,17 +1331,17 @@
 			<MapObject name="NPCs" id="8"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="23,0,-260" yaw="270.000000">
-			<MapObject name="NPC_80240D28" id="7"/>
+			<MapObject name="Bandit_02" id="7"/>
 			<Movement type="Wander" data="17,0,FFFFFEFC,64,0,FFFF8001,0,0,0,0,3E8,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="32" palette="0" animations="1,5,7,7,1,1,9,9,0,0,0,0,0,0,0,0"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-120,0,110" yaw="90.000000">
-			<MapObject name="NPC_80240B38" id="6"/>
+			<MapObject name="Pokey_01" id="6"/>
 			<Movement type="Wander" data="FFFFFF88,0,6E,64,0,FFFF8001,0,0,0,0,3E8,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="31" palette="0" animations="4,8,8,8,4,4,C,C,8,8,8,8,8,8,8,8"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-140,0,-270" yaw="270.000000">
-			<MapObject name="NPC_80240948" id="5"/>
+			<MapObject name="Pokey_00" id="5"/>
 			<Movement type="Wander" data="FFFFFF74,0,FFFFFEF2,64,0,FFFF8001,0,0,0,0,3E8,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="31" palette="0" animations="4,8,8,8,4,4,C,C,8,8,8,8,8,8,8,8"/>
 		</Marker>

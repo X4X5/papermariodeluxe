@@ -1,6 +1,7 @@
 % Script File: trd_08.mscr
 % Decoded from: 0 to 23C0 (trd_08)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -786,8 +787,8 @@ PADDING: 80240AAC to 80240AB0 (00000AAC to 00000AB0)
 {
     0:  Set   *GB_WorldLocation  .Location:KoopaBrosFortress
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80242388 )
@@ -822,7 +823,7 @@ PADDING: 80240AAC to 80240AB0 (00000AAC to 00000AB0)
 
 #new:Script $Script_80240EC0
 {
-    0:  Call  MakeItemEntity    ( .Item:FortressKey ~Vec3d:Item80240EC0 00000000 *GF_TRD08_Item_FortressKey )
+    0:  Call  MakeItemEntity    ( .Item:KoopaFortressKey ~Vec3d:Item80240EC0 00000000 *GF_TRD08_Item_FortressKey )
    24:  Return
    2C:  End
 }

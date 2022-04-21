@@ -1,6 +1,18 @@
 % Script File: dgb_08.mscr
 % Decoded from: 0 to 6E30 (dgb_08)
 
+#define .NpcID:WorldClubba_00       00
+#define .NpcID:WorldClubba_01       01
+#define .NpcID:WorldClubba_02       02
+#define .NpcID:WorldClubba_03       03
+#define .NpcID:WorldClubba_04       04
+#define .NpcID:WorldClubba_05       05
+#define .NpcID:WorldClubba_06       06
+#define .NpcID:Sentinel_07          07
+#define .NpcID:Sentinel_08          08
+#define .NpcID:WorldTubba_09        09
+#define .NpcID:WorldClubba_11       0B
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFB8
@@ -3414,7 +3426,7 @@
   254:  LI        V0, 10
   258:  JAL       ~Func:disable_player_input
   25C:  NOP
-  260:  JAL       800EF628
+  260:  JAL       ~Func:partner_disable_input
   264:  NOP
   268:  LI        V0, 14
   26C:  BEQ       R0, R0, .o278
@@ -3629,7 +3641,7 @@
         .o58
    58:  JAL       ~Func:enable_player_input
    5C:  NOP
-   60:  JAL       800EF600
+   60:  JAL       ~Func:partner_enable_input
    64:  NOP
    68:  LI        V0, 10
         .o6C
@@ -4071,7 +4083,7 @@
     8:  JAL       ~Func:increment_status_menu_disabled
     C:  NOP
    10:  LUI       A1, 437F
-   14:  JAL       ~Func:set_transition_stencil_zoom_1
+   14:  JAL       ~Func:set_screen_overlay_params_back
    18:  CLEAR     A0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -4243,8 +4255,8 @@ PADDING: 80243D88 to 80243D90 (00003D88 to 00003D90)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Switch  *GB_StoryProgress
    7C:  	Case  <  .Story:Ch3_TubbaSmashedTheBridges % FFFFFFE4
@@ -4301,7 +4313,7 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -4452,13 +4464,13 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
   2D8:  Thread
   2E0:  	Call  SetNpcAnimation   ( .Npc:Partner 00000108 )
   2F4:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  310:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  310:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   330:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  34C:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  34C:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   36C:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  388:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  388:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   3A8:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  3C4:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  3C4:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   3E4:  EndThread
   3EC:  Wait  30`
   3F8:  Call  GotoMap   ( $ASCII_80246E20 00000002 ) % dgb_00
@@ -4532,10 +4544,10 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
   120:  		BreakLoop
   128:  	EndIf
   130:  EndLoop
-  138:  Call  SetNpcAnimation   ( 00000009 006A000A )
-  14C:  Call  SetNpcPos ( .Npc:Self FFFFFD67 000000D2 000000B4 )
-  168:  Call  SetNpcYaw ( .Npc:Self 0000005A )
-  17C:  Call  NpcMoveTo ( .Npc:Self FFFFFDEE 000000B4 0000001E )
+  138:  Call  SetNpcAnimation   ( .NpcID:WorldTubba_09 006A000A )
+  14C:  Call  SetNpcPos ( .Npc:Self  -665`  210`  180` )
+  168:  Call  SetNpcYaw ( .Npc:Self  90` )
+  17C:  Call  NpcMoveTo ( .Npc:Self  -530`  180`  30` )
   198:  Thread
   1A0:  	Wait  20`
   1AC:  	Call  MakeLerp  ( 00000050 00000000 0000000A .Easing:Linear )
@@ -4550,7 +4562,7 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
   24C:  	EndLoop
   254:  	Call  PlaySoundAtCollider   ( ~Collider:deilittne .Sound:CreakyDoorClose 00000000 )
   26C:  EndThread
-  274:  Call  NpcMoveTo ( .Npc:Self FFFFFE0C 00000050 0000000A )
+  274:  Call  NpcMoveTo ( .Npc:Self  -500`  80`  10` )
   290:  Call  BindNpcAI ( .Npc:Self $Script_NpcAI_80244D7C )
   2A4:  Return
   2AC:  End
@@ -4559,7 +4571,7 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
 #new:Script $Script_80244D08
 {
     0:  Label  A
-    C:  Call  GetNpcPos ( 00000009 *Var0 *Var1 *Var2 )
+    C:  Call  GetNpcPos ( .NpcID:WorldTubba_09 *Var0 *Var1 *Var2 )
    28:  If  *Var1  >  00000000
    38:  	Wait  1`
    44:  	Goto  A
@@ -4576,10 +4588,10 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
    18:  Thread
    20:  	Loop
    2C:  		Call  PlaySoundAtNpc    ( .Npc:Self 000020F6 00400000 )
-   44:  		Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[2.0] )
+   44:  		Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[2.0] )
    60:  		Wait  5`
    6C:  		Call  PlaySoundAtNpc    ( .Npc:Self 000020F6 00400000 )
-   84:  		Call  ShakeCam  ( .Cam:Default 00000000 00000002 *Fixed[1.0] )
+   84:  		Call  ShakeCam  ( .Cam:Default 00000000  2` *Fixed[1.0] )
    A0:  		Wait  8`
    AC:  	EndLoop
    B4:  EndThread
@@ -4600,12 +4612,12 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
 #new:Script $Script_Init_80244E94
 {
     0:  If  *GB_StoryProgress  <  .Story:Ch3_TubbaSmashedTheBridges % FFFFFFE4
-   10:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   10:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    2C:  	Call  SetNpcFlagBits    ( .Npc:Self 00000004 .True )
    44:  	Return
    4C:  EndIf
    54:  If  *GB_StoryProgress  >=  .Story:Ch3_TubbaChasedMarioInFoyer % FFFFFFE6
-   64:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   64:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    80:  	Call  SetNpcFlagBits    ( .Npc:Self 00000004 .True )
    98:  	Return
    A0:  EndIf
@@ -4615,17 +4627,17 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
    E8:  Switch  *Var0
    F4:  	Case  ==  ~Entry:Entry0
   100:  		If  *GB_ARN_Tubba_MapID  !=  00000008
-  110:  			Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  110:  			Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   12C:  			Call  SetNpcFlagBits    ( .Npc:Self 00000004 .True )
   144:  		Else
-  14C:  			Call  SetNpcPos     ( .Npc:Self FFFFFF7E 00000000 000000C8 )
+  14C:  			Call  SetNpcPos     ( .Npc:Self  -130`  0`  200` )
   168:  			Call  BindNpcIdle   ( .Npc:Self $Script_NpcAI_80244D7C )
   17C:  		EndIf
   184:  	Case  ==  ~Entry:Entry1
   190:  		If  *GB_ARN_Tubba_MapID  !=  00000008
   1A0:  			Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80244A54 )
   1B4:  		Else
-  1BC:  			Call  SetNpcPos     ( .Npc:Self FFFFFF7E 000000D2 00000050 )
+  1BC:  			Call  SetNpcPos     ( .Npc:Self  -130`  210`  80` )
   1D8:  			Call  BindNpcIdle   ( .Npc:Self $Script_NpcAI_80244D7C )
   1EC:  		EndIf
   1F4:  EndSwitch
@@ -4635,85 +4647,85 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
 
 #new:NpcGroup $NpcGroup_802450A0
 {
-	00000009 $NpcSettings_8024417C ~Vec3f:NPC_802450A0 % 0 -1000 0
+	.NpcID:WorldTubba_09 $NpcSettings_8024417C ~Vec3f:NPC_WorldTubba_09 % 0 -1000 0
 	00A40004 $Script_Init_80244E94 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_802450A0
-	~AnimationTable:NPC_802450A0 % .Sprite:WorldTubba
+	~Movement:NPC_WorldTubba_09
+	~AnimationTable:NPC_WorldTubba_09 % .Sprite:WorldTubba
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245290
 {
-	00000001 $NpcSettings_80244360 ~Vec3f:NPC_80245290 % -250 0 135
+	.NpcID:WorldClubba_01 $NpcSettings_80244360 ~Vec3f:NPC_WorldClubba_01 % -250 0 135
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80245290
-	~AnimationTable:NPC_80245290 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_01
+	~AnimationTable:NPC_WorldClubba_01 % .Sprite:WorldClubba
 	00000002 00000000 $ExtraAnimationList_80244290 00000000 % no tattle string
 	%
 	% $NpcGroup_80245290[1F0]
-	00000002 $NpcSettings_80244434 ~Vec3f:NPC_80245480 % 0 -1000 0
+	.NpcID:WorldClubba_02 $NpcSettings_80244434 ~Vec3f:NPC_WorldClubba_02 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245480
-	~AnimationTable:NPC_80245480 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_02
+	~AnimationTable:NPC_WorldClubba_02 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802442B8 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245670
 {
-	00000003 $NpcSettings_80244360 ~Vec3f:NPC_80245670 % 220 0 155
+	.NpcID:WorldClubba_03 $NpcSettings_80244360 ~Vec3f:NPC_WorldClubba_03 % 220 0 155
 	00000400 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80245670
-	~AnimationTable:NPC_80245670 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_03
+	~AnimationTable:NPC_WorldClubba_03 % .Sprite:WorldClubba
 	00000002 00000000 $ExtraAnimationList_80244290 00000000 % no tattle string
 	%
 	% $NpcGroup_80245670[1F0]
-	00000004 $NpcSettings_80244434 ~Vec3f:NPC_80245860 % 0 -1000 0
+	.NpcID:WorldClubba_04 $NpcSettings_80244434 ~Vec3f:NPC_WorldClubba_04 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245860
-	~AnimationTable:NPC_80245860 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_04
+	~AnimationTable:NPC_WorldClubba_04 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802442B8 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245A50
 {
-	00000005 $NpcSettings_80244360 ~Vec3f:NPC_80245A50 % 825 100 200
+	.NpcID:WorldClubba_05 $NpcSettings_80244360 ~Vec3f:NPC_WorldClubba_05 % 825 100 200
 	00000400 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80245A50
-	~AnimationTable:NPC_80245A50 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_05
+	~AnimationTable:NPC_WorldClubba_05 % .Sprite:WorldClubba
 	00000003 00000000 $ExtraAnimationList_80244290 00000000 % no tattle string
 	%
 	% $NpcGroup_80245A50[1F0]
-	00000006 $NpcSettings_80244434 ~Vec3f:NPC_80245C40 % 0 -1000 0
+	.NpcID:WorldClubba_06 $NpcSettings_80244434 ~Vec3f:NPC_WorldClubba_06 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245C40
-	~AnimationTable:NPC_80245C40 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_06
+	~AnimationTable:NPC_WorldClubba_06 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802442B8 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245E30
 {
-	00000007 $NpcSettings_802449FC ~Vec3f:NPC_80245E30 % 75 310 85
+	.NpcID:Sentinel_07 $NpcSettings_802449FC ~Vec3f:NPC_Sentinel_07 % 75 310 85
 	00000400 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245E30
-	~AnimationTable:NPC_80245E30 % .Sprite:Sentinel
+	~Movement:NPC_Sentinel_07
+	~AnimationTable:NPC_Sentinel_07 % .Sprite:Sentinel
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80246020
 {
-	00000008 $NpcSettings_802449FC ~Vec3f:NPC_80246020 % -451 310 81
+	.NpcID:Sentinel_08 $NpcSettings_802449FC ~Vec3f:NPC_Sentinel_08 % -451 310 81
 	00000400 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246020
-	~AnimationTable:NPC_80246020 % .Sprite:Sentinel
+	~Movement:NPC_Sentinel_08
+	~AnimationTable:NPC_Sentinel_08 % .Sprite:Sentinel
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -4750,15 +4762,15 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
    4C:  Wait  20`
    58:  Call  GetNpcYaw     ( .Npc:Self *Var0 )
    6C:  Add   *Var0  000000B4
-   7C:  Call  InterpNpcYaw  ( .Npc:Self *Var0 00000000 )
+   7C:  Call  InterpNpcYaw  ( .Npc:Self *Var0  0` )
    94:  Wait  10`
    A0:  Call  GetNpcYaw     ( .Npc:Self *Var0 )
    B4:  Add   *Var0  000000B4
-   C4:  Call  InterpNpcYaw  ( .Npc:Self *Var0 00000000 )
+   C4:  Call  InterpNpcYaw  ( .Npc:Self *Var0  0` )
    DC:  Wait  25`
    E8:  Call  GetNpcYaw     ( .Npc:Self *Var0 )
    FC:  Add   *Var0  000000B4
-  10C:  Call  InterpNpcYaw  ( .Npc:Self *Var0 00000000 )
+  10C:  Call  InterpNpcYaw  ( .Npc:Self *Var0  0` )
   124:  Wait  15`
   130:  Call  NpcFacePlayer ( .Npc:Self 00000000 )
   144:  Call  SpeakToPlayer ( .Npc:Self 00390005 00390002 00000000 000E00F2 ) % Uh...huh? How long was I asleep? Where is everyone ...
@@ -4772,7 +4784,7 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
 
 #new:Script $Script_Init_802464C4
 {
-    0:  Call  SetNpcCollisionSize   ( .Npc:Self 00000024 0000001E )
+    0:  Call  SetNpcCollisionSize   ( .Npc:Self  36`  30` )
    18:  Call  SetNpcAnimation   ( .Npc:Self 00390007 )
    2C:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80246310 )
    40:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80246210 )
@@ -4782,11 +4794,11 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
 
 #new:NpcGroup $NpcGroup_80246528
 {
-	0000000B $NpcSettings_80244A28 ~Vec3f:NPC_80246528 % 426 0 38
+	.NpcID:WorldClubba_11 $NpcSettings_80244A28 ~Vec3f:NPC_WorldClubba_11 % 426 0 38
 	00600D01 $Script_Init_802464C4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80246528
-	~AnimationTable:NPC_80246528 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_11
+	~AnimationTable:NPC_WorldClubba_11 % .Sprite:WorldClubba
 	00000002 00000000 00000000 001A00B6 % Everyone left while this Clubba was sleeping. He m ...
 }
 
@@ -4799,18 +4811,18 @@ MISSING: 802441A8 to 802441D4 (000041A8 to 000041D4)
 #new:Script $Script_Init_80246728
 {
     0:  Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80246718 )
-   14:  Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   14:  Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
    30:  Return
    38:  End
 }
 
 #new:NpcGroup $NpcGroup_80246768
 {
-	00000000 $NpcSettings_80244360 ~Vec3f:NPC_80246768 % -250 0 135
+	.NpcID:WorldClubba_00 $NpcSettings_80244360 ~Vec3f:NPC_WorldClubba_00 % -250 0 135
 	00000401 $Script_Init_80246728 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80246768
-	~AnimationTable:NPC_80246768 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_00
+	~AnimationTable:NPC_WorldClubba_00 % .Sprite:WorldClubba
 	00000002 00000000 $ExtraAnimationList_80244290 00000000 % no tattle string
 }
 

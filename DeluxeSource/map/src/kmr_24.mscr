@@ -1,6 +1,7 @@
 % Script File: kmr_24.mscr
 % Decoded from: 0 to 490 (kmr_24)
 
+
 #new:Function_Init $Function_Init
 {
     0:  JR        RA
@@ -23,7 +24,7 @@ PADDING: 80240008 to 80240010 (00000008 to 00000010)
         .o20
    20:  LHU       V0, 76 (S0)
    24:  ADDIU     A0, SP, 10
-   28:  JAL       801382AC
+   28:  JAL       ~Func:update_exit_map_screen_overlay
    2C:  SH        V0, 10 (SP)
    30:  SLL       V0, V0, 10
    34:  BEQ       V0, R0, .o4C
@@ -102,7 +103,7 @@ PADDING: 8024010C to 80240110 (0000010C to 00000110)
 #new:Script $Script_80240160
 {
     0:  Wait  10`
-    C:  Call  ShowMessageAtScreenPos    ( 001E004D 000000A0 00000028 ) % Save and continue Save and quit Continue without s ...
+    C:  Call  ShowMessageAtScreenPos    ( 001E004D  160`  40` ) % Save and continue Save and quit Continue without s ...
    24:  Switch  *Var0
    30:  	Case  ==  00000000
    3C:  		Call  $Function_80240074 ( )
@@ -124,26 +125,26 @@ PADDING: 8024010C to 80240110 (0000010C to 00000110)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
-   20:  Call  SetPlayerPos  ( FFFFFC18 00000000 00000000 )
+   20:  Call  SetPlayerPos  (  -1000`  0`  0` )
    38:  Wait  1`
    44:  Call  GetCurrentPartnerID   ( *Var0 )
    54:  If  *Var0  !=  .Partner:None % 0
    64:  	Call  DisablePartnerAI  ( 00000000 )
    74:  	Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   8C:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   8C:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    A8:  EndIf
    B0:  Call  SetSpriteShading  ( .Shading:None )
-   C0:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   E0:  Call  SetCamBGColor ( .Cam:Default 000000D0 000000D0 000000D0 )
+   C0:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   E0:  Call  SetCamBGColor ( .Cam:Default  208`  208`  208` )
    FC:  Call  SetCamEnabled ( .Cam:Default .True )
   110:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
   124:  Call  SetCamType    ( .Cam:Default 00000004 .False )
-  13C:  Call  SetCamPitch   ( .Cam:Default 00000000 00000000 )
-  154:  Call  SetCamDistance    ( .Cam:Default 000001B8 )
-  168:  Call  SetCamPosA    ( .Cam:Default 00000000 00000064 )
-  180:  Call  SetCamPosB    ( .Cam:Default 00000000 00000000 )
-  198:  Call  SetCamPosC    ( .Cam:Default 00000000 00000041 )
-  1B0:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+  13C:  Call  SetCamPitch   ( .Cam:Default  0`  0` )
+  154:  Call  SetCamDistance    ( .Cam:Default  440` )
+  168:  Call  SetCamPosA    ( .Cam:Default  0`  100` )
+  180:  Call  SetCamPosB    ( .Cam:Default  0`  0` )
+  198:  Call  SetCamPosC    ( .Cam:Default  0`  65` )
+  1B0:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
   1CC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   1E0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1F8:  Call  DisablePlayerInput    ( .True )

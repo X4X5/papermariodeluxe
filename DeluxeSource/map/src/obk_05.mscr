@@ -1,6 +1,9 @@
 % Script File: obk_05.mscr
 % Decoded from: 0 to 1630 (obk_05)
 
+#define .NpcID:Boo_00               00
+#define .NpcID:Boo_01               01
+
 #new:Function $Function_80240000
 {
     0:  LA        V1, 800B1D80
@@ -758,7 +761,7 @@ PADDING: 80240A98 to 80240AA0 (00000A98 to 00000AA0)
    DC:  	EndIf
    E4:  	Call  $Function_8024001C ( )
    F0:  	Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  100:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80240D84 0000001E )
+  100:  	Call  PlayerJump    ( ~Vec3d:JumpDest_80240D84  30` )
   11C:  	Wait  1`
   128:  	Call  $Function_80240000 ( )
   134:  	Call  DisablePlayerInput    ( .False )
@@ -771,8 +774,8 @@ PADDING: 80240A98 to 80240AA0 (00000A98 to 00000AA0)
 {
     0:  Set   *GB_WorldLocation  .Location:BoosMansion
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_802414E8 )
@@ -842,7 +845,7 @@ PADDING: 80240FDC to 80240FE0 (00000FDC to 00000FE0)
    38:  	Call  $Function_802407AC ( )
    44:  	Call  $Function_80240934 ( )
    50:  	Call  802CFD30  ( FFFFFFFF 00000007 *Var0 00000000 00000000 00000000 )
-   74:  	Call  802D0244  ( FFFFFFFF 00000011 )
+   74:  	Call  SetNpcRenderMode  ( .Npc:Self .RenderMode:Surface_XLU_Layer1 )
    88:  	Wait  1`
    94:  EndLoop
    9C:  Return
@@ -865,19 +868,19 @@ PADDING: 80240FDC to 80240FE0 (00000FDC to 00000FE0)
 
 #new:NpcGroup $NpcGroup_80241108
 {
-	00000000 $NpcSettings_80240FE0 ~Vec3f:NPC_80241108 % 523 -139 193
+	.NpcID:Boo_00 $NpcSettings_80240FE0 ~Vec3f:NPC_Boo_00 % 523 -139 193
 	00000F01 $Script_Init_802410C0 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241108
-	~AnimationTable:NPC_80241108 % .Sprite:Boo
+	~Movement:NPC_Boo_00
+	~AnimationTable:NPC_Boo_00 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241108[1F0]
-	00000001 $NpcSettings_80240FE0 ~Vec3f:NPC_802412F8 % 473 -122 247
+	.NpcID:Boo_01 $NpcSettings_80240FE0 ~Vec3f:NPC_Boo_01 % 473 -122 247
 	00000F01 $Script_Init_802410E4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802412F8
-	~AnimationTable:NPC_802412F8 % .Sprite:Boo
+	~Movement:NPC_Boo_01
+	~AnimationTable:NPC_Boo_01 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

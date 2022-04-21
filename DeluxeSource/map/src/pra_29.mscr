@@ -1,6 +1,7 @@
 % Script File: pra_29.mscr
 % Decoded from: 0 to 2210 (pra_29)
 
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -13,7 +14,6 @@
 PADDING: 80240018 to 80240020 (00000018 to 00000020)
 00000000 00000000
 
-% Origin: HEURISTIC
 #new:Function $Function_80240020
 {
     0:  LI        V0, FEFFFFFF
@@ -30,7 +30,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  COPY      V0, A0
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240054
 {
     0:  SRA       V0, A0, 10
@@ -84,7 +83,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
     8:  COPY      S0, A0
     C:  LA        A1, $Function_80240128
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  CLEAR     A0
    20:  LW        V1, 13C (S0)
    24:  SW        V0, 0 (V1)
@@ -95,7 +94,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    38:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240128
 {
     0:  ADDIU     SP, SP, FFB0
@@ -213,7 +211,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   1C4:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802402F0
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -244,7 +241,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    1C:  BEQ       V0, R0, .o50
    20:  NOP
    24:  LA        A1, $Function_80240500
-   2C:  JAL       ~Func:create_dynamic_entity_world
+   2C:  JAL       ~Func:create_generic_entity_world
    30:  CLEAR     A0
    34:  LW        V1, 13C (S0)
    38:  SW        V0, 0 (V1)
@@ -260,7 +257,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    60:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240500
 {
     0:  ADDIU     SP, SP, FFB0
@@ -364,7 +360,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   188:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_8024068C
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -385,7 +380,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
 	27BD0140
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240870
 {
     0:  ADDIU     SP, SP, FE80
@@ -525,7 +519,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   224:  COPY      A0, S3
   228:  ADDIU     A1, SP, 120
   22C:  ADDIU     A2, SP, 124
-  230:  JAL       ~Func:player_get_spin_history
+  230:  JAL       ~Func:phys_get_spin_history
   234:  ADDIU     A3, SP, 128
   238:  LW        A2, 124 (SP)
   23C:  LUI       V0, 8000
@@ -733,7 +727,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
         .o8C
    8C:  LA        A0, $Function_80240EB8
         .o94
-   94:  JAL       ~Func:create_dynamic_entity_world
+   94:  JAL       ~Func:create_generic_entity_world
    98:  CLEAR     A1
    9C:  LW        V1, 13C (S0)
    A0:  SW        V0, 4 (V1)
@@ -789,7 +783,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   144:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240E84
 {
     0:  ADDIU     SP, SP, FFE8
@@ -808,7 +801,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EB8
 {
     0:  ADDIU     SP, SP, FFE8
@@ -827,7 +819,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EEC
 {
     0:  ADDIU     SP, SP, FFE8
@@ -972,12 +963,12 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    40:  ADDIU     A1, SP, 18
    44:  ADDIU     A2, SP, 1C
    48:  ADDIU     S0, SP, 20
-   4C:  JAL       8011C2B0
+   4C:  JAL       ~Func:mdl_get_copied_vertices
    50:  COPY      A3, S0
    54:  ADDIU     A0, S1, 1
    58:  ADDIU     A1, SP, 24
    5C:  ADDIU     A2, SP, 28
-   60:  JAL       8011C2B0
+   60:  JAL       ~Func:mdl_get_copied_vertices
    64:  COPY      A3, S0
    68:  LW        A0, 24 (SP)
    6C:  LW        A1, 18 (SP)
@@ -996,12 +987,12 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    9C:  ADDIU     A1, SP, 18
    A0:  ADDIU     A2, SP, 1C
    A4:  ADDIU     S0, SP, 20
-   A8:  JAL       8011C2B0
+   A8:  JAL       ~Func:mdl_get_copied_vertices
    AC:  COPY      A3, S0
    B0:  ADDIU     A0, S1, 2
    B4:  ADDIU     A1, SP, 24
    B8:  ADDIU     A2, SP, 28
-   BC:  JAL       8011C2B0
+   BC:  JAL       ~Func:mdl_get_copied_vertices
    C0:  COPY      A3, S0
    C4:  LW        A0, 18 (SP)
    C8:  LW        A1, 24 (SP)
@@ -1018,7 +1009,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    F4:  ADDIU     V0, V0, 8
    F8:  SW        V0, 0 (V1)
    FC:  LUI       V0, DE00
-  100:  JAL       8011C2EC
+  100:  JAL       ~Func:mdl_get_copied_gfx
   104:  SW        V0, 0 (S0)
   108:  SW        V0, 4 (S0)
         .o10C
@@ -1064,7 +1055,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    74:  CVT.S.W   F0, F0
    78:  MFC1      A3, F0
    7C:  CLEAR     A0
-   80:  JAL       800705B0
+   80:  JAL       ~Func:playFX_23
    84:  SW        R0, 10 (SP)
    88:  LW        RA, 24 (SP)
    8C:  LW        S2, 20 (SP)
@@ -1384,8 +1375,8 @@ PADDING: 8024133C to 80241340 (0000133C to 00001340)
 {
     0:  Set   *GB_WorldLocation  .Location:CrystalPalace
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000018 00000018 00000028 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  24`  24`  40` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  ExecWait  $Script_MakeEntities
    7C:  Exec  $Script_80241300
@@ -1443,19 +1434,19 @@ PADDING: 80241E5C to 80241E60 (00001E5C to 00001E60)
    24:  	Call  EnableModel   ( ~Model:s00 .False )
    38:  	Set   *MapVar[0]  00000000
    48:  	Set   *MapVar[1]  000000FF
-   58:  	Call  802C90FC  ( 00000035 00000000 FFFFFFFF )
-   70:  	Call  802C90FC  ( 0000003A 00000001 FFFFFFFF )
+   58:  	Call  SetModelCustomGfx     ( ~Model:u02 00000000 FFFFFFFF )
+   70:  	Call  SetModelCustomGfx     ( ~Model:s02 00000001 FFFFFFFF )
    88:  	Call  SetModelFlags ( ~Model:u02 00000010 .False )
    A0:  	Call  SetModelFlags ( ~Model:s02 00000010 .False )
-   B8:  	Call  802C94A0  ( 00000000 $Function_802410B0 00000000 )
-   D0:  	Call  802C94A0  ( 00000001 $Function_802410B0 00000000 )
-   E8:  	Call  802C9C70  ( 00000000 00000035 00000001 )
-  100:  	Call  802C9C70  ( 00000001 00000034 00000000 )
-  118:  	Call  802C9C70  ( 00000002 00000036 00000000 )
+   B8:  	Call  SetCustomGfxBuilders  ( 00000000 $Function_802410B0 00000000 )
+   D0:  	Call  SetCustomGfxBuilders  ( 00000001 $Function_802410B0 00000000 )
+   E8:  	Call  MakeLocalVertexCopy   ( 00000000 ~Model:u02 .True )
+  100:  	Call  MakeLocalVertexCopy   ( 00000001 ~Model:u01 .False )
+  118:  	Call  MakeLocalVertexCopy   ( 00000002 ~Model:u03 .False )
   130:  	Call  SetModelFlags ( ~Model:u02 00000090 .True )
-  148:  	Call  802C9C70  ( 00000003 0000003A 00000001 )
-  160:  	Call  802C9C70  ( 00000004 00000039 00000000 )
-  178:  	Call  802C9C70  ( 00000005 0000003B 00000000 )
+  148:  	Call  MakeLocalVertexCopy   ( 00000003 ~Model:s02 .True )
+  160:  	Call  MakeLocalVertexCopy   ( 00000004 ~Model:s01 .False )
+  178:  	Call  MakeLocalVertexCopy   ( 00000005 ~Model:s03 .False )
   190:  	Call  SetModelFlags ( ~Model:s02 00000090 .True )
   1A8:  	Bind  $Script_80241E60 .Trigger:AreaFlagSet *AreaFlag[002] 00000001 00000000
   1C4:  Else

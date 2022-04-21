@@ -1,6 +1,9 @@
 % Script File: flo_16.mscr
 % Decoded from: 0 to 54B0 (flo_16)
 
+#define .NpcID:TuffPuff_00          00
+#define .NpcID:TuffPuff_01          01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -10,7 +13,7 @@
    10:  COPY      A3, A1
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -365,7 +368,7 @@ PADDING: 802400D4 to 802400E0 (000000D4 to 000000E0)
     8:  LW        V0, C (A0)
     C:  JAL       ~Func:get_variable
    10:  LW        A1, 0 (V0)
-   14:  JAL       800EB168
+   14:  JAL       ~Func:switch_to_partner
    18:  COPY      A0, V0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -411,7 +414,7 @@ PADDING: 802400D4 to 802400E0 (000000D4 to 000000E0)
    54:  LW        A1, 48 (V0)
    58:  LW        A3, 50 (V0)
    5C:  MFC1      A2, F4
-   60:  JAL       80071750
+   60:  JAL       ~Func:playFX_52
    64:  CLEAR     A0
    68:  COPY      A0, S1
    6C:  COPY      A1, S0
@@ -461,7 +464,7 @@ PADDING: 802400D4 to 802400E0 (000000D4 to 000000E0)
    40:  LW        A1, 48 (V0)
    44:  LW        A3, 50 (V0)
    48:  MFC1      A2, F2
-   4C:  JAL       80070BB0
+   4C:  JAL       ~Func:playFX_33
    50:  LI        A0, 4
    54:  LW        RA, 18 (SP)
    58:  LI        V0, 2
@@ -485,7 +488,7 @@ PADDING: 802400D4 to 802400E0 (000000D4 to 000000E0)
    34:  LW        A1, 38 (V0)
    38:  LW        A3, 40 (V0)
    3C:  MFC1      A2, F4
-   40:  JAL       80070BB0
+   40:  JAL       ~Func:playFX_33
    44:  LI        A0, 9
    48:  LW        RA, 18 (SP)
    4C:  LI        V0, 2
@@ -553,7 +556,7 @@ PADDING: 802400D4 to 802400E0 (000000D4 to 000000E0)
    EC:  LW        A1, 48 (V0)
    F0:  LW        A3, 50 (V0)
    F4:  MFC1      A2, F0
-   F8:  JAL       800716F0
+   F8:  JAL       ~Func:playFX_51
    FC:  ADDIU     S1, S1, 1
   100:  SW        V0, 8 (S0)
   104:  SWC1      F20, 2C (S0)
@@ -863,7 +866,7 @@ PADDING: 802400D4 to 802400E0 (000000D4 to 000000E0)
    4C:  COPY      A3, A1
    50:  SW        V0, 88 (S1)
    54:  SW        R0, 70 (S1)
-   58:  JAL       ~Func:set_transition_stencil_color
+   58:  JAL       ~Func:set_screen_overlay_color
    5C:  SW        R0, 74 (S1)
         .o60
    60:  LW        V1, 70 (S1)
@@ -920,7 +923,7 @@ PADDING: 802400D4 to 802400E0 (000000D4 to 000000E0)
   110:  LWC1      F0, 74 (S1)
   114:  CVT.S.W   F0, F0
   118:  MFC1      A1, F0
-  11C:  JAL       ~Func:set_transition_stencil_zoom_0
+  11C:  JAL       ~Func:set_screen_overlay_params_front
   120:  LI        A0, 1
   124:  COPY      V0, S2
   128:  LW        RA, 1C (SP)
@@ -944,7 +947,7 @@ PADDING: 802400D4 to 802400E0 (000000D4 to 000000E0)
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 2
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -965,7 +968,7 @@ PADDING: 802400D4 to 802400E0 (000000D4 to 000000E0)
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 4
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -2922,8 +2925,8 @@ PADDING: 8024293C to 80242940 (0000293C to 00002940)
 {
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_802444D4 )
    84:  ExecWait  $Script_MakeEntities
@@ -3193,7 +3196,7 @@ PADDING: 802436FC to 80243700 (000036FC to 00003700)
    E8:  Call  FindKeyItem   ( .Item:UltraStone *VarC )
    FC:  Call  $Function_80240200 ( )
   108:  If  *Var0  ==  FFFFFFFF
-  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC 000000A0 00000028 ) % You have no member you can upgrade now.
+  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC  160`  40` ) % You have no member you can upgrade now.
   130:  	Wait  10`
   13C:  	Call  $Function_802405F0        ( *Var9 )
   14C:  	Call  DisablePlayerInput        ( .False )
@@ -3204,9 +3207,9 @@ PADDING: 802436FC to 80243700 (000036FC to 00003700)
   190:  EndIf
   198:  If  *GF_Tutorial_SuperBlock  ==  .False
   1A8:  	Set   *GF_Tutorial_SuperBlock  .True
-  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA 000000A0 00000028 ) % This is a Super Block. With this, you can upgrade  ...
+  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA  160`  40` ) % This is a Super Block. With this, you can upgrade  ...
   1D0:  Else
-  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB 000000A0 00000028 ) % With this, you can upgrade one of your party membe ...
+  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB  160`  40` ) % With this, you can upgrade one of your party membe ...
   1F0:  EndIf
   1F8:  Call  $Function_802402AC ( )
   204:  If  *Var0  ==  FFFFFFFF
@@ -3227,7 +3230,7 @@ PADDING: 802436FC to 80243700 (000036FC to 00003700)
   2D4:  	Call  802CF56C  ( 00000002 )
   2E4:  EndIf
   2EC:  Wait  10`
-  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF 000000A0 00000028 ) % Do you want to upgrade this member?
+  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF  160`  40` ) % Do you want to upgrade this member?
   310:  Call  ShowChoice    ( 001E000D ) % Yes No
   320:  Call  CloseMessage ( )
   32C:  If  *Var0  !=  00000000
@@ -3244,9 +3247,9 @@ PADDING: 802436FC to 80243700 (000036FC to 00003700)
   3C8:  Call  $Function_802405F0    ( *Var9 )
   3D8:  Call  $Function_80240528 ( )
   3E4:  If  *VarD  ==  00000001
-  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD 000000A0 00000028 ) % is upgraded to Super-rank!
+  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD  160`  40` ) % is upgraded to Super-rank!
   40C:  Else
-  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE 000000A0 00000028 ) % is upgraded to Ultra-rank!
+  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE  160`  40` ) % is upgraded to Ultra-rank!
   42C:  EndIf
   434:  Call  DisablePlayerInput        ( .False )
   444:  Call  EnablePartnerAI ( )
@@ -3276,7 +3279,7 @@ PADDING: 802436FC to 80243700 (000036FC to 00003700)
    3C:  Call  GetPlayerPos  ( *Var7 *Var8 *Var9 )
    54:  Exec  $Script_80243D48 *VarA
    64:  Call  SetPlayerJumpscale    ( *Fixed[0.7] )
-   74:  Call  PlayerJump    ( ~Vec3d:JumpDest_80243E24 0000001E )
+   74:  Call  PlayerJump    ( ~Vec3d:JumpDest_80243E24  30` )
    90:  Call  SetPlayerActionState  ( .ActionState:Idle )
    A0:  Call  DisablePlayerPhysics  ( .False )
    B0:  Call  DisablePlayerInput    ( .False )
@@ -3359,21 +3362,21 @@ PADDING: 80244008 to 80244010 (00004008 to 00004010)
 
 #new:NpcGroup $NpcGroup_802440F4
 {
-	00000000 $NpcSettings_802440C8 ~Vec3f:NPC_802440F4 % 440 145 15
+	.NpcID:TuffPuff_00 $NpcSettings_802440C8 ~Vec3f:NPC_TuffPuff_00 % 440 145 15
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:10:ThunderRage:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_802440F4
-	~AnimationTable:NPC_802440F4 % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_00
+	~AnimationTable:NPC_TuffPuff_00 % .Sprite:TuffPuff
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802442E4
 {
-	00000001 $NpcSettings_802440C8 ~Vec3f:NPC_802442E4 % 600 145 15
+	.NpcID:TuffPuff_01 $NpcSettings_802440C8 ~Vec3f:NPC_TuffPuff_01 % 600 145 15
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:10:ThunderRage:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_802442E4
-	~AnimationTable:NPC_802442E4 % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_01
+	~AnimationTable:NPC_TuffPuff_01 % .Sprite:TuffPuff
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
@@ -3410,8 +3413,8 @@ PADDING: 802444F8 to 80244500 (000044F8 to 00004500)
    FC:  Wait  15`
   108:  Call  PlaySound ( 0000204D )
   118:  Thread
-  120:  	Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[0.8] )
-  13C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.2] )
+  120:  	Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[0.8] )
+  13C:  	Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.2] )
   158:  EndThread
   160:  Call  MakeLerp  ( *Var5 *Var6 0000001E .Easing:Linear )
   17C:  Loop
@@ -3474,8 +3477,8 @@ PADDING: 802444F8 to 80244500 (000044F8 to 00004500)
    FC:  Wait  15`
   108:  Call  PlaySound ( 0000204D )
   118:  Thread
-  120:  	Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[0.8] )
-  13C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.2] )
+  120:  	Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[0.8] )
+  13C:  	Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.2] )
   158:  EndThread
   160:  Call  MakeLerp  ( *Var5 *Var6 0000001E .Easing:Linear )
   17C:  Loop
@@ -3546,8 +3549,8 @@ PADDING: 802444F8 to 80244500 (000044F8 to 00004500)
    FC:  Wait  15`
   108:  Call  PlaySound ( 0000204D )
   118:  Thread
-  120:  	Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[0.8] )
-  13C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[0.2] )
+  120:  	Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[0.8] )
+  13C:  	Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[0.2] )
   158:  EndThread
   160:  Call  MakeLerp  ( *Var5 *Var6 0000001E .Easing:Linear )
   17C:  Loop

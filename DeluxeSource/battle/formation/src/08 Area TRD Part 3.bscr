@@ -272,8 +272,8 @@ PADDING: 80218274 to 80218280 (004CF424 to 004CF430)
    68:  Call  ActorSpeak        ( 000C0114 .Actor:Self 00000001 00120002 00120001 ) % Now, Mario. This is your gauge for Star Energy.
    88:  Thread
    90:  	Call  EnableActorBlur   ( .Actor:Self 00000001 )
-   A4:  	Call  SetGoalPos        ( .Actor:Self FFFFFF92 00000064 00000000 )
-   C0:  	Call  FlyToGoal ( .Actor:Self 00000014 00000000 .Easing:CosInOut )
+   A4:  	Call  SetGoalPos        ( .Actor:Self  -110`  100`  0` )
+   C0:  	Call  FlyToGoal ( .Actor:Self  20`  0` .Easing:CosInOut )
    DC:  	Call  EnableActorBlur   ( .Actor:Self 00000000 )
    F0:  	Call  SetAnimation      ( .Actor:Player 00000000 0001002A )
   108:  EndThread
@@ -284,7 +284,7 @@ PADDING: 80218274 to 80218280 (004CF424 to 004CF430)
   140:  Call  SetAnimation  ( .Actor:Player 00000000 00010002 )
   158:  Call  SetGoalToHome ( .Actor:Self )
   168:  Call  EnableActorBlur   ( .Actor:Self 00000001 )
-  17C:  Call  FlyToGoal     ( .Actor:Self 00000014 00000000 .Easing:CosInOut )
+  17C:  Call  FlyToGoal     ( .Actor:Self  20`  0` .Easing:CosInOut )
   198:  Call  EnableActorBlur   ( .Actor:Self 00000000 )
   1AC:  Call  ActorSpeak    ( 000C0115 .Actor:Self 00000001 00120002 00120001 ) % See? You can check to see how much Star Energy you ...
   1CC:  Wait  10`
@@ -342,8 +342,8 @@ PADDING: 80218274 to 80218280 (004CF424 to 004CF430)
   52C:  Call  UseIdleAnimation  ( .Actor:Player .False )
   540:  Thread
   548:  	Call  EnableActorBlur   ( .Actor:Self 00000001 )
-  55C:  	Call  SetGoalPos        ( .Actor:Self FFFFFF92 00000064 00000000 )
-  578:  	Call  FlyToGoal ( .Actor:Self 00000014 00000000 .Easing:CosInOut )
+  55C:  	Call  SetGoalPos        ( .Actor:Self  -110`  100`  0` )
+  578:  	Call  FlyToGoal ( .Actor:Self  20`  0` .Easing:CosInOut )
   594:  	Call  EnableActorBlur   ( .Actor:Self 00000000 )
   5A8:  	Call  SetAnimation      ( .Actor:Player 00000000 0001002A )
   5C0:  EndThread
@@ -356,7 +356,7 @@ PADDING: 80218274 to 80218280 (004CF424 to 004CF430)
   628:  Call  SetAnimation  ( .Actor:Player 00000000 00010002 )
   640:  Call  SetGoalToHome ( .Actor:Self )
   650:  Call  EnableActorBlur   ( .Actor:Self 00000001 )
-  664:  Call  FlyToGoal     ( .Actor:Self 00000014 00000000 .Easing:CosInOut )
+  664:  Call  FlyToGoal     ( .Actor:Self  20`  0` .Easing:CosInOut )
   680:  Call  EnableActorBlur   ( .Actor:Self 00000000 )
   694:  Call  ActorSpeak    ( 000C011A .Actor:Self 00000001 00120002 00120001 ) % Did you notice that the amount of Star Energy incr ...
   6B4:  Wait  10`

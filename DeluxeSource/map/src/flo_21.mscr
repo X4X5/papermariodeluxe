@@ -1,6 +1,25 @@
 % Script File: flo_21.mscr
 % Decoded from: 0 to 5B40 (flo_21)
 
+#define .NpcID:HuffNPuff_00         00
+#define .NpcID:HuffNPuff_01         01
+#define .NpcID:HuffNPuff_02         02
+#define .NpcID:TuffPuff_03          03
+#define .NpcID:TuffPuff_04          04
+#define .NpcID:TuffPuff_05          05
+#define .NpcID:TuffPuff_06          06
+#define .NpcID:TuffPuff_07          07
+#define .NpcID:TuffPuff_08          08
+#define .NpcID:TuffPuff_09          09
+#define .NpcID:TuffPuff_10          0A
+#define .NpcID:TuffPuff_11          0B
+#define .NpcID:TuffPuff_12          0C
+#define .NpcID:TuffPuff_13          0D
+#define .NpcID:TuffPuff_14          0E
+#define .NpcID:TuffPuff_15          0F
+#define .NpcID:TuffPuff_16          10
+#define .NpcID:TuffPuff_17          11
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -97,7 +116,7 @@
   118:  LW        A1, C (S0)
   11C:  LW        A2, 10 (S0)
   120:  LW        A3, 14 (S0)
-  124:  JAL       800729B0
+  124:  JAL       ~Func:playFX_83
   128:  LI        A0, 2
   12C:  SW        V0, 50 (S0)
   130:  SH        R0, 4E (S0)
@@ -213,7 +232,7 @@
   178:  LW        A1, 18 (S1)
   17C:  LW        A2, 1C (S1)
   180:  LW        A3, 20 (S1)
-  184:  JAL       800726B0
+  184:  JAL       ~Func:playFX_7B
   188:  LI        A0, 1
   18C:  SW        V0, 54 (S1)
   190:  LW        V1, C (V0)
@@ -448,7 +467,7 @@
    A0:  LW        A1, 18 (S0)
    A4:  LW        A2, 24 (S0)
    A8:  LW        A3, 20 (S0)
-   AC:  JAL       800726B0
+   AC:  JAL       ~Func:playFX_7B
    B0:  LI        A0, 1
    B4:  SW        V0, 54 (S0)
    B8:  LW        V1, C (V0)
@@ -779,7 +798,7 @@
    10:  COPY      A3, A1
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -952,9 +971,9 @@ MISSING: 80240CD0 to 80240CF0 (00000CD0 to 00000CF0)
    84:  EndSwitch
    8C:  If  *Var0  ==  00000000
    9C:  	Call  DisablePlayerInput    ( .True )
-   AC:  	Call  UseSettingsFrom   ( .Cam:Default 0000028A 000000CD 00000000 )
+   AC:  	Call  UseSettingsFrom   ( .Cam:Default  650`  205`  0` )
    C8:  	Call  SetCamSpeed       ( .Cam:Default *Fixed[0.6] )
-   DC:  	Call  SetPanTarget      ( .Cam:Default 0000028A 00000096 00000000 )
+   DC:  	Call  SetPanTarget      ( .Cam:Default  650`  150`  0` )
    F8:  	Call  GetCamDistance    ( .Cam:Default *Var1 )
   10C:  	Sub   *Var1  00000064
   11C:  	Call  SetCamDistance    ( .Cam:Default *Var1 )
@@ -990,7 +1009,7 @@ MISSING: 80240CD0 to 80240CF0 (00000CD0 to 00000CF0)
   2F0:  	EndThread
   2F8:  	Add   *Var1  00000064
   308:  	Call  SetCamDistance        ( .Cam:Default *Var1 )
-  31C:  	Call  SetPanTarget  ( .Cam:Default 0000028A 00000078 00000000 )
+  31C:  	Call  SetPanTarget  ( .Cam:Default  650`  120`  0` )
   338:  	Call  $Function_802405BC    ( 00000002 )
   348:  	Call  GetPlayerPos  ( *Var2 *Var3 *Var4 )
   360:  	Call  UseSettingsFrom       ( .Cam:Default *Var2 *Var3 *Var4 )
@@ -1039,8 +1058,8 @@ MISSING: 80240CD0 to 80240CF0 (00000CD0 to 00000CF0)
     0:  Set   *GB_WorldLocation  .Location:CloudyClimb
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   54:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   54:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80245AEC )
    98:  Exec  $Script_80241B98
@@ -1167,7 +1186,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
 {
     0:  Label  0
     C:  Call  PlaySound ( 000020B6 )
-   1C:  Call  ShakeCam  ( .Cam:Default 00000000 0000000F *Fixed[1.0] )
+   1C:  Call  ShakeCam  ( .Cam:Default 00000000  15` *Fixed[1.0] )
    38:  Wait  15`
    44:  Goto  0
    50:  Return
@@ -1176,25 +1195,25 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
 
 #new:Script $Script_80241920
 {
-    0:  Call  PlaySoundAtNpc    ( 00000000 000003C0 00000000 )
+    0:  Call  PlaySoundAtNpc    ( .NpcID:HuffNPuff_00 000003C0 00000000 )
    18:  Call  PlayEffect        ( ~FX:ShockWave:Clouds 0000028A 00000068 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
    5C:  Wait  15`
-   68:  Call  SetNpcJumpscale   ( 00000001 *Fixed[0.0] )
-   7C:  Call  NpcJump0  ( 00000001 0000028A 00000032 00000000 00000005 )
-   9C:  Call  SetNpcPos ( 00000000 0000028A 00000032 00000005 )
-   B8:  Call  SetNpcPos ( 00000001 0000028A 00000032 00000000 )
-   D4:  Call  SetNpcPos ( 00000002 0000028A 00000032 00000000 )
-   F0:  Call  SetNpcJumpscale   ( 00000000 *Fixed[0.0] )
-  104:  Call  SetNpcJumpscale   ( 00000001 *Fixed[0.0] )
-  118:  Call  SetNpcJumpscale   ( 00000002 *Fixed[0.0] )
+   68:  Call  SetNpcJumpscale   ( .NpcID:HuffNPuff_01 *Fixed[0.0] )
+   7C:  Call  NpcJump0  ( .NpcID:HuffNPuff_01  650`  50`  0`  5` )
+   9C:  Call  SetNpcPos ( .NpcID:HuffNPuff_00  650`  50`  5` )
+   B8:  Call  SetNpcPos ( .NpcID:HuffNPuff_01  650`  50`  0` )
+   D4:  Call  SetNpcPos ( .NpcID:HuffNPuff_02  650`  50`  0` )
+   F0:  Call  SetNpcJumpscale   ( .NpcID:HuffNPuff_00 *Fixed[0.0] )
+  104:  Call  SetNpcJumpscale   ( .NpcID:HuffNPuff_01 *Fixed[0.0] )
+  118:  Call  SetNpcJumpscale   ( .NpcID:HuffNPuff_02 *Fixed[0.0] )
   12C:  Thread
-  134:  	Call  NpcJump0  ( 00000000 0000028A 00000096 00000005 0000000A )
+  134:  	Call  NpcJump0  ( .NpcID:HuffNPuff_00  650`  150`  5`  10` )
   154:  EndThread
   15C:  Thread
-  164:  	Call  NpcJump0  ( 00000001 0000028A 00000096 00000000 0000000A )
+  164:  	Call  NpcJump0  ( .NpcID:HuffNPuff_01  650`  150`  0`  10` )
   184:  EndThread
   18C:  Thread
-  194:  	Call  NpcJump0  ( 00000002 0000028A 00000096 00000000 0000000A )
+  194:  	Call  NpcJump0  ( .NpcID:HuffNPuff_02  650`  150`  0`  10` )
   1B4:  EndThread
   1BC:  Thread
   1C4:  	Call  SetPlayerAnimation    ( 00080017 )
@@ -1227,10 +1246,10 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
    A0:  	Wait  20`
    AC:  EndIf
    B4:  Call  DisablePlayerPhysics  ( .True )
-   C4:  Call  InterpPlayerYaw   ( 0000005A 00000001 )
+   C4:  Call  InterpPlayerYaw   (  90`  1` )
    D8:  Wait  5`
    E4:  Call  SetPlayerAnimation    ( 0001002B )
-   F4:  Call  SetNpcFlagBits    ( 00000001 00000100 .True )
+   F4:  Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_01 00000100 .True )
   10C:  Call  GetPlayerPos      ( *Var2 *Var3 *Var4 )
   124:  Call  UseSettingsFrom   ( .Cam:Default *Var2 *Var3 *Var4 )
   140:  Call  SetPanTarget      ( .Cam:Default *Var2 *Var3 *Var4 )
@@ -1255,7 +1274,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
   284:  EndLoop
   28C:  Call  802D2C14      ( 00000001 )
   29C:  Call  SetPlayerPos  ( *Var0 *Var2 *Var4 )
-  2B4:  Call  SetNpcFlagBits        ( 00000001 00000100 .False )
+  2B4:  Call  SetNpcFlagBits        ( .NpcID:HuffNPuff_01 00000100 .False )
   2CC:  Call  DisablePlayerPhysics  ( .False )
   2DC:  Wait  10`
   2E8:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -1268,13 +1287,13 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
   388:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   3A0:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   3B4:  Wait  10`
-  3C0:  Call  ShowMessageAtWorldPos ( 001100CA 00000276 00000078 00000000 ) % Are you a man named Mario? And did you or did you  ...
+  3C0:  Call  ShowMessageAtWorldPos ( 001100CA  630`  120`  0` ) % Are you a man named Mario? And did you or did you  ...
   3DC:  Call  SetCamDistance        ( .Cam:Default *Fixed[600.0] )
   3F0:  Call  SetCamPitch   ( .Cam:Default *Fixed[30.0] *Fixed[-9.0] )
   408:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   41C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   434:  Wait  10`
-  440:  Call  ShowMessageAtWorldPos ( 001100CB 00000276 00000078 00000000 ) % You see, I was going to turn this sunlight-blasted ...
+  440:  Call  ShowMessageAtWorldPos ( 001100CB  630`  120`  0` ) % You see, I was going to turn this sunlight-blasted ...
   45C:  Call  SetCamDistance        ( .Cam:Default *Fixed[300.0] )
   470:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-9.0] )
   488:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -1282,9 +1301,9 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
   4B0:  Wait  10`
   4BC:  Call  GetCurrentPartnerID   ( *Var0 )
   4CC:  If  *Var0  !=  .Partner:Lakilester % 8
-  4DC:  	Call  ShowMessageAtWorldPos ( 001100CC 00000276 00000078 00000000 ) % I must tell you, King Bowser ordered me to defeat  ...
+  4DC:  	Call  ShowMessageAtWorldPos ( 001100CC  630`  120`  0` ) % I must tell you, King Bowser ordered me to defeat  ...
   4F8:  Else
-  500:  	Call  ShowMessageAtWorldPos ( 001100CD 00000276 00000078 00000000 ) % Is that you, Spike?! So! You have betrayed me! You ...
+  500:  	Call  ShowMessageAtWorldPos ( 001100CD  630`  120`  0` ) % Is that you, Spike?! So! You have betrayed me! You ...
   51C:  EndIf
   524:  ChildThread
   52C:  	Wait  15`
@@ -1309,7 +1328,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
   690:  ExecWait  $Script_80241920
   69C:  Kill  *Var9
   6A8:  Wait  30`
-  6B4:  Call  SetNpcVar ( 00000000 00000000 00000001 )
+  6B4:  Call  SetNpcVar ( .NpcID:HuffNPuff_00 00000000 00000001 )
   6CC:  Call  DisablePlayerInput    ( .False )
   6DC:  Wait  15`
   6E8:  Return
@@ -1333,18 +1352,18 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
    A0:  EndSwitch
    A8:  Set   *Var4  *Var3
    B8:  Loop  *Var4
-   C4:  	Call  SetNpcScale   ( 00000000 *Var0 *Var1 00000001 )
-   E0:  	Call  SetNpcScale   ( 00000001 *Var0 *Var1 00000001 )
-   FC:  	Call  SetNpcScale   ( 00000002 *Var0 *Var1 00000001 )
+   C4:  	Call  SetNpcScale   ( .NpcID:HuffNPuff_00 *Var0 *Var1 00000001 )
+   E0:  	Call  SetNpcScale   ( .NpcID:HuffNPuff_01 *Var0 *Var1 00000001 )
+   FC:  	Call  SetNpcScale   ( .NpcID:HuffNPuff_02 *Var0 *Var1 00000001 )
   118:  	AddF  *Var0  *Fixed[0.015625]
   128:  	SubF  *Var1  *Fixed[0.01]
   138:  	Wait  *Var2
   144:  EndLoop
   14C:  Set   *Var4  *Var3
   15C:  Loop  *Var4
-  168:  	Call  SetNpcScale   ( 00000000 *Var0 *Var1 00000001 )
-  184:  	Call  SetNpcScale   ( 00000001 *Var0 *Var1 00000001 )
-  1A0:  	Call  SetNpcScale   ( 00000002 *Var0 *Var1 00000001 )
+  168:  	Call  SetNpcScale   ( .NpcID:HuffNPuff_00 *Var0 *Var1 00000001 )
+  184:  	Call  SetNpcScale   ( .NpcID:HuffNPuff_01 *Var0 *Var1 00000001 )
+  1A0:  	Call  SetNpcScale   ( .NpcID:HuffNPuff_02 *Var0 *Var1 00000001 )
   1BC:  	SubF  *Var0  *Fixed[0.015625]
   1CC:  	AddF  *Var1  *Fixed[0.01]
   1DC:  	Wait  *Var2
@@ -1396,25 +1415,25 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
    10:  SetF  *Var1  00000001
    20:  ChildThread
    28:  	Loop  00000008
-   34:  		Call  SetNpcFlagBits    ( 00000000 00000002 .False )
-   4C:  		Call  SetNpcFlagBits    ( 00000001 00000002 .False )
-   64:  		Call  SetNpcFlagBits    ( 00000002 00000002 .False )
+   34:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_00 00000002 .False )
+   4C:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_01 00000002 .False )
+   64:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_02 00000002 .False )
    7C:  		Wait  *Var0
-   88:  		Call  SetNpcFlagBits    ( 00000000 00000002 .True )
-   A0:  		Call  SetNpcFlagBits    ( 00000001 00000002 .True )
-   B8:  		Call  SetNpcFlagBits    ( 00000002 00000002 .True )
+   88:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_00 00000002 .True )
+   A0:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_01 00000002 .True )
+   B8:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_02 00000002 .True )
    D0:  		Wait  *Var1
    DC:  		SubF  *Var0  00000000
    EC:  		AddF  *Var1  00000000
    FC:  	EndLoop
   104:  	Loop
-  110:  		Call  SetNpcFlagBits    ( 00000000 00000002 .False )
-  128:  		Call  SetNpcFlagBits    ( 00000001 00000002 .False )
-  140:  		Call  SetNpcFlagBits    ( 00000002 00000002 .False )
+  110:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_00 00000002 .False )
+  128:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_01 00000002 .False )
+  140:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_02 00000002 .False )
   158:  		Wait  *Var0
-  164:  		Call  SetNpcFlagBits    ( 00000000 00000002 .True )
-  17C:  		Call  SetNpcFlagBits    ( 00000001 00000002 .True )
-  194:  		Call  SetNpcFlagBits    ( 00000002 00000002 .True )
+  164:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_00 00000002 .True )
+  17C:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_01 00000002 .True )
+  194:  		Call  SetNpcFlagBits    ( .NpcID:HuffNPuff_02 00000002 .True )
   1AC:  		Wait  *Var1
   1B8:  	EndLoop
   1C0:  EndChildThread
@@ -1445,7 +1464,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
    20:  ChildThread
    28:  	UseIntBuffer  $IntTable_8024258C
    34:  	Loop  00000006
-   40:  		Call  PlaySoundAtNpc    ( 00000000 000020B6 00000000 )
+   40:  		Call  PlaySoundAtNpc    ( .NpcID:HuffNPuff_00 000020B6 00000000 )
    58:  		Get3Int  *Var6 *Var7 *Var8
    6C:  		Call  MakeLerp  ( *Var6 *Var7 *Var8 .Easing:SinOut )
    88:  		Loop
@@ -1462,7 +1481,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
   108:  	Loop
   114:  		UseIntBuffer  $IntTable_802425D4
   120:  		Loop  00000002
-  12C:  			Call  PlaySoundAtNpc    ( 00000000 000020B6 00000000 )
+  12C:  			Call  PlaySoundAtNpc    ( .NpcID:HuffNPuff_00 000020B6 00000000 )
   144:  			Get2Int  *Var6 *Var7
   154:  			Call  MakeLerp  ( *Var6 *Var7 00000004 .Easing:SinOut )
   170:  			Loop
@@ -1511,9 +1530,9 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
   388:  	EndLoop
   390:  EndChildThread
   398:  Loop  00000064
-  3A4:  	Call  SetNpcScale   ( 00000000 *MapVar[B] *MapVar[C] 00000001 )
-  3C0:  	Call  SetNpcScale   ( 00000001 *MapVar[B] *MapVar[C] 00000001 )
-  3DC:  	Call  SetNpcScale   ( 00000002 *MapVar[B] *MapVar[C] 00000001 )
+  3A4:  	Call  SetNpcScale   ( .NpcID:HuffNPuff_00 *MapVar[B] *MapVar[C] 00000001 )
+  3C0:  	Call  SetNpcScale   ( .NpcID:HuffNPuff_01 *MapVar[B] *MapVar[C] 00000001 )
+  3DC:  	Call  SetNpcScale   ( .NpcID:HuffNPuff_02 *MapVar[B] *MapVar[C] 00000001 )
   3F8:  	Wait  1`
   404:  EndLoop
   40C:  Return
@@ -1544,34 +1563,34 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
   108:  	Thread
   110:  		Call  RandInt   ( 00000005 *Var5 )
   124:  		Wait  *Var5
-  130:  		Call  SetNpcPos ( *Var8 *Var1 *Var2 FFFFFFE2 )
+  130:  		Call  SetNpcPos ( *Var8 *Var1 *Var2  -30` )
   14C:  		Call  RandInt   ( 00000002 *Var5 )
   160:  		Add   *Var5  00000008
   170:  		Call  PlaySoundAtNpc    ( *Var8 000003D5 00000000 )
-  188:  		Call  NpcJump0  ( *Var8 *Var3 *Var4 FFFFFFF1 *Var5 )
-  1A8:  		Call  SetNpcPos ( *Var8 00000000 FFFFFC18 00000000 )
+  188:  		Call  NpcJump0  ( *Var8 *Var3 *Var4  -15` *Var5 )
+  1A8:  		Call  SetNpcPos ( *Var8  0`  -1000`  0` )
   1C4:  	EndThread
   1CC:  	Add   *Var8  00000001
   1DC:  EndLoop
-  1E4:  Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
-  200:  Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
-  21C:  Call  SetNpcPos ( 00000002 00000000 FFFFFC18 00000000 )
+  1E4:  Call  SetNpcPos ( .NpcID:HuffNPuff_00  0`  -1000`  0` )
+  200:  Call  SetNpcPos ( .NpcID:HuffNPuff_01  0`  -1000`  0` )
+  21C:  Call  SetNpcPos ( .NpcID:HuffNPuff_02  0`  -1000`  0` )
   238:  Get4Int  *Var1 *Var2 *Var3 *Var4
   250:  Wait  5`
-  25C:  Call  SetNpcPos ( *Var8 *Var1 *Var2 FFFFFFE2 )
+  25C:  Call  SetNpcPos ( *Var8 *Var1 *Var2  -30` )
   278:  Call  PlaySoundAtNpc    ( *Var8 000003D6 00000000 )
-  290:  Call  NpcJump0  ( *Var8 *Var3 *Var4 FFFFFFF1 0000000A )
-  2B0:  Call  SetNpcPos ( *Var8 00000000 FFFFFC18 00000000 )
+  290:  Call  NpcJump0  ( *Var8 *Var3 *Var4  -15`  10` )
+  2B0:  Call  SetNpcPos ( *Var8  0`  -1000`  0` )
   2CC:  Return
   2D4:  End
 }
 
 #new:Script $Script_80243010
 {
-    0:  Call  SetNpcAnimation   ( 00000001 007C0004 )
-   14:  Call  SetNpcAnimation   ( 00000000 007C0005 )
-   28:  Call  SetNpcAnimation   ( 00000002 007C0006 )
-   3C:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+    0:  Call  SetNpcAnimation   ( .NpcID:HuffNPuff_01 007C0004 )
+   14:  Call  SetNpcAnimation   ( .NpcID:HuffNPuff_00 007C0005 )
+   28:  Call  SetNpcAnimation   ( .NpcID:HuffNPuff_02 007C0006 )
+   3C:  Call  GetNpcPos     ( .NpcID:HuffNPuff_00 *Var0 *Var1 *Var2 )
    58:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    74:  Add   *Var0  FFFFFFF1
    84:  Add   *Var2  00000028
@@ -1581,10 +1600,10 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
    DC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    F0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   108:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  11C:  Call  SpeakToPlayer ( 00000000 007C0030 007C0005 00000100 FFFFFFE2 0000001E 001100CE ) % No!! I cannot lose!!
+  11C:  Call  SpeakToPlayer ( .NpcID:HuffNPuff_00 007C0030 007C0005 00000100  -30`  30` 001100CE ) % No!! I cannot lose!!
   144:  Call  FadeOutMusic  ( 00000000 000005DC )
   158:  Set   *MapVar[D]  00000002
-  168:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  168:  Call  GetNpcPos     ( .NpcID:HuffNPuff_00 *Var0 *Var1 *Var2 )
   184:  Thread
   18C:  	Set   *Var3  *Var0
   19C:  	Set   *Var4  *Var0
@@ -1601,7 +1620,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
   2DC:  		Wait  14`
   2E8:  	EndLoop
   2F0:  	Call  PlayEffect    ( ~FX:Explosion3 *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  334:  	Call  ShakeCam      ( .Cam:Default 00000000 0000001E *Fixed[1.5] )
+  334:  	Call  ShakeCam      ( .Cam:Default 00000000  30` *Fixed[1.5] )
   350:  EndThread
   358:  Thread
   360:  	Wait  30`
@@ -1642,7 +1661,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
    10:  Switch  *Var0
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  SetEncounterStatusFlags   ( 00000001 .True )
-   3C:  		Call  SetNpcYaw     ( .Npc:Partner 0000005A )
+   3C:  		Call  SetNpcYaw     ( .Npc:Partner  90` )
    50:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var3 )
    68:  		Call  GetNpcPos     ( .Npc:Partner *Var0 *Var1 *Var2 )
    84:  		Add   *Var3  FFFFFFEC
@@ -1670,7 +1689,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
    3C:  	Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_802434D8 )
    50:  	Call  SetNpcAnimation   ( .Npc:Self 007C0002 )
    64:  Else
-   6C:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   6C:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    88:  EndIf
    90:  Return
    98:  End
@@ -1684,7 +1703,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
    3C:  	Call  SetNpcAnimation   ( .Npc:Self 007C0001 )
    50:  	Exec  $Script_80242290
    5C:  Else
-   64:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   64:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    80:  EndIf
    88:  Return
    90:  End
@@ -1697,7 +1716,7 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
    28:  	Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_802435D4 )
    3C:  	Call  SetNpcAnimation   ( .Npc:Self 007C0019 )
    50:  Else
-   58:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   58:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    74:  EndIf
    7C:  Return
    84:  End
@@ -1719,27 +1738,27 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
 
 #new:NpcGroup $NpcGroup_80243804
 {
-	00000000 $NpcSettings_802417EC ~Vec3f:NPC_80243804 % 650 -1000 0
+	.NpcID:HuffNPuff_00 $NpcSettings_802417EC ~Vec3f:NPC_HuffNPuff_00 % 650 -1000 0
 	00040D01 $Script_Init_802435E4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243804
-	~AnimationTable:NPC_80243804 % .Sprite:HuffNPuff
+	~Movement:NPC_HuffNPuff_00
+	~AnimationTable:NPC_HuffNPuff_00 % .Sprite:HuffNPuff
 	00000000 00000000 $ExtraAnimationList_802437E0 00000000 % no tattle string
 	%
 	% $NpcGroup_80243804[1F0]
-	00000001 $NpcSettings_802417EC ~Vec3f:NPC_802439F4 % 650 100 0
+	.NpcID:HuffNPuff_01 $NpcSettings_802417EC ~Vec3f:NPC_HuffNPuff_01 % 650 100 0
 	00040F01 $Script_Init_80243684 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802439F4
-	~AnimationTable:NPC_802439F4 % .Sprite:HuffNPuff
+	~Movement:NPC_HuffNPuff_01
+	~AnimationTable:NPC_HuffNPuff_01 % .Sprite:HuffNPuff
 	00000000 00000000 $ExtraAnimationList_802437E0 00000000 % no tattle string
 	%
 	% $NpcGroup_80243804[3E0]
-	00000002 $NpcSettings_802417EC ~Vec3f:NPC_80243BE4 % 650 -1000 0
+	.NpcID:HuffNPuff_02 $NpcSettings_802417EC ~Vec3f:NPC_HuffNPuff_02 % 650 -1000 0
 	00040F01 $Script_Init_8024371C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243BE4
-	~AnimationTable:NPC_80243BE4 % .Sprite:HuffNPuff
+	~Movement:NPC_HuffNPuff_02
+	~AnimationTable:NPC_HuffNPuff_02 % .Sprite:HuffNPuff
 	00000000 00000000 $ExtraAnimationList_802437E0 00000000 % no tattle string
 }
 
@@ -1750,123 +1769,123 @@ MISSING: 80241818 to 8024189C (00001818 to 0000189C)
 
 #new:NpcGroup $NpcGroup_80243DDC
 {
-	00000003 $NpcSettings_802417C0 ~Vec3f:NPC_80243DDC % 0 -1000 0
+	.NpcID:TuffPuff_03 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_03 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243DDC
-	~AnimationTable:NPC_80243DDC % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_03
+	~AnimationTable:NPC_TuffPuff_03 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[1F0]
-	00000004 $NpcSettings_802417C0 ~Vec3f:NPC_80243FCC % 0 -1000 0
+	.NpcID:TuffPuff_04 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_04 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243FCC
-	~AnimationTable:NPC_80243FCC % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_04
+	~AnimationTable:NPC_TuffPuff_04 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[3E0]
-	00000005 $NpcSettings_802417C0 ~Vec3f:NPC_802441BC % 0 -1000 0
+	.NpcID:TuffPuff_05 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_05 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802441BC
-	~AnimationTable:NPC_802441BC % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_05
+	~AnimationTable:NPC_TuffPuff_05 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[5D0]
-	00000006 $NpcSettings_802417C0 ~Vec3f:NPC_802443AC % 0 -1000 0
+	.NpcID:TuffPuff_06 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_06 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802443AC
-	~AnimationTable:NPC_802443AC % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_06
+	~AnimationTable:NPC_TuffPuff_06 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[7C0]
-	00000007 $NpcSettings_802417C0 ~Vec3f:NPC_8024459C % 0 -1000 0
+	.NpcID:TuffPuff_07 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_07 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024459C
-	~AnimationTable:NPC_8024459C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_07
+	~AnimationTable:NPC_TuffPuff_07 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[9B0]
-	00000008 $NpcSettings_802417C0 ~Vec3f:NPC_8024478C % 0 -1000 0
+	.NpcID:TuffPuff_08 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_08 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024478C
-	~AnimationTable:NPC_8024478C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_08
+	~AnimationTable:NPC_TuffPuff_08 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[BA0]
-	00000009 $NpcSettings_802417C0 ~Vec3f:NPC_8024497C % 0 -1000 0
+	.NpcID:TuffPuff_09 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_09 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024497C
-	~AnimationTable:NPC_8024497C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_09
+	~AnimationTable:NPC_TuffPuff_09 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[D90]
-	0000000A $NpcSettings_802417C0 ~Vec3f:NPC_80244B6C % 0 -1000 0
+	.NpcID:TuffPuff_10 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_10 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80244B6C
-	~AnimationTable:NPC_80244B6C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_10
+	~AnimationTable:NPC_TuffPuff_10 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[F80]
-	0000000B $NpcSettings_802417C0 ~Vec3f:NPC_80244D5C % 0 -1000 0
+	.NpcID:TuffPuff_11 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_11 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80244D5C
-	~AnimationTable:NPC_80244D5C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_11
+	~AnimationTable:NPC_TuffPuff_11 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[1170]
-	0000000C $NpcSettings_802417C0 ~Vec3f:NPC_80244F4C % 0 -1000 0
+	.NpcID:TuffPuff_12 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_12 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80244F4C
-	~AnimationTable:NPC_80244F4C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_12
+	~AnimationTable:NPC_TuffPuff_12 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[1360]
-	0000000D $NpcSettings_802417C0 ~Vec3f:NPC_8024513C % 0 -1000 0
+	.NpcID:TuffPuff_13 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_13 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024513C
-	~AnimationTable:NPC_8024513C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_13
+	~AnimationTable:NPC_TuffPuff_13 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[1550]
-	0000000E $NpcSettings_802417C0 ~Vec3f:NPC_8024532C % 0 -1000 0
+	.NpcID:TuffPuff_14 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_14 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024532C
-	~AnimationTable:NPC_8024532C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_14
+	~AnimationTable:NPC_TuffPuff_14 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[1740]
-	0000000F $NpcSettings_802417C0 ~Vec3f:NPC_8024551C % 0 -1000 0
+	.NpcID:TuffPuff_15 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_15 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024551C
-	~AnimationTable:NPC_8024551C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_15
+	~AnimationTable:NPC_TuffPuff_15 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[1930]
-	00000010 $NpcSettings_802417C0 ~Vec3f:NPC_8024570C % 0 -1000 0
+	.NpcID:TuffPuff_16 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_16 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024570C
-	~AnimationTable:NPC_8024570C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_16
+	~AnimationTable:NPC_TuffPuff_16 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 	%
 	% $NpcGroup_80243DDC[1B20]
-	00000011 $NpcSettings_802417C0 ~Vec3f:NPC_802458FC % 0 -1000 0
+	.NpcID:TuffPuff_17 $NpcSettings_802417C0 ~Vec3f:NPC_TuffPuff_17 % 0 -1000 0
 	00000F01 $Script_Init_802437A8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802458FC
-	~AnimationTable:NPC_802458FC % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_17
+	~AnimationTable:NPC_TuffPuff_17 % .Sprite:TuffPuff
 	00000000 00000000 $ExtraAnimationList_80243DD4 00000000 % no tattle string
 }
 

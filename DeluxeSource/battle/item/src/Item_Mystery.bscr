@@ -271,7 +271,7 @@
    54:  NOP
 	% LBL: from $JumpTable_802A25A0 , entry 0`
    58:  LA        A1, $Function_802A123C
-   60:  JAL       ~Func:create_dynamic_entity_frontUI
+   60:  JAL       ~Func:create_generic_entity_frontUI
    64:  CLEAR     A0
    68:  SAW       V0, $End[38]
    70:  JAL       ~Func:rand_int
@@ -286,7 +286,7 @@
    A4:  SW        V0, 0 (S0)
    A8:  LI        A0, 1
    AC:  ADDIU     A1, SP, 10
-   B0:  JAL       80137DC0
+   B0:  JAL       ~Func:get_screen_overlay_params
    B4:  ADDIU     A2, SP, 14
    B8:  LWC1      F2, 14 (SP)
    BC:  LIF       F0, 215.0
@@ -514,7 +514,7 @@
   450:  SH        V0, 17A (S2)
   454:  SLL       V0, V0, 10
   458:  SRA       V0, V0, 10
-  45C:  JAL       ~Func:free_dynamic_entity
+  45C:  JAL       ~Func:free_generic_entity
   460:  SW        V0, 84 (A2)
         .o464
   464:  LW        A0, 0 (S1)
@@ -577,7 +577,7 @@
    8C:  SW        R0, 10 (SP)
    90:  SW        R0, 18 (SP)
    94:  SW        V1, 1C (SP)
-   98:  JAL       80070190
+   98:  JAL       ~Func:playFX_18
    9C:  SWC1      F0, 14 (SP)
    A0:  LW        RA, 2C (SP)
    A4:  LW        S2, 28 (SP)
@@ -638,10 +638,10 @@ PADDING: 802A1948 to 802A1950 (0072CEF8 to 0072CF00)
 #new:Script $Script_802A1C54
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -827,11 +827,11 @@ PADDING: 802A2278 to 802A227C (0072D828 to 0072D82C)
   1A4:  EndThread
   1AC:  Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[0.6] )
   1C0:  Add   *Var2  00000005
-  1D0:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 0000000C )
+  1D0:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  12` )
   1F0:  Thread
   1F8:  	Add   *Var0  0000003C
   208:  	Add   *Var1  00000000
-  218:  	Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000010 )
+  218:  	Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  16` )
   238:  	Call  DeleteVirtualEntity   ( *VarA )
   248:  EndThread
   250:  Call  SetTargetActor    ( .Actor:Self .Actor:Player )

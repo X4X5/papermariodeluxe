@@ -1,6 +1,10 @@
 % Script File: sbk_30.mscr
 % Decoded from: 0 to 4A50 (sbk_30)
 
+#define .NpcID:Kolorado_00          00
+#define .NpcID:Archeologist_01      01
+#define .NpcID:Archeologist_02      02
+
 #new:Function_GetTattle $Function_GetTattle
 {
     0:  ADDIU     SP, SP, FFE8
@@ -45,7 +49,7 @@
    50:  LI        V0, FFFF
    54:  BNE       S0, V0, .o6C
    58:  LI        V0, 1
-   5C:  JAL       8011D82C
+   5C:  JAL       ~Func:mdl_set_all_fog_mode
    60:  COPY      A0, S1
    64:  BEQ       R0, R0, .o10C
    68:  LI        V0, 2
@@ -73,7 +77,7 @@
    B4:  COPY      A0, V0
    B8:  COPY      A0, V0
    BC:  LI        A1, FFFF
-   C0:  JAL       8011BC7C
+   C0:  JAL       ~Func:set_mdl_custom_gfx_set
    C4:  COPY      A2, S1
    C8:  BEQ       R0, R0, .o9C
    CC:  NOP
@@ -240,7 +244,7 @@
    14:  SW        R0, 14 (SP)
    18:  SWC1      F0, 10 (SP)
    1C:  COPY      A2, A1
-   20:  JAL       80072950
+   20:  JAL       ~Func:playFX_82
    24:  COPY      A3, A1
    28:  LW        RA, 18 (SP)
    2C:  LI        V0, 2
@@ -1799,8 +1803,8 @@ PADDING: 8024180C to 80241810 (0000180C to 00001810)
 #new:Script $Script_80241BEC
 {
     0:  Call  PlaySound ( 80000060 )
-   10:  Call  UseSettingsFrom       ( .Cam:Default 000000C1 00000000 FFFFFF13 )
-   2C:  Call  SetPanTarget  ( .Cam:Default 000000C1 00000000 FFFFFF13 )
+   10:  Call  UseSettingsFrom       ( .Cam:Default  193`  0`  -237` )
+   2C:  Call  SetPanTarget  ( .Cam:Default  193`  0`  -237` )
    48:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    5C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    74:  Call  $Function_80240040    ( 00000002 00000000 00000003 )
@@ -1808,7 +1812,7 @@ PADDING: 8024180C to 80241810 (0000180C to 00001810)
    A4:  Call  $Function_80240164    ( 00000003 0000002C 00000020 000000B1 00000000 00000000 00000000 00000000 00000000 00000000 )
    D8:  Call  DisablePlayerInput    ( .True )
    E8:  Thread
-   F0:  	Call  ShakeCam  ( .Cam:Default 00000000 0000012C *Fixed[0.25] )
+   F0:  	Call  ShakeCam  ( .Cam:Default 00000000  300` *Fixed[0.25] )
   10C:  EndThread
   114:  Thread
   11C:  	Wait  60`
@@ -1831,8 +1835,8 @@ PADDING: 8024180C to 80241810 (0000180C to 00001810)
    20:  If  *GB_StoryProgress  ==  .Story:Ch2_GotPulseStone % FFFFFFC1
    30:  	Call  DisablePulseStone ( .False )
    40:  EndIf
-   48:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   68:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   48:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   68:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    84:  Call  SetCamEnabled     ( .Cam:Default .True )
    98:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    AC:  If  *GB_StoryProgress  <  FFFFFFCC % FFFFFFCC
@@ -2026,7 +2030,7 @@ MISSING: 80241F9C to 80241FC8 (00001F9C to 00001FC8)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -2066,7 +2070,7 @@ MISSING: 80241F9C to 80241FC8 (00001F9C to 00001FC8)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -2154,9 +2158,9 @@ MISSING: 80241F9C to 80241FC8 (00001F9C to 00001FC8)
     0:  Call  GetNpcAnimation   ( .Npc:Self *Var9 )
    14:  Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
    28:  If  *GF_SBK30_Met_Kolorado  ==  .False
-   38:  	Call  AdjustCam     ( .Cam:Default *Fixed[4.0] 00000000 *Fixed[300.0] *Fixed[15.0] *Fixed[-7.5] )
+   38:  	Call  AdjustCam     ( .Cam:Default *Fixed[4.0]  0` *Fixed[300.0] *Fixed[15.0] *Fixed[-7.5] )
    5C:  	Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000000 000D0037 ) % Well, hello there, old boy! How goes the travels,  ...
-   7C:  	Call  ResetCam      ( .Cam:Default 00000004 )
+   7C:  	Call  ResetCam      ( .Cam:Default  4` )
    90:  	Set   *GF_SBK30_Met_Kolorado  .True
    A0:  	Goto  32
    AC:  EndIf
@@ -2260,11 +2264,11 @@ MISSING: 80241F9C to 80241FC8 (00001F9C to 00001FC8)
     C:  	Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
    20:  	Wait  15`
    2C:  	Call  SetNpcAnimation   ( .Npc:Self 00B60004 )
-   40:  	Call  NpcMoveTo ( .Npc:Self 00000061 FFFFFF4D 00000078 )
+   40:  	Call  NpcMoveTo ( .Npc:Self  97`  -179`  120` )
    5C:  	Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
    70:  	Wait  15`
    7C:  	Call  SetNpcAnimation   ( .Npc:Self 00B60004 )
-   90:  	Call  NpcMoveTo ( .Npc:Self 000000C8 FFFFFF9C 00000078 )
+   90:  	Call  NpcMoveTo ( .Npc:Self  200`  -100`  120` )
    AC:  EndLoop
    B4:  Return
    BC:  End
@@ -2274,14 +2278,14 @@ MISSING: 80241F9C to 80241FC8 (00001F9C to 00001FC8)
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00B60007 )
    14:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[4.0] )
-   28:  Call  NpcMoveTo     ( .Npc:Self 00000091 FFFFFF6F 00000000 )
+   28:  Call  NpcMoveTo     ( .Npc:Self  145`  -145`  0` )
    44:  Label  0
    50:  Call  RandInt       ( 0000001E *Var0 )
    64:  Add   *Var0  00000001
    74:  Wait  *Var0
    80:  Call  GetNpcYaw     ( .Npc:Self *Var0 )
    94:  Add   *Var0  000000B4
-   A4:  Call  InterpNpcYaw  ( .Npc:Self *Var0 00000005 )
+   A4:  Call  InterpNpcYaw  ( .Npc:Self *Var0  5` )
    BC:  Goto  0
    C8:  Return
    D0:  End
@@ -2293,7 +2297,7 @@ MISSING: 80241F9C to 80241FC8 (00001F9C to 00001FC8)
    10:  Switch  *Var0
    1C:  	CaseOR  ==  ~Entry:Entry4
    28:  	CaseOR  ==  ~Entry:Entry5
-   34:  		Call  SetNpcPos     ( .Npc:Self 000000D2 00000000 FFFFFF2E )
+   34:  		Call  SetNpcPos     ( .Npc:Self  210`  0`  -210` )
    50:  		Call  BindNpcIdle   ( .Npc:Self $Script_Idle_8024330C )
    64:  	EndCaseGroup
    6C:  	Default
@@ -2313,7 +2317,7 @@ MISSING: 80241F9C to 80241FC8 (00001F9C to 00001FC8)
    44:  Wait  *Var0
    50:  Call  GetNpcYaw     ( .Npc:Self *Var0 )
    64:  Add   *Var0  000000B4
-   74:  Call  InterpNpcYaw  ( .Npc:Self *Var0 00000005 )
+   74:  Call  InterpNpcYaw  ( .Npc:Self *Var0  5` )
    8C:  Goto  0
    98:  Return
    A0:  End
@@ -2395,27 +2399,27 @@ MISSING: 80241F9C to 80241FC8 (00001F9C to 00001FC8)
 
 #new:NpcGroup $NpcGroup_80243828
 {
-	00000000 $NpcSettings_80241F70 ~Vec3f:NPC_80243828 % 200 0 -100
+	.NpcID:Kolorado_00 $NpcSettings_80241F70 ~Vec3f:NPC_Kolorado_00 % 200 0 -100
 	00002D01 $Script_Init_802433E4 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243828
-	~AnimationTable:NPC_80243828 % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_00
+	~AnimationTable:NPC_Kolorado_00 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A008B % He's the archaeologist, Kolorado. He's famous as b ...
 	%
 	% $NpcGroup_80243828[1F0]
-	00000001 $NpcSettings_80241FC8 ~Vec3f:NPC_80243A18 % 238 0 -112
+	.NpcID:Archeologist_01 $NpcSettings_80241FC8 ~Vec3f:NPC_Archeologist_01 % 238 0 -112
 	00002D01 $Script_Init_80243638 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243A18
-	~AnimationTable:NPC_80243A18 % .Sprite:Archeologist
+	~Movement:NPC_Archeologist_01
+	~AnimationTable:NPC_Archeologist_01 % .Sprite:Archeologist
 	00000000 00000000 00000000 001A008C % This is a Koopa Troopa from the excavation team. T ...
 	%
 	% $NpcGroup_80243828[3E0]
-	00000002 $NpcSettings_80241FC8 ~Vec3f:NPC_80243C08 % 170 0 -190
+	.NpcID:Archeologist_02 $NpcSettings_80241FC8 ~Vec3f:NPC_Archeologist_02 % 170 0 -190
 	00002D01 $Script_Init_802437AC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243C08
-	~AnimationTable:NPC_80243C08 % .Sprite:Archeologist
+	~Movement:NPC_Archeologist_02
+	~AnimationTable:NPC_Archeologist_02 % .Sprite:Archeologist
 	00000000 00000000 00000000 001A008D % This is a Koopa Troopa from the excavation team. T ...
 }
 

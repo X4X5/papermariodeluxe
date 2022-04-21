@@ -1,6 +1,7 @@
 % Script File: tst_01.mscr
 % Decoded from: 0 to 330 (tst_01)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %  -35.0    0.0   17.0    0.0
@@ -45,8 +46,8 @@
 {
     0:  Set   *GB_WorldLocation  .Location:Testing
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  ExecWait  $Script_MakeEntities
    7C:  Bind  $Script_802400F0 .Trigger:WallPush ~Collider:deilitw 00000001 00000000
@@ -60,12 +61,12 @@ PADDING: 80240214 to 80240220 (00000214 to 00000220)
 
 #new:Script $Script_MakeEntities
 {
-    0:  Call  MakeEntity    ( .Entity:YellowBlock ~Vec4d:Entity80240220 .Item:Flower 80000000 )
+    0:  Call  MakeEntity    ( .Entity:YellowBlock ~Vec4d:Entity80240220 .Item:FlowerPoint 80000000 )
    28:  Call  MakeEntity    ( .Entity:YellowBlock ~Vec4d:Entity80240248 80000000 )
    4C:  Call  MakeEntity    ( .Entity:HiddenYellowBlock ~Vec4d:Entity8024026C .Item:Heart 80000000 )
    74:  Call  MakeEntity    ( .Entity:HiddenYellowBlock ~Vec4d:Entity80240294 .Item:Heart 80000000 )
-   9C:  Call  MakeEntity    ( .Entity:HiddenRedBlock ~Vec4d:Entity802402BC .Item:Flower 80000000 )
-   C4:  Call  MakeEntity    ( .Entity:RedBlock ~Vec4d:Entity802402E4 .Item:Flower 80000000 )
+   9C:  Call  MakeEntity    ( .Entity:HiddenRedBlock ~Vec4d:Entity802402BC .Item:FlowerPoint 80000000 )
+   C4:  Call  MakeEntity    ( .Entity:RedBlock ~Vec4d:Entity802402E4 .Item:FlowerPoint 80000000 )
    EC:  Return
    F4:  End
 }

@@ -83,15 +83,15 @@
     0:  Call  BindTakeTurn  ( .Actor:Self $Script_TakeTurn_80231754 )
    14:  Call  BindIdle      ( .Actor:Self $Script_Idle_8023129C )
    28:  Call  BindHandleEvent   ( .Actor:Self $Script_HandleEvent_802312D0 )
-   3C:  Call  SetActorPos   ( .Actor:Self 000000B4 00000000 00000000 )
-   58:  Call  ForceHomePos  ( .Actor:Self 000000B4 00000000 00000000 )
+   3C:  Call  SetActorPos   ( .Actor:Self  180`  0`  0` )
+   58:  Call  ForceHomePos  ( .Actor:Self  180`  0`  0` )
    74:  Call  HPBarToHome   ( .Actor:Self )
    84:  Thread
    8C:  	Call  SetAnimation  ( .Actor:Self 00000001 006F000F )
    A4:  	Call  SetActorSpeed ( .Actor:Self *Fixed[5.0] )
-   B8:  	Call  SetGoalPos    ( .Actor:Self 00000000 00000000 00000000 )
-   D4:  	Call  RunToGoal     ( .Actor:Self 00000000 .False )
-   EC:  	Call  SetActorYaw   ( .Actor:Self 000000B4 )
+   B8:  	Call  SetGoalPos    ( .Actor:Self  0`  0`  0` )
+   D4:  	Call  RunToGoal     ( .Actor:Self  0` .False )
+   EC:  	Call  SetActorYaw   ( .Actor:Self  180` )
   100:  	Call  PlaySoundAtActor  ( .Actor:Self .Sound:GeneralWhistle )
   114:  	Call  SetAnimation  ( .Actor:Self 00000001 006F0004 )
   12C:  	Wait  20`
@@ -136,8 +136,8 @@
    F0:  		Call  GetActorPos   ( .Actor:Self *Var0 *Var1 *Var2 )
   10C:  		Sub   *Var0  00000023
   11C:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  138:  		Call  JumpToGoal    ( .Actor:Self 00000008 .False .True .False )
-  158:  		Call  SetActorYaw   ( .Actor:Self 00000000 )
+  138:  		Call  JumpToGoal    ( .Actor:Self  8` .False .True .False )
+  158:  		Call  SetActorYaw   ( .Actor:Self  0` )
   16C:  		Call  SetAnimation  ( .Actor:Self 00000001 006F0002 )
   184:  		Wait  24`
   190:  		Call  SetAnimation  ( .Actor:Self 00000001 006F0003 )
@@ -153,8 +153,8 @@
   280:  		Call  SetAnimation      ( .Actor:Self 00000001 006F000C )
   298:  		Call  SetActorSpeed     ( .Actor:Self *Fixed[6.0] )
   2AC:  		Call  AddActorDecoration    ( .Actor:Self 00000001 00000000 .Decoration:SteamEmitter )
-  2C8:  		Call  SetGoalPos        ( .Actor:Self FFFFFF38 00000000 00000014 )
-  2E4:  		Call  RunToGoal ( .Actor:Self 00000000 .False )
+  2C8:  		Call  SetGoalPos        ( .Actor:Self  -200`  0`  20` )
+  2E4:  		Call  RunToGoal ( .Actor:Self  0` .False )
   2FC:  		Call  RemoveActorDecoration ( .Actor:Self *Var0 00000000 )
   314:  		Call  RemoveActor       ( .Actor:Self )
   324:  		Return

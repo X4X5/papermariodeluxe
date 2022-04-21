@@ -1,6 +1,10 @@
 % Script File: nok_12.mscr
 % Decoded from: 0 to 5E10 (nok_12)
 
+#define .NpcID:KoopaTroopa_00       00
+#define .NpcID:Goomba_02            02
+#define .NpcID:SpikedGoomba_03      03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD0
@@ -2202,7 +2206,7 @@ PADDING: 80241ED8 to 80241EE0 (00001ED8 to 00001EE0)
    8C:  MFC1      A0, F4
    90:  TRUNC.W.S F4, F2
    94:  MFC1      A1, F4
-   98:  JAL       800EF3C0
+   98:  JAL       ~Func:partner_set_goal_pos
    9C:  NOP
    A0:  JAL       800EF3D4
    A4:  CLEAR     A0
@@ -2268,7 +2272,7 @@ PADDING: 80241ED8 to 80241EE0 (00001ED8 to 00001EE0)
    8C:  MFC1      A0, F4
    90:  TRUNC.W.S F4, F2
    94:  MFC1      A1, F4
-   98:  JAL       800EF3C0
+   98:  JAL       ~Func:partner_set_goal_pos
    9C:  NOP
    A0:  JAL       800EF3D4
    A4:  CLEAR     A0
@@ -2436,8 +2440,8 @@ PADDING: 8024217C to 80242180 (0000217C to 00002180)
     0:  Set   *GB_WorldLocation  .Location:PleasantPath
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Set   *AreaFlag[001]  .False
-   30:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   50:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   30:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   50:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    6C:  Call  SetCamEnabled     ( .Cam:Default .True )
    80:  Call  GetDemoState      ( *Var0 )
    90:  If  *Var0  ==  00000000
@@ -2496,7 +2500,7 @@ PADDING: 8024217C to 80242180 (0000217C to 00002180)
    C4:  		Goto  0
    D0:  	EndIf
    D8:  	Call  PlaySoundAt   ( 00000048 00000000 FFFFFE2A *Var0 FFFFFF6A )
-   F8:  	Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+   F8:  	Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[1.0] )
   114:  	Thread
   11C:  		Wait  5`
   128:  		Call  SetTimeFreezeMode ( 00000000 )
@@ -3062,7 +3066,7 @@ MISSING: 802444CC to 802444F8 (000044CC to 000044F8)
   1A0:  	Call  SetNpcRotation    ( .Npc:Self 00000000 00000000 00000000 )
   1BC:  EndThread
   1C4:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.7] )
-  1D8:  Call  NpcJump0  ( .Npc:Self FFFFFFBF 00000000 FFFFFF88 00000019 )
+  1D8:  Call  NpcJump0  ( .Npc:Self  -65`  0`  -120`  25` )
   1F8:  Call  SetNpcAnimation   ( .Npc:Self 00270006 )
   20C:  Wait  20`
   218:  Call  SetNpcAnimation   ( .Npc:Self 00270001 )
@@ -3073,7 +3077,7 @@ MISSING: 802444CC to 802444F8 (000044CC to 000044F8)
 
 #new:Script $Script_Init_80244748
 {
-    0:  Call  SetNpcPos ( .Npc:Self FFFFFF5B 00000056 FFFFFF8A )
+    0:  Call  SetNpcPos ( .Npc:Self  -165`  86`  -118` )
    1C:  Call  SetNpcRotation    ( .Npc:Self FFFFFFAB 00000000 00000000 )
    38:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_802444F8 )
    4C:  Return
@@ -3096,7 +3100,7 @@ MISSING: 802444CC to 802444F8 (000044CC to 000044F8)
    4C:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    68:  Sub   *Var0  00000050
    78:  Add   *Var2  00000064
-   88:  Call  NpcMoveTo ( .Npc:Self *Var0 *Var2 0000000C )
+   88:  Call  NpcMoveTo ( .Npc:Self *Var0 *Var2  12` )
    A4:  Call  SetNpcAnimation   ( .Npc:Self 00290108 )
    B8:  Wait  8`
    C4:  Call  SetNpcAnimation   ( .Npc:Self 00290101 )
@@ -3109,7 +3113,7 @@ MISSING: 802444CC to 802444F8 (000044CC to 000044F8)
     0:  Call  GetEntryID    ( *Var0 )
    10:  If  *Var0  >=  ~Entry:Entry2
    20:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_802447A4 )
-   34:  	Call  SetNpcPos     ( .Npc:Self 00000136 00000000 FFFFFF5B )
+   34:  	Call  SetNpcPos     ( .Npc:Self  310`  0`  -165` )
    50:  EndIf
    58:  Return
    60:  End
@@ -3127,12 +3131,12 @@ MISSING: 802444CC to 802444F8 (000044CC to 000044F8)
 
 #new:NpcGroup $NpcGroup_80244950
 {
-	00000000 $NpcSettings_80244358 ~Vec3f:NPC_80244950 % -370 0 -25
+	.NpcID:KoopaTroopa_00 $NpcSettings_80244358 ~Vec3f:NPC_KoopaTroopa_00 % -370 0 -25
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:Mushroom:3:KoopaLeaf:7
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_80244950
-	~AnimationTable:NPC_80244950 % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_00
+	~AnimationTable:NPC_KoopaTroopa_00 % .Sprite:KoopaTroopa
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
@@ -3160,21 +3164,21 @@ MISSING: 802444CC to 802444F8 (000044CC to 000044F8)
 
 #new:NpcGroup $NpcGroup_80244F20
 {
-	00000002 $NpcSettings_802443D4 ~Vec3f:NPC_80244F20 % 50 0 -72
+	.NpcID:Goomba_02 $NpcSettings_802443D4 ~Vec3f:NPC_Goomba_02 % 50 0 -72
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:Mushroom:A ~HP:GenerousWhenLow:2 ~FP:GenerousWhenLow:2 ~NoCoinBonus
-	~Movement:NPC_80244F20
-	~AnimationTable:NPC_80244F20 % .Sprite:Goomba
+	~Movement:NPC_Goomba_02
+	~AnimationTable:NPC_Goomba_02 % .Sprite:Goomba
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245110
 {
-	00000003 $NpcSettings_80244450 ~Vec3f:NPC_80245110 % -160 0 -120
+	.NpcID:SpikedGoomba_03 $NpcSettings_80244450 ~Vec3f:NPC_SpikedGoomba_03 % -160 0 -120
 	00000C00 $Script_Init_80244748 00000000 00000000 0000010E
 	~Items:5:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80245110
-	~AnimationTable:NPC_80245110 % .Sprite:SpikedGoomba
+	~Movement:NPC_SpikedGoomba_03
+	~AnimationTable:NPC_SpikedGoomba_03 % .Sprite:SpikedGoomba
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

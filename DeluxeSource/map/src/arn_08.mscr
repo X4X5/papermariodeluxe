@@ -1,6 +1,9 @@
 % Script File: arn_08.mscr
 % Decoded from: 0 to 18C0 (arn_08)
 
+#define .NpcID:TubbasHeart_00       00
+#define .NpcID:Yakkey_01            01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -11,7 +14,7 @@
    14:  COPY      S0, A0
    18:  SW        R0, 70 (S0)
    1C:  LI        A0, 00010007
-   20:  JAL       ~Func:suggest_player_anim
+   20:  JAL       ~Func:suggest_player_anim_clearUnkFlag
    24:  RESERVED
         .o28
    28:  JAL       800E34D8
@@ -166,7 +169,7 @@ PADDING: 802400BC to 802400C0 (000000BC to 000000C0)
    8C:  MFC1      A0, F4
    90:  TRUNC.W.S F4, F2
    94:  MFC1      A1, F4
-   98:  JAL       800EF3C0
+   98:  JAL       ~Func:partner_set_goal_pos
    9C:  NOP
    A0:  JAL       800EF3D4
    A4:  CLEAR     A0
@@ -274,25 +277,25 @@ PADDING: 802403A8 to 802403B0 (000003A8 to 000003B0)
    D4:  		Call  DisablePlayerInput    ( .True )
    E4:  		Call  DisablePlayerPhysics  ( .True )
    F4:  		If  *GB_StoryProgress  ==  .Story:Ch3_HeartEscapedWell % FFFFFFEE
-  104:  			Call  SetPlayerPos      ( 000003E8 000003E8 00000000 )
-  11C:  			Call  SetNpcPos ( .Npc:Partner 000003E8 000003E8 00000000 )
+  104:  			Call  SetPlayerPos      (  1000`  1000`  0` )
+  11C:  			Call  SetNpcPos ( .Npc:Partner  1000`  1000`  0` )
   138:  			Call  RotateModel       ( ~Model:doa 00000050 00000000 FFFFFFFF 00000000 )
   158:  			Call  RotateModel       ( ~Model:o37 00000050 00000000 FFFFFFFF 00000000 )
-  178:  			Call  SetNpcAnimation   ( 00000000 006C0006 )
-  18C:  			Call  SetNpcJumpscale   ( 00000000 *Fixed[2.5] )
-  1A0:  			Call  PlaySoundAtNpc    ( 00000000 000020C8 00000000 )
-  1B8:  			Call  NpcJump0  ( 00000000 FFFFFFCE 00000000 00000032 0000000A )
-  1D8:  			Call  SetNpcAnimation   ( 00000000 006C0007 )
+  178:  			Call  SetNpcAnimation   ( .NpcID:TubbasHeart_00 006C0006 )
+  18C:  			Call  SetNpcJumpscale   ( .NpcID:TubbasHeart_00 *Fixed[2.5] )
+  1A0:  			Call  PlaySoundAtNpc    ( .NpcID:TubbasHeart_00 000020C8 00000000 )
+  1B8:  			Call  NpcJump0  ( .NpcID:TubbasHeart_00  -50`  0`  50`  10` )
+  1D8:  			Call  SetNpcAnimation   ( .NpcID:TubbasHeart_00 006C0007 )
   1EC:  			Wait  1`
-  1F8:  			Call  SetNpcAnimation   ( 00000000 006C0006 )
-  20C:  			Call  PlaySoundAtNpc    ( 00000000 000020C8 00000000 )
-  224:  			Call  NpcJump0  ( 00000000 FFFFFF92 00000000 0000006E 0000000A )
-  244:  			Call  SetNpcAnimation   ( 00000000 006C0007 )
+  1F8:  			Call  SetNpcAnimation   ( .NpcID:TubbasHeart_00 006C0006 )
+  20C:  			Call  PlaySoundAtNpc    ( .NpcID:TubbasHeart_00 000020C8 00000000 )
+  224:  			Call  NpcJump0  ( .NpcID:TubbasHeart_00  -110`  0`  110`  10` )
+  244:  			Call  SetNpcAnimation   ( .NpcID:TubbasHeart_00 006C0007 )
   258:  			Wait  1`
-  264:  			Call  SetNpcAnimation   ( 00000000 006C0006 )
-  278:  			Call  PlaySoundAtNpc    ( 00000000 000020C8 00000000 )
-  290:  			Call  NpcJump0  ( 00000000 FFFFFF4C 00000000 000000B4 0000000A )
-  2B0:  			Call  SetNpcAnimation   ( 00000000 006C0007 )
+  264:  			Call  SetNpcAnimation   ( .NpcID:TubbasHeart_00 006C0006 )
+  278:  			Call  PlaySoundAtNpc    ( .NpcID:TubbasHeart_00 000020C8 00000000 )
+  290:  			Call  NpcJump0  ( .NpcID:TubbasHeart_00  -180`  0`  180`  10` )
+  2B0:  			Call  SetNpcAnimation   ( .NpcID:TubbasHeart_00 006C0007 )
   2C4:  			Wait  1`
   2D0:  			Call  MakeLerp  ( 00000050 00000000 0000000A .Easing:Linear )
   2EC:  			Loop
@@ -306,13 +309,13 @@ PADDING: 802403A8 to 802403B0 (000003A8 to 000003B0)
   370:  			EndLoop
   378:  			Call  PlaySoundAtCollider   ( ~Collider:tts .Sound:BasicDoorClose 00000000 )
   390:  			Wait  20`
-  39C:  			Call  SetPlayerPos  ( 00000000 00000000 00000000 )
-  3B4:  			Call  SetNpcPos ( .Npc:Partner 00000000 00000000 00000000 )
+  39C:  			Call  SetPlayerPos  (  0`  0`  0` )
+  3B4:  			Call  SetNpcPos ( .Npc:Partner  0`  0`  0` )
   3D0:  			Set   *GB_StoryProgress  .Story:Ch3_HeartEscapedWindyMill
   3E0:  		EndIf
   3E8:  		Call  DisablePlayerPhysics  ( .False )
   3F8:  		Call  SetPlayerJumpscale    ( *Fixed[2.0] )
-  408:  		Call  PlayerJump    ( ~Vec3d:JumpDest_802408A4 00000012 )
+  408:  		Call  PlayerJump    ( ~Vec3d:JumpDest_802408A4  18` )
   424:  		Call  DisablePlayerInput    ( .False )
   434:  		Exec  $Script_80240470
   440:  EndSwitch
@@ -324,8 +327,8 @@ PADDING: 802403A8 to 802403B0 (000003A8 to 000003B0)
 {
     0:  Set   *GB_WorldLocation  .Location:WindyMill
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *GF_Map_WindyMill  .True
@@ -376,7 +379,7 @@ PADDING: 80240A6C to 80240A70 (00000A6C to 00000A70)
 
 #new:Script $Script_80240B50
 {
-    0:  Call  SetCamProperties  ( .Cam:Default *Fixed[90.0] 00000000 00000000 00000000 *Fixed[470.0] *Fixed[17.0] *Fixed[-7.0] )
+    0:  Call  SetCamProperties  ( .Cam:Default *Fixed[90.0]  0`  0`  0` *Fixed[470.0] *Fixed[17.0] *Fixed[-7.0] )
    2C:  Exec  $Script_80240A70
    38:  Return
    40:  End
@@ -512,7 +515,7 @@ PADDING: 80240CB4 to 80240CC0 (00000CB4 to 00000CC0)
 
 #new:Script $Script_8024118C
 {
-    0:  Call  SetCamProperties  ( .Cam:Default *Fixed[90.0] 00000000 00000000 00000000 *Fixed[470.0] *Fixed[17.0] *Fixed[-7.0] )
+    0:  Call  SetCamProperties  ( .Cam:Default *Fixed[90.0]  0`  0`  0` *Fixed[470.0] *Fixed[17.0] *Fixed[-7.0] )
    2C:  Call  $Function_8024019C ( )
    38:  Set   *GF_DemoSceneDone  .False
    48:  Exec  $Script_802410AC
@@ -557,7 +560,7 @@ PADDING: 802411FC to 80241200 (000011FC to 00001200)
 #new:Script $Script_Init_80241288
 {
     0:  If  *GB_StoryProgress  !=  .Story:Ch3_HeartEscapedWell % FFFFFFEE
-   10:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   10:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    2C:  Else
    34:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80241278 )
    48:  EndIf
@@ -586,7 +589,7 @@ PADDING: 802411FC to 80241200 (000011FC to 00001200)
 #new:Script $Script_Init_802413E8
 {
     0:  If  *GB_StoryProgress  <  .Story:Ch4_FryingPanStolen % FFFFFFF4
-   10:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   10:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    2C:  Else
    34:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802412E8 )
    48:  EndIf
@@ -596,21 +599,21 @@ PADDING: 802411FC to 80241200 (000011FC to 00001200)
 
 #new:NpcGroup $NpcGroup_80241448
 {
-	00000000 $NpcSettings_80241220 ~Vec3f:NPC_80241448 % -23 75 31
+	.NpcID:TubbasHeart_00 $NpcSettings_80241220 ~Vec3f:NPC_TubbasHeart_00 % -23 75 31
 	00000D05 $Script_Init_80241288 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241448
-	~AnimationTable:NPC_80241448 % .Sprite:TubbasHeart
+	~Movement:NPC_TubbasHeart_00
+	~AnimationTable:NPC_TubbasHeart_00 % .Sprite:TubbasHeart
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241638
 {
-	00000001 $NpcSettings_8024124C ~Vec3f:NPC_80241638 % 38 0 97
+	.NpcID:Yakkey_01 $NpcSettings_8024124C ~Vec3f:NPC_Yakkey_01 % 38 0 97
 	00000801 $Script_Init_802413E8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241638
-	~AnimationTable:NPC_80241638 % .Sprite:Yakkey
+	~Movement:NPC_Yakkey_01
+	~AnimationTable:NPC_Yakkey_01 % .Sprite:Yakkey
 	00000000 00000000 00000000 001A00B4 % This is Yakkey, a magical key. It was lucky for us ...
 }
 

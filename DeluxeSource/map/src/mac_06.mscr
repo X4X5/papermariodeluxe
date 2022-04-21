@@ -1,6 +1,10 @@
 % Script File: mac_06.mscr
 % Decoded from: 0 to 4970 (mac_06)
 
+#define .NpcID:Kolorado_00          00
+#define .NpcID:Kolorado_02          02
+#define .NpcID:JrTroopa_03          03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -338,7 +342,7 @@
    14:  SW        R0, 14 (SP)
    18:  SWC1      F0, 10 (SP)
    1C:  COPY      A2, A1
-   20:  JAL       80072950
+   20:  JAL       ~Func:playFX_82
    24:  COPY      A3, A1
    28:  LW        RA, 18 (SP)
    2C:  LI        V0, 2
@@ -635,7 +639,7 @@ PADDING: 802404B4 to 802404C0 (000004B4 to 000004C0)
    10:  ADDIU     A3, SP, 18
    14:  SW        RA, 28 (SP)
    18:  SW        S1, 24 (SP)
-   1C:  JAL       8011C2B0
+   1C:  JAL       ~Func:mdl_get_copied_vertices
    20:  SW        S0, 20 (SP)
    24:  LA        S1, $???_80241B64
    2C:  LW        A0, 10 (SP)
@@ -650,7 +654,7 @@ PADDING: 802404B4 to 802404C0 (000004B4 to 000004C0)
    54:  ADDIU     V0, V0, 8
    58:  SW        V0, 0 (V1)
    5C:  LUI       V0, DE00
-   60:  JAL       8011C2EC
+   60:  JAL       ~Func:mdl_get_copied_gfx
    64:  SW        V0, 0 (S0)
    68:  LW        V1, 0 (S1)
    6C:  BLTZ      V1, .o7C
@@ -680,7 +684,7 @@ PADDING: 802404B4 to 802404C0 (000004B4 to 000004C0)
    10:  ADDIU     A3, SP, 18
    14:  SW        RA, 28 (SP)
    18:  SW        S1, 24 (SP)
-   1C:  JAL       8011C2B0
+   1C:  JAL       ~Func:mdl_get_copied_vertices
    20:  SW        S0, 20 (SP)
    24:  LA        S1, $???_80241B68
    2C:  LW        A0, 10 (SP)
@@ -695,7 +699,7 @@ PADDING: 802404B4 to 802404C0 (000004B4 to 000004C0)
    54:  ADDIU     V0, V0, 8
    58:  SW        V0, 0 (V1)
    5C:  LUI       V0, DE00
-   60:  JAL       8011C2EC
+   60:  JAL       ~Func:mdl_get_copied_gfx
    64:  SW        V0, 0 (S0)
    68:  LW        V1, 0 (S1)
    6C:  BLTZ      V1, .o7C
@@ -934,7 +938,7 @@ PADDING: 802404B4 to 802404C0 (000004B4 to 000004C0)
    E0:  SWC1      F24, 10 (SP)
    E4:  SWC1      F22, 14 (SP)
    E8:  SWC1      F20, 18 (SP)
-   EC:  JAL       80070F70
+   EC:  JAL       ~Func:playFX_3D
    F0:  SW        V0, 20 (SP)
    F4:  LW        V1, 28 (SP)
    F8:  SW        V1, 84 (S1)
@@ -1537,7 +1541,7 @@ PADDING: 80240E78 to 80240E80 (00000E78 to 00000E80)
    48:  MFC1      A1, F24
    4C:  MFC1      A2, F20
    50:  MFC1      A3, F22
-   54:  JAL       800705B0
+   54:  JAL       ~Func:playFX_23
    58:  SWC1      F0, 10 (SP)
    5C:  LI        A0, 46
    60:  MFC1      A2, F24
@@ -1611,8 +1615,8 @@ PADDING: 8024168C to 80241690 (0000168C to 00001690)
 {
     0:  Set   *GB_WorldLocation  .Location:ToadTown
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  MakeNpcs      ( .False $NpcGroupList_802448D8 )
    84:  Exec  $Script_80243AEC
@@ -1751,14 +1755,14 @@ PADDING: 80241B54 to 80241B60 (00001B54 to 00001B60)
 % Origin: HEURISTIC
 #new:Script $Script_8024207C
 {
-    0:  Call  GetNpcVar ( 00000000 00000000 *Var3 )
+    0:  Call  GetNpcVar ( .NpcID:Kolorado_00 00000000 *Var3 )
    18:  If  *Var3  ==  00000000
    28:  	Call  $Function_80240B88 ( )
    34:  	Call  PlaySoundAt   ( 8000004F 00000000 *Var0 *Var1 *Var2 )
    54:  	Call  $Function_80240C74    ( 00000000 *Var0 *Var1 *Var2 00000000 FFFFFFFF 00000000 0000001E )
-   80:  	Call  SetNpcVar ( 00000000 00000000 *Var0 )
+   80:  	Call  SetNpcVar ( .NpcID:Kolorado_00 00000000 *Var0 )
    98:  EndIf
-   A0:  Call  GetNpcVar ( 00000000 00000000 *Var3 )
+   A0:  Call  GetNpcVar ( .NpcID:Kolorado_00 00000000 *Var3 )
    B8:  Call  $Function_80240B88 ( )
    C4:  Call  $Function_80240DA4    ( *Var3 *Var0 *Var1 *Var2 )
    E0:  Call  $Function_80240A18    ( *VarC *Var0 0000001E 0000003C 00000019 00000000 00000000 )
@@ -1902,13 +1906,13 @@ PADDING: 80241B54 to 80241B60 (00001B54 to 00001B60)
 #new:Script $Script_80242A14
 {
     0:  SetGroup  00000000
-    C:  Call  802C9C70  ( 00000001 0000000A 00000001 )
-   24:  Call  802C94A0  ( 00000001 $Function_802408D0 00000000 )
-   3C:  Call  802C90FC  ( 0000000A 00000001 FFFFFFFF )
-   54:  Call  802C9C70  ( 00000002 0000000B 00000001 )
-   6C:  Call  802C94A0  ( 00000002 $Function_80240974 00000000 )
-   84:  Call  802C90FC  ( 0000000B 00000002 FFFFFFFF )
-   9C:  Call  SetNpcVar ( 00000000 00000000 00000000 )
+    C:  Call  MakeLocalVertexCopy   ( 00000001 ~Model:karada .True )
+   24:  Call  SetCustomGfxBuilders  ( 00000001 $Function_802408D0 00000000 )
+   3C:  Call  SetModelCustomGfx     ( ~Model:karada 00000001 FFFFFFFF )
+   54:  Call  MakeLocalVertexCopy   ( 00000002 ~Model:onaka .True )
+   6C:  Call  SetCustomGfxBuilders  ( 00000002 $Function_80240974 00000000 )
+   84:  Call  SetModelCustomGfx     ( ~Model:onaka 00000002 FFFFFFFF )
+   9C:  Call  SetNpcVar ( .NpcID:Kolorado_00 00000000 00000000 )
    B4:  Thread
    BC:  	Label  0
    C8:  	Call  $Function_8024050C    ( 00000000 *Var0 *Var1 *Var2 )
@@ -1925,7 +1929,7 @@ PADDING: 80241B54 to 80241B60 (00001B54 to 00001B60)
   1B4:  	Call  TranslateModel    ( ~Model:o167 *Var0 *Var1 *Var2 )
   1D0:  	Call  TranslateModel    ( ~Model:o168 *Var0 *Var1 *Var2 )
   1EC:  	Call  TranslateGroup    ( ~Model:dou *Var0 *Var1 *Var2 )
-  208:  	Call  GetNpcYaw ( 00000000 *Var0 )
+  208:  	Call  GetNpcYaw ( .NpcID:Kolorado_00 *Var0 )
   21C:  	MulF  *Var0  FFFFFFFF
   22C:  	AddF  *Var0  FFFFFFA6
   23C:  	Call  TranslateModel    ( ~Model:bero FFFFFF9C 00000000 00000000 )
@@ -1961,29 +1965,29 @@ PADDING: 80241B54 to 80241B60 (00001B54 to 00001B60)
   5A0:  	Call  TranslateModel    ( ~Model:o167 00000064 00000000 00000000 )
   5BC:  	Call  TranslateModel    ( ~Model:o168 00000064 00000000 00000000 )
   5D8:  	Call  TranslateGroup    ( ~Model:dou 00000064 00000000 00000000 )
-  5F4:  	Call  GetNpcAnimation   ( 00000000 *Var0 )
+  5F4:  	Call  GetNpcAnimation   ( .NpcID:Kolorado_00 *Var0 )
   608:  	If  *Var0  !=  *VarB
   618:  		Set   *VarB  *Var0
   628:  		Set   *VarC  00000000
   638:  		Call  EnableModel   ( ~Model:o170 .True )
   64C:  		Call  EnableModel   ( ~Model:o183 .False )
   660:  		If  *VarB  !=  00B60009
-  670:  			Call  GetNpcVar ( 00000000 00000000 *Var0 )
+  670:  			Call  GetNpcVar ( .NpcID:Kolorado_00 00000000 *Var0 )
   688:  			If  *Var0  !=  00000000
   698:  				Call  PlaySound ( 00000443 )
   6A8:  				Call  802D62E4  ( 00000043 )
   6B8:  				Call  $Function_80240E48    ( *Var0 )
-  6C8:  				Call  SetNpcVar ( 00000000 00000000 00000000 )
+  6C8:  				Call  SetNpcVar ( .NpcID:Kolorado_00 00000000 00000000 )
   6E0:  			EndIf
   6E8:  		EndIf
   6F0:  		Switch  *VarB
   6FC:  			Case  ==  00B60003
-  708:  				Call  PlaySoundAtNpc    ( 00000000 00002037 00000000 )
+  708:  				Call  PlaySoundAtNpc    ( .NpcID:Kolorado_00 00002037 00000000 )
   720:  				Set   *VarD  $Script_80241E20
   730:  			Case  ==  00B60000
   73C:  				Set   *VarD  $Script_80241B6C
   74C:  			Case  ==  00B60002
-  758:  				Call  PlaySoundAtNpc    ( 00000000 00002036 00000000 )
+  758:  				Call  PlaySoundAtNpc    ( .NpcID:Kolorado_00 00002036 00000000 )
   770:  				Set   *VarD  $Script_80241BE4
   780:  			Case  ==  00B60001
   78C:  				Set   *VarD  $Script_8024271C
@@ -2025,7 +2029,7 @@ PADDING: 80241B54 to 80241B60 (00001B54 to 00001B60)
 % Origin: HEURISTIC
 #new:Script $Script_80243380
 {
-    0:  Call  SetNpcAnimation   ( 00000000 00B60003 )
+    0:  Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B60003 )
    14:  Return
    1C:  End
 }
@@ -2075,14 +2079,14 @@ PADDING: 802433A4 to 802433B0 (000033A4 to 000033B0)
 {
     0:  Call  GetEntryID    ( *Var0 )
    10:  If  *Var0  ==  ~Entry:Entry0
-   20:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
-   3C:  	Call  NpcFlyTo  ( 00000000 00000032 *Var1 000001F4 00000078 00000000 .Easing:SinOut )
+   20:  	Call  GetNpcPos ( .NpcID:Kolorado_00 *Var0 *Var1 *Var2 )
+   3C:  	Call  NpcFlyTo  ( .NpcID:Kolorado_00  50` *Var1  500`  120`  0` .Easing:SinOut )
    64:  	Thread
    6C:  		Call  $Function_80241098 ( )
    78:  	EndThread
    80:  	Wait  150`
-   8C:  	Call  SetNpcAnimation   ( 00000000 00B60001 )
-   A0:  	Call  NpcFlyTo  ( 00000000 000001F4 *Var1 000001F4 00000078 00000000 .Easing:CosIn )
+   8C:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B60001 )
+   A0:  	Call  NpcFlyTo  ( .NpcID:Kolorado_00  500` *Var1  500`  120`  0` .Easing:CosIn )
    C8:  	If  *GF_StartedChapter5  ==  .False
    D8:  		Set   *GF_StartedChapter5  .True
    E8:  		Call  FadeOutMusic      ( 00000000 000005DC )
@@ -2091,21 +2095,21 @@ PADDING: 802433A4 to 802433B0 (000033A4 to 000033B0)
   11C:  		Call  GotoMap   ( $ASCII_80244958 00000000 ) % jan_00
   130:  	EndIf
   138:  Else
-  140:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+  140:  	Call  GetNpcPos ( .NpcID:Kolorado_00 *Var0 *Var1 *Var2 )
   15C:  	If  *GB_StoryProgress  >=  .Story:Ch5_SushieJoinedParty % F
   16C:  		If  *GF_MAC01_Defeated_JrTroopa4  ==  .False
-  17C:  			Call  NpcFlyTo  ( 00000000 FFFFFDDA *Var1 000001F4 000000F0 00000000 .Easing:Linear )
-  1A4:  			Call  SetNpcVar ( 00000003 00000000 00000001 )
+  17C:  			Call  NpcFlyTo  ( .NpcID:Kolorado_00  -550` *Var1  500`  240`  0` .Easing:Linear )
+  1A4:  			Call  SetNpcVar ( .NpcID:JrTroopa_03 00000000 00000001 )
   1BC:  			Return
   1C4:  		EndIf
   1CC:  	EndIf
-  1D4:  	Call  NpcFlyTo  ( 00000000 FFFFFFBA *Var1 000001F4 00000078 00000000 .Easing:SinOut )
+  1D4:  	Call  NpcFlyTo  ( .NpcID:Kolorado_00  -70` *Var1  500`  120`  0` .Easing:SinOut )
   1FC:  	Thread
   204:  		Call  $Function_80241098 ( )
   210:  	EndThread
   218:  	Wait  150`
-  224:  	Call  SetNpcAnimation   ( 00000000 00B60001 )
-  238:  	Call  NpcFlyTo  ( 00000000 FFFFFE0C *Var1 000001F4 00000078 00000000 .Easing:CosIn )
+  224:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B60001 )
+  238:  	Call  NpcFlyTo  ( .NpcID:Kolorado_00  -500` *Var1  500`  120`  0` .Easing:CosIn )
   260:  	Call  GotoMap   ( $ASCII_80244950 00000001 ) % mac_05
   274:  EndIf
   27C:  Return
@@ -2118,17 +2122,17 @@ PADDING: 802433A4 to 802433B0 (000033A4 to 000033B0)
    18:  Call  SetNpcFlagBits    ( .Npc:Self 00000010 .False )
    30:  Call  GetEntryID        ( *Var0 )
    40:  If  *Var0  ==  ~Entry:Entry0
-   50:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
-   64:  	Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
-   7C:  	Call  InterpNpcYaw  ( 00000002 0000005A 00000000 )
-   94:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
-   AC:  	Call  SetNpcPos     ( .Npc:Self FFFFFED4 00000000 000001F4 )
+   50:  	Call  InterpPlayerYaw   (  90`  0` )
+   64:  	Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
+   7C:  	Call  InterpNpcYaw  ( .NpcID:Kolorado_02  90`  0` )
+   94:  	Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
+   AC:  	Call  SetNpcPos     ( .Npc:Self  -300`  0`  500` )
    C8:  Else
-   D0:  	Call  InterpPlayerYaw   ( 0000010E 00000000 )
-   E4:  	Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000000 )
-   FC:  	Call  InterpNpcYaw  ( 00000002 0000010E 00000000 )
-  114:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
-  12C:  	Call  SetNpcPos     ( .Npc:Self 0000012C 00000000 000001F4 )
+   D0:  	Call  InterpPlayerYaw   (  270`  0` )
+   E4:  	Call  InterpNpcYaw  ( .Npc:Partner  270`  0` )
+   FC:  	Call  InterpNpcYaw  ( .NpcID:Kolorado_02  270`  0` )
+  114:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
+  12C:  	Call  SetNpcPos     ( .Npc:Self  300`  0`  500` )
   148:  EndIf
   150:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80243444 )
   164:  Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
@@ -2324,7 +2328,7 @@ PADDING: 802433A4 to 802433B0 (000033A4 to 000033B0)
    74:  Call  SetMusicTrack ( 00000000 .Song:JrTroopaTheme 00000000 00000008 )
    90:  Call  PlaySound     ( 80000055 )
    A0:  Call  SetNpcAnimation   ( .Npc:Self 0021000C )
-   B4:  Call  SetNpcPos     ( .Npc:Self 000000FA FFFFFFE2 000001F4 )
+   B4:  Call  SetNpcPos     ( .Npc:Self  250`  -30`  500` )
    D0:  Wait  5`
    DC:  ChildThread
    E4:  	Loop
@@ -2333,7 +2337,7 @@ PADDING: 802433A4 to 802433B0 (000033A4 to 000033B0)
   108:  	EndLoop
   110:  EndChildThread
   118:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
-  12C:  Call  NpcMoveTo     ( .Npc:Self FFFFFED4 000001F4 00000000 )
+  12C:  Call  NpcMoveTo     ( .Npc:Self  -300`  500`  0` )
   148:  Call  GotoMap       ( $ASCII_80244950 00000001 ) % mac_05
   15C:  Wait  100`
   168:  Return
@@ -2355,21 +2359,21 @@ PADDING: 802433A4 to 802433B0 (000033A4 to 000033B0)
 
 #new:NpcGroup $NpcGroup_802442F8
 {
-	00000000 $NpcSettings_802433B0 ~Vec3f:NPC_802442F8 % 0 -1000 0
+	.NpcID:Kolorado_00 $NpcSettings_802433B0 ~Vec3f:NPC_Kolorado_00 % 0 -1000 0
 	00000F09 $Script_Init_802436D0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802442F8
-	~AnimationTable:NPC_802442F8 % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_00
+	~AnimationTable:NPC_Kolorado_00 % .Sprite:Kolorado
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802444E8
 {
-	00000002 $NpcSettings_802433DC ~Vec3f:NPC_802444E8 % 0 -1000 0
+	.NpcID:Kolorado_02 $NpcSettings_802433DC ~Vec3f:NPC_Kolorado_02 % 0 -1000 0
 	00000D09 $Script_Init_80243A34 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802444E8
-	~AnimationTable:NPC_802444E8 % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_02
+	~AnimationTable:NPC_Kolorado_02 % .Sprite:Kolorado
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2380,11 +2384,11 @@ PADDING: 802433A4 to 802433B0 (000033A4 to 000033B0)
 
 #new:NpcGroup $NpcGroup_802446E8
 {
-	00000003 $NpcSettings_80243408 ~Vec3f:NPC_802446E8 % 0 -1000 0
+	.NpcID:JrTroopa_03 $NpcSettings_80243408 ~Vec3f:NPC_JrTroopa_03 % 0 -1000 0
 	00440D0D $Script_Init_8024428C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802446E8
-	~AnimationTable:NPC_802446E8 % .Sprite:JrTroopa
+	~Movement:NPC_JrTroopa_03
+	~AnimationTable:NPC_JrTroopa_03 % .Sprite:JrTroopa
 	00000000 00000000 $ExtraAnimationList_802446D8 001A0006 % That's Jr. Troopa. He used to boot us out of the f ...
 }
 

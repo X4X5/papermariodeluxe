@@ -1,6 +1,9 @@
 % Script File: hos_06.mscr
 % Decoded from: 0 to 6260 (hos_06)
 
+#define .NpcID:Merluvlee_00         00
+#define .NpcID:Merlow_01            01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1720,7 +1723,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    20:  COPY      A0, V0
    24:  COPY      A0, V0
    28:  LI        A1, FFFF
-   2C:  JAL       8011BC7C
+   2C:  JAL       ~Func:set_mdl_custom_gfx_set
    30:  LI        A2, 3
    34:  JAL       ~Func:get_model_list_index_from_tree_index
    38:  LI        A0, 7A
@@ -1728,7 +1731,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    40:  COPY      A0, V0
    44:  COPY      A0, V0
    48:  LI        A1, FFFF
-   4C:  JAL       8011BC7C
+   4C:  JAL       ~Func:set_mdl_custom_gfx_set
    50:  LI        A2, 3
    54:  JAL       ~Func:get_model_list_index_from_tree_index
    58:  LI        A0, 7B
@@ -1736,7 +1739,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    60:  COPY      A0, V0
    64:  COPY      A0, V0
    68:  LI        A1, FFFF
-   6C:  JAL       8011BC7C
+   6C:  JAL       ~Func:set_mdl_custom_gfx_set
    70:  LI        A2, 3
    74:  JAL       ~Func:get_model_list_index_from_tree_index
    78:  LI        A0, 7C
@@ -1744,7 +1747,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    80:  COPY      A0, V0
    84:  COPY      A0, V0
    88:  LI        A1, FFFF
-   8C:  JAL       8011BC7C
+   8C:  JAL       ~Func:set_mdl_custom_gfx_set
    90:  LI        A2, 3
    94:  JAL       ~Func:get_model_list_index_from_tree_index
    98:  LI        A0, 7D
@@ -1752,7 +1755,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    A0:  COPY      A0, V0
    A4:  COPY      A0, V0
    A8:  LI        A1, FFFF
-   AC:  JAL       8011BC7C
+   AC:  JAL       ~Func:set_mdl_custom_gfx_set
    B0:  LI        A2, 3
    B4:  JAL       ~Func:get_model_list_index_from_tree_index
    B8:  LI        A0, 7F
@@ -1760,7 +1763,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    C0:  COPY      A0, V0
    C4:  COPY      A0, V0
    C8:  LI        A1, FFFF
-   CC:  JAL       8011BC7C
+   CC:  JAL       ~Func:set_mdl_custom_gfx_set
    D0:  LI        A2, 3
    D4:  JAL       ~Func:get_model_list_index_from_tree_index
    D8:  LI        A0, D0
@@ -1768,7 +1771,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    E0:  COPY      A0, V0
    E4:  COPY      A0, V0
    E8:  LI        A1, FFFF
-   EC:  JAL       8011BC7C
+   EC:  JAL       ~Func:set_mdl_custom_gfx_set
    F0:  LI        A2, 3
    F4:  LI        A0, FF
    F8:  COPY      A1, A0
@@ -1922,7 +1925,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    70:  COPY      A0, V0
    74:  COPY      A0, V0
    78:  LI        A1, FFFF
-   7C:  JAL       8011BC7C
+   7C:  JAL       ~Func:set_mdl_custom_gfx_set
    80:  CLEAR     A2
    84:  JAL       ~Func:get_model_list_index_from_tree_index
    88:  LI        A0, 7A
@@ -1930,7 +1933,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    90:  COPY      A0, V0
    94:  COPY      A0, V0
    98:  LI        A1, FFFF
-   9C:  JAL       8011BC7C
+   9C:  JAL       ~Func:set_mdl_custom_gfx_set
    A0:  CLEAR     A2
    A4:  JAL       ~Func:get_model_list_index_from_tree_index
    A8:  LI        A0, 7B
@@ -1938,7 +1941,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    B0:  COPY      A0, V0
    B4:  COPY      A0, V0
    B8:  LI        A1, FFFF
-   BC:  JAL       8011BC7C
+   BC:  JAL       ~Func:set_mdl_custom_gfx_set
    C0:  CLEAR     A2
    C4:  JAL       ~Func:get_model_list_index_from_tree_index
    C8:  LI        A0, 7C
@@ -1946,7 +1949,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    D0:  COPY      A0, V0
    D4:  COPY      A0, V0
    D8:  LI        A1, FFFF
-   DC:  JAL       8011BC7C
+   DC:  JAL       ~Func:set_mdl_custom_gfx_set
    E0:  CLEAR     A2
    E4:  JAL       ~Func:get_model_list_index_from_tree_index
    E8:  LI        A0, 7D
@@ -1954,7 +1957,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
    F0:  COPY      A0, V0
    F4:  COPY      A0, V0
    F8:  LI        A1, FFFF
-   FC:  JAL       8011BC7C
+   FC:  JAL       ~Func:set_mdl_custom_gfx_set
   100:  CLEAR     A2
   104:  JAL       ~Func:get_model_list_index_from_tree_index
   108:  LI        A0, 7F
@@ -1962,7 +1965,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
   110:  COPY      A0, V0
   114:  COPY      A0, V0
   118:  LI        A1, FFFF
-  11C:  JAL       8011BC7C
+  11C:  JAL       ~Func:set_mdl_custom_gfx_set
   120:  CLEAR     A2
   124:  JAL       ~Func:get_model_list_index_from_tree_index
   128:  LI        A0, D0
@@ -1970,7 +1973,7 @@ MISSING: 80240D24 to 80240DAC (00000D24 to 00000DAC)
   130:  COPY      A0, V0
   134:  COPY      A0, V0
   138:  LI        A1, FFFF
-  13C:  JAL       8011BC7C
+  13C:  JAL       ~Func:set_mdl_custom_gfx_set
   140:  CLEAR     A2
   144:  LI        V0, 2
         .o148
@@ -2704,8 +2707,8 @@ PADDING: 802425F8 to 80242600 (000025F8 to 00002600)
 {
     0:  Set   *GB_WorldLocation  .Location:ShootingStarSummit
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *AreaFlag[0B6]  .False
@@ -2855,7 +2858,7 @@ PADDING: 80242BA4 to 80242BB0 (00002BA4 to 00002BB0)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -2895,7 +2898,7 @@ PADDING: 80242BA4 to 80242BB0 (00002BA4 to 00002BB0)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -2995,54 +2998,54 @@ PADDING: 80242BA4 to 80242BB0 (00002BA4 to 00002BB0)
    28:  	Return
    30:  EndIf
    38:  If  *GB_HOS06_Merlow_PurchaseCount  >=  0000000F
-   48:  	Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A004C ) % Oh, you wanna trade Star Pieces for Badges, do you ...
+   48:  	Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A004C ) % Oh, you wanna trade Star Pieces for Badges, do you ...
    68:  	Return
    70:  EndIf
    78:  If  *MapFlag[00]  ==  .True
-   88:  	Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A004D ) % You want to trade more?
+   88:  	Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A004D ) % You want to trade more?
    A8:  Else
    B0:  	If  *GF_HOS06_Met_Merlow  ==  .False
-   C0:  		Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A004A ) % I'm the famous Merlow of Shooting Star Summit. I c ...
+   C0:  		Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A004A ) % I'm the famous Merlow of Shooting Star Summit. I c ...
    E0:  		Set   *GF_HOS06_Met_Merlow  .True
    F0:  	Else
-   F8:  		Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A004B ) % I'm the famous Merlow of Shooting Star Summit. Got ...
+   F8:  		Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A004B ) % I'm the famous Merlow of Shooting Star Summit. Got ...
   118:  	EndIf
   120:  EndIf
   128:  Call  ShowChoice    ( 001E0014 ) % Yes No
   138:  If  *Var0  ==  00000001
-  148:  	Call  ContinueSpeech    ( 00000001 00B20004 00B20001 00000000 000A004E ) % Later!
+  148:  	Call  ContinueSpeech    ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A004E ) % Later!
   168:  	Return
   170:  EndIf
   178:  Call  $Function_80240A68    ( *Var0 )
   188:  If  *Var0  ==  00000000
-  198:  	Call  ContinueSpeech    ( 00000001 00B20004 00B20001 00000000 000A004F ) % Ahhh... I can tell you don't have any Star Pieces. ...
+  198:  	Call  ContinueSpeech    ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A004F ) % Ahhh... I can tell you don't have any Star Pieces. ...
   1B8:  	Return
   1C0:  EndIf
-  1C8:  Call  ContinueSpeech    ( 00000001 00B20004 00B20001 00000000 000A0050 ) % Which Badges do you want to swap for?
+  1C8:  Call  ContinueSpeech    ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0050 ) % Which Badges do you want to swap for?
   1E8:  Label  0
   1F4:  Call  $Function_80240AD0 ( )
   200:  Wait  10`
   20C:  If  *Var0  ==  FFFFFFFF
-  21C:  	Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A0051 ) % Ahh... Did you change your mind? I see...
+  21C:  	Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0051 ) % Ahh... Did you change your mind? I see...
   23C:  	Return
   244:  EndIf
   24C:  Call  $Function_80240A68    ( *Var3 )
   25C:  If  *Var3  <  *Var1
-  26C:  	Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A0051 ) % Ahh... Did you change your mind? I see...
+  26C:  	Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0051 ) % Ahh... Did you change your mind? I see...
   28C:  	Goto  0
   298:  EndIf
   2A0:  Call  SetMessageString  ( *Var4 00000000 )
   2B4:  Call  SetMessageValue   ( *Var1 00000001 )
   2C8:  Call  SetMessageValue   ( *Var5 00000002 )
   2DC:  If  *Var1  ==  00000001
-  2EC:  	Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A0053 ) % I'm going to exchange "" for Star Piece. The numbe ...
+  2EC:  	Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0053 ) % I'm going to exchange "" for Star Piece. The numbe ...
   30C:  Else
-  314:  	Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A0052 ) % I'm going to exchange "" for Star Pieces. The numb ...
+  314:  	Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0052 ) % I'm going to exchange "" for Star Pieces. The numb ...
   334:  EndIf
   33C:  Set   *Var3  *Var0
   34C:  Call  ShowChoice    ( 001E000D ) % Yes No
   35C:  If  *Var0  ==  00000001
-  36C:  	Call  ContinueSpeech    ( 00000001 00B20004 00B20001 00000000 000A0054 ) % Ahh... Did you change your mind? You're an indecis ...
+  36C:  	Call  ContinueSpeech    ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0054 ) % Ahh... Did you change your mind? You're an indecis ...
   38C:  	Goto  0
   398:  EndIf
   3A0:  Call  CloseMessage ( )
@@ -3056,18 +3059,18 @@ PADDING: 80242BA4 to 80242BB0 (00002BA4 to 00002BB0)
   41C:  ExecWait  $Script_80242C0C
   428:  Call  AddBadge  ( *Var0 *Var1 )
   43C:  If  *GB_HOS06_Merlow_PurchaseCount  >=  0000000F
-  44C:  	Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A0055 ) % All right! These Star Pieces really help round out ...
+  44C:  	Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0055 ) % All right! These Star Pieces really help round out ...
   46C:  	Return
   474:  EndIf
   47C:  Call  $Function_80240A68    ( *Var0 )
   48C:  If  *Var0  <=  00000000
-  49C:  	Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A0055 ) % All right! These Star Pieces really help round out ...
+  49C:  	Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0055 ) % All right! These Star Pieces really help round out ...
   4BC:  	Return
   4C4:  EndIf
-  4CC:  Call  SpeakToPlayer ( 00000001 00B20004 00B20001 00000000 000A0056 ) % All right then, mister. Why don't we swap some mor ...
+  4CC:  Call  SpeakToPlayer ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0056 ) % All right then, mister. Why don't we swap some mor ...
   4EC:  Call  ShowChoice    ( 001E000D ) % Yes No
   4FC:  If  *Var0  ==  00000001
-  50C:  	Call  ContinueSpeech    ( 00000001 00B20004 00B20001 00000000 000A0057 ) % You don't want to? Oh well. At least I was able to ...
+  50C:  	Call  ContinueSpeech    ( .NpcID:Merlow_01 00B20004 00B20001 00000000 000A0057 ) % You don't want to? Oh well. At least I was able to ...
   52C:  	Return
   534:  EndIf
   53C:  Call  CloseMessage ( )
@@ -3094,19 +3097,19 @@ PADDING: 80242BA4 to 80242BB0 (00002BA4 to 00002BB0)
 
 #new:NpcGroup $NpcGroup_80243C68
 {
-	00000000 $NpcSettings_80242BB0 ~Vec3f:NPC_80243C68 % 62 20 7
+	.NpcID:Merluvlee_00 $NpcSettings_80242BB0 ~Vec3f:NPC_Merluvlee_00 % 62 20 7
 	00000D05 $Script_Init_80243C04 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243C68
-	~AnimationTable:NPC_80243C68 % .Sprite:Merluvlee
+	~Movement:NPC_Merluvlee_00
+	~AnimationTable:NPC_Merluvlee_00 % .Sprite:Merluvlee
 	00000000 00000000 00000000 001A0008 % She's a gorgeous lady named Merluvlee. I can't bel ...
 	%
 	% $NpcGroup_80243C68[1F0]
-	00000001 $NpcSettings_80242BDC ~Vec3f:NPC_80243E58 % -150 160 -25
+	.NpcID:Merlow_01 $NpcSettings_80242BDC ~Vec3f:NPC_Merlow_01 % -150 160 -25
 	00000D05 $Script_Init_80243C34 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243E58
-	~AnimationTable:NPC_80243E58 % .Sprite:Merlow
+	~Movement:NPC_Merlow_01
+	~AnimationTable:NPC_Merlow_01 % .Sprite:Merlow
 	00000000 00000000 00000000 001A0009 % He's Merlow. He's about the same age as I am. I wa ...
 }
 
@@ -3474,7 +3477,7 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
 #new:Script $Script_80244F3C
 {
     0:  Call  SetMusicTrack ( 00000000 .Song:MerleeSpell 00000002 00000008 )
-   1C:  Call  SetNpcAnimation   ( 00000000 00B00008 )
+   1C:  Call  SetNpcAnimation   ( .NpcID:Merluvlee_00 00B00008 )
    30:  Call  GetModelCenter    ( ~Model:o100 )
    40:  Add   *Var1  00000014
    50:  Call  PlaySoundAt   ( 00000207 00000000 *Var0 *Var1 *Var2 )
@@ -3548,7 +3551,7 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
   660:  EndThread
   668:  Wait  46`
   674:  Call  ResetCam  ( .Cam:Default *Fixed[5.0] )
-  688:  Call  SetNpcAnimation   ( 00000000 00B00001 )
+  688:  Call  SetNpcAnimation   ( .NpcID:Merluvlee_00 00B00001 )
   69C:  Call  SetMusicTrack     ( 00000000 .Song:ShootingStarSummit 00000000 00000008 )
   6B8:  Return
   6C0:  End
@@ -3569,9 +3572,9 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
    30:  		Wait  1`
    3C:  		Call  SetPlayerAnimation    ( 00080007 )
    4C:  		Wait  20`
-   58:  		Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 000A0046 ) % ... Excuse me? You want... ...my autograph? My, my ...
+   58:  		Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A0046 ) % ... Excuse me? You want... ...my autograph? My, my ...
    78:  		Wait  10`
-   84:  		Call  ContinueSpeech        ( 00000000 00B00004 00B00001 00000000 000A0047 ) % You really do? Well! This is a first! What shall I ...
+   84:  		Call  ContinueSpeech        ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A0047 ) % You really do? Well! This is a first! What shall I ...
    A4:  		Set   *GF_HOS06_MerluvleeRequestedCrystalBall  .True
    B4:  	EndIf
    BC:  EndIf
@@ -3594,20 +3597,20 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
    38:  EndIf
    40:  Call  FindKeyItem   ( .Item:CrystalBall *Var0 )
    54:  If  *Var0  ==  FFFFFFFF
-   64:  	Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 000A0048 ) % Have you seen my sister yet? I'm sorry...but I sim ...
+   64:  	Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A0048 ) % Have you seen my sister yet? I'm sorry...but I sim ...
    84:  Else
    8C:  	Set   *Var0  $???_802456F4
    9C:  	Set   *Var1  00000000
    AC:  	ExecWait  $Script_8024471C
    B8:  	If  *Var0  !=  FFFFFFFF
-   C8:  		Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 000A0049 ) % Oh! Mercy! Thank you! I'll cherish this. And for y ...
+   C8:  		Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A0049 ) % Oh! Mercy! Thank you! I'll cherish this. And for y ...
    E8:  		Set   *Var0  00000071
    F8:  		Set   *Var1  00000001
   108:  		ExecWait  $Script_80244770
-  114:  		Call  AddKeyItem    ( .Item:Autograph2 )
+  114:  		Call  AddKeyItem    ( .Item:KootMerluvleeAutograph )
   124:  		Set   *GF_HOS06_Gift_MerluvleesAutograph  .True
   134:  	Else
-  13C:  		Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 000A0048 ) % Have you seen my sister yet? I'm sorry...but I sim ...
+  13C:  		Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A0048 ) % Have you seen my sister yet? I'm sorry...but I sim ...
   15C:  	EndIf
   164:  EndIf
   16C:  Return
@@ -3618,8 +3621,8 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  802CF56C      ( 00000001 )
-   20:  Call  PlayerMoveTo  ( FFFFFFCF 00000000 00000006 )
-   38:  Call  PlayerFaceNpc ( 00000000 00000000 )
+   20:  Call  PlayerMoveTo  (  -49`  0`  6` )
+   38:  Call  PlayerFaceNpc ( .NpcID:Merluvlee_00 .False )
    4C:  If  *MapVar[A]  ==  00000000
    5C:  	NewArray  00000014 *MapVar[A]
    6C:  EndIf
@@ -3627,18 +3630,18 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
    80:  If  *AreaFlag[0B6]  ==  .False
    90:  	Set   *AreaFlag[0B6]  .True
    A0:  	If  *GF_HOS06_Met_Merluvlee  ==  .False
-   B0:  		Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 000A0038 ) % Ah... My, my... I foresaw your arrival, Mario. My  ...
+   B0:  		Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A0038 ) % Ah... My, my... I foresaw your arrival, Mario. My  ...
    D0:  		Set   *GF_HOS06_Met_Merluvlee  .True
    E0:  	Else
-   E8:  		Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 000A0039 ) % Ah... My, my... We meet again, Mario! My noble cal ...
+   E8:  		Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A0039 ) % Ah... My, my... We meet again, Mario! My noble cal ...
   108:  	EndIf
   110:  Else
-  118:  	Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 000A003A ) % Ah... My, my... Shall I read something else?
+  118:  	Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A003A ) % Ah... My, my... Shall I read something else?
   138:  EndIf
   140:  Label  A
   14C:  Call  ShowChoice    ( 001E0011 ) % Yes No
   15C:  If  *Var0  !=  00000000
-  16C:  	Call  ContinueSpeech        ( 00000000 00B00004 00B00001 00000000 000A003C ) % My, my... Are you sure? If ever you seek something ...
+  16C:  	Call  ContinueSpeech        ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A003C ) % My, my... Are you sure? If ever you seek something ...
   18C:  	Call  802CF56C  ( 00000000 )
   19C:  	Call  DisablePlayerInput    ( .False )
   1AC:  	Return
@@ -3647,14 +3650,14 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
   1CC:  Call  ShowChoice        ( 001E0000 ) % Star Pieces 5 coins Badge 20 coins Super Block 30  ...
   1DC:  Call  ShowCoinCounter   ( .False )
   1EC:  If  *Var0  ==  00000004
-  1FC:  	Call  ContinueSpeech        ( 00000000 00B00004 00B00001 00000000 000A003C ) % My, my... Are you sure? If ever you seek something ...
+  1FC:  	Call  ContinueSpeech        ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A003C ) % My, my... Are you sure? If ever you seek something ...
   21C:  	Call  802CF56C  ( 00000000 )
   22C:  	Call  DisablePlayerInput    ( .False )
   23C:  	Return
   244:  EndIf
   24C:  Call  $Function_HasEnoughCoins  ( *Var0 *Var1 )
   260:  If  *Var1  !=  00000000
-  270:  	Call  ContinueSpeech        ( 00000000 00B00004 00B00001 00000000 000A003D ) % My, my... How unfortunate! You don't have enough c ...
+  270:  	Call  ContinueSpeech        ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A003D ) % My, my... How unfortunate! You don't have enough c ...
   290:  	Call  802CF56C  ( 00000000 )
   2A0:  	Call  DisablePlayerInput    ( .False )
   2B0:  	Return
@@ -3662,39 +3665,39 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
   2C0:  Call  $Function_DeductHintCoins ( *Var0 )
   2D0:  Switch  *Var0
   2DC:  	Case  ==  00000000
-  2E8:  		Call  ContinueSpeech    ( 00000000 00B00004 00B00001 00000000 000A003E ) % Star Piece, is it? My, my... OK I'll now read your ...
-  308:  		Call  SpeakToPlayer     ( 00000000 00B00007 00B00007 00000000 000A0041 ) % Waaaa--------!! Twinkle light! Twinkle bright!! Wa ...
+  2E8:  		Call  ContinueSpeech    ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A003E ) % Star Piece, is it? My, my... OK I'll now read your ...
+  308:  		Call  SpeakToPlayer     ( .NpcID:Merluvlee_00 00B00007 00B00007 00000000 000A0041 ) % Waaaa--------!! Twinkle light! Twinkle bright!! Wa ...
   328:  		ExecWait  $Script_80244F3C
   334:  		Call  $Function_GetStarPieceHint ( )
   340:  		If  *Var1  ==  00000000
-  350:  			Call  SpeakToPlayer ( 00000000 00B00006 00B00006 00000000 000A0042 ) % Alas... At the moment, there are no Star Pieces wi ...
+  350:  			Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00006 00B00006 00000000 000A0042 ) % Alas... At the moment, there are no Star Pieces wi ...
   370:  			Call  $Function_RefundHintCoins ( 00000000 )
   380:  		Else
-  388:  			Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 *Var1 ) % variable string ID
+  388:  			Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 *Var1 ) % variable string ID
   3A8:  		EndIf
   3B0:  		Goto  63
   3BC:  	Case  ==  00000001
-  3C8:  		Call  ContinueSpeech    ( 00000000 00B00004 00B00001 00000000 000A003F ) % Badge, is it? My, my... OK I'll now read your fort ...
-  3E8:  		Call  SpeakToPlayer     ( 00000000 00B00007 00B00007 00000000 000A0041 ) % Waaaa--------!! Twinkle light! Twinkle bright!! Wa ...
+  3C8:  		Call  ContinueSpeech    ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A003F ) % Badge, is it? My, my... OK I'll now read your fort ...
+  3E8:  		Call  SpeakToPlayer     ( .NpcID:Merluvlee_00 00B00007 00B00007 00000000 000A0041 ) % Waaaa--------!! Twinkle light! Twinkle bright!! Wa ...
   408:  		ExecWait  $Script_80244F3C
   414:  		Call  $Function_GetBadgeHint ( )
   420:  		If  *Var1  ==  00000000
-  430:  			Call  SpeakToPlayer ( 00000000 00B00006 00B00006 00000000 000A0043 ) % Alas... At the moment, there are no Badges within  ...
+  430:  			Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00006 00B00006 00000000 000A0043 ) % Alas... At the moment, there are no Badges within  ...
   450:  			Call  $Function_RefundHintCoins ( 00000001 )
   460:  		Else
-  468:  			Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 *Var1 ) % variable string ID
+  468:  			Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 *Var1 ) % variable string ID
   488:  		EndIf
   490:  		Goto  63
   49C:  	Case  ==  00000002
-  4A8:  		Call  ContinueSpeech    ( 00000000 00B00004 00B00001 00000000 000A0040 ) % Super Block, is it? My, my... OK I'll now read you ...
-  4C8:  		Call  SpeakToPlayer     ( 00000000 00B00007 00B00007 00000000 000A0041 ) % Waaaa--------!! Twinkle light! Twinkle bright!! Wa ...
+  4A8:  		Call  ContinueSpeech    ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A0040 ) % Super Block, is it? My, my... OK I'll now read you ...
+  4C8:  		Call  SpeakToPlayer     ( .NpcID:Merluvlee_00 00B00007 00B00007 00000000 000A0041 ) % Waaaa--------!! Twinkle light! Twinkle bright!! Wa ...
   4E8:  		ExecWait  $Script_80244F3C
   4F4:  		Call  $Function_GetSuperBlockHint ( )
   500:  		If  *Var1  ==  00000000
-  510:  			Call  SpeakToPlayer ( 00000000 00B00006 00B00006 00000000 000A0044 ) % Alas... At the moment, there are no Super Blocks w ...
+  510:  			Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00006 00B00006 00000000 000A0044 ) % Alas... At the moment, there are no Super Blocks w ...
   530:  			Call  $Function_RefundHintCoins ( 00000002 )
   540:  		Else
-  548:  			Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 *Var1 ) % variable string ID
+  548:  			Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 *Var1 ) % variable string ID
   568:  		EndIf
   570:  		Goto  63
   57C:  EndSwitch
@@ -3707,7 +3710,7 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
 
 #new:Script $Script_80245E38
 {
-    0:  Call  SpeakToPlayer ( 00000000 00B00004 00B00001 00000000 000A0045 ) % Ah... My, my... Hello there, Mario! This spot is a ...
+    0:  Call  SpeakToPlayer ( .NpcID:Merluvlee_00 00B00004 00B00001 00000000 000A0045 ) % Ah... My, my... Hello there, Mario! This spot is a ...
    20:  ExecWait  $Script_802456FC
    2C:  ExecWait  $Script_80245620
    38:  Return
@@ -3779,7 +3782,7 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
    38:  Switch  *Var0
    44:  	Case  ==  FFFFFFFF
    50:  	Case  ==  00000000
-   5C:  		Call  ShowMessageAtScreenPos    ( 001D00D4 000000A0 00000028 ) % It's empty.
+   5C:  		Call  ShowMessageAtScreenPos    ( 001D00D4  160`  40` ) % It's empty.
    74:  	CaseOR  ==  0000010D
    80:  	CaseOR  ==  00000129
    8C:  	CaseOR  ==  00000111
@@ -3793,7 +3796,7 @@ PADDING: 802445C8 to 802445D0 (000045C8 to 000045D0)
   104:  	Default
   10C:  		Call  $Function_80242534 ( )
   118:  		If  *Var1  <=  00000000
-  128:  			Call  ShowMessageAtScreenPos    ( 001D00D5 000000A0 00000028 ) % You already have as many items as you can carry.
+  128:  			Call  ShowMessageAtScreenPos    ( 001D00D5  160`  40` ) % You already have as many items as you can carry.
   140:  		Else
   148:  			Call  ShowGotItem   ( *Var0 .False 00000002 )
   160:  			Call  AddItem       ( *Var0 *Var1 )

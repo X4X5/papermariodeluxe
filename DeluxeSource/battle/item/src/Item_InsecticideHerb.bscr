@@ -246,7 +246,7 @@
    BC:  MFC1      A2, F22
    C0:  LI        V0, 1E
    C4:  SW        V0, 14 (SP)
-   C8:  JAL       80072230
+   C8:  JAL       ~Func:playFX_6F
    CC:  SWC1      F2, 10 (SP)
    D0:  COPY      A0, V0
    D4:  LW        V0, C (A0)
@@ -326,10 +326,10 @@ PADDING: 802A1418 to 802A1420 (0072AB68 to 0072AB70)
 #new:Script $Script_802A1724
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -477,7 +477,7 @@ PADDING: 802A1D48 to 802A1D4C (0072B498 to 0072B49C)
     0:  SetConst  *VarA  00000087
    10:  ExecWait  $Script_802A1420
    1C:  Call  UseBattleCamPreset    ( 00000003 )
-   2C:  Call  MoveBattleCamOver     ( 0000000F )
+   2C:  Call  MoveBattleCamOver     (  15` )
    3C:  Call  SetAnimation  ( .Actor:Player 00000000 00010016 )
    54:  Call  PlaySound ( 000003FA )
    64:  Wait  3`
@@ -507,7 +507,7 @@ PADDING: 802A1D48 to 802A1D4C (0072B498 to 0072B49C)
   20C:  EndThread
   214:  Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[0.8] )
   228:  Add   *Var2  00000005
-  238:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000012 )
+  238:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  18` )
   258:  Call  PlayEffect    ( 00000007 00000003 *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   29C:  Sub   *Var0  0000000A
   2AC:  Call  PlayEffect    ( 00000007 00000003 *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )

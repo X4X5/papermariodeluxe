@@ -1,6 +1,7 @@
 % Script File: pra_15.mscr
 % Decoded from: 0 to 310 (pra_15)
 
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -83,8 +84,8 @@ PADDING: 802400CC to 802400D0 (000000CC to 000000D0)
 {
     0:  Set   *GB_WorldLocation  .Location:CrystalPalace
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  ExecWait  $Script_802402C0

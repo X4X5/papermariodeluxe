@@ -1,6 +1,9 @@
 % Script File: flo_14.mscr
 % Decoded from: 0 to 53B0 (flo_14)
 
+#define .NpcID:Bubulb_00            00
+#define .NpcID:Bzzap_01             01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -242,7 +245,7 @@
    10:  COPY      A3, A0
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -499,7 +502,7 @@
   20C:  CLEAR     A0
   210:  ADDIU     A1, SP, 50
   214:  ADDIU     A2, SP, 54
-  218:  JAL       8011C2B0
+  218:  JAL       ~Func:mdl_get_copied_vertices
   21C:  ADDIU     A3, SP, 58
   220:  LI        V1, DA380001
   228:  LI        T0, 00011630
@@ -523,7 +526,7 @@
   280:  SW        V1, 4 (A3)
   284:  SW        V0, 0 (A2)
   288:  LUI       V0, DE00
-  28C:  JAL       8011C2EC
+  28C:  JAL       ~Func:mdl_get_copied_gfx
   290:  SW        V0, 0 (S0)
   294:  LA        V1, $???_80243B14
   29C:  LWC1      F0, 0 (V1)
@@ -555,7 +558,7 @@
    28:  SDC1      F24, 48 (SP)
    2C:  SDC1      F22, 40 (SP)
    30:  SDC1      F20, 38 (SP)
-   34:  JAL       8011C2B0
+   34:  JAL       ~Func:mdl_get_copied_vertices
    38:  ADDIU     A3, SP, 18
    3C:  LW        V0, 18 (SP)
    40:  BLEZ      V0, .o20C
@@ -671,7 +674,7 @@
   220:  ADDIU     V0, V0, 8
   224:  SW        V0, 0 (V1)
   228:  LUI       V0, DE00
-  22C:  JAL       8011C2EC
+  22C:  JAL       ~Func:mdl_get_copied_gfx
   230:  SW        V0, 0 (S0)
   234:  CLEAR     A0
   238:  LI        A1, *AreaFlag[024]
@@ -2497,8 +2500,8 @@ PADDING: 8024238C to 80242390 (0000238C to 00002390)
 {
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80244F00 )
    84:  Exec  $Script_80244F30
@@ -2695,7 +2698,7 @@ PADDING: 80242BF4 to 80242C00 (00002BF4 to 00002C00)
    AC:  EndLoop
    B4:  Loop
    C0:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   D8:  	Call  SetCamTarget  ( .Cam:Default *Var0 00000030 *Var2 )
+   D8:  	Call  SetCamTarget  ( .Cam:Default *Var0  48` *Var2 )
    F4:  	Wait  1`
   100:  EndLoop
   108:  Return
@@ -2775,14 +2778,14 @@ PADDING: 80242BF4 to 80242C00 (00002BF4 to 00002C00)
    EC:  Thread
    F4:  	Add   *Var2  FFFFFFF6
   104:  	Call  SetPlayerJumpscale    ( *Fixed[0.2] )
-  114:  	Call  PlayerJump    ( 00000213 00000030 *Var2 0000000A )
+  114:  	Call  PlayerJump    (  531`  48` *Var2  10` )
   130:  	Call  SetPlayerActionState  ( .ActionState:Land )
   140:  EndThread
   148:  Thread
   150:  	Wait  5`
   15C:  	Add   *Var2  FFFFFFF1
   16C:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.2] )
-  180:  	Call  NpcJump0  ( .Npc:Partner 00000213 00000044 *Var2 0000000A )
+  180:  	Call  NpcJump0  ( .Npc:Partner  531`  68` *Var2  10` )
   1A0:  EndThread
   1A8:  Exec  $Script_802431D0 *MapVar[9]
   1B8:  Wait  15`
@@ -2956,28 +2959,28 @@ PADDING: 80242BF4 to 80242C00 (00002BF4 to 00002C00)
   1BC:  Set   *Var3  0000008C
   1CC:  Set   *Var4  00000000
   1DC:  Exec  $Script_80242C00
-  1E8:  Call  GetModelCenter        ( ~Model:o92 )
+  1E8:  Call  GetModelCenter    ( ~Model:o92 )
   1F8:  Set   *Var3  00000060
   208:  Set   *Var4  00000061
   218:  Set   *Var5  00000062
   228:  Set   *Var6  00000063
   238:  Set   *VarA  000000AE
   248:  Exec  $Script_80242EAC
-  254:  Call  GetModelCenter        ( ~Model:o82 )
+  254:  Call  GetModelCenter    ( ~Model:o82 )
   264:  Set   *Var3  00000052
   274:  Set   *Var4  00000053
   284:  Set   *Var5  00000054
   294:  Set   *Var6  00000055
   2A4:  Set   *VarA  00000000
   2B4:  Exec  $Script_80242EAC
-  2C0:  Call  GetModelCenter        ( ~Model:o78 )
+  2C0:  Call  GetModelCenter    ( ~Model:o78 )
   2D0:  Set   *Var3  0000004C
   2E0:  Set   *Var4  0000004D
   2F0:  Set   *Var5  0000004E
   300:  Set   *Var6  0000004F
   310:  Set   *VarA  00000000
   320:  Exec  $Script_80242EAC
-  32C:  Call  GetModelCenter        ( ~Model:o88 )
+  32C:  Call  GetModelCenter    ( ~Model:o88 )
   33C:  Set   *Var3  0000005A
   34C:  Set   *Var4  0000005B
   35C:  Set   *Var5  0000005C
@@ -2985,18 +2988,18 @@ PADDING: 80242BF4 to 80242C00 (00002BF4 to 00002C00)
   37C:  Set   *VarA  00000000
   38C:  Exec  $Script_80242EAC
   398:  Call  ModifyColliderFlags   ( 00000000 ~Collider:o113 7FFFFE00 )
-  3B0:  Call  CloneModel    ( ~Model:o169 00002711 )
-  3C4:  Call  CloneModel    ( ~Model:o169 00002712 )
-  3D8:  Call  CloneModel    ( ~Model:o169 00002713 )
-  3EC:  Call  CloneModel    ( ~Model:o169 00002714 )
-  400:  Call  CloneModel    ( ~Model:o169 00002715 )
-  414:  Call  EnableModel   ( ~Model:o167 .False )
-  428:  Call  EnableModel   ( ~Model:o169 .False )
-  43C:  Call  EnableModel   ( 00002711 .False )
-  450:  Call  EnableModel   ( 00002712 .False )
-  464:  Call  EnableModel   ( 00002713 .False )
-  478:  Call  EnableModel   ( 00002714 .False )
-  48C:  Call  EnableModel   ( 00002715 .False )
+  3B0:  Call  CloneModel        ( ~Model:o169 00002711 )
+  3C4:  Call  CloneModel        ( ~Model:o169 00002712 )
+  3D8:  Call  CloneModel        ( ~Model:o169 00002713 )
+  3EC:  Call  CloneModel        ( ~Model:o169 00002714 )
+  400:  Call  CloneModel        ( ~Model:o169 00002715 )
+  414:  Call  EnableModel       ( ~Model:o167 .False )
+  428:  Call  EnableModel       ( ~Model:o169 .False )
+  43C:  Call  EnableModel       ( 00002711 .False )
+  450:  Call  EnableModel       ( 00002712 .False )
+  464:  Call  EnableModel       ( 00002713 .False )
+  478:  Call  EnableModel       ( 00002714 .False )
+  48C:  Call  EnableModel       ( 00002715 .False )
   4A0:  Set   *Var0  00002711
   4B0:  Exec  $Script_80243B1C
   4BC:  Set   *Var0  00002712
@@ -3007,17 +3010,17 @@ PADDING: 80242BF4 to 80242C00 (00002BF4 to 00002C00)
   504:  Exec  $Script_80243B1C
   510:  Set   *Var0  00002715
   520:  Exec  $Script_80243B1C
-  52C:  Call  802C9C70      ( 00000000 0000007B 00000001 )
-  544:  Call  802C94A0      ( 00000001 $Function_80240504 00000000 )
-  55C:  Call  802C90FC      ( 0000007B 00000001 FFFFFFFF )
-  574:  Call  802C90FC      ( 00002711 00000001 FFFFFFFF )
-  58C:  Call  802C90FC      ( 00002712 00000001 FFFFFFFF )
-  5A4:  Call  802C90FC      ( 00002713 00000001 FFFFFFFF )
-  5BC:  Call  802C90FC      ( 00002714 00000001 FFFFFFFF )
-  5D4:  Call  802C90FC      ( 00002715 00000001 FFFFFFFF )
-  5EC:  Call  802C9C70      ( 00000001 00000039 00000001 )
-  604:  Call  802C94A0      ( 00000002 $Function_802407D4 00000000 )
-  61C:  Call  802C90FC      ( 00000039 00000002 FFFFFFFF )
+  52C:  Call  MakeLocalVertexCopy   ( 00000000 ~Model:o167 .True )
+  544:  Call  SetCustomGfxBuilders  ( 00000001 $Function_80240504 00000000 )
+  55C:  Call  SetModelCustomGfx ( ~Model:o167 00000001 FFFFFFFF )
+  574:  Call  SetModelCustomGfx ( 00002711 00000001 FFFFFFFF )
+  58C:  Call  SetModelCustomGfx ( 00002712 00000001 FFFFFFFF )
+  5A4:  Call  SetModelCustomGfx ( 00002713 00000001 FFFFFFFF )
+  5BC:  Call  SetModelCustomGfx ( 00002714 00000001 FFFFFFFF )
+  5D4:  Call  SetModelCustomGfx ( 00002715 00000001 FFFFFFFF )
+  5EC:  Call  MakeLocalVertexCopy   ( 00000001 ~Model:o57 .True )
+  604:  Call  SetCustomGfxBuilders  ( 00000002 $Function_802407D4 00000000 )
+  61C:  Call  SetModelCustomGfx ( ~Model:o57 00000002 FFFFFFFF )
   634:  Return
   63C:  End
 }
@@ -3147,17 +3150,17 @@ MISSING: 802445D0 to 802445FC (000045D0 to 000045FC)
   158:  		Call  SpeakToPlayer ( .Npc:Self FFFFFFFF FFFFFFFF 00000000 00110061 ) % Oh, awesome! Good going! OK! Get a load of this!
   178:  		Set   *AreaFlag[024]  .True
   188:  		Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
-  1A0:  		Call  PlayerMoveTo  ( 0000022B 0000006E 00000014 )
+  1A0:  		Call  PlayerMoveTo  (  555`  110`  20` )
   1B8:  		Call  SetNpcFlagBits    ( .Npc:Self 00000100 .False )
-  1D0:  		Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  1D0:  		Call  InterpPlayerYaw   (  90`  0` )
   1E4:  		Call  802CF56C      ( 00000002 )
   1F4:  		Wait  5`
-  200:  		Call  AdjustCam     ( .Cam:Default *Fixed[1.0] 00000000 0000015E *Fixed[17.0] *Fixed[-6.0] )
+  200:  		Call  AdjustCam     ( .Cam:Default *Fixed[1.0]  0`  350` *Fixed[17.0] *Fixed[-6.0] )
   224:  		Exec  $Script_80243870
   230:  		Call  SpeakToPlayer ( .Npc:Self FFFFFFFF FFFFFFFF 00000000 00110062 ) % Ummmm... Hrrrrrrrrr......
   250:  		Thread
   258:  			Wait  40`
-  264:  			Call  InterpPlayerYaw   ( 0000013B 00000000 )
+  264:  			Call  InterpPlayerYaw   (  315`  0` )
   278:  		EndThread
   280:  		Label  A
   28C:  		If  *AreaFlag[025]  ==  .False
@@ -3186,22 +3189,22 @@ MISSING: 802445D0 to 802445FC (000045D0 to 000045FC)
 
 #new:NpcGroup $NpcGroup_80244B20
 {
-	00000000 $NpcSettings_802445A4 ~Vec3f:NPC_80244B20 % 617 0 108
+	.NpcID:Bubulb_00 $NpcSettings_802445A4 ~Vec3f:NPC_Bubulb_00 % 617 0 108
 	00004D01 $Script_Init_80244ADC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80244B20
-	~AnimationTable:NPC_80244B20 % .Sprite:Bubulb
+	~Movement:NPC_Bubulb_00
+	~AnimationTable:NPC_Bubulb_00 % .Sprite:Bubulb
 	00000000 00000000 00000000 001A00E3 % It's a Bubble Plant. It looks like blowing bubbles ...
 }
 
 #new:NpcGroup $NpcGroup_80244D10
 {
-	00000001 $NpcSettings_80244578 ~Vec3f:NPC_80244D10 % -175 55 15
+	.NpcID:Bzzap_01 $NpcSettings_80244578 ~Vec3f:NPC_Bzzap_01 % -175 55 15
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:15:MapleSyrup:6:HoneySyrup:4
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:4
-	~Movement:NPC_80244D10
-	~AnimationTable:NPC_80244D10 % .Sprite:Bzzap
+	~Movement:NPC_Bzzap_01
+	~AnimationTable:NPC_Bzzap_01 % .Sprite:Bzzap
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 

@@ -527,7 +527,7 @@
   2DC:  BEQ       R0, R0, .o1124
   2E0:  LI        V0, 15
         .o2E4
-  2E4:  JAL       ~Func:suggest_player_anim
+  2E4:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   2E8:  ORI       A0, A0, 2
   2EC:  LWC1      F0, 28 (S1)
   2F0:  LIF       F2, 32.0
@@ -614,7 +614,7 @@
   448:  SW        V0, 28 (S0)
   44C:  SW        R0, 10 (S0)
   450:  SWC1      F0, C (S0)
-  454:  JAL       800DFF78
+  454:  JAL       ~Func:suggest_player_anim_setUnkFlag
   458:  SWC1      F2, 18 (S0)
   45C:  LI        A0, 2009
   460:  CLEAR     A1
@@ -648,7 +648,7 @@
         .o4D4
   4D4:  SAW       A0, $End[10]
   4DC:  LI        A0, 00010002
-  4E0:  JAL       ~Func:suggest_player_anim
+  4E0:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   4E4:  RESERVED
   4E8:  BEQ       R0, R0, .o112C
   4EC:  NOP
@@ -787,7 +787,7 @@
         .o728
   728:  LI        A0, 00010002
         .o72C
-  72C:  JAL       ~Func:suggest_player_anim
+  72C:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   730:  RESERVED
   734:  BEQ       R0, R0, .o1124
   738:  LI        V0, 15
@@ -1078,7 +1078,7 @@
   BD0:  LI        V0, 16
   BD4:  BEQ       V1, V0, .o1120
   BD8:  LUI       A0, 8
-  BDC:  JAL       800DFF78
+  BDC:  JAL       ~Func:suggest_player_anim_setUnkFlag
   BE0:  ORI       A0, A0, D
   BE4:  LW        V0, 0 (S1)
   BE8:  ANDI      V0, V0, 800
@@ -1228,7 +1228,7 @@
   E38:  SWC1      F2, 14 (SP)
   E3C:  BEQ       V0, R0, .oE5C
   E40:  LUI       A0, 1
-  E44:  JAL       ~Func:suggest_player_anim
+  E44:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   E48:  ORI       A0, A0, 2
   E4C:  SAW       S5, $End[10]
   E54:  BEQ       R0, R0, .o112C

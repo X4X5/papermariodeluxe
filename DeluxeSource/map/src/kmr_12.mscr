@@ -1,6 +1,8 @@
 % Script File: kmr_12.mscr
 % Decoded from: 0 to AC0 (kmr_12)
 
+#define .NpcID:Goomba_00            00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -76,8 +78,8 @@ PADDING: 802400BC to 802400C0 (000000BC to 000000C0)
 {
     0:  Set   *GB_WorldLocation  .Location:GoombaRoad
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_802409A8 )
    84:  ExecWait  $Script_MakeEntities
@@ -124,14 +126,14 @@ PADDING: 802400BC to 802400C0 (000000BC to 000000C0)
     0:  SetGroup  00000000
     C:  SuspendAll  00000001
    18:  Call  DisablePlayerInput        ( .True )
-   28:  Call  ShowMessageAtScreenPos    ( 001D0167 000000A0 00000028 ) % Eat a Mushroom to regain your energy!
+   28:  Call  ShowMessageAtScreenPos    ( 001D0167  160`  40` ) % Eat a Mushroom to regain your energy!
    40:  ResumeAll  00000001
    4C:  Set   *Flag[00]  .False
    5C:  Call  $Function_80240000 ( )
    68:  If  *Var0  !=  00000000
-   78:  	Call  GetNpcVar ( 00000000 00000000 *Var0 )
+   78:  	Call  GetNpcVar ( .NpcID:Goomba_00 00000000 *Var0 )
    90:  	If  *Var0  ==  00000000
-   A0:  		Call  SetNpcVar ( 00000000 00000000 00000001 )
+   A0:  		Call  SetNpcVar ( .NpcID:Goomba_00 00000000 00000001 )
    B8:  		Set   *Flag[00]  .True
    C8:  		Wait  10`
    D4:  	EndIf
@@ -184,9 +186,9 @@ MISSING: 80240448 to 80240450 (00000448 to 00000450)
   228:  Call  PlaySoundAtNpc    ( .Npc:Self 0000032C 00000000 )
   240:  Call  EnableNpcShadow   ( .Npc:Self .True )
   254:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.6] )
-  268:  Call  NpcJump0  ( .Npc:Self FFFFFFDD 00000000 0000001E 00000017 )
+  268:  Call  NpcJump0  ( .Npc:Self  -35`  0`  30`  23` )
   288:  Call  802CFD30  ( FFFFFFFF 00000000 00000000 00000000 00000000 00000000 )
-  2AC:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+  2AC:  Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
   2C4:  Call  SetNpcFlagBits    ( .Npc:Self 00240000 .False )
   2DC:  Call  SetSelfEnemyFlagBits  ( 00000020 00000000 )
   2F0:  Call  SetSelfEnemyFlagBits  ( 40000000 00000001 )
@@ -205,11 +207,11 @@ MISSING: 80240448 to 80240450 (00000448 to 00000450)
 
 #new:NpcGroup $NpcGroup_802407B8
 {
-	00000000 $NpcSettings_80240300 ~Vec3f:NPC_802407B8 % -33 30 -25
+	.NpcID:Goomba_00 $NpcSettings_80240300 ~Vec3f:NPC_Goomba_00 % -33 30 -25
 	00000C00 $Script_Init_80240794 00000000 00000000 0000005A
 	~Items:5:Mushroom:A ~HP:GenerousWhenLow:2 ~FP:GenerousWhenLow:2 ~NoCoinBonus
-	~Movement:NPC_802407B8
-	~AnimationTable:NPC_802407B8 % .Sprite:Goomba
+	~Movement:NPC_Goomba_00
+	~AnimationTable:NPC_Goomba_00 % .Sprite:Goomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -228,7 +230,7 @@ MISSING: 80240448 to 80240450 (00000448 to 00000450)
    30:  SetGroup  00000000
    3C:  Call  SetTimeFreezeMode     ( 00000001 )
    4C:  Call  DisablePlayerInput    ( .True )
-   5C:  Call  ShowMessageAtScreenPos    ( 001D0168 000000A0 00000028 ) % Goomba King's Fortress Ahead
+   5C:  Call  ShowMessageAtScreenPos    ( 001D0168  160`  40` ) % Goomba King's Fortress Ahead
    74:  Call  DisablePlayerInput    ( .False )
    84:  Call  SetTimeFreezeMode     ( 00000000 )
    94:  Return

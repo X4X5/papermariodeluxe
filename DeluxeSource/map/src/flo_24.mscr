@@ -1,6 +1,7 @@
 % Script File: flo_24.mscr
 % Decoded from: 0 to 2290 (flo_24)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -10,7 +11,7 @@
    10:  COPY      A3, A1
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -518,12 +519,12 @@ PADDING: 8024058C to 80240590 (0000058C to 00000590)
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading      ( .Shading:None )
    20:  Call  SetCamLeadPlayer      ( .Cam:Default .False )
-   34:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   54:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   54:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    70:  Call  SetCamEnabled ( .Cam:Default .True )
    84:  ExecWait  $Script_MakeEntities
-   90:  Call  802C971C  ( 0000005D )
-   A0:  Call  802C971C  ( 00000064 )
+   90:  Call  MakeTransformGroup    ( ~Model:g58 )
+   A0:  Call  MakeTransformGroup    ( ~Model:g73 )
    B0:  Exec  $Script_80241728
    BC:  Exec  $Script_80241ABC
    C8:  Call  ModifyColliderFlags   ( 00000003 ~Collider:o177 00000004 )
@@ -808,9 +809,9 @@ PADDING: 80240D38 to 80240D40 (00000D38 to 00000D40)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  TranslateGroup    ( ~Model:g73 00000000 0000002D 00000000 )
-   2C:  Call  UseSettingsFrom   ( .Cam:Default 000000AA 00000000 000000A0 )
-   48:  Call  SetPanTarget  ( .Cam:Default 000000AA FFFFFFA6 000000A0 )
-   64:  Call  SetCamDistance    ( .Cam:Default 00000320 )
+   2C:  Call  UseSettingsFrom   ( .Cam:Default  170`  0`  160` )
+   48:  Call  SetPanTarget  ( .Cam:Default  170`  -90`  160` )
+   64:  Call  SetCamDistance    ( .Cam:Default  800` )
    78:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.5] *Fixed[-7.5] )
    90:  Call  SetCamPosA    ( .Cam:Default *Fixed[-300.0] *Fixed[200.0] )
    A8:  Call  SetCamPosB    ( .Cam:Default *Fixed[300.0] *Fixed[-150.0] )

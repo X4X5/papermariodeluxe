@@ -178,8 +178,8 @@
     0:  Call  SetGoalToHome ( .Actor:Partner )
    10:  Call  SetActorSpeed ( .Actor:Partner *Fixed[6.0] )
    24:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 009D0003 )
-   3C:  Call  SetActorYaw   ( .Actor:Partner 00000000 )
-   50:  Call  RunToGoal     ( .Actor:Partner 00000000 )
+   3C:  Call  SetActorYaw   ( .Actor:Partner  0` )
+   50:  Call  RunToGoal     ( .Actor:Partner  0` )
    64:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 009D0001 )
    7C:  Return
    84:  End

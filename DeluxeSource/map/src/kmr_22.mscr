@@ -1,6 +1,41 @@
 % Script File: kmr_22.mscr
 % Decoded from: 0 to 83C0 (kmr_22)
 
+#define .NpcID:WorldEldstar_00      00
+#define .NpcID:WorldMamar_01        01
+#define .NpcID:WorldSkolar_02       02
+#define .NpcID:WorldMuskular_03     03
+#define .NpcID:WorldMisstar_04      04
+#define .NpcID:WorldKlevar_05       05
+#define .NpcID:WorldKalmar_06       06
+#define .NpcID:KoopaBros_07         07
+#define .NpcID:KoopaBros_08         08
+#define .NpcID:KoopaBros_09         09
+#define .NpcID:KoopaBros_10         0A
+#define .NpcID:Tutankoopa_11        0B
+#define .NpcID:ChainChomp_12        0C
+#define .NpcID:ChainChomp_13        0D
+#define .NpcID:ChainChomp_14        0E
+#define .NpcID:ChainChomp_15        0F
+#define .NpcID:ChainChomp_16        10
+#define .NpcID:WorldTubba_17        11
+#define .NpcID:GeneralGuy_18        12
+#define .NpcID:ShyGuy_19            13
+#define .NpcID:ShyGuy_20            14
+#define .NpcID:LavaPiranhaHead_21   15
+#define .NpcID:LavaBud_22           16
+#define .NpcID:LavaBud_23           17
+#define .NpcID:HuffNPuff_25         19
+#define .NpcID:HuffNPuff_26         1A
+#define .NpcID:HuffNPuff_27         1B
+#define .NpcID:TuffPuff_28          1C
+#define .NpcID:TuffPuff_29          1D
+#define .NpcID:CrystalKing_30       1E
+#define .NpcID:CrystalKing_31       1F
+#define .NpcID:CrystalKing_32       20
+#define .NpcID:CrystalKing_33       21
+#define .NpcID:WorldBowser_34       22
+
 #new:Function_Init $Function_Init
 {
     0:  JR        RA
@@ -34,7 +69,7 @@ PADDING: 80240008 to 80240010 (00000008 to 00000010)
    50:  CLEAR     A3
    54:  SWC1      F20, 10 (SP)
    58:  SW        R0, 14 (SP)
-   5C:  JAL       800725F0
+   5C:  JAL       ~Func:playFX_79
    60:  COPY      A2, A1
    64:  SAW       V0, $End[0]
    6C:  SAW       R0, $End[4]
@@ -154,7 +189,6 @@ PADDING: 80240008 to 80240010 (00000008 to 00000010)
 PADDING: 8024023C to 80240240 (0000023C to 00000240)
 00000000
 
-% Origin: HEURISTIC
 #new:Function $Function_80240240
 {
     0:  ADDIU     SP, SP, FE60
@@ -371,7 +405,6 @@ PADDING: 8024023C to 80240240 (0000023C to 00000240)
    84:  ADDIU     SP, SP, 20
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_8024056C
 {
     0:  ADDIU     SP, SP, FF70
@@ -735,7 +768,6 @@ PADDING: 8024023C to 80240240 (0000023C to 00000240)
   590:  ADDIU     SP, SP, 90
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240B00
 {
     0:  ADDIU     SP, SP, FFD8
@@ -776,7 +808,7 @@ PADDING: 8024023C to 80240240 (0000023C to 00000240)
    2C:  LI        V0, FFFF
    30:  LA        A1, $Function_80240B00
    38:  SAW       V0, $End[10]
-   40:  JAL       ~Func:create_dynamic_entity_world
+   40:  JAL       ~Func:create_generic_entity_world
    44:  CLEAR     A0
    48:  LW        RA, 14 (SP)
    4C:  LW        S0, 10 (SP)
@@ -955,32 +987,32 @@ PADDING: 80240D0C to 80240D10 (00000D0C to 00000D10)
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  GetEntryID    ( *Var0 )
    30:  If  *Var0  ==  ~Entry:Entry0
-   40:  	Call  SetPlayerPos  ( FFFFFF38 00000000 00000000 )
+   40:  	Call  SetPlayerPos  (  -200`  0`  0` )
    58:  Else
-   60:  	Call  SetPlayerPos  ( FFFFFFA1 00000000 00000000 )
+   60:  	Call  SetPlayerPos  (  -95`  0`  0` )
    78:  EndIf
    80:  Call  SetPlayerFlagBits     ( 00200000 .True )
-   94:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
+   94:  Call  InterpPlayerYaw       (  90`  0` )
    A8:  Wait  1`
    B4:  Call  SetPlayerAnimation    ( .PlayerAnim:BeforeJump )
    C4:  Call  GetCurrentPartnerID   ( *Var0 )
    D4:  If  *Var0  !=  .Partner:None % 0
    E4:  	Call  DisablePartnerAI  ( 00000000 )
    F4:  	Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-  10C:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+  10C:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
   128:  EndIf
   130:  Call  SetSpriteShading  ( .Shading:None )
-  140:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-  160:  Call  SetCamBGColor ( .Cam:Default 000000D0 000000D0 000000D0 )
+  140:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+  160:  Call  SetCamBGColor ( .Cam:Default  208`  208`  208` )
   17C:  Call  SetCamEnabled ( .Cam:Default .True )
   190:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
   1A4:  Call  SetCamType    ( .Cam:Default 00000004 .False )
-  1BC:  Call  SetCamPitch   ( .Cam:Default 00000000 00000000 )
-  1D4:  Call  SetCamDistance    ( .Cam:Default 000001B8 )
-  1E8:  Call  SetCamPosA    ( .Cam:Default 00000000 00000064 )
-  200:  Call  SetCamPosB    ( .Cam:Default 00000000 00000000 )
-  218:  Call  SetCamPosC    ( .Cam:Default 00000000 00000041 )
-  230:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+  1BC:  Call  SetCamPitch   ( .Cam:Default  0`  0` )
+  1D4:  Call  SetCamDistance    ( .Cam:Default  440` )
+  1E8:  Call  SetCamPosA    ( .Cam:Default  0`  100` )
+  200:  Call  SetCamPosB    ( .Cam:Default  0`  0` )
+  218:  Call  SetCamPosC    ( .Cam:Default  0`  65` )
+  230:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
   24C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   260:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   278:  Call  GetEntryID    ( *Var0 )
@@ -1358,9 +1390,9 @@ PADDING: 802418FC to 80241900 (000018FC to 00001900)
    14:  UseArray  *Var0
    20:  Label  0
    2C:  Call  GetAnimatedPositionByTreeIndex    ( 00000000 0000000A *Var0 *Var1 *Var2 )
-   4C:  Call  SetNpcPos ( 00000015 *Var0 *Var1 *Var2 )
+   4C:  Call  SetNpcPos ( .NpcID:LavaPiranhaHead_21 *Var0 *Var1 *Var2 )
    68:  Call  GetAnimatedRotationByTreeIndex    ( 00000000 0000000A *Var0 *Var1 *Var2 )
-   88:  Call  SetNpcRotation        ( 00000015 *Var0 00000000 *Var2 )
+   88:  Call  SetNpcRotation        ( .NpcID:LavaPiranhaHead_21 *Var0 00000000 *Var2 )
    A4:  Call  $Function_80240B3C ( )
    B0:  Call  GetAnimatedPositionByTreeIndex    ( 00000000 0000000A *Var0 *Var1 *Var2 )
    D0:  Call  $Function_80240314    ( 00000000 00000000 *Var0 *Var1 *Var2 )
@@ -1409,9 +1441,9 @@ PADDING: 802418FC to 80241900 (000018FC to 00001900)
   620:  Call  $Function_80240418    ( 00000000 00000008 *Var0 *Var1 *Var2 )
   640:  Call  $Function_802404E4    ( 00000000 00000008 *Fixed[0.71484375] *Fixed[0.71484375] *Fixed[1.0] )
   660:  Call  GetAnimatedPositionByTreeIndex    ( 00000001 00000008 *Var0 *Var1 *Var2 )
-  680:  Call  SetNpcPos ( 00000016 *Var0 *Var1 *Var2 )
+  680:  Call  SetNpcPos ( .NpcID:LavaBud_22 *Var0 *Var1 *Var2 )
   69C:  Call  GetAnimatedRotationByTreeIndex    ( 00000001 00000008 *Var0 *Var1 *Var2 )
-  6BC:  Call  SetNpcRotation        ( 00000016 *Var0 00000000 *Var2 )
+  6BC:  Call  SetNpcRotation        ( .NpcID:LavaBud_22 *Var0 00000000 *Var2 )
   6D8:  Call  GetAnimatedPositionByTreeIndex    ( 00000001 00000008 *Var0 *Var1 *Var2 )
   6F8:  Call  $Function_80240314    ( 00000001 00000000 *Var0 *Var1 *Var2 )
   718:  Call  GetAnimatedRotationByTreeIndex    ( 00000001 00000008 *Var0 *Var1 *Var2 )
@@ -1450,9 +1482,9 @@ PADDING: 802418FC to 80241900 (000018FC to 00001900)
   B18:  Call  $Function_80240418    ( 00000001 00000006 *Var0 *Var1 *Var2 )
   B38:  Call  $Function_802404E4    ( 00000001 00000006 *Fixed[0.71484375] *Fixed[0.71484375] *Fixed[1.0] )
   B58:  Call  GetAnimatedPositionByTreeIndex    ( 00000002 00000008 *Var0 *Var1 *Var2 )
-  B78:  Call  SetNpcPos ( 00000017 *Var0 *Var1 *Var2 )
+  B78:  Call  SetNpcPos ( .NpcID:LavaBud_23 *Var0 *Var1 *Var2 )
   B94:  Call  GetAnimatedRotationByTreeIndex    ( 00000002 00000008 *Var0 *Var1 *Var2 )
-  BB4:  Call  SetNpcRotation        ( 00000017 *Var0 00000000 *Var2 )
+  BB4:  Call  SetNpcRotation        ( .NpcID:LavaBud_23 *Var0 00000000 *Var2 )
   BD0:  Call  GetAnimatedPositionByTreeIndex    ( 00000002 00000008 *Var0 *Var1 *Var2 )
   BF0:  Call  $Function_80240314    ( 00000002 00000000 *Var0 *Var1 *Var2 )
   C10:  Call  GetAnimatedRotationByTreeIndex    ( 00000002 00000008 *Var0 *Var1 *Var2 )
@@ -1526,12 +1558,12 @@ PADDING: 802418FC to 80241900 (000018FC to 00001900)
     0:  Call  802CFD30  ( 00000015 0000000E 00000050 00000050 00000050 00000000 )
    24:  Call  802CFD30  ( 00000016 0000000E 00000050 00000050 00000050 00000000 )
    48:  Call  802CFD30  ( 00000017 0000000E 00000050 00000050 00000050 00000000 )
-   6C:  Call  SetNpcAnimation   ( 00000015 00790003 )
-   80:  Call  SetNpcAnimation   ( 00000016 007B0003 )
-   94:  Call  SetNpcAnimation   ( 00000017 007B0003 )
-   A8:  Call  EnableNpcShadow   ( 00000015 .False )
-   BC:  Call  EnableNpcShadow   ( 00000016 .False )
-   D0:  Call  EnableNpcShadow   ( 00000017 .False )
+   6C:  Call  SetNpcAnimation   ( .NpcID:LavaPiranhaHead_21 00790003 )
+   80:  Call  SetNpcAnimation   ( .NpcID:LavaBud_22 007B0003 )
+   94:  Call  SetNpcAnimation   ( .NpcID:LavaBud_23 007B0003 )
+   A8:  Call  EnableNpcShadow   ( .NpcID:LavaPiranhaHead_21 .False )
+   BC:  Call  EnableNpcShadow   ( .NpcID:LavaBud_22 .False )
+   D0:  Call  EnableNpcShadow   ( .NpcID:LavaBud_23 .False )
    E4:  NewArray  00000040 *Var0
    F4:  Call  SetSelfVar        ( 00000000 *Var0 )
   108:  UseArray  *Var0
@@ -1613,19 +1645,19 @@ PADDING: 802418FC to 80241900 (000018FC to 00001900)
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00690003 )
    14:  Call  802CFD30  ( FFFFFFFF 0000000E 00000050 00000050 00000050 00000000 )
-   38:  Call  SetNpcPos ( .Npc:Self 00000005 FFFFFFE7 FFFFFF4C )
-   54:  Call  SetNpcAnimation   ( 0000000D 00690002 )
+   38:  Call  SetNpcPos ( .Npc:Self  5`  -25`  -180` )
+   54:  Call  SetNpcAnimation   ( .NpcID:ChainChomp_13 00690002 )
    68:  Call  802CFD30  ( 0000000D 0000000E 00000050 00000050 00000050 00000000 )
-   8C:  Call  SetNpcPos ( 0000000D 00000023 FFFFFFF2 FFFFFF4C )
-   A8:  Call  SetNpcAnimation   ( 0000000E 00690002 )
+   8C:  Call  SetNpcPos ( .NpcID:ChainChomp_13  35`  -14`  -180` )
+   A8:  Call  SetNpcAnimation   ( .NpcID:ChainChomp_14 00690002 )
    BC:  Call  802CFD30  ( 0000000E 0000000E 00000050 00000050 00000050 00000000 )
-   E0:  Call  SetNpcPos ( 0000000E 00000034 FFFFFFEE FFFFFF4C )
-   FC:  Call  SetNpcAnimation   ( 0000000F 00690002 )
+   E0:  Call  SetNpcPos ( .NpcID:ChainChomp_14  52`  -18`  -180` )
+   FC:  Call  SetNpcAnimation   ( .NpcID:ChainChomp_15 00690002 )
   110:  Call  802CFD30  ( 0000000F 0000000E 00000050 00000050 00000050 00000000 )
-  134:  Call  SetNpcPos ( 0000000F 00000045 FFFFFFED FFFFFF4C )
-  150:  Call  SetNpcAnimation   ( 00000010 00690002 )
+  134:  Call  SetNpcPos ( .NpcID:ChainChomp_15  69`  -19`  -180` )
+  150:  Call  SetNpcAnimation   ( .NpcID:ChainChomp_16 00690002 )
   164:  Call  802CFD30  ( 00000010 0000000E 00000050 00000050 00000050 00000000 )
-  188:  Call  SetNpcPos ( 00000010 00000056 FFFFFFED FFFFFF4C )
+  188:  Call  SetNpcPos ( .NpcID:ChainChomp_16  86`  -19`  -180` )
   1A4:  Return
   1AC:  End
 }
@@ -1690,7 +1722,7 @@ PADDING: 802418FC to 80241900 (000018FC to 00001900)
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 007C001A )
    14:  Call  802CFD30  ( FFFFFFFF 0000000E 00000050 00000050 00000050 00000000 )
-   38:  Call  SetNpcPos ( .Npc:Self 00000028 0000002D 00000001 )
+   38:  Call  SetNpcPos ( .Npc:Self  40`  45`  1` )
    54:  Return
    5C:  End
 }
@@ -1699,7 +1731,7 @@ PADDING: 802418FC to 80241900 (000018FC to 00001900)
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 007C001B )
    14:  Call  802CFD30  ( FFFFFFFF 0000000E 00000050 00000050 00000050 00000000 )
-   38:  Call  SetNpcPos ( .Npc:Self 00000028 0000002D 00000001 )
+   38:  Call  SetNpcPos ( .Npc:Self  40`  45`  1` )
    54:  Return
    5C:  End
 }
@@ -1708,19 +1740,19 @@ PADDING: 802418FC to 80241900 (000018FC to 00001900)
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 007C001C )
    14:  Call  802CFD30  ( FFFFFFFF 0000000E 00000050 00000050 00000050 00000000 )
-   38:  Call  SetNpcPos ( .Npc:Self 00000028 0000002D 00000001 )
+   38:  Call  SetNpcPos ( .Npc:Self  40`  45`  1` )
    54:  Return
    5C:  End
 }
 
 #new:Script $Script_Init_80243E54
 {
-    0:  Call  SetNpcAnimation   ( 0000001C 007D0001 )
+    0:  Call  SetNpcAnimation   ( .NpcID:TuffPuff_28 007D0001 )
    14:  Call  802CFD30  ( 0000001C 0000000E 00000050 00000050 00000050 00000000 )
-   38:  Call  SetNpcPos ( 0000001C 00000078 FFFFFFFF FFFFFFCD )
-   54:  Call  SetNpcAnimation   ( 0000001D 007D0001 )
+   38:  Call  SetNpcPos ( .NpcID:TuffPuff_28  120`  -1`  -51` )
+   54:  Call  SetNpcAnimation   ( .NpcID:TuffPuff_29 007D0001 )
    68:  Call  802CFD30  ( 0000001D 0000000E 00000050 00000050 00000050 00000000 )
-   8C:  Call  SetNpcPos ( 0000001D FFFFFFD8 0000003B 00000001 )
+   8C:  Call  SetNpcPos ( .NpcID:TuffPuff_29  -40`  59`  1` )
    A8:  Return
    B0:  End
 }
@@ -1775,289 +1807,289 @@ PADDING: 802418FC to 80241900 (000018FC to 00001900)
 
 #new:NpcGroup $NpcGroup_802440BC
 {
-	00000000 $NpcSettings_80241410 ~Vec3f:NPC_802440BC % -62 96 0
+	.NpcID:WorldEldstar_00 $NpcSettings_80241410 ~Vec3f:NPC_WorldEldstar_00 % -62 96 0
 	00000F01 $Script_Init_8024385C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802440BC
-	~AnimationTable:NPC_802440BC % .Sprite:WorldEldstar
+	~Movement:NPC_WorldEldstar_00
+	~AnimationTable:NPC_WorldEldstar_00 % .Sprite:WorldEldstar
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802440BC[1F0]
-	00000007 $NpcSettings_80241410 ~Vec3f:NPC_802442AC % 10 0 0
+	.NpcID:KoopaBros_07 $NpcSettings_80241410 ~Vec3f:NPC_KoopaBros_07 % 10 0 0
 	00000F01 $Script_Init_802438A4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802442AC
-	~AnimationTable:NPC_802442AC % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_07
+	~AnimationTable:NPC_KoopaBros_07 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802440BC[3E0]
-	00000008 $NpcSettings_80241410 ~Vec3f:NPC_8024449C % 90 10 91
+	.NpcID:KoopaBros_08 $NpcSettings_80241410 ~Vec3f:NPC_KoopaBros_08 % 90 10 91
 	00000F01 $Script_Init_802438A4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024449C
-	~AnimationTable:NPC_8024449C % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_08
+	~AnimationTable:NPC_KoopaBros_08 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802440BC[5D0]
-	00000009 $NpcSettings_80241410 ~Vec3f:NPC_8024468C % 86 0 -7
+	.NpcID:KoopaBros_09 $NpcSettings_80241410 ~Vec3f:NPC_KoopaBros_09 % 86 0 -7
 	00000F01 $Script_Init_802438A4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024468C
-	~AnimationTable:NPC_8024468C % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_09
+	~AnimationTable:NPC_KoopaBros_09 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802440BC[7C0]
-	0000000A $NpcSettings_80241410 ~Vec3f:NPC_8024487C % 54 -2 -47
+	.NpcID:KoopaBros_10 $NpcSettings_80241410 ~Vec3f:NPC_KoopaBros_10 % 54 -2 -47
 	00000F01 $Script_Init_802438A4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024487C
-	~AnimationTable:NPC_8024487C % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_10
+	~AnimationTable:NPC_KoopaBros_10 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244A6C
 {
-	00000001 $NpcSettings_80241410 ~Vec3f:NPC_80244A6C % -62 96 0
+	.NpcID:WorldMamar_01 $NpcSettings_80241410 ~Vec3f:NPC_WorldMamar_01 % -62 96 0
 	00000F01 $Script_Init_802438EC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80244A6C
-	~AnimationTable:NPC_80244A6C % .Sprite:WorldMamar
+	~Movement:NPC_WorldMamar_01
+	~AnimationTable:NPC_WorldMamar_01 % .Sprite:WorldMamar
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80244A6C[1F0]
-	0000000B $NpcSettings_80241410 ~Vec3f:NPC_80244C5C % 78 19 20
+	.NpcID:Tutankoopa_11 $NpcSettings_80241410 ~Vec3f:NPC_Tutankoopa_11 % 78 19 20
 	00000F01 $Script_Init_80243934 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80244C5C
-	~AnimationTable:NPC_80244C5C % .Sprite:Tutankoopa
+	~Movement:NPC_Tutankoopa_11
+	~AnimationTable:NPC_Tutankoopa_11 % .Sprite:Tutankoopa
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80244A6C[3E0]
-	0000000C $NpcSettings_80241410 ~Vec3f:NPC_80244E4C % 23 -4 -180
+	.NpcID:ChainChomp_12 $NpcSettings_80241410 ~Vec3f:NPC_ChainChomp_12 % 23 -4 -180
 	00000F01 $Script_Init_8024397C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80244E4C
-	~AnimationTable:NPC_80244E4C % .Sprite:ChainChomp
+	~Movement:NPC_ChainChomp_12
+	~AnimationTable:NPC_ChainChomp_12 % .Sprite:ChainChomp
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80244A6C[5D0]
-	0000000D $NpcSettings_80241410 ~Vec3f:NPC_8024503C % 23 -4 -180
+	.NpcID:ChainChomp_13 $NpcSettings_80241410 ~Vec3f:NPC_ChainChomp_13 % 23 -4 -180
 	00000F01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024503C
-	~AnimationTable:NPC_8024503C % .Sprite:ChainChomp
+	~Movement:NPC_ChainChomp_13
+	~AnimationTable:NPC_ChainChomp_13 % .Sprite:ChainChomp
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80244A6C[7C0]
-	0000000E $NpcSettings_80241410 ~Vec3f:NPC_8024522C % 23 -4 -180
+	.NpcID:ChainChomp_14 $NpcSettings_80241410 ~Vec3f:NPC_ChainChomp_14 % 23 -4 -180
 	00000F01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024522C
-	~AnimationTable:NPC_8024522C % .Sprite:ChainChomp
+	~Movement:NPC_ChainChomp_14
+	~AnimationTable:NPC_ChainChomp_14 % .Sprite:ChainChomp
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80244A6C[9B0]
-	0000000F $NpcSettings_80241410 ~Vec3f:NPC_8024541C % 23 -4 -180
+	.NpcID:ChainChomp_15 $NpcSettings_80241410 ~Vec3f:NPC_ChainChomp_15 % 23 -4 -180
 	00000F01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024541C
-	~AnimationTable:NPC_8024541C % .Sprite:ChainChomp
+	~Movement:NPC_ChainChomp_15
+	~AnimationTable:NPC_ChainChomp_15 % .Sprite:ChainChomp
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80244A6C[BA0]
-	00000010 $NpcSettings_80241410 ~Vec3f:NPC_8024560C % 23 -4 -180
+	.NpcID:ChainChomp_16 $NpcSettings_80241410 ~Vec3f:NPC_ChainChomp_16 % 23 -4 -180
 	00000F01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024560C
-	~AnimationTable:NPC_8024560C % .Sprite:ChainChomp
+	~Movement:NPC_ChainChomp_16
+	~AnimationTable:NPC_ChainChomp_16 % .Sprite:ChainChomp
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802457FC
 {
-	00000002 $NpcSettings_80241410 ~Vec3f:NPC_802457FC % -62 96 0
+	.NpcID:WorldSkolar_02 $NpcSettings_80241410 ~Vec3f:NPC_WorldSkolar_02 % -62 96 0
 	00000F01 $Script_Init_80243B30 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802457FC
-	~AnimationTable:NPC_802457FC % .Sprite:WorldSkolar
+	~Movement:NPC_WorldSkolar_02
+	~AnimationTable:NPC_WorldSkolar_02 % .Sprite:WorldSkolar
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802457FC[1F0]
-	00000011 $NpcSettings_80241410 ~Vec3f:NPC_802459EC % 54 -1 1
+	.NpcID:WorldTubba_17 $NpcSettings_80241410 ~Vec3f:NPC_WorldTubba_17 % 54 -1 1
 	00000F01 $Script_Init_80243B78 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802459EC
-	~AnimationTable:NPC_802459EC % .Sprite:WorldTubba
+	~Movement:NPC_WorldTubba_17
+	~AnimationTable:NPC_WorldTubba_17 % .Sprite:WorldTubba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245BDC
 {
-	00000003 $NpcSettings_80241410 ~Vec3f:NPC_80245BDC % -62 96 0
+	.NpcID:WorldMuskular_03 $NpcSettings_80241410 ~Vec3f:NPC_WorldMuskular_03 % -62 96 0
 	00000F01 $Script_Init_80243BC0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80245BDC
-	~AnimationTable:NPC_80245BDC % .Sprite:WorldMuskular
+	~Movement:NPC_WorldMuskular_03
+	~AnimationTable:NPC_WorldMuskular_03 % .Sprite:WorldMuskular
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80245BDC[1F0]
-	00000012 $NpcSettings_80241410 ~Vec3f:NPC_80245DCC % 97 0 0
+	.NpcID:GeneralGuy_18 $NpcSettings_80241410 ~Vec3f:NPC_GeneralGuy_18 % 97 0 0
 	00000F01 $Script_Init_80243C08 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80245DCC
-	~AnimationTable:NPC_80245DCC % .Sprite:GeneralGuy
+	~Movement:NPC_GeneralGuy_18
+	~AnimationTable:NPC_GeneralGuy_18 % .Sprite:GeneralGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80245BDC[3E0]
-	00000013 $NpcSettings_80241410 ~Vec3f:NPC_80245FBC % 17 0 -14
+	.NpcID:ShyGuy_19 $NpcSettings_80241410 ~Vec3f:NPC_ShyGuy_19 % 17 0 -14
 	00000F01 $Script_Init_80243C50 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80245FBC
-	~AnimationTable:NPC_80245FBC % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_19
+	~AnimationTable:NPC_ShyGuy_19 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80245BDC[5D0]
-	00000014 $NpcSettings_80241410 ~Vec3f:NPC_802461AC % 47 0 25
+	.NpcID:ShyGuy_20 $NpcSettings_80241410 ~Vec3f:NPC_ShyGuy_20 % 47 0 25
 	00000F01 $Script_Init_80243C50 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802461AC
-	~AnimationTable:NPC_802461AC % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_20
+	~AnimationTable:NPC_ShyGuy_20 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024639C
 {
-	00000004 $NpcSettings_80241410 ~Vec3f:NPC_8024639C % -62 96 0
+	.NpcID:WorldMisstar_04 $NpcSettings_80241410 ~Vec3f:NPC_WorldMisstar_04 % -62 96 0
 	00000F01 $Script_Init_80243C98 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024639C
-	~AnimationTable:NPC_8024639C % .Sprite:WorldMisstar
+	~Movement:NPC_WorldMisstar_04
+	~AnimationTable:NPC_WorldMisstar_04 % .Sprite:WorldMisstar
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_8024639C[1F0]
-	00000015 $NpcSettings_80241410 ~Vec3f:NPC_8024658C % 0 0 0
+	.NpcID:LavaPiranhaHead_21 $NpcSettings_80241410 ~Vec3f:NPC_LavaPiranhaHead_21 % 0 0 0
 	00000004 $Script_Init_80243534 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024658C
-	~AnimationTable:NPC_8024658C % .Sprite:LavaPiranhaHead
+	~Movement:NPC_LavaPiranhaHead_21
+	~AnimationTable:NPC_LavaPiranhaHead_21 % .Sprite:LavaPiranhaHead
 	00000000 00000000 $ExtraAnimationList_80243848 00000000 % no tattle string
 	%
 	% $NpcGroup_8024639C[3E0]
-	00000016 $NpcSettings_80241410 ~Vec3f:NPC_8024677C % 0 0 0
+	.NpcID:LavaBud_22 $NpcSettings_80241410 ~Vec3f:NPC_LavaBud_22 % 0 0 0
 	00000005 $Script_Init_80243838 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024677C
-	~AnimationTable:NPC_8024677C % .Sprite:LavaBud
+	~Movement:NPC_LavaBud_22
+	~AnimationTable:NPC_LavaBud_22 % .Sprite:LavaBud
 	00000000 00000000 $ExtraAnimationList_80243854 00000000 % no tattle string
 	%
 	% $NpcGroup_8024639C[5D0]
-	00000017 $NpcSettings_80241410 ~Vec3f:NPC_8024696C % 0 0 0
+	.NpcID:LavaBud_23 $NpcSettings_80241410 ~Vec3f:NPC_LavaBud_23 % 0 0 0
 	00000005 $Script_Init_80243838 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024696C
-	~AnimationTable:NPC_8024696C % .Sprite:LavaBud
+	~Movement:NPC_LavaBud_23
+	~AnimationTable:NPC_LavaBud_23 % .Sprite:LavaBud
 	00000000 00000000 $ExtraAnimationList_80243854 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80246B5C
 {
-	00000005 $NpcSettings_80241410 ~Vec3f:NPC_80246B5C % -62 96 0
+	.NpcID:WorldKlevar_05 $NpcSettings_80241410 ~Vec3f:NPC_WorldKlevar_05 % -62 96 0
 	00000F01 $Script_Init_80243CE0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80246B5C
-	~AnimationTable:NPC_80246B5C % .Sprite:WorldKlevar
+	~Movement:NPC_WorldKlevar_05
+	~AnimationTable:NPC_WorldKlevar_05 % .Sprite:WorldKlevar
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80246B5C[1F0]
-	00000019 $NpcSettings_80241410 ~Vec3f:NPC_80246D4C % 70 109 1
+	.NpcID:HuffNPuff_25 $NpcSettings_80241410 ~Vec3f:NPC_HuffNPuff_25 % 70 109 1
 	00000F01 $Script_Init_80243D28 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80246D4C
-	~AnimationTable:NPC_80246D4C % .Sprite:HuffNPuff
+	~Movement:NPC_HuffNPuff_25
+	~AnimationTable:NPC_HuffNPuff_25 % .Sprite:HuffNPuff
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80246B5C[3E0]
-	0000001A $NpcSettings_80241410 ~Vec3f:NPC_80246F3C % 70 109 1
+	.NpcID:HuffNPuff_26 $NpcSettings_80241410 ~Vec3f:NPC_HuffNPuff_26 % 70 109 1
 	00000F01 $Script_Init_80243D8C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80246F3C
-	~AnimationTable:NPC_80246F3C % .Sprite:HuffNPuff
+	~Movement:NPC_HuffNPuff_26
+	~AnimationTable:NPC_HuffNPuff_26 % .Sprite:HuffNPuff
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80246B5C[5D0]
-	0000001B $NpcSettings_80241410 ~Vec3f:NPC_8024712C % 70 109 1
+	.NpcID:HuffNPuff_27 $NpcSettings_80241410 ~Vec3f:NPC_HuffNPuff_27 % 70 109 1
 	00000F01 $Script_Init_80243DF0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024712C
-	~AnimationTable:NPC_8024712C % .Sprite:HuffNPuff
+	~Movement:NPC_HuffNPuff_27
+	~AnimationTable:NPC_HuffNPuff_27 % .Sprite:HuffNPuff
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80246B5C[7C0]
-	0000001C $NpcSettings_80241410 ~Vec3f:NPC_8024731C % 60 40 -50
+	.NpcID:TuffPuff_28 $NpcSettings_80241410 ~Vec3f:NPC_TuffPuff_28 % 60 40 -50
 	00000F01 $Script_Init_80243E54 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024731C
-	~AnimationTable:NPC_8024731C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_28
+	~AnimationTable:NPC_TuffPuff_28 % .Sprite:TuffPuff
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80246B5C[9B0]
-	0000001D $NpcSettings_80241410 ~Vec3f:NPC_8024750C % 14 61 1
+	.NpcID:TuffPuff_29 $NpcSettings_80241410 ~Vec3f:NPC_TuffPuff_29 % 14 61 1
 	00000F01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024750C
-	~AnimationTable:NPC_8024750C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_29
+	~AnimationTable:NPC_TuffPuff_29 % .Sprite:TuffPuff
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802476FC
 {
-	00000006 $NpcSettings_80241410 ~Vec3f:NPC_802476FC % -62 96 0
+	.NpcID:WorldKalmar_06 $NpcSettings_80241410 ~Vec3f:NPC_WorldKalmar_06 % -62 96 0
 	00000F01 $Script_Init_80243F0C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802476FC
-	~AnimationTable:NPC_802476FC % .Sprite:WorldKalmar
+	~Movement:NPC_WorldKalmar_06
+	~AnimationTable:NPC_WorldKalmar_06 % .Sprite:WorldKalmar
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802476FC[1F0]
-	0000001E $NpcSettings_80241410 ~Vec3f:NPC_802478EC % 60 -2 0
+	.NpcID:CrystalKing_30 $NpcSettings_80241410 ~Vec3f:NPC_CrystalKing_30 % 60 -2 0
 	00000F01 $Script_Init_80243F54 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802478EC
-	~AnimationTable:NPC_802478EC % .Sprite:CrystalKing
+	~Movement:NPC_CrystalKing_30
+	~AnimationTable:NPC_CrystalKing_30 % .Sprite:CrystalKing
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802476FC[3E0]
-	0000001F $NpcSettings_80241410 ~Vec3f:NPC_80247ADC % 10 31 -12
+	.NpcID:CrystalKing_31 $NpcSettings_80241410 ~Vec3f:NPC_CrystalKing_31 % 10 31 -12
 	00000F01 $Script_Init_80243F9C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80247ADC
-	~AnimationTable:NPC_80247ADC % .Sprite:CrystalKing
+	~Movement:NPC_CrystalKing_31
+	~AnimationTable:NPC_CrystalKing_31 % .Sprite:CrystalKing
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802476FC[5D0]
-	00000020 $NpcSettings_80241410 ~Vec3f:NPC_80247CCC % 40 68 0
+	.NpcID:CrystalKing_32 $NpcSettings_80241410 ~Vec3f:NPC_CrystalKing_32 % 40 68 0
 	00000F01 $Script_Init_80243FE4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80247CCC
-	~AnimationTable:NPC_80247CCC % .Sprite:CrystalKing
+	~Movement:NPC_CrystalKing_32
+	~AnimationTable:NPC_CrystalKing_32 % .Sprite:CrystalKing
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802476FC[7C0]
-	00000021 $NpcSettings_80241410 ~Vec3f:NPC_80247EBC % 96 53 0
+	.NpcID:CrystalKing_33 $NpcSettings_80241410 ~Vec3f:NPC_CrystalKing_33 % 96 53 0
 	00000F01 $Script_Init_8024402C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80247EBC
-	~AnimationTable:NPC_80247EBC % .Sprite:CrystalKing
+	~Movement:NPC_CrystalKing_33
+	~AnimationTable:NPC_CrystalKing_33 % .Sprite:CrystalKing
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802480AC
 {
-	00000022 $NpcSettings_80241410 ~Vec3f:NPC_802480AC % 58 0 20
+	.NpcID:WorldBowser_34 $NpcSettings_80241410 ~Vec3f:NPC_WorldBowser_34 % 58 0 20
 	00000F01 $Script_Init_80244074 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802480AC
-	~AnimationTable:NPC_802480AC % .Sprite:WorldBowser
+	~Movement:NPC_WorldBowser_34
+	~AnimationTable:NPC_WorldBowser_34 % .Sprite:WorldBowser
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2160,7 +2192,6 @@ PADDING: 8024835C to 80248360 (0000835C to 00008360)
 PADDING: 802483A8 to 802483B0 (000083A8 to 000083B0)
 00000000 00000000
 
-% Origin: HEURISTIC
 #new:ConstDouble $ConstDouble_802483B0
 {
 	90.000000d

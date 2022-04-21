@@ -1,6 +1,8 @@
 % Script File: hos_10.mscr
 % Decoded from: 0 to 61F0 (hos_10)
 
+#define .NpcID:BattleKooper_00      00
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -284,7 +286,7 @@ C4400000 46040001 03E00008 E4400000 C4400000 46020000 03E00008 E4400000
    30:  SW        R0, 18 (SP)
    34:  SWC1      F0, 10 (SP)
    38:  SWC1      F2, 14 (SP)
-   3C:  JAL       8006FE30
+   3C:  JAL       ~Func:playFX_0F
    40:  SWC1      F4, 1C (SP)
    44:  LW        RA, 20 (SP)
    48:  LI        V0, 2
@@ -625,7 +627,7 @@ PADDING: 8024076C to 80240770 (0000076C to 00000770)
   170:  LW        A1, 38 (S0)
   174:  LW        A3, 40 (S0)
   178:  MFC1      A2, F2
-  17C:  JAL       8006FEF0
+  17C:  JAL       ~Func:playFX_11
   180:  LI        A0, 3
         .o184
   184:  LW        V0, 7C (S1)
@@ -704,7 +706,7 @@ PADDING: 8024076C to 80240770 (0000076C to 00000770)
   2B8:  LW        A1, 38 (S0)
   2BC:  LW        A3, 40 (S0)
   2C0:  MFC1      A2, F2
-  2C4:  JAL       8006FEF0
+  2C4:  JAL       ~Func:playFX_11
   2C8:  LI        A0, 3
         .o2CC
   2CC:  LW        V0, 7C (S1)
@@ -850,12 +852,12 @@ PADDING: 8024076C to 80240770 (0000076C to 00000770)
    18:  CLEAR     A0
    1C:  LI        A1, D0
    20:  COPY      A2, A1
-   24:  JAL       ~Func:set_transition_stencil_color
+   24:  JAL       ~Func:set_screen_overlay_color
    28:  COPY      A3, A1
    2C:  LWC1      F0, 74 (S0)
    30:  CVT.S.W   F0, F0
    34:  MFC1      A1, F0
-   38:  JAL       ~Func:set_transition_stencil_zoom_0
+   38:  JAL       ~Func:set_screen_overlay_params_front
    3C:  LI        A0, 1
    40:  LW        V0, 74 (S0)
    44:  LI        V1, FF
@@ -943,63 +945,63 @@ MISSING: 80240E58 to 80240EB0 (00000E58 to 00000EB0)
 
 #new:Script $Script_Init_80240EB0
 {
-    0:  Call  SetNpcPos ( 00000000 FFFFFF9C 000000C8 00000514 )
+    0:  Call  SetNpcPos ( .NpcID:BattleKooper_00  -100`  200`  1300` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80240EDC
 {
-    0:  Call  SetNpcPos ( 00000001 FFFFFF7E 00000104 00000514 )
+    0:  Call  SetNpcPos ( 00000001  -130`  260`  1300` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80240F08
 {
-    0:  Call  SetNpcPos ( 00000002 FFFFFF87 000000C8 00000559 )
+    0:  Call  SetNpcPos ( 00000002  -121`  200`  1369` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80240F34
 {
-    0:  Call  SetNpcPos ( 00000003 FFFFFF51 000000C8 0000053E )
+    0:  Call  SetNpcPos ( 00000003  -175`  200`  1342` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80240F60
 {
-    0:  Call  SetNpcPos ( 00000004 FFFFFF44 000000C8 00000504 )
+    0:  Call  SetNpcPos ( 00000004  -188`  200`  1284` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80240F8C
 {
-    0:  Call  SetNpcPos ( 00000005 FFFFFF6A 000000C8 000004D5 )
+    0:  Call  SetNpcPos ( 00000005  -150`  200`  1237` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80240FB8
 {
-    0:  Call  SetNpcPos ( 00000006 FFFFFF9C 000000C8 000004D5 )
+    0:  Call  SetNpcPos ( 00000006  -100`  200`  1237` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80240FE4
 {
-    0:  Call  SetNpcPos ( 00000007 FFFFFFCC 000000C8 00000504 )
+    0:  Call  SetNpcPos ( 00000007  -52`  200`  1284` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80241010
 {
-    0:  Call  SetNpcPos ( 00000008 FFFFFFBF 000000C8 0000053E )
+    0:  Call  SetNpcPos ( 00000008  -65`  200`  1342` )
    1C:  Return
    24:  End
 }
@@ -1051,11 +1053,11 @@ MISSING: 80240E58 to 80240EB0 (00000E58 to 00000EB0)
 
 #new:NpcGroup $NpcGroup_802410B8
 {
-	00000000 $NpcSettings_80240E00 ~Vec3f:NPC_802410B8 % 0 -1000 0
+	.NpcID:BattleKooper_00 $NpcSettings_80240E00 ~Vec3f:NPC_BattleKooper_00 % 0 -1000 0
 	00020F05 $Script_Init_80240EB0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802410B8
-	~AnimationTable:NPC_802410B8 % .Sprite:BattleKooper
+	~Movement:NPC_BattleKooper_00
+	~AnimationTable:NPC_BattleKooper_00 % .Sprite:BattleKooper
 	00000000 00000000 $ExtraAnimationList_8024103C 00000000 % no tattle string
 	%
 	% $NpcGroup_802410B8[1F0]
@@ -1148,57 +1150,57 @@ MISSING: 80242298 to 802422F0 (00002298 to 000022F0)
 
 #new:Script $Script_Init_802422F0
 {
-    0:  Call  SetNpcPos ( 00000001 00000000 00000000 FFFFFE70 )
-   1C:  Call  SetNpcYaw ( 00000001 0000005A )
+    0:  Call  SetNpcPos ( 00000001  0`  0`  -400` )
+   1C:  Call  SetNpcYaw ( 00000001  90` )
    30:  Return
    38:  End
 }
 
 #new:Script $Script_Init_80242330
 {
-    0:  Call  SetNpcPos ( 00000002 00000000 00000000 FFFFFE70 )
+    0:  Call  SetNpcPos ( 00000002  0`  0`  -400` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_8024235C
 {
-    0:  Call  SetNpcPos ( 00000003 00000000 00000000 FFFFFE70 )
+    0:  Call  SetNpcPos ( 00000003  0`  0`  -400` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80242388
 {
-    0:  Call  SetNpcPos ( 00000004 00000000 00000000 FFFFFE70 )
+    0:  Call  SetNpcPos ( 00000004  0`  0`  -400` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_802423B4
 {
-    0:  Call  SetNpcPos ( 00000005 00000000 00000000 FFFFFE70 )
+    0:  Call  SetNpcPos ( 00000005  0`  0`  -400` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_802423E0
 {
-    0:  Call  SetNpcPos ( 00000006 00000000 00000000 FFFFFE70 )
+    0:  Call  SetNpcPos ( 00000006  0`  0`  -400` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_8024240C
 {
-    0:  Call  SetNpcPos ( 00000007 00000000 00000000 FFFFFE70 )
+    0:  Call  SetNpcPos ( 00000007  0`  0`  -400` )
    1C:  Return
    24:  End
 }
 
 #new:Script $Script_Init_80242438
 {
-    0:  Call  SetNpcPos ( 00000008 00000000 00000000 FFFFFE70 )
+    0:  Call  SetNpcPos ( 00000008  0`  0`  -400` )
    1C:  Return
    24:  End
 }
@@ -1322,8 +1324,8 @@ MISSING: 80242298 to 802422F0 (00002298 to 000022F0)
    20:  	Wait  75`
    2C:  EndIf
    34:  Call  SetSpriteShading  ( .Shading:None )
-   44:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   64:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   44:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   64:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    80:  Call  SetCamEnabled     ( .Cam:Default .True )
    94:  Call  GetEntryID        ( *Var0 )
    A4:  Switch  *Var0
@@ -1551,8 +1553,8 @@ PADDING: 8024365C to 80243660 (0000365C to 00003660)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetPanTarget      ( .Cam:Default 00000000 00000000 00000000 )
-   50:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetPanTarget      ( .Cam:Default  0`  0`  0` )
+   50:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
    6C:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    84:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    98:  Call  EnableModel       ( ~Model:nagare .False )
@@ -1566,8 +1568,8 @@ PADDING: 8024365C to 80243660 (0000365C to 00003660)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetPanTarget      ( .Cam:Default 00000000 00000000 00000000 )
-   50:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetPanTarget      ( .Cam:Default  0`  0`  0` )
+   50:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
    6C:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    84:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    98:  Exec  $Script_80243790
@@ -1601,12 +1603,12 @@ PADDING: 802441D4 to 802441E0 (000041D4 to 000041E0)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  SetPlayerAnimation    ( .PlayerAnim:FallBack )
-   30:  Call  SetPlayerPos      ( 00000000 FFFFFC18 00000000 )
+   30:  Call  SetPlayerPos      (  0`  -1000`  0` )
    48:  Call  EnableModel       ( ~Model:o2 .False )
    5C:  Call  EnableModel       ( ~Model:nagare .False )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   84:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
-   A0:  Call  SetPanTarget      ( .Cam:Default 00000000 00000000 00000000 )
+   84:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
+   A0:  Call  SetPanTarget      ( .Cam:Default  0`  0`  0` )
    BC:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    D0:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    E8:  Thread
@@ -1800,10 +1802,10 @@ PADDING: 802441D4 to 802441E0 (000041D4 to 000041E0)
    20:  Call  DisablePartnerAI      ( 00000000 )
    30:  Call  SetNpcFlagBits        ( .Npc:Partner 00000200 .False )
    48:  Call  PlaySound     ( 000004A4 )
-   58:  Call  SetPlayerPos  ( FFFFFF7E 000000C8 00000514 )
-   70:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
-   84:  Call  SetNpcPos     ( .Npc:Partner FFFFFF6A 000000C8 00000514 )
-   A0:  Call  SetNpcYaw     ( .Npc:Partner 0000005A )
+   58:  Call  SetPlayerPos  (  -130`  200`  1300` )
+   70:  Call  InterpPlayerYaw       (  90`  0` )
+   84:  Call  SetNpcPos     ( .Npc:Partner  -150`  200`  1300` )
+   A0:  Call  SetNpcYaw     ( .Npc:Partner  90` )
    B4:  Call  EnableModel   ( ~Model:o2 .False )
    C8:  Call  EnableGroup   ( ~Model:kumo .False )
    DC:  Call  EnableModel   ( ~Model:nagare .False )
@@ -1822,8 +1824,8 @@ PADDING: 802441D4 to 802441E0 (000041D4 to 000041E0)
   238:  	EndLoop
   240:  EndChildThread
   248:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-  25C:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
-  278:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+  25C:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
+  278:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
   294:  Call  SetCamPitch   ( .Cam:Default *Fixed[0.0] *Fixed[0.0] )
   2AC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   2C0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -1837,19 +1839,19 @@ PADDING: 802441D4 to 802441E0 (000041D4 to 000041E0)
   33C:  EndThread
   344:  Thread
   34C:  	Call  SetPlayerJumpscale    ( *Fixed[0.0] )
-  35C:  	Call  PlayerJump1   ( FFFFFF7E 00000000 00000514 000000FA )
+  35C:  	Call  PlayerJump1   (  -130`  0`  1300`  250` )
   378:  EndThread
   380:  Thread
   388:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.0] )
-  39C:  	Call  NpcJump0  ( .Npc:Partner FFFFFF6A 00000000 00000514 000000FA )
+  39C:  	Call  NpcJump0  ( .Npc:Partner  -150`  0`  1300`  250` )
   3BC:  EndThread
   3C4:  Thread
-  3CC:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[0.0] )
-  3E0:  	Call  NpcJump0  ( 00000000 FFFFFF9C 00000000 00000514 000000FA )
+  3CC:  	Call  SetNpcJumpscale   ( .NpcID:BattleKooper_00 *Fixed[0.0] )
+  3E0:  	Call  NpcJump0  ( .NpcID:BattleKooper_00  -100`  0`  1300`  250` )
   400:  EndThread
   408:  Thread
   410:  	Call  SetNpcJumpscale   ( 00000001 *Fixed[0.0] )
-  424:  	Call  NpcJump0  ( 00000001 FFFFFF7E 0000003C 00000514 000000FA )
+  424:  	Call  NpcJump0  ( 00000001  -130`  60`  1300`  250` )
   444:  EndThread
   44C:  Thread
   454:  	Call  $Function_80240770    ( 00000002 00000000 00000000 )
@@ -1908,7 +1910,7 @@ PADDING: 802441D4 to 802441E0 (000041D4 to 000041E0)
   744:  		MulF  *Var1  *Var0
   754:  		Call  GetPlayerPos  ( *Var2 *Var3 *Var4 )
   76C:  		AddF  *Var2  *Var1
-  77C:  		Call  SetNpcPos     ( 00000000 *Var2 *Var3 *Var4 )
+  77C:  		Call  SetNpcPos     ( .NpcID:BattleKooper_00 *Var2 *Var3 *Var4 )
   798:  		Wait  1`
   7A4:  		If  *Var1  ==  00000000
   7B4:  			BreakLoop
@@ -1937,7 +1939,7 @@ PADDING: 802441D4 to 802441E0 (000041D4 to 000041E0)
   8F0:  		Call  UpdateLerp ( )
   8FC:  		DivF  *Var0  00000064
   90C:  		Call  SetNpcScale   ( .Npc:Partner *Var0 *Var0 *Var0 )
-  928:  		Call  SetNpcScale   ( 00000000 *Var0 *Var0 *Var0 )
+  928:  		Call  SetNpcScale   ( .NpcID:BattleKooper_00 *Var0 *Var0 *Var0 )
   944:  		Call  SetNpcScale   ( 00000001 *Var0 *Var0 *Var0 )
   960:  		Call  SetNpcScale   ( 00000002 *Var0 *Var0 *Var0 )
   97C:  		Call  SetNpcScale   ( 00000003 *Var0 *Var0 *Var0 )
@@ -2005,7 +2007,7 @@ PADDING: 802441D4 to 802441E0 (000041D4 to 000041E0)
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  DisablePartnerAI  ( 00000000 )
    30:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   48:  Call  SetPlayerPos      ( 00000000 FFFFFC18 00000000 )
+   48:  Call  SetPlayerPos      (  0`  -1000`  0` )
    60:  Call  EnableModel       ( ~Model:o2 .False )
    74:  Call  EnableModel       ( ~Model:nagare .False )
    88:  Call  TranslateGroup    ( ~Model:castle 00000000 FFFFF63C 00000000 )
@@ -2019,8 +2021,8 @@ PADDING: 802441D4 to 802441E0 (000041D4 to 000041E0)
   168:  Call  EnableTexPanning  ( ~Model:k9 .True )
   17C:  Call  EnableTexPanning  ( ~Model:k12 .True )
   190:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-  1A4:  Call  SetPanTarget      ( .Cam:Default 00000000 00000000 00000000 )
-  1C0:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
+  1A4:  Call  SetPanTarget      ( .Cam:Default  0`  0`  0` )
+  1C0:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
   1DC:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   1F0:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   208:  Thread
@@ -2134,13 +2136,13 @@ PADDING: 802441D4 to 802441E0 (000041D4 to 000041E0)
   7C4:  		EndIf
   7CC:  	EndLoop
   7D4:  	Wait  20`
-  7E0:  	Call  InterpNpcYaw      ( 00000001 0000010E 00000000 )
+  7E0:  	Call  InterpNpcYaw      ( 00000001  270`  0` )
   7F8:  	Call  SetNpcAnimation   ( 00000001 0020001A )
   80C:  	Wait  50`
-  818:  	Call  InterpNpcYaw      ( 00000001 0000005A 00000000 )
+  818:  	Call  InterpNpcYaw      ( 00000001  90`  0` )
   830:  	Call  SetNpcAnimation   ( 00000001 00200001 )
   844:  	Wait  10`
-  850:  	Call  NpcFlyTo  ( 00000001 00000064 0000003C 00000708 00000014 FFFFFFF6 .Easing:Linear )
+  850:  	Call  NpcFlyTo  ( 00000001  100`  60`  1800`  20`  -10` .Easing:Linear )
   878:  EndThread
   880:  Thread
   888:  	SetF  *Var0  FFFFF736

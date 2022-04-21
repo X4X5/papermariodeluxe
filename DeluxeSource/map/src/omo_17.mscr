@@ -1,6 +1,13 @@
 % Script File: omo_17.mscr
 % Decoded from: 0 to 7B60 (omo_17)
 
+#define .NpcID:SpyGuy_01            01
+#define .NpcID:SpyGuy_02            02
+#define .NpcID:SpyGuy_03            03
+#define .NpcID:SpyGuy_04            04
+#define .NpcID:PyroGuy_05           05
+#define .NpcID:GrooveGuy_06         06
+
 MISSING: 80240000 to 8024001C (00000000 to 0000001C)
 3C03800B 24631D80 94620002 3042FFFE A4620002 03E00008 24020002
 
@@ -3209,7 +3216,7 @@ PADDING: 8024055C to 80240560 (0000055C to 00000560)
   4A4:  LW        A1, 38 (S2)
   4A8:  LW        A2, 3C (S2)
   4AC:  LW        A3, 40 (S2)
-  4B0:  JAL       ~Func:fx_walk_normal
+  4B0:  JAL       ~Func:fx_walk
   4B4:  LI        A0, 2
   4B8:  LIF       F0, -1000.0
   4C0:  SW        R0, 6C (S3)
@@ -3317,7 +3324,7 @@ PADDING: 8024055C to 80240560 (0000055C to 00000560)
   104:  LW        A1, 38 (S0)
   108:  LW        A2, 3C (S0)
   10C:  LW        A3, 40 (S0)
-  110:  JAL       ~Func:fx_walk_normal
+  110:  JAL       ~Func:fx_walk
   114:  LI        A0, 2
   118:  LWC1      F12, 6C (S2)
   11C:  JAL       ~Func:clamp_angle
@@ -3473,7 +3480,7 @@ PADDING: 8024055C to 80240560 (0000055C to 00000560)
   37C:  LW        A1, 38 (S0)
   380:  LW        A2, 3C (S0)
   384:  LW        A3, 40 (S0)
-  388:  JAL       ~Func:fx_walk_normal
+  388:  JAL       ~Func:fx_walk
   38C:  LI        A0, 2
   390:  LIF       F0, -1000.0
   398:  SW        R0, 6C (S1)
@@ -3857,8 +3864,8 @@ PADDING: 8024370C to 80243710 (0000370C to 00003710)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  MakeNpcs      ( .True $NpcGroupList_802474A0 )
    84:  ExecWait  $Script_MakeEntities
@@ -4194,7 +4201,7 @@ PADDING: 80243DE8 to 80243DF0 (00003DE8 to 00003DF0)
 {
     0:  Label  0
     C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   24:  Call  SetCamTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+   24:  Call  SetCamTarget  ( .Cam:Default *Var0  0` *Var2 )
    40:  Wait  1`
    4C:  Goto  0
    58:  Return
@@ -4235,7 +4242,7 @@ PADDING: 80243DE8 to 80243DF0 (00003DE8 to 00003DF0)
    AC:  EndLoop
    B4:  Loop
    C0:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   D8:  	Call  SetCamTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+   D8:  	Call  SetCamTarget  ( .Cam:Default *Var0  0` *Var2 )
    F4:  	Wait  1`
   100:  EndLoop
   108:  Return
@@ -4253,12 +4260,12 @@ PADDING: 80243DE8 to 80243DF0 (00003DE8 to 00003DF0)
    58:  	Call  AddVectorPolar    ( *Var1 *Var2 *Fixed[15.0] *Var3 )
    74:  	Call  SetPlayerAnimation    ( .PlayerAnim:Walking )
    84:  	Call  SetPlayerSpeed    ( *Fixed[4.0] )
-   94:  	Call  PlayerMoveTo      ( *Var1 *Var2 00000000 )
+   94:  	Call  PlayerMoveTo      ( *Var1 *Var2  0` )
    AC:  	Call  SetPlayerSpeed    ( *Fixed[0.7] )
-   BC:  	Call  PlayerMoveTo      ( *Var1 *Var2 00000000 )
-   D4:  	Call  SetPlayerPos      ( *Var1 00000032 *Var2 )
+   BC:  	Call  PlayerMoveTo      ( *Var1 *Var2  0` )
+   D4:  	Call  SetPlayerPos      ( *Var1  50` *Var2 )
    EC:  	Call  SetPlayerAnimation    ( 00010002 )
-   FC:  	Call  InterpPlayerYaw   ( *Var3 00000000 )
+   FC:  	Call  InterpPlayerYaw   ( *Var3  0` )
   110:  EndThread
   118:  Wait  5`
   124:  UseIntBuffer  *Var0
@@ -4267,11 +4274,11 @@ PADDING: 80243DE8 to 80243DF0 (00003DE8 to 00003DF0)
   154:  AddF  *Var3  *Fixed[180.0]
   164:  Call  AddVectorPolar    ( *Var1 *Var2 *Fixed[15.0] *Var3 )
   180:  Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.7] )
-  194:  Call  NpcJump0  ( .Npc:Partner *Var1 00000032 *Var2 0000000A )
+  194:  Call  NpcJump0  ( .Npc:Partner *Var1  50` *Var2  10` )
   1B4:  Call  SetNpcSpeed       ( .Npc:Partner *Fixed[0.5] )
-  1C8:  Call  NpcMoveTo ( .Npc:Partner *Var1 *Var2 00000000 )
+  1C8:  Call  NpcMoveTo ( .Npc:Partner *Var1 *Var2  0` )
   1E4:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
-  1F8:  Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  1F8:  Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   210:  Wait  5`
   21C:  UseIntBuffer  *Var0
   228:  Get3Int  *Var1 *Var2 *Var3
@@ -4287,12 +4294,12 @@ PADDING: 80243DE8 to 80243DF0 (00003DE8 to 00003DF0)
   2BC:  Call  AddVectorPolar    ( *Var1 *Var2 *Fixed[100.0] *Var3 )
   2D8:  Call  SetNpcSpeed   ( 00000000 *Fixed[3.0] )
   2EC:  Call  SetNpcAnimation   ( 00000000 008C0003 )
-  300:  Call  NpcMoveTo     ( 00000000 *Var1 *Var2 00000000 )
+  300:  Call  NpcMoveTo     ( 00000000 *Var1 *Var2  0` )
   31C:  Call  SetNpcAnimation   ( 00000000 008C0001 )
   330:  Call  AddVectorPolar    ( *Var4 *Var5 *Fixed[20.0] *Var6 )
   34C:  Call  SetNpcJumpscale   ( 00000000 *Fixed[0.7] )
-  360:  Call  NpcJump0      ( 00000000 *Var4 00000032 *Var5 0000000A )
-  380:  Call  InterpNpcYaw  ( 00000000 *VarA 00000000 )
+  360:  Call  NpcJump0      ( 00000000 *Var4  50` *Var5  10` )
+  380:  Call  InterpNpcYaw  ( 00000000 *VarA  0` )
   398:  Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000005 000F0009 ) % We're leaving! All aboard!
   3B8:  Call  PlaySound     ( 00000083 )
   3C8:  Call  SetMusicTrack ( 00000000 .Song:ToyboxTrain 00000000 00000008 )
@@ -4319,14 +4326,14 @@ PADDING: 80243DE8 to 80243DF0 (00003DE8 to 00003DF0)
    CC:  Call  AddVectorPolar    ( *Var0 *Var1 *Fixed[100.0] *Var2 )
    E8:  Thread
    F0:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  104:  	Call  NpcJump0  ( 00000000 *Var0 00000032 *Var1 0000000A )
+  104:  	Call  NpcJump0  ( 00000000 *Var0  50` *Var1  10` )
   124:  	Call  SetNpcAnimation   ( 00000000 008C0003 )
   138:  	Call  SetNpcSpeed       ( 00000000 *Fixed[2.0] )
   14C:  	UseIntBuffer  *Var9
   158:  	Get2Int  *Var3 *Var4
-  168:  	Call  NpcMoveTo ( 00000000 *Var3 *Var4 00000000 )
+  168:  	Call  NpcMoveTo ( 00000000 *Var3 *Var4  0` )
   184:  	Call  SetNpcAnimation   ( 00000000 008C0001 )
-  198:  	Call  InterpNpcYaw      ( 00000000 0000010E 0000000F )
+  198:  	Call  InterpNpcYaw      ( 00000000  270`  15` )
   1B0:  	Call  SetNpcFlagBits    ( 00000000 00000140 .False )
   1C8:  EndThread
   1D0:  Wait  10`
@@ -4335,14 +4342,14 @@ PADDING: 80243DE8 to 80243DF0 (00003DE8 to 00003DF0)
   1F4:  	Call  AddVectorPolar        ( *Var0 *Var1 *Fixed[20.0] *Var2 )
   210:  	Call  SetPlayerAnimation    ( .PlayerAnim:Walking )
   220:  	Call  SetPlayerSpeed        ( *Fixed[3.0] )
-  230:  	Call  PlayerMoveTo  ( *Var0 *Var1 00000000 )
+  230:  	Call  PlayerMoveTo  ( *Var0 *Var1  0` )
   248:  	Call  SetPlayerAnimation    ( 00010002 )
   258:  EndThread
   260:  Wait  10`
   26C:  Sub   *Var1  0000001E
   27C:  Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
   290:  Call  SetNpcSpeed       ( .Npc:Partner *Fixed[2.5] )
-  2A4:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var1 00000000 )
+  2A4:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var1  0` )
   2C0:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   2D4:  Call  SetNpcFlagBits    ( .Npc:Partner 00000140 .False )
   2EC:  Return
@@ -4625,7 +4632,7 @@ MISSING: 8024623C to 80246268 (0000623C to 00006268)
    28:  		Call  SetSelfVar    ( 00000000 00000005 )
    3C:  		Call  RemoveNpc     ( .Npc:Self )
    4C:  	Case  ==  .Outcome:PlayerFled % 2
-   58:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   58:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    74:  		Call  80045900  ( 00000001 )
    84:  	Case  ==  .Outcome:EnemyFled % 3
    90:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -4724,7 +4731,7 @@ MISSING: 8024623C to 80246268 (0000623C to 00006268)
    D4:  		Call  SetSelfVar    ( 00000000 00000004 )
    E8:  		Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   104:  		Call  PlayEffect    ( ~FX:Steam:Ring *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  148:  		Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  148:  		Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   164:  		Call  SetSelfVar    ( 00000000 00000000 )
   178:  	EndCaseGroup
   180:  	Default
@@ -4785,57 +4792,57 @@ PADDING: 8024684A to 80246900 (0000684A to 00006900)
 
 #new:NpcGroup $NpcGroup_80246900
 {
-	00000001 $NpcSettings_802463E4 ~Vec3f:NPC_80246900 % -305 0 135
+	.NpcID:SpyGuy_01 $NpcSettings_802463E4 ~Vec3f:NPC_SpyGuy_01 % -305 0 135
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:2:ThunderRage:2:ThunderBolt:2:DustyHammer:2:Pebble:2
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80246900
-	~AnimationTable:NPC_80246900 % .Sprite:SpyGuy
+	~Movement:NPC_SpyGuy_01
+	~AnimationTable:NPC_SpyGuy_01 % .Sprite:SpyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80246900[1F0]
-	00000002 $NpcSettings_80246688 ~Vec3f:NPC_80246AF0 % 0 -1000 0
+	.NpcID:SpyGuy_02 $NpcSettings_80246688 ~Vec3f:NPC_SpyGuy_02 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246AF0
-	~AnimationTable:NPC_80246AF0 % .Sprite:SpyGuy
+	~Movement:NPC_SpyGuy_02
+	~AnimationTable:NPC_SpyGuy_02 % .Sprite:SpyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80246900[3E0]
-	00000003 $NpcSettings_80246688 ~Vec3f:NPC_80246CE0 % 0 -1000 0
+	.NpcID:SpyGuy_03 $NpcSettings_80246688 ~Vec3f:NPC_SpyGuy_03 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246CE0
-	~AnimationTable:NPC_80246CE0 % .Sprite:SpyGuy
+	~Movement:NPC_SpyGuy_03
+	~AnimationTable:NPC_SpyGuy_03 % .Sprite:SpyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80246900[5D0]
-	00000004 $NpcSettings_80246688 ~Vec3f:NPC_80246ED0 % 0 -1000 0
+	.NpcID:SpyGuy_04 $NpcSettings_80246688 ~Vec3f:NPC_SpyGuy_04 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246ED0
-	~AnimationTable:NPC_80246ED0 % .Sprite:SpyGuy
+	~Movement:NPC_SpyGuy_04
+	~AnimationTable:NPC_SpyGuy_04 % .Sprite:SpyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802470C0
 {
-	00000005 $NpcSettings_802460DC ~Vec3f:NPC_802470C0 % 354 10 -113
+	.NpcID:PyroGuy_05 $NpcSettings_802460DC ~Vec3f:NPC_PyroGuy_05 % 354 10 -113
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802470C0
-	~AnimationTable:NPC_802470C0 % .Sprite:PyroGuy
+	~Movement:NPC_PyroGuy_05
+	~AnimationTable:NPC_PyroGuy_05 % .Sprite:PyroGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802472B0
 {
-	00000006 $NpcSettings_80246158 ~Vec3f:NPC_802472B0 % -150 10 -125
+	.NpcID:GrooveGuy_06 $NpcSettings_80246158 ~Vec3f:NPC_GrooveGuy_06 % -150 10 -125
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:5:Mystery:5:FrightJar:5
 	~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:0:3
-	~Movement:NPC_802472B0
-	~AnimationTable:NPC_802472B0 % .Sprite:GrooveGuy
+	~Movement:NPC_GrooveGuy_06
+	~AnimationTable:NPC_GrooveGuy_06 % .Sprite:GrooveGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

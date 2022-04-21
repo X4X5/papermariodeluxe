@@ -89,7 +89,7 @@
 
 #new:Script $Script_8021D4F4_0D {
     0:  Call  UseBattleCamPreset    ( 00000002 )
-   10:  Call  MoveBattleCamOver ( 00000014 )
+   10:  Call  MoveBattleCamOver (  20` )
    20:  Call  SetActorFlagBits  ( .Actor:Self 00000004 .True )
    38:  Call  PlaySoundAtActor  ( .Actor:Self .Sound:MoleDig )
    4C:  Call  SetAnimation      ( .Actor:Self 00000001 00370004 )
@@ -238,7 +238,7 @@
    8C:  	Call  UseBattleCamPreset    ( 0000003F )
    9C:  	Call  BattleCamTargetActor  ( .Actor:Self )
    AC:  	Call  8024ECF8  ( FFFFFFFF 00000001 00000000 )
-   C4:  	Call  MoveBattleCamOver ( 00000001 )
+   C4:  	Call  MoveBattleCamOver (  1` )
    D4:  	Call  SetGoalToTarget   ( .Actor:Self )
    E4:  	Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
   100:  	Add   *Var0  00000014 
@@ -257,10 +257,10 @@
   1E8:  Add   *Var0  00000014 
   1F8:  Set   *Var1  00000000 
   208:  Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-  220:  Call  SetBattleCamZoom  ( 0000015E )
-  230:  Call  SetBattleCamOffsetZ   ( 0000002D )
+  220:  Call  SetBattleCamZoom  (  350` )
+  230:  Call  SetBattleCamOffsetZ   (  45` )
   240:  Call  8024ECF8  ( FFFFFFFF 00000001 00000000 )
-  258:  Call  MoveBattleCamOver ( 00000014 )
+  258:  Call  MoveBattleCamOver (  20` )
   268:  Call  SetGoalToTarget   ( .Actor:Self )
   278:  Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
   294:  Call  GetStatusFlags    ( .Actor:Self *Var5 )
@@ -274,7 +274,7 @@
   308:  Call  SetActorJumpGravity   ( .Actor:Self *Fixed[1.0] )
   31C:  Call  SetActorSounds    ( .Actor:Self .ActorSound:Jump 00000000 00000000 )
   338:  Call  SetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
-  354:  Call  JumpToGoal        ( .Actor:Self 00000014 .False .False .False )
+  354:  Call  JumpToGoal        ( .Actor:Self  20` .False .False .False )
   374:  Label  7B
   380:  Call  PlaySoundAtActor  ( .Actor:Self .Sound:MoleSurface )
   394:  Call  SetActorPos       ( .Actor:Self *Var0 *Var1 *Var2 )
@@ -326,7 +326,7 @@
   67C:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:0 00000000 00000000 00000003 00000020 )
   6A4:  Switch  *Var0 
   6B0:  	CaseOR  ==  .HitResult:Hit % 0
-  6BC:  	CaseOR  ==  00000002 % 2
+  6BC:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   6C8:  		Call  UseBattleCamPreset    ( 00000002 )
   6D8:  		Wait  2`
   6E4:  		Call  SetAnimation  ( .Actor:Self 00000001 00370008 )

@@ -1,6 +1,7 @@
 % Script File: dgb_11.mscr
 % Decoded from: 0 to B10 (dgb_11)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -89,22 +90,22 @@ PADDING: 80240168 to 80240170 (00000168 to 00000170)
    58:  		ExecWait  EnterSingleDoor
    64:  		Return
    6C:  	Case  ==  ~Entry:Entry1
-   78:  		Call  UseSettingsFrom   ( .Cam:Default 000001F4 00000000 FFFFFF9C )
-   94:  		Call  SetPanTarget      ( .Cam:Default 000001F4 00000000 FFFFFF9C )
+   78:  		Call  UseSettingsFrom   ( .Cam:Default  500`  0`  -100` )
+   94:  		Call  SetPanTarget      ( .Cam:Default  500`  0`  -100` )
    B0:  		Set   *Var3  00000001
    C0:  	Case  ==  ~Entry:Entry2
-   CC:  		Call  UseSettingsFrom   ( .Cam:Default 000001F4 0000004B FFFFFF06 )
-   E8:  		Call  SetPanTarget      ( .Cam:Default 000001F4 0000004B FFFFFF06 )
+   CC:  		Call  UseSettingsFrom   ( .Cam:Default  500`  75`  -250` )
+   E8:  		Call  SetPanTarget      ( .Cam:Default  500`  75`  -250` )
   104:  		Set   *Var3  0000004B
   114:  	Case  ==  ~Entry:Entry3
   120:  		Call  SetZoneEnabled    ( ~Zone:o203 .False )
-  134:  		Call  UseSettingsFrom   ( .Cam:Default 00000177 00000000 FFFFFF51 )
-  150:  		Call  SetPanTarget      ( .Cam:Default 00000177 00000000 FFFFFF51 )
+  134:  		Call  UseSettingsFrom   ( .Cam:Default  375`  0`  -175` )
+  150:  		Call  SetPanTarget      ( .Cam:Default  375`  0`  -175` )
   16C:  		Set   *AreaFlag[002]  .True
   17C:  		Set   *Var3  00000001
   18C:  EndSwitch
   194:  Call  DisablePlayerInput    ( .True )
-  1A4:  Call  InterpPlayerYaw   ( 000000B4 00000000 )
+  1A4:  Call  InterpPlayerYaw   (  180`  0` )
   1B8:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   1CC:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   1E4:  Loop
@@ -124,8 +125,8 @@ PADDING: 80240168 to 80240170 (00000168 to 00000170)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  ExecWait  $Script_MakeEntities
@@ -155,7 +156,7 @@ PADDING: 8024056C to 80240570 (0000056C to 00000570)
 
 #new:Script $Script_80240600
 {
-    0:  Call  PlayerJump    ( ~Vec3d:JumpDest_80240600 00000014 )
+    0:  Call  PlayerJump    ( ~Vec3d:JumpDest_80240600  20` )
    1C:  Return
    24:  End
 }
@@ -185,18 +186,18 @@ PADDING: 8024056C to 80240570 (0000056C to 00000570)
   128:  			EndIf
   130:  		EndLoop
   138:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  150:  		Call  SetPlayerPos  ( *Var0 000000A5 *Var2 )
+  150:  		Call  SetPlayerPos  ( *Var0  165` *Var2 )
   168:  		Kill  *VarB
   174:  		Call  SetPlayerAnimation    ( 00080015 )
-  184:  		Call  ShakeCam  ( .Cam:Default 00000000 00000014 *Fixed[1.0] )
+  184:  		Call  ShakeCam  ( .Cam:Default 00000000  20` *Fixed[1.0] )
   1A0:  		Wait  10`
   1AC:  		Call  SetPlayerAnimation    ( 00010002 )
   1BC:  		Call  SetPlayerJumpscale    ( *Fixed[0.0] )
-  1CC:  		Call  PlayerJump1   ( 00000177 00000019 FFFFFF06 0000000A )
+  1CC:  		Call  PlayerJump1   (  375`  25`  -250`  10` )
   1E8:  		Call  $Function_80240000 ( )
   1F4:  		Call  PlaySoundAtPlayer     ( 00002086 00000000 )
   208:  		Call  SetPlayerJumpscale    ( *Fixed[0.7] )
-  218:  		Call  PlayerJump    ( ~Vec3d:JumpDest_80240844 0000000F )
+  218:  		Call  PlayerJump    ( ~Vec3d:JumpDest_80240844  15` )
   234:  		Kill  *VarA
   240:  		Call  SetPlayerActionState  ( .ActionState:Idle )
   250:  		Wait  2`
@@ -216,7 +217,7 @@ PADDING: 8024056C to 80240570 (0000056C to 00000570)
   310:  		Set   *Var3  000001F4
   320:  		Exec  $Script_80240570 *VarA
   330:  		Call  SetPlayerJumpscale    ( *Fixed[0.7] )
-  340:  		Call  PlayerJump    ( ~Vec3d:JumpDest_8024096C 00000014 )
+  340:  		Call  PlayerJump    ( ~Vec3d:JumpDest_8024096C  20` )
   35C:  		Set   *AreaFlag[003]  .False
   36C:  	EndIf
   374:  Else
@@ -224,7 +225,7 @@ PADDING: 8024056C to 80240570 (0000056C to 00000570)
   38C:  	Wait  1`
   398:  	Set   *Var3  00000019
   3A8:  	Call  SetPlayerJumpscale    ( *Fixed[0.7] )
-  3B8:  	Call  PlayerJump    ( ~Vec3d:JumpDest_802409E4 0000000F )
+  3B8:  	Call  PlayerJump    ( ~Vec3d:JumpDest_802409E4  15` )
   3D4:  	Set   *AreaFlag[002]  .False
   3E4:  	Kill  *VarA
   3F0:  	Call  SetPlayerActionState  ( .ActionState:Idle )

@@ -1,6 +1,7 @@
 % Script File: isk_01.mscr
 % Decoded from: 0 to 5D0 (isk_01)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 % -576.0    0.0  -71.0  179.0
@@ -26,7 +27,7 @@
    60:  		Wait  20`
    6C:  		SetGroup  00000000
    78:  		Call  SetTimeFreezeMode ( 00000001 )
-   88:  		Call  ShowMessageAtScreenPos    ( 000D00DD 000000A0 00000028 ) % Bleeag, Blooooaaaagh!! I'm the huge, scary Tutanko ...
+   88:  		Call  ShowMessageAtScreenPos    ( 000D00DD  160`  40` ) % Bleeag, Blooooaaaagh!! I'm the huge, scary Tutanko ...
    A0:  		Set   *GF_ISK01_FirstWarning  .True
    B0:  		Call  DisablePlayerInput        ( .False )
    C0:  		Call  SetTimeFreezeMode ( 00000000 )
@@ -98,8 +99,8 @@ PADDING: 8024021C to 80240220 (0000021C to 00000220)
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *GF_Map_DryDryRuins  .True
@@ -126,7 +127,7 @@ PADDING: 80240474 to 80240480 (00000474 to 00000480)
     0:  Call  SetTexPanner      ( ~Model:o99 00000002 )
    14:  Call  EnableTexPanning  ( ~Model:o99 .True )
    28:  Set   *Var0  00000000
-   38:  Call  802C9428  ( 00000000 $DisplayList_80240480 00000000 )
+   38:  Call  SetCustomGfx      ( 00000000 $DisplayList_80240480 00000000 )
    50:  Call  SetModelFlags     ( ~Model:o99 00000010 .True )
    68:  Label  0
    74:  Add   *Var0  00000046

@@ -1,6 +1,7 @@
 % Script File: tst_12.mscr
 % Decoded from: 0 to 470 (tst_12)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %  416.0    0.0   76.0   90.0
@@ -61,8 +62,8 @@
 {
     0:  Set   *GB_WorldLocation  .Location:Testing
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  ModifyColliderFlags   ( 00000003 ~Collider:o92 00000006 )
    88:  Set   *Var0  00000220

@@ -1,6 +1,7 @@
 % Script File: kkj_26.mscr
 % Decoded from: 0 to C50 (kkj_26)
 
+
 #new:Function $Function_80240000
 {
     0:  LAW       V0, 8007419C
@@ -87,8 +88,8 @@ PADDING: 80240028 to 80240030 (00000028 to 00000030)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachsCastle
    10:  Call  SetSpriteShading  ( .Shading:kkj_26 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  GetEntryID        ( *Var0 )
    80:  If  *Var0  ==  ~Entry:Entry1
@@ -115,15 +116,15 @@ PADDING: 802403D4 to 802403E0 (000003D4 to 000003E0)
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  SetMusicTrack ( 00000000 .Song:PrisonerPeachTheme 00000001 00000008 )
    3C:  Call  DisablePartnerAI      ( 00000000 )
-   4C:  Call  SetNpcPos     ( .Npc:Partner 00000000 FFFFFE0C 00000000 )
+   4C:  Call  SetNpcPos     ( .Npc:Partner  0`  -500`  0` )
    68:  Call  RotateModel   ( ~Model:o85 00000050 00000000 FFFFFFFF 00000000 )
    88:  Call  RotateModel   ( ~Model:o83 00000050 00000000 00000001 00000000 )
    A8:  Call  RotateModel   ( ~Model:o86 00000050 00000000 FFFFFFFF 00000000 )
    C8:  Call  RotateModel   ( ~Model:o84 00000050 00000000 00000001 00000000 )
-   E8:  Call  UseSettingsFrom       ( .Cam:Default 00000226 0000001E FFFFFFEC )
+   E8:  Call  UseSettingsFrom       ( .Cam:Default  550`  30`  -20` )
   104:  Call  SetCamDistance        ( .Cam:Default *Fixed[200.0] )
   118:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.5] *Fixed[-10.0] )
-  130:  Call  SetCamPosB    ( .Cam:Default *Fixed[570.0] 00000000 )
+  130:  Call  SetCamPosB    ( .Cam:Default *Fixed[570.0]  0` )
   148:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   15C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   174:  Wait  50`
@@ -148,11 +149,11 @@ PADDING: 802403D4 to 802403E0 (000003D4 to 000003E0)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePartnerAI      ( 00000000 )
    20:  Call  SetMusicTrack ( 00000000 .Song:PrisonerPeachTheme 00000001 00000008 )
-   3C:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
-   50:  Call  SetNpcPos     ( .Npc:Partner 000001F4 00000032 00000000 )
-   6C:  Call  SetNpcYaw     ( .Npc:Partner 0000005A )
+   3C:  Call  InterpPlayerYaw       (  90`  0` )
+   50:  Call  SetNpcPos     ( .Npc:Partner  500`  50`  0` )
+   6C:  Call  SetNpcYaw     ( .Npc:Partner  90` )
    80:  Wait  30`
-   8C:  Call  UseSettingsFrom       ( .Cam:Default 000001F4 0000001E FFFFFFEC )
+   8C:  Call  UseSettingsFrom       ( .Cam:Default  500`  30`  -20` )
    A8:  Call  SetCamDistance        ( .Cam:Default *Fixed[300.0] )
    BC:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-7.0] )
    D4:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
@@ -193,10 +194,10 @@ PADDING: 80240918 to 80240920 (00000918 to 00000920)
 #new:Script $Script_80240920
 {
     0:  Call  EnableStatusMenu  ( .False )
-   10:  Call  UseSettingsFrom   ( .Cam:Default 00000226 0000001E FFFFFFEC )
+   10:  Call  UseSettingsFrom   ( .Cam:Default  550`  30`  -20` )
    2C:  Call  SetCamDistance    ( .Cam:Default *Fixed[200.0] )
    40:  Call  SetCamPitch       ( .Cam:Default *Fixed[17.5] *Fixed[-10.0] )
-   58:  Call  SetCamPosB        ( .Cam:Default *Fixed[570.0] 00000000 )
+   58:  Call  SetCamPosB        ( .Cam:Default *Fixed[570.0]  0` )
    70:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    84:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    9C:  Wait  60`

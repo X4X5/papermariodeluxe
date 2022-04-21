@@ -1,6 +1,13 @@
 % Script File: jan_23.mscr
 % Decoded from: 0 to 3770 (jan_23)
 
+#define .NpcID:RafaelRaven_00       00
+#define .NpcID:Raven_01             01
+#define .NpcID:Raven_02             02
+#define .NpcID:Raven_03             03
+#define .NpcID:Raven_04             04
+#define .NpcID:Raven_05             05
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %  230.0  160.0  106.0   90.0
@@ -52,7 +59,7 @@
    C8:  		If  *Var0  ==  00000000
    D8:  			Call  GetPlayerPos      ( *Var2 *Var3 *Var4 )
    F0:  			Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[3.0] )
-  104:  			Call  NpcJump0  ( .Npc:Partner *Var2 *Var3 *Var4 0000000F )
+  104:  			Call  NpcJump0  ( .Npc:Partner *Var2 *Var3 *Var4  15` )
   124:  		Else
   12C:  			Wait  10`
   138:  		EndIf
@@ -76,8 +83,8 @@
   234:  			Case  ==  .ActionState:UltraJump % F
   240:  				Label  B
   24C:  				Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  264:  				Call  UseSettingsFrom   ( .Cam:Default *Var0 000000FA 00000064 )
-  280:  				Call  SetPanTarget  ( .Cam:Default *Var0 FFFFFF9C *Var2 )
+  264:  				Call  UseSettingsFrom   ( .Cam:Default *Var0  250`  100` )
+  280:  				Call  SetPanTarget  ( .Cam:Default *Var0  -100` *Var2 )
   29C:  				Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   2B0:  				Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   2C8:  				Set   *MapVar[5]  FFFFFFFF
@@ -107,7 +114,7 @@
   414:  	EndIf
   41C:  EndLoop
   424:  If  *MapVar[5]  ==  00000000
-  434:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 000000FA 00000064 )
+  434:  	Call  UseSettingsFrom   ( .Cam:Default *Var0  250`  100` )
   450:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   46C:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   480:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -131,8 +138,8 @@
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_8024373C )
@@ -169,31 +176,31 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
 #new:Script $Script_80240754
 {
     0:  Loop  00000004
-    C:  	Call  SetNpcAnimation   ( 00000000 00C40006 )
-   20:  	Call  InterpNpcYaw  ( 00000001 0000005A 00000001 )
-   38:  	Call  InterpNpcYaw  ( 00000002 0000010E 00000001 )
-   50:  	Call  InterpNpcYaw  ( 00000003 00000000 00000004 )
-   68:  	Call  InterpNpcYaw  ( 00000004 0000005A 00000001 )
-   80:  	Call  InterpNpcYaw  ( 00000005 0000010E 00000001 )
+    C:  	Call  SetNpcAnimation   ( .NpcID:RafaelRaven_00 00C40006 )
+   20:  	Call  InterpNpcYaw  ( .NpcID:Raven_01  90`  1` )
+   38:  	Call  InterpNpcYaw  ( .NpcID:Raven_02  270`  1` )
+   50:  	Call  InterpNpcYaw  ( .NpcID:Raven_03  0`  4` )
+   68:  	Call  InterpNpcYaw  ( .NpcID:Raven_04  90`  1` )
+   80:  	Call  InterpNpcYaw  ( .NpcID:Raven_05  270`  1` )
    98:  	Wait  20`
-   A4:  	Call  SetNpcAnimation   ( 00000000 00C40003 )
-   B8:  	Call  InterpNpcYaw  ( 00000001 0000010E 00000002 )
-   D0:  	Call  InterpNpcYaw  ( 00000002 0000005A 00000001 )
-   E8:  	Call  InterpNpcYaw  ( 00000003 00000000 00000001 )
-  100:  	Call  InterpNpcYaw  ( 00000004 0000010E 00000004 )
-  118:  	Call  InterpNpcYaw  ( 00000005 0000005A 00000001 )
+   A4:  	Call  SetNpcAnimation   ( .NpcID:RafaelRaven_00 00C40003 )
+   B8:  	Call  InterpNpcYaw  ( .NpcID:Raven_01  270`  2` )
+   D0:  	Call  InterpNpcYaw  ( .NpcID:Raven_02  90`  1` )
+   E8:  	Call  InterpNpcYaw  ( .NpcID:Raven_03  0`  1` )
+  100:  	Call  InterpNpcYaw  ( .NpcID:Raven_04  270`  4` )
+  118:  	Call  InterpNpcYaw  ( .NpcID:Raven_05  90`  1` )
   130:  	Wait  20`
   13C:  EndLoop
-  144:  Call  SetNpcAnimation   ( 00000001 00980001 )
-  158:  Call  SetNpcAnimation   ( 00000002 00980001 )
-  16C:  Call  SetNpcAnimation   ( 00000003 00980001 )
-  180:  Call  SetNpcAnimation   ( 00000004 00980001 )
-  194:  Call  SetNpcAnimation   ( 00000005 00980001 )
-  1A8:  Call  InterpNpcYaw      ( 00000001 00000000 00000001 )
-  1C0:  Call  InterpNpcYaw      ( 00000002 00000000 00000001 )
-  1D8:  Call  InterpNpcYaw      ( 00000003 00000000 00000001 )
-  1F0:  Call  InterpNpcYaw      ( 00000004 00000000 00000001 )
-  208:  Call  InterpNpcYaw      ( 00000005 00000000 00000001 )
+  144:  Call  SetNpcAnimation   ( .NpcID:Raven_01 00980001 )
+  158:  Call  SetNpcAnimation   ( .NpcID:Raven_02 00980001 )
+  16C:  Call  SetNpcAnimation   ( .NpcID:Raven_03 00980001 )
+  180:  Call  SetNpcAnimation   ( .NpcID:Raven_04 00980001 )
+  194:  Call  SetNpcAnimation   ( .NpcID:Raven_05 00980001 )
+  1A8:  Call  InterpNpcYaw      ( .NpcID:Raven_01  0`  1` )
+  1C0:  Call  InterpNpcYaw      ( .NpcID:Raven_02  0`  1` )
+  1D8:  Call  InterpNpcYaw      ( .NpcID:Raven_03  0`  1` )
+  1F0:  Call  InterpNpcYaw      ( .NpcID:Raven_04  0`  1` )
+  208:  Call  InterpNpcYaw      ( .NpcID:Raven_05  0`  1` )
   220:  Return
   228:  End
 }
@@ -204,18 +211,18 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
    14:  Loop  00000002
    20:  	Set   *Var3  FFFFFFE2
    30:  	Loop  00000014
-   3C:  		Call  SetNpcRotation    ( 00000001 00000000 00000000 *Var3 )
+   3C:  		Call  SetNpcRotation    ( .NpcID:Raven_01 00000000 00000000 *Var3 )
    58:  		Add   *Var3  00000003
    68:  		Wait  1`
    74:  	EndLoop
    7C:  	Loop  00000014
-   88:  		Call  SetNpcRotation    ( 00000001 00000000 00000000 *Var3 )
+   88:  		Call  SetNpcRotation    ( .NpcID:Raven_01 00000000 00000000 *Var3 )
    A4:  		Add   *Var3  FFFFFFFD
    B4:  		Wait  1`
    C0:  	EndLoop
    C8:  EndLoop
    D0:  Loop  0000000A
-   DC:  	Call  SetNpcRotation    ( 00000001 00000000 00000000 *Var3 )
+   DC:  	Call  SetNpcRotation    ( .NpcID:Raven_01 00000000 00000000 *Var3 )
    F8:  	Add   *Var3  00000003
   108:  	Wait  1`
   114:  EndLoop
@@ -230,18 +237,18 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
    14:  Loop  00000002
    20:  	Set   *Var3  FFFFFFE2
    30:  	Loop  00000014
-   3C:  		Call  SetNpcRotation    ( 00000002 00000000 00000000 *Var3 )
+   3C:  		Call  SetNpcRotation    ( .NpcID:Raven_02 00000000 00000000 *Var3 )
    58:  		Add   *Var3  00000003
    68:  		Wait  1`
    74:  	EndLoop
    7C:  	Loop  00000014
-   88:  		Call  SetNpcRotation    ( 00000002 00000000 00000000 *Var3 )
+   88:  		Call  SetNpcRotation    ( .NpcID:Raven_02 00000000 00000000 *Var3 )
    A4:  		Add   *Var3  FFFFFFFD
    B4:  		Wait  1`
    C0:  	EndLoop
    C8:  EndLoop
    D0:  Loop  0000000A
-   DC:  	Call  SetNpcRotation    ( 00000002 00000000 00000000 *Var3 )
+   DC:  	Call  SetNpcRotation    ( .NpcID:Raven_02 00000000 00000000 *Var3 )
    F8:  	Add   *Var3  00000003
   108:  	Wait  1`
   114:  EndLoop
@@ -256,18 +263,18 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
    14:  Loop  00000002
    20:  	Set   *Var3  FFFFFFE2
    30:  	Loop  00000014
-   3C:  		Call  SetNpcRotation    ( 00000003 00000000 00000000 *Var3 )
+   3C:  		Call  SetNpcRotation    ( .NpcID:Raven_03 00000000 00000000 *Var3 )
    58:  		Add   *Var3  00000003
    68:  		Wait  1`
    74:  	EndLoop
    7C:  	Loop  00000014
-   88:  		Call  SetNpcRotation    ( 00000003 00000000 00000000 *Var3 )
+   88:  		Call  SetNpcRotation    ( .NpcID:Raven_03 00000000 00000000 *Var3 )
    A4:  		Add   *Var3  FFFFFFFD
    B4:  		Wait  1`
    C0:  	EndLoop
    C8:  EndLoop
    D0:  Loop  0000000A
-   DC:  	Call  SetNpcRotation    ( 00000003 00000000 00000000 *Var3 )
+   DC:  	Call  SetNpcRotation    ( .NpcID:Raven_03 00000000 00000000 *Var3 )
    F8:  	Add   *Var3  00000003
   108:  	Wait  1`
   114:  EndLoop
@@ -282,18 +289,18 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
    14:  Loop  00000002
    20:  	Set   *Var3  FFFFFFE2
    30:  	Loop  00000014
-   3C:  		Call  SetNpcRotation    ( 00000004 00000000 00000000 *Var3 )
+   3C:  		Call  SetNpcRotation    ( .NpcID:Raven_04 00000000 00000000 *Var3 )
    58:  		Add   *Var3  00000003
    68:  		Wait  1`
    74:  	EndLoop
    7C:  	Loop  00000014
-   88:  		Call  SetNpcRotation    ( 00000004 00000000 00000000 *Var3 )
+   88:  		Call  SetNpcRotation    ( .NpcID:Raven_04 00000000 00000000 *Var3 )
    A4:  		Add   *Var3  FFFFFFFD
    B4:  		Wait  1`
    C0:  	EndLoop
    C8:  EndLoop
    D0:  Loop  0000000A
-   DC:  	Call  SetNpcRotation    ( 00000004 00000000 00000000 *Var3 )
+   DC:  	Call  SetNpcRotation    ( .NpcID:Raven_04 00000000 00000000 *Var3 )
    F8:  	Add   *Var3  00000003
   108:  	Wait  1`
   114:  EndLoop
@@ -308,18 +315,18 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
    14:  Loop  00000002
    20:  	Set   *Var3  FFFFFFE2
    30:  	Loop  00000014
-   3C:  		Call  SetNpcRotation    ( 00000005 00000000 00000000 *Var3 )
+   3C:  		Call  SetNpcRotation    ( .NpcID:Raven_05 00000000 00000000 *Var3 )
    58:  		Add   *Var3  00000003
    68:  		Wait  1`
    74:  	EndLoop
    7C:  	Loop  00000014
-   88:  		Call  SetNpcRotation    ( 00000005 00000000 00000000 *Var3 )
+   88:  		Call  SetNpcRotation    ( .NpcID:Raven_05 00000000 00000000 *Var3 )
    A4:  		Add   *Var3  FFFFFFFD
    B4:  		Wait  1`
    C0:  	EndLoop
    C8:  EndLoop
    D0:  Loop  0000000A
-   DC:  	Call  SetNpcRotation    ( 00000005 00000000 00000000 *Var3 )
+   DC:  	Call  SetNpcRotation    ( .NpcID:Raven_05 00000000 00000000 *Var3 )
    F8:  	Add   *Var3  00000003
   108:  	Wait  1`
   114:  EndLoop
@@ -331,11 +338,11 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
 #new:Script $Script_80240FC4
 {
     0:  Wait  10`
-    C:  Call  SetNpcAnimation   ( 00000001 00980003 )
-   20:  Call  SetNpcSpeed       ( 00000001 *Fixed[3.0] )
-   34:  Call  NpcMoveTo ( 00000001 0000021C 00000055 00000000 )
-   50:  Call  SetNpcAnimation   ( 00000001 00980001 )
-   64:  Call  InterpNpcYaw      ( 00000001 00000000 00000001 )
+    C:  Call  SetNpcAnimation   ( .NpcID:Raven_01 00980003 )
+   20:  Call  SetNpcSpeed       ( .NpcID:Raven_01 *Fixed[3.0] )
+   34:  Call  NpcMoveTo ( .NpcID:Raven_01  540`  85`  0` )
+   50:  Call  SetNpcAnimation   ( .NpcID:Raven_01 00980001 )
+   64:  Call  InterpNpcYaw      ( .NpcID:Raven_01  0`  1` )
    7C:  Return
    84:  End
 }
@@ -343,11 +350,11 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
 #new:Script $Script_80241050
 {
     0:  Wait  10`
-    C:  Call  SetNpcAnimation   ( 00000002 00980003 )
-   20:  Call  SetNpcSpeed       ( 00000002 *Fixed[3.0] )
-   34:  Call  NpcMoveTo ( 00000002 00000230 00000084 00000000 )
-   50:  Call  SetNpcAnimation   ( 00000002 00980001 )
-   64:  Call  InterpNpcYaw      ( 00000002 00000000 00000001 )
+    C:  Call  SetNpcAnimation   ( .NpcID:Raven_02 00980003 )
+   20:  Call  SetNpcSpeed       ( .NpcID:Raven_02 *Fixed[3.0] )
+   34:  Call  NpcMoveTo ( .NpcID:Raven_02  560`  132`  0` )
+   50:  Call  SetNpcAnimation   ( .NpcID:Raven_02 00980001 )
+   64:  Call  InterpNpcYaw      ( .NpcID:Raven_02  0`  1` )
    7C:  Return
    84:  End
 }
@@ -355,11 +362,11 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
 #new:Script $Script_802410DC
 {
     0:  Wait  10`
-    C:  Call  SetNpcAnimation   ( 00000003 00980003 )
-   20:  Call  SetNpcSpeed       ( 00000003 *Fixed[3.0] )
-   34:  Call  NpcMoveTo ( 00000003 0000024E 00000069 00000000 )
-   50:  Call  SetNpcAnimation   ( 00000003 00980001 )
-   64:  Call  InterpNpcYaw      ( 00000003 00000000 00000001 )
+    C:  Call  SetNpcAnimation   ( .NpcID:Raven_03 00980003 )
+   20:  Call  SetNpcSpeed       ( .NpcID:Raven_03 *Fixed[3.0] )
+   34:  Call  NpcMoveTo ( .NpcID:Raven_03  590`  105`  0` )
+   50:  Call  SetNpcAnimation   ( .NpcID:Raven_03 00980001 )
+   64:  Call  InterpNpcYaw      ( .NpcID:Raven_03  0`  1` )
    7C:  Return
    84:  End
 }
@@ -367,11 +374,11 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
 #new:Script $Script_80241168
 {
     0:  Wait  10`
-    C:  Call  SetNpcAnimation   ( 00000004 00980003 )
-   20:  Call  SetNpcSpeed       ( 00000004 *Fixed[3.0] )
-   34:  Call  NpcMoveTo ( 00000004 00000267 0000007A 00000000 )
-   50:  Call  SetNpcAnimation   ( 00000004 00980001 )
-   64:  Call  InterpNpcYaw      ( 00000004 00000000 00000001 )
+    C:  Call  SetNpcAnimation   ( .NpcID:Raven_04 00980003 )
+   20:  Call  SetNpcSpeed       ( .NpcID:Raven_04 *Fixed[3.0] )
+   34:  Call  NpcMoveTo ( .NpcID:Raven_04  615`  122`  0` )
+   50:  Call  SetNpcAnimation   ( .NpcID:Raven_04 00980001 )
+   64:  Call  InterpNpcYaw      ( .NpcID:Raven_04  0`  1` )
    7C:  Return
    84:  End
 }
@@ -390,11 +397,11 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
 {
     0:  Wait  10`
     C:  Exec  $Script_802411F4 *Var9
-   1C:  Call  SetNpcAnimation   ( 00000005 00980003 )
-   30:  Call  SetNpcSpeed       ( 00000005 *Fixed[4.0] )
-   44:  Call  NpcMoveTo ( 00000005 00000285 0000004E 00000000 )
-   60:  Call  SetNpcAnimation   ( 00000005 00980001 )
-   74:  Call  InterpNpcYaw      ( 00000005 00000000 00000001 )
+   1C:  Call  SetNpcAnimation   ( .NpcID:Raven_05 00980003 )
+   30:  Call  SetNpcSpeed       ( .NpcID:Raven_05 *Fixed[4.0] )
+   44:  Call  NpcMoveTo ( .NpcID:Raven_05  645`  78`  0` )
+   60:  Call  SetNpcAnimation   ( .NpcID:Raven_05 00980001 )
+   74:  Call  InterpNpcYaw      ( .NpcID:Raven_05  0`  1` )
    8C:  Wait  15`
    98:  Kill  *Var9
    A4:  Return
@@ -408,7 +415,7 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
    28:  Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
    44:  Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
    60:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-   7C:  Call  SetCamDistance        ( .Cam:Default 000001CC )
+   7C:  Call  SetCamDistance        ( .Cam:Default  460` )
    90:  Call  SetCamPitch   ( .Cam:Default *Fixed[16.0] *Fixed[-9.0] )
    A8:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
    BC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -433,11 +440,11 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
   23C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[12.0] )
   250:  Loop  00000005
   25C:  	Call  PlaySoundAtNpc    ( .Npc:Self 00000386 00000000 )
-  274:  	Call  SetCamDistance    ( .Cam:Default 00000136 )
+  274:  	Call  SetCamDistance    ( .Cam:Default  310` )
   288:  	Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   2A0:  	Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
   2B4:  	Call  PlaySoundAtNpc    ( .Npc:Self 00000387 00000000 )
-  2CC:  	Call  SetCamDistance    ( .Cam:Default 000001CC )
+  2CC:  	Call  SetCamDistance    ( .Cam:Default  460` )
   2E0:  	Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   2F8:  	Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
   30C:  EndLoop
@@ -454,99 +461,99 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
   3C4:  Add   *Var1  00000000
   3D4:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   3F0:  Call  SetPanTarget      ( .Cam:Default *Var0 *Var1 *Var2 )
-  40C:  Call  SetCamDistance    ( .Cam:Default 00000244 )
+  40C:  Call  SetCamDistance    ( .Cam:Default  580` )
   420:  Call  SetCamSpeed       ( .Cam:Default *Fixed[2.0] )
   434:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   44C:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
-  460:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000001 )
-  478:  Call  SetNpcAnimation   ( 00000001 00980006 )
-  48C:  Call  SetNpcAnimation   ( 00000002 00980006 )
-  4A0:  Call  SetNpcAnimation   ( 00000003 00980006 )
-  4B4:  Call  SetNpcAnimation   ( 00000004 00980006 )
-  4C8:  Call  SetNpcAnimation   ( 00000005 00980006 )
-  4DC:  Call  SetNpcPos ( 00000001 00000320 000001C2 FFFFFFEC )
-  4F8:  Call  SetNpcPos ( 00000002 00000334 000001C4 00000000 )
-  514:  Call  SetNpcPos ( 00000003 00000348 000001C4 0000001B )
-  530:  Call  SetNpcPos ( 00000004 0000033E 000001C4 00000038 )
-  54C:  Call  SetNpcPos ( 00000005 0000031B 000001C7 00000014 )
-  568:  Call  EnableNpcShadow   ( 00000001 .False )
-  57C:  Call  EnableNpcShadow   ( 00000002 .False )
-  590:  Call  EnableNpcShadow   ( 00000003 .False )
-  5A4:  Call  EnableNpcShadow   ( 00000004 .False )
-  5B8:  Call  EnableNpcShadow   ( 00000005 .False )
+  460:  Call  InterpNpcYaw      ( .Npc:Self  90`  1` )
+  478:  Call  SetNpcAnimation   ( .NpcID:Raven_01 00980006 )
+  48C:  Call  SetNpcAnimation   ( .NpcID:Raven_02 00980006 )
+  4A0:  Call  SetNpcAnimation   ( .NpcID:Raven_03 00980006 )
+  4B4:  Call  SetNpcAnimation   ( .NpcID:Raven_04 00980006 )
+  4C8:  Call  SetNpcAnimation   ( .NpcID:Raven_05 00980006 )
+  4DC:  Call  SetNpcPos ( .NpcID:Raven_01  800`  450`  -20` )
+  4F8:  Call  SetNpcPos ( .NpcID:Raven_02  820`  452`  0` )
+  514:  Call  SetNpcPos ( .NpcID:Raven_03  840`  452`  27` )
+  530:  Call  SetNpcPos ( .NpcID:Raven_04  830`  452`  56` )
+  54C:  Call  SetNpcPos ( .NpcID:Raven_05  795`  455`  20` )
+  568:  Call  EnableNpcShadow   ( .NpcID:Raven_01 .False )
+  57C:  Call  EnableNpcShadow   ( .NpcID:Raven_02 .False )
+  590:  Call  EnableNpcShadow   ( .NpcID:Raven_03 .False )
+  5A4:  Call  EnableNpcShadow   ( .NpcID:Raven_04 .False )
+  5B8:  Call  EnableNpcShadow   ( .NpcID:Raven_05 .False )
   5CC:  Thread
   5D4:  	Exec  $Script_80240984
-  5E0:  	Call  SetNpcJumpscale   ( 00000001 00000000 )
-  5F4:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+  5E0:  	Call  SetNpcJumpscale   ( .NpcID:Raven_01 00000000 )
+  5F4:  	Call  GetNpcPos ( .NpcID:Raven_01 *Var0 *Var1 *Var2 )
   610:  	Add   *Var0  FFFFFF88
   620:  	Add   *Var1  FFFFFF06
   630:  	Add   *Var2  0000003F
-  640:  	Call  PlaySoundAtNpc    ( 00000001 0000020C 00000000 )
-  658:  	Call  NpcJump0  ( 00000001 *Var0 *Var1 *Var2 00000064 )
-  678:  	Call  SetNpcAnimation   ( 00000001 00980001 )
-  68C:  	Call  EnableNpcShadow   ( 00000001 .True )
+  640:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_01 0000020C 00000000 )
+  658:  	Call  NpcJump0  ( .NpcID:Raven_01 *Var0 *Var1 *Var2  100` )
+  678:  	Call  SetNpcAnimation   ( .NpcID:Raven_01 00980001 )
+  68C:  	Call  EnableNpcShadow   ( .NpcID:Raven_01 .True )
   6A0:  	ExecWait  $Script_80240FC4
   6AC:  EndThread
   6B4:  Wait  20`
   6C0:  Thread
   6C8:  	Exec  $Script_80240AC4
-  6D4:  	Call  SetNpcJumpscale   ( 00000002 00000000 )
-  6E8:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+  6D4:  	Call  SetNpcJumpscale   ( .NpcID:Raven_02 00000000 )
+  6E8:  	Call  GetNpcPos ( .NpcID:Raven_02 *Var0 *Var1 *Var2 )
   704:  	Add   *Var0  FFFFFF88
   714:  	Add   *Var1  FFFFFF06
   724:  	Add   *Var2  0000003F
-  734:  	Call  PlaySoundAtNpc    ( 00000002 0000020D 00000000 )
-  74C:  	Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 00000064 )
-  76C:  	Call  SetNpcAnimation   ( 00000002 00980001 )
-  780:  	Call  EnableNpcShadow   ( 00000002 .True )
+  734:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_02 0000020D 00000000 )
+  74C:  	Call  NpcJump0  ( .NpcID:Raven_02 *Var0 *Var1 *Var2  100` )
+  76C:  	Call  SetNpcAnimation   ( .NpcID:Raven_02 00980001 )
+  780:  	Call  EnableNpcShadow   ( .NpcID:Raven_02 .True )
   794:  	ExecWait  $Script_80241050
   7A0:  EndThread
   7A8:  Wait  20`
   7B4:  Thread
-  7BC:  	Call  InterpPlayerYaw   ( 0000005A 00000001 )
+  7BC:  	Call  InterpPlayerYaw   (  90`  1` )
   7D0:  	Wait  20`
   7DC:  	Set   *Var3  00000271
   7EC:  	Set   *Var5  000000DC
-  7FC:  	Call  PlayerMoveTo      ( *Var3 *Var5 0000001E )
-  814:  	Call  InterpPlayerYaw   ( 0000000A 00000004 )
+  7FC:  	Call  PlayerMoveTo      ( *Var3 *Var5  30` )
+  814:  	Call  InterpPlayerYaw   (  10`  4` )
   828:  EndThread
   830:  Thread
   838:  	Exec  $Script_80240C04
-  844:  	Call  SetNpcJumpscale   ( 00000003 00000000 )
-  858:  	Call  GetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
+  844:  	Call  SetNpcJumpscale   ( .NpcID:Raven_03 00000000 )
+  858:  	Call  GetNpcPos ( .NpcID:Raven_03 *Var0 *Var1 *Var2 )
   874:  	Add   *Var0  FFFFFF9C
   884:  	Add   *Var1  FFFFFF06
   894:  	Add   *Var2  00000032
-  8A4:  	Call  PlaySoundAtNpc    ( 00000003 0000020E 00000000 )
-  8BC:  	Call  NpcJump0  ( 00000003 *Var0 *Var1 *Var2 0000005A )
-  8DC:  	Call  SetNpcAnimation   ( 00000003 00980001 )
-  8F0:  	Call  EnableNpcShadow   ( 00000003 .True )
+  8A4:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_03 0000020E 00000000 )
+  8BC:  	Call  NpcJump0  ( .NpcID:Raven_03 *Var0 *Var1 *Var2  90` )
+  8DC:  	Call  SetNpcAnimation   ( .NpcID:Raven_03 00980001 )
+  8F0:  	Call  EnableNpcShadow   ( .NpcID:Raven_03 .True )
   904:  	ExecWait  $Script_802410DC
   910:  EndThread
   918:  Wait  40`
   924:  Thread
   92C:  	Exec  $Script_80240D44
-  938:  	Call  SetNpcJumpscale   ( 00000004 00000000 )
-  94C:  	Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+  938:  	Call  SetNpcJumpscale   ( .NpcID:Raven_04 00000000 )
+  94C:  	Call  GetNpcPos ( .NpcID:Raven_04 *Var0 *Var1 *Var2 )
   968:  	Add   *Var0  FFFFFF9C
   978:  	Add   *Var1  FFFFFF06
   988:  	Add   *Var2  0000003C
-  998:  	Call  PlaySoundAtNpc    ( 00000004 0000020C 00000000 )
-  9B0:  	Call  NpcJump0  ( 00000004 *Var0 *Var1 *Var2 00000064 )
-  9D0:  	Call  SetNpcAnimation   ( 00000004 00980001 )
-  9E4:  	Call  EnableNpcShadow   ( 00000004 .True )
+  998:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_04 0000020C 00000000 )
+  9B0:  	Call  NpcJump0  ( .NpcID:Raven_04 *Var0 *Var1 *Var2  100` )
+  9D0:  	Call  SetNpcAnimation   ( .NpcID:Raven_04 00980001 )
+  9E4:  	Call  EnableNpcShadow   ( .NpcID:Raven_04 .True )
   9F8:  	ExecWait  $Script_80241168
   A04:  EndThread
   A0C:  Wait  20`
   A18:  Exec  $Script_80240E84
-  A24:  Call  SetNpcJumpscale   ( 00000005 00000000 )
-  A38:  Call  PlaySoundAtNpc    ( 00000005 0000020D 00000000 )
-  A50:  Call  NpcJump0      ( 00000005 000002E1 000000C8 00000041 00000064 )
-  A70:  Call  SetNpcAnimation   ( 00000005 00980001 )
-  A84:  Call  EnableNpcShadow   ( 00000005 .True )
+  A24:  Call  SetNpcJumpscale   ( .NpcID:Raven_05 00000000 )
+  A38:  Call  PlaySoundAtNpc    ( .NpcID:Raven_05 0000020D 00000000 )
+  A50:  Call  NpcJump0      ( .NpcID:Raven_05  737`  200`  65`  100` )
+  A70:  Call  SetNpcAnimation   ( .NpcID:Raven_05 00980001 )
+  A84:  Call  EnableNpcShadow   ( .NpcID:Raven_05 .True )
   A98:  ExecWait  $Script_80241258
   AA4:  Wait  20`
-  AB0:  Call  InterpPlayerYaw   ( 0000015E 00000004 )
+  AB0:  Call  InterpPlayerYaw   (  350`  4` )
   AC4:  Call  SpeakToPlayer ( .Npc:Self 00C40006 00C40003 00000005 001000DD ) % Cawcaaaw caw.
   AE4:  Call  SpeakToPlayer ( .Npc:Self 00C40006 00C40003 00000005 001000DE ) % Excellent response time, Ravens. We've got work to ...
   B04:  ExecWait  $Script_80240754
@@ -554,13 +561,13 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
   B30:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
   B44:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   B5C:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-  B78:  Call  SetPanTarget  ( .Cam:Default 00000217 000000C8 000000D7 )
+  B78:  Call  SetPanTarget  ( .Cam:Default  535`  200`  215` )
   B94:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
   BA8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   BC0:  Wait  20`
   BCC:  Thread
   BD4:  	Wait  20`
-  BE0:  	Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+  BE0:  	Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[1.0] )
   BFC:  	Wait  15`
   C08:  	Call  PlaySoundAtNpc    ( .Npc:Self 0000020C 00000000 )
   C20:  EndThread
@@ -572,7 +579,7 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
   C8C:  	Add   *Var0  FFFFFFBA
   C9C:  	Add   *Var1  FFFFFFF9
   CAC:  	Add   *Var2  000000AF
-  CBC:  	Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 00000014 )
+  CBC:  	Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  20` )
   CDC:  	Call  SetNpcAnimation   ( .Npc:Self 00C40002 )
   CF0:  	Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.5] )
   D04:  	Call  SetNpcAnimation   ( .Npc:Self 00C40004 )
@@ -580,133 +587,133 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
   D34:  	Add   *Var0  FFFFFF9C
   D44:  	Add   *Var1  FFFFFED4
   D54:  	Add   *Var2  000000AF
-  D64:  	Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 0000001E )
+  D64:  	Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  30` )
   D84:  	Call  SetNpcAnimation   ( .Npc:Self 00C40002 )
-  D98:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  D98:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   DB4:  	Call  SetNpcFlagBits    ( .Npc:Self 00000200 .False )
   DCC:  EndThread
   DD4:  Wait  40`
   DE0:  Thread
   DE8:  	Wait  35`
-  DF4:  	Call  PlaySoundAtNpc    ( 00000001 0000020D 00000000 )
+  DF4:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_01 0000020D 00000000 )
   E0C:  EndThread
   E14:  Thread
-  E1C:  	Call  SetNpcFlagBits    ( 00000001 00000200 .True )
-  E34:  	Call  SetNpcAnimation   ( 00000001 00980003 )
-  E48:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+  E1C:  	Call  SetNpcFlagBits    ( .NpcID:Raven_01 00000200 .True )
+  E34:  	Call  SetNpcAnimation   ( .NpcID:Raven_01 00980003 )
+  E48:  	Call  GetNpcPos ( .NpcID:Raven_01 *Var0 *Var1 *Var2 )
   E64:  	Add   *Var0  FFFFFFD8
   E74:  	Add   *Var2  0000009A
-  E84:  	Call  NpcMoveTo ( 00000001 *Var0 *Var2 00000014 )
-  EA0:  	Call  SetNpcAnimation   ( 00000001 00980001 )
-  EB4:  	Call  SetNpcJumpscale   ( 00000001 *Fixed[1.5] )
-  EC8:  	Call  SetNpcAnimation   ( 00000001 00980003 )
-  EDC:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+  E84:  	Call  NpcMoveTo ( .NpcID:Raven_01 *Var0 *Var2  20` )
+  EA0:  	Call  SetNpcAnimation   ( .NpcID:Raven_01 00980001 )
+  EB4:  	Call  SetNpcJumpscale   ( .NpcID:Raven_01 *Fixed[1.5] )
+  EC8:  	Call  SetNpcAnimation   ( .NpcID:Raven_01 00980003 )
+  EDC:  	Call  GetNpcPos ( .NpcID:Raven_01 *Var0 *Var1 *Var2 )
   EF8:  	Add   *Var0  FFFFFFEC
   F08:  	Add   *Var1  FFFFFED4
   F18:  	Add   *Var2  0000009A
-  F28:  	Call  NpcJump0  ( 00000001 *Var0 *Var1 *Var2 0000001E )
-  F48:  	Call  SetNpcAnimation   ( 00000001 00980001 )
-  F5C:  	Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
-  F78:  	Call  SetNpcFlagBits    ( 00000001 00000200 .False )
+  F28:  	Call  NpcJump0  ( .NpcID:Raven_01 *Var0 *Var1 *Var2  30` )
+  F48:  	Call  SetNpcAnimation   ( .NpcID:Raven_01 00980001 )
+  F5C:  	Call  SetNpcPos ( .NpcID:Raven_01  0`  -1000`  0` )
+  F78:  	Call  SetNpcFlagBits    ( .NpcID:Raven_01 00000200 .False )
   F90:  EndThread
   F98:  Wait  20`
   FA4:  Thread
   FAC:  	Wait  35`
-  FB8:  	Call  PlaySoundAtNpc    ( 00000002 0000020E 00000000 )
+  FB8:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_02 0000020E 00000000 )
   FD0:  EndThread
   FD8:  Thread
-  FE0:  	Call  SetNpcFlagBits    ( 00000002 00000200 .True )
-  FF8:  	Call  SetNpcAnimation   ( 00000002 00980003 )
- 100C:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+  FE0:  	Call  SetNpcFlagBits    ( .NpcID:Raven_02 00000200 .True )
+  FF8:  	Call  SetNpcAnimation   ( .NpcID:Raven_02 00980003 )
+ 100C:  	Call  GetNpcPos ( .NpcID:Raven_02 *Var0 *Var1 *Var2 )
  1028:  	Add   *Var0  FFFFFFC9
  1038:  	Add   *Var2  0000006E
- 1048:  	Call  NpcMoveTo ( 00000002 *Var0 *Var2 00000014 )
- 1064:  	Call  SetNpcAnimation   ( 00000002 00980001 )
- 1078:  	Call  SetNpcJumpscale   ( 00000002 *Fixed[1.5] )
- 108C:  	Call  SetNpcAnimation   ( 00000002 00980003 )
- 10A0:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+ 1048:  	Call  NpcMoveTo ( .NpcID:Raven_02 *Var0 *Var2  20` )
+ 1064:  	Call  SetNpcAnimation   ( .NpcID:Raven_02 00980001 )
+ 1078:  	Call  SetNpcJumpscale   ( .NpcID:Raven_02 *Fixed[1.5] )
+ 108C:  	Call  SetNpcAnimation   ( .NpcID:Raven_02 00980003 )
+ 10A0:  	Call  GetNpcPos ( .NpcID:Raven_02 *Var0 *Var1 *Var2 )
  10BC:  	Add   *Var0  FFFFFFD8
  10CC:  	Add   *Var1  FFFFFED4
  10DC:  	Add   *Var2  0000006E
- 10EC:  	Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 0000001E )
- 110C:  	Call  SetNpcAnimation   ( 00000002 00980001 )
- 1120:  	Call  SetNpcPos ( 00000002 00000000 FFFFFC18 00000000 )
- 113C:  	Call  SetNpcFlagBits    ( 00000002 00000200 .False )
+ 10EC:  	Call  NpcJump0  ( .NpcID:Raven_02 *Var0 *Var1 *Var2  30` )
+ 110C:  	Call  SetNpcAnimation   ( .NpcID:Raven_02 00980001 )
+ 1120:  	Call  SetNpcPos ( .NpcID:Raven_02  0`  -1000`  0` )
+ 113C:  	Call  SetNpcFlagBits    ( .NpcID:Raven_02 00000200 .False )
  1154:  EndThread
  115C:  Wait  20`
  1168:  Thread
  1170:  	Wait  35`
- 117C:  	Call  PlaySoundAtNpc    ( 00000003 0000020C 00000000 )
+ 117C:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_03 0000020C 00000000 )
  1194:  EndThread
  119C:  Thread
- 11A4:  	Call  SetNpcFlagBits    ( 00000003 00000200 .True )
- 11BC:  	Call  SetNpcAnimation   ( 00000003 00980003 )
- 11D0:  	Call  GetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
+ 11A4:  	Call  SetNpcFlagBits    ( .NpcID:Raven_03 00000200 .True )
+ 11BC:  	Call  SetNpcAnimation   ( .NpcID:Raven_03 00980003 )
+ 11D0:  	Call  GetNpcPos ( .NpcID:Raven_03 *Var0 *Var1 *Var2 )
  11EC:  	Add   *Var0  FFFFFFB5
  11FC:  	Add   *Var2  00000086
- 120C:  	Call  NpcMoveTo ( 00000003 *Var0 *Var2 00000014 )
- 1228:  	Call  SetNpcAnimation   ( 00000003 00980001 )
- 123C:  	Call  SetNpcJumpscale   ( 00000003 *Fixed[1.5] )
- 1250:  	Call  SetNpcAnimation   ( 00000003 00980003 )
- 1264:  	Call  GetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
+ 120C:  	Call  NpcMoveTo ( .NpcID:Raven_03 *Var0 *Var2  20` )
+ 1228:  	Call  SetNpcAnimation   ( .NpcID:Raven_03 00980001 )
+ 123C:  	Call  SetNpcJumpscale   ( .NpcID:Raven_03 *Fixed[1.5] )
+ 1250:  	Call  SetNpcAnimation   ( .NpcID:Raven_03 00980003 )
+ 1264:  	Call  GetNpcPos ( .NpcID:Raven_03 *Var0 *Var1 *Var2 )
  1280:  	Add   *Var0  FFFFFFBA
  1290:  	Add   *Var1  FFFFFED4
  12A0:  	Add   *Var2  00000086
- 12B0:  	Call  NpcJump0  ( 00000003 *Var0 *Var1 *Var2 0000001E )
- 12D0:  	Call  SetNpcAnimation   ( 00000003 00980001 )
- 12E4:  	Call  SetNpcPos ( 00000003 00000000 FFFFFC18 00000000 )
- 1300:  	Call  SetNpcFlagBits    ( 00000003 00000200 .False )
+ 12B0:  	Call  NpcJump0  ( .NpcID:Raven_03 *Var0 *Var1 *Var2  30` )
+ 12D0:  	Call  SetNpcAnimation   ( .NpcID:Raven_03 00980001 )
+ 12E4:  	Call  SetNpcPos ( .NpcID:Raven_03  0`  -1000`  0` )
+ 1300:  	Call  SetNpcFlagBits    ( .NpcID:Raven_03 00000200 .False )
  1318:  EndThread
  1320:  Wait  20`
  132C:  Thread
  1334:  	Wait  35`
- 1340:  	Call  PlaySoundAtNpc    ( 00000004 0000020D 00000000 )
+ 1340:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_04 0000020D 00000000 )
  1358:  EndThread
  1360:  Thread
- 1368:  	Call  SetNpcFlagBits    ( 00000004 00000200 .True )
- 1380:  	Call  SetNpcAnimation   ( 00000004 00980003 )
- 1394:  	Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+ 1368:  	Call  SetNpcFlagBits    ( .NpcID:Raven_04 00000200 .True )
+ 1380:  	Call  SetNpcAnimation   ( .NpcID:Raven_04 00980003 )
+ 1394:  	Call  GetNpcPos ( .NpcID:Raven_04 *Var0 *Var1 *Var2 )
  13B0:  	Add   *Var0  FFFFFF92
  13C0:  	Add   *Var2  00000073
- 13D0:  	Call  NpcMoveTo ( 00000004 *Var0 *Var2 00000014 )
- 13EC:  	Call  SetNpcAnimation   ( 00000004 00980001 )
- 1400:  	Call  SetNpcJumpscale   ( 00000004 *Fixed[1.5] )
- 1414:  	Call  SetNpcAnimation   ( 00000004 00980003 )
- 1428:  	Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+ 13D0:  	Call  NpcMoveTo ( .NpcID:Raven_04 *Var0 *Var2  20` )
+ 13EC:  	Call  SetNpcAnimation   ( .NpcID:Raven_04 00980001 )
+ 1400:  	Call  SetNpcJumpscale   ( .NpcID:Raven_04 *Fixed[1.5] )
+ 1414:  	Call  SetNpcAnimation   ( .NpcID:Raven_04 00980003 )
+ 1428:  	Call  GetNpcPos ( .NpcID:Raven_04 *Var0 *Var1 *Var2 )
  1444:  	Add   *Var0  FFFFFF92
  1454:  	Add   *Var1  FFFFFED4
  1464:  	Add   *Var2  00000073
- 1474:  	Call  NpcJump0  ( 00000004 *Var0 *Var1 *Var2 0000001E )
- 1494:  	Call  SetNpcAnimation   ( 00000004 00980001 )
- 14A8:  	Call  SetNpcPos ( 00000004 00000000 FFFFFC18 00000000 )
- 14C4:  	Call  SetNpcFlagBits    ( 00000004 00000200 .False )
+ 1474:  	Call  NpcJump0  ( .NpcID:Raven_04 *Var0 *Var1 *Var2  30` )
+ 1494:  	Call  SetNpcAnimation   ( .NpcID:Raven_04 00980001 )
+ 14A8:  	Call  SetNpcPos ( .NpcID:Raven_04  0`  -1000`  0` )
+ 14C4:  	Call  SetNpcFlagBits    ( .NpcID:Raven_04 00000200 .False )
  14DC:  EndThread
  14E4:  Wait  10`
  14F0:  Thread
  14F8:  	Wait  45`
- 1504:  	Call  PlaySoundAtNpc    ( 00000005 0000020E 00000000 )
+ 1504:  	Call  PlaySoundAtNpc    ( .NpcID:Raven_05 0000020E 00000000 )
  151C:  EndThread
- 1524:  Call  SetNpcFlagBits    ( 00000005 00000200 .True )
- 153C:  Call  SetNpcAnimation   ( 00000005 00980003 )
- 1550:  Call  GetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
+ 1524:  Call  SetNpcFlagBits    ( .NpcID:Raven_05 00000200 .True )
+ 153C:  Call  SetNpcAnimation   ( .NpcID:Raven_05 00980003 )
+ 1550:  Call  GetNpcPos ( .NpcID:Raven_05 *Var0 *Var1 *Var2 )
  156C:  Add   *Var0  FFFFFF9C
  157C:  Add   *Var2  000000A1
- 158C:  Call  NpcMoveTo ( 00000005 *Var0 *Var2 0000001E )
+ 158C:  Call  NpcMoveTo ( .NpcID:Raven_05 *Var0 *Var2  30` )
  15A8:  Thread
- 15B0:  	Call  SetNpcAnimation   ( 00000005 00980001 )
- 15C4:  	Call  SetNpcJumpscale   ( 00000005 *Fixed[1.5] )
- 15D8:  	Call  SetNpcAnimation   ( 00000005 00980003 )
- 15EC:  	Call  GetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
+ 15B0:  	Call  SetNpcAnimation   ( .NpcID:Raven_05 00980001 )
+ 15C4:  	Call  SetNpcJumpscale   ( .NpcID:Raven_05 *Fixed[1.5] )
+ 15D8:  	Call  SetNpcAnimation   ( .NpcID:Raven_05 00980003 )
+ 15EC:  	Call  GetNpcPos ( .NpcID:Raven_05 *Var0 *Var1 *Var2 )
  1608:  	Add   *Var0  FFFFFFBA
  1618:  	Add   *Var1  FFFFFE0C
  1628:  	Add   *Var2  000000A1
- 1638:  	Call  NpcJump0  ( 00000005 *Var0 *Var1 *Var2 00000023 )
- 1658:  	Call  SetNpcAnimation   ( 00000005 00980001 )
- 166C:  	Call  SetNpcPos ( 00000005 00000000 FFFFFC18 00000000 )
- 1688:  	Call  SetNpcFlagBits    ( 00000005 00000200 .False )
+ 1638:  	Call  NpcJump0  ( .NpcID:Raven_05 *Var0 *Var1 *Var2  35` )
+ 1658:  	Call  SetNpcAnimation   ( .NpcID:Raven_05 00980001 )
+ 166C:  	Call  SetNpcPos ( .NpcID:Raven_05  0`  -1000`  0` )
+ 1688:  	Call  SetNpcFlagBits    ( .NpcID:Raven_05 00000200 .False )
  16A0:  EndThread
- 16A8:  Call  SetPanTarget  ( .Cam:Default 00000226 FFFFFF6A 00000190 )
- 16C4:  Call  SetCamDistance        ( .Cam:Default 00000244 )
+ 16A8:  Call  SetPanTarget  ( .Cam:Default  550`  -150`  400` )
+ 16C4:  Call  SetCamDistance        ( .Cam:Default  580` )
  16D8:  Call  SetCamPitch   ( .Cam:Default *Fixed[16.0] *Fixed[-4.0] )
  16F0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.8] )
  1704:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -773,51 +780,51 @@ PADDING: 802406C8 to 802406D0 (000006C8 to 000006D0)
 
 #new:NpcGroup $NpcGroup_80242B9C
 {
-	00000000 $NpcSettings_802406FC ~Vec3f:NPC_80242B9C % 590 210 0
+	.NpcID:RafaelRaven_00 $NpcSettings_802406FC ~Vec3f:NPC_RafaelRaven_00 % 590 210 0
 	0000150D $Script_Init_80242ABC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242B9C
-	~AnimationTable:NPC_80242B9C % .Sprite:RafaelRaven
+	~Movement:NPC_RafaelRaven_00
+	~AnimationTable:NPC_RafaelRaven_00 % .Sprite:RafaelRaven
 	00000000 00000000 00000000 001A00D0 % He's Raphael the Raven, the guardian of this jungl ...
 	%
 	% $NpcGroup_80242B9C[1F0]
-	00000001 $NpcSettings_80240728 ~Vec3f:NPC_80242D8C % 0 -1000 0
+	.NpcID:Raven_01 $NpcSettings_80240728 ~Vec3f:NPC_Raven_01 % 0 -1000 0
 	0000050D $Script_Init_80242B4C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242D8C
-	~AnimationTable:NPC_80242D8C % .Sprite:Raven
+	~Movement:NPC_Raven_01
+	~AnimationTable:NPC_Raven_01 % .Sprite:Raven
 	00000000 00000000 00000000 001A00C9 % He's a Raven. Ravens are short and chubby. They're ...
 	%
 	% $NpcGroup_80242B9C[3E0]
-	00000002 $NpcSettings_80240728 ~Vec3f:NPC_80242F7C % 0 -1000 0
+	.NpcID:Raven_02 $NpcSettings_80240728 ~Vec3f:NPC_Raven_02 % 0 -1000 0
 	0000050D $Script_Init_80242B5C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242F7C
-	~AnimationTable:NPC_80242F7C % .Sprite:Raven
+	~Movement:NPC_Raven_02
+	~AnimationTable:NPC_Raven_02 % .Sprite:Raven
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242B9C[5D0]
-	00000003 $NpcSettings_80240728 ~Vec3f:NPC_8024316C % 0 -1000 0
+	.NpcID:Raven_03 $NpcSettings_80240728 ~Vec3f:NPC_Raven_03 % 0 -1000 0
 	0000050D $Script_Init_80242B6C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024316C
-	~AnimationTable:NPC_8024316C % .Sprite:Raven
+	~Movement:NPC_Raven_03
+	~AnimationTable:NPC_Raven_03 % .Sprite:Raven
 	00000000 00000000 00000000 001A00CB % He's a Raven. He looks good in black. Can we take  ...
 	%
 	% $NpcGroup_80242B9C[7C0]
-	00000004 $NpcSettings_80240728 ~Vec3f:NPC_8024335C % 0 -1000 0
+	.NpcID:Raven_04 $NpcSettings_80240728 ~Vec3f:NPC_Raven_04 % 0 -1000 0
 	0000050D $Script_Init_80242B7C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024335C
-	~AnimationTable:NPC_8024335C % .Sprite:Raven
+	~Movement:NPC_Raven_04
+	~AnimationTable:NPC_Raven_04 % .Sprite:Raven
 	00000000 00000000 00000000 001A00CC % He's a Raven. Ravens only say "caw" unless they th ...
 	%
 	% $NpcGroup_80242B9C[9B0]
-	00000005 $NpcSettings_80240728 ~Vec3f:NPC_8024354C % 0 -1000 0
+	.NpcID:Raven_05 $NpcSettings_80240728 ~Vec3f:NPC_Raven_05 % 0 -1000 0
 	0000050D $Script_Init_80242B8C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024354C
-	~AnimationTable:NPC_8024354C % .Sprite:Raven
+	~Movement:NPC_Raven_05
+	~AnimationTable:NPC_Raven_05 % .Sprite:Raven
 	00000000 00000000 00000000 001A00CD % He's a Raven. Ravens are really cute. I told Koope ...
 }
 

@@ -1,6 +1,7 @@
 % Script File: sam_09.mscr
 % Decoded from: 0 to 1510 (sam_09)
 
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -336,8 +337,8 @@ PADDING: 8024048C to 80240490 (0000048C to 00000490)
 {
     0:  Set   *GB_WorldLocation  .Location:ShiverMountain
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  ExecWait  $Script_802406B0
    7C:  ExecWait  $Script_80240460
@@ -422,7 +423,7 @@ PADDING: 802406A4 to 802406B0 (000006A4 to 000006B0)
   110:  Call  PlayEffect    ( ~FX:Steam:FloatingRings *Var0 00000000 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   154:  Call  PlayEffect    ( ~FX:Steam:FloatingRings *Var0 00000000 *Var3 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   198:  Call  PlayEffect    ( ~FX:Steam:FloatingRings *Var0 00000000 *Var4 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  1DC:  Call  ShakeCam      ( .Cam:Default 00000000 0000000A *Fixed[1.0] )
+  1DC:  Call  ShakeCam      ( .Cam:Default 00000000  10` *Fixed[1.0] )
   1F8:  Return
   200:  End
 }
@@ -433,7 +434,7 @@ PADDING: 802406A4 to 802406B0 (000006A4 to 000006B0)
    10:  	Call  ShowConsumableChoicePopup ( )
    1C:  	Call  CloseChoicePopup ( )
    28:  	If  *Var0  ==  00000000
-   38:  		Call  ShowMessageAtScreenPos    ( 001D015E 000000A0 00000028 ) % Here's a space where you can put something.
+   38:  		Call  ShowMessageAtScreenPos    ( 001D015E  160`  40` ) % Here's a space where you can put something.
    50:  		Return
    58:  	EndIf
    60:  	If  *Var0  ==  FFFFFFFF
@@ -453,13 +454,13 @@ PADDING: 802406A4 to 802406B0 (000006A4 to 000006B0)
   130:  	Call  $Function_80240118    ( *Var0 )
   140:  	Call  $Function_802400B4    ( *Var0 )
   150:  	Call  SetMessageString      ( *Var0 00000000 )
-  164:  	Call  ShowMessageAtScreenPos    ( 001D015F 000000A0 00000028 ) % Do you want to pick up the ?
+  164:  	Call  ShowMessageAtScreenPos    ( 001D015F  160`  40` ) % Do you want to pick up the ?
   17C:  	Call  ShowChoice    ( 001E000D ) % Yes No
   18C:  	Call  CloseMessage ( )
   198:  	If  *Var0  ==  00000000
   1A8:  		Call  AddItem   ( *MapVar[0] *Var0 )
   1BC:  		If  *Var0  ==  FFFFFFFF
-  1CC:  			Call  ShowMessageAtScreenPos    ( 001D0160 000000A0 00000028 ) % You can't carry any more items!
+  1CC:  			Call  ShowMessageAtScreenPos    ( 001D0160  160`  40` ) % You can't carry any more items!
   1E4:  			Return
   1EC:  		EndIf
   1F4:  		Call  $Function_80240118    ( *MapVar[3] )
@@ -483,7 +484,7 @@ PADDING: 802406A4 to 802406B0 (000006A4 to 000006B0)
    10:  	Call  ShowConsumableChoicePopup ( )
    1C:  	Call  CloseChoicePopup ( )
    28:  	If  *Var0  ==  00000000
-   38:  		Call  ShowMessageAtScreenPos    ( 001D015E 000000A0 00000028 ) % Here's a space where you can put something.
+   38:  		Call  ShowMessageAtScreenPos    ( 001D015E  160`  40` ) % Here's a space where you can put something.
    50:  		Return
    58:  	EndIf
    60:  	If  *Var0  ==  FFFFFFFF
@@ -503,13 +504,13 @@ PADDING: 802406A4 to 802406B0 (000006A4 to 000006B0)
   130:  	Call  $Function_80240118    ( *Var0 )
   140:  	Call  $Function_802400B4    ( *Var0 )
   150:  	Call  SetMessageString      ( *Var0 00000000 )
-  164:  	Call  ShowMessageAtScreenPos    ( 001D015F 000000A0 00000028 ) % Do you want to pick up the ?
+  164:  	Call  ShowMessageAtScreenPos    ( 001D015F  160`  40` ) % Do you want to pick up the ?
   17C:  	Call  ShowChoice    ( 001E000D ) % Yes No
   18C:  	Call  CloseMessage ( )
   198:  	If  *Var0  ==  00000000
   1A8:  		Call  AddItem   ( *MapVar[1] *Var0 )
   1BC:  		If  *Var0  ==  FFFFFFFF
-  1CC:  			Call  ShowMessageAtScreenPos    ( 001D0160 000000A0 00000028 ) % You can't carry any more items!
+  1CC:  			Call  ShowMessageAtScreenPos    ( 001D0160  160`  40` ) % You can't carry any more items!
   1E4:  			Return
   1EC:  		EndIf
   1F4:  		Call  $Function_80240118    ( *MapVar[4] )
@@ -533,7 +534,7 @@ PADDING: 802406A4 to 802406B0 (000006A4 to 000006B0)
    10:  	Call  ShowConsumableChoicePopup ( )
    1C:  	Call  CloseChoicePopup ( )
    28:  	If  *Var0  ==  00000000
-   38:  		Call  ShowMessageAtScreenPos    ( 001D015E 000000A0 00000028 ) % Here's a space where you can put something.
+   38:  		Call  ShowMessageAtScreenPos    ( 001D015E  160`  40` ) % Here's a space where you can put something.
    50:  		Return
    58:  	EndIf
    60:  	If  *Var0  ==  FFFFFFFF
@@ -553,13 +554,13 @@ PADDING: 802406A4 to 802406B0 (000006A4 to 000006B0)
   130:  	Call  $Function_80240118    ( *Var0 )
   140:  	Call  $Function_802400B4    ( *Var0 )
   150:  	Call  SetMessageString      ( *Var0 00000000 )
-  164:  	Call  ShowMessageAtScreenPos    ( 001D015F 000000A0 00000028 ) % Do you want to pick up the ?
+  164:  	Call  ShowMessageAtScreenPos    ( 001D015F  160`  40` ) % Do you want to pick up the ?
   17C:  	Call  ShowChoice    ( 001E000D ) % Yes No
   18C:  	Call  CloseMessage ( )
   198:  	If  *Var0  ==  00000000
   1A8:  		Call  AddItem   ( *MapVar[2] *Var0 )
   1BC:  		If  *Var0  ==  FFFFFFFF
-  1CC:  			Call  ShowMessageAtScreenPos    ( 001D0160 000000A0 00000028 ) % You can't carry any more items!
+  1CC:  			Call  ShowMessageAtScreenPos    ( 001D0160  160`  40` ) % You can't carry any more items!
   1E4:  			Return
   1EC:  		EndIf
   1F4:  		Call  $Function_80240118    ( *MapVar[5] )

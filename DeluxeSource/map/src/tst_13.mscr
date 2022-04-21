@@ -1,6 +1,8 @@
 % Script File: tst_13.mscr
 % Decoded from: 0 to 2D10 (tst_13)
 
+#define .NpcID:WorldBombette_00     00
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -172,7 +174,7 @@
   158:  LA        S3, $DisplayList_80242860
   160:  COPY      A1, S3
   164:  ADDIU     A2, SP, 10
-  168:  JAL       8011C32C
+  168:  JAL       ~Func:mdl_project_tex_coords
   16C:  CLEAR     A3
   170:  LI        A3, E3000A01
   178:  LI        T1, E200001C
@@ -194,7 +196,7 @@
   1C4:  SW        R0, 4 (V0)
   1C8:  SW        V1, 0 (S0)
   1CC:  SW        T1, 8 (V0)
-  1D0:  JAL       8011D72C
+  1D0:  JAL       ~Func:mdl_draw_hidden_panel_surface
   1D4:  SW        T0, C (V0)
   1D8:  LI        V1, DA380002
   1E0:  LI        A2, D8380002
@@ -562,10 +564,10 @@ PADDING: 802403B4 to 802403C0 (000003B4 to 000003C0)
 
 #new:NpcGroup $NpcGroup_80240F38
 {
-	00000000 $NpcSettings_80240D80 ~Vec3f:NPC_80240F38 % 0 0 0
+	.NpcID:WorldBombette_00 $NpcSettings_80240D80 ~Vec3f:NPC_WorldBombette_00 % 0 0 0
 	00000D09 00000000 00000000 00000000 00000000
-	~NoDrops~Movement:NPC_80240F38
-	~AnimationTable:NPC_80240F38 % 00000000
+	~NoDrops~Movement:NPC_WorldBombette_00
+	~AnimationTable:NPC_WorldBombette_00 % 00000000
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80240F38[1F0]
@@ -934,14 +936,14 @@ DF000000 00000000
 {
     0:  Set   *GB_WorldLocation  .Location:Testing
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
-   5C:  Call  SetCamEnabled ( .Cam:Default .True )
-   70:  Call  MakeNpcs      ( .False $NpcGroupList_80242298 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
+   5C:  Call  SetCamEnabled     ( .Cam:Default .True )
+   70:  Call  MakeNpcs  ( .False $NpcGroupList_80242298 )
    84:  Set   *Var0  $???_80242BFC
    94:  Exec  $Script_80240600
-   A0:  Call  802C90FC      ( 00000001 00000000 FFFFFFFF )
-   B8:  Call  802C94A0      ( 00000000 00000000 $Function_8024013C )
+   A0:  Call  SetModelCustomGfx ( ~Model:o152 00000000 FFFFFFFF )
+   B8:  Call  SetCustomGfxBuilders  ( 00000000 00000000 $Function_8024013C )
    D0:  Return
    D8:  End
 }

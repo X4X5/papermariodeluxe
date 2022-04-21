@@ -1,6 +1,9 @@
 % Script File: sbk_00.mscr
 % Decoded from: 0 to 820 (sbk_00)
 
+#define .NpcID:Pokey_00             00
+#define .NpcID:Pokey_01             01
+
 #new:Function $Function_80240000
 {
     0:  MTC1      R0, F0
@@ -11,7 +14,7 @@
    14:  SW        R0, 14 (SP)
    18:  SWC1      F0, 10 (SP)
    1C:  COPY      A2, A1
-   20:  JAL       80072950
+   20:  JAL       ~Func:playFX_82
    24:  COPY      A3, A1
    28:  LW        RA, 18 (SP)
    2C:  LI        V0, 2
@@ -88,8 +91,8 @@ PADDING: 80240054 to 80240060 (00000054 to 00000060)
    20:  If  *GB_StoryProgress  ==  .Story:Ch2_GotPulseStone % FFFFFFC1
    30:  	Call  DisablePulseStone ( .False )
    40:  EndIf
-   48:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   68:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   48:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   68:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    84:  Call  SetCamEnabled ( .Cam:Default .True )
    98:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    AC:  Call  MakeNpcs      ( .False $NpcGroupList_80240768 )
@@ -134,23 +137,23 @@ PADDING: 80240054 to 80240060 (00000054 to 00000060)
 
 #new:NpcGroup $NpcGroup_80240388
 {
-	00000000 $NpcSettings_8024035C ~Vec3f:NPC_80240388 % -40 0 160
+	.NpcID:Pokey_00 $NpcSettings_8024035C ~Vec3f:NPC_Pokey_00 % -40 0 160
 	00000800 00000000 00000000 00000000 0000005A
 	~Items:15:DriedFruit:9:TastyTonic:1
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80240388
-	~AnimationTable:NPC_80240388 % .Sprite:Pokey
+	~Movement:NPC_Pokey_00
+	~AnimationTable:NPC_Pokey_00 % .Sprite:Pokey
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80240578
 {
-	00000001 $NpcSettings_8024035C ~Vec3f:NPC_80240578 % 245 0 75
+	.NpcID:Pokey_01 $NpcSettings_8024035C ~Vec3f:NPC_Pokey_01 % 245 0 75
 	00000800 00000000 00000000 00000000 0000010E
 	~Items:15:DriedFruit:9:TastyTonic:1
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80240578
-	~AnimationTable:NPC_80240578 % .Sprite:Pokey
+	~Movement:NPC_Pokey_01
+	~AnimationTable:NPC_Pokey_01 % .Sprite:Pokey
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

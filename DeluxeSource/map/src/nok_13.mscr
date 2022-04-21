@@ -1,6 +1,7 @@
 % Script File: nok_13.mscr
 % Decoded from: 0 to 2240 (nok_13)
 
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -703,7 +704,7 @@
   20C:  LW        A1, 38 (S3)
   210:  LW        A2, 3C (S3)
   214:  LW        A3, 40 (S3)
-  218:  JAL       ~Func:fx_walk_normal
+  218:  JAL       ~Func:fx_walk
   21C:  LI        A0, 2
   220:  COPY      A0, S7
   224:  LI        V0, C
@@ -1496,8 +1497,8 @@ PADDING: 8024153C to 80241540 (0000153C to 00001540)
 {
     0:  Set   *GB_WorldLocation  .Location:PleasantPath
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_802420A8 )
@@ -1553,7 +1554,7 @@ PADDING: 80241A3C to 80241A40 (00001A3C to 00001A40)
     0:  SetGroup  00000000
     C:  Call  SetTimeFreezeMode     ( 00000001 )
    1C:  Call  DisablePlayerInput    ( .True )
-   2C:  Call  ShowMessageAtScreenPos    ( 001D0178 000000A0 00000028 ) % Toad TownKoopa Bros. Fortress Koopa Village
+   2C:  Call  ShowMessageAtScreenPos    ( 001D0178  160`  40` ) % Toad TownKoopa Bros. Fortress Koopa Village
    44:  Call  DisablePlayerInput    ( .False )
    54:  Call  SetTimeFreezeMode     ( 00000000 )
    64:  Return

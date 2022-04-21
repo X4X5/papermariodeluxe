@@ -156,17 +156,17 @@
   2D8:  		SetConst  *Var0  00000001 
   2E8:  		SetConst  *Var1  00A20016 
   2F8:  		ExecWait  DoJumpBack 
-  304:  		Call  JumpToGoal    ( .Actor:Self 00000005 .False .True .False )
+  304:  		Call  JumpToGoal    ( .Actor:Self  5` .False .True .False )
   324:  		Call  SetAnimationRate      ( .Actor:Self 00000001 *Fixed[2.0] )
   33C:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20008 )
   354:  		Call  SetGoalToHome ( .Actor:Self )
   364:  		Call  SetActorSpeed ( .Actor:Self *Fixed[8.0] )
-  378:  		Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  378:  		Call  RunToGoal     ( .Actor:Self  0` .False )
   390:  		Call  SetAnimationRate      ( .Actor:Self 00000001 *Fixed[1.0] )
   3A8:  		Wait  5`
   3B4:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20006 )
   3CC:  		Call  SetActorJumpGravity   ( .Actor:Self *Fixed[1.6] )
-  3E0:  		Call  JumpToGoal    ( .Actor:Self 00000005 .False .True .False )
+  3E0:  		Call  JumpToGoal    ( .Actor:Self  5` .False .True .False )
   400:  	CaseOR  ==  00000017 % 17
   40C:  	CaseOR  ==  .Event:Immune % 19
   418:  	CaseOR  ==  .Event:AirLiftFailed % 1F
@@ -229,9 +229,9 @@
    34:  Call  8024ECF8  ( FFFFFFFF 00000001 00000000 )
    4C:  Call  SetAnimation      ( .Actor:Self 00000001 00A20008 )
    64:  Call  SetGoalToTarget   ( .Actor:Self )
-   74:  Call  AddGoalPos        ( .Actor:Self 00000032 00000000 00000000 )
+   74:  Call  AddGoalPos        ( .Actor:Self  50`  0`  0` )
    90:  Call  SetActorSpeed     ( .Actor:Self *Fixed[3.8] )
-   A4:  Call  RunToGoal ( .Actor:Self 00000000 .False )
+   A4:  Call  RunToGoal ( .Actor:Self  0` .False )
    BC:  Call  SetAnimation      ( .Actor:Self 00000001 00A20003 )
    D4:  Wait  10`
    E0:  Call  PlaySoundAtActor  ( .Actor:Self 000020BD )
@@ -251,8 +251,8 @@
   1D0:  		Call  UseBattleCamPreset    ( 00000002 )
   1E0:  		Call  EnableActorBlur   ( .Actor:Self 00000001 )
   1F4:  		Call  SetGoalToTarget   ( .Actor:Self )
-  204:  		Call  AddGoalPos        ( .Actor:Self FFFFFFCE 00000000 00000000 )
-  220:  		Call  RunToGoal ( .Actor:Self 0000000A .False )
+  204:  		Call  AddGoalPos        ( .Actor:Self  -50`  0`  0` )
+  220:  		Call  RunToGoal ( .Actor:Self  10` .False )
   238:  		Call  SetAnimation      ( .Actor:Self 00000001 00A20003 )
   250:  		Call  EnableActorBlur   ( .Actor:Self 00000000 )
   264:  		Wait  10`
@@ -263,15 +263,15 @@
   2C4:  		Call  SetGoalToHome ( .Actor:Self )
   2D4:  		Call  SetActorSpeed ( .Actor:Self *Fixed[8.0] )
   2E8:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20008 )
-  300:  		Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  300:  		Call  RunToGoal     ( .Actor:Self  0` .False )
   318:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20003 )
   330:  		Return
   338:  	EndCaseGroup
   340:  EndSwitch
   348:  Call  EnableActorBlur   ( .Actor:Self 00000001 )
   35C:  Call  SetGoalToTarget   ( .Actor:Self )
-  36C:  Call  AddGoalPos        ( .Actor:Self 00000000 00000000 00000000 )
-  388:  Call  RunToGoal ( .Actor:Self 00000005 .False )
+  36C:  Call  AddGoalPos        ( .Actor:Self  0`  0`  0` )
+  388:  Call  RunToGoal ( .Actor:Self  5` .False )
   3A0:  Call  EnableActorBlur   ( .Actor:Self 00000000 )
   3B4:  Call  PlaySoundAtActor  ( .Actor:Self 000003ED )
   3C8:  Call  PlaySoundAtActor  ( .Actor:Self 000020BB )
@@ -279,7 +279,7 @@
   3E8:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:0 00000000 00000000 0000000A 00000030 )
   410:  Switch  *Var0 
   41C:  	CaseOR  ==  .HitResult:Hit % 0
-  428:  	CaseOR  ==  00000002 % 2
+  428:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   434:  		Call  UseBattleCamPreset    ( 00000002 )
   444:  		Call  PlaySoundAtActor      ( .Actor:Self 000020BB )
   458:  		Thread
@@ -298,7 +298,7 @@
   52C:  		Call  SetActorJumpGravity   ( .Actor:Self *Fixed[0.2] )
   540:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20021 )
   558:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  574:  		Call  JumpToGoal    ( .Actor:Self 0000000F .False .True .False )
+  574:  		Call  JumpToGoal    ( .Actor:Self  15` .False .True .False )
   594:  		Call  PlaySoundAtActor      ( .Actor:Self 000020BA )
   5A8:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20023 )
   5C0:  		Call  SetActorRotationOffset    ( .Actor:Self 00000000 00000000 00000000 )
@@ -307,7 +307,7 @@
   5F8:  		Set   *Var1  00000000 
   608:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20021 )
   620:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  63C:  		Call  JumpToGoal    ( .Actor:Self 00000005 .False .True .False )
+  63C:  		Call  JumpToGoal    ( .Actor:Self  5` .False .True .False )
   65C:  		Call  PlaySoundAtActor      ( .Actor:Self 000003B4 )
   670:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20023 )
   688:  		Wait  20`
@@ -317,7 +317,7 @@
   6BC:  Call  SetGoalToHome ( .Actor:Self )
   6CC:  Call  SetActorSpeed ( .Actor:Self *Fixed[3.8] )
   6E0:  Call  SetAnimation  ( .Actor:Self 00000001 00A20008 )
-  6F8:  Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  6F8:  Call  RunToGoal     ( .Actor:Self  0` .False )
   710:  Call  SetAnimation  ( .Actor:Self 00000001 00A20003 )
   728:  Call  EnableIdleScript  ( .Actor:Self 00000001 )
   73C:  Call  UseIdleAnimation  ( .Actor:Self .True )
@@ -329,15 +329,15 @@
     0:  Call  SetTargetActor    ( .Actor:Self .Actor:Player )
    14:  Call  UseBattleCamPreset    ( 00000008 )
    24:  Call  BattleCamTargetActor  ( .Actor:Self )
-   34:  Call  SetBattleCamZoom  ( 000000C8 )
-   44:  Call  SetBattleCamOffsetZ   ( 0000000D )
-   54:  Call  MoveBattleCamOver ( 0000003C )
+   34:  Call  SetBattleCamZoom  (  200` )
+   44:  Call  SetBattleCamOffsetZ   (  13` )
+   54:  Call  MoveBattleCamOver (  60` )
    64:  Call  SetAnimation      ( .Actor:Self 00000001 00A20015 )
    7C:  Wait  40`
    88:  Call  SetGoalToTarget   ( .Actor:Self )
    98:  Call  UseBattleCamPreset    ( 00000007 )
    A8:  Call  BattleCamTargetActor  ( .Actor:Self )
-   B8:  Call  MoveBattleCamOver ( 00000001 )
+   B8:  Call  MoveBattleCamOver (  1` )
    C8:  Wait  10`
    D4:  Call  PlaySoundAtActor  ( .Actor:Self 000003B9 )
    E8:  Call  PlaySoundAtActor  ( .Actor:Self 000020BB )
@@ -348,9 +348,9 @@
   144:  		Call  UseBattleCamPreset    ( 00000002 )
   154:  		Call  EnableActorBlur   ( .Actor:Self 00000001 )
   168:  		Call  SetGoalToTarget   ( .Actor:Self )
-  178:  		Call  AddGoalPos        ( .Actor:Self FFFFFFCE 00000000 00000000 )
+  178:  		Call  AddGoalPos        ( .Actor:Self  -50`  0`  0` )
   194:  		Call  SetAnimation      ( .Actor:Self 00000001 00A20013 )
-  1AC:  		Call  RunToGoal ( .Actor:Self 0000000A .False )
+  1AC:  		Call  RunToGoal ( .Actor:Self  10` .False )
   1C4:  		Call  SetAnimation      ( .Actor:Self 00000001 00A20003 )
   1DC:  		Call  EnableActorBlur   ( .Actor:Self 00000000 )
   1F0:  		Wait  10`
@@ -361,24 +361,24 @@
   250:  		Call  SetGoalToHome ( .Actor:Self )
   260:  		Call  SetActorSpeed ( .Actor:Self *Fixed[8.0] )
   274:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20008 )
-  28C:  		Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  28C:  		Call  RunToGoal     ( .Actor:Self  0` .False )
   2A4:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20003 )
   2BC:  		Return
   2C4:  	EndCaseGroup
   2CC:  EndSwitch
   2D4:  Call  EnableActorBlur   ( .Actor:Self 00000001 )
   2E8:  Call  SetGoalToTarget   ( .Actor:Self )
-  2F8:  Call  AddGoalPos        ( .Actor:Self 00000000 00000000 00000000 )
+  2F8:  Call  AddGoalPos        ( .Actor:Self  0`  0`  0` )
   314:  Call  SetAnimation      ( .Actor:Self 00000001 00A20013 )
-  32C:  Call  RunToGoal ( .Actor:Self 00000005 .False )
+  32C:  Call  RunToGoal ( .Actor:Self  5` .False )
   344:  Call  EnableActorBlur   ( .Actor:Self 00000000 )
   358:  Thread
-  360:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  37C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[4.0] )
-  398:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[3.0] )
-  3B4:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[2.0] )
-  3D0:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  3EC:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
+  360:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  37C:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[4.0] )
+  398:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[3.0] )
+  3B4:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[2.0] )
+  3D0:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  3EC:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
   408:  EndThread
   410:  Call  PlaySoundAtActor  ( .Actor:Self 000003ED )
   424:  Call  PlaySoundAtActor  ( .Actor:Self 000020BB )
@@ -391,14 +391,14 @@
   4A4:  	Call  EnableActorBlur   ( .Actor:Self 00000001 )
   4B8:  	Call  SetAnimation      ( .Actor:Self 00000001 00A20014 )
   4D0:  	Call  SetActorJumpGravity   ( .Actor:Self *Fixed[0.9] )
-  4E4:  	Call  JumpToGoal        ( .Actor:Self 00000019 .False .True .False )
+  4E4:  	Call  JumpToGoal        ( .Actor:Self  25` .False .True .False )
   504:  	Call  EnableActorBlur   ( .Actor:Self 00000000 )
   518:  EndThread
   520:  Thread
-  528:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  544:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.5] )
-  560:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  57C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.2] )
+  528:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  544:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.5] )
+  560:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  57C:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.2] )
   598:  EndThread
   5A0:  Wait  2`
   5AC:  Call  PlaySoundAtActor  ( .Actor:Self 000003ED )
@@ -408,7 +408,7 @@
   608:  Wait  15`
   614:  Switch  *Var0 
   620:  	CaseOR  ==  .HitResult:Hit % 0
-  62C:  	CaseOR  ==  00000002 % 2
+  62C:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   638:  		Call  UseBattleCamPreset    ( 00000002 )
   648:  		Call  PlaySoundAtActor      ( .Actor:Self 000020BE )
   65C:  		Call  PlaySoundAtActor      ( .Actor:Self 000020BB )
@@ -428,7 +428,7 @@
   744:  		Call  SetActorJumpGravity   ( .Actor:Self *Fixed[0.8] )
   758:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20021 )
   770:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  78C:  		Call  JumpToGoal    ( .Actor:Self 0000001E .False .True .False )
+  78C:  		Call  JumpToGoal    ( .Actor:Self  30` .False .True .False )
   7AC:  		Call  PlaySoundAtActor      ( .Actor:Self 000020BA )
   7C0:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20023 )
   7D8:  		Call  SetActorRotationOffset    ( .Actor:Self 00000000 00000000 00000000 )
@@ -437,7 +437,7 @@
   810:  		Set   *Var1  00000000 
   820:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20021 )
   838:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  854:  		Call  JumpToGoal    ( .Actor:Self 0000000A .False .True .False )
+  854:  		Call  JumpToGoal    ( .Actor:Self  10` .False .True .False )
   874:  		Call  PlaySoundAtActor      ( .Actor:Self 000003B4 )
   888:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20023 )
   8A0:  		Wait  20`
@@ -447,7 +447,7 @@
   8D4:  Call  SetGoalToHome ( .Actor:Self )
   8E4:  Call  SetActorSpeed ( .Actor:Self *Fixed[3.8] )
   8F8:  Call  SetAnimation  ( .Actor:Self 00000001 00A20008 )
-  910:  Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  910:  Call  RunToGoal     ( .Actor:Self  0` .False )
   928:  Call  SetAnimation  ( .Actor:Self 00000001 00A20003 )
   940:  Call  EnableIdleScript  ( .Actor:Self 00000001 )
   954:  Call  UseIdleAnimation  ( .Actor:Self .True )
@@ -459,16 +459,16 @@
     0:  Call  SetTargetActor    ( .Actor:Self .Actor:Player )
    14:  Call  UseBattleCamPreset    ( 00000008 )
    24:  Call  BattleCamTargetActor  ( .Actor:Self )
-   34:  Call  SetBattleCamZoom  ( 000000C8 )
-   44:  Call  SetBattleCamOffsetZ   ( 0000000D )
-   54:  Call  MoveBattleCamOver ( 0000003C )
+   34:  Call  SetBattleCamZoom  (  200` )
+   44:  Call  SetBattleCamOffsetZ   (  13` )
+   54:  Call  MoveBattleCamOver (  60` )
    64:  Call  SetAnimation      ( .Actor:Self 00000001 00A20015 )
    7C:  Wait  20`
    88:  Call  ActorSpeak        ( 0002003C .Actor:Self 00000001 00A2000A 00A20006 ) % Hyaaahhhh!!! Mario! Survive this if you can!!!!
    A8:  Call  SetGoalToTarget   ( .Actor:Self )
    B8:  Call  UseBattleCamPreset    ( 00000007 )
    C8:  Call  BattleCamTargetActor  ( .Actor:Self )
-   D8:  Call  MoveBattleCamOver ( 00000001 )
+   D8:  Call  MoveBattleCamOver (  1` )
    E8:  Wait  10`
    F4:  Call  PlaySoundAtActor  ( .Actor:Self 000003B9 )
   108:  Call  PlaySoundAtActor  ( .Actor:Self 000020BB )
@@ -479,9 +479,9 @@
   164:  		Call  UseBattleCamPreset    ( 00000002 )
   174:  		Call  EnableActorBlur   ( .Actor:Self 00000001 )
   188:  		Call  SetGoalToTarget   ( .Actor:Self )
-  198:  		Call  AddGoalPos        ( .Actor:Self FFFFFFCE 00000000 00000000 )
+  198:  		Call  AddGoalPos        ( .Actor:Self  -50`  0`  0` )
   1B4:  		Call  SetAnimation      ( .Actor:Self 00000001 00A20013 )
-  1CC:  		Call  RunToGoal ( .Actor:Self 0000000A .False )
+  1CC:  		Call  RunToGoal ( .Actor:Self  10` .False )
   1E4:  		Call  SetAnimation      ( .Actor:Self 00000001 00A20003 )
   1FC:  		Call  EnableActorBlur   ( .Actor:Self 00000000 )
   210:  		Wait  10`
@@ -492,24 +492,24 @@
   270:  		Call  SetGoalToHome ( .Actor:Self )
   280:  		Call  SetActorSpeed ( .Actor:Self *Fixed[8.0] )
   294:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20008 )
-  2AC:  		Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  2AC:  		Call  RunToGoal     ( .Actor:Self  0` .False )
   2C4:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20003 )
   2DC:  		Return
   2E4:  	EndCaseGroup
   2EC:  EndSwitch
   2F4:  Call  EnableActorBlur   ( .Actor:Self 00000001 )
   308:  Call  SetGoalToTarget   ( .Actor:Self )
-  318:  Call  AddGoalPos        ( .Actor:Self 00000000 00000000 00000000 )
+  318:  Call  AddGoalPos        ( .Actor:Self  0`  0`  0` )
   334:  Call  SetAnimation      ( .Actor:Self 00000001 00A20013 )
-  34C:  Call  RunToGoal ( .Actor:Self 00000005 .False )
+  34C:  Call  RunToGoal ( .Actor:Self  5` .False )
   364:  Call  EnableActorBlur   ( .Actor:Self 00000000 )
   378:  Thread
-  380:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  39C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[4.0] )
-  3B8:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[3.0] )
-  3D4:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[2.0] )
-  3F0:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  40C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
+  380:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  39C:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[4.0] )
+  3B8:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[3.0] )
+  3D4:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[2.0] )
+  3F0:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  40C:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
   428:  EndThread
   430:  Call  PlaySoundAtActor  ( .Actor:Self 000003ED )
   444:  Call  PlaySoundAtActor  ( .Actor:Self 000020BB )
@@ -523,14 +523,14 @@
   4D0:  	Call  PlaySoundAtActor  ( .Actor:Self .Sound:Jump )
   4E4:  	Call  SetAnimation      ( .Actor:Self 00000001 00A20014 )
   4FC:  	Call  SetActorJumpGravity   ( .Actor:Self *Fixed[1.5] )
-  510:  	Call  JumpToGoal        ( .Actor:Self 00000019 .False .True .False )
+  510:  	Call  JumpToGoal        ( .Actor:Self  25` .False .True .False )
   530:  	Call  EnableActorBlur   ( .Actor:Self 00000000 )
   544:  EndThread
   54C:  Thread
-  554:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  570:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.5] )
-  58C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  5A8:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.2] )
+  554:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  570:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.5] )
+  58C:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  5A8:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.2] )
   5C4:  EndThread
   5CC:  Wait  2`
   5D8:  Call  PlaySoundAtActor  ( .Actor:Self 000003ED )
@@ -555,7 +555,7 @@
   74C:  Call  SetActorJumpGravity       ( .Actor:Self *Fixed[0.8] )
   760:  Call  SetAnimation      ( .Actor:Self 00000001 00A20021 )
   778:  Call  SetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
-  794:  Call  JumpToGoal        ( .Actor:Self 0000001E .False .True .False )
+  794:  Call  JumpToGoal        ( .Actor:Self  30` .False .True .False )
   7B4:  Call  PlaySoundAtActor  ( .Actor:Self 000020BA )
   7C8:  Call  SetAnimation      ( .Actor:Self 00000001 00A20023 )
   7E0:  Call  SetActorRotationOffset    ( .Actor:Self 00000000 00000000 00000000 )
@@ -570,26 +570,26 @@
   870:  EndThread
   878:  Call  SetAnimation  ( .Actor:Self 00000001 00A2000E )
   890:  Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  8AC:  Call  JumpToGoal    ( .Actor:Self 0000000A .False .True .False )
+  8AC:  Call  JumpToGoal    ( .Actor:Self  10` .False .True .False )
   8CC:  Call  PlaySoundAtActor  ( .Actor:Self 000003B4 )
   8E0:  Wait  10`
   8EC:  Call  SetAnimation  ( .Actor:Self 00000001 00A2000F )
   904:  Call  EnableActorBlur   ( .Actor:Self 00000001 )
   918:  Call  SetGoalToTarget   ( .Actor:Self )
-  928:  Call  AddGoalPos    ( .Actor:Self 00000000 00000000 00000000 )
-  944:  Call  RunToGoal     ( .Actor:Self 00000003 .False )
+  928:  Call  AddGoalPos    ( .Actor:Self  0`  0`  0` )
+  944:  Call  RunToGoal     ( .Actor:Self  3` .False )
   95C:  Call  EnableActorBlur   ( .Actor:Self 00000000 )
   970:  Thread
-  978:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  994:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[3.0] )
-  9B0:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[6.0] )
-  9CC:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[5.0] )
-  9E8:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[4.0] )
-  A04:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[3.0] )
-  A20:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[2.0] )
-  A3C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  A58:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  A74:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.2] )
+  978:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  994:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[3.0] )
+  9B0:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[6.0] )
+  9CC:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[5.0] )
+  9E8:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[4.0] )
+  A04:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[3.0] )
+  A20:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[2.0] )
+  A3C:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  A58:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  A74:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.2] )
   A90:  EndThread
   A98:  Call  PlaySoundAtActor  ( .Actor:Self 000003EE )
   AAC:  Call  PlaySoundAtActor  ( .Actor:Self 000020BB )
@@ -598,7 +598,7 @@
   AF4:  Wait  15`
   B00:  Switch  *Var0 
   B0C:  	CaseOR  ==  .HitResult:Hit % 0
-  B18:  	CaseOR  ==  00000002 % 2
+  B18:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   B24:  		Call  UseBattleCamPreset    ( 00000002 )
   B34:  		Call  PlaySoundAtActor      ( .Actor:Self 000020BE )
   B48:  		Call  PlaySoundAtActor      ( .Actor:Self 000020BB )
@@ -618,7 +618,7 @@
   C30:  		Call  SetActorJumpGravity   ( .Actor:Self *Fixed[0.8] )
   C44:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20021 )
   C5C:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  C78:  		Call  JumpToGoal    ( .Actor:Self 0000001E .False .True .False )
+  C78:  		Call  JumpToGoal    ( .Actor:Self  30` .False .True .False )
   C98:  		Call  PlaySoundAtActor      ( .Actor:Self 000020BA )
   CAC:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20023 )
   CC4:  		Call  SetActorRotationOffset    ( .Actor:Self 00000000 00000000 00000000 )
@@ -627,7 +627,7 @@
   CFC:  		Set   *Var1  00000000 
   D0C:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20021 )
   D24:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  D40:  		Call  JumpToGoal    ( .Actor:Self 0000000A .False .True .False )
+  D40:  		Call  JumpToGoal    ( .Actor:Self  10` .False .True .False )
   D60:  		Call  PlaySoundAtActor      ( .Actor:Self 000003B4 )
   D74:  		Call  SetAnimation  ( .Actor:Self 00000001 00A20023 )
   D8C:  		Wait  20`
@@ -637,7 +637,7 @@
   DC0:  Call  SetGoalToHome ( .Actor:Self )
   DD0:  Call  SetActorSpeed ( .Actor:Self *Fixed[3.8] )
   DE4:  Call  SetAnimation  ( .Actor:Self 00000001 00A20008 )
-  DFC:  Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  DFC:  Call  RunToGoal     ( .Actor:Self  0` .False )
   E14:  Call  SetAnimation  ( .Actor:Self 00000001 00A20003 )
   E2C:  Call  EnableIdleScript  ( .Actor:Self 00000001 )
   E40:  Call  UseIdleAnimation  ( .Actor:Self .True )
@@ -648,9 +648,9 @@
 #new:Script $Script_80230240_03 {
     0:  Call  UseBattleCamPreset    ( 00000008 )
    10:  Call  BattleCamTargetActor  ( .Actor:Self )
-   20:  Call  SetBattleCamZoom  ( 000000C8 )
-   30:  Call  SetBattleCamOffsetZ   ( 0000000D )
-   40:  Call  MoveBattleCamOver ( 0000003C )
+   20:  Call  SetBattleCamZoom  (  200` )
+   30:  Call  SetBattleCamOffsetZ   (  13` )
+   40:  Call  MoveBattleCamOver (  60` )
    50:  Call  SetAnimation  ( .Actor:Self 00000001 00A20015 )
    68:  Wait  20`
    74:  Wait  10`
@@ -667,7 +667,7 @@
   140:  Add   *Var1  00000032 
   150:  Call  SetAnimation  ( .Actor:Self 00000001 00A20003 )
   168:  Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  184:  Call  FlyToGoal     ( .Actor:Self 0000005A 00000000 .Easing:CosInOut )
+  184:  Call  FlyToGoal     ( .Actor:Self  90`  0` .Easing:CosInOut )
   1A0:  Call  EnableActorBlur   ( .Actor:Self 00000000 )
   1B4:  Call  GetActorPos   ( .Actor:Self *Var0 *Var1 *Var2 )
   1D0:  Call  ForceHomePos  ( .Actor:Self *Var0 *Var1 *Var2 )
@@ -675,7 +675,7 @@
   1FC:  Call  SetActorFlagBits  ( .Actor:Self 00000200 .True )
   214:  Call  SetActorVar   ( .Actor:Self 00000001 00000001 )
   22C:  Call  UseBattleCamPreset    ( 00000002 )
-  23C:  Call  MoveBattleCamOver ( 0000001E )
+  23C:  Call  MoveBattleCamOver (  30` )
   24C:  Wait  30`
   258:  Set   *Var0  00000050 
   268:  Loop  00000005 
@@ -699,9 +699,9 @@
     0:  Call  SetTargetActor        ( .Actor:Self .Actor:Player )
    14:  Call  UseBattleCamPreset    ( 00000008 )
    24:  Call  BattleCamTargetActor  ( .Actor:Self )
-   34:  Call  SetBattleCamZoom      ( 000000C8 )
-   44:  Call  SetBattleCamOffsetZ   ( 0000000D )
-   54:  Call  MoveBattleCamOver     ( 0000003C )
+   34:  Call  SetBattleCamZoom      (  200` )
+   44:  Call  SetBattleCamOffsetZ   (  13` )
+   54:  Call  MoveBattleCamOver     (  60` )
    64:  Call  SetAnimation  ( .Actor:Self 00000001 00A20015 )
    7C:  Set   *Var0  00000050 
    8C:  Loop  0000001E 
@@ -730,13 +730,13 @@
   250:  Call  SetGoalToTarget   ( .Actor:Self )
   260:  Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
   27C:  Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.1] )
-  294:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2 0000000A .True )
+  294:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2  10` .True )
   2BC:  Call  SetPartFlagBits   ( .Actor:Self 00000002 00000001 .True )
   2D8:  Wait  2`
   2E4:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:0 00000000 00000000 0000000A 00000010 )
   30C:  Switch  *Var0 
   318:  	CaseOR  ==  .HitResult:Hit % 0
-  324:  	CaseOR  ==  00000002 % 2
+  324:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   330:  	EndCaseGroup
   338:  EndSwitch
   340:  Call  EnableIdleScript  ( .Actor:Self 00000001 )
@@ -749,9 +749,9 @@
     0:  Call  SetTargetActor        ( .Actor:Self .Actor:Player )
    14:  Call  UseBattleCamPreset    ( 00000008 )
    24:  Call  BattleCamTargetActor  ( .Actor:Self )
-   34:  Call  SetBattleCamZoom      ( 000000C8 )
-   44:  Call  SetBattleCamOffsetZ   ( 0000000D )
-   54:  Call  MoveBattleCamOver     ( 0000003C )
+   34:  Call  SetBattleCamZoom      (  200` )
+   44:  Call  SetBattleCamOffsetZ   (  13` )
+   54:  Call  MoveBattleCamOver     (  60` )
    64:  Call  SetAnimation  ( .Actor:Self 00000001 00A20015 )
    7C:  Set   *Var0  00000050 
    8C:  Loop  0000001E 
@@ -763,13 +763,13 @@
    FC:  Call  SetGoalToTarget   ( .Actor:Self )
   10C:  Call  GetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
   128:  Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  144:  Call  FlyToGoal     ( .Actor:Self 0000001E 00000000 .Easing:Linear )
+  144:  Call  FlyToGoal     ( .Actor:Self  30`  0` .Easing:Linear )
   160:  Wait  00002710 
   16C:  Wait  2`
   178:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:0 00000000 00000000 0000000A 00000010 )
   1A0:  Switch  *Var0 
   1AC:  	CaseOR  ==  .HitResult:Hit % 0
-  1B8:  	CaseOR  ==  00000002 % 2
+  1B8:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   1C4:  	EndCaseGroup
   1CC:  EndSwitch
   1D4:  Call  EnableIdleScript  ( .Actor:Self 00000001 )
@@ -891,7 +891,7 @@
   4D0:  			Wait  15`
   4DC:  			Call  SetAnimation      ( .Actor:Self 00000001 00A20003 )
   4F4:  			Call  UseBattleCamPreset    ( 00000002 )
-  504:  			Call  MoveBattleCamOver ( 0000000A )
+  504:  			Call  MoveBattleCamOver (  10` )
   514:  			Call  ActorSpeak        ( 00020038 .Actor:Self 00000001 00A2000A 00A20006 ) % Kwaaaaa! Behold my fury, Mario!!
   534:  		EndIf
   53C:  	Case  ==  0000000C 
@@ -904,14 +904,14 @@
   5A4:  		Div   *Var1  00000002 
   5B4:  		If  *Var0  <=  *Var1 
   5C4:  			Call  UseBattleCamPreset    ( 00000002 )
-  5D4:  			Call  MoveBattleCamOver     ( 0000000A )
+  5D4:  			Call  MoveBattleCamOver     (  10` )
   5E4:  			Call  ActorSpeak    ( 0002003B .Actor:Self 00000001 00A2000A 00A20006 ) % Now...it is time I stopped being so merciful.
   604:  			BreakCase
   60C:  		EndIf
   614:  		Call  GetPlayerHP   ( *Var0 )
   624:  		If  *Var0  <=  0000000A 
   634:  			Call  UseBattleCamPreset    ( 00000002 )
-  644:  			Call  MoveBattleCamOver     ( 0000000A )
+  644:  			Call  MoveBattleCamOver     (  10` )
   654:  			Call  ActorSpeak    ( 0002003D .Actor:Self 00000001 00A2000A 00A20006 ) % You underestimate me, Mario! Did you really think  ...
   674:  			BreakCase
   67C:  		EndIf
@@ -966,13 +966,13 @@
   250:  		If  *VarA  ==  00000001 
   260:  			If  *VarB  >  00000002 
   270:  				Call  UseBattleCamPreset    ( 00000002 )
-  280:  				Call  MoveBattleCamOver ( 0000000A )
+  280:  				Call  MoveBattleCamOver (  10` )
   290:  				Call  ActorSpeak        ( 0002003A .Actor:Self 00000001 00A2000A 00A20006 ) % Hm! You have great hidden strength for one clothed ...
   2B0:  				Call  SetActorVar       ( .Actor:Self 00000003 00000000 )
   2C8:  			EndIf
   2D0:  		Else
   2D8:  			Call  UseBattleCamPreset    ( 00000002 )
-  2E8:  			Call  MoveBattleCamOver     ( 0000000A )
+  2E8:  			Call  MoveBattleCamOver     (  10` )
   2F8:  			Call  ActorSpeak    ( 00020039 .Actor:Self 00000001 00A2000A 00A20006 ) % You foolish novice! Do you think you can beat me w ...
   318:  		EndIf
   320:  		Call  EnableIdleScript  ( .Actor:Self 00000001 )

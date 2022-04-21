@@ -1,6 +1,9 @@
 % Script File: sam_10.mscr
 % Decoded from: 0 to 2DD0 (sam_10)
 
+#define .NpcID:WorldClubba_00       00
+#define .NpcID:WorldClubba_01       01
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -971,8 +974,8 @@ PADDING: 80240D4C to 80240D50 (00000D4C to 00000D50)
 {
     0:  Set   *GB_WorldLocation  .Location:ShiverMountain
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80242BEC )
    84:  ExecWait  $Script_MakeEntities
@@ -1055,7 +1058,7 @@ PADDING: 8024103C to 80241040 (0000103C to 00001040)
    A8:  			Call  RemoveKeyItemAt   ( *Var1 )
    B8:  	EndSwitch
    C0:  Else
-   C8:  	Call  ShowMessageAtScreenPos    ( 001D0161 000000A0 00000028 ) % Here's a space where you can put something.
+   C8:  	Call  ShowMessageAtScreenPos    ( 001D0161  160`  40` ) % Here's a space where you can put something.
    E0:  	Call  DisablePlayerInput        ( .False )
    F0:  	Return
    F8:  EndIf
@@ -1095,7 +1098,7 @@ PADDING: 8024103C to 80241040 (0000103C to 00001040)
   368:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   37C:  Wait  30`
   388:  Call  PlaySound     ( 0000039D )
-  398:  Call  ShakeCam      ( .Cam:Default 00000000 0000000A *Fixed[3.0] )
+  398:  Call  ShakeCam      ( .Cam:Default 00000000  10` *Fixed[3.0] )
   3B4:  Call  PlayEffect    ( ~FX:Steam:FloatingRings FFFFFFEC FFFFFFEC FFFFFFBE 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   3F8:  Call  PlayEffect    ( ~FX:Steam:FloatingRings 00000014 FFFFFFEC FFFFFFBE 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   43C:  Call  PlayEffect    ( ~FX:Steam:FloatingRings 0000003C FFFFFFEC FFFFFFBE 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
@@ -1120,7 +1123,7 @@ PADDING: 8024103C to 80241040 (0000103C to 00001040)
   8B0:  Call  SetGroupEnabled   ( ~Model:move3 00000000 )
   8C4:  Call  PlaySound     ( 80000040 )
   8D4:  Thread
-  8DC:  	Call  ShakeCam  ( .Cam:Default 00000000 00000258 *Fixed[0.15] )
+  8DC:  	Call  ShakeCam  ( .Cam:Default 00000000  600` *Fixed[0.15] )
   8F8:  EndThread
   900:  Set   *Var2  00000000
   910:  UseIntBuffer  $IntTable_802411F0
@@ -1141,9 +1144,9 @@ PADDING: 8024103C to 80241040 (0000103C to 00001040)
   9F0:  		If  *Var2  ==  0000001E
   A00:  			Call  PlaySound ( 0000039F )
   A10:  			Call  StopSound ( 80000040 )
-  A20:  			Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[3.0] )
-  A3C:  			Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[2.0] )
-  A58:  			Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+  A20:  			Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[3.0] )
+  A3C:  			Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[2.0] )
+  A58:  			Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[1.0] )
   A74:  			Set   *VarB  *Var0
   A84:  			Call  GetModelCenter    ( *Var3 )
   A94:  			Set   *VarA  FFFFFFEC
@@ -1152,7 +1155,7 @@ PADDING: 8024103C to 80241040 (0000103C to 00001040)
   ABC:  			Call  PlaySoundAt   ( 000001EC 00000000 *Var0 *VarA *Var2 )
   ADC:  			Mod   *Var2  00000003
   AEC:  			If  *Var2  ==  00000000
-  AFC:  				Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+  AFC:  				Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[1.0] )
   B18:  			EndIf
   B20:  		EndIf
   B28:  	EndThread
@@ -1160,17 +1163,17 @@ PADDING: 8024103C to 80241040 (0000103C to 00001040)
   B38:  Wait  150`
   B44:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   B5C:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-  B78:  Call  SetPanTarget  ( .Cam:Default 0000008C *Var1 *Var2 )
+  B78:  Call  SetPanTarget  ( .Cam:Default  140` *Var1 *Var2 )
   B94:  Call  SetCamDistance    ( .Cam:Default *Fixed[400.0] )
   BA8:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   BBC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   BD4:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   BE8:  Thread
   BF0:  	Call  MakeLerp      ( 00000096 0000041A 000000C8 .Easing:Linear )
-  C0C:  	Call  UseSettingsFrom   ( .Cam:Default 00000096 00000096 FFFFFFBA )
+  C0C:  	Call  UseSettingsFrom   ( .Cam:Default  150`  150`  -70` )
   C28:  	Label  64
   C34:  	Call  UpdateLerp ( )
-  C40:  	Call  SetPanTarget  ( .Cam:Default 00000096 *Var0 FFFFFFBA )
+  C40:  	Call  SetPanTarget  ( .Cam:Default  150` *Var0  -70` )
   C5C:  	Call  SetCamDistance    ( .Cam:Default *Fixed[750.0] )
   C70:  	Call  SetCamPitch   ( .Cam:Default *Fixed[10.0] *Fixed[-14.0] )
   C88:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
@@ -1284,7 +1287,7 @@ PADDING: 8024103C to 80241040 (0000103C to 00001040)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1358,19 +1361,19 @@ MISSING: 8024263C to 80242664 (0000263C to 00002664)
 
 #new:NpcGroup $NpcGroup_8024280C
 {
-	00000000 $NpcSettings_8024270C ~Vec3f:NPC_8024280C % 575 480 -50
+	.NpcID:WorldClubba_00 $NpcSettings_8024270C ~Vec3f:NPC_WorldClubba_00 % 575 480 -50
 	00002D00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_8024280C
-	~AnimationTable:NPC_8024280C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_00
+	~AnimationTable:NPC_WorldClubba_00 % .Sprite:WorldClubba
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_8024280C[1F0]
-	00000001 $NpcSettings_802427E0 ~Vec3f:NPC_802429FC % 0 -1000 0
+	.NpcID:WorldClubba_01 $NpcSettings_802427E0 ~Vec3f:NPC_WorldClubba_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802429FC
-	~AnimationTable:NPC_802429FC % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_01
+	~AnimationTable:NPC_WorldClubba_01 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_80242664 00000000 % no tattle string
 }
 

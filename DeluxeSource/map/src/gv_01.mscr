@@ -1,6 +1,7 @@
 % Script File: gv_01.mscr
 % Decoded from: 0 to 1CB0 (gv_01)
 
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -468,15 +469,15 @@
         .o50
    50:  LI        A1, D0
    54:  COPY      A2, A1
-   58:  JAL       ~Func:set_transition_stencil_color
+   58:  JAL       ~Func:set_screen_overlay_color
    5C:  COPY      A3, A1
    60:  LWC1      F0, 70 (S0)
    64:  CVT.S.W   F0, F0
    68:  MFC1      A1, F0
-   6C:  JAL       ~Func:set_transition_stencil_zoom_1
+   6C:  JAL       ~Func:set_screen_overlay_params_back
    70:  CLEAR     A0
    74:  LI        A0, 1
-   78:  JAL       ~Func:set_transition_stencil_alpha
+   78:  JAL       ~Func:set_screen_overlay_alpha
    7C:  CLEAR     A1
    80:  LW        V0, 70 (S0)
    84:  LW        RA, 14 (SP)
@@ -506,9 +507,9 @@
    40:  AND       V0, V0, V1
    44:  JAL       ~Func:general_heap_create
    48:  SW        V0, 0 (A0)
-   4C:  JAL       8011D890
+   4C:  JAL       ~Func:clear_render_tasks
    50:  NOP
-   54:  JAL       ~Func:clear_dynamic_entity_list
+   54:  JAL       ~Func:clear_generic_entity_list
    58:  NOP
    5C:  JAL       ~Func:clear_script_list
    60:  NOP
@@ -534,7 +535,7 @@
    B0:  NOP
    B4:  JAL       ~Func:clear_entity_data
    B8:  CLEAR     A0
-   BC:  JAL       ~Func:clear_transition_stencil
+   BC:  JAL       ~Func:clear_screen_overlays
    C0:  NOP
    C4:  JAL       ~Func:clear_player_status
    C8:  NOP
@@ -594,13 +595,13 @@ PADDING: 802407BC to 802407C0 (000007BC to 000007C0)
    50:  Call  GetCurrentPartnerID   ( *Var0 )
    60:  If  *Var0  !=  .Partner:None % 0
    70:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-   84:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   84:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    A0:  EndIf
    A8:  Call  GetEntryID    ( *Var0 )
    B8:  Call  $Function_802400F0 ( )
    C4:  Sub   *Var2  00000028
    D4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   EC:  Call  InterpPlayerYaw   ( *Var4 00000000 )
+   EC:  Call  InterpPlayerYaw   ( *Var4  0` )
   100:  Call  PlaySound     ( 00000163 )
   110:  Call  802D286C      ( 00000100 )
   120:  Call  802D2520      ( 00010000 00000005 00000002 00000001 00000001 00000000 )
@@ -655,7 +656,7 @@ PADDING: 802407BC to 802407C0 (000007BC to 000007C0)
    84:  Set   *Var7  *Var3
    94:  Add   *Var2  00000002
    A4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   BC:  Call  InterpPlayerYaw       ( *Var4 00000000 )
+   BC:  Call  InterpPlayerYaw       ( *Var4  0` )
    D0:  If  *Var4  ==  0000005A
    E0:  	Add   *Var5  00000028
    F0:  Else
@@ -669,8 +670,8 @@ PADDING: 802407BC to 802407C0 (000007BC to 000007C0)
   184:  If  *Var0  !=  .Partner:None % 0
   194:  	Call  DisablePartnerAI  ( 00000000 )
   1A4:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-  1B8:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
-  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000000 )
+  1B8:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
+  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0  0` )
   1EC:  EndIf
   1F4:  Wait  1`
   200:  Call  PlaySound ( 00000163 )
@@ -739,13 +740,13 @@ PADDING: 802407BC to 802407C0 (000007BC to 000007C0)
    28:  Call  HidePlayerShadow  ( .True )
    38:  Set   *Var0  *VarA
    48:  Call  $Function_802400F0 ( )
-   54:  Call  PlayerMoveTo      ( *Var1 *Var3 00000003 )
+   54:  Call  PlayerMoveTo      ( *Var1 *Var3  3` )
    6C:  Set   *Var0  *VarA
    7C:  Call  $Function_802400F0 ( )
    88:  Call  SetPlayerPos      ( *Var1 *Var2 *Var3 )
    A0:  Call  SetPlayerFlagBits ( 00200000 .True )
    B4:  Call  $Function_802401D0 ( )
-   C0:  Call  InterpPlayerYaw   ( *Var0 00000000 )
+   C0:  Call  InterpPlayerYaw   ( *Var0  0` )
    D4:  Wait  2`
    E0:  Call  SetPlayerFlagBits ( 00200000 .False )
    F4:  Call  PlaySound ( 00000163 )
@@ -804,7 +805,7 @@ PADDING: 802407BC to 802407C0 (000007BC to 000007C0)
   1B0:  If  *Var4  >=  00000168
   1C0:  	Sub   *Var4  00000168
   1D0:  EndIf
-  1D8:  Call  InterpPlayerYaw       ( *Var8 00000001 )
+  1D8:  Call  InterpPlayerYaw       ( *Var8  1` )
   1EC:  Wait  1`
   1F8:  Call  PlaySound     ( 00000163 )
   208:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -882,8 +883,8 @@ PADDING: 802407BC to 802407C0 (000007BC to 000007C0)
    B0:  Return
    B8:  Call  DisablePlayerInput        ( .True )
    C8:  Call  ModifyGlobalOverrideFlags ( 00000000 00020000 )
-   DC:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   FC:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   DC:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   FC:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
   118:  Call  SetCamEnabled     ( .Cam:Default .True )
   12C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
   140:  Thread
@@ -891,10 +892,10 @@ PADDING: 802407BC to 802407C0 (000007BC to 000007C0)
   158:  	If  *Var0  !=  .Partner:None % 0
   168:  		Call  DisablePartnerAI  ( 00000000 )
   178:  		Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-  190:  		Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+  190:  		Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
   1AC:  	EndIf
   1B4:  	Call  SetPlayerFlagBits ( 00200000 .True )
-  1C8:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  1C8:  	Call  InterpPlayerYaw   (  90`  0` )
   1DC:  	Wait  2`
   1E8:  	Call  RandInt   ( 00000004 *Var0 )
   1FC:  	Switch  *Var0
@@ -954,12 +955,12 @@ PADDING: 802407BC to 802407C0 (000007BC to 000007C0)
   554:  	Exec  $Script_80241690[5C]
   560:  EndThread
   568:  Thread
-  570:  	Call  UseSettingsFrom   ( .Cam:Default 00000000 0000000A 00000000 )
-  58C:  	Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+  570:  	Call  UseSettingsFrom   ( .Cam:Default  0`  10`  0` )
+  58C:  	Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
   5A8:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[0.3] )
   5BC:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   5D4:  	Wait  94`
-  5E0:  	Call  SetPanTarget  ( .Cam:Default 00000000 00000000 000003E8 )
+  5E0:  	Call  SetPanTarget  ( .Cam:Default  0`  0`  1000` )
   5FC:  EndThread
   604:  Return
   60C:  End

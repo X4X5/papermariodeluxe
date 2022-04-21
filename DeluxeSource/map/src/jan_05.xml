@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Map name="jan_05" background="yos_bg" textures="jan_tex">
 	<ModelTree>
 		<Node name="Root" id="78">
@@ -295,13 +295,13 @@
 				<Node name="Entry3" id="2"/>
 			</Node>
 			<Node name="NPCs" id="B">
-				<Node name="NPC_80246188" id="4"/>
-				<Node name="NPC_80246378" id="5"/>
-				<Node name="NPC_80246568" id="6"/>
-				<Node name="NPC_80246758" id="7"/>
-				<Node name="NPC_80246948" id="8"/>
-				<Node name="NPC_80246B38" id="9"/>
-				<Node name="NPC_80245F84" id="A"/>
+				<Node name="Fuzzy_00" id="4"/>
+				<Node name="JungleGuy_01" id="5"/>
+				<Node name="JungleGuy_02" id="6"/>
+				<Node name="HeartPlant_04" id="7"/>
+				<Node name="HurtPlant_05" id="8"/>
+				<Node name="MBush_06" id="9"/>
+				<Node name="YoshiKid_03" id="A"/>
 			</Node>
 			<Node name="Entities" id="F">
 				<Node name="Entity80247970" id="C"/>
@@ -6562,37 +6562,37 @@
 			<MapObject name="NPCs" id="B"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-320,0,80" yaw="270.000000">
-			<MapObject name="NPC_80245F84" id="A"/>
+			<MapObject name="YoshiKid_03" id="A"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="97" palette="2" animations="1,2,3,3,1,1,1,1,1,1,1,1,1,1,1,1"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="400,0,-75" yaw="90.000000">
-			<MapObject name="NPC_80246B38" id="9"/>
+			<MapObject name="MBush_06" id="9"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="45" palette="0" animations="2,2,2,2,2,2,7,7,2,2,2,2,2,2,2,2"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="375,0,260" yaw="270.000000">
-			<MapObject name="NPC_80246948" id="8"/>
+			<MapObject name="HurtPlant_05" id="8"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="44" palette="0" animations="1,1,1,1,1,1,E,E,1,1,1,1,1,1,1,1"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="430,0,205" yaw="270.000000">
-			<MapObject name="NPC_80246758" id="7"/>
+			<MapObject name="HeartPlant_04" id="7"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="43" palette="0" animations="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,-1000,0" yaw="0.000000">
-			<MapObject name="NPC_80246568" id="6"/>
+			<MapObject name="JungleGuy_02" id="6"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="42" palette="0" animations="3,5,6,6,3,3,7,7,1A,1B,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,0,0" yaw="90.000000">
-			<MapObject name="NPC_80246378" id="5"/>
+			<MapObject name="JungleGuy_01" id="5"/>
 			<Movement type="Wander" data="0,0,0,14,0,FFFF8001,0,0,0,0,64,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="42" palette="0" animations="3,5,6,6,3,3,7,7,1A,1B,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,0,0" yaw="270.000000">
-			<MapObject name="NPC_80246188" id="4"/>
+			<MapObject name="Fuzzy_00" id="4"/>
 			<Movement type="Wander" data="3F,0,FFFFFE92,32,0,FFFF8001,0,3F,0,FFFFFE92,C8,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="2B" palette="3" animations="2,2,3,3,1,1,8,8,3,3,3,3,3,3,3,3"/>
 		</Marker>

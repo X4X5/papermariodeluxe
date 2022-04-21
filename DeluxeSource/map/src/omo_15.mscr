@@ -1,6 +1,17 @@
 % Script File: omo_15.mscr
 % Decoded from: 0 to 3760 (omo_15)
 
+#define .NpcID:GeneralGuy_00        00
+#define .NpcID:ShyGuy_01            01
+#define .NpcID:ShyGuy_02            02
+#define .NpcID:ShyGuy_03            03
+#define .NpcID:ShyGuy_04            04
+#define .NpcID:ShyGuy_05            05
+#define .NpcID:ShyGuy_06            06
+#define .NpcID:ShyGuy_07            07
+#define .NpcID:ShyGuy_08            08
+#define .NpcID:ShyGuy_09            09
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -97,7 +108,7 @@
   118:  LW        A1, C (S0)
   11C:  LW        A2, 10 (S0)
   120:  LW        A3, 14 (S0)
-  124:  JAL       800729B0
+  124:  JAL       ~Func:playFX_83
   128:  LI        A0, 2
   12C:  SW        V0, 50 (S0)
   130:  SH        R0, 4E (S0)
@@ -213,7 +224,7 @@
   178:  LW        A1, 18 (S1)
   17C:  LW        A2, 1C (S1)
   180:  LW        A3, 20 (S1)
-  184:  JAL       800726B0
+  184:  JAL       ~Func:playFX_7B
   188:  LI        A0, 1
   18C:  SW        V0, 54 (S1)
   190:  LW        V1, C (V0)
@@ -448,7 +459,7 @@
    A0:  LW        A1, 18 (S0)
    A4:  LW        A2, 24 (S0)
    A8:  LW        A3, 20 (S0)
-   AC:  JAL       800726B0
+   AC:  JAL       ~Func:playFX_7B
    B0:  LI        A0, 1
    B4:  SW        V0, 54 (S0)
    B8:  LW        V1, C (V0)
@@ -580,15 +591,15 @@ PADDING: 802407F4 to 80240800 (000007F4 to 00000800)
    64:  EndSwitch
    6C:  If  *Var0  ==  00000000
    7C:  	Call  DisablePlayerInput    ( .True )
-   8C:  	Call  UseSettingsFrom   ( .Cam:Default FFFFFF9C 00000055 00000000 )
+   8C:  	Call  UseSettingsFrom   ( .Cam:Default  -100`  85`  0` )
    A8:  	Call  SetCamSpeed       ( .Cam:Default *Fixed[0.5] )
-   BC:  	Call  SetPanTarget      ( .Cam:Default FFFFFF9C 0000001E 00000000 )
+   BC:  	Call  SetPanTarget      ( .Cam:Default  -100`  30`  0` )
    D8:  	Call  GetCamDistance    ( .Cam:Default *Var1 )
    EC:  	Sub   *Var1  00000064
    FC:  	Call  SetCamDistance    ( .Cam:Default *Var1 )
   110:  	If  00002710  !=  00002710
   120:  		Call  GetCamPitch   ( .Cam:Default *Var2 *Var3 )
-  138:  		Call  SetCamPitch   ( .Cam:Default *Var2 00002710 )
+  138:  		Call  SetCamPitch   ( .Cam:Default *Var2  10000` )
   150:  	EndIf
   158:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   170:  	Call  $Function_8024004C    ( 00000003 000000B4 000000D7 0000003C 00000000 FFFFFF9C 00000055 00000000 0000001E 00000000 )
@@ -618,7 +629,7 @@ PADDING: 802407F4 to 80240800 (000007F4 to 00000800)
   2D0:  	EndThread
   2D8:  	Add   *Var1  00000064
   2E8:  	Call  SetCamDistance        ( .Cam:Default *Var1 )
-  2FC:  	Call  SetPanTarget  ( .Cam:Default FFFFFF9C 00000000 00000000 )
+  2FC:  	Call  SetPanTarget  ( .Cam:Default  -100`  0`  0` )
   318:  	Call  $Function_802405BC    ( 00000002 )
   328:  	Call  GetPlayerPos  ( *Var2 *Var3 *Var4 )
   340:  	Call  UseSettingsFrom       ( .Cam:Default *Var2 *Var3 *Var4 )
@@ -666,8 +677,8 @@ PADDING: 802407F4 to 80240800 (000007F4 to 00000800)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_8024370C )
@@ -714,36 +725,36 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
    9C:  		Call  802D2C14  ( 00000000 )
    AC:  	EndIf
    B4:  EndThread
-   BC:  Call  SpeakToPlayer ( 00000000 0076000A 00760002 00000000 000F005F ) % So, you came, did you?
+   BC:  Call  SpeakToPlayer ( .NpcID:GeneralGuy_00 0076000A 00760002 00000000 000F005F ) % So, you came, did you?
    DC:  Wait  10`
-   E8:  Call  UseSettingsFrom   ( .Cam:Default 000000FA FFFFFFCE 0000000A )
-  104:  Call  SetPanTarget  ( .Cam:Default 000000FA FFFFFFCE 0000000A )
+   E8:  Call  UseSettingsFrom   ( .Cam:Default  250`  -50`  10` )
+  104:  Call  SetPanTarget  ( .Cam:Default  250`  -50`  10` )
   120:  Call  SetCamPosB    ( .Cam:Default *Fixed[205.0] *Fixed[11.0] )
   138:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   14C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   164:  Wait  20`
-  170:  Call  SpeakToPlayer ( 00000000 0076000A 00760002 00000000 000F0060 ) % I'm General Guy. We're following the orders of Kin ...
+  170:  Call  SpeakToPlayer ( .NpcID:GeneralGuy_00 0076000A 00760002 00000000 000F0060 ) % I'm General Guy. We're following the orders of Kin ...
   190:  Wait  20`
-  19C:  Call  SpeakToPlayer ( 00000000 0076000A 00760002 00000000 000F0061 ) % I don't care for you, sir. You are rude, and furth ...
+  19C:  Call  SpeakToPlayer ( .NpcID:GeneralGuy_00 0076000A 00760002 00000000 000F0061 ) % I don't care for you, sir. You are rude, and furth ...
   1BC:  Wait  20`
-  1C8:  Call  SpeakToPlayer ( 00000000 0076000A 00760002 00000000 000F0062 ) % Prepare to fight me, sir!
+  1C8:  Call  SpeakToPlayer ( .NpcID:GeneralGuy_00 0076000A 00760002 00000000 000F0062 ) % Prepare to fight me, sir!
   1E8:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  1F8:  Call  PlayerMoveTo  ( FFFFFF38 00000000 00000000 )
+  1F8:  Call  PlayerMoveTo  (  -200`  0`  0` )
   210:  Set   *Var0  00000001
   220:  Loop  00000009
   22C:  	Call  SetNpcAnimation   ( *Var0 003B0002 )
   240:  	Add   *Var0  00000001
   250:  EndLoop
-  258:  Call  SetNpcAnimation   ( 00000000 0076000C )
-  26C:  Call  ShowMessageAtScreenPos    ( 000F0063 000000A0 00000028 ) % Taste defeat!
-  284:  Call  SetNpcAnimation   ( 00000000 00760002 )
+  258:  Call  SetNpcAnimation   ( .NpcID:GeneralGuy_00 0076000C )
+  26C:  Call  ShowMessageAtScreenPos    ( 000F0063  160`  40` ) % Taste defeat!
+  284:  Call  SetNpcAnimation   ( .NpcID:GeneralGuy_00 00760002 )
   298:  Wait  20`
   2A4:  Set   *Var0  00000001
   2B4:  Loop  00000009
   2C0:  	Call  SetNpcAnimation   ( *Var0 003B0001 )
   2D4:  	Add   *Var0  00000001
   2E4:  EndLoop
-  2EC:  Call  SpeakToPlayer ( 00000000 00760002 0076000A 00000000 000F0064 ) % Charge!!
+  2EC:  Call  SpeakToPlayer ( .NpcID:GeneralGuy_00 00760002 0076000A 00000000 000F0064 ) % Charge!!
   30C:  Thread
   314:  	Wait  10`
   320:  	Call  PlaySound ( 8000004D )
@@ -764,13 +775,13 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
   3F4:  Loop  00000009
   400:  	Get3Int  *Var1 *Var2 *Var3
   414:  	Call  SetNpcSpeed   ( *Var0 *Var1 )
-  428:  	Call  SetNpcPos     ( *Var0 *Var2 00000000 *Var3 )
+  428:  	Call  SetNpcPos     ( *Var0 *Var2  0` *Var3 )
   444:  	Add   *Var0  00000001
   454:  EndLoop
   45C:  Call  ResetCam  ( .Cam:Default *Fixed[90.0] )
   470:  Wait  20`
   47C:  Label  5
-  488:  Call  GetNpcVar ( 00000009 00000000 *Var0 )
+  488:  Call  GetNpcVar ( .NpcID:ShyGuy_09 00000000 *Var0 )
   4A0:  If  *Var0  !=  00000028
   4B0:  	Wait  1`
   4BC:  	Goto  5
@@ -781,8 +792,8 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
   500:  	Call  SpeakToPlayer     ( .Npc:Partner 00000108 00000106 00000000 000F0075 ) % Yay! Yippeeee!! We beat the Shy Guys! Hm hm hee he ...
   520:  	Call  EnablePartnerAI ( )
   52C:  EndIf
-  534:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
-  548:  Call  SetPanTarget  ( .Cam:Default 00000096 00000000 00000000 )
+  534:  Call  InterpPlayerYaw       (  90`  0` )
+  548:  Call  SetPanTarget  ( .Cam:Default  150`  0`  0` )
   564:  Call  SetCamSpeed   ( .Cam:Default *Fixed[2.5] )
   578:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   590:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -920,12 +931,12 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
    80:  		Switch  *Var2
    8C:  			Case  ==  00000000
    98:  				Get2Int  *Var3 *Var4
-   A8:  				Call  SetNpcSpeed   ( 00000000 *Fixed[8.0] )
-   BC:  				Call  NpcMoveTo     ( 00000000 *Var3 *Var4 00000000 )
+   A8:  				Call  SetNpcSpeed   ( .NpcID:GeneralGuy_00 *Fixed[8.0] )
+   BC:  				Call  NpcMoveTo     ( .NpcID:GeneralGuy_00 *Var3 *Var4  0` )
    D8:  			Case  ==  00000001
    E4:  				Get3Int  *Var3 *Var4 *Var5
-   F8:  				Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  10C:  				Call  NpcJump0  ( 00000000 *Var3 *Var4 *Var5 0000000A )
+   F8:  				Call  SetNpcJumpscale   ( .NpcID:GeneralGuy_00 *Fixed[1.0] )
+  10C:  				Call  NpcJump0  ( .NpcID:GeneralGuy_00 *Var3 *Var4 *Var5  10` )
   12C:  		EndSwitch
   134:  		If  *Var2  ==  FFFFFFFF
   144:  			BreakLoop
@@ -948,11 +959,11 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
   20C:  				Get2Int  *Var3 *Var4
   21C:  				Call  SetNpcAnimation   ( *Var9 003B0004 )
   230:  				Call  SetNpcSpeed       ( *Var9 *Fixed[8.0] )
-  244:  				Call  NpcMoveTo ( *Var9 *Var3 *Var4 00000000 )
+  244:  				Call  NpcMoveTo ( *Var9 *Var3 *Var4  0` )
   260:  			Case  ==  00000001
   26C:  				Get3Int  *Var3 *Var4 *Var5
   280:  				Call  SetNpcJumpscale   ( *Var9 *Fixed[1.0] )
-  294:  				Call  NpcJump0  ( *Var9 *Var3 *Var4 *Var5 0000000A )
+  294:  				Call  NpcJump0  ( *Var9 *Var3 *Var4 *Var5  10` )
   2B4:  			Case  ==  00000002
   2C0:  				Call  802CDE68  ( *Var9 0000000A )
   2D4:  				Thread
@@ -963,7 +974,7 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
   324:  						Wait  1`
   330:  					EndLoop
   338:  				EndThread
-  340:  				Call  NpcJump0  ( *Var9 FFFFFF4C 00000000 0000003F 00000004 )
+  340:  				Call  NpcJump0  ( *Var9  -180`  0`  63`  4` )
   360:  				Thread
   368:  					Wait  10`
   374:  					Call  SetNpcRotation    ( *Var9 00000000 00000000 00000000 )
@@ -971,9 +982,9 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
   3A4:  					Call  PlayerFaceNpc     ( *Var9 00000003 )
   3B8:  					Call  NpcFaceNpc        ( .Npc:Partner *Var9 00000003 )
   3D0:  				EndThread
-  3D8:  				Call  NpcJump0  ( *Var9 FFFFFF24 00000000 0000003F 0000000A )
+  3D8:  				Call  NpcJump0  ( *Var9  -220`  0`  63`  10` )
   3F8:  				Call  PlaySoundAtNpc    ( *Var9 .Sound:MissJump 00000000 )
-  410:  				Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+  410:  				Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[1.0] )
   42C:  				Wait  50`
   438:  				Loop  00000002
   444:  					Call  PlaySoundAtNpc    ( *Var9 000003E4 00000000 )
@@ -982,14 +993,14 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
   470:  				Wait  6`
   47C:  				Call  802CDE68      ( *Var9 00000000 )
   490:  				Call  SetNpcAnimation   ( *Var9 003B0001 )
-  4A4:  				Call  NpcJump0      ( *Var9 FFFFFF1A 00000000 0000003F 0000000A )
-  4C4:  				Call  InterpNpcYaw  ( *Var9 0000005A 00000000 )
+  4A4:  				Call  NpcJump0      ( *Var9  -230`  0`  63`  10` )
+  4C4:  				Call  InterpNpcYaw  ( *Var9  90`  0` )
   4DC:  				Wait  20`
   4E8:  				Thread
   4F0:  					Call  PlaySoundAtNpc    ( *Var9 000003A2 00000000 )
   508:  					Wait  45`
   514:  					Call  StopSound ( 000003A2 )
-  524:  					Call  SetNpcVar ( 00000009 00000000 00000028 )
+  524:  					Call  SetNpcVar ( .NpcID:ShyGuy_09 00000000 00000028 )
   53C:  				EndThread
   544:  		EndSwitch
   54C:  		If  *Var2  ==  FFFFFFFF
@@ -998,7 +1009,7 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
   56C:  	EndLoop
   574:  EndIf
   57C:  Call  SetNpcFlagBits    ( *Var9 00000200 .False )
-  594:  Call  SetNpcPos ( *Var9 00000000 FFFFFC18 00000000 )
+  594:  Call  SetNpcPos ( *Var9  0`  -1000`  0` )
   5B0:  Return
   5B8:  End
 }
@@ -1016,13 +1027,13 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
    84:  			Set   *Var0  00000001
    94:  			Loop  00000009
    A0:  				Get3Int  *Var1 *Var2 *Var3
-   B4:  				Call  SetNpcPos     ( *Var0 *Var1 00000000 *Var2 )
+   B4:  				Call  SetNpcPos     ( *Var0 *Var1  0` *Var2 )
    D0:  				Call  NpcFacePlayer ( *Var0 00000000 )
    E4:  				Add   *Var0  00000001
    F4:  			EndLoop
    FC:  			UseIntBuffer  $IntTable_80241924
   108:  			Get3Int  *Var1 *Var2 *Var3
-  11C:  			Call  SetNpcPos ( 00000000 *Var1 *Var2 *Var3 )
+  11C:  			Call  SetNpcPos ( .NpcID:GeneralGuy_00 *Var1 *Var2 *Var3 )
   138:  		EndIf
   140:  		Exec  $Script_80241AC4
   14C:  	Case  ==  .Outcome:PlayerLost % 1
@@ -1074,83 +1085,83 @@ PADDING: 80240EF4 to 80240F00 (00000EF4 to 00000F00)
 
 #new:NpcGroup $NpcGroup_802423AC
 {
-	00000000 $NpcSettings_80240F00 ~Vec3f:NPC_802423AC % 187 38 20
+	.NpcID:GeneralGuy_00 $NpcSettings_80240F00 ~Vec3f:NPC_GeneralGuy_00 % 187 38 20
 	00041705 $Script_Init_8024234C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802423AC
-	~AnimationTable:NPC_802423AC % .Sprite:GeneralGuy
+	~Movement:NPC_GeneralGuy_00
+	~AnimationTable:NPC_GeneralGuy_00 % .Sprite:GeneralGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802423AC[1F0]
-	00000001 $NpcSettings_80240F00 ~Vec3f:NPC_8024259C % 0 -1000 0
+	.NpcID:ShyGuy_01 $NpcSettings_80240F00 ~Vec3f:NPC_ShyGuy_01 % 0 -1000 0
 	00041705 $Script_Init_8024226C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024259C
-	~AnimationTable:NPC_8024259C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_01
+	~AnimationTable:NPC_ShyGuy_01 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802423AC[3E0]
-	00000002 $NpcSettings_80240F00 ~Vec3f:NPC_8024278C % 0 -1000 0
+	.NpcID:ShyGuy_02 $NpcSettings_80240F00 ~Vec3f:NPC_ShyGuy_02 % 0 -1000 0
 	00041705 $Script_Init_8024226C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024278C
-	~AnimationTable:NPC_8024278C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_02
+	~AnimationTable:NPC_ShyGuy_02 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802423AC[5D0]
-	00000003 $NpcSettings_80240F00 ~Vec3f:NPC_8024297C % 0 -1000 0
+	.NpcID:ShyGuy_03 $NpcSettings_80240F00 ~Vec3f:NPC_ShyGuy_03 % 0 -1000 0
 	00041705 $Script_Init_8024226C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024297C
-	~AnimationTable:NPC_8024297C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_03
+	~AnimationTable:NPC_ShyGuy_03 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802423AC[7C0]
-	00000004 $NpcSettings_80240F00 ~Vec3f:NPC_80242B6C % 0 -1000 0
+	.NpcID:ShyGuy_04 $NpcSettings_80240F00 ~Vec3f:NPC_ShyGuy_04 % 0 -1000 0
 	00041705 $Script_Init_8024226C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242B6C
-	~AnimationTable:NPC_80242B6C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_04
+	~AnimationTable:NPC_ShyGuy_04 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802423AC[9B0]
-	00000005 $NpcSettings_80240F00 ~Vec3f:NPC_80242D5C % 0 -1000 0
+	.NpcID:ShyGuy_05 $NpcSettings_80240F00 ~Vec3f:NPC_ShyGuy_05 % 0 -1000 0
 	00041705 $Script_Init_8024226C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242D5C
-	~AnimationTable:NPC_80242D5C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_05
+	~AnimationTable:NPC_ShyGuy_05 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802423AC[BA0]
-	00000006 $NpcSettings_80240F00 ~Vec3f:NPC_80242F4C % 0 -1000 0
+	.NpcID:ShyGuy_06 $NpcSettings_80240F00 ~Vec3f:NPC_ShyGuy_06 % 0 -1000 0
 	00041705 $Script_Init_8024226C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242F4C
-	~AnimationTable:NPC_80242F4C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_06
+	~AnimationTable:NPC_ShyGuy_06 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802423AC[D90]
-	00000007 $NpcSettings_80240F00 ~Vec3f:NPC_8024313C % 0 -1000 0
+	.NpcID:ShyGuy_07 $NpcSettings_80240F00 ~Vec3f:NPC_ShyGuy_07 % 0 -1000 0
 	00041705 $Script_Init_8024226C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024313C
-	~AnimationTable:NPC_8024313C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_07
+	~AnimationTable:NPC_ShyGuy_07 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802423AC[F80]
-	00000008 $NpcSettings_80240F00 ~Vec3f:NPC_8024332C % 0 -1000 0
+	.NpcID:ShyGuy_08 $NpcSettings_80240F00 ~Vec3f:NPC_ShyGuy_08 % 0 -1000 0
 	00041705 $Script_Init_8024226C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024332C
-	~AnimationTable:NPC_8024332C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_08
+	~AnimationTable:NPC_ShyGuy_08 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802423AC[1170]
-	00000009 $NpcSettings_80240F00 ~Vec3f:NPC_8024351C % 0 -1000 0
+	.NpcID:ShyGuy_09 $NpcSettings_80240F00 ~Vec3f:NPC_ShyGuy_09 % 0 -1000 0
 	00041705 $Script_Init_8024226C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024351C
-	~AnimationTable:NPC_8024351C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_09
+	~AnimationTable:NPC_ShyGuy_09 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

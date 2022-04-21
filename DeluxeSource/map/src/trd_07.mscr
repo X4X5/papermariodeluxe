@@ -1,6 +1,10 @@
 % Script File: trd_07.mscr
 % Decoded from: 0 to 4920 (trd_07)
 
+#define .NpcID:KoopaTroopa_00       00
+#define .NpcID:ParaTroopa_01        01
+#define .NpcID:ParaTroopa_02        02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -2800,7 +2804,7 @@ PADDING: 8024030C to 80240310 (0000030C to 00000310)
    BC:  MFC1      A3, F2
    C0:  NEG.S     F0, F0
    C4:  SWC1      F20, 10 (SP)
-   C8:  JAL       ~Func:fx_walk_normal
+   C8:  JAL       ~Func:fx_walk
    CC:  SWC1      F0, 14 (SP)
    D0:  LW        RA, 28 (SP)
    D4:  LW        S3, 24 (SP)
@@ -2907,8 +2911,8 @@ PADDING: 8024298C to 80242990 (0000298C to 00002990)
 {
     0:  Set   *GB_WorldLocation  .Location:KoopaBrosFortress
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_8024369C )
@@ -3047,32 +3051,32 @@ PADDING: 80242DDC to 80242DE0 (00002DDC to 00002DE0)
 
 #new:NpcGroup $NpcGroup_802430CC
 {
-	00000000 $NpcSettings_80242E80 ~Vec3f:NPC_802430CC % -75 0 -30
+	.NpcID:KoopaTroopa_00 $NpcSettings_80242E80 ~Vec3f:NPC_KoopaTroopa_00 % -75 0 -30
 	00040C00 $Script_Init_80243070 00000000 00000000 0000005A
 	~Items:5:Mushroom:5:POWBlock:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_802430CC
-	~AnimationTable:NPC_802430CC % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_00
+	~AnimationTable:NPC_KoopaTroopa_00 % .Sprite:KoopaTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802432BC
 {
-	00000001 $NpcSettings_80242F64 ~Vec3f:NPC_802432BC % 0 50 30
+	.NpcID:ParaTroopa_01 $NpcSettings_80242F64 ~Vec3f:NPC_ParaTroopa_01 % 0 50 30
 	00040C00 $Script_Init_80243070 00000000 00000000 0000010E
 	~Items:5:POWBlock:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_802432BC
-	~AnimationTable:NPC_802432BC % .Sprite:ParaTroopa
+	~Movement:NPC_ParaTroopa_01
+	~AnimationTable:NPC_ParaTroopa_01 % .Sprite:ParaTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802434AC
 {
-	00000002 $NpcSettings_80242F64 ~Vec3f:NPC_802434AC % 75 50 -30
+	.NpcID:ParaTroopa_02 $NpcSettings_80242F64 ~Vec3f:NPC_ParaTroopa_02 % 75 50 -30
 	00040C00 $Script_Init_80243070 00000000 00000000 0000010E
 	~Items:5:POWBlock:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_802434AC
-	~AnimationTable:NPC_802434AC % .Sprite:ParaTroopa
+	~Movement:NPC_ParaTroopa_02
+	~AnimationTable:NPC_ParaTroopa_02 % .Sprite:ParaTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

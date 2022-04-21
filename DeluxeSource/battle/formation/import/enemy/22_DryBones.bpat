@@ -179,19 +179,19 @@
    44:  	Case  ==  00000000 
    50:  		Switch  *Var1 
    5C:  			Case  &  ~Flags:StatusFlags:Sleep % 1000
-   68:  				Call  SetTargetOffset   ( .Actor:Self 00000001 FFFFFFFA 00000018 )
+   68:  				Call  SetTargetOffset   ( .Actor:Self 00000001  -6`  24` )
    84:  				Call  8027D4C8  ( FFFFFF81 00000001 00000001 FFFFFFFB )
    A0:  			Default
-   A8:  				Call  SetTargetOffset   ( .Actor:Self 00000001 FFFFFFF8 0000001E )
+   A8:  				Call  SetTargetOffset   ( .Actor:Self 00000001  -8`  30` )
    C4:  				Call  8027D4C8  ( FFFFFF81 00000001 FFFFFFFF FFFFFFF6 )
    E0:  		EndSwitch
    E8:  	Case  ==  00000001 
    F4:  		Switch  *Var1 
   100:  			Case  &  ~Flags:StatusFlags:Sleep % 1000
-  10C:  				Call  SetTargetOffset   ( .Actor:Self 00000001 FFFFFFFF 0000000A )
+  10C:  				Call  SetTargetOffset   ( .Actor:Self 00000001  -1`  10` )
   128:  				Call  8027D4C8  ( FFFFFF81 00000001 00000000 00000000 )
   144:  			Default
-  14C:  				Call  SetTargetOffset   ( .Actor:Self 00000001 FFFFFFFF 0000000A )
+  14C:  				Call  SetTargetOffset   ( .Actor:Self 00000001  -1`  10` )
   168:  				Call  8027D4C8  ( FFFFFF81 00000001 00000000 00000000 )
   184:  		EndSwitch
   18C:  EndSwitch
@@ -210,7 +210,7 @@
    68:  Call  SetDefenseTable   ( .Actor:Self 00000001 $DefenseTable_8021CAA0_22 )
    80:  Call  SetStatusTable    ( .Actor:Self $StatusTable_8021CB68_22 )
    94:  Call  ClearStatusEffects    ( .Actor:Self )
-   A4:  Call  SetTargetOffset   ( .Actor:Self 00000001 FFFFFFFF 0000000A )
+   A4:  Call  SetTargetOffset   ( .Actor:Self 00000001  -1`  10` )
    C0:  Call  8027D4C8  ( FFFFFF81 00000001 00000000 00000000 )
    DC:  Call  RandInt   ( 00000000 *Var0 )
    F0:  Add   *Var0  00000002 
@@ -341,7 +341,7 @@
   4C0:  		Call  GetActorVar   ( .Actor:Self 00000008 *Var0 )
   4D8:  		If  *Var0  ==  00000000 
   4E8:  			Call  GetStatusFlags    ( .Actor:Self *Var0 )
-  4FC:  			If  *Var0  !&  ~Flags:StatusFlags:Sleep|Frozen|UnknownStatus3|Paralyze|Dizzy|Stone|Stop % 35D000
+  4FC:  			If  *Var0  !&  ~Flags:StatusFlags:Sleep|Frozen|Fear|Paralyze|Dizzy|Stone|Stop % 35D000
   50C:  				If  *Var0  &  ~Flags:StatusFlags:Shrink % 80000
   51C:  					Call  SetActorDispOffset    ( .Actor:Self FFFFFFFF FFFFFFFE 00000000 )
   538:  				Else
@@ -395,7 +395,7 @@
    3C:  Call  GetBattlePhase    ( *Var0 )
    4C:  If  *Var0  ==  00000001 
    5C:  	Call  UseBattleCamPreset    ( 00000002 )
-   6C:  	Call  MoveBattleCamOver     ( 00000001 )
+   6C:  	Call  MoveBattleCamOver     (  1` )
    7C:  EndIf
    84:  Call  GetBattlePhase    ( *Var0 )
    94:  If  *Var0  ==  00000001 
@@ -419,7 +419,7 @@
   1E8:  		Call  SetDefenseTable   ( .Actor:Self 00000001 $DefenseTable_8021CA84_22 )
   200:  		Call  SetStatusTable    ( .Actor:Self $StatusTable_8021CABC_22 )
   214:  		Call  SetPartFlagBits   ( .Actor:Self 00000001 00002000 .False )
-  230:  		Call  SetTargetOffset   ( .Actor:Self 00000001 FFFFFFF8 0000001E )
+  230:  		Call  SetTargetOffset   ( .Actor:Self 00000001  -8`  30` )
   24C:  		Call  8027D4C8  ( FFFFFF81 00000001 FFFFFFFF FFFFFFF6 )
   268:  		Call  GetEnemyMaxHP     ( .Actor:Self *Var0 )
   27C:  		Call  SetEnemyHP        ( .Actor:Self *Var0 )
@@ -498,11 +498,11 @@
   810:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:NoContact 00000000 00000000 00000004 00000020 )
   838:  Switch  *Var0 
   844:  	CaseOR  ==  .HitResult:Hit % 0
-  850:  	CaseOR  ==  00000002 % 2
+  850:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   85C:  		Call  GetPartOffset     ( .Actor:Self 00000002 *Var0 *Var1 *Var2 )
   87C:  		Sub   *Var0  00000064 
   88C:  		Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.7] )
-  8A4:  		Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 00000000 *Var2 0000001E .True )
+  8A4:  		Call  JumpPartTo        ( .Actor:Self 00000002 *Var0  0` *Var2  30` .True )
   8CC:  		Call  SetPartFlagBits   ( .Actor:Self 00000002 00000001 .True )
   8E8:  		Kill  *VarA 
   8F4:  		Call  YieldTurn ( )

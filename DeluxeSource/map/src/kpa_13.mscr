@@ -1,6 +1,7 @@
 % Script File: kpa_13.mscr
 % Decoded from: 0 to 1590 (kpa_13)
 
+
 #new:Function_GetTattle $Function_GetTattle
 {
     0:  ADDIU     SP, SP, FFE8
@@ -479,8 +480,8 @@ PADDING: 80240468 to 80240470 (00000468 to 00000470)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  ExecWait  $Script_MakeEntities
    7C:  If  *GF_KPA16_ShutOffLava  ==  .False
@@ -560,7 +561,7 @@ PADDING: 80240D78 to 80240D80 (00000D78 to 00000D80)
    8C:  			Goto  B
    98:  		EndIf
    A0:  		Wait  20`
-   AC:  		Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[0.5] )
+   AC:  		Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[0.5] )
    C8:  		Set   *GF_KPA13_BlueSwitchA  .True
    D8:  	EndIf
    E0:  	Set   *Var0  0000007D
@@ -630,7 +631,7 @@ PADDING: 80240D78 to 80240D80 (00000D78 to 00000D80)
   474:  		Goto  C
   480:  	EndIf
   488:  	Wait  20`
-  494:  	Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[0.5] )
+  494:  	Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[0.5] )
   4B0:  	Set   *GF_KPA13_BlueSwitchB  .True
   4C0:  EndIf
   4C8:  Set   *Var0  0000004B

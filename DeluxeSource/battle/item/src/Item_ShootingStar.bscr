@@ -222,7 +222,7 @@
   114:  SWC1      F22, 10 (SP)
   118:  SW        R0, 14 (SP)
   11C:  SWC1      F20, 18 (SP)
-  120:  JAL       8006FE30
+  120:  JAL       ~Func:playFX_0F
   124:  SWC1      F0, 1C (SP)
   128:  LW        RA, 2C (SP)
   12C:  LW        S2, 28 (SP)
@@ -274,7 +274,7 @@
    8C:  SW        R0, 10 (SP)
    90:  SW        R0, 18 (SP)
    94:  SW        V1, 1C (SP)
-   98:  JAL       80070190
+   98:  JAL       ~Func:playFX_18
    9C:  SWC1      F0, 14 (SP)
    A0:  LW        RA, 2C (SP)
    A4:  LW        S2, 28 (SP)
@@ -292,7 +292,7 @@
     8:  COPY      S0, A0
     C:  BEQ       A1, R0, .o48
    10:  SW        RA, 14 (SP)
-   14:  JAL       8011D82C
+   14:  JAL       ~Func:mdl_set_all_fog_mode
    18:  LI        A0, 1
    1C:  CLEAR     A0
    20:  COPY      A1, A0
@@ -412,10 +412,10 @@ PADDING: 802A154C to 802A1550 (0071DCBC to 0071DCC0)
 #new:Script $Script_802A1854
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -481,7 +481,7 @@ PADDING: 802A154C to 802A1550 (0071DCBC to 0071DCC0)
    1C:  Thread
    24:  	Wait  5`
    30:  	Call  UseBattleCamPreset    ( 00000002 )
-   40:  	Call  MoveBattleCamOver     ( 00000014 )
+   40:  	Call  MoveBattleCamOver     (  20` )
    50:  EndThread
    58:  Call  $Function_802A1444 ( )
    64:  Thread
@@ -513,12 +513,12 @@ PADDING: 802A154C to 802A1550 (0071DCBC to 0071DCC0)
   1B8:  	Loop  00000005
   1C4:  		Wait  15`
   1D0:  		Call  StartRumble   ( 00000008 )
-  1E0:  		Call  ShakeCam      ( .Cam:Battle 00000000 00000005 *Fixed[1.0] )
+  1E0:  		Call  ShakeCam      ( .Cam:Battle 00000000  5` *Fixed[1.0] )
   1FC:  	EndLoop
   204:  EndThread
   20C:  Wait  90`
   218:  Call  UseBattleCamPreset    ( 00000003 )
-  228:  Call  MoveBattleCamOver ( 00000014 )
+  228:  Call  MoveBattleCamOver (  20` )
   238:  Call  InitTargetIterator ( )
   244:  Label  0
   250:  Call  SetGoalToTarget   ( .Actor:Self )
@@ -529,7 +529,7 @@ PADDING: 802A154C to 802A1550 (0071DCBC to 0071DCC0)
   2A4:  Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
   2C0:  Call  $Function_802A1388    ( *Var0 *Var1 *Var2 )
   2D8:  Call  GetItemPower      ( .Item:ShootingStar *Var0 *Var1 )
-  2F0:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:IgnoreDefense|NoContact|Unblockable|Cosmic 00000000 *Var0 00000020 )
+  2F0:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:IgnoreDefense|NoContact|NoOtherDamagePopups|Cosmic 00000000 *Var0 00000020 )
   310:  Label  1
   31C:  Wait  10`
   328:  Call  ChooseNextTarget  ( .Iter:Next *Var0 )
@@ -538,7 +538,7 @@ PADDING: 802A154C to 802A1550 (0071DCBC to 0071DCC0)
   358:  EndIf
   360:  Wait  20`
   36C:  Call  UseBattleCamPreset    ( 00000002 )
-  37C:  Call  MoveBattleCamOver     ( 00000014 )
+  37C:  Call  MoveBattleCamOver     (  20` )
   38C:  ExecWait  $Script_802A1980
   398:  Thread
   3A0:  	Call  $Function_802A14D4 ( )

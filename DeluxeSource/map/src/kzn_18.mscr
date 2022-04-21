@@ -1,6 +1,9 @@
 % Script File: kzn_18.mscr
 % Decoded from: 0 to 1B10 (kzn_18)
 
+#define .NpcID:Kolorado_00          00
+#define .NpcID:PutridPiranha_01     01
+
 #new:Function_GetTattle $Function_GetTattle
 {
     0:  ADDIU     SP, SP, FFE8
@@ -494,8 +497,8 @@ PADDING: 802403B4 to 802403C0 (000003B4 to 000003C0)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading  ( .Shading:kzn_18 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80241A4C )
    84:  ExecWait  $Script_MakeEntities
@@ -550,7 +553,7 @@ MISSING: 80240E18 to 80240E44 (00000E18 to 00000E44)
    50:  		Goto  0
    5C:  	EndIf
    64:  	Set   *GB_StoryProgress  .Story:Ch5_KoloradoRanAhead
-   74:  	Call  SetNpcPos ( .Npc:Self FFFFFEE8 000000FA FFFFFE98 )
+   74:  	Call  SetNpcPos ( .Npc:Self  -280`  250`  -360` )
    90:  	Call  SetNpcAnimation   ( .Npc:Self 00B60007 )
    A4:  	Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
    BC:  	If  *Var2  <  FFFFFEAC
@@ -559,12 +562,12 @@ MISSING: 80240E18 to 80240E44 (00000E18 to 00000E44)
    E4:  		Set   *Var2  FFFFFE98
    F4:  	EndIf
    FC:  	Call  SetNpcSpeed   ( .Npc:Self *Fixed[10.0] )
-  110:  	Call  NpcMoveTo     ( .Npc:Self 000000B9 *Var2 00000000 )
+  110:  	Call  NpcMoveTo     ( .Npc:Self  185` *Var2  0` )
   12C:  	Call  NpcFacePlayer ( .Npc:Self 00000004 )
   140:  	Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
   154:  Else
-  15C:  	Call  SetNpcPos ( .Npc:Self 000000B9 000000FA FFFFFEAC )
-  178:  	Call  SetNpcYaw ( .Npc:Self 0000010E )
+  15C:  	Call  SetNpcPos ( .Npc:Self  185`  250`  -340` )
+  178:  	Call  SetNpcYaw ( .Npc:Self  270` )
   18C:  EndIf
   194:  Loop
   1A0:  	Wait  1`
@@ -592,8 +595,8 @@ MISSING: 80240E18 to 80240E44 (00000E18 to 00000E44)
   314:  	Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
   330:  	Call  SetNpcJumpscale   ( .Npc:Self *Fixed[2.0] )
   344:  	Call  PlaySoundAtNpc    ( .Npc:Self 0000032C 00000000 )
-  35C:  	Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 0000000A )
-  37C:  	Call  SetNpcYaw ( .Npc:Self 0000005A )
+  35C:  	Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  10` )
+  37C:  	Call  SetNpcYaw ( .Npc:Self  90` )
   390:  	Set   *MapVar[A]  00000001
   3A0:  EndThread
   3A8:  Call  ContinueSpeech    ( .Npc:Self 00B60008 00B60001 00000000 001000FE ) % It's over here!!
@@ -604,13 +607,13 @@ MISSING: 80240E18 to 80240E44 (00000E18 to 00000E44)
   3F8:  	EndIf
   400:  EndLoop
   408:  Call  UseSettingsFrom       ( .Cam:Default *Var3 *Var4 *Var5 )
-  424:  Call  SetPanTarget  ( .Cam:Default 000001A4 000000FA FFFFFEA2 )
+  424:  Call  SetPanTarget  ( .Cam:Default  420`  250`  -350` )
   440:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   454:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   46C:  Call  SetNpcAnimation       ( .Npc:Self 00B60006 )
   480:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[5.0] )
-  494:  Call  NpcMoveTo     ( .Npc:Self 00000212 FFFFFE98 00000000 )
-  4B0:  Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  494:  Call  NpcMoveTo     ( .Npc:Self  530`  -360`  0` )
+  4B0:  Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   4CC:  Wait  15`
   4D8:  Call  ResetCam      ( .Cam:Default *Fixed[3.0] )
   4EC:  Set   *GB_StoryProgress  .Story:Ch5_KoloradoInTreasureRoom
@@ -644,13 +647,13 @@ MISSING: 80240E18 to 80240E44 (00000E18 to 00000E44)
    78:  Call  DisablePlayerInput    ( .True )
    88:  Call  $Function_80240350 ( )
    94:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-   B0:  Call  SetPanTarget      ( .Cam:Default 0000011D 00000019 00000023 )
-   CC:  Call  SetCamDistance    ( .Cam:Default 00000190 )
+   B0:  Call  SetPanTarget      ( .Cam:Default  285`  25`  35` )
+   CC:  Call  SetCamDistance    ( .Cam:Default  400` )
    E0:  Call  SetCamSpeed       ( .Cam:Default *Fixed[2.5] )
    F4:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   10C:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
   120:  Wait  10`
-  12C:  Call  SetNpcPos ( .Npc:Self 0000011D 00000019 00000023 )
+  12C:  Call  SetNpcPos ( .Npc:Self  285`  25`  35` )
   148:  Call  PlaySoundAtNpc    ( .Npc:Self .Sound:MoleSurface 00000000 )
   160:  Call  SetNpcAnimation   ( .Npc:Self 00360017 )
   174:  Wait  30`
@@ -660,7 +663,7 @@ MISSING: 80240E18 to 80240E44 (00000E18 to 00000E44)
   1C0:  Call  PlaySoundAtNpc    ( .Npc:Self .Sound:MoleDig 00000000 )
   1D8:  Call  SetNpcAnimation   ( .Npc:Self 00360018 )
   1EC:  Wait  25`
-  1F8:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  1F8:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   214:  Call  $Function_8024036C ( )
   220:  Call  ResetCam  ( .Cam:Default *Fixed[3.0] )
   234:  Set   *GF_KZN18_IntruderAlert  .True
@@ -682,21 +685,21 @@ MISSING: 80240E18 to 80240E44 (00000E18 to 00000E44)
 
 #new:NpcGroup $NpcGroup_8024166C
 {
-	00000000 $NpcSettings_80240DC0 ~Vec3f:NPC_8024166C % 0 -1000 0
+	.NpcID:Kolorado_00 $NpcSettings_80240DC0 ~Vec3f:NPC_Kolorado_00 % 0 -1000 0
 	00110709 $Script_Init_80241360 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024166C
-	~AnimationTable:NPC_8024166C % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_00
+	~AnimationTable:NPC_Kolorado_00 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 }
 
 #new:NpcGroup $NpcGroup_8024185C
 {
-	00000001 $NpcSettings_80240DEC ~Vec3f:NPC_8024185C % 0 -1000 0
+	.NpcID:PutridPiranha_01 $NpcSettings_80240DEC ~Vec3f:NPC_PutridPiranha_01 % 0 -1000 0
 	00200004 $Script_Init_80241618 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_8024185C
-	~AnimationTable:NPC_8024185C % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_01
+	~AnimationTable:NPC_PutridPiranha_01 % .Sprite:PutridPiranha
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

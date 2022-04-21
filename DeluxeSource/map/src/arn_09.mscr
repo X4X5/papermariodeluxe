@@ -1,6 +1,8 @@
 % Script File: arn_09.mscr
 % Decoded from: 0 to 9A0 (arn_09)
 
+#define .NpcID:TubbasHeart_00       00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -100,8 +102,8 @@ PADDING: 80240138 to 80240140 (00000138 to 00000140)
 {
     0:  Set   *GB_WorldLocation  .Location:WindyMill
    10:  Call  SetSpriteShading  ( .Shading:arn_09 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80240974 )
@@ -127,7 +129,7 @@ PADDING: 80240398 to 802403A0 (00000398 to 000003A0)
    50:  Call  SetPlayerActionState  ( .ActionState:Launch )
    60:  Wait  1`
    6C:  Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-   7C:  Call  PlayerJump    ( ~Vec3d:JumpDest_8024041C 0000001E )
+   7C:  Call  PlayerJump    ( ~Vec3d:JumpDest_8024041C  30` )
    98:  Call  GotoMap   ( $ASCII_80240998 00000001 ) % arn_08
    AC:  Wait  100`
    B8:  Call  DisablePlayerInput    ( .False )
@@ -158,7 +160,7 @@ PADDING: 802404CC to 802404D0 (000004CC to 000004D0)
    50:  Call  802D2484 ( )
    5C:  Call  SetPlayerActionState  ( .ActionState:Launch )
    6C:  Call  SetPlayerJumpscale    ( *Fixed[1.5] )
-   7C:  Call  PlayerJump    ( ~Vec3d:JumpDest_8024054C 00000010 )
+   7C:  Call  PlayerJump    ( ~Vec3d:JumpDest_8024054C  16` )
    98:  Call  SetPlayerAnimation    ( 00010002 )
    A8:  Set   *AreaFlag[001]  .False
    B8:  Call  DisablePlayerInput    ( .False )
@@ -193,14 +195,14 @@ PADDING: 802405A8 to 802405B0 (000005A8 to 000005B0)
    14:  Call  SetNpcAnimation   ( .Npc:Self 006C0013 )
    28:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[2.5] )
    3C:  Call  PlaySoundAtNpc    ( .Npc:Self 000020C8 00000000 )
-   54:  Call  NpcJump0  ( .Npc:Self 00000000 00000019 FFFFFFF6 00000006 )
+   54:  Call  NpcJump0  ( .Npc:Self  0`  25`  -10`  6` )
    74:  Call  PlaySoundAtNpc    ( .Npc:Self 00002086 00000000 )
    8C:  Call  $Function_80240000 ( )
    98:  Call  SetNpcAnimation   ( .Npc:Self 006C0013 )
    AC:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[2.5] )
    C0:  Call  PlaySoundAtNpc    ( .Npc:Self 000020C8 00000000 )
-   D8:  Call  NpcJump0  ( .Npc:Self 00000000 000000C8 00000000 0000000F )
-   F8:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   D8:  Call  NpcJump0  ( .Npc:Self  0`  200`  0`  15` )
+   F8:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   114:  Set   *GB_StoryProgress  .Story:Ch3_HeartEscapedWell
   124:  Return
   12C:  End
@@ -219,11 +221,11 @@ PADDING: 802405A8 to 802405B0 (000005A8 to 000005B0)
 
 #new:NpcGroup $NpcGroup_80240784
 {
-	00000000 $NpcSettings_802405D0 ~Vec3f:NPC_80240784 % 0 25 0
+	.NpcID:TubbasHeart_00 $NpcSettings_802405D0 ~Vec3f:NPC_TubbasHeart_00 % 0 25 0
 	00000D05 $Script_Init_80240730 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80240784
-	~AnimationTable:NPC_80240784 % .Sprite:TubbasHeart
+	~Movement:NPC_TubbasHeart_00
+	~AnimationTable:NPC_TubbasHeart_00 % .Sprite:TubbasHeart
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

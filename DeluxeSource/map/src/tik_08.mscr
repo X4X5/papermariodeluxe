@@ -1,6 +1,8 @@
 % Script File: tik_08.mscr
 % Decoded from: 0 to 33D0 (tik_08)
 
+#define .NpcID:Blooper_00           00
+
 #new:Function $Function_80240000
 {
     0:  LAW       V0, 800F7B30
@@ -807,13 +809,13 @@ PADDING: 80240BA8 to 80240BB0 (00000BA8 to 00000BB0)
    50:  Call  GetCurrentPartnerID   ( *Var0 )
    60:  If  *Var0  !=  .Partner:None % 0
    70:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-   84:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   84:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    A0:  EndIf
    A8:  Call  GetEntryID    ( *Var0 )
    B8:  Call  $Function_802400F0 ( )
    C4:  Sub   *Var2  00000028
    D4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   EC:  Call  InterpPlayerYaw   ( *Var4 00000000 )
+   EC:  Call  InterpPlayerYaw   ( *Var4  0` )
   100:  Call  PlaySound     ( 00000163 )
   110:  Call  802D286C      ( 00000100 )
   120:  Call  802D2520      ( 00010000 00000005 00000002 00000001 00000001 00000000 )
@@ -867,7 +869,7 @@ PADDING: 80240BA8 to 80240BB0 (00000BA8 to 00000BB0)
    84:  Set   *Var7  *Var3
    94:  Add   *Var2  00000002
    A4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   BC:  Call  InterpPlayerYaw       ( *Var4 00000000 )
+   BC:  Call  InterpPlayerYaw       ( *Var4  0` )
    D0:  If  *Var4  ==  0000005A
    E0:  	Add   *Var5  00000028
    F0:  Else
@@ -881,8 +883,8 @@ PADDING: 80240BA8 to 80240BB0 (00000BA8 to 00000BB0)
   184:  If  *Var0  !=  .Partner:None % 0
   194:  	Call  DisablePartnerAI  ( 00000000 )
   1A4:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-  1B8:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
-  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000000 )
+  1B8:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
+  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0  0` )
   1EC:  EndIf
   1F4:  Wait  1`
   200:  Call  PlaySound ( 00000163 )
@@ -951,13 +953,13 @@ PADDING: 80240BA8 to 80240BB0 (00000BA8 to 00000BB0)
    28:  Call  HidePlayerShadow  ( .True )
    38:  Set   *Var0  *VarA
    48:  Call  $Function_802400F0 ( )
-   54:  Call  PlayerMoveTo      ( *Var1 *Var3 00000003 )
+   54:  Call  PlayerMoveTo      ( *Var1 *Var3  3` )
    6C:  Set   *Var0  *VarA
    7C:  Call  $Function_802400F0 ( )
    88:  Call  SetPlayerPos      ( *Var1 *Var2 *Var3 )
    A0:  Call  SetPlayerFlagBits ( 00200000 .True )
    B4:  Call  $Function_802401D0 ( )
-   C0:  Call  InterpPlayerYaw   ( *Var0 00000000 )
+   C0:  Call  InterpPlayerYaw   ( *Var0  0` )
    D4:  Wait  2`
    E0:  Call  SetPlayerFlagBits ( 00200000 .False )
    F4:  Call  PlaySound ( 00000163 )
@@ -1015,7 +1017,7 @@ PADDING: 80240BA8 to 80240BB0 (00000BA8 to 00000BB0)
   1B0:  If  *Var4  >=  00000168
   1C0:  	Sub   *Var4  00000168
   1D0:  EndIf
-  1D8:  Call  InterpPlayerYaw       ( *Var8 00000001 )
+  1D8:  Call  InterpPlayerYaw       ( *Var8  1` )
   1EC:  Wait  1`
   1F8:  Call  PlaySound     ( 00000163 )
   208:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -1115,8 +1117,8 @@ PADDING: 80240BA8 to 80240BB0 (00000BA8 to 00000BB0)
 {
     0:  Set   *GB_WorldLocation  .Location:ToadTownTunnels
    10:  Call  SetSpriteShading  ( .Shading:tik_08 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80243394 )
@@ -1374,7 +1376,7 @@ PADDING: 80242974 to 80242980 (00002974 to 00002980)
    90:  	Wait  1`
    9C:  EndLoop
    A4:  Call  PlaySoundAt   ( 00000048 00000000 0000005A *Var0 00000064 )
-   C4:  Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+   C4:  Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[1.0] )
    E0:  Wait  10`
    EC:  Return
    F4:  End
@@ -1443,30 +1445,30 @@ PADDING: 80242BDC to 80242BE0 (00002BDC to 00002BE0)
    78:  EndLoop
    80:  Call  DisablePlayerInput        ( .True )
    90:  Exec  $Script_80240B7C
-   9C:  Call  ShowMessageAtScreenPos    ( 00080000 000000A0 00000028 ) % BLOOPER!
+   9C:  Call  ShowMessageAtScreenPos    ( 00080000  160`  40` ) % BLOOPER!
    B4:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
-   CC:  Call  UseSettingsFrom   ( .Cam:Default FFFFFFE7 *Var1 *Var2 )
-   E8:  Call  SetPanTarget      ( .Cam:Default FFFFFFE7 *Var1 *Var2 )
+   CC:  Call  UseSettingsFrom   ( .Cam:Default  -25` *Var1 *Var2 )
+   E8:  Call  SetPanTarget      ( .Cam:Default  -25` *Var1 *Var2 )
   104:  Call  SetCamSpeed       ( .Cam:Default *Fixed[1.0] )
   118:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   130:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
-  144:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  144:  Call  InterpPlayerYaw   (  270`  0` )
   158:  Wait  20`
   164:  Call  PlaySoundAtNpc    ( .Npc:Self 000003DC 00000000 )
   17C:  Call  PlaySoundAtNpc    ( .Npc:Self 000003E7 00000000 )
   194:  Call  MakeLerp  ( FFFFFF06 FFFFFFC4 0000000F .Easing:QuadraticIn )
   1B0:  Loop
   1BC:  	Call  UpdateLerp ( )
-  1C8:  	Call  SetNpcPos ( .Npc:Self FFFFFFD8 *Var0 00000000 )
+  1C8:  	Call  SetNpcPos ( .Npc:Self  -40` *Var0  0` )
   1E4:  	Wait  1`
   1F0:  	If  *Var1  ==  00000000
   200:  		BreakLoop
   208:  	EndIf
   210:  EndLoop
   218:  Loop  00000006
-  224:  	Call  SetNpcPos ( .Npc:Self FFFFFFD8 FFFFFFC7 00000000 )
+  224:  	Call  SetNpcPos ( .Npc:Self  -40`  -57`  0` )
   240:  	Wait  1`
-  24C:  	Call  SetNpcPos ( .Npc:Self FFFFFFD8 FFFFFFC4 00000000 )
+  24C:  	Call  SetNpcPos ( .Npc:Self  -40`  -60`  0` )
   268:  	Wait  1`
   274:  EndLoop
   27C:  Wait  5`
@@ -1492,7 +1494,7 @@ PADDING: 80242BDC to 80242BE0 (00002BDC to 00002BE0)
    AC:  EndThread
    B4:  Call  PlaySoundAtNpc    ( .Npc:Self 000003DD 00000000 )
    CC:  Call  PlaySoundAtNpc    ( .Npc:Self 000003E7 00000000 )
-   E4:  Call  NpcFlyTo  ( .Npc:Self FFFFFFD8 FFFFFF06 00000000 00000028 00000000 .Easing:Linear )
+   E4:  Call  NpcFlyTo  ( .Npc:Self  -40`  -250`  0`  40`  0` .Easing:Linear )
   10C:  Call  ResetCam  ( .Cam:Default *Fixed[1.0] )
   120:  ExecWait  $Script_80242980
   12C:  If  *GF_TIK_DefeatedOneBlooper  ==  .False
@@ -1534,11 +1536,11 @@ PADDING: 80242BDC to 80242BE0 (00002BDC to 00002BE0)
 
 #new:NpcGroup $NpcGroup_802431A4
 {
-	00000000 $NpcSettings_80242BE0 ~Vec3f:NPC_802431A4 % 0 -1000 0
+	.NpcID:Blooper_00 $NpcSettings_80242BE0 ~Vec3f:NPC_Blooper_00 % 0 -1000 0
 	00840D0D $Script_Init_80243078 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802431A4
-	~AnimationTable:NPC_802431A4 % .Sprite:Blooper
+	~Movement:NPC_Blooper_00
+	~AnimationTable:NPC_Blooper_00 % .Sprite:Blooper
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

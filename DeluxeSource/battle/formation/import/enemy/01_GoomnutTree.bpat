@@ -232,10 +232,10 @@
    9C:  Call  SetActorVar   ( .Actor:Self 00000004 00000000 )
    B4:  Call  SetActorVar   ( .Actor:Self 00000005 00000000 )
    CC:  Call  SetActorVar   ( .Actor:Self 00000006 00000001 )
-   E4:  Call  SetPartPos    ( .Actor:Self 00000002 0000000A 0000008C 0000000A )
-  104:  Call  SetPartPos    ( .Actor:Self 00000003 FFFFFFA1 0000008C 0000000A )
-  124:  Call  SetPartPos    ( .Actor:Self 00000004 FFFFFF8D 00000082 00000000 )
-  144:  Call  SetPartPos    ( .Actor:Self 00000005 FFFFFFBF 00000076 00000005 )
+   E4:  Call  SetPartPos    ( .Actor:Self 00000002  10`  140`  10` )
+  104:  Call  SetPartPos    ( .Actor:Self 00000003  -95`  140`  10` )
+  124:  Call  SetPartPos    ( .Actor:Self 00000004  -115`  130`  0` )
+  144:  Call  SetPartPos    ( .Actor:Self 00000005  -65`  118`  5` )
   164:  Call  SetPartScale  ( .Actor:Self 00000003 *Fixed[0.5] *Fixed[0.5] *Fixed[1.0] )
   184:  Call  SetPartScale  ( .Actor:Self 00000004 *Fixed[0.5] *Fixed[0.5] *Fixed[1.0] )
   1A4:  Call  SetPartScale  ( .Actor:Self 00000005 *Fixed[0.5] *Fixed[0.5] *Fixed[1.0] )
@@ -404,14 +404,14 @@
    A8:  Call  SetActorVar   ( .Actor:Self 00000005 00000001 )
    C0:  Call  ActorExists   ( .Actor:Enemy0 *Var0 )
    D4:  If  *Var0  ==  .False 
-   E4:  	Call  SetGoalPos        ( .Actor:Self 0000000A 00000000 0000000A )
+   E4:  	Call  SetGoalPos        ( .Actor:Self  10`  0`  10` )
   100:  	Call  SetPartFlagBits   ( .Actor:Self 00000002 00000001 .False )
   11C:  	Call  PlaySoundAtPart   ( .Actor:Self 00000002 00000301 )
   134:  	Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.8] )
   14C:  	Call  SetPartMoveSpeed  ( .Actor:Self 00000002 *Fixed[4.0] )
-  164:  	Call  FallPartTo        ( .Actor:Self 00000002 0000000A 00000014 0000000A 00000014 )
-  188:  	Call  JumpPartTo        ( .Actor:Self 00000002 0000001E 00000014 0000000A 0000000A .True )
-  1B0:  	Call  JumpPartTo        ( .Actor:Self 00000002 00000028 00000014 0000000A 00000005 .True )
+  164:  	Call  FallPartTo        ( .Actor:Self 00000002  10`  20`  10`  20` )
+  188:  	Call  JumpPartTo        ( .Actor:Self 00000002  30`  20`  10`  10` .True )
+  1B0:  	Call  JumpPartTo        ( .Actor:Self 00000002  40`  20`  10`  5` .True )
   1D8:  	Loop  00000014 
   1E4:  		Call  SetPartFlagBits   ( .Actor:Self 00000002 00000001 .False )
   200:  		Wait  1`
@@ -425,12 +425,12 @@
   27C:  Call  SetPartMoveSpeed  ( .Actor:Self 00000002 *Fixed[4.0] )
   294:  Call  GetStatusFlags    ( .Actor:Enemy0 *Var0 )
   2A8:  If  *Var0  !&  ~Flags:StatusFlags:Shrink % 80000
-  2B8:  	Call  FallPartTo    ( .Actor:Self 00000002 0000000A 00000050 0000000A 0000000A )
+  2B8:  	Call  FallPartTo    ( .Actor:Self 00000002  10`  80`  10`  10` )
   2DC:  Else
-  2E4:  	Call  FallPartTo    ( .Actor:Self 00000002 0000000A 00000020 0000000A 0000000A )
+  2E4:  	Call  FallPartTo    ( .Actor:Self 00000002  10`  32`  10`  10` )
   308:  EndIf
   310:  Call  UseBattleCamPreset    ( 00000002 )
-  320:  Call  MoveBattleCamOver ( 0000001E )
+  320:  Call  MoveBattleCamOver (  30` )
   330:  Call  SetOwnerTarget    ( .Actor:Enemy0 00000002 )
   344:  Call  SetGoalToTarget   ( .Actor:Self )
   354:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:IgnoreDefense 00000000 00000000 00000003 00000020 )
@@ -440,9 +440,9 @@
   3C0:  	Add   *Var0  00000041 
   3D0:  	Set   *Var1  00000014 
   3E0:  	Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.7] )
-  3F8:  	Call  JumpPartTo    ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000014 .True )
+  3F8:  	Call  JumpPartTo    ( .Actor:Self 00000002 *Var0 *Var1 *Var2  20` .True )
   420:  	Add   *Var0  0000000C 
-  430:  	Call  JumpPartTo    ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000008 .True )
+  430:  	Call  JumpPartTo    ( .Actor:Self 00000002 *Var0 *Var1 *Var2  8` .True )
   458:  	Loop  00000014 
   464:  		Call  SetPartFlagBits   ( .Actor:Self 00000002 00000001 .False )
   480:  		Wait  1`
@@ -459,7 +459,7 @@
   524:  	Add   *Var1  00000014 
   534:  EndIf
   53C:  Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.7] )
-  554:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000014 .True )
+  554:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2  20` .True )
   57C:  Call  SetOwnerTarget    ( .Actor:Enemy1 00000001 )
   590:  Call  SetGoalToTarget   ( .Actor:Self )
   5A0:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:IgnoreDefense 00000000 00000000 00000003 00000020 )
@@ -469,9 +469,9 @@
   60C:  	Add   *Var0  00000023 
   61C:  	Set   *Var1  00000014 
   62C:  	Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.7] )
-  644:  	Call  JumpPartTo    ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000014 .True )
+  644:  	Call  JumpPartTo    ( .Actor:Self 00000002 *Var0 *Var1 *Var2  20` .True )
   66C:  	Add   *Var0  0000000C 
-  67C:  	Call  JumpPartTo    ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000008 .True )
+  67C:  	Call  JumpPartTo    ( .Actor:Self 00000002 *Var0 *Var1 *Var2  8` .True )
   6A4:  	Loop  00000014 
   6B0:  		Call  SetPartFlagBits   ( .Actor:Self 00000002 00000001 .False )
   6CC:  		Wait  1`
@@ -488,7 +488,7 @@
   770:  	Add   *Var1  00000014 
   780:  EndIf
   788:  Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.7] )
-  7A0:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000014 .True )
+  7A0:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2  20` .True )
   7C8:  Call  SetOwnerTarget    ( .Actor:Enemy2 00000001 )
   7DC:  Call  SetGoalToTarget   ( .Actor:Self )
   7EC:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:IgnoreDefense 00000000 00000000 00000003 00000020 )
@@ -496,9 +496,9 @@
   834:  Add   *Var0  00000014 
   844:  Set   *Var1  00000014 
   854:  Call  SetPartJumpGravity    ( .Actor:Self 00000002 *Fixed[0.7] )
-  86C:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000014 .True )
+  86C:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2  20` .True )
   894:  Add   *Var0  0000000C 
-  8A4:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2 00000008 .True )
+  8A4:  Call  JumpPartTo        ( .Actor:Self 00000002 *Var0 *Var1 *Var2  8` .True )
   8CC:  Loop  00000014 
   8D8:  	Call  SetPartFlagBits   ( .Actor:Self 00000002 00000001 .False )
   8F4:  	Wait  1`

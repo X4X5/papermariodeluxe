@@ -1,6 +1,9 @@
 % Script File: kzn_11.mscr
 % Decoded from: 0 to 5910 (kzn_11)
 
+#define .NpcID:Bubble_100           64
+#define .NpcID:Bubble_101           65
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -2803,8 +2806,8 @@ PADDING: 8024265C to 80242660 (0000265C to 00002660)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading      ( .Shading:kzn_11 )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_802457F8 )
    84:  Call  SetMusicTrack ( 00000000 .Song:MtLavalava 00000000 00000008 )
@@ -3306,21 +3309,21 @@ MISSING: 80245140 to 80245418 (00005140 to 00005418)
 
 #new:NpcGroup $NpcGroup_80245418
 {
-	00000064 $NpcSettings_80243788 ~Vec3f:NPC_80245418 % -150 50 10
+	.NpcID:Bubble_100 $NpcSettings_80243788 ~Vec3f:NPC_Bubble_100 % -150 50 10
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80245418
-	~AnimationTable:NPC_80245418 % .Sprite:Bubble
+	~Movement:NPC_Bubble_100
+	~AnimationTable:NPC_Bubble_100 % .Sprite:Bubble
 	00000002 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245608
 {
-	00000065 $NpcSettings_80243788 ~Vec3f:NPC_80245608 % 150 50 10
+	.NpcID:Bubble_101 $NpcSettings_80243788 ~Vec3f:NPC_Bubble_101 % 150 50 10
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80245608
-	~AnimationTable:NPC_80245608 % .Sprite:Bubble
+	~Movement:NPC_Bubble_101
+	~AnimationTable:NPC_Bubble_101 % .Sprite:Bubble
 	00000002 00000000 00000000 00000000 % no tattle string
 }
 

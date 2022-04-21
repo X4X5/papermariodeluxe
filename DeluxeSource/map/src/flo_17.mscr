@@ -1,6 +1,13 @@
 % Script File: flo_17.mscr
 % Decoded from: 0 to 53C0 (flo_17)
 
+#define .NpcID:Lakitu_00            00
+#define .NpcID:Lakitu_01            01
+#define .NpcID:Spiny_50             32
+#define .NpcID:Spiny_51             33
+#define .NpcID:Spiny_52             34
+#define .NpcID:Spiny_53             35
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -10,7 +17,7 @@
    10:  COPY      A3, A1
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -3523,8 +3530,8 @@ PADDING: 80243214 to 80243220 (00003214 to 00003220)
 {
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80245228 )
    84:  ExecWait  $Script_MakeEntities
@@ -3817,63 +3824,63 @@ MISSING: 802443D8 to 8024440C (000043D8 to 0000440C)
 
 #new:NpcGroup $NpcGroup_80244688
 {
-	00000000 $NpcSettings_802444C4 ~Vec3f:NPC_80244688 % -185 90 10
+	.NpcID:Lakitu_00 $NpcSettings_802444C4 ~Vec3f:NPC_Lakitu_00 % -185 90 10
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:25:SuperShroom:2:MapleSyrup:2:ThunderRage:2:StopWatch:2
 	~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_80244688
-	~AnimationTable:NPC_80244688 % .Sprite:Lakitu
+	~Movement:NPC_Lakitu_00
+	~AnimationTable:NPC_Lakitu_00 % .Sprite:Lakitu
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244878
 {
-	00000001 $NpcSettings_802444C4 ~Vec3f:NPC_80244878 % 200 90 -25
+	.NpcID:Lakitu_01 $NpcSettings_802444C4 ~Vec3f:NPC_Lakitu_01 % 200 90 -25
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:25:SuperShroom:2:MapleSyrup:2:ThunderRage:2:StopWatch:2
 	~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_80244878
-	~AnimationTable:NPC_80244878 % .Sprite:Lakitu
+	~Movement:NPC_Lakitu_01
+	~AnimationTable:NPC_Lakitu_01 % .Sprite:Lakitu
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244A68
 {
-	00000032 $NpcSettings_8024465C ~Vec3f:NPC_80244A68 % 0 -1000 0
+	.NpcID:Spiny_50 $NpcSettings_8024465C ~Vec3f:NPC_Spiny_50 % 0 -1000 0
 	00000C04 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80244A68
-	~AnimationTable:NPC_80244A68 % .Sprite:Spiny
+	~Movement:NPC_Spiny_50
+	~AnimationTable:NPC_Spiny_50 % .Sprite:Spiny
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244C58
 {
-	00000033 $NpcSettings_8024465C ~Vec3f:NPC_80244C58 % 0 -1000 0
+	.NpcID:Spiny_51 $NpcSettings_8024465C ~Vec3f:NPC_Spiny_51 % 0 -1000 0
 	00000C04 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80244C58
-	~AnimationTable:NPC_80244C58 % .Sprite:Spiny
+	~Movement:NPC_Spiny_51
+	~AnimationTable:NPC_Spiny_51 % .Sprite:Spiny
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244E48
 {
-	00000034 $NpcSettings_8024465C ~Vec3f:NPC_80244E48 % 0 -1000 0
+	.NpcID:Spiny_52 $NpcSettings_8024465C ~Vec3f:NPC_Spiny_52 % 0 -1000 0
 	00000C04 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80244E48
-	~AnimationTable:NPC_80244E48 % .Sprite:Spiny
+	~Movement:NPC_Spiny_52
+	~AnimationTable:NPC_Spiny_52 % .Sprite:Spiny
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245038
 {
-	00000035 $NpcSettings_8024465C ~Vec3f:NPC_80245038 % 0 -1000 0
+	.NpcID:Spiny_53 $NpcSettings_8024465C ~Vec3f:NPC_Spiny_53 % 0 -1000 0
 	00000C04 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80245038
-	~AnimationTable:NPC_80245038 % .Sprite:Spiny
+	~Movement:NPC_Spiny_53
+	~AnimationTable:NPC_Spiny_53 % .Sprite:Spiny
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 

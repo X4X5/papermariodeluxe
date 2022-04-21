@@ -1,6 +1,12 @@
 % Script File: kpa_91.mscr
 % Decoded from: 0 to 5D70 (kpa_91)
 
+#define .NpcID:Toad_00              00
+#define .NpcID:Toad_01              01
+#define .NpcID:ToadGuard_02         02
+#define .NpcID:Dryite_03            03
+#define .NpcID:WorldKoopatrol_04    04
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFB8
@@ -1523,13 +1529,13 @@
    38:  COPY      A1, A0
    3C:  COPY      S0, V0
    40:  LI        A2, BE
-   44:  JAL       ~Func:set_transition_stencil_center
+   44:  JAL       ~Func:set_screen_overlay_center
    48:  LI        A3, 91
    4C:  MTC1      S0, F0
    50:  NOP
    54:  CVT.S.W   F0, F0
    58:  MFC1      A1, F0
-   5C:  JAL       ~Func:set_transition_stencil_zoom_0
+   5C:  JAL       ~Func:set_screen_overlay_params_front
    60:  ANDI      A0, S1, FF
    64:  LW        RA, 18 (SP)
    68:  LW        S1, 14 (SP)
@@ -1645,7 +1651,7 @@ MISSING: 8024169C to 802416E8 (0000169C to 000016E8)
    4C:  CLEAR     A0
    50:  ANDI      A1, S2, FF
    54:  ANDI      A2, S0, FF
-   58:  JAL       ~Func:set_transition_stencil_color
+   58:  JAL       ~Func:set_screen_overlay_color
    5C:  ANDI      A3, V0, FF
    60:  LW        RA, 1C (SP)
    64:  LW        S2, 18 (SP)
@@ -1664,7 +1670,7 @@ MISSING: 8024169C to 802416E8 (0000169C to 000016E8)
     C:  LAB       A2, 8010F2A2
    14:  JAL       ~Func:set_variable
    18:  LW        A1, 0 (V0)
-   1C:  JAL       800EB168
+   1C:  JAL       ~Func:switch_to_partner
    20:  CLEAR     A0
    24:  LW        RA, 10 (SP)
    28:  LI        V0, 2
@@ -1680,7 +1686,7 @@ MISSING: 8024169C to 802416E8 (0000169C to 000016E8)
     C:  JAL       ~Func:get_variable
    10:  LW        A1, 0 (V0)
    14:  SLL       V0, V0, 18
-   18:  JAL       800EB168
+   18:  JAL       ~Func:switch_to_partner
    1C:  SRA       A0, V0, 18
    20:  LW        RA, 10 (SP)
    24:  LI        V0, 2
@@ -1805,8 +1811,8 @@ PADDING: 802419C8 to 802419D0 (000019C8 to 000019D0)
 #new:Script $Script_80241A58
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  PlayerMoveTo      ( FFFFFFE2 0000000F 00000014 )
-   28:  Call  InterpPlayerYaw   ( 0000005A 00000002 )
+   10:  Call  PlayerMoveTo      (  -30`  15`  20` )
+   28:  Call  InterpPlayerYaw   (  90`  2` )
    3C:  Call  PlaySoundAtCollider   ( ~Collider:deilittn .Sound:MetalGateOpen 00000000 )
    54:  Call  MakeLerp  ( 00000000 0000008C 0000003C .Easing:CosInOut )
    70:  Label  0
@@ -1832,8 +1838,8 @@ PADDING: 802419C8 to 802419D0 (000019C8 to 000019D0)
    20:  Set   *AreaByte[7]  00000000
    30:  Set   *AreaByte[6]  00000000
    40:  Call  SetSpriteShading  ( .Shading:None )
-   50:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   70:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   50:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   70:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    8C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    A0:  Call  SetCamEnabled     ( .Cam:Default .True )
    B4:  Call  MakeNpcs  ( .True $NpcGroupList_802457B8 )
@@ -2319,7 +2325,7 @@ MISSING: 80241D0C to 80241D38 (00001D0C to 00001D38)
   114:  	Return
   11C:  EndIf
   124:  Call  ContinueSpeech        ( .Npc:Self 00830004 00830001 00000000 *VarA ) % variable string ID
-  144:  Call  SetPlayerJumpscale    ( 00000001 )
+  144:  Call  SetPlayerJumpscale    (  1` )
   154:  Call  DisablePlayerPhysics  ( .True )
   164:  Call  SetNpcFlagBits        ( .Npc:Self 00000100 .True )
   17C:  Call  $Function_80241528 ( )
@@ -2382,21 +2388,21 @@ MISSING: 80241D0C to 80241D38 (00001D0C to 00001D38)
    24:  	Wait  20`
    30:  	Call  $Function_802415EC    ( 00000000 00000028 )
    44:  	Call  SetCamType    ( .Cam:Default 00000004 .False )
-   5C:  	Call  SetCamPitch   ( .Cam:Default 00000022 FFFFFFF8 )
-   74:  	Call  SetCamDistance        ( .Cam:Default 000000DC )
+   5C:  	Call  SetCamPitch   ( .Cam:Default  34`  -8` )
+   74:  	Call  SetCamDistance        ( .Cam:Default  220` )
    88:  	Call  SetCamPosA    ( .Cam:Default *Fixed[-3.0] *Fixed[-240.0] )
    A0:  	Call  SetCamPosB    ( .Cam:Default *Fixed[-150.0] *Fixed[-56.0] )
-   B8:  	Call  SetCamPosC    ( .Cam:Default 00000001 0000000A )
+   B8:  	Call  SetCamPosC    ( .Cam:Default  1`  10` )
    D0:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    E4:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    FC:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   110:  EndThread
   118:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  128:  Call  PlayerMoveTo      ( FFFFFF4C FFFFFF9C 00000000 )
-  140:  Call  InterpPlayerYaw   ( 000000BF 00000001 )
-  154:  Call  SetPlayerPos      ( FFFFFF60 00000016 FFFFFF85 )
+  128:  Call  PlayerMoveTo      (  -180`  -100`  0` )
+  140:  Call  InterpPlayerYaw   (  191`  1` )
+  154:  Call  SetPlayerPos      (  -160`  22`  -123` )
   16C:  Wait  5`
-  178:  Call  InterpPlayerYaw   ( 00000072 00000001 )
+  178:  Call  InterpPlayerYaw   (  114`  1` )
   18C:  Call  HidePlayerShadow  ( .True )
   19C:  Call  SetPlayerAnimation    ( 00010002 )
   1AC:  Call  802D286C  ( 00002800 )
@@ -2423,8 +2429,8 @@ MISSING: 80241D0C to 80241D38 (00001D0C to 00001D38)
    44:  Call  SetPanTarget  ( .Cam:Default *MapVar[1] *MapVar[2] *MapVar[3] )
    60:  Call  802D2520      ( 00010002 00000000 00000000 00000000 00000000 00000000 )
    84:  Call  HidePlayerShadow      ( .False )
-   94:  Call  SetPlayerPos  ( FFFFFF75 00000000 FFFFFFA6 )
-   AC:  Call  PlayerMoveTo  ( FFFFFF9A FFFFFF7E 00000014 )
+   94:  Call  SetPlayerPos  (  -139`  0`  -90` )
+   AC:  Call  PlayerMoveTo  (  -102`  -130`  20` )
    C4:  Exec  $Script_80241960
    D0:  Return
    D8:  End
@@ -2484,8 +2490,8 @@ MISSING: 80241D0C to 80241D38 (00001D0C to 00001D38)
 #new:Script $Script_Init_80244B00
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802448E0 )
-   14:  Call  SetNpcPos ( .Npc:Self FFFFFFBA 00000000 FFFFFF74 )
-   30:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+   14:  Call  SetNpcPos ( .Npc:Self  -70`  0`  -140` )
+   30:  Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
    48:  Return
    50:  End
 }
@@ -2493,9 +2499,9 @@ MISSING: 80241D0C to 80241D38 (00001D0C to 00001D38)
 #new:Script $Script_Init_80244B58
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024492C )
-   14:  Call  SetNpcPos ( .Npc:Self 0000006E 00000000 FFFFFF7E )
+   14:  Call  SetNpcPos ( .Npc:Self  110`  0`  -130` )
    30:  Call  SetNpcAnimation   ( .Npc:Self 00830301 )
-   44:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+   44:  Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
    5C:  Return
    64:  End
 }
@@ -2503,9 +2509,9 @@ MISSING: 80241D0C to 80241D38 (00001D0C to 00001D38)
 #new:Script $Script_Init_80244BC4
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802449C8 )
-   14:  Call  SetNpcPos ( .Npc:Self 0000000A 00000000 FFFFFF4C )
+   14:  Call  SetNpcPos ( .Npc:Self  10`  0`  -180` )
    30:  Call  SetNpcAnimation   ( .Npc:Self 00870201 )
-   44:  Call  InterpNpcYaw      ( .Npc:Self 0000010E 00000000 )
+   44:  Call  InterpNpcYaw      ( .Npc:Self  270`  0` )
    5C:  Return
    64:  End
 }
@@ -2513,43 +2519,43 @@ MISSING: 80241D0C to 80241D38 (00001D0C to 00001D38)
 #new:Script $Script_Init_80244C30
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80244A64 )
-   14:  Call  SetNpcPos ( .Npc:Self 000000AF 00000000 FFFFFFBF )
-   30:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+   14:  Call  SetNpcPos ( .Npc:Self  175`  0`  -65` )
+   30:  Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
    48:  Return
    50:  End
 }
 
 #new:NpcGroup $NpcGroup_80244C88
 {
-	00000000 $NpcSettings_80241CE0 ~Vec3f:NPC_80244C88 % 0 -1000 0
+	.NpcID:Toad_00 $NpcSettings_80241CE0 ~Vec3f:NPC_Toad_00 % 0 -1000 0
 	00000D01 $Script_Init_80244B00 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244C88
-	~AnimationTable:NPC_80244C88 % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 001A0117 % This Toad's been captured. Somehow he's been able  ...
 	%
 	% $NpcGroup_80244C88[1F0]
-	00000001 $NpcSettings_80241CE0 ~Vec3f:NPC_80244E78 % 0 -1000 0
+	.NpcID:Toad_01 $NpcSettings_80241CE0 ~Vec3f:NPC_Toad_01 % 0 -1000 0
 	00000D01 $Script_Init_80244B58 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244E78
-	~AnimationTable:NPC_80244E78 % .Sprite:Toad
+	~Movement:NPC_Toad_01
+	~AnimationTable:NPC_Toad_01 % .Sprite:Toad
 	00000000 00000000 00000000 001A0118 % This Toad's been captured. It must've been scary t ...
 	%
 	% $NpcGroup_80244C88[3E0]
-	00000002 $NpcSettings_80241CE0 ~Vec3f:NPC_80245068 % 0 -1000 0
+	.NpcID:ToadGuard_02 $NpcSettings_80241CE0 ~Vec3f:NPC_ToadGuard_02 % 0 -1000 0
 	00000D01 $Script_Init_80244BC4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245068
-	~AnimationTable:NPC_80245068 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_02
+	~AnimationTable:NPC_ToadGuard_02 % .Sprite:ToadGuard
 	00000000 00000000 00000000 001A0119 % He's one of the captured Toad Soldiers. These guys ...
 	%
 	% $NpcGroup_80244C88[5D0]
-	00000003 $NpcSettings_80241D38 ~Vec3f:NPC_80245258 % 0 -1000 0
+	.NpcID:Dryite_03 $NpcSettings_80241D38 ~Vec3f:NPC_Dryite_03 % 0 -1000 0
 	00000D01 $Script_Init_80244C30 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245258
-	~AnimationTable:NPC_80245258 % .Sprite:Dryite
+	~Movement:NPC_Dryite_03
+	~AnimationTable:NPC_Dryite_03 % .Sprite:Dryite
 	00000000 00000000 00000000 001A011A % It's a Dryite. He came to the party and was dragge ...
 }
 
@@ -2587,11 +2593,11 @@ MISSING: 80241D0C to 80241D38 (00001D0C to 00001D38)
 
 #new:NpcGroup $NpcGroup_802455C8
 {
-	00000004 $NpcSettings_80241DF0 ~Vec3f:NPC_802455C8 % 60 0 55
+	.NpcID:WorldKoopatrol_04 $NpcSettings_80241DF0 ~Vec3f:NPC_WorldKoopatrol_04 % 60 0 55
 	00842C00 $Script_Init_80245574 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802455C8
-	~AnimationTable:NPC_802455C8 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_04
+	~AnimationTable:NPC_WorldKoopatrol_04 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2615,7 +2621,7 @@ PADDING: 802457DC to 802457E0 (000057DC to 000057E0)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf

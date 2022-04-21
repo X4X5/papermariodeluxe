@@ -1,6 +1,10 @@
 % Script File: kmr_11.mscr
 % Decoded from: 0 to 11260 (kmr_11)
 
+#define .NpcID:GoombaBros_00        00
+#define .NpcID:GoombaBros_01        01
+#define .NpcID:GoombaKing_02        02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD0
@@ -220,7 +224,7 @@ PADDING: 8024029C to 802402A0 (0000029C to 000002A0)
    6C:  MFC1      A2, F22
    70:  MFC1      A3, F20
    74:  CLEAR     A0
-   78:  JAL       80070250
+   78:  JAL       ~Func:playFX_1A
    7C:  SW        V0, 10 (SP)
    80:  LW        RA, 20 (SP)
    84:  LW        S1, 1C (SP)
@@ -1499,8 +1503,8 @@ PADDING: 802411EC to 802411F0 (000011EC to 000011F0)
     0:  Set   *GB_WorldLocation  .Location:GoombaRoad
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  $Function_8024027C ( )
-   2C:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   4C:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   2C:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   4C:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    68:  Call  SetCamEnabled     ( .Cam:Default .True )
    7C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    90:  Call  MakeNpcs  ( .False $NpcGroupList_80245A88 )
@@ -1566,18 +1570,18 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
    30:  	Label  0
    3C:  	Call  UpdateLerp ( )
    48:  	MulF  *Var0  *Fixed[0.01]
-   58:  	Call  SetNpcScale   ( 00000002 *Var0 *Var0 *Var0 )
+   58:  	Call  SetNpcScale   ( .NpcID:GoombaKing_02 *Var0 *Var0 *Var0 )
    74:  	Wait  1`
    80:  	If  *Var1  ==  00000001
    90:  		Goto  0
    9C:  	EndIf
    A4:  EndThread
-   AC:  Call  SetNpcJumpscale       ( 00000002 *Fixed[0.3] )
-   C0:  Call  NpcJump0      ( 00000002 FFFFF9C0 000003E8 FFFFF9C0 00000096 )
+   AC:  Call  SetNpcJumpscale       ( .NpcID:GoombaKing_02 *Fixed[0.3] )
+   C0:  Call  NpcJump0      ( .NpcID:GoombaKing_02  -1600`  1000`  -1600`  150` )
    E0:  Call  PlaySoundAt   ( 00000055 00000000 FFFFF9C0 000003E8 FFFFF9C0 )
   100:  Call  $Function_802402A0    ( FFFFF9C0 000003E8 FFFFF9C0 00000028 )
-  11C:  Call  SetNpcPos     ( 00000002 00000000 FFFFFC18 00000000 )
-  138:  Call  RemoveNpc     ( 00000002 )
+  11C:  Call  SetNpcPos     ( .NpcID:GoombaKing_02  0`  -1000`  0` )
+  138:  Call  RemoveNpc     ( .NpcID:GoombaKing_02 )
   148:  Return
   150:  End
 }
@@ -1586,11 +1590,11 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
 {
     0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
    18:  Call  SetCamType    ( .Cam:Default 00000004 .False )
-   30:  Call  SetCamPitch   ( .Cam:Default FFFFFFF9 00000000 )
-   48:  Call  SetCamPosA    ( .Cam:Default FFFFFB48 00000371 )
-   60:  Call  SetCamPosB    ( .Cam:Default FFFFFDF4 FFFFFFA7 )
-   78:  Call  SetCamPosC    ( .Cam:Default 00000000 0000006E )
-   90:  Call  SetCamDistance    ( .Cam:Default 000001F4 )
+   30:  Call  SetCamPitch   ( .Cam:Default  -7`  0` )
+   48:  Call  SetCamPosA    ( .Cam:Default  -1208`  881` )
+   60:  Call  SetCamPosB    ( .Cam:Default  -524`  -89` )
+   78:  Call  SetCamPosC    ( .Cam:Default  0`  110` )
+   90:  Call  SetCamDistance    ( .Cam:Default  500` )
    A4:  Return
    AC:  End
 }
@@ -1599,11 +1603,11 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
 {
     0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
    18:  Call  SetCamType    ( .Cam:Default 00000004 .False )
-   30:  Call  SetCamPitch   ( .Cam:Default FFFFFFF1 00000019 )
-   48:  Call  SetCamPosA    ( .Cam:Default FFFFFB48 00000371 )
-   60:  Call  SetCamPosB    ( .Cam:Default FFFFFDBD FFFFFFA7 )
-   78:  Call  SetCamPosC    ( .Cam:Default 00000000 0000006E )
-   90:  Call  SetCamDistance    ( .Cam:Default 000000C8 )
+   30:  Call  SetCamPitch   ( .Cam:Default  -15`  25` )
+   48:  Call  SetCamPosA    ( .Cam:Default  -1208`  881` )
+   60:  Call  SetCamPosB    ( .Cam:Default  -579`  -89` )
+   78:  Call  SetCamPosC    ( .Cam:Default  0`  110` )
+   90:  Call  SetCamDistance    ( .Cam:Default  200` )
    A4:  Return
    AC:  End
 }
@@ -1612,11 +1616,11 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
 {
     0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
    18:  Call  SetCamType    ( .Cam:Default 00000004 .False )
-   30:  Call  SetCamPitch   ( .Cam:Default FFFFFFF9 00000002 )
-   48:  Call  SetCamPosA    ( .Cam:Default FFFFF96F 000001FF )
-   60:  Call  SetCamPosB    ( .Cam:Default FFFFFE52 FFFFFFA4 )
-   78:  Call  SetCamPosC    ( .Cam:Default 00000000 000000C8 )
-   90:  Call  SetCamDistance    ( .Cam:Default 000000FA )
+   30:  Call  SetCamPitch   ( .Cam:Default  -7`  2` )
+   48:  Call  SetCamPosA    ( .Cam:Default  -1681`  511` )
+   60:  Call  SetCamPosB    ( .Cam:Default  -430`  -92` )
+   78:  Call  SetCamPosC    ( .Cam:Default  0`  200` )
+   90:  Call  SetCamDistance    ( .Cam:Default  250` )
    A4:  Return
    AC:  End
 }
@@ -1628,7 +1632,7 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
    1C:  Call  RandInt   ( 0000000A *Var0 )
    30:  Add   *Var0  00000005
    40:  MulF  *Var0  *Fixed[0.1]
-   50:  Call  ShakeCam  ( .Cam:Default 00000000 00000014 *Var0 )
+   50:  Call  ShakeCam  ( .Cam:Default 00000000  20` *Var0 )
    6C:  Goto  0
    78:  Return
    80:  End
@@ -1735,16 +1739,16 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
    38:  Call  SetPlayerAnimation    ( 0001002B )
    48:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    60:  Call  SetPlayerJumpscale    ( *Fixed[1.8] )
-   70:  Call  PlayerJump1   ( *Var0 *Var1 *Var2 0000000A )
+   70:  Call  PlayerJump1   ( *Var0 *Var1 *Var2  10` )
    8C:  Wait  30`
    98:  Call  SetPlayerAnimation    ( .PlayerAnim:Running )
    A8:  Call  SetPlayerSpeed        ( *Fixed[6.0] )
    B8:  Call  SetNpcSpeed   ( .Npc:Partner *Fixed[6.0] )
    CC:  Thread
-   D4:  	Call  NpcMoveTo ( .Npc:Partner FFFFFDC3 000000A2 00000000 )
+   D4:  	Call  NpcMoveTo ( .Npc:Partner  -573`  162`  0` )
    F0:  EndThread
-   F8:  Call  PlayerMoveTo  ( FFFFFDDD 00000093 00000000 )
-  110:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
+   F8:  Call  PlayerMoveTo  (  -547`  147`  0` )
+  110:  Call  InterpPlayerYaw       (  90`  0` )
   124:  Call  SetPlayerAnimation    ( 00010002 )
   134:  Call  EnablePartnerAI ( )
   140:  Wait  100`
@@ -1757,62 +1761,62 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Wait  15`
    1C:  Call  SetCamType    ( .Cam:Default 00000001 .False )
-   34:  Call  SetCamPitch   ( .Cam:Default 00000000 *Fixed[-12.5] )
-   4C:  Call  SetCamDistance    ( .Cam:Default 0000012C )
-   60:  Call  SetCamPosA    ( .Cam:Default FFFFFE7B FFFFFFF4 )
-   78:  Call  SetCamPosB    ( .Cam:Default FFFFFE2B 0000009C )
-   90:  Call  SetPanTarget  ( .Cam:Default FFFFFE7B 00000078 FFFFFFF4 )
+   34:  Call  SetCamPitch   ( .Cam:Default  0` *Fixed[-12.5] )
+   4C:  Call  SetCamDistance    ( .Cam:Default  300` )
+   60:  Call  SetCamPosA    ( .Cam:Default  -389`  -12` )
+   78:  Call  SetCamPosB    ( .Cam:Default  -469`  156` )
+   90:  Call  SetPanTarget  ( .Cam:Default  -389`  120`  -12` )
    AC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
    C0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    D8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-   EC:  Call  SetNpcPos     ( 00000002 FFFFFE84 00000000 FFFFFFD6 )
+   EC:  Call  SetNpcPos     ( .NpcID:GoombaKing_02  -380`  0`  -42` )
   108:  Wait  20`
-  114:  Call  SetNpcJumpscale   ( 00000002 *Fixed[0.8] )
-  128:  Call  NpcFacePlayer ( 00000002 00000000 )
-  13C:  Call  PlaySoundAtNpc    ( 00000002 000003E7 00000000 )
-  154:  Call  NpcJump1      ( 00000002 FFFFFE84 00000078 FFFFFFD6 00000019 )
-  174:  Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+  114:  Call  SetNpcJumpscale   ( .NpcID:GoombaKing_02 *Fixed[0.8] )
+  128:  Call  NpcFacePlayer ( .NpcID:GoombaKing_02 00000000 )
+  13C:  Call  PlaySoundAtNpc    ( .NpcID:GoombaKing_02 000003E7 00000000 )
+  154:  Call  NpcJump1      ( .NpcID:GoombaKing_02  -380`  120`  -42` 00000019 )
+  174:  Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[1.0] )
   190:  Wait  10`
-  19C:  Call  SetPlayerPos  ( FFFFFE0F 00000000 00000082 )
-  1B4:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
-  1C8:  Call  SetNpcPos     ( .Npc:Partner FFFFFDEA 00000000 0000007F )
-  1E4:  Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
-  1FC:  Call  SpeakToPlayer ( 00000002 00630001 00630001 00000000 000B00D8 ) % Uh...Mario! Good fight and all that! I must warn y ...
+  19C:  Call  SetPlayerPos  (  -497`  0`  130` )
+  1B4:  Call  InterpPlayerYaw   (  270`  0` )
+  1C8:  Call  SetNpcPos     ( .Npc:Partner  -534`  0`  127` )
+  1E4:  Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
+  1FC:  Call  SpeakToPlayer ( .NpcID:GoombaKing_02 00630001 00630001 00000000 000B00D8 ) % Uh...Mario! Good fight and all that! I must warn y ...
   21C:  Set   *GB_StoryProgress  .Story:Ch0_HitGatehouseSwitch
   22C:  Call  EnableModel   ( ~Model:eye_mask .True )
   240:  Wait  1`
   24C:  Exec  $Script_802424E4 *VarA
   25C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.7] )
-  270:  Call  UseSettingsFrom   ( .Cam:Default 00000000 FFFFFF9C 00000000 )
+  270:  Call  UseSettingsFrom   ( .Cam:Default  0`  -100`  0` )
   28C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   2A4:  Wait  60`
-  2B0:  Call  SpeakToPlayer ( 00000002 00630001 00630001 00000000 000B00D9 ) % Oh nooo!!!
+  2B0:  Call  SpeakToPlayer ( .NpcID:GoombaKing_02 00630001 00630001 00000000 000B00D9 ) % Oh nooo!!!
   2D0:  Loop  00000064
-  2DC:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+  2DC:  	Call  GetNpcPos ( .NpcID:GoombaKing_02 *Var0 *Var1 *Var2 )
   2F8:  	Sub   *Var1  00000001
-  308:  	Call  SetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+  308:  	Call  SetNpcPos ( .NpcID:GoombaKing_02 *Var0 *Var1 *Var2 )
   324:  	Wait  1`
   330:  EndLoop
-  338:  Call  SetNpcPos ( 00000002 FFFFFED1 0000011E FFFFFF88 )
+  338:  Call  SetNpcPos ( .NpcID:GoombaKing_02  -303`  286`  -120` )
   354:  Call  FadeOutMusic  ( 00000000 000003E8 )
   368:  Call  SetPlayerAnimation    ( .PlayerAnim:ShockStill )
   378:  Wait  30`
   384:  Kill  *VarA
   390:  Thread
-  398:  	Call  ShakeCam  ( .Cam:Default 00000000 00000064 *Fixed[0.5] )
-  3B4:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000F *Fixed[4.0] )
-  3D0:  	Call  ShakeCam  ( .Cam:Default 00000000 00000053 *Fixed[0.5] )
-  3EC:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[1.5] )
-  408:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000F *Fixed[0.5] )
-  424:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[1.5] )
-  440:  	Call  ShakeCam  ( .Cam:Default 00000000 000000AA *Fixed[0.5] )
-  45C:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[3.0] )
+  398:  	Call  ShakeCam  ( .Cam:Default 00000000  100` *Fixed[0.5] )
+  3B4:  	Call  ShakeCam  ( .Cam:Default 00000000  15` *Fixed[4.0] )
+  3D0:  	Call  ShakeCam  ( .Cam:Default 00000000  83` *Fixed[0.5] )
+  3EC:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[1.5] )
+  408:  	Call  ShakeCam  ( .Cam:Default 00000000  15` *Fixed[0.5] )
+  424:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[1.5] )
+  440:  	Call  ShakeCam  ( .Cam:Default 00000000  170` *Fixed[0.5] )
+  45C:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[3.0] )
   478:  	Wait  50`
-  484:  	Call  ShakeCam  ( .Cam:Default 00000000 00000014 *Fixed[4.0] )
+  484:  	Call  ShakeCam  ( .Cam:Default 00000000  20` *Fixed[4.0] )
   4A0:  	Wait  20`
-  4AC:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.5] )
+  4AC:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.5] )
   4C8:  	Wait  20`
-  4D4:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.2] )
+  4D4:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.2] )
   4F0:  	Call  PlaySound ( 000004A5 )
   500:  EndThread
   508:  Exec  $Script_80241B54
@@ -1820,7 +1824,7 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
   520:  Exec  $Script_80242B98
   52C:  Wait  380`
   538:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
-  550:  Call  UseSettingsFrom       ( .Cam:Default 00000000 FFFFFF6A 00000000 )
+  550:  Call  UseSettingsFrom       ( .Cam:Default  0`  -150`  0` )
   56C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   584:  Wait  20`
   590:  Exec  $Script_80242170
@@ -1839,7 +1843,7 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
   664:  Call  SetNpcJumpscale       ( .Npc:Partner *Fixed[0.8] )
   678:  Loop  00000002
   684:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  6A0:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+  6A0:  	Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  10` )
   6C0:  	Wait  3`
   6CC:  EndLoop
   6D4:  Call  DisablePartnerAI      ( 00000000 )
@@ -1875,19 +1879,19 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
    1C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.3] )
    30:  Call  PanToTarget   ( .Cam:Default *Fixed[0.5] 00000001 )
    48:  Wait  170`
-   54:  Call  SetNpcPos     ( 00000000 FFFFFCC2 00000000 FFFFFFBA )
-   70:  Call  SetNpcPos     ( 00000001 FFFFFCE0 00000000 FFFFFFEC )
-   8C:  Call  SetNpcAnimation       ( 00000000 00620107 )
-   A0:  Call  SetNpcAnimation       ( 00000001 00620007 )
-   B4:  Call  SetNpcSpeed   ( 00000000 *Fixed[4.0] )
-   C8:  Call  SetNpcSpeed   ( 00000001 *Fixed[4.0] )
+   54:  Call  SetNpcPos     ( .NpcID:GoombaBros_00  -830`  0`  -70` )
+   70:  Call  SetNpcPos     ( .NpcID:GoombaBros_01  -800`  0`  -20` )
+   8C:  Call  SetNpcAnimation       ( .NpcID:GoombaBros_00 00620107 )
+   A0:  Call  SetNpcAnimation       ( .NpcID:GoombaBros_01 00620007 )
+   B4:  Call  SetNpcSpeed   ( .NpcID:GoombaBros_00 *Fixed[4.0] )
+   C8:  Call  SetNpcSpeed   ( .NpcID:GoombaBros_01 *Fixed[4.0] )
    DC:  Wait  50`
    E8:  Thread
-   F0:  	Call  NpcMoveTo ( 00000000 FFFFFDF7 FFFFFF9C 00000000 )
+   F0:  	Call  NpcMoveTo ( .NpcID:GoombaBros_00  -521`  -100`  0` )
   10C:  EndThread
-  114:  Call  NpcMoveTo     ( 00000001 FFFFFE08 FFFFFFB6 00000000 )
-  130:  Call  SpeakToPlayer ( 00000001 00620005 00620003 00000005 000B00C3 ) % King Goomba! Help us!
-  150:  Call  SpeakToPlayer ( 00000000 00620105 00620103 00000005 000B00C4 ) % Mario beat us up!
+  114:  Call  NpcMoveTo     ( .NpcID:GoombaBros_01  -504`  -74`  0` )
+  130:  Call  SpeakToPlayer ( .NpcID:GoombaBros_01 00620005 00620003 00000005 000B00C3 ) % King Goomba! Help us!
+  150:  Call  SpeakToPlayer ( .NpcID:GoombaBros_00 00620105 00620103 00000005 000B00C4 ) % Mario beat us up!
   170:  Call  PlaySoundAtCollider   ( ~Collider:tt .Sound:MetalDoorOpen 00000000 )
   188:  Call  MakeLerp      ( 00000000 0000005A 0000001E .Easing:CosInOut )
   1A4:  Label  0
@@ -1899,9 +1903,9 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
   218:  	Goto  0
   224:  EndIf
   22C:  Thread
-  234:  	Call  NpcMoveTo ( 00000000 FFFFFE9F FFFFFFA3 00000000 )
+  234:  	Call  NpcMoveTo ( .NpcID:GoombaBros_00  -353`  -93`  0` )
   250:  EndThread
-  258:  Call  NpcMoveTo     ( 00000001 FFFFFE94 FFFFFFB3 00000000 )
+  258:  Call  NpcMoveTo     ( .NpcID:GoombaBros_01  -364`  -77`  0` )
   274:  Call  MakeLerp      ( 0000005A 00000000 0000001E .Easing:CosInOut )
   290:  Label  1
   29C:  Call  UpdateLerp ( )
@@ -1916,22 +1920,22 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
   350:  Call  PlaySoundAt   ( 000020B4 00000000 FFFFFEB6 00000000 FFFFFF7E )
   370:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD2B 00000075 FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   3B4:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD97 0000006C FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  3F8:  Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[0.5] )
-  414:  Call  SetPlayerPos  ( FFFFFC68 00000000 FFFFFFDD )
+  3F8:  Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[0.5] )
+  414:  Call  SetPlayerPos  (  -920`  0`  -35` )
   42C:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  43C:  Call  PlayerMoveTo  ( FFFFFDC1 FFFFFFC4 00000000 )
+  43C:  Call  PlayerMoveTo  (  -575`  -60`  0` )
   454:  Wait  30`
   460:  Call  DisablePartnerAI  ( 00000000 )
   470:  Wait  10`
-  47C:  Call  PlayerFaceNpc ( .Npc:Partner 00000000 )
+  47C:  Call  PlayerFaceNpc ( .Npc:Partner .False )
   490:  Call  SpeakToPlayer ( .Npc:Partner 00010008 00010001 00000000 000B00C5 ) % Hey, look, Mario! See that building over there? I' ...
-  4B0:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  4B0:  Call  InterpPlayerYaw   (  90`  0` )
   4C4:  Wait  40`
   4D0:  Call  PlaySoundAt   ( 000020EC 00000000 FFFFFEB6 00000000 FFFFFF7E )
   4F0:  Call  PlaySoundAt   ( 000020B4 00000000 FFFFFEB6 00000000 FFFFFF7E )
   510:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD2B 00000075 FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   554:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD97 0000006C FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  598:  Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[0.2] )
+  598:  Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[0.2] )
   5B4:  Set   *Var3  00000002
   5C4:  Exec  $Script_80243460
   5D0:  Wait  60`
@@ -1939,7 +1943,7 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
   5FC:  Call  PlaySoundAt   ( 000020B4 00000000 FFFFFEB6 00000000 FFFFFF7E )
   61C:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD2B 00000075 FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   660:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD97 0000006C FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  6A4:  Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[0.6] )
+  6A4:  Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[0.6] )
   6C0:  Set   *Var3  00000004
   6D0:  Exec  $Script_80243460
   6DC:  Wait  60`
@@ -1947,7 +1951,7 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
   708:  Call  PlaySoundAt   ( 000020B4 00000000 FFFFFEB6 00000000 FFFFFF7E )
   728:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD2B 00000075 FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   76C:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD97 0000006C FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  7B0:  Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+  7B0:  Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[1.0] )
   7CC:  Set   *Var3  00000006
   7DC:  Exec  $Script_80243460
   7E8:  Wait  60`
@@ -1955,43 +1959,43 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
   814:  Call  PlaySoundAt   ( 000020B4 00000000 FFFFFEB6 00000000 FFFFFF7E )
   834:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD2B 00000075 FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   878:  Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD97 0000006C FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  8BC:  Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[1.5] )
+  8BC:  Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[1.5] )
   8D8:  Set   *Var3  00000008
   8E8:  Exec  $Script_80243460
   8F4:  Wait  28`
   900:  Call  SetMusicTrack ( 00000000 .Song:GoombaKingTheme 00000000 00000008 )
   91C:  Wait  32`
-  928:  Call  SetNpcAnimation   ( 00000000 00620102 )
-  93C:  Call  SetNpcAnimation   ( 00000001 00620002 )
-  950:  Call  SetNpcJumpscale   ( 00000000 *Fixed[0.8] )
-  964:  Call  SetNpcJumpscale   ( 00000001 *Fixed[0.8] )
+  928:  Call  SetNpcAnimation   ( .NpcID:GoombaBros_00 00620102 )
+  93C:  Call  SetNpcAnimation   ( .NpcID:GoombaBros_01 00620002 )
+  950:  Call  SetNpcJumpscale   ( .NpcID:GoombaBros_00 *Fixed[0.8] )
+  964:  Call  SetNpcJumpscale   ( .NpcID:GoombaBros_01 *Fixed[0.8] )
   978:  Thread
-  980:  	Call  SetNpcPos ( 00000000 FFFFFE70 00000000 FFFFFF5E )
-  99C:  	Call  PlaySoundAtNpc    ( 00000000 0000010F 00000000 )
-  9B4:  	Call  NpcJump0  ( 00000000 FFFFFE50 00000082 FFFFFF6E 0000001E )
+  980:  	Call  SetNpcPos ( .NpcID:GoombaBros_00  -400`  0`  -162` )
+  99C:  	Call  PlaySoundAtNpc    ( .NpcID:GoombaBros_00 0000010F 00000000 )
+  9B4:  	Call  NpcJump0  ( .NpcID:GoombaBros_00  -432`  130`  -146`  30` )
   9D4:  EndThread
-  9DC:  Call  SetNpcPos ( 00000001 FFFFFE70 00000000 FFFFFFD7 )
-  9F8:  Call  PlaySoundAtNpc    ( 00000001 0000010F 00000000 )
-  A10:  Call  NpcJump0  ( 00000001 FFFFFE64 00000082 FFFFFFDD 0000001E )
+  9DC:  Call  SetNpcPos ( .NpcID:GoombaBros_01  -400`  0`  -41` )
+  9F8:  Call  PlaySoundAtNpc    ( .NpcID:GoombaBros_01 0000010F 00000000 )
+  A10:  Call  NpcJump0  ( .NpcID:GoombaBros_01  -412`  130`  -35`  30` )
   A30:  Wait  10`
   A3C:  Thread
-  A44:  	Call  SetNpcJumpscale   ( 00000002 *Fixed[0.8] )
-  A58:  	Call  SetNpcPos     ( 00000002 FFFFFE6B 00000000 FFFFFFA5 )
-  A74:  	Call  PlaySoundAtNpc    ( 00000002 000003E7 00000000 )
-  A8C:  	Call  NpcJump0      ( 00000002 FFFFFE5D 00000077 FFFFFFA5 0000001E )
+  A44:  	Call  SetNpcJumpscale   ( .NpcID:GoombaKing_02 *Fixed[0.8] )
+  A58:  	Call  SetNpcPos     ( .NpcID:GoombaKing_02  -405`  0`  -91` )
+  A74:  	Call  PlaySoundAtNpc    ( .NpcID:GoombaKing_02 000003E7 00000000 )
+  A8C:  	Call  NpcJump0      ( .NpcID:GoombaKing_02  -419`  119`  -91`  30` )
   AAC:  	Call  PlaySoundAt   ( 000020EC 00000000 FFFFFEB6 00000000 FFFFFF7E )
   ACC:  	Call  PlaySoundAt   ( 000020B4 00000000 FFFFFEB6 00000000 FFFFFF7E )
   AEC:  	Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD2B 00000075 FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   B30:  	Call  PlayEffect    ( ~FX:DropLeaves:Random FFFFFD97 0000006C FFFFFF77 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  B74:  	Call  ShakeCam      ( .Cam:Default 00000000 0000000A *Fixed[1.0] )
+  B74:  	Call  ShakeCam      ( .Cam:Default 00000000  10` *Fixed[1.0] )
   B90:  EndThread
   B98:  ExecWait  $Script_80242430
   BA4:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   BB8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   BD0:  Wait  55`
-  BDC:  Call  SpeakToPlayer ( 00000002 00630001 00630001 00000000 000B00C6 ) % So, Mario, it's true! You've made it this far. I r ...
-  BFC:  Call  SpeakToPlayer ( 00000001 00620004 00620002 00000000 000B00C7 ) % You hear that, Mario! No farther! Not one step! Ar ...
-  C1C:  Call  SpeakToPlayer ( 00000000 00620104 00620102 00000000 000B00C8 ) % Bah ha ha!!! Yeah, you're scared, all right. You w ...
+  BDC:  Call  SpeakToPlayer ( .NpcID:GoombaKing_02 00630001 00630001 00000000 000B00C6 ) % So, Mario, it's true! You've made it this far. I r ...
+  BFC:  Call  SpeakToPlayer ( .NpcID:GoombaBros_01 00620004 00620002 00000000 000B00C7 ) % You hear that, Mario! No farther! Not one step! Ar ...
+  C1C:  Call  SpeakToPlayer ( .NpcID:GoombaBros_00 00620104 00620102 00000000 000B00C8 ) % Bah ha ha!!! Yeah, you're scared, all right. You w ...
   C3C:  ExecWait  $Script_8024237C
   C48:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   C5C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2003,10 +2007,10 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
   CCC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   CE0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   CF8:  Wait  5`
-  D04:  Call  SpeakToPlayer ( 00000002 00630001 00630001 00000000 000B00CA ) % Ready to meet my wrath, Mario? You'd better be!!
+  D04:  Call  SpeakToPlayer ( .NpcID:GoombaKing_02 00630001 00630001 00000000 000B00CA ) % Ready to meet my wrath, Mario? You'd better be!!
   D24:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   D3C:  Wait  30`
-  D48:  Call  SetNpcVar     ( 00000002 00000000 00000001 )
+  D48:  Call  SetNpcVar     ( .NpcID:GoombaKing_02 00000000 00000001 )
   D60:  Return
   D68:  End
 }
@@ -2015,7 +2019,7 @@ PADDING: 80242164 to 80242170 (00002164 to 00002170)
 {
     0:  Call  $Function_80240344    ( 00000020 )
    10:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
-   24:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
+   24:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
    40:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    58:  Exec  $Script_80243514
    64:  Return
@@ -2068,11 +2072,11 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
     0:  Switch  *GB_StoryProgress
     C:  	Case  <  .Story:Ch0_DefeatedGoombaKing % FFFFFF90
    18:  		If  *GF_KMR11_GoombaBrosFledToCastle  ==  .True
-   28:  			Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+   28:  			Call  GetNpcPos ( .NpcID:GoombaKing_02 *Var0 *Var1 *Var2 )
    44:  			Call  AwaitPlayerApproach   ( *Var0 *Var2 0000012C )
    5C:  			Call  DisablePlayerInput    ( .True )
    6C:  			Call  SetPlayerSpeed        ( *Fixed[3.0] )
-   7C:  			Call  PlayerMoveTo  ( FFFFFDCC FFFFFFC0 00000000 )
+   7C:  			Call  PlayerMoveTo  (  -564`  -64`  0` )
    94:  		Else
    9C:  			Label  0
    A8:  			Call  GetSelfVar    ( 00000000 *Var0 )
@@ -2084,29 +2088,29 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
    F4:  	Case  >=  .Story:Ch0_DefeatedGoombaKing % FFFFFF90
   100:  		Return
   108:  EndSwitch
-  110:  Call  SetNpcJumpscale   ( 00000001 *Fixed[0.8] )
-  124:  Call  SetNpcJumpscale   ( 00000000 *Fixed[0.8] )
-  138:  Call  SetNpcJumpscale   ( 00000002 *Fixed[0.8] )
+  110:  Call  SetNpcJumpscale   ( .NpcID:GoombaBros_01 *Fixed[0.8] )
+  124:  Call  SetNpcJumpscale   ( .NpcID:GoombaBros_00 *Fixed[0.8] )
+  138:  Call  SetNpcJumpscale   ( .NpcID:GoombaKing_02 *Fixed[0.8] )
   14C:  Thread
-  154:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
-  170:  	Call  GetAngleToPlayer  ( 00000001 *Var3 )
+  154:  	Call  GetNpcPos ( .NpcID:GoombaBros_01 *Var0 *Var1 *Var2 )
+  170:  	Call  GetAngleToPlayer  ( .NpcID:GoombaBros_01 *Var3 )
   184:  	Call  AddVectorPolar    ( *Var0 *Var2 *Fixed[100.0] *Var3 )
-  1A0:  	Call  PlaySoundAtNpc    ( 00000001 0000010F 00000000 )
-  1B8:  	Call  NpcJump0  ( 00000001 *Var0 00000000 *Var2 0000001E )
+  1A0:  	Call  PlaySoundAtNpc    ( .NpcID:GoombaBros_01 0000010F 00000000 )
+  1B8:  	Call  NpcJump0  ( .NpcID:GoombaBros_01 *Var0  0` *Var2  30` )
   1D8:  EndThread
   1E0:  Thread
-  1E8:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
-  204:  	Call  GetAngleToPlayer  ( 00000000 *Var3 )
+  1E8:  	Call  GetNpcPos ( .NpcID:GoombaBros_00 *Var0 *Var1 *Var2 )
+  204:  	Call  GetAngleToPlayer  ( .NpcID:GoombaBros_00 *Var3 )
   218:  	Call  AddVectorPolar    ( *Var0 *Var2 *Fixed[100.0] *Var3 )
-  234:  	Call  PlaySoundAtNpc    ( 00000000 0000010F 00000000 )
-  24C:  	Call  NpcJump0  ( 00000000 *Var0 00000000 *Var2 0000001E )
+  234:  	Call  PlaySoundAtNpc    ( .NpcID:GoombaBros_00 0000010F 00000000 )
+  24C:  	Call  NpcJump0  ( .NpcID:GoombaBros_00 *Var0  0` *Var2  30` )
   26C:  EndThread
   274:  Thread
-  27C:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-  298:  	Call  GetAngleToPlayer  ( 00000002 *Var3 )
+  27C:  	Call  GetNpcPos ( .NpcID:GoombaKing_02 *Var0 *Var1 *Var2 )
+  298:  	Call  GetAngleToPlayer  ( .NpcID:GoombaKing_02 *Var3 )
   2AC:  	Call  AddVectorPolar    ( *Var0 *Var2 *Fixed[100.0] *Var3 )
-  2C8:  	Call  PlaySoundAtNpc    ( 00000002 000003E7 00000000 )
-  2E0:  	Call  NpcJump0  ( 00000002 *Var0 00000000 *Var2 0000001E )
+  2C8:  	Call  PlaySoundAtNpc    ( .NpcID:GoombaKing_02 000003E7 00000000 )
+  2E0:  	Call  NpcJump0  ( .NpcID:GoombaKing_02 *Var0  0` *Var2  30` )
   300:  EndThread
   308:  Wait  15`
   314:  Call  StartBossBattle   ( .Song:GoombaKingBattle )
@@ -2126,23 +2130,23 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
    9C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    B4:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    C8:  Call  $Function_80240344        ( 00000019 )
-   D8:  Call  SpeakToPlayer ( 00000002 00630003 00630001 00000000 000B00D1 ) % Wh...wh...what!? How could I lose?
-   F8:  Call  SetNpcSpeed   ( 00000000 *Fixed[6.0] )
-  10C:  Call  SetNpcSpeed   ( 00000001 *Fixed[6.0] )
-  120:  Call  SetNpcSpeed   ( 00000002 *Fixed[6.0] )
-  134:  Call  SetNpcAnimation   ( 00000000 00620106 )
-  148:  Call  SetNpcAnimation   ( 00000001 00620006 )
-  15C:  Call  SetNpcAnimation   ( 00000002 00630004 )
+   D8:  Call  SpeakToPlayer ( .NpcID:GoombaKing_02 00630003 00630001 00000000 000B00D1 ) % Wh...wh...what!? How could I lose?
+   F8:  Call  SetNpcSpeed   ( .NpcID:GoombaBros_00 *Fixed[6.0] )
+  10C:  Call  SetNpcSpeed   ( .NpcID:GoombaBros_01 *Fixed[6.0] )
+  120:  Call  SetNpcSpeed   ( .NpcID:GoombaKing_02 *Fixed[6.0] )
+  134:  Call  SetNpcAnimation   ( .NpcID:GoombaBros_00 00620106 )
+  148:  Call  SetNpcAnimation   ( .NpcID:GoombaBros_01 00620006 )
+  15C:  Call  SetNpcAnimation   ( .NpcID:GoombaKing_02 00630004 )
   170:  Thread
-  178:  	Call  NpcMoveTo ( 00000002 FFFFFE9A FFFFFF95 00000000 )
+  178:  	Call  NpcMoveTo ( .NpcID:GoombaKing_02  -358`  -107`  0` )
   194:  EndThread
   19C:  Thread
   1A4:  	Wait  20`
-  1B0:  	Call  NpcMoveTo ( 00000000 FFFFFE74 FFFFFF87 00000000 )
+  1B0:  	Call  NpcMoveTo ( .NpcID:GoombaBros_00  -396`  -121`  0` )
   1CC:  EndThread
   1D4:  Thread
   1DC:  	Wait  20`
-  1E8:  	Call  NpcMoveTo ( 00000001 FFFFFE74 FFFFFFA7 00000000 )
+  1E8:  	Call  NpcMoveTo ( .NpcID:GoombaBros_01  -396`  -89`  0` )
   204:  EndThread
   20C:  Wait  2`
   218:  Call  PlaySoundAtCollider   ( ~Collider:tt .Sound:MetalDoorOpen 00000000 )
@@ -2166,10 +2170,10 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
   370:  	Goto  1
   37C:  EndIf
   384:  Call  PlaySoundAtCollider   ( ~Collider:tt .Sound:MetalDoorClose 00000000 )
-  39C:  Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[2.0] )
+  39C:  Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[2.0] )
   3B8:  Set   *GB_StoryProgress  .Story:Ch0_DefeatedGoombaKing
   3C8:  Exec  $Script_802411C0
-  3D4:  Call  AdjustCam ( .Cam:Default *Fixed[4.0] 00000000 *Fixed[250.0] *Fixed[15.0] *Fixed[-7.5] )
+  3D4:  Call  AdjustCam ( .Cam:Default *Fixed[4.0]  0` *Fixed[250.0] *Fixed[15.0] *Fixed[-7.5] )
   3F8:  Wait  10`
   404:  Call  DisablePartnerAI  ( 00000000 )
   414:  Call  SpeakToPlayer     ( .Npc:Partner 00010008 00010001 00000000 000B00D2 ) % Yeah! I knew we could do it! Cooool!! Victory!!
@@ -2181,8 +2185,8 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
   470:  	Call  ResetCam  ( .Cam:Default *Fixed[4.0] )
   484:  	Call  DisablePlayerInput    ( .False )
   494:  EndThread
-  49C:  Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
-  4B8:  Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
+  49C:  Call  SetNpcPos ( .NpcID:GoombaBros_00  0`  -1000`  0` )
+  4B8:  Call  SetNpcPos ( .NpcID:GoombaBros_01  0`  -1000`  0` )
   4D4:  Return
   4DC:  End
 }
@@ -2196,7 +2200,7 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
    34:  	Case  ==  .Outcome:PlayerLost % 1
    40:  	Case  ==  .Outcome:PlayerFled % 2
    4C:  		Call  SetPlayerSpeed    ( *Fixed[6.0] )
-   5C:  		Call  PlayerMoveTo      ( FFFFFC46 FFFFFFCE 00000000 )
+   5C:  		Call  PlayerMoveTo      (  -954`  -50`  0` )
    74:  EndSwitch
    7C:  Call  DisablePlayerInput    ( .False )
    8C:  Return
@@ -2300,11 +2304,11 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
    28:  Switch  *GB_StoryProgress
    34:  	Case  <  .Story:Ch0_DefeatedGoombaKing % FFFFFF90
    40:  		If  *GF_KMR11_GoombaBrosFledToCastle  ==  .True
-   50:  			Call  SetNpcPos ( 00000000 FFFFFE50 00000082 FFFFFF6E )
+   50:  			Call  SetNpcPos ( .NpcID:GoombaBros_00  -432`  130`  -146` )
    6C:  		EndIf
    74:  	Case  >=  .Story:Ch0_DefeatedGoombaKing % FFFFFF90
-   80:  		Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
-   9C:  		Call  SetNpcFlagBits    ( 00000000 00000200 .False )
+   80:  		Call  SetNpcPos ( .NpcID:GoombaBros_00  0`  -1000`  0` )
+   9C:  		Call  SetNpcFlagBits    ( .NpcID:GoombaBros_00 00000200 .False )
    B4:  EndSwitch
    BC:  Return
    C4:  End
@@ -2317,11 +2321,11 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
    28:  Switch  *GB_StoryProgress
    34:  	Case  <  .Story:Ch0_DefeatedGoombaKing % FFFFFF90
    40:  		If  *GF_KMR11_GoombaBrosFledToCastle  ==  .True
-   50:  			Call  SetNpcPos ( 00000001 FFFFFE64 00000082 FFFFFFDD )
+   50:  			Call  SetNpcPos ( .NpcID:GoombaBros_01  -412`  130`  -35` )
    6C:  		EndIf
    74:  	Case  >=  .Story:Ch0_DefeatedGoombaKing % FFFFFF90
-   80:  		Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
-   9C:  		Call  SetNpcFlagBits    ( 00000001 00000200 .False )
+   80:  		Call  SetNpcPos ( .NpcID:GoombaBros_01  0`  -1000`  0` )
+   9C:  		Call  SetNpcFlagBits    ( .NpcID:GoombaBros_01 00000200 .False )
    B4:  EndSwitch
    BC:  Return
    C4:  End
@@ -2331,14 +2335,14 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
 {
     0:  Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80244390 )
    14:  Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_80244BA8 )
-   28:  Call  SetNpcCollisionSize   ( .Npc:Self 00000046 00000032 )
+   28:  Call  SetNpcCollisionSize   ( .Npc:Self  70`  50` )
    40:  Switch  *GB_StoryProgress
    4C:  	Case  <  .Story:Ch0_DefeatedGoombaKing % FFFFFF90
    58:  		If  *GF_KMR11_GoombaBrosFledToCastle  ==  .True
-   68:  			Call  SetNpcPos ( 00000002 FFFFFE5D 00000077 FFFFFFA5 )
+   68:  			Call  SetNpcPos ( .NpcID:GoombaKing_02  -419`  119`  -91` )
    84:  		EndIf
    8C:  	Case  <  .Story:Ch0_HitGatehouseSwitch % FFFFFF92
-   98:  		Call  SetNpcPos ( 00000002 FFFFFE9A 00000000 FFFFFF95 )
+   98:  		Call  SetNpcPos ( .NpcID:GoombaKing_02  -358`  0`  -107` )
    B4:  	Case  >=  .Story:Ch0_HitGatehouseSwitch % FFFFFF92
    C0:  		Call  RemoveNpc ( .Npc:Self )
    D0:  EndSwitch
@@ -2354,27 +2358,27 @@ PADDING: 802442F8 to 80244300 (000042F8 to 00004300)
 
 #new:NpcGroup $NpcGroup_802452C8
 {
-	00000000 $NpcSettings_80244344 ~Vec3f:NPC_802452C8 % 0 -1000 0
+	.NpcID:GoombaBros_00 $NpcSettings_80244344 ~Vec3f:NPC_GoombaBros_00 % 0 -1000 0
 	00A40104 $Script_Init_8024501C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802452C8
-	~AnimationTable:NPC_802452C8 % .Sprite:GoombaBros
+	~Movement:NPC_GoombaBros_00
+	~AnimationTable:NPC_GoombaBros_00 % .Sprite:GoombaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802452C8[1F0]
-	00000001 $NpcSettings_80244344 ~Vec3f:NPC_802454B8 % 0 -1000 0
+	.NpcID:GoombaBros_01 $NpcSettings_80244344 ~Vec3f:NPC_GoombaBros_01 % 0 -1000 0
 	00A40104 $Script_Init_802450E8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802454B8
-	~AnimationTable:NPC_802454B8 % .Sprite:GoombaBros
+	~Movement:NPC_GoombaBros_01
+	~AnimationTable:NPC_GoombaBros_01 % .Sprite:GoombaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802452C8[3E0]
-	00000002 $NpcSettings_80244344 ~Vec3f:NPC_802456A8 % 0 -1000 0
+	.NpcID:GoombaKing_02 $NpcSettings_80244344 ~Vec3f:NPC_GoombaKing_02 % 0 -1000 0
 	00A40104 $Script_Init_802451B4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802456A8
-	~AnimationTable:NPC_802456A8 % .Sprite:GoombaKing
+	~Movement:NPC_GoombaKing_02
+	~AnimationTable:NPC_GoombaKing_02 % .Sprite:GoombaKing
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2408,16 +2412,16 @@ PADDING: 80245AAC to 80245AB0 (00005AAC to 00005AB0)
 #new:Script $Script_80245AB0
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
-   2C:  Call  SetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
-   48:  Call  SetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
-   64:  Call  SpeakToPlayer ( 00000002 00630001 00630001 00000000 000B00D3 ) % Red Goomba, you're positive that you hid the switc ...
-   84:  Call  SpeakToPlayer ( 00000001 0062000A 00620002 00000000 000B00D4 ) % Of course, King Goomba! I hid it in the grass outs ...
-   A4:  Call  SpeakToPlayer ( 00000002 00630001 00630001 00000000 000B00D5 ) % Outside the... You idiot! You didn't hide it in he ...
-   C4:  Call  SpeakToPlayer ( 00000000 0062010A 00620102 00000000 000B00D6 ) % Oh! Do you think? You know...you might be right.
-   E4:  Call  SpeakToPlayer ( 00000001 0062000A 00620002 00000000 000B00D7 ) % King Goomba, maybe we ought to try to trick Mario  ...
-  104:  Call  SetNpcPos     ( 00000001 00000000 FFFFFC18 00000000 )
-  120:  Call  SetNpcPos     ( 00000000 00000000 FFFFFC18 00000000 )
+   10:  Call  GetNpcPos     ( .NpcID:GoombaKing_02 *Var0 *Var1 *Var2 )
+   2C:  Call  SetNpcPos     ( .NpcID:GoombaBros_01 *Var0 *Var1 *Var2 )
+   48:  Call  SetNpcPos     ( .NpcID:GoombaBros_00 *Var0 *Var1 *Var2 )
+   64:  Call  SpeakToPlayer ( .NpcID:GoombaKing_02 00630001 00630001 00000000 000B00D3 ) % Red Goomba, you're positive that you hid the switc ...
+   84:  Call  SpeakToPlayer ( .NpcID:GoombaBros_01 0062000A 00620002 00000000 000B00D4 ) % Of course, King Goomba! I hid it in the grass outs ...
+   A4:  Call  SpeakToPlayer ( .NpcID:GoombaKing_02 00630001 00630001 00000000 000B00D5 ) % Outside the... You idiot! You didn't hide it in he ...
+   C4:  Call  SpeakToPlayer ( .NpcID:GoombaBros_00 0062010A 00620102 00000000 000B00D6 ) % Oh! Do you think? You know...you might be right.
+   E4:  Call  SpeakToPlayer ( .NpcID:GoombaBros_01 0062000A 00620002 00000000 000B00D7 ) % King Goomba, maybe we ought to try to trick Mario  ...
+  104:  Call  SetNpcPos     ( .NpcID:GoombaBros_01  0`  -1000`  0` )
+  120:  Call  SetNpcPos     ( .NpcID:GoombaBros_00  0`  -1000`  0` )
   13C:  Call  DisablePlayerInput    ( .False )
   14C:  Return
   154:  End
@@ -2426,7 +2430,7 @@ PADDING: 80245AAC to 80245AB0 (00005AAC to 00005AB0)
 #new:Script $Script_80245C0C
 {
     0:  Label  A
-    C:  Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+    C:  Call  GetNpcPos ( .NpcID:GoombaBros_00 *Var0 *Var1 *Var2 )
    28:  Set   *VarA  *MapVar[0]
    38:  Call  $Function_80240EC0 ( )
    44:  Wait  1`
@@ -2441,16 +2445,16 @@ PADDING: 80245AAC to 80245AB0 (00005AAC to 00005AB0)
    10:  	Return
    18:  EndIf
    20:  Call  DisablePlayerInput    ( .True )
-   30:  Call  SetNpcPos ( 00000000 FFFFFE87 FFFFFFF8 00000051 )
-   4C:  Call  SetNpcFlagBits    ( 00000000 01000000 .True )
+   30:  Call  SetNpcPos ( .NpcID:GoombaBros_00  -377`  -8`  81` )
+   4C:  Call  SetNpcFlagBits    ( .NpcID:GoombaBros_00 01000000 .True )
    64:  Exec  $Script_80245C0C *VarB
-   74:  Call  SetNpcJumpscale   ( 00000000 *Fixed[2.0] )
-   88:  Call  NpcJump0  ( 00000000 FFFFFE43 00000000 0000005C 0000000F )
+   74:  Call  SetNpcJumpscale   ( .NpcID:GoombaBros_00 *Fixed[2.0] )
+   88:  Call  NpcJump0  ( .NpcID:GoombaBros_00  -445`  0`  92`  15` )
    A8:  Call  PlaySoundAt       ( 00000048 00000000 FFFFFE2B 00000001 0000005C )
-   C8:  Call  SetNpcJumpscale   ( 00000000 *Fixed[2.0] )
-   DC:  Call  NpcJump0  ( 00000000 FFFFFE2B 00000000 0000005C 00000007 )
+   C8:  Call  SetNpcJumpscale   ( .NpcID:GoombaBros_00 *Fixed[2.0] )
+   DC:  Call  NpcJump0  ( .NpcID:GoombaBros_00  -469`  0`  92`  7` )
    FC:  Kill  *VarB
-  108:  Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+  108:  Call  SetNpcPos ( .NpcID:GoombaBros_00  0`  -1000`  0` )
   124:  Set   *GB_StoryProgress  .Story:Ch0_FoundGatehouseSwitch
   134:  Call  DisablePlayerInput    ( .False )
   144:  Return
@@ -2514,25 +2518,25 @@ PADDING: 8024608C to 80246090 (0000608C to 00006090)
 {
     0:  Call  SetMusicTrack ( 00000000 .Song:KammyKoopaTheme 00000000 00000008 )
    1C:  Call  SetNpcVar     ( 00000004 00000000 00000001 )
-   34:  Call  SetNpcPos     ( 00000004 00000064 000000B6 FFFFFE9F )
-   50:  Call  UseSettingsFrom   ( .Cam:Default 00000064 00000000 FFFFFF24 )
-   6C:  Call  SetPanTarget  ( .Cam:Default 00000064 00000000 FFFFFF24 )
-   88:  Call  SetCamDistance    ( .Cam:Default 00000498 )
-   9C:  Call  SetCamPosA    ( .Cam:Default 0000003B FFFFFF61 )
-   B4:  Call  SetCamPosB    ( .Cam:Default FFFFFFE8 FFFFFF00 )
-   CC:  Call  SetCamPitch   ( .Cam:Default 00000008 FFFFFFFB )
+   34:  Call  SetNpcPos     ( 00000004  100`  182`  -353` )
+   50:  Call  UseSettingsFrom   ( .Cam:Default  100`  0`  -220` )
+   6C:  Call  SetPanTarget  ( .Cam:Default  100`  0`  -220` )
+   88:  Call  SetCamDistance    ( .Cam:Default  1176` )
+   9C:  Call  SetCamPosA    ( .Cam:Default  59`  -159` )
+   B4:  Call  SetCamPosB    ( .Cam:Default  -24`  -256` )
+   CC:  Call  SetCamPitch   ( .Cam:Default  8`  -5` )
    E4:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    F8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   110:  Wait  60`
-  11C:  Call  UseSettingsFrom   ( .Cam:Default 00000064 00000000 FFFFFF24 )
-  138:  Call  SetPanTarget  ( .Cam:Default 00000064 000000BE FFFFFE9F )
-  154:  Call  SetCamDistance    ( .Cam:Default 000000FA )
+  11C:  Call  UseSettingsFrom   ( .Cam:Default  100`  0`  -220` )
+  138:  Call  SetPanTarget  ( .Cam:Default  100`  190`  -353` )
+  154:  Call  SetCamDistance    ( .Cam:Default  250` )
   168:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   17C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   194:  Wait  30`
-  1A0:  Call  UseSettingsFrom   ( .Cam:Default 00000064 00000000 FFFFFF24 )
-  1BC:  Call  SetPanTarget  ( .Cam:Default 00000064 000000BE FFFFFE9F )
-  1D8:  Call  SetCamDistance    ( .Cam:Default 000003E8 )
+  1A0:  Call  UseSettingsFrom   ( .Cam:Default  100`  0`  -220` )
+  1BC:  Call  SetPanTarget  ( .Cam:Default  100`  190`  -353` )
+  1D8:  Call  SetCamDistance    ( .Cam:Default  1000` )
   1EC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.65] )
   200:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   218:  Wait  30`

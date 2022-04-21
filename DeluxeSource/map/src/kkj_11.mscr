@@ -1,6 +1,8 @@
 % Script File: kkj_11.mscr
 % Decoded from: 0 to 5F50 (kkj_11)
 
+#define .NpcID:WorldKoopatrol_04    04
+
 #new:Function $Function_80240000
 {
     0:  CLEAR     A0
@@ -1349,8 +1351,8 @@ PADDING: 802410CC to 802410D0 (000010CC to 000010D0)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachsCastle
    10:  Call  SetSpriteShading  ( .Shading:kkj_11 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Switch  *GB_StoryProgress
@@ -1395,7 +1397,7 @@ PADDING: 80241BFC to 80241C00 (00001BFC to 00001C00)
 
 #new:ItemList $ItemList_80241C00
 {
-	.Item:CastleKey3
+	.Item:PeachKey1
 	00000000
 }
 
@@ -1403,7 +1405,7 @@ PADDING: 80241BFC to 80241C00 (00001BFC to 00001C00)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf
@@ -1474,16 +1476,16 @@ PADDING: 80241DE4 to 80241DF0 (00001DE4 to 00001DF0)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePartnerAI  ( 00000000 )
    20:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   38:  Call  SetNpcPos     ( .Npc:Partner *Var0 0000000A *Var2 )
-   54:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 000001BC )
-   70:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 000001BC )
+   38:  Call  SetNpcPos     ( .Npc:Partner *Var0  10` *Var2 )
+   54:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  444` )
+   70:  Call  SetPanTarget  ( .Cam:Default  0`  0`  444` )
    8C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    A0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    B8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    CC:  Wait  1`
    D8:  Wait  30`
-   E4:  Call  UseSettingsFrom   ( .Cam:Default FFFFFE52 00000000 00000032 )
-  100:  Call  SetPanTarget  ( .Cam:Default FFFFFE52 00000000 00000032 )
+   E4:  Call  UseSettingsFrom   ( .Cam:Default  -430`  0`  50` )
+  100:  Call  SetPanTarget  ( .Cam:Default  -430`  0`  50` )
   11C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   130:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   148:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -1493,10 +1495,10 @@ PADDING: 80241DE4 to 80241DF0 (00001DE4 to 00001DF0)
   184:  Wait  10`
   190:  Thread
   198:  	Wait  5`
-  1A4:  	Call  NpcMoveTo ( .Npc:Partner FFFFFE39 00000032 0000001E )
+  1A4:  	Call  NpcMoveTo ( .Npc:Partner  -455`  50`  30` )
   1C0:  EndThread
-  1C8:  Call  PlayerMoveTo  ( FFFFFE52 00000032 0000001E )
-  1E0:  Call  SetPlayerPos  ( FFFFFE52 00000000 00000032 )
+  1C8:  Call  PlayerMoveTo  (  -430`  50`  30` )
+  1E0:  Call  SetPlayerPos  (  -430`  0`  50` )
   1F8:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   210:  Wait  5`
   21C:  Call  EnablePartnerAI ( )
@@ -1744,10 +1746,10 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
    10:  SetGroup  00000000
    1C:  Call  SetTimeFreezeMode ( 00000001 )
    2C:  Call  PlaySoundAtNpc    ( .Npc:Self 00000262 00000000 )
-   44:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+   44:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation  0`  20` .True  0`  0`  0`  0` )
    74:  Call  NpcFacePlayer     ( .Npc:Self 00000005 )
    88:  Wait  20`
-   94:  Call  PlayerFaceNpc     ( .Npc:Self 00000000 )
+   94:  Call  PlayerFaceNpc     ( .Npc:Self .False )
    A8:  Call  SetPlayerAnimation    ( 000C0005 )
    B8:  Call  SetNpcAnimation   ( .Npc:Self 00580002 )
    CC:  Call  SpeakToPlayer     ( .Npc:Self 00580009 00580002 00000000 00140174 ) % What?! Princess Peach!
@@ -1755,7 +1757,7 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
   108:  If  *Var3  !=  00000000
   118:  	Call  SetNpcAnimation   ( .Npc:Self 00580007 )
   12C:  	Call  SetNpcSpeed       ( .Npc:Self *Fixed[5.0] )
-  140:  	Call  NpcMoveTo ( .Npc:Self *Var0 *Var2 00000000 )
+  140:  	Call  NpcMoveTo ( .Npc:Self *Var0 *Var2  0` )
   15C:  	Call  SetNpcAnimation   ( .Npc:Self 00580002 )
   170:  EndIf
   178:  Call  SpeakToPlayer ( .Npc:Self 00580009 00580002 00000000 00140175 ) % You know you're not allowed to leave the room! I'm ...
@@ -1786,18 +1788,18 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
    B4:  EndThread
    BC:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
    D0:  Loop
-   DC:  	Call  NpcMoveTo     ( .Npc:Self FFFFFF7E FFFFFF7E 00000000 )
+   DC:  	Call  NpcMoveTo     ( .Npc:Self  -130`  -130`  0` )
    F8:  	Call  $Function_80240644    ( *Var0 FFFFFF7E FFFFFF7E FFFFFF4C FFFFFFE2 )
-  118:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  130:  	Call  NpcMoveTo     ( .Npc:Self FFFFFF4C FFFFFFE2 00000000 )
+  118:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  130:  	Call  NpcMoveTo     ( .Npc:Self  -180`  -30`  0` )
   14C:  	Call  $Function_80240644    ( *Var0 FFFFFF4C FFFFFFE2 000000B4 FFFFFFE2 )
-  16C:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  184:  	Call  NpcMoveTo     ( .Npc:Self 000000B4 FFFFFFE2 00000000 )
+  16C:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  184:  	Call  NpcMoveTo     ( .Npc:Self  180`  -30`  0` )
   1A0:  	Call  $Function_80240644    ( *Var0 000000B4 FFFFFFE2 00000082 FFFFFF7E )
-  1C0:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  1D8:  	Call  NpcMoveTo     ( .Npc:Self 00000082 FFFFFF7E 00000000 )
+  1C0:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  1D8:  	Call  NpcMoveTo     ( .Npc:Self  130`  -130`  0` )
   1F4:  	Call  $Function_80240644    ( *Var0 00000082 FFFFFF7E FFFFFF7E FFFFFF7E )
-  214:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
+  214:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
   22C:  EndLoop
   234:  Return
   23C:  End
@@ -1820,24 +1822,24 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
    B4:  EndThread
    BC:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
    D0:  Loop
-   DC:  	Call  NpcMoveTo     ( .Npc:Self FFFFFF7E 000000B4 00000000 )
+   DC:  	Call  NpcMoveTo     ( .Npc:Self  -130`  180`  0` )
    F8:  	Call  $Function_80240644    ( *Var0 FFFFFF7E 000000B4 FFFFFF7E 000000E6 )
-  118:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  130:  	Call  NpcMoveTo     ( .Npc:Self FFFFFF7E 000000E6 00000000 )
+  118:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  130:  	Call  NpcMoveTo     ( .Npc:Self  -130`  230`  0` )
   14C:  	Call  $Function_80240644    ( *Var0 FFFFFF7E 000000E6 FFFFFFD8 000000E6 )
-  16C:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  184:  	Call  NpcMoveTo     ( .Npc:Self FFFFFFD8 000000E6 00000000 )
+  16C:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  184:  	Call  NpcMoveTo     ( .Npc:Self  -40`  230`  0` )
   1A0:  	Call  $Function_80240644    ( *Var0 FFFFFFD8 000000E6 FFFFFFD8 00000050 )
-  1C0:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  1D8:  	Call  NpcMoveTo     ( .Npc:Self FFFFFFD8 00000050 00000000 )
+  1C0:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  1D8:  	Call  NpcMoveTo     ( .Npc:Self  -40`  80`  0` )
   1F4:  	Call  $Function_80240644    ( *Var0 FFFFFFD8 00000050 FFFFFF06 00000050 )
-  214:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  22C:  	Call  NpcMoveTo     ( .Npc:Self FFFFFF06 00000050 00000000 )
+  214:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  22C:  	Call  NpcMoveTo     ( .Npc:Self  -250`  80`  0` )
   248:  	Call  $Function_80240644    ( *Var0 FFFFFF06 00000050 FFFFFF06 000000B4 )
-  268:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  280:  	Call  NpcMoveTo     ( .Npc:Self FFFFFF06 000000B4 00000000 )
+  268:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  280:  	Call  NpcMoveTo     ( .Npc:Self  -250`  180`  0` )
   29C:  	Call  $Function_80240644    ( *Var0 FFFFFF06 000000B4 FFFFFF7E 000000B4 )
-  2BC:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
+  2BC:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
   2D4:  EndLoop
   2DC:  Return
   2E4:  End
@@ -1860,24 +1862,24 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
    B4:  EndThread
    BC:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
    D0:  Loop
-   DC:  	Call  NpcMoveTo     ( .Npc:Self 00000082 000000B4 00000000 )
+   DC:  	Call  NpcMoveTo     ( .Npc:Self  130`  180`  0` )
    F8:  	Call  $Function_80240644    ( *Var0 00000082 000000B4 000000FA 000000B4 )
-  118:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  130:  	Call  NpcMoveTo     ( .Npc:Self 000000FA 000000B4 00000000 )
+  118:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  130:  	Call  NpcMoveTo     ( .Npc:Self  250`  180`  0` )
   14C:  	Call  $Function_80240644    ( *Var0 000000FA 000000B4 000000FA 00000050 )
-  16C:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  184:  	Call  NpcMoveTo     ( .Npc:Self 000000FA 00000050 00000000 )
+  16C:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  184:  	Call  NpcMoveTo     ( .Npc:Self  250`  80`  0` )
   1A0:  	Call  $Function_80240644    ( *Var0 000000FA 00000050 00000028 00000050 )
-  1C0:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  1D8:  	Call  NpcMoveTo     ( .Npc:Self 00000028 00000050 00000000 )
+  1C0:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  1D8:  	Call  NpcMoveTo     ( .Npc:Self  40`  80`  0` )
   1F4:  	Call  $Function_80240644    ( *Var0 00000028 00000050 00000028 000000E6 )
-  214:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  22C:  	Call  NpcMoveTo     ( .Npc:Self 00000028 000000E6 00000000 )
+  214:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  22C:  	Call  NpcMoveTo     ( .Npc:Self  40`  230`  0` )
   248:  	Call  $Function_80240644    ( *Var0 00000028 000000E6 00000082 000000E6 )
-  268:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  280:  	Call  NpcMoveTo     ( .Npc:Self 00000082 000000E6 00000000 )
+  268:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  280:  	Call  NpcMoveTo     ( .Npc:Self  130`  230`  0` )
   29C:  	Call  $Function_80240644    ( *Var0 00000082 000000E6 00000082 000000B4 )
-  2BC:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
+  2BC:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
   2D4:  EndLoop
   2DC:  Return
   2E4:  End
@@ -1898,10 +1900,10 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
    9C:  SetGroup  00000000
    A8:  Call  SetTimeFreezeMode ( 00000001 )
    B8:  Call  PlaySoundAtNpc    ( .Npc:Self 00000262 00000000 )
-   D0:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+   D0:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation  0`  20` .True  0`  0`  0`  0` )
   100:  Call  NpcFacePlayer     ( .Npc:Self 00000005 )
   114:  Wait  20`
-  120:  Call  PlayerFaceNpc     ( .Npc:Self 00000000 )
+  120:  Call  PlayerFaceNpc     ( .Npc:Self .False )
   134:  Call  SetPlayerAnimation    ( 000C0005 )
   144:  Call  SpeakToPlayer     ( .Npc:Self 00580008 00580001 00000000 00140174 ) % What?! Princess Peach!
   164:  Call  SpeakToPlayer     ( .Npc:Self 00580008 00580001 00000000 00140175 ) % You know you're not allowed to leave the room! I'm ...
@@ -1918,7 +1920,7 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
 #new:Script $Script_Init_80243AB4
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00580005 )
-   14:  Call  SetNpcPos ( .Npc:Self 00000082 00000000 FFFFFF7E )
+   14:  Call  SetNpcPos ( .Npc:Self  130`  0`  -130` )
    30:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_802430A4 )
    44:  Return
    4C:  End
@@ -1927,7 +1929,7 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
 #new:Script $Script_Init_80243B08
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00580005 )
-   14:  Call  SetNpcPos ( .Npc:Self FFFFFF06 00000000 000000B4 )
+   14:  Call  SetNpcPos ( .Npc:Self  -250`  0`  180` )
    30:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_802432E8 )
    44:  Return
    4C:  End
@@ -1936,7 +1938,7 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
 #new:Script $Script_Init_80243B5C
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00580005 )
-   14:  Call  SetNpcPos ( .Npc:Self 00000082 00000000 000000E6 )
+   14:  Call  SetNpcPos ( .Npc:Self  130`  0`  230` )
    30:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_802435D4 )
    44:  Return
    4C:  End
@@ -1944,8 +1946,8 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
 
 #new:Script $Script_Init_80243BB0
 {
-    0:  Call  SetNpcPos     ( .Npc:Self 00000000 00000064 FFFFFEA2 )
-   1C:  Call  SetNpcYaw     ( .Npc:Self 000000DC )
+    0:  Call  SetNpcPos     ( .Npc:Self  0`  100`  -350` )
+   1C:  Call  SetNpcYaw     ( .Npc:Self  220` )
    30:  Call  BindNpcIdle   ( .Npc:Self $Script_Idle_802438C0 )
    44:  Return
    4C:  End
@@ -1955,11 +1957,11 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
 {
     0:  Call  GetEntryID    ( *Var0 )
    10:  If  *Var0  ==  ~Entry:Entry4
-   20:  	Call  SetNpcPos ( .Npc:Self FFFFFFD8 00000000 FFFFFF24 )
-   3C:  	Call  SetNpcYaw ( .Npc:Self 0000005A )
+   20:  	Call  SetNpcPos ( .Npc:Self  -40`  0`  -220` )
+   3C:  	Call  SetNpcYaw ( .Npc:Self  90` )
    50:  Else
-   58:  	Call  SetNpcPos ( .Npc:Self 00000000 00000000 FFFFFF10 )
-   74:  	Call  SetNpcYaw ( .Npc:Self 000000DC )
+   58:  	Call  SetNpcPos ( .Npc:Self  0`  0`  -240` )
+   74:  	Call  SetNpcYaw ( .Npc:Self  220` )
    88:  EndIf
    90:  Call  BindNpcIdle   ( .Npc:Self $Script_Idle_802438C0 )
    A4:  Return
@@ -2006,11 +2008,11 @@ PADDING: 80242194 to 802421A0 (00002194 to 000021A0)
 	00000000 00000000 $ExtraAnimationList_80243CB8 00000000 % no tattle string
 	%
 	% $NpcGroup_80243CDC[7C0]
-	00000004 $NpcSettings_80242E70 ~Vec3f:NPC_8024449C % 0 -500 0
+	.NpcID:WorldKoopatrol_04 $NpcSettings_80242E70 ~Vec3f:NPC_WorldKoopatrol_04 % 0 -500 0
 	00000F0D $Script_Init_80243C04 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024449C
-	~AnimationTable:NPC_8024449C % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_04
+	~AnimationTable:NPC_WorldKoopatrol_04 % .Sprite:WorldKoopatrol
 	00000000 00000000 $ExtraAnimationList_80243CB8 00000000 % no tattle string
 }
 
@@ -2042,10 +2044,10 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
    1C:  SetGroup  00000000
    28:  Call  SetTimeFreezeMode ( 00000001 )
    38:  Call  PlaySoundAtNpc    ( .Npc:Self 00000262 00000000 )
-   50:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+   50:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation  0`  20` .True  0`  0`  0`  0` )
    80:  Call  NpcFacePlayer     ( .Npc:Self 00000005 )
    94:  Wait  20`
-   A0:  Call  PlayerFaceNpc     ( .Npc:Self 00000000 )
+   A0:  Call  PlayerFaceNpc     ( .Npc:Self .False )
    B4:  Call  SetPlayerAnimation    ( 000C0005 )
    C4:  Call  SetNpcAnimation   ( .Npc:Self 00580001 )
    D8:  Call  SpeakToPlayer     ( .Npc:Self 00580008 00580001 00000000 00140174 ) % What?! Princess Peach!
@@ -2053,7 +2055,7 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
   114:  If  *Var3  !=  00000000
   124:  	Call  SetNpcAnimation   ( .Npc:Self 00580007 )
   138:  	Call  SetNpcSpeed       ( .Npc:Self *Fixed[5.0] )
-  14C:  	Call  NpcMoveTo ( .Npc:Self *Var0 *Var2 00000000 )
+  14C:  	Call  NpcMoveTo ( .Npc:Self *Var0 *Var2  0` )
   168:  	Call  SetNpcAnimation   ( .Npc:Self 00580001 )
   17C:  EndIf
   184:  Call  SpeakToPlayer ( .Npc:Self 00580008 00580001 00000000 00140175 ) % You know you're not allowed to leave the room! I'm ...
@@ -2117,14 +2119,14 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
    4C:  	Thread
    54:  		Call  DisablePlayerInput    ( .True )
    64:  		Call  SetPlayerSpeed        ( *Fixed[2.0] )
-   74:  		Call  PlayerMoveTo  ( 00000046 FFFFFEBB 00000000 )
+   74:  		Call  PlayerMoveTo  (  70`  -325`  0` )
    8C:  		Call  DisablePlayerInput    ( .False )
    9C:  	EndThread
    A4:  	Call  SetNpcAnimation   ( .Npc:Self 00580004 )
    B8:  	Call  SetNpcSpeed       ( .Npc:Self *Fixed[2.0] )
-   CC:  	Call  NpcMoveTo ( .Npc:Self 00000000 FFFFFEA2 00000000 )
+   CC:  	Call  NpcMoveTo ( .Npc:Self  0`  -350`  0` )
    E8:  	Call  SetNpcAnimation   ( .Npc:Self 00580001 )
-   FC:  	Call  InterpNpcYaw      ( .Npc:Self 000000DC 00000005 )
+   FC:  	Call  InterpNpcYaw      ( .Npc:Self  220`  5` )
   114:  	Call  SetSelfEnemyFlagBits  ( 08000000 00000000 )
   128:  EndIf
   130:  Loop
@@ -2144,14 +2146,14 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
    4C:  	Thread
    54:  		Call  DisablePlayerInput    ( .True )
    64:  		Call  SetPlayerSpeed        ( *Fixed[2.0] )
-   74:  		Call  PlayerMoveTo  ( 00000046 FFFFFF38 00000000 )
+   74:  		Call  PlayerMoveTo  (  70`  -200`  0` )
    8C:  		Call  DisablePlayerInput    ( .False )
    9C:  	EndThread
    A4:  	Call  SetNpcAnimation   ( .Npc:Self 00580004 )
    B8:  	Call  SetNpcSpeed       ( .Npc:Self *Fixed[2.0] )
-   CC:  	Call  NpcMoveTo ( .Npc:Self 00000000 FFFFFF10 00000000 )
+   CC:  	Call  NpcMoveTo ( .Npc:Self  0`  -240`  0` )
    E8:  	Call  SetNpcAnimation   ( .Npc:Self 00580001 )
-   FC:  	Call  InterpNpcYaw      ( .Npc:Self 000000DC 00000005 )
+   FC:  	Call  InterpNpcYaw      ( .Npc:Self  220`  5` )
   114:  	Call  SetSelfEnemyFlagBits  ( 08000000 00000000 )
   128:  EndIf
   130:  Loop
@@ -2199,9 +2201,9 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
    C4:  	Add   *Var3  00000032
    D4:  EndIf
    DC:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
-   F0:  Call  NpcMoveTo     ( .Npc:Self *Var3 *Var5 00000000 )
+   F0:  Call  NpcMoveTo     ( .Npc:Self *Var3 *Var5  0` )
   10C:  Call  SetNpcAnimation   ( .Npc:Self 00580001 )
-  120:  Call  InterpNpcYaw  ( .Npc:Self 000000DC 00000005 )
+  120:  Call  InterpNpcYaw  ( .Npc:Self  220`  5` )
   138:  Call  SetSelfVar    ( 00000000 00000001 )
   14C:  Bind  $Script_ExitDoubleDoor_80241254 .Trigger:WallPressA ~Collider:ttn 00000001 00000000
   168:  Return
@@ -2224,9 +2226,9 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
    C4:  	Add   *Var3  00000032
    D4:  EndIf
    DC:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
-   F0:  Call  NpcMoveTo     ( .Npc:Self *Var3 *Var5 00000000 )
+   F0:  Call  NpcMoveTo     ( .Npc:Self *Var3 *Var5  0` )
   10C:  Call  SetNpcAnimation   ( .Npc:Self 00580001 )
-  120:  Call  InterpNpcYaw  ( .Npc:Self 000000DC 00000005 )
+  120:  Call  InterpNpcYaw  ( .Npc:Self  220`  5` )
   138:  Call  SetSelfVar    ( 00000000 00000001 )
   14C:  Bind  $Script_ExitSingleDoor_80241308 .Trigger:WallPressA ~Collider:ttn2 00000001 00000000
   168:  Return
@@ -2289,11 +2291,11 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
 {
     0:  Call  GetEntryID    ( *Var0 )
    10:  If  *Var0  ==  ~Entry:Entry1
-   20:  	Call  SetNpcPos ( .Npc:Self FFFFFFBA 00000064 FFFFFEA2 )
-   3C:  	Call  SetNpcYaw ( .Npc:Self 0000005A )
+   20:  	Call  SetNpcPos ( .Npc:Self  -70`  100`  -350` )
+   3C:  	Call  SetNpcYaw ( .Npc:Self  90` )
    50:  Else
-   58:  	Call  SetNpcPos ( .Npc:Self 00000000 00000064 FFFFFEA2 )
-   74:  	Call  SetNpcYaw ( .Npc:Self 000000C8 )
+   58:  	Call  SetNpcPos ( .Npc:Self  0`  100`  -350` )
+   74:  	Call  SetNpcYaw ( .Npc:Self  200` )
    88:  EndIf
    90:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80244AE8 )
    A4:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80244EB4 )
@@ -2304,7 +2306,7 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
 #new:Script $Script_Init_80245534
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00580001 )
-   14:  Call  SetNpcPos ( .Npc:Self FFFFFED9 00000000 FFFFFFE2 )
+   14:  Call  SetNpcPos ( .Npc:Self  -295`  0`  -30` )
    30:  Call  NpcFaceNpc        ( .Npc:Self 00000002 00000000 )
    48:  Exec  $Script_80244A18
    54:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80244DA8 )
@@ -2316,7 +2318,7 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
 #new:Script $Script_Init_802455C0
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00580001 )
-   14:  Call  SetNpcPos ( .Npc:Self FFFFFF01 00000000 FFFFFFC9 )
+   14:  Call  SetNpcPos ( .Npc:Self  -255`  0`  -55` )
    30:  Call  NpcFaceNpc        ( .Npc:Self 00000001 00000000 )
    48:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802452F4 )
    5C:  Return
@@ -2327,11 +2329,11 @@ PADDING: 802446A4 to 802446B0 (000046A4 to 000046B0)
 {
     0:  Call  GetEntryID    ( *Var0 )
    10:  If  *Var0  ==  ~Entry:Entry4
-   20:  	Call  SetNpcPos ( .Npc:Self FFFFFFD8 00000000 FFFFFF24 )
-   3C:  	Call  SetNpcYaw ( .Npc:Self 0000005A )
+   20:  	Call  SetNpcPos ( .Npc:Self  -40`  0`  -220` )
+   3C:  	Call  SetNpcYaw ( .Npc:Self  90` )
    50:  Else
-   58:  	Call  SetNpcPos ( .Npc:Self 00000000 00000000 FFFFFF10 )
-   74:  	Call  SetNpcYaw ( .Npc:Self 000000DC )
+   58:  	Call  SetNpcPos ( .Npc:Self  0`  0`  -240` )
+   74:  	Call  SetNpcYaw ( .Npc:Self  220` )
    88:  EndIf
    90:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80244C48 )
    A4:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024502C )

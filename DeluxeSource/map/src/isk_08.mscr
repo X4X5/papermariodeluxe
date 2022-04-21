@@ -1,6 +1,8 @@
 % Script File: isk_08.mscr
 % Decoded from: 0 to 16B0 (isk_08)
 
+#define .NpcID:BuzzyBeetle_01       01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -713,8 +715,8 @@ PADDING: 802408E8 to 802408F0 (000008E8 to 000008F0)
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:isk_08 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80241244 )
@@ -837,11 +839,11 @@ MISSING: 80240FD0 to 80241054 (00000FD0 to 00001054)
 
 #new:NpcGroup $NpcGroup_80241054
 {
-	00000001 $NpcSettings_80240FA4 ~Vec3f:NPC_80241054 % -415 -520 355
+	.NpcID:BuzzyBeetle_01 $NpcSettings_80240FA4 ~Vec3f:NPC_BuzzyBeetle_01 % -415 -520 355
 	00000C00 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Generous:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80241054
-	~AnimationTable:NPC_80241054 % .Sprite:BuzzyBeetle
+	~Movement:NPC_BuzzyBeetle_01
+	~AnimationTable:NPC_BuzzyBeetle_01 % .Sprite:BuzzyBeetle
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

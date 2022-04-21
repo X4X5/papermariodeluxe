@@ -1,6 +1,19 @@
 % Script File: dgb_16.mscr
 % Decoded from: 0 to 3520 (dgb_16)
 
+#define .NpcID:WorldClubba_00       00
+#define .NpcID:WorldClubba_01       01
+#define .NpcID:WorldClubba_05       05
+#define .NpcID:WorldClubba_06       06
+#define .NpcID:WorldClubba_10       0A
+#define .NpcID:WorldClubba_11       0B
+#define .NpcID:WorldClubba_15       0F
+#define .NpcID:WorldClubba_16       10
+#define .NpcID:WorldClubba_20       14
+#define .NpcID:WorldClubba_21       15
+#define .NpcID:WorldClubba_25       19
+#define .NpcID:WorldClubba_26       1A
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -1486,8 +1499,8 @@ PADDING: 80241518 to 80241520 (00001518 to 00001520)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GB_StoryProgress  <  .Story:Ch3_StarSpiritRescued % FFFFFFF1
    80:  	Call  MakeNpcs  ( .True $NpcGroupList_8024318C )
@@ -1505,7 +1518,7 @@ PADDING: 80241774 to 80241780 (00001774 to 00001780)
 
 #new:Script $Script_80241780
 {
-    0:  Call  MakeItemEntity    ( .Item:CastleKey1 ~Vec3d:Item80241780 .ItemSpawnMode:Fixed_NeverVanish *GF_DGB16_Item_CastleKey1 )
+    0:  Call  MakeItemEntity    ( .Item:TubbaCastleKey ~Vec3d:Item80241780 .ItemSpawnMode:Fixed_NeverVanish *GF_DGB16_Item_CastleKey1 )
    24:  Return
    2C:  End
 }
@@ -1520,7 +1533,7 @@ PADDING: 802417B4 to 802417C0 (000017B4 to 000017C0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1596,109 +1609,109 @@ PADDING: 802417B4 to 802417C0 (000017B4 to 000017C0)
 
 #new:NpcGroup $NpcGroup_80241A4C
 {
-	00000000 $NpcSettings_8024194C ~Vec3f:NPC_80241A4C % -70 0 -100
+	.NpcID:WorldClubba_00 $NpcSettings_8024194C ~Vec3f:NPC_WorldClubba_00 % -70 0 -100
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80241A4C
-	~AnimationTable:NPC_80241A4C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_00
+	~AnimationTable:NPC_WorldClubba_00 % .Sprite:WorldClubba
 	00000002 00000000 $ExtraAnimationList_8024187C 00000000 % no tattle string
 	%
 	% $NpcGroup_80241A4C[1F0]
-	00000001 $NpcSettings_80241A20 ~Vec3f:NPC_80241C3C % 0 -1000 0
+	.NpcID:WorldClubba_01 $NpcSettings_80241A20 ~Vec3f:NPC_WorldClubba_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241C3C
-	~AnimationTable:NPC_80241C3C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_01
+	~AnimationTable:NPC_WorldClubba_01 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802418A4 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241E2C
 {
-	00000005 $NpcSettings_8024194C ~Vec3f:NPC_80241E2C % 0 0 -235
+	.NpcID:WorldClubba_05 $NpcSettings_8024194C ~Vec3f:NPC_WorldClubba_05 % 0 0 -235
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80241E2C
-	~AnimationTable:NPC_80241E2C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_05
+	~AnimationTable:NPC_WorldClubba_05 % .Sprite:WorldClubba
 	00000002 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241E2C[1F0]
-	00000006 $NpcSettings_80241A20 ~Vec3f:NPC_8024201C % 0 -1000 0
+	.NpcID:WorldClubba_06 $NpcSettings_80241A20 ~Vec3f:NPC_WorldClubba_06 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024201C
-	~AnimationTable:NPC_8024201C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_06
+	~AnimationTable:NPC_WorldClubba_06 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802418A4 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024220C
 {
-	0000000A $NpcSettings_8024194C ~Vec3f:NPC_8024220C % 70 0 -100
+	.NpcID:WorldClubba_10 $NpcSettings_8024194C ~Vec3f:NPC_WorldClubba_10 % 70 0 -100
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_8024220C
-	~AnimationTable:NPC_8024220C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_10
+	~AnimationTable:NPC_WorldClubba_10 % .Sprite:WorldClubba
 	00000002 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_8024220C[1F0]
-	0000000B $NpcSettings_80241A20 ~Vec3f:NPC_802423FC % 0 -1000 0
+	.NpcID:WorldClubba_11 $NpcSettings_80241A20 ~Vec3f:NPC_WorldClubba_11 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802423FC
-	~AnimationTable:NPC_802423FC % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_11
+	~AnimationTable:NPC_WorldClubba_11 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802418A4 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802425EC
 {
-	0000000F $NpcSettings_8024194C ~Vec3f:NPC_802425EC % 140 0 -235
+	.NpcID:WorldClubba_15 $NpcSettings_8024194C ~Vec3f:NPC_WorldClubba_15 % 140 0 -235
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_802425EC
-	~AnimationTable:NPC_802425EC % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_15
+	~AnimationTable:NPC_WorldClubba_15 % .Sprite:WorldClubba
 	00000002 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802425EC[1F0]
-	00000010 $NpcSettings_80241A20 ~Vec3f:NPC_802427DC % 0 -1000 0
+	.NpcID:WorldClubba_16 $NpcSettings_80241A20 ~Vec3f:NPC_WorldClubba_16 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802427DC
-	~AnimationTable:NPC_802427DC % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_16
+	~AnimationTable:NPC_WorldClubba_16 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802418A4 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802429CC
 {
-	00000014 $NpcSettings_8024194C ~Vec3f:NPC_802429CC % 210 0 -100
+	.NpcID:WorldClubba_20 $NpcSettings_8024194C ~Vec3f:NPC_WorldClubba_20 % 210 0 -100
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_802429CC
-	~AnimationTable:NPC_802429CC % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_20
+	~AnimationTable:NPC_WorldClubba_20 % .Sprite:WorldClubba
 	00000002 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802429CC[1F0]
-	00000015 $NpcSettings_80241A20 ~Vec3f:NPC_80242BBC % 0 -1000 0
+	.NpcID:WorldClubba_21 $NpcSettings_80241A20 ~Vec3f:NPC_WorldClubba_21 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80242BBC
-	~AnimationTable:NPC_80242BBC % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_21
+	~AnimationTable:NPC_WorldClubba_21 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802418A4 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242DAC
 {
-	00000019 $NpcSettings_8024194C ~Vec3f:NPC_80242DAC % 280 0 -235
+	.NpcID:WorldClubba_25 $NpcSettings_8024194C ~Vec3f:NPC_WorldClubba_25 % 280 0 -235
 	00000C00 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80242DAC
-	~AnimationTable:NPC_80242DAC % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_25
+	~AnimationTable:NPC_WorldClubba_25 % .Sprite:WorldClubba
 	00000002 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242DAC[1F0]
-	0000001A $NpcSettings_80241A20 ~Vec3f:NPC_80242F9C % 0 -1000 0
+	.NpcID:WorldClubba_26 $NpcSettings_80241A20 ~Vec3f:NPC_WorldClubba_26 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80242F9C
-	~AnimationTable:NPC_80242F9C % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_26
+	~AnimationTable:NPC_WorldClubba_26 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_802418A4 00000000 % no tattle string
 }
 

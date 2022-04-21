@@ -1,6 +1,10 @@
 % Script File: mim_07.mscr
 % Decoded from: 0 to 3800 (mim_07)
 
+#define .NpcID:Fuzzy_00             00
+#define .NpcID:Fuzzy_01             01
+#define .NpcID:JrTroopa_02          02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -867,7 +871,7 @@ PADDING: 80240268 to 80240270 (00000268 to 00000270)
   20C:  LW        A1, 38 (S3)
   210:  LW        A2, 3C (S3)
   214:  LW        A3, 40 (S3)
-  218:  JAL       ~Func:fx_walk_normal
+  218:  JAL       ~Func:fx_walk
   21C:  LI        A0, 2
   220:  COPY      A0, S7
   224:  LI        V0, C
@@ -1194,8 +1198,8 @@ PADDING: 80241178 to 80241180 (00001178 to 00001180)
 {
     0:  Set   *GB_WorldLocation  .Location:ForeverForest
    10:  Call  SetSpriteShading  ( .Shading:mim_07 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 0000028A )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  650` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Set   *AreaByte[2]  *GB_MIM_CurrentMapID
@@ -1211,8 +1215,8 @@ PADDING: 80241178 to 80241180 (00001178 to 00001180)
   110:  Call  $Function_80240000 ( )
   11C:  Call  GetEntryID    ( *Var0 )
   12C:  If  *Var0  ==  ~Entry:Entry3
-  13C:  	Call  UseSettingsFrom   ( .Cam:Default 000001F4 FFFFFF9C 00000000 )
-  158:  	Call  SetPanTarget  ( .Cam:Default 00000212 00000000 00000000 )
+  13C:  	Call  UseSettingsFrom   ( .Cam:Default  500`  -100`  0` )
+  158:  	Call  SetPanTarget  ( .Cam:Default  530`  0`  0` )
   174:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   188:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1A0:  	Wait  1`
@@ -1239,7 +1243,7 @@ PADDING: 8024158C to 80241590 (0000158C to 00001590)
    30:  SetGroup  00000000
    3C:  Call  SetTimeFreezeMode     ( 00000001 )
    4C:  Call  DisablePlayerInput    ( .True )
-   5C:  Call  ShowMessageAtScreenPos    ( 001D017F 000000A0 00000028 ) % If you have business at Boo's Mansion, come this w ...
+   5C:  Call  ShowMessageAtScreenPos    ( 001D017F  160`  40` ) % If you have business at Boo's Mansion, come this w ...
    74:  Call  DisablePlayerInput    ( .False )
    84:  Call  SetTimeFreezeMode     ( 00000000 )
    94:  Return
@@ -1318,11 +1322,11 @@ PADDING: 80241678 to 80241680 (00001678 to 00001680)
 
 #new:Script $Script_80241900
 {
-    0:  Call  802C94A0      ( 00000001 $Function_802400D8 00000000 )
-   18:  Call  802C90FC      ( 00000032 00000001 FFFFFFFF )
-   30:  Call  SetModelFlags ( ~Model:o440 00000010 .True )
+    0:  Call  SetCustomGfxBuilders  ( 00000001 $Function_802400D8 00000000 )
+   18:  Call  SetModelCustomGfx ( ~Model:o440 00000001 FFFFFFFF )
+   30:  Call  SetModelFlags     ( ~Model:o440 00000010 .True )
    48:  Bind  $Script_80241704 .Trigger:WallPressA ~Collider:o491 00000001 00000000
-   64:  Call  SetTexPanner  ( ~Model:o440 00000000 )
+   64:  Call  SetTexPanner      ( ~Model:o440 00000000 )
    78:  Return
    80:  End
 }
@@ -1428,7 +1432,7 @@ PADDING: 80241988 to 80241990 (00001988 to 00001990)
   11C:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   134:  			Add   *Var0  *Var7
   144:  			Add   *Var2  *Var8
-  154:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  154:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   16C:  		EndThread
   174:  		Set   *Var1  00000001
   184:  		Exec  $Script_80241990
@@ -1461,7 +1465,7 @@ PADDING: 80241988 to 80241990 (00001988 to 00001990)
   314:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   32C:  			Sub   *Var0  *Var7
   33C:  			Sub   *Var2  *Var8
-  34C:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  34C:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   364:  		EndThread
   36C:  		Set   *Var1  00000002
   37C:  		Exec  $Script_80241990
@@ -1492,7 +1496,7 @@ PADDING: 80241988 to 80241990 (00001988 to 00001990)
   4F0:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   508:  			Add   *Var0  *Var7
   518:  			Add   *Var2  *Var8
-  528:  			Call  PlayerMoveTo  ( *Var0 *Var2 0000000F )
+  528:  			Call  PlayerMoveTo  ( *Var0 *Var2  15` )
   540:  		EndThread
   548:  		Set   *Var1  00000001
   558:  		Exec  $Script_80241990
@@ -1550,7 +1554,7 @@ PADDING: 80241988 to 80241990 (00001988 to 00001990)
    6C:  	If  *GF_MIM10_Defeated_JrTroopa  ==  .False
    7C:  		If  *GF_MIM10_JrTroopaFreakout  ==  .False
    8C:  			Set   *GF_MIM10_JrTroopaFreakout  .True
-   9C:  			Call  ShowMessageAtScreenPos    ( 000E0017 000000A0 00000028 ) % Nooooo! Waaahh! Bugs! Get 'em off me! I'm lost in  ...
+   9C:  			Call  ShowMessageAtScreenPos    ( 000E0017  160`  40` ) % Nooooo! Waaahh! Bugs! Get 'em off me! I'm lost in  ...
    B4:  		EndIf
    BC:  	EndIf
    C4:  EndIf
@@ -1740,7 +1744,7 @@ PADDING: 80242878 to 80242880 (00002878 to 00002880)
   280:  Get4Int  *Var2 *Var3 *Var4 *Var5
   298:  Call  SetSelfVar    ( 00000000 *Var2 )
   2AC:  Call  SetSelfVar    ( 00000001 *Var3 )
-  2C0:  Call  SetNpcPos     ( .Npc:Self *Var2 00000000 *Var3 )
+  2C0:  Call  SetNpcPos     ( .Npc:Self *Var2  0` *Var3 )
   2DC:  Call  SpeakToPlayer ( .Npc:Self 00210016 00210003 00000000 000E0018 ) % Eeeek!
   2FC:  Thread
   304:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -1756,7 +1760,7 @@ PADDING: 80242878 to 80242880 (00002878 to 00002880)
   3D4:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   3EC:  EndThread
   3F4:  Call  SetNpcAnimation   ( .Npc:Self 00210009 )
-  408:  Call  NpcMoveTo ( .Npc:Self *Var4 *Var5 0000001E )
+  408:  Call  NpcMoveTo ( .Npc:Self *Var4 *Var5  30` )
   424:  Call  SetNpcAnimation   ( .Npc:Self 00210003 )
   438:  Call  SpeakToPlayer     ( .Npc:Self 00210016 00210003 00000000 000E0019 ) % Oh, Mario! Oh, thank... ...I mean, ah HA! Boy, are ...
   458:  Call  DisablePartnerAI  ( 00000000 )
@@ -1788,13 +1792,13 @@ PADDING: 80242878 to 80242880 (00002878 to 00002880)
    20:  Call  GetSelfVar    ( 00000000 *Var0 )
    34:  Call  GetSelfVar    ( 00000001 *Var1 )
    48:  If  *Var1  >=  00000000
-   58:  	Call  InterpNpcYaw  ( .Npc:Self 000000C8 00000000 )
+   58:  	Call  InterpNpcYaw  ( .Npc:Self  200`  0` )
    70:  Else
-   78:  	Call  InterpNpcYaw  ( .Npc:Self 0000014A 00000000 )
+   78:  	Call  InterpNpcYaw  ( .Npc:Self  330`  0` )
    90:  EndIf
    98:  Call  SetNpcAnimation   ( .Npc:Self 0021000B )
    AC:  Wait  10`
-   B8:  Call  NpcMoveTo ( .Npc:Self *Var0 *Var1 0000000F )
+   B8:  Call  NpcMoveTo ( .Npc:Self *Var0 *Var1  15` )
    D4:  Set   *GF_MIM10_Defeated_JrTroopa  .True
    E4:  ExecWait  $Script_80241110
    F0:  Call  ResetCam  ( .Cam:Default *Fixed[4.0] )
@@ -1830,31 +1834,31 @@ PADDING: 80242878 to 80242880 (00002878 to 00002880)
 
 #new:NpcGroup $NpcGroup_80243188
 {
-	00000000 $NpcSettings_802428EC ~Vec3f:NPC_80243188 % -240 0 -240
+	.NpcID:Fuzzy_00 $NpcSettings_802428EC ~Vec3f:NPC_Fuzzy_00 % -240 0 -240
 	00000000 $Script_Init_80243138 00000000 00000000 00000000
 	~Items:5:ThunderBolt:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80243188
-	~AnimationTable:NPC_80243188 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_00
+	~AnimationTable:NPC_Fuzzy_00 % .Sprite:Fuzzy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243378
 {
-	00000001 $NpcSettings_802428EC ~Vec3f:NPC_80243378 % 270 0 200
+	.NpcID:Fuzzy_01 $NpcSettings_802428EC ~Vec3f:NPC_Fuzzy_01 % 270 0 200
 	00000000 $Script_Init_80243138 00000000 00000000 00000000
 	~Items:5:ThunderBolt:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80243378
-	~AnimationTable:NPC_80243378 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_01
+	~AnimationTable:NPC_Fuzzy_01 % .Sprite:Fuzzy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243568
 {
-	00000002 $NpcSettings_80242918 ~Vec3f:NPC_80243568 % -338 0 0
+	.NpcID:JrTroopa_02 $NpcSettings_80242918 ~Vec3f:NPC_JrTroopa_02 % -338 0 0
 	00A40D04 $Script_Init_802430B8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243568
-	~AnimationTable:NPC_80243568 % .Sprite:JrTroopa
+	~Movement:NPC_JrTroopa_02
+	~AnimationTable:NPC_JrTroopa_02 % .Sprite:JrTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

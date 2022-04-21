@@ -206,7 +206,7 @@
    8C:  CVT.S.W   F0, F0
    90:  MFC1      A3, F0
    94:  CLEAR     A0
-   98:  JAL       80071090
+   98:  JAL       ~Func:playFX_40
    9C:  SW        V0, 10 (SP)
    A0:  LW        RA, 28 (SP)
    A4:  LW        S3, 24 (SP)
@@ -258,7 +258,7 @@
    8C:  CVT.S.W   F0, F0
    90:  MFC1      A3, F0
    94:  LI        A0, 1
-   98:  JAL       80071090
+   98:  JAL       ~Func:playFX_40
    9C:  SW        V0, 10 (SP)
    A0:  LW        RA, 28 (SP)
    A4:  LW        S3, 24 (SP)
@@ -398,10 +398,10 @@ PADDING: 802A153C to 802A1540 (00730ADC to 00730AE0)
 #new:Script $Script_802A1844
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )

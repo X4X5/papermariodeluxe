@@ -1,6 +1,8 @@
 % Script File: trd_04.mscr
 % Decoded from: 0 to 6310 (trd_04)
 
+#define .NpcID:ParaTroopa_01        01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -4066,7 +4068,7 @@ PADDING: 8024397C to 80243980 (0000397C to 00003980)
 
 #new:ItemList $ItemList_80243DAC
 {
-	.Item:FortressKey
+	.Item:KoopaFortressKey
 	00000000
 }
 
@@ -4146,26 +4148,26 @@ PADDING: 8024397C to 80243980 (0000397C to 00003980)
    28:  Call  DisablePlayerInput    ( .True )
    38:  Wait  30`
    44:  Thread
-   4C:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.7] )
-   68:  	Call  ShakeCam  ( .Cam:Default 00000000 00000140 *Fixed[1.0] )
-   84:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.7] )
-   A0:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.4] )
+   4C:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.7] )
+   68:  	Call  ShakeCam  ( .Cam:Default 00000000  320` *Fixed[1.0] )
+   84:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.7] )
+   A0:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.4] )
    BC:  EndThread
    C4:  Wait  30`
    D0:  Call  EnableModel   ( ~Model:o6 .False )
    E4:  Call  EnableModel   ( ~Model:o7 .False )
    F8:  Call  EnableModel   ( ~Model:bero2 .False )
-  10C:  Call  UseSettingsFrom   ( .Cam:Default FFFFFFCE 00000000 00000000 )
-  128:  Call  SetPanTarget  ( .Cam:Default FFFFFFCE 00000000 00000000 )
+  10C:  Call  UseSettingsFrom   ( .Cam:Default  -50`  0`  0` )
+  128:  Call  SetPanTarget  ( .Cam:Default  -50`  0`  0` )
   144:  Call  SetCamDistance    ( .Cam:Default *Fixed[540.0] )
-  158:  Call  SetCamPitch   ( .Cam:Default 0000000F FFFFFFFA )
-  170:  Call  SetCamPosA    ( .Cam:Default FFFFFFE2 FFFFFFC4 )
+  158:  Call  SetCamPitch   ( .Cam:Default  15`  -6` )
+  170:  Call  SetCamPosA    ( .Cam:Default  -30`  -60` )
   188:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   19C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
-  1B4:  Call  SetPlayerPos  ( FFFFFF47 00000000 FFFFFFDC )
-  1CC:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
-  1E0:  Call  SetNpcPos     ( .Npc:Partner FFFFFF5D 00000000 FFFFFFF4 )
-  1FC:  Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  1B4:  Call  SetPlayerPos  (  -185`  0`  -36` )
+  1CC:  Call  InterpPlayerYaw   (  90`  0` )
+  1E0:  Call  SetNpcPos     ( .Npc:Partner  -163`  0`  -12` )
+  1FC:  Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   214:  Call  PlaySound     ( 80000005 )
   224:  Wait  20`
   230:  Thread
@@ -4195,30 +4197,30 @@ PADDING: 8024397C to 80243980 (0000397C to 00003980)
   408:  	EndLoop
   410:  EndThread
   418:  Thread
-  420:  	Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  420:  	Call  InterpPlayerYaw   (  270`  0` )
   434:  	Wait  10`
-  440:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  440:  	Call  InterpPlayerYaw   (  90`  0` )
   454:  	Wait  15`
-  460:  	Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  460:  	Call  InterpPlayerYaw   (  270`  0` )
   474:  	Wait  12`
-  480:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  480:  	Call  InterpPlayerYaw   (  90`  0` )
   494:  	Wait  18`
-  4A0:  	Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  4A0:  	Call  InterpPlayerYaw   (  270`  0` )
   4B4:  	Wait  29`
-  4C0:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  4C0:  	Call  InterpPlayerYaw   (  90`  0` )
   4D4:  EndThread
   4DC:  Thread
-  4E4:  	Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000000 )
+  4E4:  	Call  InterpNpcYaw  ( .Npc:Partner  270`  0` )
   4FC:  	Wait  13`
-  508:  	Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  508:  	Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   520:  	Wait  15`
-  52C:  	Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000000 )
+  52C:  	Call  InterpNpcYaw  ( .Npc:Partner  270`  0` )
   544:  	Wait  17`
-  550:  	Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  550:  	Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   568:  	Wait  18`
-  574:  	Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000000 )
+  574:  	Call  InterpNpcYaw  ( .Npc:Partner  270`  0` )
   58C:  	Wait  17`
-  598:  	Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  598:  	Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   5B0:  EndThread
   5B8:  Wait  20`
   5C4:  Call  MakeLerp  ( 000000BB 00000000 0000012C .Easing:CosInOut )
@@ -4238,10 +4240,10 @@ PADDING: 8024397C to 80243980 (0000397C to 00003980)
   6BC:  Wait  50`
   6C8:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   6E0:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-  6FC:  Call  SetPanTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+  6FC:  Call  SetPanTarget  ( .Cam:Default *Var0  0` *Var2 )
   718:  Call  SetCamDistance    ( .Cam:Default *Fixed[400.0] )
-  72C:  Call  SetCamPosA    ( .Cam:Default FFFFFF57 00000082 )
-  744:  Call  SetCamPitch   ( .Cam:Default 00000012 FFFFFFFA )
+  72C:  Call  SetCamPosA    ( .Cam:Default  -169`  130` )
+  744:  Call  SetCamPitch   ( .Cam:Default  18`  -6` )
   75C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
   770:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   784:  Wait  2`
@@ -4277,11 +4279,11 @@ PADDING: 8024397C to 80243980 (0000397C to 00003980)
 {
     0:  Set   *GB_WorldLocation  .Location:KoopaBrosFortress
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
-   84:  Call  SetRenderMode     ( ~Model:suimen 00000016 )
+   84:  Call  SetRenderMode     ( ~Model:suimen .RenderMode:Surface_XLU_Layer2 )
    98:  If  *GB_StoryProgress  <  .Story:Ch1_LoweredFirstStairs % FFFFFFAA
    A8:  	Call  MakeNpcs  ( .True $NpcGroupList_80245E98 )
    BC:  Else
@@ -4346,7 +4348,7 @@ MISSING: 80244D68 to 80244E98 (00004D68 to 00004E98)
     C:  SuspendAll  00000001
    18:  Call  ShowKeyChoicePopup ( )
    24:  If  *Var0  ==  00000000
-   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    4C:  	Call  CloseChoicePopup ( )
    58:  	ResumeAll  00000001
    64:  	Return
@@ -4375,7 +4377,7 @@ MISSING: 80244D68 to 80244E98 (00004D68 to 00004E98)
     C:  SuspendAll  00000001
    18:  Call  ShowKeyChoicePopup ( )
    24:  If  *Var0  ==  00000000
-   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   34:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    4C:  	Call  CloseChoicePopup ( )
    58:  	ResumeAll  00000001
    64:  	Return
@@ -4416,8 +4418,8 @@ MISSING: 80244D68 to 80244E98 (00004D68 to 00004E98)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Wait  40`
-   1C:  Call  UseSettingsFrom       ( .Cam:Default FFFFFF44 00000000 FFFFFFD5 )
-   38:  Call  SetPanTarget  ( .Cam:Default FFFFFF44 00000000 FFFFFFD5 )
+   1C:  Call  UseSettingsFrom       ( .Cam:Default  -188`  0`  -43` )
+   38:  Call  SetPanTarget  ( .Cam:Default  -188`  0`  -43` )
    54:  Call  SetCamDistance        ( .Cam:Default *Fixed[510.0] )
    68:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    7C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -4433,11 +4435,11 @@ MISSING: 80244D68 to 80244E98 (00004D68 to 00004E98)
   130:  	Wait  1`
   13C:  EndLoop
   144:  Call  PlaySoundAt   ( 00000048 00000000 FFFFFF4C 00000000 FFFFFFDD )
-  164:  Call  ShakeCam      ( .Cam:Default 00000000 00000005 *Fixed[1.0] )
+  164:  Call  ShakeCam      ( .Cam:Default 00000000  5` *Fixed[1.0] )
   180:  Wait  20`
   18C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   1A4:  Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
-  1C0:  Call  SetPanTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+  1C0:  Call  SetPanTarget  ( .Cam:Default *Var0  0` *Var2 )
   1DC:  Call  SetCamDistance        ( .Cam:Default *Fixed[400.0] )
   1F0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
   204:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -4628,11 +4630,11 @@ PADDING: 80245564 to 80245570 (00005564 to 00005570)
 
 #new:NpcGroup $NpcGroup_80245C84
 {
-	00000001 $NpcSettings_802457AC ~Vec3f:NPC_80245C84 % -5 237 157
+	.NpcID:ParaTroopa_01 $NpcSettings_802457AC ~Vec3f:NPC_ParaTroopa_01 % -5 237 157
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:POWBlock:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_80245C84
-	~AnimationTable:NPC_80245C84 % .Sprite:ParaTroopa
+	~Movement:NPC_ParaTroopa_01
+	~AnimationTable:NPC_ParaTroopa_01 % .Sprite:ParaTroopa
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

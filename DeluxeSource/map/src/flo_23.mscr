@@ -1,6 +1,10 @@
 % Script File: flo_23.mscr
 % Decoded from: 0 to 26E0 (flo_23)
 
+#define .NpcID:Spiny_00             00
+#define .NpcID:Spiny_01             01
+#define .NpcID:GateFlower_02        02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -10,7 +14,7 @@
    10:  COPY      A3, A0
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -1007,8 +1011,8 @@ PADDING: 80240034 to 80240040 (00000034 to 00000040)
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   54:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   54:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80242568 )
    98:  ExecWait  $Script_MakeEntities
@@ -1123,7 +1127,7 @@ PADDING: 802412D8 to 802412E0 (000012D8 to 000012E0)
    20:  	Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
    3C:  	Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
    58:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-   74:  	Call  SetCamDistance        ( .Cam:Default 0000015E )
+   74:  	Call  SetCamDistance        ( .Cam:Default  350` )
    88:  	Call  SetCamPitch   ( .Cam:Default *Fixed[18.5] *Fixed[-7.5] )
    A0:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
    B4:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -1270,31 +1274,31 @@ PADDING: 802412D8 to 802412E0 (000012D8 to 000012E0)
 
 #new:NpcGroup $NpcGroup_80241F98
 {
-	00000002 $NpcSettings_802412E0 ~Vec3f:NPC_80241F98 % 385 0 -35
+	.NpcID:GateFlower_02 $NpcSettings_802412E0 ~Vec3f:NPC_GateFlower_02 % 385 0 -35
 	00402D09 $Script_Init_80241E70 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80241F98
-	~AnimationTable:NPC_80241F98 % .Sprite:GateFlower
+	~Movement:NPC_GateFlower_02
+	~AnimationTable:NPC_GateFlower_02 % .Sprite:GateFlower
 	00000000 00000000 00000000 001A00DC % It's a blue flower that guards a gate. Blue... It' ...
 }
 
 #new:NpcGroup $NpcGroup_80242188
 {
-	00000000 $NpcSettings_80241538 ~Vec3f:NPC_80242188 % 80 0 0
+	.NpcID:Spiny_00 $NpcSettings_80241538 ~Vec3f:NPC_Spiny_00 % 80 0 0
 	00002800 00000000 00000000 00000000 0000005A
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80242188
-	~AnimationTable:NPC_80242188 % .Sprite:Spiny
+	~Movement:NPC_Spiny_00
+	~AnimationTable:NPC_Spiny_00 % .Sprite:Spiny
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242378
 {
-	00000001 $NpcSettings_80241538 ~Vec3f:NPC_80242378 % -320 0 0
+	.NpcID:Spiny_01 $NpcSettings_80241538 ~Vec3f:NPC_Spiny_01 % -320 0 0
 	00002800 00000000 00000000 00000000 0000010E
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_80242378
-	~AnimationTable:NPC_80242378 % .Sprite:Spiny
+	~Movement:NPC_Spiny_01
+	~AnimationTable:NPC_Spiny_01 % .Sprite:Spiny
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

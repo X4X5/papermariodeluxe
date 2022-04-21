@@ -1,6 +1,11 @@
 % Script File: omo_05.mscr
 % Decoded from: 0 to 5650 (omo_05)
 
+#define .NpcID:GourmetGuy_00        00
+#define .NpcID:GourmetGuy_01        01
+#define .NpcID:GourmetGuy_02        02
+#define .NpcID:GrooveGuy_03         03
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -2558,8 +2563,8 @@ PADDING: 802424AC to 802424B0 (000024AC to 000024B0)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80245124 )
    84:  ExecWait  $Script_MakeEntities
@@ -2802,9 +2807,9 @@ MISSING: 80243040 to 8024306C (00003040 to 0000306C)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
-   2C:  Call  UseSettingsFrom   ( .Cam:Default *Var0 00000000 *Var2 )
-   48:  Call  SetPanTarget  ( .Cam:Default *Var0 00000000 *Var2 )
-   64:  Call  SetCamDistance    ( .Cam:Default 0000015E )
+   2C:  Call  UseSettingsFrom   ( .Cam:Default *Var0  0` *Var2 )
+   48:  Call  SetPanTarget  ( .Cam:Default *Var0  0` *Var2 )
+   64:  Call  SetCamDistance    ( .Cam:Default  350` )
    78:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.5] *Fixed[-10.0] )
    90:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
    A4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2931,48 +2936,48 @@ MISSING: 80243040 to 8024306C (00003040 to 0000306C)
   84C:  		Call  SetNpcAnimation   ( .Npc:Self 00C1000D )
   860:  	Case  ==  00000002
   86C:  		Thread
-  874:  			Call  ShowMessageAtScreenPos    ( 000F0044 000000A0 00000028 ) % Oh... Ohhh, mmmm... Ohhhhhhh!!!!! Deeeliciouuuuuuu ...
+  874:  			Call  ShowMessageAtScreenPos    ( 000F0044  160`  40` ) % Oh... Ohhh, mmmm... Ohhhhhhh!!!!! Deeeliciouuuuuuu ...
   88C:  		EndThread
   894:  		Call  DisablePartnerAI  ( 00000000 )
   8A4:  		Call  SetNpcAnimation   ( .Npc:Self 00C10007 )
   8B8:  		Thread
-  8C0:  			Call  SetNpcFlagBits    ( 00000002 00000002 .False )
-  8D8:  			Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-  8F4:  			Call  SetNpcJumpscale   ( 00000002 *Fixed[0.05] )
-  908:  			Call  NpcJump0  ( 00000002 *Var0 00000002 *Var2 00000008 )
+  8C0:  			Call  SetNpcFlagBits    ( .NpcID:GourmetGuy_02 00000002 .False )
+  8D8:  			Call  GetNpcPos ( .NpcID:GourmetGuy_02 *Var0 *Var1 *Var2 )
+  8F4:  			Call  SetNpcJumpscale   ( .NpcID:GourmetGuy_02 *Fixed[0.05] )
+  908:  			Call  NpcJump0  ( .NpcID:GourmetGuy_02 *Var0  2` *Var2  8` )
   928:  			Call  802CDE68  ( 00000002 0000000F )
   93C:  			Set   *Var3  00000000
   94C:  			Loop  00000005
   958:  				Add   *Var3  00000032
-  968:  				Call  SetNpcRotation    ( 00000002 00000000 00000000 *Var3 )
+  968:  				Call  SetNpcRotation    ( .NpcID:GourmetGuy_02 00000000 00000000 *Var3 )
   984:  				Wait  1`
   990:  			EndLoop
   998:  			Add   *Var2  00000014
-  9A8:  			Call  SetNpcJumpscale   ( 00000002 *Fixed[0.2] )
-  9BC:  			Call  NpcJump0  ( 00000002 *Var0 FFFFFFF6 *Var2 00000008 )
+  9A8:  			Call  SetNpcJumpscale   ( .NpcID:GourmetGuy_02 *Fixed[0.2] )
+  9BC:  			Call  NpcJump0  ( .NpcID:GourmetGuy_02 *Var0  -10` *Var2  8` )
   9DC:  			Wait  10`
-  9E8:  			Call  RemoveNpc ( 00000002 )
+  9E8:  			Call  RemoveNpc ( .NpcID:GourmetGuy_02 )
   9F8:  		EndThread
   A00:  		Thread
-  A08:  			Call  SetNpcFlagBits    ( 00000001 00000002 .False )
-  A20:  			Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
-  A3C:  			Call  SetNpcJumpscale   ( 00000001 *Fixed[0.05] )
-  A50:  			Call  NpcJump0  ( 00000001 *Var0 00000002 *Var2 00000008 )
+  A08:  			Call  SetNpcFlagBits    ( .NpcID:GourmetGuy_01 00000002 .False )
+  A20:  			Call  GetNpcPos ( .NpcID:GourmetGuy_01 *Var0 *Var1 *Var2 )
+  A3C:  			Call  SetNpcJumpscale   ( .NpcID:GourmetGuy_01 *Fixed[0.05] )
+  A50:  			Call  NpcJump0  ( .NpcID:GourmetGuy_01 *Var0  2` *Var2  8` )
   A70:  			Call  802CDE68  ( 00000001 0000000F )
   A84:  			Set   *Var3  00000000
   A94:  			Loop  00000005
   AA0:  				Sub   *Var3  00000032
-  AB0:  				Call  SetNpcRotation    ( 00000001 00000000 00000000 *Var3 )
+  AB0:  				Call  SetNpcRotation    ( .NpcID:GourmetGuy_01 00000000 00000000 *Var3 )
   ACC:  				Wait  1`
   AD8:  			EndLoop
   AE0:  			Add   *Var2  00000014
-  AF0:  			Call  SetNpcJumpscale   ( 00000001 *Fixed[0.2] )
-  B04:  			Call  NpcJump0  ( 00000001 *Var0 FFFFFFF6 *Var2 00000008 )
+  AF0:  			Call  SetNpcJumpscale   ( .NpcID:GourmetGuy_01 *Fixed[0.2] )
+  B04:  			Call  NpcJump0  ( .NpcID:GourmetGuy_01 *Var0  -10` *Var2  8` )
   B24:  			Wait  10`
-  B30:  			Call  RemoveNpc ( 00000001 )
+  B30:  			Call  RemoveNpc ( .NpcID:GourmetGuy_01 )
   B40:  		EndThread
-  B48:  		Call  UseSettingsFrom   ( .Cam:Default FFFFFF06 00000019 FFFFFF9C )
-  B64:  		Call  SetPanTarget  ( .Cam:Default FFFFFF06 00000019 FFFFFF9C )
+  B48:  		Call  UseSettingsFrom   ( .Cam:Default  -250`  25`  -100` )
+  B64:  		Call  SetPanTarget  ( .Cam:Default  -250`  25`  -100` )
   B80:  		Call  SetCamDistance    ( .Cam:Default *Fixed[420.0] )
   B94:  		Call  SetCamPitch   ( .Cam:Default *Fixed[12.0] *Fixed[-1.5] )
   BAC:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[25.0] )
@@ -3020,14 +3025,14 @@ MISSING: 80243040 to 8024306C (00003040 to 0000306C)
   F44:  		Call  $Function_80242328 ( )
   F50:  		Call  $Function_80242328 ( )
   F5C:  		Call  802D7CF8      ( 00000000 00000000 00000000 00000140 000000F0 00000000 0000000A )
-  F84:  		Call  UseSettingsFrom   ( .Cam:Default FFFFFF06 00000000 00000064 )
-  FA0:  		Call  SetPanTarget  ( .Cam:Default FFFFFF06 00000000 00000064 )
+  F84:  		Call  UseSettingsFrom   ( .Cam:Default  -250`  0`  100` )
+  FA0:  		Call  SetPanTarget  ( .Cam:Default  -250`  0`  100` )
   FBC:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   FD0:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   FE8:  		Call  SetSelfVar    ( 00000000 00000001 )
   FFC:  		Thread
  1004:  			Label  13
- 1010:  			Call  PlayerFaceNpc ( .Npc:Self 00000000 )
+ 1010:  			Call  PlayerFaceNpc ( .Npc:Self .False )
  1024:  			Call  GetSelfVar    ( 00000000 *Var0 )
  1038:  			If  *Var0  !=  00000000
  1048:  				Wait  1`
@@ -3038,17 +3043,17 @@ MISSING: 80243040 to 8024306C (00003040 to 0000306C)
  1088:  		Call  SetNpcAnimation   ( .Npc:Self 00C10003 )
  109C:  		Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
  10B4:  		Call  SetNpcSpeed       ( .Npc:Self *Fixed[20.0] )
- 10C8:  		Call  NpcMoveTo ( .Npc:Self 00000000 0000006E 00000000 )
+ 10C8:  		Call  NpcMoveTo ( .Npc:Self  0`  110`  0` )
  10E4:  		Wait  20`
  10F0:  		Call  PlaySoundAtNpc    ( .Npc:Self 00000384 00000000 )
  1108:  		Call  SetNpcFlagBits    ( .Npc:Self 00000080 .True )
- 1120:  		Call  SetNpcPos ( .Npc:Self 00000000 00000091 0000006E )
- 113C:  		Call  NpcMoveTo ( .Npc:Self FFFFFE0C 0000006E 00000000 )
+ 1120:  		Call  SetNpcPos ( .Npc:Self  0`  145`  110` )
+ 113C:  		Call  NpcMoveTo ( .Npc:Self  -500`  110`  0` )
  1158:  		Call  SetNpcFlagBits    ( .Npc:Self 00000080 .False )
  1170:  		Wait  20`
  117C:  		Call  PlaySoundAtNpc    ( .Npc:Self 00000384 00000000 )
  1194:  		Call  SetNpcRotation    ( .Npc:Self 00000000 00000000 FFFFFFD3 )
- 11B0:  		Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+ 11B0:  		Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
  11C8:  		Call  MakeLerp  ( 00000000 00000064 0000001E .Easing:Linear )
  11E4:  		Label  A
  11F0:  		Call  UpdateLerp ( )
@@ -3069,8 +3074,8 @@ MISSING: 80243040 to 8024306C (00003040 to 0000306C)
  12D8:  		Wait  20`
  12E4:  		Call  PlaySoundAtNpc    ( .Npc:Self 00000384 00000000 )
  12FC:  		Call  SetNpcRotation    ( .Npc:Self 00000000 00000000 00000000 )
- 1318:  		Call  SetNpcPos ( .Npc:Self FFFFFE0C 00000000 0000006E )
- 1334:  		Call  NpcMoveTo ( .Npc:Self FFFFFF06 0000006E 00000000 )
+ 1318:  		Call  SetNpcPos ( .Npc:Self  -500`  0`  110` )
+ 1334:  		Call  NpcMoveTo ( .Npc:Self  -250`  110`  0` )
  1350:  		Wait  20`
  135C:  		Call  SetNpcAnimation   ( .Npc:Self 00C10008 )
  1370:  		Thread
@@ -3084,10 +3089,10 @@ MISSING: 80243040 to 8024306C (00003040 to 0000306C)
  13E4:  			Call  PlaySoundAtNpc    ( .Npc:Self 00000385 00000000 )
  13FC:  			Call  SetNpcAnimation   ( .Npc:Self 00C1000B )
  1410:  			Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.001953125] )
- 1424:  			Call  NpcJump0  ( .Npc:Self FFFFFF06 000001F4 0000006E 00000028 )
+ 1424:  			Call  NpcJump0  ( .Npc:Self  -250`  500`  110`  40` )
  1444:  			Call  SetSelfVar        ( 00000000 00000002 )
  1458:  		EndThread
- 1460:  		Call  ShowMessageAtScreenPos    ( 000F0045 000000A0 00000028 ) % Yuuuuummmm!!!!!!!!
+ 1460:  		Call  ShowMessageAtScreenPos    ( 000F0045  160`  40` ) % Yuuuuummmm!!!!!!!!
  1478:  		Label  C
  1484:  		Call  GetSelfVar    ( 00000000 *Var0 )
  1498:  		If  *Var0  !=  00000002
@@ -3121,17 +3126,17 @@ MISSING: 80243040 to 8024306C (00003040 to 0000306C)
 #new:Script $Script_Init_8024484C
 {
     0:  If  *GB_StoryProgress  >=  .Story:Ch4_GaveCakeToGourmetGuy % FFFFFFFE
-   10:  	Call  RemoveNpc ( 00000002 )
-   20:  	Call  RemoveNpc ( 00000001 )
+   10:  	Call  RemoveNpc ( .NpcID:GourmetGuy_02 )
+   20:  	Call  RemoveNpc ( .NpcID:GourmetGuy_01 )
    30:  	Call  RemoveNpc ( .Npc:Self )
    40:  Else
    48:  	Call  SetNpcAnimation   ( .Npc:Self 00C1000D )
-   5C:  	Call  SetNpcAnimation   ( 00000002 00C1000A )
-   70:  	Call  SetNpcFlagBits    ( 00000002 00000002 .True )
-   88:  	Call  SetNpcPos ( 00000002 FFFFFEE3 00000032 0000005A )
-   A4:  	Call  SetNpcAnimation   ( 00000001 00C10009 )
-   B8:  	Call  SetNpcFlagBits    ( 00000001 00000002 .True )
-   D0:  	Call  SetNpcPos ( 00000001 FFFFFF2E 00000032 0000005A )
+   5C:  	Call  SetNpcAnimation   ( .NpcID:GourmetGuy_02 00C1000A )
+   70:  	Call  SetNpcFlagBits    ( .NpcID:GourmetGuy_02 00000002 .True )
+   88:  	Call  SetNpcPos ( .NpcID:GourmetGuy_02  -285`  50`  90` )
+   A4:  	Call  SetNpcAnimation   ( .NpcID:GourmetGuy_01 00C10009 )
+   B8:  	Call  SetNpcFlagBits    ( .NpcID:GourmetGuy_01 00000002 .True )
+   D0:  	Call  SetNpcPos ( .NpcID:GourmetGuy_01  -210`  50`  90` )
    EC:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80243224 )
   100:  EndIf
   108:  Return
@@ -3140,38 +3145,38 @@ MISSING: 80243040 to 8024306C (00003040 to 0000306C)
 
 #new:NpcGroup $NpcGroup_80244964
 {
-	00000000 $NpcSettings_8024306C ~Vec3f:NPC_80244964 % -250 10 85
+	.NpcID:GourmetGuy_00 $NpcSettings_8024306C ~Vec3f:NPC_GourmetGuy_00 % -250 10 85
 	00400901 $Script_Init_8024484C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244964
-	~AnimationTable:NPC_80244964 % .Sprite:GourmetGuy
+	~Movement:NPC_GourmetGuy_00
+	~AnimationTable:NPC_GourmetGuy_00 % .Sprite:GourmetGuy
 	00000000 00000000 00000000 001A00B7 % That's Gourmet Guy. Woow! He's huuuuge! Does this  ...
 	%
 	% $NpcGroup_80244964[1F0]
-	00000001 $NpcSettings_8024306C ~Vec3f:NPC_80244B54 % -250 10 85
+	.NpcID:GourmetGuy_01 $NpcSettings_8024306C ~Vec3f:NPC_GourmetGuy_01 % -250 10 85
 	00000B01 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244B54
-	~AnimationTable:NPC_80244B54 % .Sprite:GourmetGuy
+	~Movement:NPC_GourmetGuy_01
+	~AnimationTable:NPC_GourmetGuy_01 % .Sprite:GourmetGuy
 	00000000 00000000 00000000 001A00B7 % That's Gourmet Guy. Woow! He's huuuuge! Does this  ...
 	%
 	% $NpcGroup_80244964[3E0]
-	00000002 $NpcSettings_8024306C ~Vec3f:NPC_80244D44 % -250 10 85
+	.NpcID:GourmetGuy_02 $NpcSettings_8024306C ~Vec3f:NPC_GourmetGuy_02 % -250 10 85
 	00000B01 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244D44
-	~AnimationTable:NPC_80244D44 % .Sprite:GourmetGuy
+	~Movement:NPC_GourmetGuy_02
+	~AnimationTable:NPC_GourmetGuy_02 % .Sprite:GourmetGuy
 	00000000 00000000 00000000 001A00B7 % That's Gourmet Guy. Woow! He's huuuuge! Does this  ...
 }
 
 #new:NpcGroup $NpcGroup_80244F34
 {
-	00000003 $NpcSettings_80242F5C ~Vec3f:NPC_80244F34 % 320 10 -145
+	.NpcID:GrooveGuy_03 $NpcSettings_80242F5C ~Vec3f:NPC_GrooveGuy_03 % 320 10 -145
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:2:ThunderRage:2:ThunderBolt:2:DustyHammer:2:Pebble:2
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80244F34
-	~AnimationTable:NPC_80244F34 % .Sprite:GrooveGuy
+	~Movement:NPC_GrooveGuy_03
+	~AnimationTable:NPC_GrooveGuy_03 % .Sprite:GrooveGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

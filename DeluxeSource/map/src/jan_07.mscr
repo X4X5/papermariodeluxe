@@ -1,6 +1,12 @@
 % Script File: jan_07.mscr
 % Decoded from: 0 to 4A40 (jan_07)
 
+#define .NpcID:YoshiKid_00          00
+#define .NpcID:PutridPiranha_01     01
+#define .NpcID:PutridPiranha_02     02
+#define .NpcID:JungleGuy_10         0A
+#define .NpcID:JungleGuy_11         0B
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -1321,8 +1327,8 @@ PADDING: 802412AC to 802412B0 (000012AC to 000012B0)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_802431A8 )
    84:  Exec  $Script_80243BC4
@@ -1361,7 +1367,7 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1428,7 +1434,7 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
 {
     0:  Set   *AreaFlag[002]  .False
    10:  Loop
-   1C:  	Call  PlaySoundAtNpc    ( 00000000 000001F0 00000000 )
+   1C:  	Call  PlaySoundAtNpc    ( .NpcID:YoshiKid_00 000001F0 00000000 )
    34:  	Wait  20`
    40:  	If  *AreaFlag[002]  ==  .True
    50:  		BreakLoop
@@ -1442,17 +1448,17 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
 {
     0:  If  *GF_JAN07_YoshiCriedForHelp  ==  .False
    10:  	Call  DisablePlayerInput    ( .True )
-   20:  	Call  ShowMessageAtScreenPos    ( 001000B4 00000140 0000003C ) % Yeeeeeeeek! Somebody, help me!!
+   20:  	Call  ShowMessageAtScreenPos    ( 001000B4  320`  60` ) % Yeeeeeeeek! Somebody, help me!!
    38:  	Call  PlaySoundAtPlayer     ( 00000262 00000000 )
-   4C:  	Call  ShowEmote     ( 00000000 .Emote:Exclamation 00000000 0000001E 00000000 00000000 00000000 00000000 00000000 )
+   4C:  	Call  ShowEmote     ( .NpcID:YoshiKid_00 .Emote:Exclamation  0`  30` .False  0`  0`  0`  0` )
    7C:  	Call  PlaySoundAtNpc        ( .Npc:Partner 00000262 00000000 )
-   94:  	Call  ShowEmote     ( .Npc:Partner .Emote:Exclamation 00000000 0000001E 00000001 00000000 00000000 00000000 00000000 )
+   94:  	Call  ShowEmote     ( .Npc:Partner .Emote:Exclamation  0`  30` .True  0`  0`  0`  0` )
    C4:  	Wait  30`
-   D0:  	Call  UseSettingsFrom       ( .Cam:Default FFFFFF49 00000032 FFFFFFF5 )
-   EC:  	Call  SetPanTarget  ( .Cam:Default 00000032 00000000 00000000 )
-  108:  	Call  SetCamDistance        ( .Cam:Default 000001F4 )
-  11C:  	Call  SetCamPitch   ( .Cam:Default 00000010 *Fixed[-6.0] )
-  134:  	Call  SetCamSpeed   ( .Cam:Default 00000003 )
+   D0:  	Call  UseSettingsFrom       ( .Cam:Default  -183`  50`  -11` )
+   EC:  	Call  SetPanTarget  ( .Cam:Default  50`  0`  0` )
+  108:  	Call  SetCamDistance        ( .Cam:Default  500` )
+  11C:  	Call  SetCamPitch   ( .Cam:Default  16` *Fixed[-6.0] )
+  134:  	Call  SetCamSpeed   ( .Cam:Default  3` )
   148:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   160:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   174:  	Call  SpeakToPlayer ( .Npc:Self 00970306 00970306 00000005 001000B5 ) % I'm so scared... I wanna go home!
@@ -1469,8 +1475,8 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
   224:  	Goto  0
   230:  EndIf
   238:  Call  DisablePlayerInput    ( .True )
-  248:  Call  UseSettingsFrom   ( .Cam:Default FFFFFFEC 00000000 00000014 )
-  264:  Call  SetPanTarget      ( .Cam:Default FFFFFFEC 00000000 00000014 )
+  248:  Call  UseSettingsFrom   ( .Cam:Default  -20`  0`  20` )
+  264:  Call  SetPanTarget      ( .Cam:Default  -20`  0`  20` )
   280:  Call  SetCamDistance    ( .Cam:Default *Fixed[300.0] )
   294:  Call  SetCamSpeed       ( .Cam:Default *Fixed[2.5] )
   2A8:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
@@ -1478,27 +1484,27 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
   2C8:  	Call  DisablePartnerAI  ( 00000000 )
   2D8:  	Call  SetNpcFlagBits    ( .Npc:Partner 00008140 .True )
   2F0:  	Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
-  304:  	Call  NpcMoveTo ( .Npc:Partner FFFFFFC9 00000005 0000001E )
+  304:  	Call  NpcMoveTo ( .Npc:Partner  -55`  5`  30` )
   320:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   334:  	Call  NpcFaceNpc        ( .Npc:Partner .Npc:Self 00000000 )
   34C:  	Call  SetNpcFlagBits    ( .Npc:Partner 00008140 .False )
   364:  	Call  EnablePartnerAI ( )
   370:  EndThread
-  378:  Call  PlayerMoveTo  ( FFFFFFEC 0000000A 00000019 )
+  378:  Call  PlayerMoveTo  (  -20`  10`  25` )
   390:  Wait  15`
   39C:  Set   *AreaFlag[002]  .True
   3AC:  Thread
   3B4:  	Call  PlaySoundAtNpc    ( .Npc:Self 00000262 00000000 )
-  3CC:  	Call  ShowEmote ( .Npc:Self .Emote:Exclamation 00000000 0000001E 00000001 00000000 00000000 00000000 00000000 )
+  3CC:  	Call  ShowEmote ( .Npc:Self .Emote:Exclamation  0`  30` .True  0`  0`  0`  0` )
   3FC:  EndThread
   404:  Wait  30`
   410:  Call  SetNpcAnimation   ( .Npc:Self 0097030A )
   424:  Wait  10`
-  430:  Call  InterpNpcYaw      ( .Npc:Self 0000010E 00000000 )
+  430:  Call  InterpNpcYaw      ( .Npc:Self  270`  0` )
   448:  Wait  30`
-  454:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+  454:  Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
   46C:  Wait  15`
-  478:  Call  InterpNpcYaw      ( .Npc:Self 0000010E 00000000 )
+  478:  Call  InterpNpcYaw      ( .Npc:Self  270`  0` )
   490:  Wait  10`
   49C:  Call  GetCurrentPartnerID   ( *Var0 )
   4AC:  If  *Var0  ==  .Partner:Sushie % 7
@@ -1511,8 +1517,8 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
   530:  	Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
   548:  	Call  SetNpcAnimation   ( .Npc:Self 00970303 )
   55C:  	Call  SetNpcSpeed       ( .Npc:Self *Fixed[5.0] )
-  570:  	Call  NpcMoveTo ( .Npc:Self FFFFFF6A 0000000F 00000000 )
-  58C:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  570:  	Call  NpcMoveTo ( .Npc:Self  -150`  15`  0` )
+  58C:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   5A8:  EndThread
   5B0:  Set   *GF_JAN07_SavedYoshi  .True
   5C0:  Set   *Var0  00000000
@@ -1531,8 +1537,8 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
   694:  Else
   69C:  	Thread
   6A4:  		Wait  12`
-  6B0:  		Call  InterpPlayerYaw   ( 0000010E 00000000 )
-  6C4:  		Call  InterpNpcYaw      ( .Npc:Partner 0000010E 00000000 )
+  6B0:  		Call  InterpPlayerYaw   (  270`  0` )
+  6C4:  		Call  InterpNpcYaw      ( .Npc:Partner  270`  0` )
   6DC:  	EndThread
   6E4:  	Wait  30`
   6F0:  EndIf
@@ -1572,8 +1578,8 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
    9C:  		Wait  1`
    A8:  	EndLoop
    B0:  EndChildThread
-   B8:  Call  SetNpcCollisionSize   ( 00000001 00000030 00000028 )
-   D0:  Call  SetNpcCollisionSize   ( 00000002 00000030 00000028 )
+   B8:  Call  SetNpcCollisionSize   ( .NpcID:PutridPiranha_01  48`  40` )
+   D0:  Call  SetNpcCollisionSize   ( .NpcID:PutridPiranha_02  48`  40` )
    E8:  Call  AwaitPlayerApproach   ( 0000003C 00000014 0000008C )
   100:  Call  DisablePlayerInput    ( .True )
   110:  Call  GetCurrentPartner     ( *Var0 )
@@ -1582,81 +1588,81 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
   13C:  EndIf
   144:  Wait  5`
   150:  Thread
-  158:  	Call  UseSettingsFrom   ( .Cam:Default FFFFFFC4 00000000 00000014 )
-  174:  	Call  SetPanTarget  ( .Cam:Default FFFFFFCE 00000000 00000014 )
+  158:  	Call  UseSettingsFrom   ( .Cam:Default  -60`  0`  20` )
+  174:  	Call  SetPanTarget  ( .Cam:Default  -50`  0`  20` )
   190:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   1A4:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1BC:  EndThread
   1C4:  Thread
-  1CC:  	Call  InterpNpcYaw  ( 00000001 0000010E 00000000 )
+  1CC:  	Call  InterpNpcYaw  ( .NpcID:PutridPiranha_01  270`  0` )
   1E4:  EndThread
-  1EC:  Call  SetNpcAnimation   ( 00000002 00360004 )
-  200:  Call  PlaySoundAtNpc    ( 00000002 00000262 00000000 )
-  218:  Call  ShowEmote ( 00000002 .Emote:Exclamation 00000000 00000026 00000001 00000000 00000000 00000000 00000000 )
+  1EC:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360004 )
+  200:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_02 00000262 00000000 )
+  218:  Call  ShowEmote ( .NpcID:PutridPiranha_02 .Emote:Exclamation  0`  38` .True  0`  0`  0`  0` )
   248:  Wait  3`
-  254:  Call  SetNpcAnimation   ( 00000001 00360004 )
-  268:  Call  PlaySoundAtNpc    ( 00000001 00000262 00000000 )
-  280:  Call  ShowEmote ( 00000001 .Emote:Exclamation 00000000 00000023 00000001 00000000 00000000 00000000 00000000 )
+  254:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360004 )
+  268:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_01 00000262 00000000 )
+  280:  Call  ShowEmote ( .NpcID:PutridPiranha_01 .Emote:Exclamation  0`  35` .True  0`  0`  0`  0` )
   2B0:  Wait  35`
-  2BC:  Call  SetNpcAnimation   ( 00000001 00360001 )
-  2D0:  Call  SetNpcAnimation   ( 00000002 00360001 )
+  2BC:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360001 )
+  2D0:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360001 )
   2E4:  Wait  5`
-  2F0:  Call  SetNpcAnimation   ( 00000001 00360004 )
+  2F0:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360004 )
   304:  Set   *Var0  00000000
   314:  Loop  0000000F
   320:  	Add   *Var0  00000018
-  330:  	Call  SetNpcRotation    ( 00000001 00000000 *Var0 00000000 )
+  330:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_01 00000000 *Var0 00000000 )
   34C:  	Wait  1`
   358:  EndLoop
-  360:  Call  PlaySoundAtNpc    ( 00000001 000020B1 00000000 )
-  378:  Call  SetNpcAnimation   ( 00000001 00360001 )
+  360:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_01 000020B1 00000000 )
+  378:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360001 )
   38C:  Wait  5`
-  398:  Call  SetNpcAnimation   ( 00000002 00360004 )
+  398:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360004 )
   3AC:  Set   *Var0  00000000
   3BC:  Loop  0000000F
   3C8:  	Add   *Var0  00000018
-  3D8:  	Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  3D8:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_02 00000000 *Var0 00000000 )
   3F4:  	Wait  1`
   400:  EndLoop
-  408:  Call  PlaySoundAtNpc    ( 00000002 000020B1 00000000 )
-  420:  Call  SetNpcAnimation   ( 00000002 00360001 )
+  408:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_02 000020B1 00000000 )
+  420:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360001 )
   434:  Wait  5`
-  440:  Call  SetNpcAnimation   ( 00000001 00360004 )
-  454:  Call  SetNpcAnimation   ( 00000002 00360004 )
+  440:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360004 )
+  454:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360004 )
   468:  Set   *Var0  00000000
   478:  Loop  0000000C
   484:  	Add   *Var0  0000001E
-  494:  	Call  SetNpcRotation    ( 00000001 00000000 *Var0 00000000 )
-  4B0:  	Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  494:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_01 00000000 *Var0 00000000 )
+  4B0:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_02 00000000 *Var0 00000000 )
   4CC:  	Wait  1`
   4D8:  EndLoop
-  4E0:  Call  PlaySoundAtNpc    ( 00000001 000020B2 00000000 )
+  4E0:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_01 000020B2 00000000 )
   4F8:  Set   *Var0  00000000
   508:  Loop  0000000C
   514:  	Add   *Var0  0000001E
-  524:  	Call  SetNpcRotation    ( 00000001 00000000 *Var0 00000000 )
-  540:  	Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  524:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_01 00000000 *Var0 00000000 )
+  540:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_02 00000000 *Var0 00000000 )
   55C:  	Wait  1`
   568:  EndLoop
-  570:  Call  PlaySoundAtNpc    ( 00000001 000020B2 00000000 )
+  570:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_01 000020B2 00000000 )
   588:  Set   *Var0  00000000
   598:  Loop  0000000C
   5A4:  	Add   *Var0  0000001E
-  5B4:  	Call  SetNpcRotation    ( 00000001 00000000 *Var0 00000000 )
-  5D0:  	Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  5B4:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_01 00000000 *Var0 00000000 )
+  5D0:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_02 00000000 *Var0 00000000 )
   5EC:  	Wait  1`
   5F8:  EndLoop
-  600:  Call  PlaySoundAtNpc    ( 00000001 000020B2 00000000 )
+  600:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_01 000020B2 00000000 )
   618:  Loop  00000003
   624:  	Wait  5`
-  630:  	Call  PlaySoundAtNpc    ( 00000001 000020B3 00000000 )
+  630:  	Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_01 000020B3 00000000 )
   648:  EndLoop
-  650:  Call  SetNpcAnimation   ( 00000001 00360005 )
-  664:  Call  SetNpcAnimation   ( 00000002 00360005 )
+  650:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360005 )
+  664:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360005 )
   678:  Wait  20`
-  684:  Call  SetNpcAnimation   ( 00000001 00360006 )
-  698:  Call  SetNpcAnimation   ( 00000002 00360006 )
-  6AC:  Call  PlaySoundAtNpc    ( 00000001 000003B2 00000000 )
+  684:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360006 )
+  698:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360006 )
+  6AC:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_01 000003B2 00000000 )
   6C4:  Call  DisablePlayerInput    ( .False )
   6D4:  Call  StartBossBattle   ( .Song:SpecialBattle )
   6E4:  Return
@@ -1665,15 +1671,15 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
 
 #new:Script $Script_Defeat_8024263C
 {
-    0:  Call  UseSettingsFrom   ( .Cam:Default FFFFFFEC 00000000 00000014 )
-   1C:  Call  SetPanTarget      ( .Cam:Default FFFFFFEC 00000000 00000014 )
+    0:  Call  UseSettingsFrom   ( .Cam:Default  -20`  0`  20` )
+   1C:  Call  SetPanTarget      ( .Cam:Default  -20`  0`  20` )
    38:  Call  SetCamDistance    ( .Cam:Default *Fixed[500.0] )
    4C:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    60:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    78:  Call  GetBattleOutcome  ( *Var0 )
    88:  Switch  *Var0
    94:  	Case  ==  .Outcome:PlayerWon % 0
-   A0:  		Call  SetNpcVar ( 00000000 00000000 00000001 )
+   A0:  		Call  SetNpcVar ( .NpcID:YoshiKid_00 00000000 00000001 )
    B8:  		Call  DoNpcDefeat ( )
    C4:  	Case  ==  .Outcome:PlayerLost % 1
    D0:  	Case  ==  .Outcome:PlayerFled % 2
@@ -1699,8 +1705,8 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
 #new:Script $Script_Init_802427B0
 {
     0:  If  *GF_JAN07_SavedYoshi  ==  .False
-   10:  	Call  RemoveNpc ( 0000000A )
-   20:  	Call  RemoveNpc ( 0000000B )
+   10:  	Call  RemoveNpc ( .NpcID:JungleGuy_10 )
+   20:  	Call  RemoveNpc ( .NpcID:JungleGuy_11 )
    30:  EndIf
    38:  Return
    40:  End
@@ -1708,47 +1714,47 @@ MISSING: 80241488 to 802414B8 (00001488 to 000014B8)
 
 #new:NpcGroup $NpcGroup_802427F8
 {
-	0000000A $NpcSettings_80241614 ~Vec3f:NPC_802427F8 % -28 0 13
+	.NpcID:JungleGuy_10 $NpcSettings_80241614 ~Vec3f:NPC_JungleGuy_10 % -28 0 13
 	00000D00 00000000 00000000 00000000 0000005A
 	~Items:5:SleepySheep:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802427F8
-	~AnimationTable:NPC_802427F8 % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_10
+	~AnimationTable:NPC_JungleGuy_10 % .Sprite:JungleGuy
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802427F8[1F0]
-	0000000B $NpcSettings_802416E8 ~Vec3f:NPC_802429E8 % 0 -1000 0
+	.NpcID:JungleGuy_11 $NpcSettings_802416E8 ~Vec3f:NPC_JungleGuy_11 % 0 -1000 0
 	00000D00 $Script_Init_802427B0 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802429E8
-	~AnimationTable:NPC_802429E8 % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_11
+	~AnimationTable:NPC_JungleGuy_11 % .Sprite:JungleGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242BD8
 {
-	00000001 $NpcSettings_8024145C ~Vec3f:NPC_80242BD8 % -20 0 20
+	.NpcID:PutridPiranha_01 $NpcSettings_8024145C ~Vec3f:NPC_PutridPiranha_01 % -20 0 20
 	00C40900 $Script_Init_80242730 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242BD8
-	~AnimationTable:NPC_80242BD8 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_01
+	~AnimationTable:NPC_PutridPiranha_01 % .Sprite:PutridPiranha
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242BD8[1F0]
-	00000002 $NpcSettings_8024145C ~Vec3f:NPC_80242DC8 % 80 0 20
+	.NpcID:PutridPiranha_02 $NpcSettings_8024145C ~Vec3f:NPC_PutridPiranha_02 % 80 0 20
 	00C40900 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242DC8
-	~AnimationTable:NPC_80242DC8 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_02
+	~AnimationTable:NPC_PutridPiranha_02 % .Sprite:PutridPiranha
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242FB8
 {
-	00000000 $NpcSettings_80241430 ~Vec3f:NPC_80242FB8 % 30 0 20
+	.NpcID:YoshiKid_00 $NpcSettings_80241430 ~Vec3f:NPC_YoshiKid_00 % 30 0 20
 	0040090D $Script_Init_80241EC8 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242FB8
-	~AnimationTable:NPC_80242FB8 % .Sprite:YoshiKid
+	~Movement:NPC_YoshiKid_00
+	~AnimationTable:NPC_YoshiKid_00 % .Sprite:YoshiKid
 	00000000 00000000 00000000 001A00C6 % He's a yellow Yoshi kid. Whoa! He's cheery, huh? T ...
 }
 

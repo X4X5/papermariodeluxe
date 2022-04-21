@@ -1,6 +1,11 @@
 % Script File: kpa_16.mscr
 % Decoded from: 0 to 29F0 (kpa_16)
 
+#define .NpcID:WorldKoopatrol_00    00
+#define .NpcID:WorldKoopatrol_01    01
+#define .NpcID:WorldKoopatrol_02    02
+#define .NpcID:Magikoopa_03         03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -247,7 +252,7 @@ PADDING: 8024030C to 80240310 (0000030C to 00000310)
    18:  NOP
    1C:  CVT.S.W   F0, F0
    20:  MFC1      A1, F0
-   24:  JAL       ~Func:set_transition_stencil_zoom_0
+   24:  JAL       ~Func:set_screen_overlay_params_front
    28:  CLEAR     A0
    2C:  LW        RA, 10 (SP)
    30:  LI        V0, 2
@@ -516,8 +521,8 @@ PADDING: 8024039C to 802403A0 (0000039C to 000003A0)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GF_KPA16_Defeated_SwitchGuards  ==  .True
    80:  	Call  ModifyColliderFlags   ( 00000000 ~Collider:o958 7FFFFE00 )
@@ -595,10 +600,10 @@ PADDING: 8024114C to 80241150 (0000114C to 00001150)
    C0:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    DC:  Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
    F0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
-  104:  Call  SetPanTarget  ( .Cam:Default 0000014A 000000E6 FFFFFF6A )
+  104:  Call  SetPanTarget  ( .Cam:Default  330`  230`  -150` )
   120:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   138:  Wait  1`
-  144:  Call  SetPanTarget  ( .Cam:Default 0000014A 000000AA FFFFFF6A )
+  144:  Call  SetPanTarget  ( .Cam:Default  330`  170`  -150` )
   160:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   174:  Thread
   17C:  	Call  $Function_8024034C ( )
@@ -681,17 +686,17 @@ PADDING: 8024114C to 80241150 (0000114C to 00001150)
 {
     0:  ChildThread
     8:  	Wait  15`
-   14:  	Call  SetNpcSpeed   ( 00000000 *Fixed[3.0] )
-   28:  	Call  NpcMoveTo     ( 00000000 0000028A FFFFFF6F 00000000 )
+   14:  	Call  SetNpcSpeed   ( .NpcID:WorldKoopatrol_00 *Fixed[3.0] )
+   28:  	Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_00  650`  -145`  0` )
    44:  EndChildThread
    4C:  ChildThread
    54:  	Wait  10`
-   60:  	Call  SetNpcSpeed   ( 00000002 *Fixed[3.5] )
-   74:  	Call  NpcMoveTo     ( 00000002 0000028A FFFFFF5B 00000000 )
+   60:  	Call  SetNpcSpeed   ( .NpcID:WorldKoopatrol_02 *Fixed[3.5] )
+   74:  	Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_02  650`  -165`  0` )
    90:  EndChildThread
    98:  Wait  5`
-   A4:  Call  SetNpcSpeed   ( 00000001 *Fixed[4.0] )
-   B8:  Call  NpcMoveTo     ( 00000001 0000028A FFFFFF88 00000000 )
+   A4:  Call  SetNpcSpeed   ( .NpcID:WorldKoopatrol_01 *Fixed[4.0] )
+   B8:  Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_01  650`  -120`  0` )
    D4:  Return
    DC:  End
 }
@@ -712,23 +717,23 @@ PADDING: 8024114C to 80241150 (0000114C to 00001150)
    98:  	Goto  0
    A4:  EndIf
    AC:  Call  DisablePlayerInput    ( .True )
-   BC:  Call  PlaySoundAtNpc    ( 00000000 00000262 00000000 )
-   D4:  Call  PlaySoundAtNpc    ( 00000001 00000262 00000000 )
-   EC:  Call  PlaySoundAtNpc    ( 00000002 00000262 00000000 )
-  104:  Call  ShowEmote     ( 00000000 .Emote:Exclamation 00000000 0000000F 00000001 00000000 00000000 00000000 00000000 )
-  134:  Call  ShowEmote     ( 00000001 .Emote:Exclamation 00000000 0000000F 00000001 00000000 00000000 00000000 00000000 )
-  164:  Call  ShowEmote     ( 00000002 .Emote:Exclamation 00000000 0000000F 00000001 00000000 00000000 00000000 00000000 )
+   BC:  Call  PlaySoundAtNpc    ( .NpcID:WorldKoopatrol_00 00000262 00000000 )
+   D4:  Call  PlaySoundAtNpc    ( .NpcID:WorldKoopatrol_01 00000262 00000000 )
+   EC:  Call  PlaySoundAtNpc    ( .NpcID:WorldKoopatrol_02 00000262 00000000 )
+  104:  Call  ShowEmote     ( .NpcID:WorldKoopatrol_00 .Emote:Exclamation  0`  15` .True  0`  0`  0`  0` )
+  134:  Call  ShowEmote     ( .NpcID:WorldKoopatrol_01 .Emote:Exclamation  0`  15` .True  0`  0`  0`  0` )
+  164:  Call  ShowEmote     ( .NpcID:WorldKoopatrol_02 .Emote:Exclamation  0`  15` .True  0`  0`  0`  0` )
   194:  Wait  15`
-  1A0:  Call  InterpNpcYaw  ( 00000000 0000005A 00000000 )
-  1B8:  Call  InterpNpcYaw  ( 00000001 0000005A 00000000 )
-  1D0:  Call  InterpNpcYaw  ( 00000002 0000005A 00000000 )
-  1E8:  Call  InterpNpcYaw  ( 00000003 0000005A 00000000 )
-  200:  Call  SetNpcAnimation   ( 00000000 00580006 )
-  214:  Call  SetNpcAnimation   ( 00000001 00580006 )
-  228:  Call  SetNpcAnimation   ( 00000002 00580006 )
+  1A0:  Call  InterpNpcYaw  ( .NpcID:WorldKoopatrol_00  90`  0` )
+  1B8:  Call  InterpNpcYaw  ( .NpcID:WorldKoopatrol_01  90`  0` )
+  1D0:  Call  InterpNpcYaw  ( .NpcID:WorldKoopatrol_02  90`  0` )
+  1E8:  Call  InterpNpcYaw  ( .NpcID:Magikoopa_03  90`  0` )
+  200:  Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_00 00580006 )
+  214:  Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_01 00580006 )
+  228:  Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_02 00580006 )
   23C:  Wait  10`
-  248:  Call  UseSettingsFrom   ( .Cam:Default 0000022B 000000E6 FFFFFF6A )
-  264:  Call  SetPanTarget  ( .Cam:Default 0000022B 000000E6 FFFFFF6A )
+  248:  Call  UseSettingsFrom   ( .Cam:Default  555`  230`  -150` )
+  264:  Call  SetPanTarget  ( .Cam:Default  555`  230`  -150` )
   280:  Call  SetCamDistance    ( .Cam:Default *Fixed[300.0] )
   294:  Call  SetCamPitch   ( .Cam:Default *Fixed[10.0] *Fixed[-10.0] )
   2AC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
@@ -736,35 +741,35 @@ PADDING: 8024114C to 80241150 (0000114C to 00001150)
   2D8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   2EC:  Thread
   2F4:  	Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  304:  	Call  PlayerMoveTo      ( 000002A8 FFFFFF6F 00000000 )
-  31C:  	Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  304:  	Call  PlayerMoveTo      (  680`  -145`  0` )
+  31C:  	Call  InterpPlayerYaw   (  270`  0` )
   330:  EndThread
   338:  Call  SetSelfVar    ( 00000000 00000000 )
   34C:  Thread
   354:  	Wait  30`
-  360:  	Call  SetNpcAnimation   ( 00000001 00580006 )
-  374:  	Call  SetNpcSpeed   ( 00000001 *Fixed[4.0] )
+  360:  	Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_01 00580006 )
+  374:  	Call  SetNpcSpeed   ( .NpcID:WorldKoopatrol_01 *Fixed[4.0] )
   388:  	Label  A
-  394:  	Call  NpcMoveTo     ( 00000001 00000226 FFFFFF5B 00000000 )
+  394:  	Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_01  550`  -165`  0` )
   3B0:  	Wait  5`
-  3BC:  	Call  NpcMoveTo     ( 00000001 000001FE FFFFFF5B 00000000 )
+  3BC:  	Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_01  510`  -165`  0` )
   3D8:  	Wait  5`
   3E4:  	Call  GetSelfVar    ( 00000000 *Var0 )
   3F8:  	If  *Var0  ==  00000000
   408:  		Goto  A
   414:  	EndIf
-  41C:  	Call  NpcMoveTo     ( 00000001 00000217 FFFFFF5B 00000000 )
+  41C:  	Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_01  535`  -165`  0` )
   438:  	Call  SetSelfVar    ( 00000000 00000002 )
   44C:  EndThread
-  454:  Call  InterpNpcYaw  ( 00000000 0000010E 00000000 )
-  46C:  Call  SpeakToPlayer ( 00000000 00580006 00580006 00000001 00130017 ) % Uh-oh! Ma... Mario...is right...there! Now what we ...
+  454:  Call  InterpNpcYaw  ( .NpcID:WorldKoopatrol_00  270`  0` )
+  46C:  Call  SpeakToPlayer ( .NpcID:WorldKoopatrol_00 00580006 00580006 00000001 00130017 ) % Uh-oh! Ma... Mario...is right...there! Now what we ...
   48C:  Thread
   494:  	Wait  5`
-  4A0:  	Call  SetNpcJumpscale   ( 00000002 *Fixed[1.0] )
-  4B4:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-  4D0:  	Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 00000014 )
+  4A0:  	Call  SetNpcJumpscale   ( .NpcID:WorldKoopatrol_02 *Fixed[1.0] )
+  4B4:  	Call  GetNpcPos ( .NpcID:WorldKoopatrol_02 *Var0 *Var1 *Var2 )
+  4D0:  	Call  NpcJump0  ( .NpcID:WorldKoopatrol_02 *Var0 *Var1 *Var2  20` )
   4F0:  EndThread
-  4F8:  Call  SpeakToPlayer ( 00000002 00580006 00580006 00000000 00130018 ) % No!!!!!! He'll wipe the floor with us!
+  4F8:  Call  SpeakToPlayer ( .NpcID:WorldKoopatrol_02 00580006 00580006 00000000 00130018 ) % No!!!!!! He'll wipe the floor with us!
   518:  Call  SetSelfVar    ( 00000000 00000001 )
   52C:  Label  F
   538:  Call  GetSelfVar    ( 00000000 *Var0 )
@@ -772,23 +777,23 @@ PADDING: 8024114C to 80241150 (0000114C to 00001150)
   55C:  	Wait  1`
   568:  	Goto  F
   574:  EndIf
-  57C:  Call  InterpNpcYaw      ( 00000001 0000010E 00000000 )
-  594:  Call  InterpNpcYaw      ( 00000002 0000010E 00000000 )
-  5AC:  Call  SetNpcAnimation   ( 00000000 00580001 )
-  5C0:  Call  SetNpcAnimation   ( 00000001 00580001 )
-  5D4:  Call  SetNpcAnimation   ( 00000002 00580001 )
-  5E8:  Call  SpeakToPlayer     ( 00000003 00560002 00560001 00000000 00130019 ) % Stop your bellyaching!! Who says we should be afra ...
+  57C:  Call  InterpNpcYaw      ( .NpcID:WorldKoopatrol_01  270`  0` )
+  594:  Call  InterpNpcYaw      ( .NpcID:WorldKoopatrol_02  270`  0` )
+  5AC:  Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_00 00580001 )
+  5C0:  Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_01 00580001 )
+  5D4:  Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_02 00580001 )
+  5E8:  Call  SpeakToPlayer     ( .NpcID:Magikoopa_03 00560002 00560001 00000000 00130019 ) % Stop your bellyaching!! Who says we should be afra ...
   608:  Thread
   610:  	Wait  15`
-  61C:  	Call  InterpNpcYaw  ( 00000002 0000005A 00000000 )
+  61C:  	Call  InterpNpcYaw  ( .NpcID:WorldKoopatrol_02  90`  0` )
   634:  	Wait  10`
-  640:  	Call  InterpNpcYaw  ( 00000000 0000005A 00000000 )
+  640:  	Call  InterpNpcYaw  ( .NpcID:WorldKoopatrol_00  90`  0` )
   658:  EndThread
-  660:  Call  SpeakToPlayer     ( 00000001 00580008 00580001 00000000 0013001A ) % Waahh!! We have no choice! Gotta be brave... Gotta ...
+  660:  Call  SpeakToPlayer     ( .NpcID:WorldKoopatrol_01 00580008 00580001 00000000 0013001A ) % Waahh!! We have no choice! Gotta be brave... Gotta ...
   680:  Call  ResetCam  ( .Cam:Default *Fixed[90.0] )
-  694:  Call  SetNpcAnimation   ( 00000000 00580006 )
-  6A8:  Call  SetNpcAnimation   ( 00000001 00580006 )
-  6BC:  Call  SetNpcAnimation   ( 00000002 00580006 )
+  694:  Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_00 00580006 )
+  6A8:  Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_01 00580006 )
+  6BC:  Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_02 00580006 )
   6D0:  Exec  $Script_802417F8
   6DC:  Call  DisablePlayerInput    ( .False )
   6EC:  Thread
@@ -799,10 +804,10 @@ PADDING: 8024114C to 80241150 (0000114C to 00001150)
   724:  		EndIf
   72C:  	EndLoop
   734:  	Wait  30`
-  740:  	Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
-  75C:  	Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
-  778:  	Call  SetNpcPos ( 00000002 00000000 FFFFFC18 00000000 )
-  794:  	Call  SetNpcPos ( 00000003 00000000 FFFFFC18 00000000 )
+  740:  	Call  SetNpcPos ( .NpcID:WorldKoopatrol_00  0`  -1000`  0` )
+  75C:  	Call  SetNpcPos ( .NpcID:WorldKoopatrol_01  0`  -1000`  0` )
+  778:  	Call  SetNpcPos ( .NpcID:WorldKoopatrol_02  0`  -1000`  0` )
+  794:  	Call  SetNpcPos ( .NpcID:Magikoopa_03  0`  -1000`  0` )
   7B0:  EndThread
   7B8:  Call  StartBossBattle   ( .Song:SpecialBattle )
   7C8:  Return
@@ -833,9 +838,9 @@ PADDING: 8024114C to 80241150 (0000114C to 00001150)
    34:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_802418DC )
    48:  	Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_802420B4 )
    5C:  Else
-   64:  	Call  RemoveNpc ( 00000003 )
-   74:  	Call  RemoveNpc ( 00000001 )
-   84:  	Call  RemoveNpc ( 00000002 )
+   64:  	Call  RemoveNpc ( .NpcID:Magikoopa_03 )
+   74:  	Call  RemoveNpc ( .NpcID:WorldKoopatrol_01 )
+   84:  	Call  RemoveNpc ( .NpcID:WorldKoopatrol_02 )
    94:  	Call  RemoveNpc ( .Npc:Self )
    A4:  EndIf
    AC:  Return
@@ -844,36 +849,36 @@ PADDING: 8024114C to 80241150 (0000114C to 00001150)
 
 #new:NpcGroup $NpcGroup_802421FC
 {
-	00000000 $NpcSettings_80241150 ~Vec3f:NPC_802421FC % 585 230 -145
+	.NpcID:WorldKoopatrol_00 $NpcSettings_80241150 ~Vec3f:NPC_WorldKoopatrol_00 % 585 230 -145
 	00C42D05 $Script_Init_80242140 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802421FC
-	~AnimationTable:NPC_802421FC % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_00
+	~AnimationTable:NPC_WorldKoopatrol_00 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802421FC[1F0]
-	00000001 $NpcSettings_80241150 ~Vec3f:NPC_802423EC % 525 230 -165
+	.NpcID:WorldKoopatrol_01 $NpcSettings_80241150 ~Vec3f:NPC_WorldKoopatrol_01 % 525 230 -165
 	00C42D05 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802423EC
-	~AnimationTable:NPC_802423EC % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_01
+	~AnimationTable:NPC_WorldKoopatrol_01 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802421FC[3E0]
-	00000002 $NpcSettings_80241150 ~Vec3f:NPC_802425DC % 550 230 -120
+	.NpcID:WorldKoopatrol_02 $NpcSettings_80241150 ~Vec3f:NPC_WorldKoopatrol_02 % 550 230 -120
 	00C42D05 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:5 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802425DC
-	~AnimationTable:NPC_802425DC % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_02
+	~AnimationTable:NPC_WorldKoopatrol_02 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802421FC[5D0]
-	00000003 $NpcSettings_80241150 ~Vec3f:NPC_802427CC % 505 230 -120
+	.NpcID:Magikoopa_03 $NpcSettings_80241150 ~Vec3f:NPC_Magikoopa_03 % 505 230 -120
 	00C40D05 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:5:MapleSyrup:5:ThunderRage:5:StopWatch:5
 	~HP:Standard:2 ~FP:Standard:5 ~CoinBonus:1:3
-	~Movement:NPC_802427CC
-	~AnimationTable:NPC_802427CC % .Sprite:Magikoopa
+	~Movement:NPC_Magikoopa_03
+	~AnimationTable:NPC_Magikoopa_03 % .Sprite:Magikoopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

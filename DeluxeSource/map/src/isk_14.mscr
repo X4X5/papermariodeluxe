@@ -1,6 +1,8 @@
 % Script File: isk_14.mscr
 % Decoded from: 0 to 2AC0 (isk_14)
 
+#define .NpcID:StoneChomp_01        01
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -699,7 +701,7 @@
   20C:  LW        A1, 38 (S3)
   210:  LW        A2, 3C (S3)
   214:  LW        A3, 40 (S3)
-  218:  JAL       ~Func:fx_walk_normal
+  218:  JAL       ~Func:fx_walk
   21C:  LI        A0, 2
   220:  COPY      A0, S7
   224:  LI        V0, C
@@ -1462,7 +1464,6 @@
    4C:  ADDIU     SP, SP, 20
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80241610
 {
     0:  ADDIU     SP, SP, FF00
@@ -1798,7 +1799,7 @@
    A4:  SWC1      F0, 28 (S0)
    A8:  SWC1      F0, 2C (S0)
    AC:  SWC1      F0, 30 (S0)
-   B0:  JAL       ~Func:create_dynamic_entity_frontUI
+   B0:  JAL       ~Func:create_generic_entity_frontUI
    B4:  SWC1      F4, 18 (S0)
    B8:  SW        V0, 4 (S0)
    BC:  LW        RA, 28 (SP)
@@ -1814,7 +1815,7 @@
     0:  LAW       A0, $End[4]
     8:  ADDIU     SP, SP, FFE8
     C:  SW        RA, 10 (SP)
-   10:  JAL       ~Func:free_dynamic_entity
+   10:  JAL       ~Func:free_generic_entity
    14:  NOP
    18:  LW        RA, 10 (SP)
    1C:  LI        V0, 2
@@ -1957,8 +1958,8 @@ PADDING: 80241D54 to 80241D60 (00001D54 to 00001D60)
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:isk_14 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_802429FC )
@@ -1983,7 +1984,7 @@ PADDING: 80241F94 to 80241FA0 (00001F94 to 00001FA0)
 #new:Script $Script_80241FA0
 {
     0:  Set   *GF_ISK14_Hammer2Block  .True
-   10:  Call  SetNpcVar ( 00000001 00000001 00000001 )
+   10:  Call  SetNpcVar ( .NpcID:StoneChomp_01 00000001 00000001 )
    28:  Return
    30:  End
 }
@@ -2101,7 +2102,7 @@ PADDING: 80242124 to 80242130 (00002124 to 00002130)
    48:  EndIf
    50:  Call  DisablePlayerInput    ( .True )
    60:  Wait  5`
-   6C:  Call  SetNpcPos ( .Npc:Self FFFFFDFB FFFFFCF4 FFFFFE6E )
+   6C:  Call  SetNpcPos ( .Npc:Self  -517`  -780`  -402` )
    88:  Call  $Function_80241AF0 ( )
    94:  Call  $Function_80241BEC    ( FFFFFDFB FFFFFCF4 FFFFFE6E )
    AC:  Call  $Function_80241CA0    ( 00000055 00000014 00000000 )
@@ -2129,7 +2130,7 @@ PADDING: 80242124 to 80242130 (00002124 to 00002130)
   224:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   23C:  Call  SetNpcJumpscale   ( .Npc:Self 00000001 )
   250:  Add   *Var1  00000014
-  260:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 0000000A )
+  260:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  10` )
   280:  Thread
   288:  	Loop  0000001E
   294:  		Call  SetPlayerAnimation    ( 0001002B )
@@ -2177,11 +2178,11 @@ PADDING: 80242124 to 80242130 (00002124 to 00002130)
 
 #new:NpcGroup $NpcGroup_8024280C
 {
-	00000001 $NpcSettings_80242398 ~Vec3f:NPC_8024280C % 0 -1000 0
+	.NpcID:StoneChomp_01 $NpcSettings_80242398 ~Vec3f:NPC_StoneChomp_01 % 0 -1000 0
 	00040900 $Script_Init_80242764 00000001 FFFFFCF4 000000DA
 	~Items:5:HoneySyrup:A ~HP:Generous:3 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_8024280C
-	~AnimationTable:NPC_8024280C % .Sprite:StoneChomp
+	~Movement:NPC_StoneChomp_01
+	~AnimationTable:NPC_StoneChomp_01 % .Sprite:StoneChomp
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

@@ -260,7 +260,7 @@ $EmptyMoleHole_27 $Vector3D_80226FB8_27 00000000 00000001 00000000 00000000 0000
   554:  	Case  ==  .Event:BlowAway % 16
   560:  		ExecWait  $Script_80226FFC_27 
   56C:  		Call  GetStatusFlags    ( .Actor:Self *Var0 )
-  580:  		If  *Var0  &  ~Flags:StatusFlags:Sleep|Frozen|UnknownStatus3|Paralyze|Dizzy|Stone|Stop % 35D000
+  580:  		If  *Var0  &  ~Flags:StatusFlags:Sleep|Frozen|Fear|Paralyze|Dizzy|Stone|Stop % 35D000
   590:  			Call  SetActorDispOffset    ( .Actor:Self 00000000 FFFFFFFB 00000000 )
   5AC:  			Call  SetAnimation  ( .Actor:Self 00000001 002F0019 )
   5C4:  		Else
@@ -302,7 +302,7 @@ $EmptyMoleHole_27 $Vector3D_80226FB8_27 00000000 00000001 00000000 00000000 0000
    4C:  Call  GetBattlePhase    ( *Var0 )
    5C:  If  *Var0  ==  00000001 
    6C:  	Call  UseBattleCamPreset    ( 00000002 )
-   7C:  	Call  MoveBattleCamOver     ( 00000001 )
+   7C:  	Call  MoveBattleCamOver     (  1` )
    8C:  EndIf
    94:  ChildThread
    9C:  	Call  PlaySoundAtActor  ( .Actor:Self .Sound:MoleDig )
@@ -337,7 +337,7 @@ $EmptyMoleHole_27 $Vector3D_80226FB8_27 00000000 00000001 00000000 00000000 0000
   2D4:  		Call  SetPartMoveSpeed  ( .Actor:Self 00000003 *Fixed[12.0] )
   2EC:  		Call  SetPartJumpGravity    ( .Actor:Self 00000003 *Fixed[0.1] )
   304:  		Call  SetAnimation      ( .Actor:Self 00000003 002F000F )
-  31C:  		Call  FlyPartTo ( .Actor:Self 00000003 *Var0 *Var1 *Var2 00000000 0000001E .Easing:Linear )
+  31C:  		Call  FlyPartTo ( .Actor:Self 00000003 *Var0 *Var1 *Var2  0`  30` .Easing:Linear )
   348:  		Call  SetPartFlagBits   ( .Actor:Self 00000003 00000001 .True )
   364:  		If  *VarA  ==  .HitResult:Lucky % 5
   374:  			Call  EnemyTestTarget   ( .Actor:Self *Var0 ~Flags:DamageType:TriggerLucky 00000000 00000000 00000000 )
@@ -354,21 +354,21 @@ $EmptyMoleHole_27 $Vector3D_80226FB8_27 00000000 00000001 00000000 00000000 0000
   42C:  Call  SetPartMoveSpeed  ( .Actor:Self 00000003 *Fixed[12.0] )
   444:  Call  SetPartJumpGravity    ( .Actor:Self 00000003 *Fixed[0.1] )
   45C:  Call  SetAnimation      ( .Actor:Self 00000003 002F000F )
-  474:  Call  FlyPartTo ( .Actor:Self 00000003 *Var0 *Var1 *Var2 00000000 00000014 .Easing:Linear )
+  474:  Call  FlyPartTo ( .Actor:Self 00000003 *Var0 *Var1 *Var2  0`  20` .Easing:Linear )
   4A0:  Wait  2`
   4AC:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:NoContact 00000000 00000000 00000002 00000020 )
   4D4:  Switch  *Var0 
   4E0:  	CaseOR  ==  .HitResult:Hit % 0
-  4EC:  	CaseOR  ==  00000002 % 2
+  4EC:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   4F8:  		Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
   514:  		Sub   *Var0  00000037 
   524:  		Set   *Var1  00000000 
   534:  		Call  SetPartMoveSpeed  ( .Actor:Self 00000003 *Fixed[6.0] )
   54C:  		Call  SetPartJumpGravity    ( .Actor:Self 00000003 *Fixed[0.1] )
-  564:  		Call  FlyPartTo ( .Actor:Self 00000003 *Var0 *Var1 *Var2 00000000 00000019 .Easing:Linear )
+  564:  		Call  FlyPartTo ( .Actor:Self 00000003 *Var0 *Var1 *Var2  0`  25` .Easing:Linear )
   590:  		Call  SetPartMoveSpeed  ( .Actor:Self 00000003 *Fixed[4.0] )
   5A8:  		Sub   *Var0  00000014 
-  5B8:  		Call  FlyPartTo ( .Actor:Self 00000003 *Var0 *Var1 *Var2 00000000 00000015 .Easing:Linear )
+  5B8:  		Call  FlyPartTo ( .Actor:Self 00000003 *Var0 *Var1 *Var2  0`  21` .Easing:Linear )
   5E4:  		Call  SetPartFlagBits   ( .Actor:Self 00000003 00000001 .True )
   600:  	EndCaseGroup
   608:  EndSwitch

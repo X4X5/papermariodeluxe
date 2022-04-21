@@ -504,7 +504,7 @@
   154:  JAL       ~Func:atan2
   158:  LW        A3, 30 (S3)
   15C:  LI        A0, 00010002
-  164:  JAL       ~Func:suggest_player_anim
+  164:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   168:  SWC1      F0, C (S1)
   16C:  LI        V0, 15
   170:  SW        V0, 70 (S2)
@@ -613,7 +613,7 @@
   304:  JAL       ~Func:disable_npc_blur
   308:  SWC1      F4, 40 (S1)
   30C:  LI        A0, 0006000C
-  310:  JAL       ~Func:suggest_player_anim
+  310:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   314:  RESERVED
   318:  LUI       V0, 3
   31C:  LWC1      F0, 80 (S3)
@@ -644,7 +644,7 @@
   37C:  BNE       V0, S0, .o394
   380:  NOP
   384:  LI        A0, 00060006
-  388:  JAL       ~Func:suggest_player_anim
+  388:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   38C:  RESERVED
   390:  LW        V0, 74 (S2)
         .o394
@@ -752,7 +752,7 @@
   534:  BNE       V0, R0, .o54C
   538:  LUI       V0, 3
   53C:  LI        A0, 00010002
-  540:  JAL       ~Func:suggest_player_anim
+  540:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   544:  RESERVED
   548:  LI        V0, 00030010
   550:  LI        V1, FDFF
@@ -791,7 +791,7 @@
   5DC:  LB        V0, B4 (S3)
   5E0:  BNE       V0, R0, .o5F0
   5E4:  LUI       A0, 1
-  5E8:  JAL       ~Func:suggest_player_anim
+  5E8:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   5EC:  ORI       A0, A0, 2
   5F0:  JAL       ~Func:enable_player_input
   5F4:  NOP
@@ -827,7 +827,7 @@
   67C:  BNE       V0, R0, .o690
   680:  NOP
   684:  LI        A0, 00010002
-  688:  JAL       ~Func:suggest_player_anim
+  688:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   68C:  RESERVED
   690:  LW        V1, 70 (S2)
   694:  LI        V0, 4
@@ -873,7 +873,7 @@
   740:  ADDU      V0, V0, S0
   744:  LB        A0, 15 (V0)
   748:  MFC1      A2, F2
-  74C:  JAL       800701F0
+  74C:  JAL       ~Func:playFX_19
   750:  NOP
   754:  LB        V0, 12 (S0)
   758:  SLL       V0, V0, 3
@@ -1147,7 +1147,7 @@
   BC0:  LB        V0, B4 (S3)
   BC4:  BNE       V0, R0, .oBD4
   BC8:  LUI       A0, 1
-  BCC:  JAL       ~Func:suggest_player_anim
+  BCC:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   BD0:  ORI       A0, A0, 2
   BD4:  LA        V1, $End[C]
   BDC:  LW        V0, 0 (V1)

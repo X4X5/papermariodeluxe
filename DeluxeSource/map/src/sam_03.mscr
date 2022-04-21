@@ -1,6 +1,9 @@
 % Script File: sam_03.mscr
 % Decoded from: 0 to 2510 (sam_03)
 
+#define .NpcID:Gulpit_02            02
+#define .NpcID:Gulpit_03            03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -698,8 +701,8 @@ PADDING: 802409AC to 802409B0 (000009AC to 000009B0)
 {
     0:  Set   *GB_WorldLocation  .Location:ShiverSnowfield
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Set   *GF_Map_ShiverSnowfield  .True
    80:  Call  EnableModel       ( ~Model:o44 .False )
@@ -746,8 +749,8 @@ PADDING: 80240C74 to 80240C80 (00000C74 to 00000C80)
    90:  Call  SetMusicTrack ( 00000000 .Song:JrTroopaTheme 00000000 00000008 )
    AC:  Call  SpeakToPlayer ( 00000000 00210016 00210003 00000000 001200D8 ) % Hey hey hey hey hey!
    CC:  Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-   E0:  Call  NpcJump0      ( 00000000 00000208 00000000 FFFFFFBC 00000014 )
-  100:  Call  PlayerFaceNpc ( 00000000 00000000 )
+   E0:  Call  NpcJump0      ( 00000000  520`  0`  -68`  20` )
+  100:  Call  PlayerFaceNpc ( 00000000 .False )
   114:  Wait  15`
   120:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
   13C:  Add   *Var0  FFFFFFEC
@@ -776,7 +779,7 @@ PADDING: 80240C74 to 80240C80 (00000C74 to 00000C80)
   35C:  Call  SetNpcSpeed   ( 00000000 *Fixed[4.0] )
   370:  Call  SetNpcAnimation   ( 00000000 0021000A )
   384:  Thread
-  38C:  	Call  NpcMoveTo ( 00000000 *Var3 *Var5 00000000 )
+  38C:  	Call  NpcMoveTo ( 00000000 *Var3 *Var5  0` )
   3A8:  EndThread
   3B0:  Call  StartBossBattle   ( .Song:JrTroopaBattle )
   3C0:  Call  PanToTarget       ( .Cam:Default 00000000 00000000 )
@@ -833,8 +836,8 @@ PADDING: 80240C74 to 80240C80 (00000C74 to 00000C80)
   184:  		Call  SpeakToPlayer     ( 00000000 00210014 00210014 00000005 001200DF ) % Nooooo!!
   1A4:  		Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
   1C0:  		Call  SetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
-  1DC:  		Call  SetNpcCollisionSize   ( 00000000 0000001A 00000018 )
-  1F4:  		Call  SetNpcCollisionSize   ( 00000001 0000001A 00000018 )
+  1DC:  		Call  SetNpcCollisionSize   ( 00000000  26`  24` )
+  1F4:  		Call  SetNpcCollisionSize   ( 00000001  26`  24` )
   20C:  		Call  SetNpcFlagBits    ( 00000001 00000002 .True )
   224:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80241094 )
   238:  		Call  BindNpcHit        ( 00000001 $Script_Hit_802410C4 )
@@ -852,9 +855,9 @@ PADDING: 80240C74 to 80240C80 (00000C74 to 00000C80)
    14:  Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_80241164 )
    28:  Switch  *GB_StoryProgress
    34:  	Case  <  .Story:Ch7_DefeatedJrTroopa % 44
-   40:  		Call  SetNpcPos ( 00000000 00000258 00000000 FFFFFFBF )
+   40:  		Call  SetNpcPos ( 00000000  600`  0`  -65` )
    5C:  	Case  >=  .Story:Ch7_DefeatedJrTroopa % 44
-   68:  		Call  SetNpcPos ( 00000000 0000018F 00000006 FFFFFF9C )
+   68:  		Call  SetNpcPos ( 00000000  399`  6`  -100` )
    84:  		Call  SetNpcAnimation   ( 00000000 00210027 )
    98:  		Call  EnableModel       ( ~Model:o44 .True )
    AC:  		Call  ModifyColliderFlags   ( 00000001 ~Collider:o44 7FFFFE00 )
@@ -865,7 +868,7 @@ PADDING: 80240C74 to 80240C80 (00000C74 to 00000C80)
 
 #new:Script $Script_Init_802414CC
 {
-    0:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+    0:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    1C:  Return
    24:  End
 }
@@ -901,7 +904,7 @@ PADDING: 80240C74 to 80240C80 (00000C74 to 00000C80)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -995,20 +998,20 @@ PADDING: 80240C74 to 80240C80 (00000C74 to 00000C80)
 
 #new:NpcGroup $NpcGroup_80241F50
 {
-	00000002 $NpcSettings_80241A4C ~Vec3f:NPC_80241F50 % 200 0 0
+	.NpcID:Gulpit_02 $NpcSettings_80241A4C ~Vec3f:NPC_Gulpit_02 % 200 0 0
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:Pebble:2:SuperShroom:8
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:4
-	~Movement:NPC_80241F50
-	~AnimationTable:NPC_80241F50 % .Sprite:Gulpit
+	~Movement:NPC_Gulpit_02
+	~AnimationTable:NPC_Gulpit_02 % .Sprite:Gulpit
 	00000003 00000000 $ExtraAnimationList_80241B54 00000000 % no tattle string
 	%
 	% $NpcGroup_80241F50[1F0]
-	00000003 $NpcSettings_80241B20 ~Vec3f:NPC_80242140 % 0 -1000 0
+	.NpcID:Gulpit_03 $NpcSettings_80241B20 ~Vec3f:NPC_Gulpit_03 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80242140
-	~AnimationTable:NPC_80242140 % .Sprite:Gulpit
+	~Movement:NPC_Gulpit_03
+	~AnimationTable:NPC_Gulpit_03 % .Sprite:Gulpit
 	00000000 00000000 $ExtraAnimationList_80241B4C 00000000 % no tattle string
 }
 

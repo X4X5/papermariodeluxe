@@ -1,6 +1,9 @@
 % Script File: kkj_02.mscr
 % Decoded from: 0 to 9F0 (kkj_02)
 
+#define .NpcID:Toad_00              00
+#define .NpcID:ToadGuard_01         01
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %  -75.0    0.0    0.0   90.0
@@ -96,8 +99,8 @@ PADDING: 8024011C to 80240120 (0000011C to 00000120)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachCastleGrounds
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_802409C8 )
@@ -186,19 +189,19 @@ MISSING: 80240514 to 80240540 (00000514 to 00000540)
 
 #new:NpcGroup $NpcGroup_802405E8
 {
-	00000000 $NpcSettings_80240490 ~Vec3f:NPC_802405E8 % 0 0 -100
+	.NpcID:Toad_00 $NpcSettings_80240490 ~Vec3f:NPC_Toad_00 % 0 0 -100
 	00000D0D $Script_Init_802405A0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802405E8
-	~AnimationTable:NPC_802405E8 % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802405E8[1F0]
-	00000001 $NpcSettings_802404E8 ~Vec3f:NPC_802407D8 % 1175 110 60
+	.NpcID:ToadGuard_01 $NpcSettings_802404E8 ~Vec3f:NPC_ToadGuard_01 % 1175 110 60
 	00000D0D $Script_Init_802405C4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802407D8
-	~AnimationTable:NPC_802407D8 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_01
+	~AnimationTable:NPC_ToadGuard_01 % .Sprite:ToadGuard
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

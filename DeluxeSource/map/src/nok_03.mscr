@@ -1,6 +1,11 @@
 % Script File: nok_03.mscr
 % Decoded from: 0 to 2400 (nok_03)
 
+#define .NpcID:Fuzzy_00             00
+#define .NpcID:Fuzzy_01             01
+#define .NpcID:Fuzzy_04             04
+#define .NpcID:WorldKooper_05       05
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFA8
@@ -697,7 +702,7 @@
   20C:  LW        A1, 38 (S3)
   210:  LW        A2, 3C (S3)
   214:  LW        A3, 40 (S3)
-  218:  JAL       ~Func:fx_walk_normal
+  218:  JAL       ~Func:fx_walk
   21C:  LI        A0, 2
   220:  COPY      A0, S7
   224:  LI        V0, C
@@ -1042,8 +1047,8 @@ PADDING: 80240F08 to 80240F10 (00000F08 to 00000F10)
 {
     0:  Set   *GB_WorldLocation  .Location:KoopaVillage
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GB_StoryProgress  <  .Story:Ch1_KooperJoinedParty % FFFFFFA4
    80:  	Call  MakeNpcs  ( .False $NpcGroupList_80242368 )
@@ -1117,28 +1122,28 @@ PADDING: 802413D4 to 802413E0 (000013D4 to 000013E0)
 {
     0:  Thread
     8:  	Label  0
-   14:  	Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+   14:  	Call  GetNpcPos ( .NpcID:Fuzzy_04 *Var0 *Var1 *Var2 )
    30:  	Add   *Var2  00000002
-   40:  	Call  SetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
+   40:  	Call  SetNpcPos ( .NpcID:WorldKooper_05 *Var0 *Var1 *Var2 )
    5C:  	Wait  1`
    68:  	Goto  0
    74:  EndThread
    7C:  Label  1
    88:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   A0:  Call  GetNpcPos     ( 00000004 *Var3 *Var4 *Var5 )
+   A0:  Call  GetNpcPos     ( .NpcID:Fuzzy_04 *Var3 *Var4 *Var5 )
    BC:  Set   *Var6  *Var3
    CC:  Sub   *Var6  *Var0
    DC:  If  *Var6  <  00000064
    EC:  	Add   *Var3  00000064
-   FC:  	Call  PlaySoundAtNpc    ( 00000004 B0000017 00000000 )
-  114:  	Call  NpcJump0  ( 00000004 *Var3 *Var4 *Var5 0000000A )
+   FC:  	Call  PlaySoundAtNpc    ( .NpcID:Fuzzy_04 B0000017 00000000 )
+  114:  	Call  NpcJump0  ( .NpcID:Fuzzy_04 *Var3 *Var4 *Var5  10` )
   134:  	Set   *GB_StoryProgress  .Story:Ch1_FuzzyThiefRanAway
   144:  EndIf
   14C:  If  *Var3  >  000004B0
-  15C:  	Call  SetNpcPos ( 00000004 00000000 FFFFFC18 00000000 )
-  178:  	Call  SetNpcPos ( 00000005 00000000 FFFFFC18 00000000 )
-  194:  	Call  EnableNpcShadow   ( 00000004 .False )
-  1A8:  	Call  EnableNpcShadow   ( 00000005 .False )
+  15C:  	Call  SetNpcPos ( .NpcID:Fuzzy_04  0`  -1000`  0` )
+  178:  	Call  SetNpcPos ( .NpcID:WorldKooper_05  0`  -1000`  0` )
+  194:  	Call  EnableNpcShadow   ( .NpcID:Fuzzy_04 .False )
+  1A8:  	Call  EnableNpcShadow   ( .NpcID:WorldKooper_05 .False )
   1BC:  	Return
   1C4:  EndIf
   1CC:  Wait  1`
@@ -1160,22 +1165,22 @@ PADDING: 802413D4 to 802413E0 (000013D4 to 000013E0)
    78:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    94:  Set   *Var1  00000000
    A4:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[3.0] )
-   B8:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 00000006 )
+   B8:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  6` )
    D8:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.2] )
    EC:  Add   *Var0  00000014
    FC:  Call  PlaySoundAtNpc    ( .Npc:Self B0000017 00000000 )
-  114:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 00000008 )
+  114:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  8` )
   134:  Sub   *Var0  0000000F
   144:  Add   *Var2  00000014
   154:  Call  PlaySoundAtNpc    ( .Npc:Self B0000017 00000000 )
-  16C:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 0000000A )
+  16C:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  10` )
   18C:  Add   *Var0  00000014
   19C:  Add   *Var2  00000014
   1AC:  Call  PlaySoundAtNpc    ( .Npc:Self B0000017 00000000 )
-  1C4:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 00000008 )
+  1C4:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  8` )
   1E4:  Call  PlaySoundAtNpc    ( .Npc:Self B0000017 00000000 )
   1FC:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.8] )
-  210:  Call  NpcJump0  ( .Npc:Self FFFFFEAB 00000000 00000017 0000000F )
+  210:  Call  NpcJump0  ( .Npc:Self  -341`  0`  23`  15` )
   230:  Call  SetSelfEnemyFlagBits  ( 40000000 00000001 )
   244:  Call  BindNpcAI ( .Npc:Self $Script_NpcAI_80241410 )
   258:  Return
@@ -1194,7 +1199,7 @@ PADDING: 802413D4 to 802413E0 (000013D4 to 000013E0)
    60:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    7C:  Set   *Var1  00000000
    8C:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[3.0] )
-   A0:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 00000006 )
+   A0:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  6` )
    C0:  Call  SetSelfEnemyFlagBits  ( 40000000 00000001 )
    D4:  Call  BindNpcAI ( .Npc:Self $Script_NpcAI_80241410 )
    E8:  Return
@@ -1220,12 +1225,12 @@ PADDING: 802413D4 to 802413E0 (000013D4 to 000013E0)
 #new:Script $Script_Init_80241A9C
 {
     0:  If  *GB_StoryProgress  >=  .Story:Ch1_FuzzyThiefRanAway % FFFFFFA2
-   10:  	Call  SetNpcFlagBits    ( 00000004 00000200 .False )
-   28:  	Call  SetNpcFlagBits    ( 00000005 00000200 .False )
-   40:  	Call  SetNpcPos ( 00000004 00000000 FFFFFC18 00000000 )
-   5C:  	Call  SetNpcPos ( 00000005 00000000 FFFFFC18 00000000 )
-   78:  	Call  EnableNpcShadow   ( 00000004 .False )
-   8C:  	Call  EnableNpcShadow   ( 00000005 .False )
+   10:  	Call  SetNpcFlagBits    ( .NpcID:Fuzzy_04 00000200 .False )
+   28:  	Call  SetNpcFlagBits    ( .NpcID:WorldKooper_05 00000200 .False )
+   40:  	Call  SetNpcPos ( .NpcID:Fuzzy_04  0`  -1000`  0` )
+   5C:  	Call  SetNpcPos ( .NpcID:WorldKooper_05  0`  -1000`  0` )
+   78:  	Call  EnableNpcShadow   ( .NpcID:Fuzzy_04 .False )
+   8C:  	Call  EnableNpcShadow   ( .NpcID:WorldKooper_05 .False )
    A0:  	Return
    A8:  EndIf
    B0:  Call  BindNpcIdle   ( .Npc:Self $Script_Idle_802414D0 )
@@ -1243,39 +1248,39 @@ PADDING: 802413D4 to 802413E0 (000013D4 to 000013E0)
 
 #new:NpcGroup $NpcGroup_80241BA8
 {
-	00000000 $NpcSettings_8024144C ~Vec3f:NPC_80241BA8 % -388 100 -107
+	.NpcID:Fuzzy_00 $NpcSettings_8024144C ~Vec3f:NPC_Fuzzy_00 % -388 100 -107
 	00400400 $Script_Init_80241A24 00000000 00000000 00000000
 	~NoItems ~HP:Standard:2 ~FP:SlightlyReduced:2 ~CoinBonus:0:1
-	~Movement:NPC_80241BA8
-	~AnimationTable:NPC_80241BA8 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_00
+	~AnimationTable:NPC_Fuzzy_00 % .Sprite:Fuzzy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241D98
 {
-	00000001 $NpcSettings_8024144C ~Vec3f:NPC_80241D98 % -76 118 -43
+	.NpcID:Fuzzy_01 $NpcSettings_8024144C ~Vec3f:NPC_Fuzzy_01 % -76 118 -43
 	00400400 $Script_Init_80241A60 00000000 00000000 00000000
 	~NoItems ~HP:Standard:2 ~FP:SlightlyReduced:2 ~CoinBonus:0:1
-	~Movement:NPC_80241D98
-	~AnimationTable:NPC_80241D98 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_01
+	~AnimationTable:NPC_Fuzzy_01 % .Sprite:Fuzzy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241F88
 {
-	00000004 $NpcSettings_80241478 ~Vec3f:NPC_80241F88 % -540 0 0
+	.NpcID:Fuzzy_04 $NpcSettings_80241478 ~Vec3f:NPC_Fuzzy_04 % -540 0 0
 	00400B09 $Script_Init_80241A9C 00000000 00000000 00000000
 	~NoItems ~HP:Standard:2 ~FP:SlightlyReduced:2 ~CoinBonus:0:1
-	~Movement:NPC_80241F88
-	~AnimationTable:NPC_80241F88 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_04
+	~AnimationTable:NPC_Fuzzy_04 % .Sprite:Fuzzy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241F88[1F0]
-	00000005 $NpcSettings_802414A4 ~Vec3f:NPC_80242178 % 0 0 0
+	.NpcID:WorldKooper_05 $NpcSettings_802414A4 ~Vec3f:NPC_WorldKooper_05 % 0 0 0
 	00400B09 $Script_Init_80241B70 00000000 00000000 00000000
 	~NoItems ~HP:Standard:2 ~FP:SlightlyReduced:2 ~CoinBonus:0:1
-	~Movement:NPC_80242178
-	~AnimationTable:NPC_80242178 % .Sprite:WorldKooper
+	~Movement:NPC_WorldKooper_05
+	~AnimationTable:NPC_WorldKooper_05 % .Sprite:WorldKooper
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

@@ -587,7 +587,7 @@
   368:  JAL       ~Func:set_action_state
   36C:  SWC1      F0, C (S2)
   370:  LI        A0, 00010002
-  374:  JAL       ~Func:suggest_player_anim
+  374:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   378:  RESERVED
   37C:  LW        V0, 70 (S4)
   380:  ADDIU     V0, V0, 1
@@ -671,7 +671,7 @@
   4C4:  JAL       8003D624
   4C8:  SW        R0, 18 (SP)
   4CC:  LI        A0, 00010014
-  4D0:  JAL       800DFF78
+  4D0:  JAL       ~Func:suggest_player_anim_setUnkFlag
   4D4:  RESERVED
   4D8:  LI        A0, 200E
   4DC:  CLEAR     A1

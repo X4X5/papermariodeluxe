@@ -207,10 +207,10 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   10C:  Call  GetActorVar   ( .Actor:Self 00000000 *Var0 )
   124:  If  *Var0  ==  00000000
   134:  	Set   *Var0  0000000A
-  144:  	Call  SetPartPos    ( .Actor:Self 0000000E *Var0 000000C8 00000000 )
-  164:  	Call  SetPartPos    ( .Actor:Self 0000000D *Var0 000000C8 00000000 )
-  184:  	Call  SetPartPos    ( .Actor:Self 0000000C *Var0 000000C8 00000000 )
-  1A4:  	Call  SetPartPos    ( .Actor:Self 0000000B *Var0 000000C8 00000000 )
+  144:  	Call  SetPartPos    ( .Actor:Self 0000000E *Var0  200`  0` )
+  164:  	Call  SetPartPos    ( .Actor:Self 0000000D *Var0  200`  0` )
+  184:  	Call  SetPartPos    ( .Actor:Self 0000000C *Var0  200`  0` )
+  1A4:  	Call  SetPartPos    ( .Actor:Self 0000000B *Var0  200`  0` )
   1C4:  	Thread
   1CC:  		Wait  5`
   1D8:  		Call  PlaySoundAtPart   ( .Actor:Self 0000000E 00000301 )
@@ -220,7 +220,7 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   218:  		Call  SetPartFlagBits   ( .Actor:Self 0000000E 00000001 .False )
   234:  		Call  SetPartJumpGravity    ( .Actor:Self 0000000E *Fixed[1.0] )
   24C:  		Call  SetPartSounds     ( .Actor:Self 0000000E .ActorSound:Jump 00000000 00000000 )
-  26C:  		Call  FallPartTo        ( .Actor:Self 0000000E *Var0 00000000 00000000 00000024 )
+  26C:  		Call  FallPartTo        ( .Actor:Self 0000000E *Var0  0`  0`  36` )
   290:  		Call  PlaySoundAtPart   ( .Actor:Self 0000000E 00002064 )
   2A8:  		Call  SetAnimation      ( .Actor:Self 0000000E 003B0007 )
   2C0:  	EndThread
@@ -234,7 +234,7 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   328:  		Call  SetPartFlagBits   ( .Actor:Self 0000000D 00000001 .False )
   344:  		Call  SetPartJumpGravity    ( .Actor:Self 0000000D *Fixed[1.0] )
   35C:  		Call  SetPartSounds     ( .Actor:Self 0000000D .ActorSound:Jump 00000000 00000000 )
-  37C:  		Call  FallPartTo        ( .Actor:Self 0000000D *Var0 00000012 00000000 00000020 )
+  37C:  		Call  FallPartTo        ( .Actor:Self 0000000D *Var0  18`  0`  32` )
   3A0:  		Call  PlaySoundAtPart   ( .Actor:Self 0000000D 00002064 )
   3B8:  		Call  SetAnimation      ( .Actor:Self 0000000D 003B0007 )
   3D0:  		Call  SetPartScale      ( .Actor:Self 0000000E *Fixed[1.1] *Fixed[0.9] *Fixed[1.0] )
@@ -259,7 +259,7 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   55C:  		Call  SetPartFlagBits   ( .Actor:Self 0000000C 00000001 .False )
   578:  		Call  SetPartJumpGravity    ( .Actor:Self 0000000C *Fixed[1.0] )
   590:  		Call  SetPartSounds     ( .Actor:Self 0000000C .ActorSound:Jump 00000000 00000000 )
-  5B0:  		Call  FallPartTo        ( .Actor:Self 0000000C *Var0 00000024 00000000 0000001C )
+  5B0:  		Call  FallPartTo        ( .Actor:Self 0000000C *Var0  36`  0`  28` )
   5D4:  		Call  PlaySoundAtPart   ( .Actor:Self 0000000C 00002064 )
   5EC:  		Call  SetAnimation      ( .Actor:Self 0000000C 003B0007 )
   604:  		Call  SetPartScale      ( .Actor:Self 0000000E *Fixed[1.1] *Fixed[0.9] *Fixed[1.0] )
@@ -292,7 +292,7 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   890:  		Call  SetPartFlagBits   ( .Actor:Self 0000000B 00000001 .False )
   8AC:  		Call  SetPartJumpGravity    ( .Actor:Self 0000000B *Fixed[1.0] )
   8C4:  		Call  SetPartSounds     ( .Actor:Self 0000000B .ActorSound:Jump 00000000 00000000 )
-  8E4:  		Call  FallPartTo        ( .Actor:Self 0000000B *Var0 00000036 00000000 00000018 )
+  8E4:  		Call  FallPartTo        ( .Actor:Self 0000000B *Var0  54`  0`  24` )
   908:  		Call  PlaySoundAtPart   ( .Actor:Self 0000000B 00002064 )
   920:  		Call  SetAnimation      ( .Actor:Self 0000000B 003B0007 )
   938:  		Call  SetPartScale      ( .Actor:Self 0000000E *Fixed[1.1] *Fixed[0.9] *Fixed[1.0] )
@@ -335,16 +335,16 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   D54:  		Call  UseIdleAnimation  ( .Actor:Self .True )
   D68:  	EndThread
   D70:  Else
-  D78:  	Call  SetPartPos    ( .Actor:Self 0000000E 000000C8 00000000 0000002F )
-  D98:  	Call  SetPartPos    ( .Actor:Self 0000000D 000000C8 00000000 0000002F )
-  DB8:  	Call  SetPartPos    ( .Actor:Self 0000000C 000000C8 00000000 0000002F )
-  DD8:  	Call  SetPartPos    ( .Actor:Self 0000000B 000000C8 00000000 0000002F )
+  D78:  	Call  SetPartPos    ( .Actor:Self 0000000E  200`  0`  47` )
+  D98:  	Call  SetPartPos    ( .Actor:Self 0000000D  200`  0`  47` )
+  DB8:  	Call  SetPartPos    ( .Actor:Self 0000000C  200`  0`  47` )
+  DD8:  	Call  SetPartPos    ( .Actor:Self 0000000B  200`  0`  47` )
   DF8:  	Thread
   E00:  		Call  SetAnimation  ( .Actor:Self 0000000E 003B0004 )
   E18:  		Call  SetPartFlagBits   ( .Actor:Self 0000000E 00000001 .False )
   E34:  		Call  SetPartMoveSpeed  ( .Actor:Self 0000000E *Fixed[4.0] )
-  E4C:  		Call  RunPartTo     ( .Actor:Self 0000000E 00000037 00000000 0000002F .False )
-  E70:  		Call  RunPartTo     ( .Actor:Self 0000000E 00000032 00000000 00000000 .False )
+  E4C:  		Call  RunPartTo     ( .Actor:Self 0000000E  55`  0`  47` .False )
+  E70:  		Call  RunPartTo     ( .Actor:Self 0000000E  50`  0`  0` .False )
   E94:  		Call  SetAnimation  ( .Actor:Self 0000000E 003B0007 )
   EAC:  	EndThread
   EB4:  	Thread
@@ -352,10 +352,10 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   EC8:  		Call  SetAnimation      ( .Actor:Self 0000000D 003B0004 )
   EE0:  		Call  SetPartFlagBits   ( .Actor:Self 0000000D 00000001 .False )
   EFC:  		Call  SetPartMoveSpeed  ( .Actor:Self 0000000D *Fixed[4.0] )
-  F14:  		Call  RunPartTo ( .Actor:Self 0000000D 00000037 00000000 0000002F 00000024 )
+  F14:  		Call  RunPartTo ( .Actor:Self 0000000D  55`  0`  47` 00000024 )
   F38:  		Call  SetAnimation      ( .Actor:Self 0000000D 003B0009 )
   F50:  		Call  SetPartJumpGravity    ( .Actor:Self 0000000D *Fixed[1.0] )
-  F68:  		Call  JumpPartTo        ( .Actor:Self 0000000D 00000032 00000012 00000000 00000014 .True )
+  F68:  		Call  JumpPartTo        ( .Actor:Self 0000000D  50`  18`  0`  20` .True )
   F90:  		Call  PlaySoundAtPart   ( .Actor:Self 0000000D 00002064 )
   FA8:  		Call  SetAnimation      ( .Actor:Self 0000000D 003B0007 )
   FC0:  		Call  SetPartScale      ( .Actor:Self 0000000E *Fixed[1.1] *Fixed[0.9] *Fixed[1.0] )
@@ -379,10 +379,10 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
  1134:  		Call  SetAnimation      ( .Actor:Self 0000000C 003B0004 )
  114C:  		Call  SetPartFlagBits   ( .Actor:Self 0000000C 00000001 .False )
  1168:  		Call  SetPartMoveSpeed  ( .Actor:Self 0000000C *Fixed[4.0] )
- 1180:  		Call  RunPartTo ( .Actor:Self 0000000C 00000037 00000000 0000002F 00000024 )
+ 1180:  		Call  RunPartTo ( .Actor:Self 0000000C  55`  0`  47` 00000024 )
  11A4:  		Call  SetAnimation      ( .Actor:Self 0000000C 003B0009 )
  11BC:  		Call  SetPartJumpGravity    ( .Actor:Self 0000000C *Fixed[1.0] )
- 11D4:  		Call  JumpPartTo        ( .Actor:Self 0000000C 00000032 00000024 00000000 00000014 .True )
+ 11D4:  		Call  JumpPartTo        ( .Actor:Self 0000000C  50`  36`  0`  20` .True )
  11FC:  		Call  PlaySoundAtPart   ( .Actor:Self 0000000C 00002064 )
  1214:  		Call  SetAnimation      ( .Actor:Self 0000000C 003B0007 )
  122C:  		Call  SetPartScale      ( .Actor:Self 0000000E *Fixed[1.1] *Fixed[0.9] *Fixed[1.0] )
@@ -427,9 +427,9 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
  159C:  		Add   *Var0  FFFFFFEC
  15AC:  		Add   *Var1  00000012
  15BC:  		Call  SetPartJumpGravity    ( .Actor:Self 0000000B *Fixed[0.6] )
- 15D4:  		Call  JumpPartTo        ( .Actor:Self 0000000B *Var0 *Var1 *Var2 00000014 .True )
+ 15D4:  		Call  JumpPartTo        ( .Actor:Self 0000000B *Var0 *Var1 *Var2  20` .True )
  15FC:  		Call  SetPartJumpGravity    ( .Actor:Self 0000000B *Fixed[0.3] )
- 1614:  		Call  JumpPartTo        ( .Actor:Self 0000000B 00000032 00000036 00000000 0000001E .True )
+ 1614:  		Call  JumpPartTo        ( .Actor:Self 0000000B  50`  54`  0`  30` .True )
  163C:  		Call  PlaySoundAtPart   ( .Actor:Self 0000000B 00002064 )
  1654:  		Call  SetAnimation      ( .Actor:Self 0000000B 003B0007 )
  166C:  		Call  SetAnimation      ( .Actor:Enemy0 00000001 00760004 )
@@ -772,12 +772,12 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   15C:  EndIf
   164:  Call  SetGoalToTarget       ( .Actor:Self )
   174:  Call  GetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  190:  Call  SetGoalPos    ( .Actor:Self *Var0 00000000 *Var2 )
+  190:  Call  SetGoalPos    ( .Actor:Self *Var0  0` *Var2 )
   1AC:  Call  SetActorJumpGravity   ( .Actor:Self *Fixed[0.1] )
   1C0:  Call  SetActorSpeed ( .Actor:Self *Fixed[7.0] )
-  1D4:  Call  JumpToGoal    ( .Actor:Self 00000000 .False .True .False )
+  1D4:  Call  JumpToGoal    ( .Actor:Self  0` .False .True .False )
   1F4:  Thread
-  1FC:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
+  1FC:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
   218:  EndThread
   220:  Call  SetGoalToTarget   ( .Actor:Self )
   230:  Call  GetOwnerTarget    ( *Var0 *Var1 )
@@ -809,18 +809,18 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   410:  If  *Var4  <=  *Var6
   420:  	Set   *Var4  *Var6
   430:  	Call  SetGoalPos    ( .Actor:Self *Var4 *Var1 *Var2 )
-  44C:  	Call  JumpToGoal    ( .Actor:Self 0000000C .False .True .False )
+  44C:  	Call  JumpToGoal    ( .Actor:Self  12` .False .True .False )
   46C:  Else
   474:  	Call  SetGoalPos    ( .Actor:Self *Var4 *Var1 *Var2 )
-  490:  	Call  JumpToGoal    ( .Actor:Self 0000000C .False .True .False )
+  490:  	Call  JumpToGoal    ( .Actor:Self  12` .False .True .False )
   4B0:  	Call  SetGoalToHome ( .Actor:Self )
   4C0:  	Call  GetGoalPos    ( .Actor:Self *Var4 *Var7 *Var8 )
   4DC:  	Call  SetActorJumpGravity   ( .Actor:Self *Fixed[1.0] )
   4F0:  	Call  SetGoalPos    ( .Actor:Self *Var4 *Var1 *Var2 )
-  50C:  	Call  JumpToGoal    ( .Actor:Self 0000000C .False .True .False )
+  50C:  	Call  JumpToGoal    ( .Actor:Self  12` .False .True .False )
   52C:  EndIf
   534:  Kill  *VarE
-  540:  Call  SetActorYaw   ( .Actor:Self 00000000 )
+  540:  Call  SetActorYaw   ( .Actor:Self  0` )
   554:  Wait  10`
   560:  Return
   568:  End
@@ -844,9 +844,9 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   10C:  		Call  SetPartFlagBits   ( .Actor:Self 00000002 00020000 .True )
   128:  		Call  SetPartFlagBits   ( .Actor:Self 00000003 00020000 .False )
   144:  		Call  SetPartFlagBits   ( .Actor:Self 00000003 00800000 .True )
-  160:  		Call  SetActorSize  ( .Actor:Self 0000003E F1194D80 )
+  160:  		Call  SetActorSize  ( .Actor:Self  62`  -250000000` )
   178:  		Call  8026DA94      ( FFFFFF81 00000000 FFFFFFEC 00000000 FFFFFFEC )
-  198:  		Call  SetPartSize   ( .Actor:Self 00000001 00000039 0000001E )
+  198:  		Call  SetPartSize   ( .Actor:Self 00000001  57`  30` )
   1B4:  	Case  ==  00000001
   1C0:  		Call  SetActorVar   ( .Actor:Self 00000008 00000002 )
   1D8:  		Call  SetActorVar   ( .Actor:Self 00000001 00720002 )
@@ -860,9 +860,9 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   29C:  		Call  SetPartFlagBits   ( .Actor:Self 00000003 00020000 .True )
   2B8:  		Call  SetPartFlagBits   ( .Actor:Self 00000004 00020000 .False )
   2D4:  		Call  SetPartFlagBits   ( .Actor:Self 00000004 00800000 .True )
-  2F0:  		Call  SetActorSize  ( .Actor:Self 0000002C F1194D80 )
+  2F0:  		Call  SetActorSize  ( .Actor:Self  44`  -250000000` )
   308:  		Call  8026DA94      ( FFFFFF81 00000000 FFFFFFD8 00000000 FFFFFFD8 )
-  328:  		Call  SetPartSize   ( .Actor:Self 00000001 00000027 0000001E )
+  328:  		Call  SetPartSize   ( .Actor:Self 00000001  39`  30` )
   344:  	Case  ==  00000002
   350:  		Call  SetActorVar   ( .Actor:Self 00000008 00000003 )
   368:  		Call  SetActorVar   ( .Actor:Self 00000001 00720003 )
@@ -876,9 +876,9 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   42C:  		Call  SetPartFlagBits   ( .Actor:Self 00000004 00020000 .True )
   448:  		Call  SetPartFlagBits   ( .Actor:Self 00000005 00020000 .False )
   464:  		Call  SetPartFlagBits   ( .Actor:Self 00000005 00800000 .True )
-  480:  		Call  SetActorSize  ( .Actor:Self 0000001A F1194D80 )
+  480:  		Call  SetActorSize  ( .Actor:Self  26`  -250000000` )
   498:  		Call  8026DA94      ( FFFFFF81 00000000 FFFFFFC4 00000000 FFFFFFC4 )
-  4B8:  		Call  SetPartSize   ( .Actor:Self 00000001 00000015 0000001E )
+  4B8:  		Call  SetPartSize   ( .Actor:Self 00000001  21`  30` )
   4D4:  EndSwitch
   4DC:  Return
   4E4:  End
@@ -983,9 +983,9 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   328:  Call  $Function_80231000    ( $ASCII_80236788 *Var0 )
   33C:  Call  $Function_80231000    ( $ASCII_80236784 *Var1 )
   350:  Call  $Function_80231000    ( $ASCII_80236780 *Var2 )
-  364:  Call  JumpPartTo    ( .Actor:Self 0000000A *Var0 *Var1 *Var2 00000000 .True )
+  364:  Call  JumpPartTo    ( .Actor:Self 0000000A *Var0 *Var1 *Var2  0` .True )
   38C:  Thread
-  394:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
+  394:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
   3B0:  EndThread
   3B8:  Call  SetGoalToTarget   ( .Actor:Self )
   3C8:  Call  GetOwnerTarget    ( *Var0 *Var1 )
@@ -1011,7 +1011,7 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   53C:  Sub   *Var4  00000012
   54C:  Call  SetPartJumpGravity    ( .Actor:Self 0000000A *Fixed[1.5] )
   564:  Call  SetPartMoveSpeed  ( .Actor:Self 0000000A *Fixed[3.0] )
-  57C:  Call  JumpPartTo        ( .Actor:Self 0000000A *Var4 *Var1 *Var2 0000000C .True )
+  57C:  Call  JumpPartTo        ( .Actor:Self 0000000A *Var4 *Var1 *Var2  12` .True )
   5A4:  Call  SetPartFlagBits   ( .Actor:Self 0000000A 00020000 .True )
   5C0:  Call  GetPartOffset     ( .Actor:Self 0000000A *Var0 *Var1 *Var2 )
   5E0:  Add   *Var1  0000000A
@@ -1082,7 +1082,7 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   33C:  Call  JumpPartTo    ( .Actor:Self 0000000A *Var4 *Var1 *Var2 *Var5 .True )
   364:  Set   *Var1  00000000
   374:  Sub   *Var0  0000000A
-  384:  Call  JumpPartTo    ( .Actor:Self 0000000A *Var0 *Var1 *Var2 0000000A .True )
+  384:  Call  JumpPartTo    ( .Actor:Self 0000000A *Var0 *Var1 *Var2  10` .True )
   3AC:  Wait  20`
   3B8:  Call  GetPartOffset ( .Actor:Self 0000000A *Var0 *Var1 *Var2 )
   3D8:  Add   *Var1  0000000A
@@ -1125,7 +1125,7 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
    28:  Call  SetTargetActor    ( .Actor:Self .Actor:Player )
    3C:  Call  UseBattleCamPreset    ( 0000003F )
    4C:  Call  BattleCamTargetActor  ( .Actor:Self )
-   5C:  Call  MoveBattleCamOver ( 00000014 )
+   5C:  Call  MoveBattleCamOver (  20` )
    6C:  Call  8024ECF8  ( FFFFFFFF 00000001 00000000 )
    84:  Call  GetActorVar       ( .Actor:Self 00000006 *Var0 )
    9C:  Call  SetAnimation      ( .Actor:Self 00000001 *Var0 )
@@ -1199,7 +1199,7 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   4FC:  Set   *VarF  *Var0
   50C:  Switch  *VarF
   518:  	CaseOR  ==  .HitResult:Hit % 0
-  524:  	CaseOR  ==  00000002 % 2
+  524:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   530:  	CaseOR  ==  0000000A % A
   53C:  		Call  UseBattleCamPreset    ( 00000002 )
   54C:  		Wait  15`
@@ -1276,13 +1276,13 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   430:  Call  SetPartJumpGravity    ( .Actor:Self *Var2 *Fixed[1.0] )
   448:  Switch  *Var1
   454:  	Case  ==  00000000
-  460:  		Call  JumpPartTo        ( .Actor:Self *Var2 *Var6 *Var7 *Var8 00000009 .True )
+  460:  		Call  JumpPartTo        ( .Actor:Self *Var2 *Var6 *Var7 *Var8  9` .True )
   488:  		Sub   *Var6  00000064
   498:  		Call  RandInt   ( 00000028 *Var9 )
   4AC:  		Sub   *Var6  *Var9
   4BC:  		Add   *Var7  *Var9
   4CC:  		Call  SetPartJumpGravity    ( .Actor:Self *Var2 *Fixed[0.8] )
-  4E4:  		Call  JumpPartTo        ( .Actor:Self *Var2 *Var6 *Var7 *Var8 00000019 .True )
+  4E4:  		Call  JumpPartTo        ( .Actor:Self *Var2 *Var6 *Var7 *Var8  25` .True )
   50C:  		Call  SetPartFlagBits   ( .Actor:Self *Var2 00000001 .True )
   528:  	Case  ==  00000001
   534:  		Switch  *Var0
@@ -1299,13 +1299,13 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
   5E4:  		Call  RandInt       ( 00000023 *Var9 )
   5F8:  		Add   *Var9  0000001E
   608:  		Sub   *Var6  *Var9
-  618:  		Call  JumpPartTo    ( .Actor:Self *Var2 *Var6 *Var7 *Var8 00000009 .True )
+  618:  		Call  JumpPartTo    ( .Actor:Self *Var2 *Var6 *Var7 *Var8  9` .True )
   640:  		Call  RandInt       ( 00000019 *Var9 )
   654:  		Add   *Var9  0000002D
   664:  		Sub   *Var6  *Var9
-  674:  		Call  JumpPartTo    ( .Actor:Self *Var2 *Var6 *Var7 *Var8 00000008 .True )
+  674:  		Call  JumpPartTo    ( .Actor:Self *Var2 *Var6 *Var7 *Var8  8` .True )
   69C:  		Sub   *Var6  00000019
-  6AC:  		Call  JumpPartTo    ( .Actor:Self *Var2 *Var6 *Var7 *Var8 00000004 .True )
+  6AC:  		Call  JumpPartTo    ( .Actor:Self *Var2 *Var6 *Var7 *Var8  4` .True )
   6D4:  		Call  SetPartFlagBits   ( .Actor:Self *Var2 00000001 .True )
   6F0:  EndSwitch
   6F8:  Return
@@ -1340,14 +1340,14 @@ PADDING: 80231024 to 80231030 (0054CC94 to 0054CCA0)
    6C:  	Add   *Var2  0000001E
    7C:  	Wait  1`
    88:  EndLoop
-   90:  Call  SetActorYaw   ( .Actor:Self 00000000 )
+   90:  Call  SetActorYaw   ( .Actor:Self  0` )
    A4:  Call  GetActorPos   ( .Actor:Self *Var0 *Var1 *Var2 )
    C0:  Add   *Var1  0000000A
    D0:  Call  PlaySoundAtActor  ( .Actor:Self .Sound:Death )
    E4:  Call  PlayEffect    ( ~FX:BigSmokePuff *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   128:  Call  PlaySound     ( 000003E5 )
   138:  Call  DropStarPoints    ( .Actor:Self )
-  148:  Call  SetActorYaw   ( .Actor:Self 00000000 )
+  148:  Call  SetActorYaw   ( .Actor:Self  0` )
   15C:  Set   *Var3  00000000
   16C:  Loop  0000000C
   178:  	Call  SetActorRotation  ( .Actor:Self *Var3 00000000 00000000 )

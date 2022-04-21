@@ -1,6 +1,8 @@
 % Script File: kpa_81.mscr
 % Decoded from: 0 to 2040 (kpa_81)
 
+#define .NpcID:Toad_00              00
+
 #new:Function_Init $Function_Init
 {
     0:  ADDIU     SP, SP, FFE8
@@ -446,8 +448,8 @@ PADDING: 80240528 to 80240530 (00000528 to 00000530)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80241FE0 )
@@ -628,7 +630,7 @@ MISSING: 80240D6C to 80240D98 (00000D6C to 00000D98)
    5C:  	Call  SetCamType    ( .Cam:Default 00000006 .False )
    74:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    8C:  	Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
-   A8:  	Call  SetPanTarget  ( .Cam:Default 0000006D 00000000 000000CA )
+   A8:  	Call  SetPanTarget  ( .Cam:Default  109`  0`  202` )
    C4:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
    D8:  	Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-10.0] )
    F0:  	Call  SetCamDistance        ( .Cam:Default *Fixed[500.0] )
@@ -654,11 +656,11 @@ MISSING: 80240D6C to 80240D98 (00000D6C to 00000D98)
   248:  Call  DisablePlayerInput    ( .True )
   258:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   270:  Call  SetPlayerSpeed    ( *Fixed[2.0] )
-  280:  Call  PlayerMoveTo  ( FFFFFF8D *Var2 00000000 )
+  280:  Call  PlayerMoveTo  (  -115` *Var2  0` )
   298:  Call  SetCamType    ( .Cam:Default 00000006 .False )
   2B0:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   2C8:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-  2E4:  Call  SetPanTarget  ( .Cam:Default 0000006D 00000000 000000CA )
+  2E4:  Call  SetPanTarget  ( .Cam:Default  109`  0`  202` )
   300:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   314:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-10.0] )
   32C:  Call  SetCamDistance    ( .Cam:Default *Fixed[500.0] )
@@ -723,7 +725,7 @@ MISSING: 80240D6C to 80240D98 (00000D6C to 00000D98)
   734:  Thread
   73C:  	Call  DisablePartnerAI  ( 00000000 )
   74C:  	Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
-  764:  	Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2 0000000A )
+  764:  	Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2  10` )
   780:  	Call  EnablePartnerAI ( )
   78C:  EndThread
   794:  Call  SpeakToPlayer ( .Npc:Self 00830001 00830001 00000000 00130005 ) % Are you standing squarely in front of me? OK... Th ...
@@ -733,7 +735,7 @@ MISSING: 80240D6C to 80240D98 (00000D6C to 00000D98)
   7D8:  Thread
   7E0:  	Call  DisablePartnerAI  ( 00000000 )
   7F0:  	Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
-  808:  	Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2 0000000A )
+  808:  	Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2  10` )
   824:  	Call  EnablePartnerAI ( )
   830:  EndThread
   838:  Call  ContinueSpeech    ( .Npc:Self 00830001 00830001 00000000 00130006 ) % Are you standing squarely in front of me? OK... Th ...
@@ -741,7 +743,7 @@ MISSING: 80240D6C to 80240D98 (00000D6C to 00000D98)
   864:  Call  SetCamType    ( .Cam:Default 00000006 .False )
   87C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   894:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-  8B0:  Call  SetPanTarget  ( .Cam:Default 000000A3 FFFFFFB9 0000006C )
+  8B0:  Call  SetPanTarget  ( .Cam:Default  163`  -71`  108` )
   8CC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   8E0:  Call  SetCamPitch   ( .Cam:Default *Fixed[20.0] *Fixed[-16.0] )
   8F8:  Call  SetCamDistance    ( .Cam:Default *Fixed[500.0] )
@@ -800,18 +802,18 @@ MISSING: 80240D6C to 80240D98 (00000D6C to 00000D98)
     0:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80241178 )
    14:  Call  SetNpcFlagBits    ( .Npc:Self 10000102 .True )
    2C:  Call  EnableNpcShadow   ( .Npc:Self .False )
-   40:  Call  SetNpcPos ( .Npc:Self 000000B8 00000014 00000096 )
+   40:  Call  SetNpcPos ( .Npc:Self  184`  20`  150` )
    5C:  Return
    64:  End
 }
 
 #new:NpcGroup $NpcGroup_80241DF0
 {
-	00000000 $NpcSettings_80240D40 ~Vec3f:NPC_80241DF0 % 0 -1000 0
+	.NpcID:Toad_00 $NpcSettings_80240D40 ~Vec3f:NPC_Toad_00 % 0 -1000 0
 	03504D08 $Script_Init_80241D84 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241DF0
-	~AnimationTable:NPC_80241DF0 % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

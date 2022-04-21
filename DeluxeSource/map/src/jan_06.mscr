@@ -1,6 +1,13 @@
 % Script File: jan_06.mscr
 % Decoded from: 0 to 7040 (jan_06)
 
+#define .NpcID:Fuzzy_00             00
+#define .NpcID:JungleGuy_01         01
+#define .NpcID:JungleGuy_02         02
+#define .NpcID:HeartPlant_03        03
+#define .NpcID:HurtPlant_04         04
+#define .NpcID:HurtPlant_05         05
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1225,7 +1232,7 @@ PADDING: 8024073C to 80240740 (0000073C to 00000740)
   20C:  LW        A1, 38 (S3)
   210:  LW        A2, 3C (S3)
   214:  LW        A3, 40 (S3)
-  218:  JAL       ~Func:fx_walk_normal
+  218:  JAL       ~Func:fx_walk
   21C:  LI        A0, 2
   220:  COPY      A0, S7
   224:  LI        V0, C
@@ -2752,8 +2759,8 @@ PADDING: 802425DC to 802425E0 (000025DC to 000025E0)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer      ( .Cam:Default .False )
    84:  Call  SetZoneEnabled        ( ~Zone:o59 .False )
@@ -2782,7 +2789,7 @@ PADDING: 802425DC to 802425E0 (000025DC to 000025E0)
   254:  Exec  $Script_80243F68
   260:  Call  SetMusicTrack ( 00000000 .Song:JadeJungle 00000000 00000008 )
   27C:  Call  ClearAmbientSounds    ( 000000FA )
-  28C:  Call  802C971C  ( 0000008A )
+  28C:  Call  MakeTransformGroup    ( ~Model:g14 )
   29C:  Call  EnableTexPanning      ( ~Model:o61 .True )
   2B0:  Thread
   2B8:  	Set   *Var0  00000001
@@ -2816,8 +2823,8 @@ PADDING: 8024302C to 80243030 (0000302C to 00003030)
 #new:Script $Script_80243038
 {
     0:  Thread
-    8:  	Call  ShakeCam  ( .Cam:Default 00000000 00000019 *Fixed[0.8] )
-   24:  	Call  ShakeCam  ( .Cam:Default 00000000 00000019 *Fixed[0.7] )
+    8:  	Call  ShakeCam  ( .Cam:Default 00000000  25` *Fixed[0.8] )
+   24:  	Call  ShakeCam  ( .Cam:Default 00000000  25` *Fixed[0.7] )
    40:  EndThread
    48:  Call  MakeLerp  ( 00000001 00000005 00000032 .Easing:CubicIn )
    64:  Set   *Var2  00000001
@@ -2835,9 +2842,9 @@ PADDING: 8024302C to 80243030 (0000302C to 00003030)
   138:  	EndIf
   140:  EndLoop
   148:  Thread
-  150:  	Call  ShakeCam  ( .Cam:Default 00000000 00000019 *Fixed[0.6] )
-  16C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000019 *Fixed[0.5] )
-  188:  	Call  ShakeCam  ( .Cam:Default 00000000 00000019 *Fixed[0.4] )
+  150:  	Call  ShakeCam  ( .Cam:Default 00000000  25` *Fixed[0.6] )
+  16C:  	Call  ShakeCam  ( .Cam:Default 00000000  25` *Fixed[0.5] )
+  188:  	Call  ShakeCam  ( .Cam:Default 00000000  25` *Fixed[0.4] )
   1A4:  EndThread
   1AC:  Call  MakeLerp  ( 00000005 00000000 0000004B .Easing:CubicOut )
   1C8:  Loop
@@ -2876,7 +2883,7 @@ PADDING: 8024302C to 80243030 (0000302C to 00003030)
    2C:  Call  PlaySoundAt       ( 80000010 00000000 *Var0 *Var1 *Var2 )
    4C:  Exec  $Script_802432E4 *Var9
    5C:  Thread
-   64:  	Call  ShakeCam  ( .Cam:Default 00000000 000000B4 *Fixed[0.4] )
+   64:  	Call  ShakeCam  ( .Cam:Default 00000000  180` *Fixed[0.4] )
    80:  EndThread
    88:  Call  MakeLerp  ( 00000000 FFFFFF9C 000000B4 .Easing:CubicIn )
    A4:  Loop
@@ -2889,7 +2896,7 @@ PADDING: 8024302C to 80243030 (0000302C to 00003030)
   130:  		BreakLoop
   138:  	EndIf
   140:  EndLoop
-  148:  Call  ShakeCam  ( .Cam:Default 00000000 0000000F *Fixed[1.0] )
+  148:  Call  ShakeCam  ( .Cam:Default 00000000  15` *Fixed[1.0] )
   164:  Kill  *Var9
   170:  Call  StopSound ( 80000010 )
   180:  Call  StopSound ( 80000018 )
@@ -2909,7 +2916,7 @@ PADDING: 8024302C to 80243030 (0000302C to 00003030)
    1C:  Call  ShowKeyChoicePopup ( )
    28:  If  *Var0  <=  00000000
    38:  	If  *Var0  ==  00000000
-   48:  		Call  ShowMessageAtScreenPos    ( 001D015B 000000A0 00000028 ) % It's a statue of Raphael the Raven! Maybe you can  ...
+   48:  		Call  ShowMessageAtScreenPos    ( 001D015B  160`  40` ) % It's a statue of Raphael the Raven! Maybe you can  ...
    60:  	EndIf
    68:  	Call  CloseChoicePopup ( )
    74:  	Call  SetTimeFreezeMode ( 00000000 )
@@ -3018,7 +3025,7 @@ PADDING: 80243704 to 80243710 (00003704 to 00003710)
   1A4:  Call  SetPlayerAnimation    ( 00010002 )
   1B4:  Call  PlaySoundAtCollider   ( ~Collider:o167 0000209D 00000000 )
   1CC:  Call  PlayEffect    ( ~FX:Steam:LargeOutward FFFFFF9C 00000000 0000003C 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  210:  Call  ShakeCam  ( .Cam:Default 00000002 00000003 00000001 )
+  210:  Call  ShakeCam  ( .Cam:Default 00000002  3`  1` )
   22C:  Return
   234:  End
 }
@@ -3042,7 +3049,7 @@ PADDING: 80243704 to 80243710 (00003704 to 00003710)
    FC:  	EndIf
   104:  EndLoop
   10C:  Thread
-  114:  	Call  ShakeCam  ( .Cam:Default 00000002 00000003 00000001 )
+  114:  	Call  ShakeCam  ( .Cam:Default 00000002  3`  1` )
   130:  EndThread
   138:  Return
   140:  End
@@ -3525,7 +3532,7 @@ MISSING: 80244FA8 to 80244FE4 (00004FA8 to 00004FE4)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -3595,12 +3602,12 @@ MISSING: 80244FA8 to 80244FE4 (00004FA8 to 00004FE4)
 
 #new:NpcGroup $NpcGroup_8024525C
 {
-	00000000 $NpcSettings_80244B5C ~Vec3f:NPC_8024525C % 310 24 35
+	.NpcID:Fuzzy_00 $NpcSettings_80244B5C ~Vec3f:NPC_Fuzzy_00 % 310 24 35
 	00400400 00000000 00000000 00000000 0000010E
 	~Items:10:DizzyDial:5:VoltShroom:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_8024525C
-	~AnimationTable:NPC_8024525C % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_00
+	~AnimationTable:NPC_Fuzzy_00 % .Sprite:Fuzzy
 	00000003 00000000 $ExtraAnimationList_80245248 00000000 % no tattle string
 }
 
@@ -3612,51 +3619,51 @@ MISSING: 80244FA8 to 80244FE4 (00004FA8 to 00004FE4)
 
 #new:NpcGroup $NpcGroup_80245480
 {
-	00000001 $NpcSettings_80245148 ~Vec3f:NPC_80245480 % -298 35 37
+	.NpcID:JungleGuy_01 $NpcSettings_80245148 ~Vec3f:NPC_JungleGuy_01 % -298 35 37
 	00400400 00000000 00000000 00000000 0000005A
 	~Items:5:SleepySheep:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80245480
-	~AnimationTable:NPC_80245480 % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_01
+	~AnimationTable:NPC_JungleGuy_01 % .Sprite:JungleGuy
 	00000003 00000000 $ExtraAnimationList_8024544C 00000000 % no tattle string
 	%
 	% $NpcGroup_80245480[1F0]
-	00000002 $NpcSettings_8024521C ~Vec3f:NPC_80245670 % 0 -1000 0
+	.NpcID:JungleGuy_02 $NpcSettings_8024521C ~Vec3f:NPC_JungleGuy_02 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245670
-	~AnimationTable:NPC_80245670 % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_02
+	~AnimationTable:NPC_JungleGuy_02 % .Sprite:JungleGuy
 	00000000 00000000 $ExtraAnimationList_80244FE4 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245860
 {
-	00000003 $NpcSettings_80244D10 ~Vec3f:NPC_80245860 % 410 0 -30
+	.NpcID:HeartPlant_03 $NpcSettings_80244D10 ~Vec3f:NPC_HeartPlant_03 % 410 0 -30
 	00408D01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80245860
-	~AnimationTable:NPC_80245860 % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_03
+	~AnimationTable:NPC_HeartPlant_03 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_80245A50
 {
-	00000004 $NpcSettings_80244F7C ~Vec3f:NPC_80245A50 % 110 0 55
+	.NpcID:HurtPlant_04 $NpcSettings_80244F7C ~Vec3f:NPC_HurtPlant_04 % 110 0 55
 	00408D01 00000000 00000000 00000000 0000005A
 	~Items:10:TastyTonic:5:SuperSoda:5
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80245A50
-	~AnimationTable:NPC_80245A50 % .Sprite:HurtPlant
+	~Movement:NPC_HurtPlant_04
+	~AnimationTable:NPC_HurtPlant_04 % .Sprite:HurtPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_80245C40
 {
-	00000005 $NpcSettings_80244F7C ~Vec3f:NPC_80245C40 % -430 0 -80
+	.NpcID:HurtPlant_05 $NpcSettings_80244F7C ~Vec3f:NPC_HurtPlant_05 % -430 0 -80
 	00408D01 00000000 00000000 00000000 0000005A
 	~Items:10:TastyTonic:5:SuperSoda:5
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80245C40
-	~AnimationTable:NPC_80245C40 % .Sprite:HurtPlant
+	~Movement:NPC_HurtPlant_05
+	~AnimationTable:NPC_HurtPlant_05 % .Sprite:HurtPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 

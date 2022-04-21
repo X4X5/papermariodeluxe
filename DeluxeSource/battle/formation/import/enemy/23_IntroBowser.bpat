@@ -332,7 +332,7 @@
     8:  COPY      S0, A0
     C:  BEQ       A1, R0, .o48
    10:  SW        RA, 14 (SP)
-   14:  JAL       8011D82C
+   14:  JAL       ~Func:mdl_set_all_fog_mode
    18:  LI        A0, 1
    1C:  CLEAR     A0
    20:  COPY      A1, A0
@@ -412,7 +412,7 @@
     C:  LW        A0, 148 (A0)
    10:  LH        A0, 436 (V0)
    14:  SB        R0, 224 (V0)
-   18:  JAL       80047B84
+   18:  JAL       ~Func:remove_status_4
    1C:  SB        R0, 223 (V0)
    20:  LW        RA, 10 (SP)
    24:  LI        V0, 2
@@ -524,7 +524,7 @@
   194:  LW        A1, FFDC (S0)
   198:  LW        A2, FFE0 (S0)
   19C:  LW        A3, FFE4 (S0)
-  1A0:  JAL       80072A70
+  1A0:  JAL       ~Func:playFX_85
   1A4:  CLEAR     A0
   1A8:  SW        V0, 0 (S1)
   1AC:  LW        V0, C (V0)
@@ -774,7 +774,7 @@
   184:  LW        A1, FFD4 (S0)
   188:  LW        A2, FFD8 (S0)
   18C:  LW        A3, FFDC (S0)
-  190:  JAL       80072A70
+  190:  JAL       ~Func:playFX_85
   194:  CLEAR     A0
   198:  SW        V0, 0 (S1)
   19C:  LW        V0, C (V0)
@@ -1033,8 +1033,8 @@
    30:  Call  SetActorVar   ( .Actor:Self 0000000E 00000000 )
    48:  Call  8026E020      ( 00000001 )
    58:  Call  CreateNpc     ( 00000000 00D60004 )
-   6C:  Call  SetNpcYaw     ( 00000000 0000005A )
-   80:  Call  SetNpcPos     ( 00000000 FFFFFF7E 00000000 FFFFFFF4 )
+   6C:  Call  SetNpcYaw     ( 00000000  90` )
+   80:  Call  SetNpcPos     ( 00000000  -130`  0`  -12` )
    9C:  Call  EnableNpcShadow       ( 00000000 .True )
    B0:  Call  BindTakeTurn  ( .Actor:Self $Script_TakeTurn_8021FC14_23 )
    C4:  Call  BindIdle      ( .Actor:Self $Script_Idle_8021F53C_23 )
@@ -1068,14 +1068,14 @@
    64:  			Call  SetActorVar       ( .Actor:Self 00000001 00000001 )
    7C:  			Call  802535B4  ( 00000000 )
    8C:  			Call  UseBattleCamPreset    ( 00000013 )
-   9C:  			Call  SetBattleCamTarget    ( FFFFFF8D 00000000 00000000 )
-   B4:  			Call  SetBattleCamZoom  ( 00000140 )
-   C4:  			Call  SetBattleCamOffsetZ   ( 00000032 )
-   D4:  			Call  MoveBattleCamOver ( 00000014 )
+   9C:  			Call  SetBattleCamTarget    (  -115`  0`  0` )
+   B4:  			Call  SetBattleCamZoom  (  320` )
+   C4:  			Call  SetBattleCamOffsetZ   (  50` )
+   D4:  			Call  MoveBattleCamOver (  20` )
    E4:  			Wait  20`
    F0:  			Call  UseIdleAnimation  ( .Actor:Player .False )
   104:  			Call  SetAnimation      ( .Actor:Player 00000000 00010002 )
-  11C:  			Call  SetActorYaw       ( .Actor:Player 000000B4 )
+  11C:  			Call  SetActorYaw       ( .Actor:Player  180` )
   130:  			Call  SpeakToPlayer     ( 00000000 00D60002 00D60004 00000005 00000057 ) % Mario, you can do it!
   150:  			Call  SetJumpAnimations ( .Actor:Player 00000000 00010007 00010007 00010008 )
   170:  			Call  SetActorSpeed     ( .Actor:Player *Fixed[5.0] )
@@ -1084,7 +1084,7 @@
   1B0:  			Wait  24`
   1BC:  			Call  SetAnimation      ( .Actor:Player 00000000 00010002 )
   1D4:  			Wait  10`
-  1E0:  			Call  SetActorYaw       ( .Actor:Player 00000000 )
+  1E0:  			Call  SetActorYaw       ( .Actor:Player  0` )
   1F4:  			Call  UseIdleAnimation  ( .Actor:Player .True )
   208:  			Call  UseBattleCamPreset    ( 00000002 )
   218:  			Wait  20`
@@ -1150,7 +1150,7 @@
   2A4:  		SetConst  *Var1  00810012 
   2B4:  		ExecWait  DoRecover 
   2C0:  		Call  SetAnimation  ( .Actor:Self 00000001 00810014 )
-  2D8:  		Call  ShakeCam      ( .Cam:Battle 00000000 00000004 *Fixed[3.0] )
+  2D8:  		Call  ShakeCam      ( .Cam:Battle 00000000  4` *Fixed[3.0] )
   2F4:  	Case  ==  00000030 % 30
   300:  		SetConst  *Var0  00000001 
   310:  		SetConst  *Var1  0081000D 
@@ -1198,7 +1198,7 @@
    B4:  	Case  ==  00000005 
    C0:  		Call  UseBattleCamPreset    ( 0000000D )
    D0:  		Call  BattleCamTargetActor  ( .Actor:Self )
-   E0:  		Call  MoveBattleCamOver     ( 0000001E )
+   E0:  		Call  MoveBattleCamOver     (  30` )
    F0:  		Wait  30`
    FC:  		Call  ActorSpeak    ( 0000005C .Actor:Self 00000001 00810005 00810002 ) % Yup, just as I expected. Mario's no match for the  ...
   11C:  		ExecWait  $Script_IntroFireBreath_23 
@@ -1210,15 +1210,15 @@
 #new:Script $Script_IntroClawSwipe_23 {
     0:  Call  SetTargetActor    ( .Actor:Self .Actor:Player )
    14:  Call  UseBattleCamPreset    ( 0000003F )
-   24:  Call  SetBattleCamZoom  ( 000000C8 )
+   24:  Call  SetBattleCamZoom  (  200` )
    34:  Call  BattleCamTargetActor  ( .Actor:Self )
-   44:  Call  MoveBattleCamOver ( 00000028 )
+   44:  Call  MoveBattleCamOver (  40` )
    54:  Call  8024ECF8  ( FFFFFFFF 00000001 00000000 )
    6C:  Call  SetAnimation      ( .Actor:Self 00000001 00810003 )
    84:  Call  SetGoalToTarget   ( .Actor:Self )
-   94:  Call  AddGoalPos        ( .Actor:Self 00000028 00000000 00000000 )
+   94:  Call  AddGoalPos        ( .Actor:Self  40`  0`  0` )
    B0:  Call  SetActorSpeed     ( .Actor:Self *Fixed[3.0] )
-   C4:  Call  RunToGoal ( .Actor:Self 00000000 .False )
+   C4:  Call  RunToGoal ( .Actor:Self  0` .False )
    DC:  Call  SetAnimation      ( .Actor:Self 00000001 00810009 )
    F4:  Wait  25`
   100:  Call  SetAnimation      ( .Actor:Self 00000001 00810015 )
@@ -1237,7 +1237,7 @@
   1EC:  	Call  EnemyDamageTarget ( .Actor:Self *VarF ~Flags:DamageType:NoContact 00000000 00000000 *Var0 00000020 )
   214:  EndIf
   21C:  Call  UseBattleCamPreset    ( 00000002 )
-  22C:  Call  MoveBattleCamOver     ( 00000014 )
+  22C:  Call  MoveBattleCamOver     (  20` )
   23C:  Thread
   244:  	Call  GetActorVar   ( .Actor:Self 00000000 *Var0 )
   25C:  	If  *Var0  >=  00000003 
@@ -1250,7 +1250,7 @@
   2C4:  EndThread
   2CC:  Switch  *VarF 
   2D8:  	CaseOR  ==  .HitResult:Hit % 0
-  2E4:  	CaseOR  ==  00000002 % 2
+  2E4:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   2F0:  	CaseOR  ==  0000000A % A
   2FC:  		Wait  30`
   308:  		If  *VarF  ==  0000000A % A
@@ -1274,9 +1274,9 @@
    50:  Sub   *Var0  0000001E 
    60:  Add   *Var1  00000041 
    70:  Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-   88:  Call  SetBattleCamZoom  ( 00000190 )
-   98:  Call  SetBattleCamOffsetZ   ( 00000000 )
-   A8:  Call  MoveBattleCamOver ( 00000028 )
+   88:  Call  SetBattleCamZoom  (  400` )
+   98:  Call  SetBattleCamOffsetZ   (  0` )
+   A8:  Call  MoveBattleCamOver (  40` )
    B8:  Call  SetAnimation      ( .Actor:Self 00000001 00810016 )
    D0:  Wait  35`
    DC:  Call  SetAnimation      ( .Actor:Self 00000001 00810017 )
@@ -1299,7 +1299,7 @@
   234:  EndThread
   23C:  Call  SetNpcAnimation   ( 00000000 00D60007 )
   250:  Call  UseBattleCamPreset    ( 00000002 )
-  260:  Call  MoveBattleCamOver ( 00000037 )
+  260:  Call  MoveBattleCamOver (  55` )
   270:  Wait  20`
   27C:  Call  SetAnimation      ( .Actor:Self 00000001 00810018 )
   294:  Wait  30`
@@ -1308,7 +1308,7 @@
   2BC:  Call  EnemyDamageTarget ( .Actor:Self *VarF ~Flags:DamageType:Fire 0000FFFF 00000000 0000000A 00000020 )
   2E4:  Switch  *VarF 
   2F0:  	CaseOR  ==  .HitResult:Hit % 0
-  2FC:  	CaseOR  ==  00000002 % 2
+  2FC:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   308:  	CaseOR  ==  0000000A % A
   314:  		Thread
   31C:  			Call  SetAnimation  ( .Actor:Self 00000001 00810019 )
@@ -1336,7 +1336,7 @@
 #new:Script $Script_IntroUseStarRod_23 {
     0:  Call  UseBattleCamPreset    ( 0000000D )
    10:  Call  BattleCamTargetActor  ( .Actor:Self )
-   20:  Call  MoveBattleCamOver     ( 0000001E )
+   20:  Call  MoveBattleCamOver     (  30` )
    30:  Wait  30`
    3C:  Call  ActorSpeak    ( 00000058 .Actor:Self 00000001 00810005 00810002 ) % Good old Mario...always fighting. You're a thorn i ...
    5C:  Call  UseBattleCamPreset    ( 00000013 )
@@ -1344,9 +1344,9 @@
    88:  Sub   *Var0  0000000F 
    98:  Add   *Var1  00000041 
    A8:  Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-   C0:  Call  SetBattleCamZoom      ( 00000140 )
-   D0:  Call  SetBattleCamOffsetZ   ( 00000000 )
-   E0:  Call  MoveBattleCamOver     ( 00000014 )
+   C0:  Call  SetBattleCamZoom      (  320` )
+   D0:  Call  SetBattleCamOffsetZ   (  0` )
+   E0:  Call  MoveBattleCamOver     (  20` )
    F0:  Wait  20`
    FC:  Thread
   104:  	Wait  2`
@@ -1367,9 +1367,9 @@
   250:  Sub   *Var0  0000000F 
   260:  Add   *Var1  00000041 
   270:  Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-  288:  Call  SetBattleCamZoom  ( 00000140 )
-  298:  Call  SetBattleCamOffsetZ   ( 00000000 )
-  2A8:  Call  MoveBattleCamOver ( 00000019 )
+  288:  Call  SetBattleCamZoom  (  320` )
+  298:  Call  SetBattleCamOffsetZ   (  0` )
+  2A8:  Call  MoveBattleCamOver (  25` )
   2B8:  Call  ActorSpeak        ( 0000005A .Actor:Self 00000001 00810009 00810001 ) % Gwa ha ha ha ha ha! How do you like that, Mario?!
   2D8:  Call  SetDefenseTable   ( .Actor:Self 00000001 $DefenseTable_8021F220_23 )
   2F0:  Call  SetStatusTable    ( .Actor:Self $StatusTable_8021F2D8_23 )
@@ -1382,11 +1382,11 @@
    10:  Call  GetActorPos   ( .Actor:Self *VarA *VarB *VarC )
    2C:  Call  SetGoalToHome ( .Actor:Self )
    3C:  Call  GetGoalPos    ( .Actor:Self *VarD *VarE *VarF )
-   58:  Call  SetActorYaw   ( .Actor:Self 00000000 )
+   58:  Call  SetActorYaw   ( .Actor:Self  0` )
    6C:  Call  GetDist2D     ( *Var9 *VarA *VarC *VarD *VarF )
    8C:  If  *Var9  >=  *Fixed[5.0] 
    9C:  	Call  SetAnimation  ( .Actor:Self *Var0 *Var1 )
-   B4:  	Call  RunToGoal     ( .Actor:Self 00000000 .False )
+   B4:  	Call  RunToGoal     ( .Actor:Self  0` .False )
    CC:  EndIf
    D4:  If  *VarB  ==  000000B4 
    E4:  	Loop  0000000F 
@@ -1395,7 +1395,7 @@
   114:  		Wait  1`
   120:  	EndLoop
   128:  EndIf
-  130:  Call  SetActorYaw   ( .Actor:Self 00000000 )
+  130:  Call  SetActorYaw   ( .Actor:Self  0` )
   144:  Return
   14C:  End
 }
@@ -1491,9 +1491,9 @@
   714:  Sub   *Var0  0000000F 
   724:  Add   *Var1  00000041 
   734:  Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-  74C:  Call  SetBattleCamZoom  ( 00000190 )
-  75C:  Call  SetBattleCamOffsetZ   ( 00000000 )
-  76C:  Call  MoveBattleCamOver ( 00000020 )
+  74C:  Call  SetBattleCamZoom  (  400` )
+  75C:  Call  SetBattleCamOffsetZ   (  0` )
+  76C:  Call  MoveBattleCamOver (  32` )
   77C:  Wait  32`
   788:  Return
   790:  End

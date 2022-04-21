@@ -1,6 +1,20 @@
 % Script File: omo_09.mscr
 % Decoded from: 0 to ACE0 (omo_09)
 
+#define .NpcID:ShyGuy_00            00
+#define .NpcID:ShyGuy_01            01
+#define .NpcID:ShyGuy_02            02
+#define .NpcID:ShyGuy_03            03
+#define .NpcID:ShyGuy_04            04
+#define .NpcID:Pokey_05             05
+#define .NpcID:WorldKoopatrol_06    06
+#define .NpcID:WorldKammy_07        07
+#define .NpcID:ShyGuy_08            08
+#define .NpcID:SpyGuy_20            14
+#define .NpcID:SpyGuy_21            15
+#define .NpcID:SpyGuy_22            16
+#define .NpcID:SpyGuy_23            17
+
 #new:Function $Function_80240000
 {
     0:  LAW       V0, 8010EFC8
@@ -3148,7 +3162,7 @@ PADDING: 802409DC to 802409E0 (000009DC to 000009E0)
   4A4:  LW        A1, 38 (S2)
   4A8:  LW        A2, 3C (S2)
   4AC:  LW        A3, 40 (S2)
-  4B0:  JAL       ~Func:fx_walk_normal
+  4B0:  JAL       ~Func:fx_walk
   4B4:  LI        A0, 2
   4B8:  LIF       F0, -1000.0
   4C0:  SW        R0, 6C (S3)
@@ -3256,7 +3270,7 @@ PADDING: 802409DC to 802409E0 (000009DC to 000009E0)
   104:  LW        A1, 38 (S0)
   108:  LW        A2, 3C (S0)
   10C:  LW        A3, 40 (S0)
-  110:  JAL       ~Func:fx_walk_normal
+  110:  JAL       ~Func:fx_walk
   114:  LI        A0, 2
   118:  LWC1      F12, 6C (S2)
   11C:  JAL       ~Func:clamp_angle
@@ -3412,7 +3426,7 @@ PADDING: 802409DC to 802409E0 (000009DC to 000009E0)
   37C:  LW        A1, 38 (S0)
   380:  LW        A2, 3C (S0)
   384:  LW        A3, 40 (S0)
-  388:  JAL       ~Func:fx_walk_normal
+  388:  JAL       ~Func:fx_walk
   38C:  LI        A0, 2
   390:  LIF       F0, -1000.0
   398:  SW        R0, 6C (S1)
@@ -3860,8 +3874,8 @@ PADDING: 802437A8 to 802437B0 (000037A8 to 000037B0)
    20:  	Set   *GF_OMO09_SpawnedPeachChoice3  .True
    30:  EndIf
    38:  Call  SetSpriteShading  ( .Shading:None )
-   48:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   68:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   48:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   68:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    84:  Call  SetCamEnabled     ( .Cam:Default .True )
    98:  If  *GF_OMO09_SpawnedPeachChoice3  ==  .False
    A8:  	Call  MakeNpcs  ( .True $NpcGroupList_80249EA4 )
@@ -3946,8 +3960,8 @@ PADDING: 80243C2C to 80243C30 (00003C2C to 00003C30)
 {
     0:  Wait  8`
     C:  Call  $Function_802435CC ( )
-   18:  Call  UseSettingsFrom   ( .Cam:Default 00000217 00000000 00000000 )
-   34:  Call  SetPanTarget  ( .Cam:Default 00000217 00000000 00000000 )
+   18:  Call  UseSettingsFrom   ( .Cam:Default  535`  0`  0` )
+   34:  Call  SetPanTarget  ( .Cam:Default  535`  0`  0` )
    50:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
    64:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    7C:  Return
@@ -3956,8 +3970,8 @@ PADDING: 80243C2C to 80243C30 (00003C2C to 00003C30)
 
 #new:Script $Script_80243CBC
 {
-    0:  Call  UseSettingsFrom   ( .Cam:Default 00000217 00000000 00000000 )
-   1C:  Call  SetPanTarget  ( .Cam:Default 00000217 00000000 00000000 )
+    0:  Call  UseSettingsFrom   ( .Cam:Default  535`  0`  0` )
+   1C:  Call  SetPanTarget  ( .Cam:Default  535`  0`  0` )
    38:  Call  SetCamDistance    ( .Cam:Default *Fixed[275.0] )
    4C:  Call  SetCamPitch   ( .Cam:Default *Fixed[16.0] *Fixed[-30.0] )
    64:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
@@ -4507,49 +4521,49 @@ PADDING: 80243C2C to 80243C30 (00003C2C to 00003C30)
   3D8:  			Case  ==  00000003
   3E4:  				ExecWait  $Script_80243CBC
   3F0:  				Thread
-  3F8:  					Call  SetNpcPos ( 00000000 000001E5 00000082 FFFFFFCE )
-  414:  					Call  SetNpcJumpscale   ( 00000000 *Fixed[0.8] )
-  428:  					Call  NpcJump0  ( 00000000 000001CC 00000000 00000032 0000001E )
-  448:  					Call  SetNpcFlagBits    ( 00000000 00000040 .False )
+  3F8:  					Call  SetNpcPos ( .NpcID:ShyGuy_00  485`  130`  -50` )
+  414:  					Call  SetNpcJumpscale   ( .NpcID:ShyGuy_00 *Fixed[0.8] )
+  428:  					Call  NpcJump0  ( .NpcID:ShyGuy_00  460`  0`  50`  30` )
+  448:  					Call  SetNpcFlagBits    ( .NpcID:ShyGuy_00 00000040 .False )
   460:  				EndThread
   468:  				Thread
-  470:  					Call  SetNpcPos ( 00000001 000001FE 00000082 FFFFFFCE )
-  48C:  					Call  SetNpcJumpscale   ( 00000001 *Fixed[0.8] )
-  4A0:  					Call  NpcJump0  ( 00000001 000001F1 00000000 00000032 0000001E )
-  4C0:  					Call  SetNpcFlagBits    ( 00000001 00000040 .False )
+  470:  					Call  SetNpcPos ( .NpcID:ShyGuy_01  510`  130`  -50` )
+  48C:  					Call  SetNpcJumpscale   ( .NpcID:ShyGuy_01 *Fixed[0.8] )
+  4A0:  					Call  NpcJump0  ( .NpcID:ShyGuy_01  497`  0`  50`  30` )
+  4C0:  					Call  SetNpcFlagBits    ( .NpcID:ShyGuy_01 00000040 .False )
   4D8:  				EndThread
   4E0:  				Thread
-  4E8:  					Call  SetNpcPos ( 00000002 00000217 00000082 FFFFFFCE )
-  504:  					Call  SetNpcJumpscale   ( 00000002 *Fixed[0.8] )
-  518:  					Call  NpcJump0  ( 00000002 00000217 00000000 00000032 0000001E )
-  538:  					Call  SetNpcFlagBits    ( 00000002 00000040 .False )
+  4E8:  					Call  SetNpcPos ( .NpcID:ShyGuy_02  535`  130`  -50` )
+  504:  					Call  SetNpcJumpscale   ( .NpcID:ShyGuy_02 *Fixed[0.8] )
+  518:  					Call  NpcJump0  ( .NpcID:ShyGuy_02  535`  0`  50`  30` )
+  538:  					Call  SetNpcFlagBits    ( .NpcID:ShyGuy_02 00000040 .False )
   550:  				EndThread
   558:  				Thread
-  560:  					Call  SetNpcPos ( 00000003 00000230 00000082 FFFFFFCE )
-  57C:  					Call  SetNpcJumpscale   ( 00000003 *Fixed[0.8] )
-  590:  					Call  NpcJump0  ( 00000003 0000023D 00000000 00000032 0000001E )
-  5B0:  					Call  SetNpcFlagBits    ( 00000003 00000040 .False )
+  560:  					Call  SetNpcPos ( .NpcID:ShyGuy_03  560`  130`  -50` )
+  57C:  					Call  SetNpcJumpscale   ( .NpcID:ShyGuy_03 *Fixed[0.8] )
+  590:  					Call  NpcJump0  ( .NpcID:ShyGuy_03  573`  0`  50`  30` )
+  5B0:  					Call  SetNpcFlagBits    ( .NpcID:ShyGuy_03 00000040 .False )
   5C8:  				EndThread
   5D0:  				Thread
-  5D8:  					Call  SetNpcPos ( 00000004 00000249 00000082 FFFFFFCE )
-  5F4:  					Call  SetNpcJumpscale   ( 00000004 *Fixed[0.8] )
-  608:  					Call  NpcJump0  ( 00000004 00000262 00000000 00000032 0000001E )
-  628:  					Call  SetNpcFlagBits    ( 00000004 00000040 .False )
+  5D8:  					Call  SetNpcPos ( .NpcID:ShyGuy_04  585`  130`  -50` )
+  5F4:  					Call  SetNpcJumpscale   ( .NpcID:ShyGuy_04 *Fixed[0.8] )
+  608:  					Call  NpcJump0  ( .NpcID:ShyGuy_04  610`  0`  50`  30` )
+  628:  					Call  SetNpcFlagBits    ( .NpcID:ShyGuy_04 00000040 .False )
   640:  				EndThread
   648:  				Wait  20`
   654:  			Case  ==  00000002
   660:  				ExecWait  $Script_80243CBC
   66C:  				Thread
-  674:  					Call  SetNpcPos ( 00000001 000001FE 00000082 FFFFFFCE )
-  690:  					Call  SetNpcJumpscale   ( 00000001 *Fixed[0.8] )
-  6A4:  					Call  NpcJump0  ( 00000001 000001F1 00000000 00000032 0000001E )
-  6C4:  					Call  SetNpcFlagBits    ( 00000001 00000040 .False )
+  674:  					Call  SetNpcPos ( .NpcID:ShyGuy_01  510`  130`  -50` )
+  690:  					Call  SetNpcJumpscale   ( .NpcID:ShyGuy_01 *Fixed[0.8] )
+  6A4:  					Call  NpcJump0  ( .NpcID:ShyGuy_01  497`  0`  50`  30` )
+  6C4:  					Call  SetNpcFlagBits    ( .NpcID:ShyGuy_01 00000040 .False )
   6DC:  				EndThread
   6E4:  				Thread
-  6EC:  					Call  SetNpcPos ( 00000003 00000230 00000082 FFFFFFCE )
-  708:  					Call  SetNpcJumpscale   ( 00000003 *Fixed[0.8] )
-  71C:  					Call  NpcJump0  ( 00000003 0000023D 00000000 00000032 0000001E )
-  73C:  					Call  SetNpcFlagBits    ( 00000003 00000040 .False )
+  6EC:  					Call  SetNpcPos ( .NpcID:ShyGuy_03  560`  130`  -50` )
+  708:  					Call  SetNpcJumpscale   ( .NpcID:ShyGuy_03 *Fixed[0.8] )
+  71C:  					Call  NpcJump0  ( .NpcID:ShyGuy_03  573`  0`  50`  30` )
+  73C:  					Call  SetNpcFlagBits    ( .NpcID:ShyGuy_03 00000040 .False )
   754:  				EndThread
   75C:  				Wait  20`
   768:  			Default
@@ -5048,7 +5062,7 @@ MISSING: 80247614 to 80247640 (00007614 to 00007640)
    28:  		Call  SetSelfVar    ( 00000000 00000005 )
    3C:  		Call  RemoveNpc     ( .Npc:Self )
    4C:  	Case  ==  .Outcome:PlayerFled % 2
-   58:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   58:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    74:  		Call  80045900  ( 00000001 )
    84:  	Case  ==  .Outcome:EnemyFled % 3
    90:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -5147,7 +5161,7 @@ MISSING: 80247614 to 80247640 (00007614 to 00007640)
    D4:  		Call  SetSelfVar    ( 00000000 00000004 )
    E8:  		Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   104:  		Call  PlayEffect    ( ~FX:Steam:Ring *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  148:  		Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  148:  		Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   164:  		Call  SetSelfVar    ( 00000000 00000000 )
   178:  	EndCaseGroup
   180:  	Default
@@ -5273,11 +5287,11 @@ MISSING: 80247614 to 80247640 (00007614 to 00007640)
    78:  Call  DisablePlayerInput    ( .True )
    88:  Call  $Function_802435CC ( )
    94:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-   B0:  Call  SetCamProperties      ( .Cam:Default *Fixed[5.0] *Var0 *Var1 *Var2 0000012C *Fixed[13.0] *Fixed[-9.5] )
+   B0:  Call  SetCamProperties      ( .Cam:Default *Fixed[5.0] *Var0 *Var1 *Var2  300` *Fixed[13.0] *Fixed[-9.5] )
    DC:  If  *GB_OMO_PeachChoice3  ==  00000000
-   EC:  	Call  SpeakToPlayer ( 00000005 00310004 00310004 00000000 000F003E ) % !!!!!!!!
+   EC:  	Call  SpeakToPlayer ( .NpcID:Pokey_05 00310004 00310004 00000000 000F003E ) % !!!!!!!!
   10C:  Else
-  114:  	Call  SpeakToPlayer ( 00000006 00580008 00580001 00000000 000F003F ) % Yes!! I thought you'd come! Now I get to defeat yo ...
+  114:  	Call  SpeakToPlayer ( .NpcID:WorldKoopatrol_06 00580008 00580001 00000000 000F003F ) % Yes!! I thought you'd come! Now I get to defeat yo ...
   134:  EndIf
   13C:  Thread
   144:  	Call  $Function_802435E8 ( )
@@ -5309,7 +5323,7 @@ MISSING: 80247614 to 80247640 (00007614 to 00007640)
    10:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80247E48 )
    24:  	Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_80247FE4 )
    38:  Else
-   40:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   40:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    5C:  EndIf
    64:  Return
    6C:  End
@@ -5321,7 +5335,7 @@ MISSING: 80247614 to 80247640 (00007614 to 00007640)
    10:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_80247E48 )
    24:  	Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_80247FE4 )
    38:  Else
-   40:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   40:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    5C:  EndIf
    64:  Return
    6C:  End
@@ -5348,7 +5362,7 @@ MISSING: 80247614 to 80247640 (00007614 to 00007640)
    94:  		Case  ==  00000002
    A0:  			Call  DisablePlayerInput    ( .True )
    B0:  			Wait  25`
-   BC:  			Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   BC:  			Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    D8:  			Call  SetNpcFlagBits    ( .Npc:Self 00000002 .False )
    F0:  			Call  SetNpcFlagBits    ( .Npc:Self 00000040 .True )
   108:  			Call  SetSelfVar        ( 00000000 00000000 )
@@ -5385,71 +5399,71 @@ MISSING: 80247614 to 80247640 (00007614 to 00007640)
 
 #new:NpcGroup $NpcGroup_80248380
 {
-	00000005 $NpcSettings_80247B14 ~Vec3f:NPC_80248380 % 1900 150 -30
+	.NpcID:Pokey_05 $NpcSettings_80247B14 ~Vec3f:NPC_Pokey_05 % 1900 150 -30
 	00440F00 $Script_Init_80248058 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248380
-	~AnimationTable:NPC_80248380 % .Sprite:Pokey
+	~Movement:NPC_Pokey_05
+	~AnimationTable:NPC_Pokey_05 % .Sprite:Pokey
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80248570
 {
-	00000006 $NpcSettings_80247A8C ~Vec3f:NPC_80248570 % 1900 150 -30
+	.NpcID:WorldKoopatrol_06 $NpcSettings_80247A8C ~Vec3f:NPC_WorldKoopatrol_06 % 1900 150 -30
 	00440F00 $Script_Init_802480CC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248570
-	~AnimationTable:NPC_80248570 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_06
+	~AnimationTable:NPC_WorldKoopatrol_06 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80248760
 {
-	00000000 $NpcSettings_802474D0 ~Vec3f:NPC_80248760 % 0 -1000 0
+	.NpcID:ShyGuy_00 $NpcSettings_802474D0 ~Vec3f:NPC_ShyGuy_00 % 0 -1000 0
 	00200004 $Script_Init_80248348 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248760
-	~AnimationTable:NPC_80248760 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_00
+	~AnimationTable:NPC_ShyGuy_00 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80248950
 {
-	00000001 $NpcSettings_802474D0 ~Vec3f:NPC_80248950 % 0 -1000 0
+	.NpcID:ShyGuy_01 $NpcSettings_802474D0 ~Vec3f:NPC_ShyGuy_01 % 0 -1000 0
 	00200004 $Script_Init_80248348 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248950
-	~AnimationTable:NPC_80248950 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_01
+	~AnimationTable:NPC_ShyGuy_01 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80248B40
 {
-	00000002 $NpcSettings_802474D0 ~Vec3f:NPC_80248B40 % 0 -1000 0
+	.NpcID:ShyGuy_02 $NpcSettings_802474D0 ~Vec3f:NPC_ShyGuy_02 % 0 -1000 0
 	00200004 $Script_Init_80248348 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248B40
-	~AnimationTable:NPC_80248B40 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_02
+	~AnimationTable:NPC_ShyGuy_02 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80248D30
 {
-	00000003 $NpcSettings_802474D0 ~Vec3f:NPC_80248D30 % 0 -1000 0
+	.NpcID:ShyGuy_03 $NpcSettings_802474D0 ~Vec3f:NPC_ShyGuy_03 % 0 -1000 0
 	00200004 $Script_Init_80248348 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248D30
-	~AnimationTable:NPC_80248D30 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_03
+	~AnimationTable:NPC_ShyGuy_03 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80248F20
 {
-	00000004 $NpcSettings_802474D0 ~Vec3f:NPC_80248F20 % 0 -1000 0
+	.NpcID:ShyGuy_04 $NpcSettings_802474D0 ~Vec3f:NPC_ShyGuy_04 % 0 -1000 0
 	00200004 $Script_Init_80248348 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248F20
-	~AnimationTable:NPC_80248F20 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_04
+	~AnimationTable:NPC_ShyGuy_04 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -5460,11 +5474,11 @@ MISSING: 80247614 to 80247640 (00007614 to 00007640)
 
 #new:NpcGroup $NpcGroup_8024912C
 {
-	00000007 $NpcSettings_80247B40 ~Vec3f:NPC_8024912C % 0 -1000 0
+	.NpcID:WorldKammy_07 $NpcSettings_80247B40 ~Vec3f:NPC_WorldKammy_07 % 0 -1000 0
 	00000F04 $Script_Init_80248140 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024912C
-	~AnimationTable:NPC_8024912C % .Sprite:WorldKammy
+	~Movement:NPC_WorldKammy_07
+	~AnimationTable:NPC_WorldKammy_07 % .Sprite:WorldKammy
 	00000000 00000000 $ExtraAnimationList_80249110 00000000 % no tattle string
 }
 
@@ -5486,47 +5500,47 @@ MISSING: 80247614 to 80247640 (00007614 to 00007640)
 
 #new:NpcGroup $NpcGroup_802493BC
 {
-	00000008 $NpcSettings_802475E8 ~Vec3f:NPC_802493BC % 155 10 -96
+	.NpcID:ShyGuy_08 $NpcSettings_802475E8 ~Vec3f:NPC_ShyGuy_08 % 155 10 -96
 	00000C00 $Script_Init_8024931C 00000000 00000000 0000010E
 	~Items:5:DizzyDial:2:SuperShroom:2:ThunderBolt:2:DriedShroom:2:SleepySheep:2:POWBlock:2:FrightJar:2
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_802493BC
-	~AnimationTable:NPC_802493BC % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_08
+	~AnimationTable:NPC_ShyGuy_08 % .Sprite:ShyGuy
 	00000001 00000001 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802495AC
 {
-	00000014 $NpcSettings_802477BC ~Vec3f:NPC_802495AC % 850 0 0
+	.NpcID:SpyGuy_20 $NpcSettings_802477BC ~Vec3f:NPC_SpyGuy_20 % 850 0 0
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:2:ThunderRage:2:ThunderBolt:2:DustyHammer:2:Pebble:2
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802495AC
-	~AnimationTable:NPC_802495AC % .Sprite:SpyGuy
+	~Movement:NPC_SpyGuy_20
+	~AnimationTable:NPC_SpyGuy_20 % .Sprite:SpyGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802495AC[1F0]
-	00000015 $NpcSettings_80247A60 ~Vec3f:NPC_8024979C % 0 -1000 0
+	.NpcID:SpyGuy_21 $NpcSettings_80247A60 ~Vec3f:NPC_SpyGuy_21 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024979C
-	~AnimationTable:NPC_8024979C % .Sprite:SpyGuy
+	~Movement:NPC_SpyGuy_21
+	~AnimationTable:NPC_SpyGuy_21 % .Sprite:SpyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802495AC[3E0]
-	00000016 $NpcSettings_80247A60 ~Vec3f:NPC_8024998C % 0 -1000 0
+	.NpcID:SpyGuy_22 $NpcSettings_80247A60 ~Vec3f:NPC_SpyGuy_22 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024998C
-	~AnimationTable:NPC_8024998C % .Sprite:SpyGuy
+	~Movement:NPC_SpyGuy_22
+	~AnimationTable:NPC_SpyGuy_22 % .Sprite:SpyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802495AC[5D0]
-	00000017 $NpcSettings_80247A60 ~Vec3f:NPC_80249B7C % 0 -1000 0
+	.NpcID:SpyGuy_23 $NpcSettings_80247A60 ~Vec3f:NPC_SpyGuy_23 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80249B7C
-	~AnimationTable:NPC_80249B7C % .Sprite:SpyGuy
+	~Movement:NPC_SpyGuy_23
+	~AnimationTable:NPC_SpyGuy_23 % .Sprite:SpyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -5611,10 +5625,10 @@ PADDING: 80249ED4 to 80249EE0 (00009ED4 to 00009EE0)
 % Origin: HEURISTIC
 #new:Script $Script_8024A01C
 {
-    0:  Call  GetNpcPos ( 00000007 *Var6 *Var7 *Var8 )
+    0:  Call  GetNpcPos ( .NpcID:WorldKammy_07 *Var6 *Var7 *Var8 )
    1C:  Loop
    28:  	Call  $Function_80243610 ( )
-   34:  	Call  GetNpcPos ( 00000007 *Var9 *VarA *VarB )
+   34:  	Call  GetNpcPos ( .NpcID:WorldKammy_07 *Var9 *VarA *VarB )
    50:  	Set   *Var3  *Var9
    60:  	Set   *Var4  *VarA
    70:  	Set   *Var5  *VarB
@@ -5648,47 +5662,47 @@ PADDING: 80249ED4 to 80249EE0 (00009ED4 to 00009EE0)
    74:  	Case  ==  00000002
    80:  		Set   *MapVar[A]  0000009B
    90:  EndSwitch
-   98:  Call  SetNpcPos ( 00000007 0000071C 000000A5 00000000 )
-   B4:  Call  SetNpcYaw ( 00000007 0000005A )
-   C8:  Call  SetNpcAnimation   ( 00000007 00600013 )
+   98:  Call  SetNpcPos ( .NpcID:WorldKammy_07  1820`  165`  0` )
+   B4:  Call  SetNpcYaw ( .NpcID:WorldKammy_07  90` )
+   C8:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_07 00600013 )
    DC:  If  *AreaByte[4]  !=  00000002
-   EC:  	Call  SetNpcPos ( *MapVar[A] 00000000 FFFFFC18 00000000 )
+   EC:  	Call  SetNpcPos ( *MapVar[A]  0`  -1000`  0` )
   108:  EndIf
-  110:  Call  UseSettingsFrom   ( .Cam:Default 0000076C 00000096 00000000 )
-  12C:  Call  SetPanTarget  ( .Cam:Default 0000076C 00000096 00000000 )
+  110:  Call  UseSettingsFrom   ( .Cam:Default  1900`  150`  0` )
+  12C:  Call  SetPanTarget  ( .Cam:Default  1900`  150`  0` )
   148:  Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
   15C:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-7.5] )
   174:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   188:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1A0:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   1B4:  Wait  5`
-  1C0:  Call  SetNpcVar     ( 00000007 00000000 00000001 )
-  1D8:  Call  SetNpcAnimation   ( 00000007 00600013 )
+  1C0:  Call  SetNpcVar     ( .NpcID:WorldKammy_07 00000000 00000001 )
+  1D8:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_07 00600013 )
   1EC:  Wait  25`
-  1F8:  Call  SetNpcAnimation   ( 00000007 0060000E )
-  20C:  Call  GetNpcPos     ( 00000007 *Var0 *Var1 *Var2 )
+  1F8:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_07 0060000E )
+  20C:  Call  GetNpcPos     ( .NpcID:WorldKammy_07 *Var0 *Var1 *Var2 )
   228:  Add   *Var0  00000019
   238:  Add   *Var1  00000026
   248:  Call  PlaySoundAt   ( 0000207A 00000000 *Var0 *Var1 *Var2 )
   268:  Call  PlayEffect    ( ~FX:GatherEnergyPink *Var0 *Var1 *Var2 *Fixed[1.0] 0000004B 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   2AC:  Wait  75`
-  2B8:  Call  SetNpcAnimation   ( 00000007 0060000F )
+  2B8:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_07 0060000F )
   2CC:  Add   *Var0  00000037
   2DC:  Call  PlaySoundAt   ( 00002098 00000000 *Var0 *Var1 *Var2 )
   2FC:  Call  PlayEffect    ( ~FX:BigSmokePuff *Var0 00000096 00000000 00000001 0000000F 00000003 00000008 00000000 00000000 00000000 00000000 00000000 00000000 )
   340:  Wait  5`
   34C:  If  *AreaByte[4]  !=  00000002
-  35C:  	Call  SetNpcPos ( *MapVar[A] *Var0 00000096 00000000 )
+  35C:  	Call  SetNpcPos ( *MapVar[A] *Var0  150`  0` )
   378:  Else
   380:  	Call  MakeItemEntity    ( *MapVar[A] *Var0 00000096 00000000 .ItemSpawnMode:Decoration 00000000 )
   3A4:  EndIf
   3AC:  Wait  10`
-  3B8:  Call  SetNpcAnimation   ( 00000007 00600013 )
-  3CC:  Call  SetNpcVar ( 00000007 00000000 00000000 )
+  3B8:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_07 00600013 )
+  3CC:  Call  SetNpcVar ( .NpcID:WorldKammy_07 00000000 00000000 )
   3E4:  Wait  5`
   3F0:  If  *AreaByte[4]  !=  00000002
   400:  	Call  PlaySoundAtNpc    ( *MapVar[A] 00000263 00000000 )
-  418:  	Call  ShowEmote ( *MapVar[A] .Emote:Question 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+  418:  	Call  ShowEmote ( *MapVar[A] .Emote:Question  0`  20` .True  0`  0`  0`  0` )
   448:  	Wait  5`
   454:  EndIf
   45C:  Call  GotoMap   ( $ASCII_8024ACD0 00000000 ) % omo_09

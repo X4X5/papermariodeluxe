@@ -1,6 +1,7 @@
 % Script File: tst_04.mscr
 % Decoded from: 0 to FD0 (tst_04)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD0
@@ -165,7 +166,7 @@
     8:  COPY      S0, A0
     C:  LA        A1, $Function_8024029C
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_frontUI
+   18:  JAL       ~Func:create_generic_entity_frontUI
    1C:  CLEAR     A0
    20:  LW        V1, 13C (S0)
    24:  SW        V0, 0 (V1)
@@ -176,7 +177,6 @@
    38:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_8024029C
 {
     0:  ADDIU     SP, SP, FFB0
@@ -228,7 +228,6 @@
    C0:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_80240360
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -254,7 +253,7 @@
     8:  COPY      S0, A0
     C:  LA        A0, $Function_80240574
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  CLEAR     A1
    20:  LW        V1, 13C (S0)
    24:  LI        A0, FFFC
@@ -276,7 +275,6 @@
    60:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240574
 {
     0:  ADDIU     SP, SP, FFE8
@@ -303,7 +301,6 @@
 	27BD0018
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802405D4
 {
     0:  ADDIU     SP, SP, FEA8
@@ -334,7 +331,7 @@
     4:  LA        A0, $???_802405B0
     C:  LA        A1, $Function_802405D4
    14:  SW        RA, 10 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  NOP
    20:  LW        RA, 10 (SP)
    24:  LI        V0, 2
@@ -470,8 +467,8 @@ PADDING: 8024068C to 80240690 (0000068C to 00000690)
 {
     0:  Set   *GB_WorldLocation  .Location:Testing
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80240FA0 )
    84:  ExecWait  $Script_MakeEntities

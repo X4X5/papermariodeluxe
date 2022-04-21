@@ -71,7 +71,7 @@
    A4:  LW        A1, 0 (A1)
    A8:  LW        A2, 0 (A2)
    AC:  LW        A3, 0 (A3)
-   B0:  JAL       800723B0
+   B0:  JAL       ~Func:playFX_73
    B4:  CLEAR     A0
    B8:  ADDIU     A1, S1, 144
    BC:  SW        V0, 14 (S0)
@@ -93,7 +93,7 @@
   100:  LW        A1, 0 (A1)
   104:  LUI       A2, C47A
   108:  LW        A3, 0 (A3)
-  10C:  JAL       800723B0
+  10C:  JAL       ~Func:playFX_73
   110:  LI        A0, 1
   114:  SW        V0, 18 (S0)
   118:  LI        V0, 1
@@ -203,7 +203,7 @@
   2C4:  MFC1      A3, F24
   2C8:  LI        V0, 5
   2CC:  SW        V0, 14 (SP)
-  2D0:  JAL       800723B0
+  2D0:  JAL       ~Func:playFX_73
   2D4:  SW        R0, 18 (SP)
   2D8:  SW        V0, 14 (S0)
         .o2DC
@@ -253,7 +253,7 @@
   380:  MFC1      A3, F24
   384:  LI        V0, 5
   388:  SW        V0, 14 (SP)
-  38C:  JAL       800723B0
+  38C:  JAL       ~Func:playFX_73
   390:  SW        R0, 18 (SP)
   394:  SW        V0, 18 (S0)
   398:  LW        V0, 18 (S0)
@@ -419,7 +419,7 @@
 #new:Function $Function_8021950C_24 {
     0:  ADDIU     SP, SP, FFE8
     4:  SW        RA, 10 (SP)
-    8:  JAL       8011D82C
+    8:  JAL       ~Func:mdl_set_all_fog_mode
     C:  LI        A0, 1
    10:  CLEAR     A0
    14:  LI        V0, 1
@@ -616,25 +616,25 @@
    14:  Call  UseBattleCamPreset    ( 00000013 )
    24:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
    40:  Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-   58:  Call  SetBattleCamZoom  ( 0000015E )
-   68:  Call  SetBattleCamOffsetZ   ( 00000028 )
-   78:  Call  MoveBattleCamOver ( 00000050 )
+   58:  Call  SetBattleCamZoom  (  350` )
+   68:  Call  SetBattleCamOffsetZ   (  40` )
+   78:  Call  MoveBattleCamOver (  80` )
    88:  Call  8024ECF8  ( FFFFFFFF 00000001 00000000 )
    A0:  Call  SetTargetActor    ( .Actor:Self .Actor:Player )
    B4:  Call  SetGoalToTarget   ( .Actor:Self )
    C4:  Call  SetAnimation      ( .Actor:Self 00000001 000E0003 )
    DC:  Call  $Function_802194C0_24 ( 00000001 )
-   EC:  Call  AddGoalPos        ( .Actor:Self 0000000F FFFFFFF6 00000005 )
-  108:  Call  FlyToGoal ( .Actor:Self 0000001E 00000000 .Easing:CosInOut )
+   EC:  Call  AddGoalPos        ( .Actor:Self  15`  -10`  5` )
+  108:  Call  FlyToGoal ( .Actor:Self  30`  0` .Easing:CosInOut )
   124:  Call  SetAnimation      ( .Actor:Self 00000001 000E0001 )
   13C:  Call  $Function_802194C0_24 ( 00000000 )
   14C:  Wait  5`
   158:  Call  $Function_80219428_24 ( 00000000 )
-  168:  Call  AddGoalPos        ( .Actor:Self 00000019 00000014 00000000 )
-  184:  Call  FlyToGoal ( .Actor:Self 0000000F FFFFFFEC .Easing:CosInOut )
+  168:  Call  AddGoalPos        ( .Actor:Self  25`  20`  0` )
+  184:  Call  FlyToGoal ( .Actor:Self  15`  -20` .Easing:CosInOut )
   1A0:  Call  SetAnimation      ( .Actor:Self 00000001 000E0005 )
   1B8:  Call  SetGoalToTarget   ( .Actor:Self )
-  1C8:  Call  FlyToGoal ( .Actor:Self 00000005 00000000 .Easing:CosInOut )
+  1C8:  Call  FlyToGoal ( .Actor:Self  5`  0` .Easing:CosInOut )
   1E4:  Call  EnemyTestTarget   ( .Actor:Self *Var0 ~Flags:DamageType:0 00000000 00000001 00000010 )
   208:  Switch  *Var0 
   214:  	CaseOR  ==  .HitResult:Miss % 6
@@ -645,8 +645,8 @@
   250:  			Call  SetAnimation  ( .Actor:Self 00000001 000E0001 )
   268:  		EndThread
   270:  		Call  SetGoalToTarget   ( .Actor:Self )
-  280:  		Call  AddGoalPos        ( .Actor:Self FFFFFFD8 0000000A 00000000 )
-  29C:  		Call  FlyToGoal ( .Actor:Self 0000000A FFFFFFEC .Easing:QuadraticOut )
+  280:  		Call  AddGoalPos        ( .Actor:Self  -40`  10`  0` )
+  29C:  		Call  FlyToGoal ( .Actor:Self  10`  -20` .Easing:QuadraticOut )
   2B8:  		If  *VarA  ==  .HitResult:Lucky % 5
   2C8:  			Call  EnemyTestTarget   ( .Actor:Self *Var0 ~Flags:DamageType:TriggerLucky 00000000 00000000 00000000 )
   2EC:  		EndIf
@@ -657,7 +657,7 @@
   330:  		Call  YieldTurn ( )
   33C:  		Call  SetGoalToHome     ( .Actor:Self )
   34C:  		Call  SetAnimation      ( .Actor:Self 00000001 000E0003 )
-  364:  		Call  FlyToGoal ( .Actor:Self 0000001E 00000000 .Easing:CosInOut )
+  364:  		Call  FlyToGoal ( .Actor:Self  30`  0` .Easing:CosInOut )
   380:  		Call  SetAnimation      ( .Actor:Self 00000001 000E0001 )
   398:  		Call  UseIdleAnimation  ( .Actor:Self .True )
   3AC:  		Return
@@ -665,7 +665,7 @@
   3BC:  EndSwitch
   3C4:  Call  $Function_80219474_24 ( 00000000 )
   3D4:  Set   *VarA  00000028 
-  3E4:  Call  AddBattleCamZoom  ( FFFFFFB5 )
+  3E4:  Call  AddBattleCamZoom  (  -75` )
   3F4:  Call  MoveBattleCamOver ( *VarA )
   404:  Call  8024ECF8  ( 00000000 00000000 00000001 )
   41C:  Call  PlaySoundAtActor  ( .Actor:Self 00000289 )
@@ -692,8 +692,8 @@
   5D8:  EndLoop
   5E0:  Call  SetAnimation      ( .Actor:Self 00000001 000E0001 )
   5F8:  Call  8026EA7C  ( FFFFFF81 00000001 00000009 )
-  610:  Call  AddBattleCamZoom  ( 0000004B )
-  620:  Call  MoveBattleCamOver ( 00000005 )
+  610:  Call  AddBattleCamZoom  (  75` )
+  620:  Call  MoveBattleCamOver (  5` )
   630:  Thread
   638:  	Wait  2`
   644:  	Call  $Function_80219550_24 ( 00000000 )
@@ -712,17 +712,17 @@
   740:  EndSwitch
   748:  Switch  *Var0 
   754:  	CaseOR  ==  .HitResult:Hit % 0
-  760:  	CaseOR  ==  00000002 % 2
+  760:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   76C:  		Call  UseBattleCamPreset    ( 00000002 )
   77C:  		Call  $Function_80219474_24 ( 00000001 )
   78C:  		Call  $Function_80219428_24 ( 00000001 )
-  79C:  		Call  AddGoalPos    ( .Actor:Self 00000019 0000000A 00000000 )
-  7B8:  		Call  FlyToGoal     ( .Actor:Self 0000000F FFFFFFF6 .Easing:CosInOut )
+  79C:  		Call  AddGoalPos    ( .Actor:Self  25`  10`  0` )
+  7B8:  		Call  FlyToGoal     ( .Actor:Self  15`  -10` .Easing:CosInOut )
   7D4:  		Wait  15`
   7E0:  		Call  YieldTurn ( )
   7EC:  		Call  SetGoalToHome ( .Actor:Self )
   7FC:  		Call  SetAnimation  ( .Actor:Self 00000001 000E0003 )
-  814:  		Call  FlyToGoal     ( .Actor:Self 0000001E 00000000 .Easing:CosInOut )
+  814:  		Call  FlyToGoal     ( .Actor:Self  30`  0` .Easing:CosInOut )
   830:  		Call  SetAnimation  ( .Actor:Self 00000001 000E0001 )
   848:  	EndCaseGroup
   850:  EndSwitch

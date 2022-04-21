@@ -1,6 +1,10 @@
 % Script File: mgm_00.mscr
 % Decoded from: 0 to 3FC0 (mgm_00)
 
+#define .NpcID:Toad_00              00
+#define .NpcID:Toad_01              01
+#define .NpcID:Toad_02              02
+
 #new:Function $Function_80240000
 {
     0:  LAW       V0, 800F7B30
@@ -1246,7 +1250,6 @@
 PADDING: 802411DC to 802411E0 (000011DC to 000011E0)
 00000000
 
-% Origin: HEURISTIC
 #new:Function $Function_802411E0
 {
     0:  ADDIU     SP, SP, FFC8
@@ -1451,7 +1454,6 @@ PADDING: 802411DC to 802411E0 (000011DC to 000011E0)
   35C:  ADDIU     SP, SP, 38
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80241540
 {
     0:  ADDIU     SP, SP, FFD8
@@ -1555,7 +1557,6 @@ PADDING: 802411DC to 802411E0 (000011DC to 000011E0)
   17C:  ADDIU     SP, SP, 28
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802416C0
 {
     0:  ADDIU     SP, SP, FFD8
@@ -1595,7 +1596,7 @@ PADDING: 802411DC to 802411E0 (000011DC to 000011E0)
    48:  LI        V0, FF
    4C:  SW        S0, 70 (S1)
    50:  SW        R0, 0 (S0)
-   54:  JAL       ~Func:create_dynamic_entity_world
+   54:  JAL       ~Func:create_generic_entity_world
    58:  SW        V0, C (S0)
    5C:  COPY      A0, S1
    60:  LI        A1, *MapVar[A]
@@ -1610,7 +1611,7 @@ PADDING: 802411DC to 802411E0 (000011DC to 000011E0)
    84:  BNE       V1, V0, .oA4
    88:  CLEAR     V0
    8C:  LW        A0, 14 (S0)
-   90:  JAL       ~Func:free_dynamic_entity
+   90:  JAL       ~Func:free_generic_entity
    94:  NOP
    98:  JAL       ~Func:heap_free
    9C:  COPY      A0, S0
@@ -1661,13 +1662,13 @@ PADDING: 802417B4 to 802417C0 (000017B4 to 000017C0)
    50:  Call  GetCurrentPartnerID   ( *Var0 )
    60:  If  *Var0  !=  .Partner:None % 0
    70:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-   84:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   84:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    A0:  EndIf
    A8:  Call  GetEntryID    ( *Var0 )
    B8:  Call  $Function_802400F0 ( )
    C4:  Sub   *Var2  00000028
    D4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   EC:  Call  InterpPlayerYaw   ( *Var4 00000000 )
+   EC:  Call  InterpPlayerYaw   ( *Var4  0` )
   100:  Call  PlaySound     ( 00000163 )
   110:  Call  802D286C      ( 00000100 )
   120:  Call  802D2520      ( 00010000 00000005 00000002 00000001 00000001 00000000 )
@@ -1721,7 +1722,7 @@ PADDING: 802417B4 to 802417C0 (000017B4 to 000017C0)
    84:  Set   *Var7  *Var3
    94:  Add   *Var2  00000002
    A4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   BC:  Call  InterpPlayerYaw       ( *Var4 00000000 )
+   BC:  Call  InterpPlayerYaw       ( *Var4  0` )
    D0:  If  *Var4  ==  0000005A
    E0:  	Add   *Var5  00000028
    F0:  Else
@@ -1735,8 +1736,8 @@ PADDING: 802417B4 to 802417C0 (000017B4 to 000017C0)
   184:  If  *Var0  !=  .Partner:None % 0
   194:  	Call  DisablePartnerAI  ( 00000000 )
   1A4:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-  1B8:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
-  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000000 )
+  1B8:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
+  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0  0` )
   1EC:  EndIf
   1F4:  Wait  1`
   200:  Call  PlaySound ( 00000163 )
@@ -1803,13 +1804,13 @@ PADDING: 802417B4 to 802417C0 (000017B4 to 000017C0)
    28:  Call  HidePlayerShadow  ( .True )
    38:  Set   *Var0  *VarA
    48:  Call  $Function_802400F0 ( )
-   54:  Call  PlayerMoveTo      ( *Var1 *Var3 00000003 )
+   54:  Call  PlayerMoveTo      ( *Var1 *Var3  3` )
    6C:  Set   *Var0  *VarA
    7C:  Call  $Function_802400F0 ( )
    88:  Call  SetPlayerPos      ( *Var1 *Var2 *Var3 )
    A0:  Call  SetPlayerFlagBits ( 00200000 .True )
    B4:  Call  $Function_802401D0 ( )
-   C0:  Call  InterpPlayerYaw   ( *Var0 00000000 )
+   C0:  Call  InterpPlayerYaw   ( *Var0  0` )
    D4:  Wait  2`
    E0:  Call  SetPlayerFlagBits ( 00200000 .False )
    F4:  Call  PlaySound ( 00000163 )
@@ -1868,7 +1869,7 @@ PADDING: 802417B4 to 802417C0 (000017B4 to 000017C0)
   1B0:  If  *Var4  >=  00000168
   1C0:  	Sub   *Var4  00000168
   1D0:  EndIf
-  1D8:  Call  InterpPlayerYaw       ( *Var8 00000001 )
+  1D8:  Call  InterpPlayerYaw       ( *Var8  1` )
   1EC:  Wait  1`
   1F8:  Call  PlaySound     ( 00000163 )
   208:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -2000,8 +2001,8 @@ PADDING: 802417B4 to 802417C0 (000017B4 to 000017C0)
 
 #new:Script_Main $Script_Main
 {
-    0:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   20:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+    0:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   20:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    3C:  Call  SetCamEnabled     ( .Cam:Default .True )
    50:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    64:  ExecWait  $Script_80243C40
@@ -2062,8 +2063,8 @@ MISSING: 80242AD4 to 80242B00 (00002AD4 to 00002B00)
 
 #new:Script $Script_80242B00
 {
-    0:  Call  UseSettingsFrom       ( .Cam:Default FFFFFFE7 00000000 FFFFFF65 )
-   1C:  Call  SetPanTarget  ( .Cam:Default FFFFFFE7 00000000 FFFFFF65 )
+    0:  Call  UseSettingsFrom       ( .Cam:Default  -25`  0`  -155` )
+   1C:  Call  SetPanTarget  ( .Cam:Default  -25`  0`  -155` )
    38:  Call  SetCamDistance        ( .Cam:Default *Fixed[400.0] )
    4C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.2] )
    60:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2088,8 +2089,8 @@ MISSING: 80242AD4 to 80242B00 (00002AD4 to 00002B00)
 
 #new:Script $Script_80242CA0
 {
-    0:  Call  UseSettingsFrom       ( .Cam:Default 0000005F 00000000 FFFFFF65 )
-   1C:  Call  SetPanTarget  ( .Cam:Default 0000005F 00000000 FFFFFF65 )
+    0:  Call  UseSettingsFrom       ( .Cam:Default  95`  0`  -155` )
+   1C:  Call  SetPanTarget  ( .Cam:Default  95`  0`  -155` )
    38:  Call  SetCamDistance        ( .Cam:Default *Fixed[400.0] )
    4C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.2] )
    60:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2117,7 +2118,7 @@ MISSING: 80242AD4 to 80242B00 (00002AD4 to 00002B00)
     0:  Wait  10`
     C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    24:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-   40:  Call  SetPanTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+   40:  Call  SetPanTarget  ( .Cam:Default *Var0  0` *Var2 )
    5C:  Call  SetCamDistance    ( .Cam:Default *Fixed[450.0] )
    70:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.2] )
    84:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2208,7 +2209,7 @@ MISSING: 80242AD4 to 80242B00 (00002AD4 to 00002B00)
 
 #new:Script $Script_Init_80243368
 {
-    0:  Call  SetNpcCollisionSize   ( .Npc:Self 00000020 0000004B )
+    0:  Call  SetNpcCollisionSize   ( .Npc:Self  32`  75` )
    18:  Call  BindNpcInteract       ( .Npc:Self $Script_Interact_80242F18 )
    2C:  Return
    34:  End
@@ -2216,11 +2217,11 @@ MISSING: 80242AD4 to 80242B00 (00002AD4 to 00002B00)
 
 #new:NpcGroup $NpcGroup_802433A4
 {
-	00000000 $NpcSettings_80242AA8 ~Vec3f:NPC_802433A4 % -213 12 -180
+	.NpcID:Toad_00 $NpcSettings_80242AA8 ~Vec3f:NPC_Toad_00 % -213 12 -180
 	00002D01 $Script_Init_80243368 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802433A4
-	~AnimationTable:NPC_802433A4 % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 001A005E % He's the receptionist Toad for the Playroom. He'll ...
 }
 
@@ -2256,11 +2257,11 @@ MISSING: 80242AD4 to 80242B00 (00002AD4 to 00002B00)
 
 #new:NpcGroup $NpcGroup_802436F8
 {
-	00000001 $NpcSettings_80242A50 ~Vec3f:NPC_802436F8 % -88 0 -95
+	.NpcID:Toad_01 $NpcSettings_80242A50 ~Vec3f:NPC_Toad_01 % -88 0 -95
 	00002D01 $Script_Init_802436C0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802436F8
-	~AnimationTable:NPC_802436F8 % .Sprite:Toad
+	~Movement:NPC_Toad_01
+	~AnimationTable:NPC_Toad_01 % .Sprite:Toad
 	00000000 00000000 00000000 001A005F % He seems to be a customer at the Playroom. I bet h ...
 }
 
@@ -2292,11 +2293,11 @@ MISSING: 80242AD4 to 80242B00 (00002AD4 to 00002B00)
 
 #new:NpcGroup $NpcGroup_80243A18
 {
-	00000002 $NpcSettings_80242A50 ~Vec3f:NPC_80243A18 % 46 0 -205
+	.NpcID:Toad_02 $NpcSettings_80242A50 ~Vec3f:NPC_Toad_02 % 46 0 -205
 	00002D01 $Script_Init_802439CC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243A18
-	~AnimationTable:NPC_80243A18 % .Sprite:Toad
+	~Movement:NPC_Toad_02
+	~AnimationTable:NPC_Toad_02 % .Sprite:Toad
 	00000000 00000000 00000000 001A0060 % He seems to come to the Playroom often. He's proba ...
 }
 
@@ -2317,7 +2318,6 @@ PADDING: 80243C38 to 80243C40 (00003C38 to 00003C40)
     8:  End
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_80243C50
 {
 	E3000A01 00000000 E200001C 00504240 FCFFFFFF FFFDF6FB E3001801 000000C0
@@ -2419,19 +2419,16 @@ PADDING: 80243DE8 to 80243DF0 (00003DE8 to 00003DF0)
 	$Function_80240E74[2D4] $Function_80240E74[2D4] $Function_80240E74[2D4] $Function_80240E74[2CC]
 }
 
-% Origin: HEURISTIC
 #new:ConstDouble $ConstDouble_80243F90
 {
 	0.650000d
 }
 
-% Origin: HEURISTIC
 #new:ConstDouble $ConstDouble_80243F98
 {
 	0.550000d
 }
 
-% Origin: HEURISTIC
 #new:JumpTable $JumpTable_80243FA0
 {
 	$Function_80241540[48] $Function_80241540[64] $Function_80241540[C4] $Function_80241540[FC]

@@ -1,6 +1,18 @@
 % Script File: mac_02.mscr
 % Decoded from: 0 to E540 (mac_02)
 
+#define .NpcID:TayceT_00            00
+#define .NpcID:FiceT_01             01
+#define .NpcID:Bubulb_02            02
+#define .NpcID:Toad_03              03
+#define .NpcID:ThreeSisters_04      04
+#define .NpcID:Toad_05              05
+#define .NpcID:ToadKid_06           06
+#define .NpcID:Toad_07              07
+#define .NpcID:Toad_08              08
+#define .NpcID:Bootler_09           09
+#define .NpcID:ShyGuy_11            0B
+
 #new:Function $Function_80240000
 {
     0:  LAW       V0, 800F7B30
@@ -2001,7 +2013,7 @@ PADDING: 80240924 to 80240930 (00000924 to 00000930)
    18:  SW        S2, 18 (SP)
    1C:  BEQ       A1, R0, .oEC
    20:  SW        S0, 10 (SP)
-   24:  JAL       8011D82C
+   24:  JAL       ~Func:mdl_set_all_fog_mode
    28:  LI        A0, 1
    2C:  CLEAR     A0
    30:  COPY      A1, A0
@@ -2126,7 +2138,7 @@ PADDING: 80240924 to 80240930 (00000924 to 00000930)
    8C:  LI        V0, 1
    90:  BNE       V1, V0, .o158
    94:  CLEAR     V0
-   98:  JAL       8011D82C
+   98:  JAL       ~Func:mdl_set_all_fog_mode
    9C:  CLEAR     A0
    A0:  CLEAR     S0
    A4:  LI        S3, FFFC
@@ -2257,7 +2269,7 @@ PADDING: 80240924 to 80240930 (00000924 to 00000930)
    70:  MFC1      A1, F22
    74:  MFC1      A2, F20
    78:  MFC1      A3, F2
-   7C:  JAL       800715D0
+   7C:  JAL       ~Func:playFX_4E
    80:  CLEAR     A0
    84:  COPY      A0, S1
    88:  LI        A1, *Array[1]
@@ -2284,7 +2296,7 @@ PADDING: 80240924 to 80240930 (00000924 to 00000930)
    E4:  MFC1      A1, F22
    E8:  MFC1      A2, F20
    EC:  MFC1      A3, F2
-   F0:  JAL       80071810
+   F0:  JAL       ~Func:playFX_54
    F4:  CLEAR     A0
    F8:  COPY      A0, S1
    FC:  LUI       A1, F4AC
@@ -2314,7 +2326,7 @@ PADDING: 80240924 to 80240930 (00000924 to 00000930)
   164:  MFC1      A3, F2
   168:  CLEAR     A0
   16C:  SW        R0, 14 (SP)
-  170:  JAL       80072890
+  170:  JAL       ~Func:playFX_80
   174:  SWC1      F0, 10 (SP)
   178:  LW        V1, 0 (S0)
   17C:  LW        A0, C (V1)
@@ -2398,7 +2410,7 @@ PADDING: 80240924 to 80240930 (00000924 to 00000930)
    8C:  JAL       ~Func:remove_effect
    90:  SW        R0, 18 (A1)
    94:  LAW       A0, $End[0]
-   9C:  JAL       ~Func:free_dynamic_entity
+   9C:  JAL       ~Func:free_generic_entity
    A0:  NOP
    A4:  LI        V0, 2
         .oA8
@@ -2846,7 +2858,7 @@ PADDING: 80240924 to 80240930 (00000924 to 00000930)
    50:  NOP
         .o54
    54:  COPY      A2, A1
-   58:  JAL       80071690
+   58:  JAL       ~Func:playFX_50
    5C:  COPY      A3, A1
         .o60
    60:  LW        RA, 10 (SP)
@@ -2860,7 +2872,7 @@ PADDING: 80240924 to 80240930 (00000924 to 00000930)
     0:  ADDIU     SP, SP, FFE8
     4:  LA        A1, $Function_802427B8
     C:  SW        RA, 10 (SP)
-   10:  JAL       ~Func:create_dynamic_entity_frontUI
+   10:  JAL       ~Func:create_generic_entity_frontUI
    14:  CLEAR     A0
    18:  LW        RA, 10 (SP)
    1C:  SAW       V0, $End[0]
@@ -3807,13 +3819,13 @@ PADDING: 80243624 to 80243630 (00003624 to 00003630)
    50:  Call  GetCurrentPartnerID   ( *Var0 )
    60:  If  *Var0  !=  .Partner:None % 0
    70:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-   84:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   84:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    A0:  EndIf
    A8:  Call  GetEntryID    ( *Var0 )
    B8:  Call  $Function_802400F0 ( )
    C4:  Sub   *Var2  00000028
    D4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   EC:  Call  InterpPlayerYaw   ( *Var4 00000000 )
+   EC:  Call  InterpPlayerYaw   ( *Var4  0` )
   100:  Call  PlaySound     ( 00000163 )
   110:  Call  802D286C      ( 00000100 )
   120:  Call  802D2520      ( 00010000 00000005 00000002 00000001 00000001 00000000 )
@@ -3868,7 +3880,7 @@ PADDING: 80243624 to 80243630 (00003624 to 00003630)
    84:  Set   *Var7  *Var3
    94:  Add   *Var2  00000002
    A4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   BC:  Call  InterpPlayerYaw       ( *Var4 00000000 )
+   BC:  Call  InterpPlayerYaw       ( *Var4  0` )
    D0:  If  *Var4  ==  0000005A
    E0:  	Add   *Var5  00000028
    F0:  Else
@@ -3882,8 +3894,8 @@ PADDING: 80243624 to 80243630 (00003624 to 00003630)
   184:  If  *Var0  !=  .Partner:None % 0
   194:  	Call  DisablePartnerAI  ( 00000000 )
   1A4:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-  1B8:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
-  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000000 )
+  1B8:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
+  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0  0` )
   1EC:  EndIf
   1F4:  Wait  1`
   200:  Call  PlaySound ( 00000163 )
@@ -3950,13 +3962,13 @@ PADDING: 80243624 to 80243630 (00003624 to 00003630)
    28:  Call  HidePlayerShadow  ( .True )
    38:  Set   *Var0  *VarA
    48:  Call  $Function_802400F0 ( )
-   54:  Call  PlayerMoveTo      ( *Var1 *Var3 00000003 )
+   54:  Call  PlayerMoveTo      ( *Var1 *Var3  3` )
    6C:  Set   *Var0  *VarA
    7C:  Call  $Function_802400F0 ( )
    88:  Call  SetPlayerPos      ( *Var1 *Var2 *Var3 )
    A0:  Call  SetPlayerFlagBits ( 00200000 .True )
    B4:  Call  $Function_802401D0 ( )
-   C0:  Call  InterpPlayerYaw   ( *Var0 00000000 )
+   C0:  Call  InterpPlayerYaw   ( *Var0  0` )
    D4:  Wait  2`
    E0:  Call  SetPlayerFlagBits ( 00200000 .False )
    F4:  Call  PlaySound ( 00000163 )
@@ -4015,7 +4027,7 @@ PADDING: 80243624 to 80243630 (00003624 to 00003630)
   1B0:  If  *Var4  >=  00000168
   1C0:  	Sub   *Var4  00000168
   1D0:  EndIf
-  1D8:  Call  InterpPlayerYaw       ( *Var8 00000001 )
+  1D8:  Call  InterpPlayerYaw       ( *Var8  1` )
   1EC:  Wait  1`
   1F8:  Call  PlaySound     ( 00000163 )
   208:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -4157,8 +4169,8 @@ PADDING: 80243624 to 80243630 (00003624 to 00003630)
    20:  EndIf
    28:  Set   *GB_WorldLocation  .Location:ToadTown
    38:  Call  SetSpriteShading  ( .Shading:None )
-   48:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   68:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   48:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   68:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    84:  Call  SetCamEnabled     ( .Cam:Default .True )
    98:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    AC:  Set   *AreaFlag[016]  .False
@@ -4286,7 +4298,7 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
     0:  Switch  *Var0
     C:  	Case  ==  00000000
    18:  		If  *GF_MAC02_UnlockedHouse  ==  .False
-   28:  			Call  ShowMessageAtScreenPos    ( 001D016A 000000A0 00000028 ) % It won't open. It must be locked from the inside.
+   28:  			Call  ShowMessageAtScreenPos    ( 001D016A  160`  40` ) % It won't open. It must be locked from the inside.
    40:  			Set   *Var0  FFFFFFFF
    50:  			Return
    58:  		EndIf
@@ -4687,7 +4699,7 @@ PADDING: 80245C44 to 80245C50 (00005C44 to 00005C50)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf
@@ -4710,7 +4722,7 @@ PADDING: 80245C44 to 80245C50 (00005C44 to 00005C50)
 #new:Script $Script_80245D60
 {
     0:  Call  DisablePlayerInput        ( .True )
-   10:  Call  ShowMessageAtScreenPos    ( 001D016B 000000A0 00000028 ) % Private
+   10:  Call  ShowMessageAtScreenPos    ( 001D016B  160`  40` ) % Private
    28:  Call  DisablePlayerInput        ( .False )
    38:  Return
    40:  End
@@ -4719,7 +4731,7 @@ PADDING: 80245C44 to 80245C50 (00005C44 to 00005C50)
 #new:Script $Script_80245DA8
 {
     0:  Call  DisablePlayerInput        ( .True )
-   10:  Call  ShowMessageAtScreenPos    ( 001D0171 000000A0 00000028 ) % North West Peach's Castle East Port Forever Forest ...
+   10:  Call  ShowMessageAtScreenPos    ( 001D0171  160`  40` ) % North West Peach's Castle East Port Forever Forest ...
    28:  Call  DisablePlayerInput        ( .False )
    38:  Return
    40:  End
@@ -4881,7 +4893,7 @@ MISSING: 802460BC to 802460E8 (000060BC to 000060E8)
    48:  	Call  SetNpcJumpscale   ( .Npc:Self 00000001 )
    5C:  	Call  SetNpcAnimation   ( .Npc:Self 00AF000C )
    70:  	Wait  40`
-   7C:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   7C:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    98:  EndIf
    A0:  Return
    A8:  End
@@ -4929,7 +4941,7 @@ MISSING: 802460BC to 802460E8 (000060BC to 000060E8)
    9C:  Call  SetCamDistance    ( .Cam:Default *Var0 )
    B0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    C4:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-   D8:  Call  SetCamSpeed   ( .Cam:Default 00000001 )
+   D8:  Call  SetCamSpeed   ( .Cam:Default  1` )
    EC:  Return
    F4:  End
 }
@@ -5255,10 +5267,10 @@ MISSING: 802460BC to 802460E8 (000060BC to 000060E8)
    48:  	SetF  *Var3  *Array[3]
    58:  	AddF  *Var3  *Var1
    68:  	Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
-   7C:  	Call  NpcMoveTo ( .Npc:Partner *Var2 *Var3 00000028 )
+   7C:  	Call  NpcMoveTo ( .Npc:Partner *Var2 *Var3  40` )
    98:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
    AC:  EndThread
-   B4:  Call  PlayerMoveTo  ( *Array[1] *Array[3] 00000028 )
+   B4:  Call  PlayerMoveTo  ( *Array[1] *Array[3]  40` )
    CC:  Return
    D4:  End
 }
@@ -5730,22 +5742,22 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 
 #new:Script $Script_802490F8
 {
-    0:  Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-   18:  Call  SetNpcAnimation   ( 00000000 00AA0002 )
-   2C:  Call  NpcMoveTo ( 00000000 FFFFFF46 FFFFFE83 00000014 )
-   48:  Call  NpcMoveTo ( 00000000 FFFFFF24 FFFFFE57 0000001E )
-   64:  Call  SetNpcAnimation   ( 00000000 00AA0007 )
+    0:  Call  SetNpcFlagBits    ( .NpcID:TayceT_00 00000100 .True )
+   18:  Call  SetNpcAnimation   ( .NpcID:TayceT_00 00AA0002 )
+   2C:  Call  NpcMoveTo ( .NpcID:TayceT_00  -186`  -381`  20` )
+   48:  Call  NpcMoveTo ( .NpcID:TayceT_00  -220`  -425`  30` )
+   64:  Call  SetNpcAnimation   ( .NpcID:TayceT_00 00AA0007 )
    78:  Wait  10`
-   84:  Call  SpeakToPlayer     ( 00000000 00AA0007 00AA0007 00000005 0004000E ) % Tra-la-la-la-la!
+   84:  Call  SpeakToPlayer     ( .NpcID:TayceT_00 00AA0007 00AA0007 00000005 0004000E ) % Tra-la-la-la-la!
    A4:  Wait  20`
-   B0:  Call  SetNpcAnimation   ( 00000000 00AA0008 )
+   B0:  Call  SetNpcAnimation   ( .NpcID:TayceT_00 00AA0008 )
    C4:  Wait  30`
-   D0:  Call  SetNpcYaw ( 00000000 0000005A )
-   E4:  Call  SetNpcAnimation   ( 00000000 00AA0002 )
-   F8:  Call  NpcMoveTo ( 00000000 FFFFFF46 FFFFFE83 00000014 )
-  114:  Call  NpcMoveTo ( 00000000 FFFFFF14 FFFFFEC2 00000014 )
-  130:  Call  SetNpcAnimation   ( 00000000 00AA0001 )
-  144:  Call  SetNpcFlagBits    ( 00000000 00000100 .False )
+   D0:  Call  SetNpcYaw ( .NpcID:TayceT_00  90` )
+   E4:  Call  SetNpcAnimation   ( .NpcID:TayceT_00 00AA0002 )
+   F8:  Call  NpcMoveTo ( .NpcID:TayceT_00  -186`  -381`  20` )
+  114:  Call  NpcMoveTo ( .NpcID:TayceT_00  -236`  -318`  20` )
+  130:  Call  SetNpcAnimation   ( .NpcID:TayceT_00 00AA0001 )
+  144:  Call  SetNpcFlagBits    ( .NpcID:TayceT_00 00000100 .False )
   15C:  Return
   164:  End
 }
@@ -5760,41 +5772,41 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
     0:  If  *GF_MAC02_TayceT_HoldingCake  ==  .True
    10:  	Call  $Function_80243088    ( *Var0 )
    20:  	If  *Var0  !=  00000000
-   30:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004001A ) % Here's the Cake!
+   30:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004001A ) % Here's the Cake!
    50:  		Set   *Var0  000000C1
    60:  		Set   *Var1  00000000
    70:  		ExecWait  $Script_80246154
    7C:  		Call  AddItem       ( .Item:Cake *Var0 )
-   90:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004001B ) % This is my most delicious Cake. One taste of it wo ...
+   90:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004001B ) % This is my most delicious Cake. One taste of it wo ...
    B0:  		Set   *GB_StoryProgress  .Story:Ch4_GotTayceTsCake
    C0:  	Else
-   C8:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004001C ) % Oh, my... You're carrying too much. You can't poss ...
+   C8:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004001C ) % Oh, my... You're carrying too much. You can't poss ...
    E8:  		Set   *GF_MAC02_TayceT_HoldingCake  .True
    F8:  	EndIf
   100:  	Return
   108:  EndIf
-  110:  Call  SpeakToPlayer ( 00000000 00AA0004 00AA0006 00000000 00040017 ) % Oh...hello there, hon. Thank you for coming to vis ...
+  110:  Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0006 00000000 00040017 ) % Oh...hello there, hon. Thank you for coming to vis ...
   130:  Set   *Var0  $???_80249264
   140:  Set   *Var1  00000000
   150:  ExecWait  $Script_802488C4
   15C:  Switch  *Var0
   168:  	Case  ==  00000000
   174:  	Case  ==  FFFFFFFF
-  180:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0006 00000000 00040018 ) % But...you aren't going to give me back my Frying P ...
+  180:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0006 00000000 00040018 ) % But...you aren't going to give me back my Frying P ...
   1A0:  	Default
-  1A8:  		Call  SpeakToPlayer ( 00000000 00AA0005 00AA0001 00000000 00040019 ) % Oh, Mario! My dear, dear Frying Pan! You saved it  ...
+  1A8:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0005 00AA0001 00000000 00040019 ) % Oh, Mario! My dear, dear Frying Pan! You saved it  ...
   1C8:  		ExecWait  $Script_802490F8
   1D4:  		Call  $Function_80243088    ( *Var0 )
   1E4:  		If  *Var0  !=  00000000
-  1F4:  			Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004001A ) % Here's the Cake!
+  1F4:  			Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004001A ) % Here's the Cake!
   214:  			Set   *Var0  000000C1
   224:  			Set   *Var1  00000000
   234:  			ExecWait  $Script_80246154
   240:  			Call  AddItem       ( .Item:Cake *Var0 )
-  254:  			Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004001B ) % This is my most delicious Cake. One taste of it wo ...
+  254:  			Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004001B ) % This is my most delicious Cake. One taste of it wo ...
   274:  			Set   *GB_StoryProgress  .Story:Ch4_GotTayceTsCake
   284:  		Else
-  28C:  			Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004001C ) % Oh, my... You're carrying too much. You can't poss ...
+  28C:  			Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004001C ) % Oh, my... You're carrying too much. You can't poss ...
   2AC:  			Set   *GF_MAC02_TayceT_HoldingCake  .True
   2BC:  		EndIf
   2C4:  EndSwitch
@@ -5810,10 +5822,10 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 #new:Script $Script_80249550
 {
     0:  If  *AreaFlag[001]  ==  .False
-   10:  	Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004001D ) % Oh, my! Oh, good heavens!! That book you have! It  ...
+   10:  	Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004001D ) % Oh, my! Oh, good heavens!! That book you have! It  ...
    30:  	Set   *AreaFlag[001]  .True
    40:  Else
-   48:  	Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004001E ) % Oh, hello, hon. You know, I still wouldn't mind ha ...
+   48:  	Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004001E ) % Oh, hello, hon. You know, I still wouldn't mind ha ...
    68:  	Set   *AreaFlag[001]  .False
    78:  EndIf
    80:  Set   *Var0  $???_80249548
@@ -5821,9 +5833,9 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
    A0:  ExecWait  $Script_802488C4
    AC:  Switch  *Var0
    B8:  	Case  ==  FFFFFFFF
-   C4:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004001F ) % Oh...OK. Why'd I get my hopes up...? It's your boo ...
+   C4:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004001F ) % Oh...OK. Why'd I get my hopes up...? It's your boo ...
    E4:  	Default
-   EC:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040020 ) % Ooh! I can have it? Oh, how delightful! With this  ...
+   EC:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040020 ) % Ooh! I can have it? Oh, how delightful! With this  ...
   10C:  		Set   *GF_MAC02_TayceT_HasCookbook  .True
   11C:  EndSwitch
   124:  Return
@@ -5836,26 +5848,26 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
    10:  If  *GF_MAC02_Met_TayceT  ==  .False
    20:  	Set   *GF_MAC02_Met_TayceT  .True
    30:  	Set   *AreaFlag[001]  .True
-   40:  	Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040000 ) % Oh my goodness, it's Mario! My name is Tayce T. I  ...
+   40:  	Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040000 ) % Oh my goodness, it's Mario! My name is Tayce T. I  ...
    60:  Else
    68:  	If  *AreaFlag[001]  ==  .False
-   78:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040001 ) % Oh, it's Mario! Hi there! Would you like me to coo ...
+   78:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040001 ) % Oh, it's Mario! Hi there! Would you like me to coo ...
    98:  		Set   *AreaFlag[001]  .True
    A8:  	Else
-   B0:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040002 ) % Yes, honey? Would you like me to cook you somethin ...
+   B0:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040002 ) % Yes, honey? Would you like me to cook you somethin ...
    D0:  	EndIf
    D8:  EndIf
    E0:  Call  $Function_80243040    ( *Var0 )
    F0:  If  *Var0  <=  00000000
-  100:  	Call  ContinueSpeech    ( 00000000 00AA0004 00AA0001 00000000 00040003 ) % Oh my. You don't have any ingredients for me. I ca ...
+  100:  	Call  ContinueSpeech    ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040003 ) % Oh my. You don't have any ingredients for me. I ca ...
   120:  	Goto  9
   12C:  EndIf
   134:  Call  ShowChoice    ( 001E0010 ) % Yes No
   144:  If  *Var0  ==  00000001
-  154:  	Call  ContinueSpeech    ( 00000000 00AA0004 00AA0001 00000000 00040004 ) % Oh, that's too bad. I was so excited to show you m ...
+  154:  	Call  ContinueSpeech    ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040004 ) % Oh, that's too bad. I was so excited to show you m ...
   174:  	Goto  9
   180:  EndIf
-  188:  Call  ContinueSpeech    ( 00000000 00AA0004 00AA0001 00000000 00040005 ) % Which ingredient would you like me to use?
+  188:  Call  ContinueSpeech    ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040005 ) % Which ingredient would you like me to use?
   1A8:  Label  1
   1B4:  Set   *Var3  00000000
   1C4:  Call  $Function_802430D0 ( )
@@ -5865,10 +5877,10 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   1FC:  Switch  *Var0
   208:  	Case  ==  00000000
   214:  	Case  ==  FFFFFFFF
-  220:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040006 ) % You don't want me to cook?
+  220:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040006 ) % You don't want me to cook?
   240:  		Call  ShowChoice    ( 001E0009 ) % Don't Cook Cook
   250:  		If  *Var0  ==  00000000
-  260:  			Call  ContinueSpeech    ( 00000000 00AA0004 00AA0001 00000000 00040004 ) % Oh, that's too bad. I was so excited to show you m ...
+  260:  			Call  ContinueSpeech    ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040004 ) % Oh, that's too bad. I was so excited to show you m ...
   280:  			Goto  9
   28C:  		EndIf
   294:  		Call  CloseMessage ( )
@@ -5887,7 +5899,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   33C:  If  *Var0  <  00000002
   34C:  	Goto  5
   358:  EndIf
-  360:  Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040007 ) % Would you like me to use another ingredient?
+  360:  Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040007 ) % Would you like me to use another ingredient?
   380:  Call  ShowChoice    ( 001E0010 ) % Yes No
   390:  Call  CloseMessage ( )
   39C:  If  *Var0  ==  00000001
@@ -5904,14 +5916,14 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   43C:  Switch  *Var0
   448:  	Case  ==  00000000
   454:  	Case  ==  FFFFFFFF
-  460:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040008 ) % What's the matter, honey?
+  460:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040008 ) % What's the matter, honey?
   480:  		Call  ShowChoice    ( 001E0008 ) % Make with one Choose the second Stop
   490:  		If  *Var0  ==  00000000
   4A0:  			Call  CloseMessage ( )
   4AC:  			Goto  5
   4B8:  		EndIf
   4C0:  		If  *Var0  ==  00000002
-  4D0:  			Call  ContinueSpeech    ( 00000000 00AA0004 00AA0001 00000000 00040004 ) % Oh, that's too bad. I was so excited to show you m ...
+  4D0:  			Call  ContinueSpeech    ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040004 ) % Oh, that's too bad. I was so excited to show you m ...
   4F0:  			Goto  9
   4FC:  		EndIf
   504:  		Call  CloseMessage ( )
@@ -5920,7 +5932,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   528:  		Set   *Var9  *Var0
   538:  		Call  AddItem   ( *Var0 *Var1 )
   54C:  		If  *Var8  ==  *Var9
-  55C:  			Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040009 ) % This is the same kind as the first ingredient. Ple ...
+  55C:  			Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040009 ) % This is the same kind as the first ingredient. Ple ...
   57C:  			Set   *Var3  00000001
   58C:  		EndIf
   594:  EndSwitch
@@ -5933,10 +5945,10 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   5F4:  Set   *Var1  *Var9
   604:  Call  $Function_80241874    ( *Var1 )
   614:  Call  SetMessageString  ( *Var1 00000001 )
-  628:  Call  SpeakToPlayer     ( 00000000 00AA0004 00AA0001 00000000 0004000B ) % Then I shall cook with and .
+  628:  Call  SpeakToPlayer     ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004000B ) % Then I shall cook with and .
   648:  Call  ShowChoice        ( 001E0010 ) % Yes No
   658:  If  *Var0  ==  00000001
-  668:  	Call  ContinueSpeech    ( 00000000 00AA0004 00AA0001 00000000 0004000C ) % Oh my. You don't want me to cook now? Well, come b ...
+  668:  	Call  ContinueSpeech    ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004000C ) % Oh my. You don't want me to cook now? Well, come b ...
   688:  	Goto  9
   694:  EndIf
   69C:  Call  $Function_80242DBC    ( *Var6 *Var7 *Var8 *Var9 )
@@ -5947,36 +5959,36 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   6F8:  Set   *Var0  *Var8
   708:  Call  $Function_80241874    ( *Var0 )
   718:  Call  SetMessageString  ( *Var0 00000000 )
-  72C:  Call  SpeakToPlayer     ( 00000000 00AA0004 00AA0001 00000000 0004000A ) % Then I shall cook with .
+  72C:  Call  SpeakToPlayer     ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004000A ) % Then I shall cook with .
   74C:  Call  ShowChoice        ( 001E0010 ) % Yes No
   75C:  If  *Var0  ==  00000001
-  76C:  	Call  ContinueSpeech    ( 00000000 00AA0004 00AA0001 00000000 0004000C ) % Oh my. You don't want me to cook now? Well, come b ...
+  76C:  	Call  ContinueSpeech    ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004000C ) % Oh my. You don't want me to cook now? Well, come b ...
   78C:  	Goto  9
   798:  EndIf
   7A0:  Call  $Function_80242C44    ( *Var6 *Var7 *Var8 *GF_MAC02_TayceT_HasCookbook )
   7BC:  Call  RemoveItem    ( *Var8 *Var0 )
   7D0:  Label  6
-  7DC:  Call  ContinueSpeech        ( 00000000 00AA0004 00AA0001 00000000 0004000D ) % I'll whip something special up just for you, honey ...
+  7DC:  Call  ContinueSpeech        ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004000D ) % I'll whip something special up just for you, honey ...
   7FC:  ExecWait  $Script_802490F8
   808:  Switch  *Var7
   814:  	Case  ==  00000000
-  820:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040012 ) % Oh... I'm so sorry. This recipe didn't work out. O ...
+  820:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040012 ) % Oh... I'm so sorry. This recipe didn't work out. O ...
   840:  	Case  ==  00000002
-  84C:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 0004000F ) % All done! It smells delicious!
+  84C:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 0004000F ) % All done! It smells delicious!
   86C:  	Case  ==  00000003
-  878:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040010 ) % Oh, sweet success! This dish is one of my specialt ...
+  878:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040010 ) % Oh, sweet success! This dish is one of my specialt ...
   898:  	Case  ==  00000004
-  8A4:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040013 ) % OK, all finished! ...I don't exactly know what it  ...
+  8A4:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040013 ) % OK, all finished! ...I don't exactly know what it  ...
   8C4:  	Default
-  8CC:  		Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040011 ) % Here you are! This recipe's not too bad.
+  8CC:  		Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040011 ) % Here you are! This recipe's not too bad.
   8EC:  EndSwitch
-  8F4:  Call  ContinueSpeech        ( 00000000 00AA0004 00AA0001 00000000 00040014 ) % Here, please!
+  8F4:  Call  ContinueSpeech        ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040014 ) % Here, please!
   914:  Call  $Function_80242F60    ( *Var6 )
   924:  Set   *Var0  *Var6
   934:  Set   *Var1  00000000
   944:  ExecWait  $Script_80246154
   950:  Call  AddItem   ( *Var6 *Var0 )
-  964:  Call  SpeakToPlayer ( 00000000 00AA0004 00AA0001 00000000 00040015 ) % Come back anytime, hon. I look forward to it!
+  964:  Call  SpeakToPlayer ( .NpcID:TayceT_00 00AA0004 00AA0001 00000000 00040015 ) % Come back anytime, hon. I look forward to it!
   984:  Label  9
   990:  Call  DisablePlayerInput    ( .False )
   9A0:  Return
@@ -6004,8 +6016,8 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 #new:Script $Script_Init_8024A0D4
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024A034 )
-   14:  Call  InterpNpcYaw      ( .Npc:Self 0000002D 00000000 )
-   2C:  Call  SetNpcPos ( .Npc:Self FFFFFF14 00000014 FFFFFEC2 )
+   14:  Call  InterpNpcYaw      ( .Npc:Self  45`  0` )
+   2C:  Call  SetNpcPos ( .Npc:Self  -236`  20`  -318` )
    48:  Call  SetNpcAnimation   ( .Npc:Self 00AA0001 )
    5C:  If  *GB_StoryProgress  >=  .Story:Ch3_StarSpritDeparted % FFFFFFF3
    6C:  	If  *GB_StoryProgress  <  .Story:Ch4_GotTayceTsCake % FFFFFFFD
@@ -6066,7 +6078,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -6106,7 +6118,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -6162,14 +6174,14 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 #new:Script $Script_8024A918
 {
     0:  If  *VarC  ==  00000002
-   10:  	Call  SpeakToPlayer     ( 00000001 00AB0004 00AB0001 00000000 00040039 ) % I wonder who "Bootler" is. ... Ugh... Oh, no... No ...
-   30:  	Call  SetNpcAnimation   ( 00000001 00AB0006 )
-   44:  	Call  EndSpeech ( 00000001 00AB0006 00AB0006 00000000 )
+   10:  	Call  SpeakToPlayer     ( .NpcID:FiceT_01 00AB0004 00AB0001 00000000 00040039 ) % I wonder who "Bootler" is. ... Ugh... Oh, no... No ...
+   30:  	Call  SetNpcAnimation   ( .NpcID:FiceT_01 00AB0006 )
+   44:  	Call  EndSpeech ( .NpcID:FiceT_01 00AB0006 00AB0006 00000000 )
    60:  	Set   *Var0  0000015C
    70:  	Set   *Var1  00000003
    80:  	ExecWait  $Script_80246154
    8C:  	Call  AddStarPieces     ( 00000001 )
-   9C:  	Call  SetNpcAnimation   ( 00000001 00AB0001 )
+   9C:  	Call  SetNpcAnimation   ( .NpcID:FiceT_01 00AB0001 )
    B0:  EndIf
    B8:  Return
    C0:  End
@@ -6203,12 +6215,12 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   150:  EndSwitch
   158:  Call  GetCurrentPartnerID   ( *Var2 )
   168:  If  *Var2  ==  .Partner:Bow % 9
-  178:  	Call  SpeakToPlayer ( 00000001 00AB0006 00AB0006 00000000 *Var1 ) % variable string ID
+  178:  	Call  SpeakToPlayer ( .NpcID:FiceT_01 00AB0006 00AB0006 00000000 *Var1 ) % variable string ID
   198:  Else
   1A0:  	If  *Var3  ==  00000000
-  1B0:  		Call  SpeakToPlayer ( 00000001 00AB0004 00AB0001 00000000 *Var0 ) % variable string ID
+  1B0:  		Call  SpeakToPlayer ( .NpcID:FiceT_01 00AB0004 00AB0001 00000000 *Var0 ) % variable string ID
   1D0:  	Else
-  1D8:  		Call  SpeakToPlayer ( 00000001 00AB0006 00AB0006 00000000 *Var0 ) % variable string ID
+  1D8:  		Call  SpeakToPlayer ( .NpcID:FiceT_01 00AB0006 00AB0006 00000000 *Var0 ) % variable string ID
   1F8:  	EndIf
   200:  EndIf
   208:  ExecWait  $Script_8024A8C8
@@ -6225,7 +6237,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
     0:  If  *GB_StoryProgress  ==  .Story:Ch2_StarSpritDeparted % FFFFFFCB
    10:  	Call  SetNpcAnimation   ( .Npc:Self 00AB0006 )
    24:  Else
-   2C:  	Call  SetNpcPos ( .Npc:Self 00000186 00000000 FFFFFFCE )
+   2C:  	Call  SetNpcPos ( .Npc:Self  390`  0`  -50` )
    48:  EndIf
    50:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024A9E0 )
    64:  Return
@@ -6235,10 +6247,10 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 #new:Script $Script_8024ACA4
 {
     0:  If  *Var0  ==  *Fixed[0.0]
-   10:  	Call  PlaySoundAtNpc    ( 00000009 .Sound:BooVanish 00000000 )
+   10:  	Call  PlaySoundAtNpc    ( .NpcID:Bootler_09 .Sound:BooVanish 00000000 )
    28:  	SetF  *Var1  *Fixed[24.0]
    38:  Else
-   40:  	Call  PlaySoundAtNpc    ( 00000009 .Sound:BooAppear 00000000 )
+   40:  	Call  PlaySoundAtNpc    ( .NpcID:Bootler_09 .Sound:BooAppear 00000000 )
    58:  	SetF  *Var1  *Fixed[-24.0]
    68:  EndIf
    70:  Loop  0000000A
@@ -6269,83 +6281,83 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
    BC:  EndLoop
    C4:  Call  SetMusicTrack ( 00000000 .Song:BoosMansion 00000000 00000008 )
    E0:  Call  DisablePlayerInput        ( .True )
-   F0:  Call  ShowMessageAtScreenPos    ( 00040022 00000190 00000064 ) % Aaaaaaaagh!!
+   F0:  Call  ShowMessageAtScreenPos    ( 00040022  400`  100` ) % Aaaaaaaagh!!
   108:  Thread
-  110:  	Call  SetNpcPos     ( .Npc:Self 000001AE 0000003C FFFFFFD8 )
-  12C:  	Call  SetNpcAnimation   ( 00000009 00BF0002 )
+  110:  	Call  SetNpcPos     ( .Npc:Self  430`  60`  -40` )
+  12C:  	Call  SetNpcAnimation   ( .NpcID:Bootler_09 00BF0002 )
   140:  	Call  SetNpcSpeed   ( .Npc:Self *Fixed[3.0] )
   154:  	Call  PlaySoundAtNpc    ( .Npc:Self 00000293 00000000 )
-  16C:  	Call  NpcMoveTo     ( .Npc:Self 00000244 FFFFFFD8 00000000 )
-  188:  	Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  16C:  	Call  NpcMoveTo     ( .Npc:Self  580`  -40`  0` )
+  188:  	Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   1A4:  EndThread
-  1AC:  Call  UseSettingsFrom   ( .Cam:Default 000001AE 00000001 00000023 )
-  1C8:  Call  SetPanTarget  ( .Cam:Default 000001AE 00000001 00000023 )
+  1AC:  Call  UseSettingsFrom   ( .Cam:Default  430`  1`  35` )
+  1C8:  Call  SetPanTarget  ( .Cam:Default  430`  1`  35` )
   1E4:  Call  SetCamDistance    ( .Cam:Default *Fixed[275.0] )
   1F8:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.5] *Fixed[-10.5] )
   210:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
   224:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   23C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   250:  Call  SetPlayerSpeed    ( *Fixed[4.0] )
-  260:  Call  PlayerMoveTo  ( 000001AE FFFFFFD8 00000000 )
-  278:  Call  InterpPlayerYaw   ( 0000013B 00000000 )
+  260:  Call  PlayerMoveTo  (  430`  -40`  0` )
+  278:  Call  InterpPlayerYaw   (  315`  0` )
   28C:  Call  DisablePartnerAI  ( 00000000 )
-  29C:  Call  NpcMoveTo     ( .Npc:Partner 000001C7 FFFFFFD8 00000014 )
-  2B8:  Call  InterpNpcYaw  ( .Npc:Partner 0000013B 00000000 )
+  29C:  Call  NpcMoveTo     ( .Npc:Partner  455`  -40`  20` )
+  2B8:  Call  InterpNpcYaw  ( .Npc:Partner  315`  0` )
   2D0:  Call  EnablePartnerAI ( )
-  2DC:  Call  SpeakToPlayer ( 00000001 00AB0006 00AB0006 00000000 00040023 ) % Brrrrrrrr... Juh...Just now, a ghost passed right  ...
+  2DC:  Call  SpeakToPlayer ( .NpcID:FiceT_01 00AB0006 00AB0006 00000000 00040023 ) % Brrrrrrrr... Juh...Just now, a ghost passed right  ...
   2FC:  Call  ShowChoice    ( 001E0036 ) % Saw Didn't see
   30C:  If  *Var0  ==  00000000
   31C:  	Set   *Var1  00040024
   32C:  Else
   334:  	Set   *Var1  00040025
   344:  EndIf
-  34C:  Call  ContinueSpeech    ( 00000001 00AB0006 00AB0006 00000000 *Var1 ) % variable string ID
+  34C:  Call  ContinueSpeech    ( .NpcID:FiceT_01 00AB0006 00AB0006 00000000 *Var1 ) % variable string ID
   36C:  Wait  20`
   378:  SetF  *Var0  *Fixed[0.0]
-  388:  Call  SetNpcAnimation   ( 00000009 00BF0009 )
+  388:  Call  SetNpcAnimation   ( .NpcID:Bootler_09 00BF0009 )
   39C:  Call  802CFD30      ( FFFFFFFF 00000007 00000000 00000000 00000000 00000000 )
-  3C0:  Call  SetNpcYaw     ( .Npc:Self 0000010E )
-  3D4:  Call  SetNpcPos     ( .Npc:Self 000001F4 00000032 0000001E )
+  3C0:  Call  SetNpcYaw     ( .Npc:Self  270` )
+  3D4:  Call  SetNpcPos     ( .Npc:Self  500`  50`  30` )
   3F0:  ExecWait  $Script_8024ACA4
   3FC:  Wait  10`
-  408:  Call  SpeakToPlayer ( 00000001 00AB0006 00AB0006 00000005 00040026 ) % Over there----!!!!!
+  408:  Call  SpeakToPlayer ( .NpcID:FiceT_01 00AB0006 00AB0006 00000005 00040026 ) % Over there----!!!!!
   428:  ExecWait  $Script_8024ACA4
-  434:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
-  448:  Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  434:  Call  InterpPlayerYaw   (  90`  0` )
+  448:  Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   460:  Wait  25`
   46C:  Call  PlaySoundAtPlayer ( 00000263 00000000 )
-  480:  Call  ShowEmote     ( 00000000 .Emote:Question 00000000 0000001E 00000000 00000000 00000000 00000000 00000000 )
+  480:  Call  ShowEmote     ( .NpcID:TayceT_00 .Emote:Question  0`  30` .False  0`  0`  0`  0` )
   4B0:  Wait  30`
-  4BC:  Call  SetNpcScale   ( 00000009 *Fixed[2.0] *Fixed[2.0] *Fixed[2.0] )
-  4D8:  Call  SetNpcYaw     ( .Npc:Self 0000005A )
-  4EC:  Call  SetNpcPos     ( .Npc:Self 00000168 00000014 0000001E )
+  4BC:  Call  SetNpcScale   ( .NpcID:Bootler_09 *Fixed[2.0] *Fixed[2.0] *Fixed[2.0] )
+  4D8:  Call  SetNpcYaw     ( .Npc:Self  90` )
+  4EC:  Call  SetNpcPos     ( .Npc:Self  360`  20`  30` )
   508:  ExecWait  $Script_8024ACA4
-  514:  Call  SpeakToPlayer ( 00000001 00AB0006 00AB0006 00000005 00040027 ) % No, no, the other way---!!!
+  514:  Call  SpeakToPlayer ( .NpcID:FiceT_01 00AB0006 00AB0006 00000005 00040027 ) % No, no, the other way---!!!
   534:  ExecWait  $Script_8024ACA4
-  540:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
-  554:  Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000000 )
+  540:  Call  InterpPlayerYaw   (  270`  0` )
+  554:  Call  InterpNpcYaw  ( .Npc:Partner  270`  0` )
   56C:  Wait  25`
   578:  Call  PlaySoundAtPlayer ( 00000263 00000000 )
-  58C:  Call  ShowEmote     ( 00000000 .Emote:Question 00000000 0000001E 00000000 00000000 00000000 00000000 00000000 )
+  58C:  Call  ShowEmote     ( .NpcID:TayceT_00 .Emote:Question  0`  30` .False  0`  0`  0`  0` )
   5BC:  Wait  30`
-  5C8:  Call  SetNpcAnimation   ( 00000009 00BF0002 )
-  5DC:  Call  SetNpcScale   ( 00000009 *Fixed[1.0] *Fixed[1.0] *Fixed[1.0] )
-  5F8:  Call  SetNpcPos     ( .Npc:Self 000001E0 00000046 0000000A )
+  5C8:  Call  SetNpcAnimation   ( .NpcID:Bootler_09 00BF0002 )
+  5DC:  Call  SetNpcScale   ( .NpcID:Bootler_09 *Fixed[1.0] *Fixed[1.0] *Fixed[1.0] )
+  5F8:  Call  SetNpcPos     ( .Npc:Self  480`  70`  10` )
   614:  ExecWait  $Script_8024ACA4
   620:  Call  PlaySoundAtNpc    ( .Npc:Self 00000293 00000000 )
-  638:  Call  NpcFlyTo      ( .Npc:Self 00000226 00000028 0000000A 00000028 0000000A .Easing:Linear )
-  660:  Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
-  67C:  Call  SpeakToPlayer ( 00000001 00AB0006 00AB0006 00000005 00040028 ) % It went into the forest!!!
+  638:  Call  NpcFlyTo      ( .Npc:Self  550`  40`  10`  40`  10` .Easing:Linear )
+  660:  Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
+  67C:  Call  SpeakToPlayer ( .NpcID:FiceT_01 00AB0006 00AB0006 00000005 00040028 ) % It went into the forest!!!
   69C:  Wait  10`
-  6A8:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
-  6BC:  Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  6A8:  Call  InterpPlayerYaw   (  90`  0` )
+  6BC:  Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   6D4:  Wait  25`
   6E0:  Call  PlaySoundAtPlayer ( 00000263 00000000 )
-  6F4:  Call  ShowEmote     ( 00000000 .Emote:Question 00000000 0000001E 00000000 00000000 00000000 00000000 00000000 )
+  6F4:  Call  ShowEmote     ( .NpcID:TayceT_00 .Emote:Question  0`  30` .False  0`  0`  0`  0` )
   724:  Wait  40`
-  730:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
-  744:  Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000000 )
-  75C:  Call  SpeakToPlayer ( 00000001 00AB0006 00AB0006 00000000 00040029 ) % Ma... Mario, this madness has to end. Will you go  ...
+  730:  Call  InterpPlayerYaw   (  270`  0` )
+  744:  Call  InterpNpcYaw  ( .Npc:Partner  270`  0` )
+  75C:  Call  SpeakToPlayer ( .NpcID:FiceT_01 00AB0006 00AB0006 00000000 00040029 ) % Ma... Mario, this madness has to end. Will you go  ...
   77C:  Exec  $Script_8024E150
   788:  Set   *GB_StoryProgress  .Story:Ch3_SawBooEnterForest
   798:  Call  ResetCam      ( .Cam:Default *Fixed[4.0] )
@@ -6368,13 +6380,13 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 
 #new:Script $Script_8024B5AC
 {
-    0:  Call  GetNpcPos ( 0000000B *Var2 *Var3 *Var4 )
+    0:  Call  GetNpcPos ( .NpcID:ShyGuy_11 *Var2 *Var3 *Var4 )
    1C:  Add   *Var3  00000014
    2C:  Call  MakeItemEntity    ( .Item:FryingPan *Var2 *Var3 *Var4 .ItemSpawnMode:Decoration 00000000 )
    50:  Set   *Var9  *Var0
    60:  Wait  1`
    6C:  Loop  00000046
-   78:  	Call  GetNpcPos     ( 0000000B *Var2 *Var3 *Var4 )
+   78:  	Call  GetNpcPos     ( .NpcID:ShyGuy_11 *Var2 *Var3 *Var4 )
    94:  	Add   *Var3  00000014
    A4:  	Call  SetItemPos    ( *Var9 *Var2 *Var3 *Var4 )
    C0:  	Wait  1`
@@ -6387,7 +6399,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 #new:Script $Script_8024B6A0
 {
     0:  Loop
-    C:  	Call  PlaySoundAtNpc    ( 0000000B B0000021 00000000 )
+    C:  	Call  PlaySoundAtNpc    ( .NpcID:ShyGuy_11 B0000021 00000000 )
    24:  	Wait  2`
    30:  EndLoop
    38:  Return
@@ -6406,10 +6418,10 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
    5C:  	Wait  1`
    68:  EndLoop
    70:  Call  DisablePlayerInput    ( .True )
-   80:  Call  ShowMessageAtScreenPos    ( 00040016 000000A0 00000028 ) % Oh-oh-oh-oh-oh... NO! My favorite Frying Pan!
-   98:  Call  SetCamProperties      ( .Cam:Default *Fixed[3.0] FFFFFF74 00000014 FFFFFF74 00000190 0000000F FFFFFFFA )
-   C4:  Call  SetNpcPos ( 0000000B FFFFFF38 00000014 FFFFFEFC )
-   E0:  Call  SetNpcAnimation       ( 0000000B 003B0004 )
+   80:  Call  ShowMessageAtScreenPos    ( 00040016  160`  40` ) % Oh-oh-oh-oh-oh... NO! My favorite Frying Pan!
+   98:  Call  SetCamProperties      ( .Cam:Default *Fixed[3.0]  -140`  20`  -140`  400`  15`  -6` )
+   C4:  Call  SetNpcPos ( .NpcID:ShyGuy_11  -200`  20`  -260` )
+   E0:  Call  SetNpcAnimation       ( .NpcID:ShyGuy_11 003B0004 )
    F4:  Wait  10`
   100:  Exec  $Script_8024B5AC
   10C:  Thread
@@ -6431,16 +6443,16 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   214:  	Call  EnableGroup   ( ~Model:cook_in .False )
   228:  EndThread
   230:  Wait  5`
-  23C:  Call  PlaySoundAtNpc        ( 0000000B 0000203F 00000000 )
+  23C:  Call  PlaySoundAtNpc        ( .NpcID:ShyGuy_11 0000203F 00000000 )
   254:  Exec  $Script_8024B6A0 *VarA
-  264:  Call  SetNpcSpeed   ( 0000000B 00000008 )
-  278:  Call  NpcMoveTo ( 0000000B FFFFFF74 FFFFFF10 00000000 )
-  294:  Call  NpcMoveTo ( 0000000B FFFFFF74 FFFFFF74 00000000 )
-  2B0:  Call  NpcJump0  ( 0000000B FFFFFF74 00000000 FFFFFF9C 00000000 )
-  2D0:  Call  NpcMoveTo ( 0000000B FFFFFF42 FFFFFFEC 00000000 )
-  2EC:  Call  NpcMoveTo ( 0000000B FFFFFEA2 FFFFFFEC 00000000 )
+  264:  Call  SetNpcSpeed   ( .NpcID:ShyGuy_11 00000008 )
+  278:  Call  NpcMoveTo ( .NpcID:ShyGuy_11  -140`  -240`  0` )
+  294:  Call  NpcMoveTo ( .NpcID:ShyGuy_11  -140`  -140`  0` )
+  2B0:  Call  NpcJump0  ( .NpcID:ShyGuy_11  -140`  0`  -100`  0` )
+  2D0:  Call  NpcMoveTo ( .NpcID:ShyGuy_11  -190`  -20`  0` )
+  2EC:  Call  NpcMoveTo ( .NpcID:ShyGuy_11  -350`  -20`  0` )
   308:  Kill  *VarA
-  314:  Call  SetNpcPos ( 0000000B 00000000 FFFFFC18 00000000 )
+  314:  Call  SetNpcPos ( .NpcID:ShyGuy_11  0`  -1000`  0` )
   330:  Set   *GB_StoryProgress  .Story:Ch4_FryingPanStolen
   340:  Wait  10`
   34C:  Call  ResetCam  ( .Cam:Default *Fixed[3.0] )
@@ -6500,29 +6512,29 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   1EC:  	Case  <  .Story:Epilogue % 60
   1F8:  		Set   *Var0  00040049
   208:  EndSwitch
-  210:  Call  SpeakToPlayer ( 00000003 00830204 00830201 00000000 *Var0 ) % variable string ID
+  210:  Call  SpeakToPlayer ( .NpcID:Toad_03 00830204 00830201 00000000 *Var0 ) % variable string ID
   230:  Return
   238:  End
 }
 
 #new:Script $Script_Idle_8024BCDC
 {
-    0:  Call  SetNpcPos     ( .Npc:Self 00000014 00000000 FFFFFDDA )
+    0:  Call  SetNpcPos     ( .Npc:Self  20`  0`  -550` )
    1C:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
    30:  Loop
    3C:  	Call  SetNpcAnimation   ( .Npc:Self 00830202 )
-   50:  	Call  NpcMoveTo     ( .Npc:Self FFFFFFEC FFFFFDDA 00000000 )
+   50:  	Call  NpcMoveTo     ( .Npc:Self  -20`  -550`  0` )
    6C:  	Call  SetNpcAnimation   ( .Npc:Self 00830201 )
-   80:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000007 )
+   80:  	Call  InterpNpcYaw  ( .Npc:Self  90`  7` )
    98:  	Wait  10`
-   A4:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000007 )
+   A4:  	Call  InterpNpcYaw  ( .Npc:Self  270`  7` )
    BC:  	Wait  30`
    C8:  	Call  SetNpcAnimation   ( .Npc:Self 00830202 )
-   DC:  	Call  NpcMoveTo     ( .Npc:Self 00000014 FFFFFDDA 00000000 )
+   DC:  	Call  NpcMoveTo     ( .Npc:Self  20`  -550`  0` )
    F8:  	Call  SetNpcAnimation   ( .Npc:Self 00830201 )
-  10C:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000007 )
+  10C:  	Call  InterpNpcYaw  ( .Npc:Self  270`  7` )
   124:  	Wait  10`
-  130:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000007 )
+  130:  	Call  InterpNpcYaw  ( .Npc:Self  90`  7` )
   148:  	Wait  30`
   154:  EndLoop
   15C:  Return
@@ -6576,7 +6588,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   1A4:  	Case  <  .Story:Epilogue % 60
   1B0:  		Set   *Var0  00040056
   1C0:  EndSwitch
-  1C8:  Call  SpeakToPlayer ( 00000004 00840304 00840301 00000000 *Var0 ) % variable string ID
+  1C8:  Call  SpeakToPlayer ( .NpcID:ThreeSisters_04 00840304 00840301 00000000 *Var0 ) % variable string ID
   1E8:  Return
   1F0:  End
 }
@@ -6620,7 +6632,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   170:  	Case  <  .Story:Epilogue % 60
   17C:  		Set   *Var0  00040063
   18C:  EndSwitch
-  194:  Call  SpeakToPlayer ( 00000005 00830104 00830101 00000000 *Var0 ) % variable string ID
+  194:  Call  SpeakToPlayer ( .NpcID:Toad_05 00830104 00830101 00000000 *Var0 ) % variable string ID
   1B4:  Return
   1BC:  End
 }
@@ -6650,7 +6662,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
    B4:  	Case  <  .Story:Epilogue % 60
    C0:  		Set   *Var0  0004006A
    D0:  EndSwitch
-   D8:  Call  SpeakToPlayer ( 00000006 00860304 00860301 00000000 *Var0 ) % variable string ID
+   D8:  Call  SpeakToPlayer ( .NpcID:ToadKid_06 00860304 00860301 00000000 *Var0 ) % variable string ID
    F8:  Return
   100:  End
 }
@@ -6703,7 +6715,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   1A8:  	Case  <  .Story:Epilogue % 60
   1B4:  		Set   *Var0  00040077
   1C4:  EndSwitch
-  1CC:  Call  SpeakToPlayer ( 00000007 00830304 00830301 00000000 *Var0 ) % variable string ID
+  1CC:  Call  SpeakToPlayer ( .NpcID:Toad_07 00830304 00830301 00000000 *Var0 ) % variable string ID
   1EC:  Return
   1F4:  End
 }
@@ -6747,7 +6759,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   170:  	Case  <  .Story:Epilogue % 60
   17C:  		Set   *Var0  00040084
   18C:  EndSwitch
-  194:  Call  SpeakToPlayer ( 00000008 00830004 00830001 00000000 *Var0 ) % variable string ID
+  194:  Call  SpeakToPlayer ( .NpcID:Toad_08 00830004 00830001 00000000 *Var0 ) % variable string ID
   1B4:  Return
   1BC:  End
 }
@@ -6768,7 +6780,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
    60:  	Call  SetNpcAnimation   ( .Npc:Self 00990005 )
    74:  	Wait  45`
    80:  	Call  SetNpcAnimation   ( .Npc:Self 00990002 )
-   94:  	Call  SetNpcCollisionSize   ( .Npc:Self 0000002D 0000001A )
+   94:  	Call  SetNpcCollisionSize   ( .Npc:Self  45`  26` )
    AC:  	Call  SpeakToPlayer     ( .Npc:Self 00990003 00990002 00000000 00040086 ) % PUFFFFF! Well, hello there. My name is Bub-ulb. I  ...
    CC:  	Set   *Var0  0000002B
    DC:  	Set   *Var1  00000001
@@ -6776,7 +6788,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
    F8:  	Call  AddKeyItem        ( .Item:MagicalSeed1 )
   108:  	Call  SpeakToPlayer     ( .Npc:Self 00990003 00990002 00000000 00040087 ) % That is a flower seed. If it's well cared for, a b ...
   128:  	Set   *GF_MAC02_Gift_MagicalSeed1  .True
-  138:  	Call  SetTattleString   ( 00000002 001A003C ) % Oh! A Bub-ulb. Talking flowers seem weird... Didn' ...
+  138:  	Call  SetTattleString   ( .NpcID:Bubulb_02 001A003C ) % Oh! A Bub-ulb. Talking flowers seem weird... Didn' ...
   14C:  Else
   154:  	Switch  *GB_StoryProgress
   160:  		Case  <  .Story:Ch1_StarSpritDeparted % FFFFFFB5
@@ -6797,7 +6809,7 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
   230:  		Default
   238:  			Set   *Var0  0004008E
   248:  	EndSwitch
-  250:  	Call  SpeakToPlayer ( 00000002 00990003 00990002 00000000 *Var0 ) % variable string ID
+  250:  	Call  SpeakToPlayer ( .NpcID:Bubulb_02 00990003 00990002 00000000 *Var0 ) % variable string ID
   270:  EndIf
   278:  Return
   280:  End
@@ -6807,9 +6819,9 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024C800 )
    14:  If  *GF_MAC02_Gift_MagicalSeed1  ==  .False
-   24:  	Call  SetNpcCollisionSize   ( .Npc:Self 00000019 00000019 )
+   24:  	Call  SetNpcCollisionSize   ( .Npc:Self  25`  25` )
    3C:  	Call  SetNpcAnimation       ( .Npc:Self 00990007 )
-   50:  	Call  SetTattleString       ( 00000002 001A003B ) % It's a flower. I guess that's pretty obvious... It ...
+   50:  	Call  SetTattleString       ( .NpcID:Bubulb_02 001A003B ) % It's a flower. I guess that's pretty obvious... It ...
    64:  EndIf
    6C:  Return
    74:  End
@@ -6828,85 +6840,85 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 
 #new:NpcGroup $NpcGroup_8024CB48
 {
-	00000000 $NpcSettings_80246090 ~Vec3f:NPC_8024CB48 % -217 20 -434
+	.NpcID:TayceT_00 $NpcSettings_80246090 ~Vec3f:NPC_TayceT_00 % -217 20 -434
 	00002D09 $Script_Init_8024A0D4 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024CB48
-	~AnimationTable:NPC_8024CB48 % .Sprite:TayceT
+	~Movement:NPC_TayceT_00
+	~AnimationTable:NPC_TayceT_00 % .Sprite:TayceT
 	00000000 00000000 $ExtraAnimationList_8024CB04 001A0033 % She's Tayce T., by far the greatest cook around. T ...
 	%
 	% $NpcGroup_8024CB48[1F0]
-	00000001 $NpcSettings_80246090 ~Vec3f:NPC_8024CD38 % 389 0 -90
+	.NpcID:FiceT_01 $NpcSettings_80246090 ~Vec3f:NPC_FiceT_01 % 389 0 -90
 	00002D09 $Script_Init_8024AC30 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024CD38
-	~AnimationTable:NPC_8024CD38 % .Sprite:FiceT
+	~Movement:NPC_FiceT_01
+	~AnimationTable:NPC_FiceT_01 % .Sprite:FiceT
 	00000000 00000000 00000000 001A0034 % This Toad guards the path to Forever Forest. He lo ...
 	%
 	% $NpcGroup_8024CB48[3E0]
-	00000002 $NpcSettings_80246124 ~Vec3f:NPC_8024CF28 % 150 20 500
+	.NpcID:Bubulb_02 $NpcSettings_80246124 ~Vec3f:NPC_Bubulb_02 % 150 20 500
 	00000801 $Script_Init_8024CA88 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024CF28
-	~AnimationTable:NPC_8024CF28 % .Sprite:Bubulb
+	~Movement:NPC_Bubulb_02
+	~AnimationTable:NPC_Bubulb_02 % .Sprite:Bubulb
 	00000000 00000000 $ExtraAnimationList_8024CB2C 001A003C % Oh! A Bub-ulb. Talking flowers seem weird... Didn' ...
 	%
 	% $NpcGroup_8024CB48[5D0]
-	00000003 $NpcSettings_80245F90 ~Vec3f:NPC_8024D118 % 40 0 -60
+	.NpcID:Toad_03 $NpcSettings_80245F90 ~Vec3f:NPC_Toad_03 % 40 0 -60
 	00002D09 $Script_Init_8024BE48 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024D118
-	~AnimationTable:NPC_8024D118 % .Sprite:Toad
+	~Movement:NPC_Toad_03
+	~AnimationTable:NPC_Toad_03 % .Sprite:Toad
 	00000000 00000000 00000000 001A0035 % This Toad is diligent and very hard working. He ha ...
 	%
 	% $NpcGroup_8024CB48[7C0]
-	00000004 $NpcSettings_80246090 ~Vec3f:NPC_8024D308 % -26 0 -220
+	.NpcID:ThreeSisters_04 $NpcSettings_80246090 ~Vec3f:NPC_ThreeSisters_04 % -26 0 -220
 	00002D09 $Script_Init_8024C090 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024D308
-	~AnimationTable:NPC_8024D308 % .Sprite:ThreeSisters
+	~Movement:NPC_ThreeSisters_04
+	~AnimationTable:NPC_ThreeSisters_04 % .Sprite:ThreeSisters
 	00000000 00000000 00000000 001A0036 % She worships Tayce T. because she really loves to  ...
 	%
 	% $NpcGroup_8024CB48[9B0]
-	00000005 $NpcSettings_80246090 ~Vec3f:NPC_8024D4F8 % -350 20 -140
+	.NpcID:Toad_05 $NpcSettings_80246090 ~Vec3f:NPC_Toad_05 % -350 20 -140
 	00002D09 $Script_Init_8024C278 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024D4F8
-	~AnimationTable:NPC_8024D4F8 % .Sprite:Toad
+	~Movement:NPC_Toad_05
+	~AnimationTable:NPC_Toad_05 % .Sprite:Toad
 	00000000 00000000 00000000 001A0037 % This Toad can't keep his mouth shut. He's an incur ...
 	%
 	% $NpcGroup_8024CB48[BA0]
-	00000006 $NpcSettings_80245F90 ~Vec3f:NPC_8024D6E8 % 180 20 -435
+	.NpcID:ToadKid_06 $NpcSettings_80245F90 ~Vec3f:NPC_ToadKid_06 % 180 20 -435
 	00002D09 $Script_Init_8024C3A4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024D6E8
-	~AnimationTable:NPC_8024D6E8 % .Sprite:ToadKid
+	~Movement:NPC_ToadKid_06
+	~AnimationTable:NPC_ToadKid_06 % .Sprite:ToadKid
 	00000000 00000000 00000000 001A0038 % He always talks about what he wants to be when he  ...
 	%
 	% $NpcGroup_8024CB48[D90]
-	00000007 $NpcSettings_80245F90 ~Vec3f:NPC_8024D8D8 % -160 0 25
+	.NpcID:Toad_07 $NpcSettings_80245F90 ~Vec3f:NPC_Toad_07 % -160 0 25
 	00002D09 $Script_Init_8024C5F4 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024D8D8
-	~AnimationTable:NPC_8024D8D8 % .Sprite:Toad
+	~Movement:NPC_Toad_07
+	~AnimationTable:NPC_Toad_07 % .Sprite:Toad
 	00000000 00000000 00000000 001A0039 % This Toad is pretty smart. I wonder where he gets  ...
 	%
 	% $NpcGroup_8024CB48[F80]
-	00000008 $NpcSettings_80246090 ~Vec3f:NPC_8024DAC8 % -80 0 300
+	.NpcID:Toad_08 $NpcSettings_80246090 ~Vec3f:NPC_Toad_08 % -80 0 300
 	00002D09 $Script_Init_8024C7DC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024DAC8
-	~AnimationTable:NPC_8024DAC8 % .Sprite:Toad
+	~Movement:NPC_Toad_08
+	~AnimationTable:NPC_Toad_08 % .Sprite:Toad
 	00000000 00000000 00000000 001A003A % This Toad is constantly running his mouth. When I' ...
 }
 
 #new:NpcGroup $NpcGroup_8024DCB8
 {
-	00000009 $NpcSettings_802460E8 ~Vec3f:NPC_8024DCB8 % 0 -1000 0
+	.NpcID:Bootler_09 $NpcSettings_802460E8 ~Vec3f:NPC_Bootler_09 % 0 -1000 0
 	00000D09 $Script_Init_8024B544 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024DCB8
-	~AnimationTable:NPC_8024DCB8 % .Sprite:Bootler
+	~Movement:NPC_Bootler_09
+	~AnimationTable:NPC_Bootler_09 % .Sprite:Bootler
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -6917,11 +6929,11 @@ MISSING: 80248720 to 80248778 (00008720 to 00008778)
 
 #new:NpcGroup $NpcGroup_8024DEC8
 {
-	0000000B $NpcSettings_80246090 ~Vec3f:NPC_8024DEC8 % 0 -1000 0
+	.NpcID:ShyGuy_11 $NpcSettings_80246090 ~Vec3f:NPC_ShyGuy_11 % 0 -1000 0
 	00002F09 $Script_Init_8024BA68 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024DEC8
-	~AnimationTable:NPC_8024DEC8 % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_11
+	~AnimationTable:NPC_ShyGuy_11 % .Sprite:ShyGuy
 	00000000 00000000 $ExtraAnimationList_8024DEA8 00000000 % no tattle string
 }
 

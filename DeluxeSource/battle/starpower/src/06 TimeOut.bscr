@@ -36,7 +36,7 @@
    78:  LIF       F0, 40.0
    80:  MFC1      A3, F2
    84:  CLEAR     A0
-   88:  JAL       8006FEF0
+   88:  JAL       ~Func:playFX_11
    8C:  SWC1      F0, 10 (SP)
    90:  LW        RA, 24 (SP)
    94:  LW        S2, 20 (SP)
@@ -87,7 +87,7 @@
    90:  LI        V1, 1E
    94:  SW        V1, 1C (SP)
    98:  SWC1      F0, 10 (SP)
-   9C:  JAL       80070550
+   9C:  JAL       ~Func:playFX_22
    A0:  SWC1      F0, 14 (SP)
    A4:  LW        RA, 2C (SP)
    A8:  LW        S2, 28 (SP)
@@ -133,7 +133,7 @@
    78:  LIF       F0, 30.0
    80:  MFC1      A3, F2
    84:  CLEAR     A0
-   88:  JAL       8006FEF0
+   88:  JAL       ~Func:playFX_11
    8C:  SWC1      F0, 10 (SP)
    90:  LW        RA, 24 (SP)
    94:  LW        S2, 20 (SP)
@@ -186,7 +186,7 @@
    9C:  SW        V1, 20 (SP)
    A0:  SWC1      F0, 10 (SP)
    A4:  SWC1      F0, 14 (SP)
-   A8:  JAL       80072350
+   A8:  JAL       ~Func:playFX_72
    AC:  SWC1      F2, 18 (SP)
    B0:  LW        RA, 34 (SP)
    B4:  LW        S2, 30 (SP)
@@ -204,7 +204,7 @@
     8:  COPY      S0, A0
     C:  BEQ       A1, R0, .o48
    10:  SW        RA, 14 (SP)
-   14:  JAL       8011D82C
+   14:  JAL       ~Func:mdl_set_all_fog_mode
    18:  LI        A0, 1
    1C:  CLEAR     A0
    20:  COPY      A1, A0
@@ -247,7 +247,7 @@
     8:  COPY      S0, A0
     C:  BEQ       A1, R0, .o44
    10:  SW        RA, 14 (SP)
-   14:  JAL       8011D82C
+   14:  JAL       ~Func:mdl_set_all_fog_mode
    18:  LI        A0, 1
    1C:  CLEAR     A0
    20:  COPY      A1, A0
@@ -397,7 +397,7 @@ PADDING: 802A1518 to 802A1520 (00794238 to 00794240)
   214:  	Add   *Var0  00000010
   224:  	Call  SetActorSpeed ( .Actor:Partner *Fixed[4.0] )
   238:  	Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  254:  	Call  RunToGoal ( .Actor:Partner 00000000 .False )
+  254:  	Call  RunToGoal ( .Actor:Partner  0` .False )
   26C:  	Call  $Function_802A1494    ( 00000004 )
   27C:  	Wait  8`
   288:  	Call  PlaySound ( 00000241 )
@@ -454,7 +454,7 @@ PADDING: 802A1518 to 802A1520 (00794238 to 00794240)
   214:  	Add   *Var0  00000010
   224:  	Call  SetActorSpeed ( .Actor:Partner *Fixed[4.0] )
   238:  	Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  254:  	Call  RunToGoal ( .Actor:Partner 00000000 .False )
+  254:  	Call  RunToGoal ( .Actor:Partner  0` .False )
   26C:  	Call  $Function_802A1494    ( 00000004 )
   27C:  	Wait  8`
   288:  	Call  PlaySound ( 00000241 )
@@ -481,12 +481,12 @@ PADDING: 802A1518 to 802A1520 (00794238 to 00794240)
     0:  Wait  8`
     C:  Call  SetForegroundModelsVisible    ( .False )
    1C:  Call  8024E664  ( 00000049 )
-   2C:  Call  MoveBattleCamOver ( 00000001 )
+   2C:  Call  MoveBattleCamOver (  1` )
    3C:  Call  PlaySound ( 00002041 )
    4C:  Call  CreateNpc ( 00000064 *Var0 )
    60:  Call  $Function_802A14E8 ( )
    6C:  Call  SetNpcFlagBits    ( 00000064 00040000 .True )
-   84:  Call  SetNpcPos ( 00000064 FFFFFFB5 00000096 00000000 )
+   84:  Call  SetNpcPos ( 00000064  -75`  150`  0` )
    A0:  Call  SetNpcDecoration  ( 00000064 00000000 .NpcDecoration:WhiteGlowBehind )
    B8:  Call  $Function_802A116C    ( FFFFFFB5 000000A7 00000000 )
    D0:  Wait  10`
@@ -505,7 +505,7 @@ PADDING: 802A1518 to 802A1520 (00794238 to 00794240)
   190:  EndThread
   198:  Call  GetActorPos   ( .Actor:Player *Var0 *Var1 *Var2 )
   1B4:  Add   *Var1  00000032
-  1C4:  Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2 0000001E 00000000 .Easing:CosInOut )
+  1C4:  Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2  30`  0` .Easing:CosInOut )
   1EC:  Call  SetForegroundModelsVisible    ( .True )
   1FC:  Return
   204:  End
@@ -540,9 +540,9 @@ PADDING: 802A1518 to 802A1520 (00794238 to 00794240)
   164:  	EndThread
   16C:  	Call  GetNpcPos ( 00000064 *Var0 *Var1 *Var2 )
   188:  	Add   *Var1  0000003C
-  198:  	Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2 0000000F 00000000 .Easing:CosInOut )
+  198:  	Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2  15`  0` .Easing:CosInOut )
   1C0:  	Add   *Var1  0000008C
-  1D0:  	Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2 0000000F 00000000 .Easing:CosInOut )
+  1D0:  	Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2  15`  0` .Easing:CosInOut )
   1F8:  	Wait  10`
   204:  	Call  EnableNpcBlur ( 00000064 .False )
   218:  	Call  DeleteNpc ( 00000064 )
@@ -572,9 +572,9 @@ PADDING: 802A1518 to 802A1520 (00794238 to 00794240)
   374:  	EndThread
   37C:  	Call  GetNpcPos ( 00000064 *Var0 *Var1 *Var2 )
   398:  	Add   *Var1  0000003C
-  3A8:  	Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2 0000000F 00000000 .Easing:CosInOut )
+  3A8:  	Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2  15`  0` .Easing:CosInOut )
   3D0:  	Add   *Var1  0000008C
-  3E0:  	Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2 0000000F 00000000 .Easing:CosInOut )
+  3E0:  	Call  NpcFlyTo  ( 00000064 *Var0 *Var1 *Var2  15`  0` .Easing:CosInOut )
   408:  	Wait  10`
   414:  	Call  EnableNpcBlur ( 00000064 .False )
   428:  	Call  DeleteNpc ( 00000064 )
@@ -600,7 +600,7 @@ PADDING: 802A1518 to 802A1520 (00794238 to 00794240)
    BC:  	Call  SetGoalToHome ( .Actor:Partner )
    CC:  	Call  SetActorSpeed ( .Actor:Partner *Fixed[8.0] )
    E0:  	Call  $Function_802A1494    ( 00000003 )
-   F0:  	Call  RunToGoal ( .Actor:Partner 00000000 )
+   F0:  	Call  RunToGoal ( .Actor:Partner  0` )
   104:  	Call  $Function_802A1494    ( 00000004 )
   114:  EndIf
   11C:  Return
@@ -626,7 +626,7 @@ PADDING: 802A1518 to 802A1520 (00794238 to 00794240)
   114:  If  *Var0  ==  .HitResult:Miss % 6
   124:  	Goto  1
   130:  EndIf
-  138:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:NoContact|Unblockable|StatusAlwaysHits ~DebuffType:Stop:5:100` 00000000 00000020 )
+  138:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:NoContact|NoOtherDamagePopups|StatusAlwaysHits ~DebuffType:Stop:5:100` 00000000 00000020 )
   158:  Wait  5`
   164:  Label  1
   170:  Call  ChooseNextTarget  ( .Iter:Next *Var0 )

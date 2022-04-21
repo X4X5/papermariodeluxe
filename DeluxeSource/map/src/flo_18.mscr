@@ -1,6 +1,12 @@
 % Script File: flo_18.mscr
 % Decoded from: 0 to 7050 (flo_18)
 
+#define .NpcID:Lakitu_00            00
+#define .NpcID:Lakitu_01            01
+#define .NpcID:Lakitu_02            02
+#define .NpcID:Magikoopa_03         03
+#define .NpcID:FlyingMagikoopa_04   04
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -242,7 +248,7 @@
    10:  COPY      A3, A1
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -644,8 +650,8 @@ PADDING: 802408B8 to 802408C0 (000008B8 to 000008C0)
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   54:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   54:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_8024669C )
    98:  Exec  $Script_80247024
@@ -1257,8 +1263,8 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
   288:  If  *GB_FLO18_MachineDamage_Left  ==  00000002
   298:  	If  *GB_FLO18_MachineDamage_Right  ==  00000002
   2A8:  		Call  DisablePlayerInput    ( .True )
-  2B8:  		Call  UseSettingsFrom       ( .Cam:Default 00000028 00000000 00000000 )
-  2D4:  		Call  SetPanTarget  ( .Cam:Default 00000028 00000000 00000000 )
+  2B8:  		Call  UseSettingsFrom       ( .Cam:Default  40`  0`  0` )
+  2D4:  		Call  SetPanTarget  ( .Cam:Default  40`  0`  0` )
   2F0:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
   304:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   31C:  		Set   *GB_FLO18_MachineDamage_Right  00000003
@@ -1300,10 +1306,10 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
   678:  		EndThread
   680:  		Call  PlaySoundAt   ( 000001A0 00000000 00000046 00000028 0000000A )
   6A0:  		Call  PlayEffect    ( ~FX:RingBlast:Red 00000046 00000028 0000000A *Fixed[3.0] 0000001E 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  6E4:  		Call  ShakeCam      ( .Cam:Default 00000000 00000014 *Fixed[1.0] )
+  6E4:  		Call  ShakeCam      ( .Cam:Default 00000000  20` *Fixed[1.0] )
   700:  		Call  PlaySoundAt   ( 000001A0 00000000 00000000 0000001E 0000001E )
   720:  		Call  PlayEffect    ( ~FX:RingBlast:Red 00000000 0000001E 0000001E *Fixed[4.0] 00000028 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  764:  		Call  ShakeCam      ( .Cam:Default 00000000 00000014 *Fixed[2.0] )
+  764:  		Call  ShakeCam      ( .Cam:Default 00000000  20` *Fixed[2.0] )
   780:  		ExecWait  $Script_80242910
   78C:  		Call  PlaySoundAtCollider   ( ~Collider:o126 00000491 00000000 )
   7A4:  		Call  FadeOutMusic  ( 00000000 000003E8 )
@@ -1522,11 +1528,11 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePartnerAI  ( 00000000 )
-   20:  Call  SetPlayerPos      ( 0000001E 00000000 00000032 )
-   38:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
-   4C:  Call  SetNpcPos ( .Npc:Partner 00000041 00000000 00000032 )
+   20:  Call  SetPlayerPos      (  30`  0`  50` )
+   38:  Call  InterpPlayerYaw   (  90`  0` )
+   4C:  Call  SetNpcPos ( .Npc:Partner  65`  0`  50` )
    68:  Wait  30`
-   74:  Call  AdjustCam ( .Cam:Default *Fixed[8.0] 00000000 0000012C *Fixed[19.0] *Fixed[-8.5] )
+   74:  Call  AdjustCam ( .Cam:Default *Fixed[8.0]  0`  300` *Fixed[19.0] *Fixed[-8.5] )
    98:  Call  GetCurrentPartnerID   ( *Var0 )
    A8:  Call  BringPartnerOut   ( .Partner:Lakilester )
    B8:  If  *Var0  !=  .Partner:Lakilester % 8
@@ -1535,9 +1541,9 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    F4:  	Add   *Var1  00000014
   104:  	Add   *Var2  00000014
   114:  	Add   *Var3  00000014
-  124:  	Call  NpcJump0  ( .Npc:Partner *Var1 *Var2 *Var3 0000001E )
+  124:  	Call  NpcJump0  ( .Npc:Partner *Var1 *Var2 *Var3  30` )
   144:  EndIf
-  14C:  Call  PlayerFaceNpc ( .Npc:Partner 00000000 )
+  14C:  Call  PlayerFaceNpc ( .Npc:Partner .False )
   160:  Call  NpcFacePlayer ( .Npc:Partner 00000000 )
   174:  Call  SpeakToPlayer ( .Npc:Partner 00080009 00080001 00000005 001100C9 ) % Helping folks feels...good! I could get used to th ...
   194:  Call  SetPlayerAnimation    ( .PlayerAnim:NodYes )
@@ -1555,13 +1561,13 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 #new:Script $Script_80244270
 {
     0:  Thread
-    8:  	Call  PlaySoundAtNpc    ( 00000004 0000019E 00000000 )
-   20:  	Call  SetNpcFlagBits    ( 00000004 00000100 .True )
-   38:  	Call  InterpNpcYaw      ( 00000004 0000010E 00000000 )
+    8:  	Call  PlaySoundAtNpc    ( .NpcID:FlyingMagikoopa_04 0000019E 00000000 )
+   20:  	Call  SetNpcFlagBits    ( .NpcID:FlyingMagikoopa_04 00000100 .True )
+   38:  	Call  InterpNpcYaw      ( .NpcID:FlyingMagikoopa_04  270`  0` )
    50:  	Call  LoadPath  ( 0000003C $VectorList_80243F68 00000005 .Easing:Linear )
    6C:  	Loop
    78:  		Call  GetNextPathPos ( )
-   84:  		Call  SetNpcPos ( 00000004 *Var1 *Var2 *Var3 )
+   84:  		Call  SetNpcPos ( .NpcID:FlyingMagikoopa_04 *Var1 *Var2 *Var3 )
    A0:  		Wait  1`
    AC:  		If  *Var0  !=  00000001
    BC:  			BreakLoop
@@ -1570,13 +1576,13 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    D4:  EndThread
    DC:  Wait  15`
    E8:  Thread
-   F0:  	Call  PlaySoundAtNpc    ( 00000000 0000019F 00000000 )
-  108:  	Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-  120:  	Call  InterpNpcYaw      ( 00000000 0000010E 00000000 )
+   F0:  	Call  PlaySoundAtNpc    ( .NpcID:Lakitu_00 0000019F 00000000 )
+  108:  	Call  SetNpcFlagBits    ( .NpcID:Lakitu_00 00000100 .True )
+  120:  	Call  InterpNpcYaw      ( .NpcID:Lakitu_00  270`  0` )
   138:  	Call  LoadPath  ( 0000003C $VectorList_80243FA4 00000005 .Easing:Linear )
   154:  	Loop
   160:  		Call  GetNextPathPos ( )
-  16C:  		Call  SetNpcPos ( 00000000 *Var1 *Var2 *Var3 )
+  16C:  		Call  SetNpcPos ( .NpcID:Lakitu_00 *Var1 *Var2 *Var3 )
   188:  		Wait  1`
   194:  		If  *Var0  !=  00000001
   1A4:  			BreakLoop
@@ -1584,25 +1590,25 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
   1B4:  	EndLoop
   1BC:  EndThread
   1C4:  Thread
-  1CC:  	Call  SetNpcFlagBits    ( 00000001 00000100 .True )
-  1E4:  	Call  InterpNpcYaw      ( 00000001 0000010E 00000000 )
+  1CC:  	Call  SetNpcFlagBits    ( .NpcID:Lakitu_01 00000100 .True )
+  1E4:  	Call  InterpNpcYaw      ( .NpcID:Lakitu_01  270`  0` )
   1FC:  	Call  LoadPath  ( 00000046 $VectorList_80243FE0 00000005 .Easing:Linear )
   218:  	Loop
   224:  		Call  GetNextPathPos ( )
-  230:  		Call  SetNpcPos ( 00000001 *Var1 *Var2 *Var3 )
+  230:  		Call  SetNpcPos ( .NpcID:Lakitu_01 *Var1 *Var2 *Var3 )
   24C:  		Wait  1`
   258:  		If  *Var0  !=  00000001
   268:  			BreakLoop
   270:  		EndIf
   278:  	EndLoop
   280:  EndThread
-  288:  Call  PlaySoundAtNpc    ( 00000002 0000019F 00000000 )
-  2A0:  Call  SetNpcFlagBits    ( 00000002 00000100 .True )
-  2B8:  Call  InterpNpcYaw      ( 00000002 0000010E 00000000 )
+  288:  Call  PlaySoundAtNpc    ( .NpcID:Lakitu_02 0000019F 00000000 )
+  2A0:  Call  SetNpcFlagBits    ( .NpcID:Lakitu_02 00000100 .True )
+  2B8:  Call  InterpNpcYaw      ( .NpcID:Lakitu_02  270`  0` )
   2D0:  Call  LoadPath  ( 00000050 $VectorList_8024401C 00000005 .Easing:Linear )
   2EC:  Loop
   2F8:  	Call  GetNextPathPos ( )
-  304:  	Call  SetNpcPos ( 00000002 *Var1 *Var2 *Var3 )
+  304:  	Call  SetNpcPos ( .NpcID:Lakitu_02 *Var1 *Var2 *Var3 )
   320:  	Wait  1`
   32C:  	If  *Var0  !=  00000001
   33C:  		BreakLoop
@@ -1626,16 +1632,16 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    88:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    A0:  If  *Var2  >  FFFFFFC3
    B0:  	ChildThread
-   B8:  		Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-   D0:  		Call  NpcMoveTo ( 00000000 *Var0 00000037 *Var3 )
+   B8:  		Call  SetNpcFlagBits    ( .NpcID:Lakitu_00 00000100 .True )
+   D0:  		Call  NpcMoveTo ( .NpcID:Lakitu_00 *Var0  55` *Var3 )
    EC:  	EndChildThread
    F4:  	ChildThread
-   FC:  		Call  SetNpcFlagBits    ( 00000001 00000100 .True )
-  114:  		Call  NpcMoveTo ( 00000001 *Var0 00000037 *Var3 )
+   FC:  		Call  SetNpcFlagBits    ( .NpcID:Lakitu_01 00000100 .True )
+  114:  		Call  NpcMoveTo ( .NpcID:Lakitu_01 *Var0  55` *Var3 )
   130:  	EndChildThread
   138:  	ChildThread
-  140:  		Call  SetNpcFlagBits    ( 00000002 00000100 .True )
-  158:  		Call  NpcMoveTo ( 00000002 *Var0 00000037 *Var3 )
+  140:  		Call  SetNpcFlagBits    ( .NpcID:Lakitu_02 00000100 .True )
+  158:  		Call  NpcMoveTo ( .NpcID:Lakitu_02 *Var0  55` *Var3 )
   174:  	EndChildThread
   17C:  	Wait  *Var4
   188:  EndIf
@@ -1648,14 +1654,14 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePartnerAI      ( 00000000 )
    20:  Call  GetNpcPos     ( .Npc:Partner *Var0 *Var1 *Var2 )
-   3C:  Call  SetNpcPos     ( .Npc:Partner 00000041 *Var1 00000050 )
-   58:  Call  SetNpcYaw     ( .Npc:Partner 0000010E )
-   6C:  Call  AdjustCam     ( .Cam:Default *Fixed[8.0] 00000000 000001C2 *Fixed[17.0] *Fixed[-6.0] )
-   90:  Call  SpeakToPlayer ( 00000004 00570209 00570201 00000000 001100BB ) % Ahhhh, retreat, boys!! He beat us, but good!
+   3C:  Call  SetNpcPos     ( .Npc:Partner  65` *Var1  80` )
+   58:  Call  SetNpcYaw     ( .Npc:Partner  270` )
+   6C:  Call  AdjustCam     ( .Cam:Default *Fixed[8.0]  0`  450` *Fixed[17.0] *Fixed[-6.0] )
+   90:  Call  SpeakToPlayer ( .NpcID:FlyingMagikoopa_04 00570209 00570201 00000000 001100BB ) % Ahhhh, retreat, boys!! He beat us, but good!
    B0:  Wait  20`
    BC:  Exec  $Script_80244270
    C8:  Wait  80`
-   D4:  Call  AdjustCam     ( .Cam:Default *Fixed[8.0] 00000000 0000012C *Fixed[19.0] *Fixed[-8.5] )
+   D4:  Call  AdjustCam     ( .Cam:Default *Fixed[8.0]  0`  300` *Fixed[19.0] *Fixed[-8.5] )
    F8:  Call  GetCurrentPartnerID   ( *Var0 )
   108:  Call  BringPartnerOut       ( .Partner:Lakilester )
   118:  If  *Var0  !=  .Partner:Lakilester % 8
@@ -1664,7 +1670,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
   154:  	Add   *Var1  00000014
   164:  	Add   *Var2  00000014
   174:  	Add   *Var3  00000014
-  184:  	Call  NpcJump0  ( .Npc:Partner *Var1 *Var2 *Var3 0000001E )
+  184:  	Call  NpcJump0  ( .Npc:Partner *Var1 *Var2 *Var3  30` )
   1A4:  EndIf
   1AC:  Call  NpcFacePlayer ( .Npc:Partner 00000000 )
   1C0:  Call  DisablePartnerAI      ( 00000000 )
@@ -1685,9 +1691,9 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
   2CC:  	Add   *Var1  00000014
   2DC:  	Add   *Var2  00000014
   2EC:  	Add   *Var3  00000014
-  2FC:  	Call  NpcJump0  ( .Npc:Partner *Var1 *Var2 *Var3 0000001E )
+  2FC:  	Call  NpcJump0  ( .Npc:Partner *Var1 *Var2 *Var3  30` )
   31C:  EndIf
-  324:  Call  PlayerFaceNpc ( .Npc:Partner 00000000 )
+  324:  Call  PlayerFaceNpc ( .Npc:Partner .False )
   338:  Call  NpcFacePlayer ( .Npc:Partner 00000000 )
   34C:  Call  DisablePartnerAI      ( 00000000 )
   35C:  Call  SpeakToPlayer ( .Npc:Partner 00080009 00080001 00000005 001100C2 ) % Hey, hold up, man. You're just going to walk away  ...
@@ -1713,7 +1719,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    70:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
    88:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    A4:  Call  SetPanTarget      ( .Cam:Default *Var0 *Var1 *Var2 )
-   C0:  Call  SetCamDistance    ( .Cam:Default 000003E8 )
+   C0:  Call  SetCamDistance    ( .Cam:Default  1000` )
    D4:  Call  SetCamPitch       ( .Cam:Default *Fixed[17.0] *Fixed[-6.0] )
    EC:  Call  SetCamSpeed       ( .Cam:Default *Fixed[4.0] )
   100:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
@@ -1730,18 +1736,18 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  GetSelfNpcID  ( *Var0 )
    38:  		If  *Var0  ==  00000003
-   48:  			Call  SetNpcPos ( 00000003 00000000 FFFFFC18 00000000 )
-   64:  			Call  SetNpcPos ( 00000004 FFFFFFC9 0000000F 00000023 )
-   80:  			Call  GetNpcYaw ( 00000003 *Var0 )
-   94:  			Call  SetNpcYaw ( 00000004 0000005A )
-   A8:  			Call  InterpPlayerYaw   ( 000000B4 00000000 )
-   BC:  			Call  SetPlayerPos      ( 0000001E 00000000 00000050 )
-   D4:  			Call  SetNpcYaw ( 00000000 0000005A )
-   E8:  			Call  SetNpcPos ( 00000000 FFFFFFEC 0000000F 0000001E )
-  104:  			Call  SetNpcYaw ( 00000001 0000010E )
-  118:  			Call  SetNpcPos ( 00000001 00000041 0000000F 0000001E )
-  134:  			Call  SetNpcYaw ( 00000002 0000010E )
-  148:  			Call  SetNpcPos ( 00000002 00000078 0000000F 0000001E )
+   48:  			Call  SetNpcPos ( .NpcID:Magikoopa_03  0`  -1000`  0` )
+   64:  			Call  SetNpcPos ( .NpcID:FlyingMagikoopa_04  -55`  15`  35` )
+   80:  			Call  GetNpcYaw ( .NpcID:Magikoopa_03 *Var0 )
+   94:  			Call  SetNpcYaw ( .NpcID:FlyingMagikoopa_04  90` )
+   A8:  			Call  InterpPlayerYaw   (  180`  0` )
+   BC:  			Call  SetPlayerPos      (  30`  0`  80` )
+   D4:  			Call  SetNpcYaw ( .NpcID:Lakitu_00  90` )
+   E8:  			Call  SetNpcPos ( .NpcID:Lakitu_00  -20`  15`  30` )
+  104:  			Call  SetNpcYaw ( .NpcID:Lakitu_01  270` )
+  118:  			Call  SetNpcPos ( .NpcID:Lakitu_01  65`  15`  30` )
+  134:  			Call  SetNpcYaw ( .NpcID:Lakitu_02  270` )
+  148:  			Call  SetNpcPos ( .NpcID:Lakitu_02  120`  15`  30` )
   164:  			Exec  $Script_80244774
   170:  		EndIf
   178:  	Case  ==  .Outcome:PlayerLost % 1
@@ -1755,13 +1761,13 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 {
     0:  Switch  *MapVar[A]
     C:  	Case  ==  00000000
-   18:  		Call  NpcFacePlayer ( 00000003 00000001 )
+   18:  		Call  NpcFacePlayer ( .NpcID:Magikoopa_03 00000001 )
    2C:  	Case  ==  00000001
-   38:  		Call  NpcFacePlayer ( 00000000 00000001 )
+   38:  		Call  NpcFacePlayer ( .NpcID:Lakitu_00 00000001 )
    4C:  	Case  ==  00000002
-   58:  		Call  NpcFacePlayer ( 00000001 00000001 )
+   58:  		Call  NpcFacePlayer ( .NpcID:Lakitu_01 00000001 )
    6C:  	Case  ==  00000003
-   78:  		Call  NpcFacePlayer ( 00000002 00000001 )
+   78:  		Call  NpcFacePlayer ( .NpcID:Lakitu_02 00000001 )
    8C:  EndSwitch
    94:  Return
    9C:  End
@@ -1771,17 +1777,17 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 {
     0:  Switch  *MapVar[A]
     C:  	Case  ==  00000000
-   18:  		Call  SpeakToPlayer ( 00000003 00560202 00560201 00000010 001100B9 ) % Hey! Stop that! The Puff Puff Machine is extremely ...
-   38:  		Call  InterpNpcYaw  ( 00000003 0000005A 00000000 )
+   18:  		Call  SpeakToPlayer ( .NpcID:Magikoopa_03 00560202 00560201 00000010 001100B9 ) % Hey! Stop that! The Puff Puff Machine is extremely ...
+   38:  		Call  InterpNpcYaw  ( .NpcID:Magikoopa_03  90`  0` )
    50:  	Case  ==  00000001
-   5C:  		Call  SpeakToPlayer ( 00000000 00490016 00490001 00000010 001100BF ) % Hey! What're you doing! The Puff Puff Machine's de ...
-   7C:  		Call  InterpNpcYaw  ( 00000000 0000005A 00000000 )
+   5C:  		Call  SpeakToPlayer ( .NpcID:Lakitu_00 00490016 00490001 00000010 001100BF ) % Hey! What're you doing! The Puff Puff Machine's de ...
+   7C:  		Call  InterpNpcYaw  ( .NpcID:Lakitu_00  90`  0` )
    94:  	Case  ==  00000002
-   A0:  		Call  SpeakToPlayer ( 00000001 00490016 00490001 00000010 001100BF ) % Hey! What're you doing! The Puff Puff Machine's de ...
-   C0:  		Call  InterpNpcYaw  ( 00000001 0000010E 00000000 )
+   A0:  		Call  SpeakToPlayer ( .NpcID:Lakitu_01 00490016 00490001 00000010 001100BF ) % Hey! What're you doing! The Puff Puff Machine's de ...
+   C0:  		Call  InterpNpcYaw  ( .NpcID:Lakitu_01  270`  0` )
    D8:  	Case  ==  00000003
-   E4:  		Call  SpeakToPlayer ( 00000002 00490016 00490001 00000010 001100BF ) % Hey! What're you doing! The Puff Puff Machine's de ...
-  104:  		Call  InterpNpcYaw  ( 00000002 0000010E 00000000 )
+   E4:  		Call  SpeakToPlayer ( .NpcID:Lakitu_02 00490016 00490001 00000010 001100BF ) % Hey! What're you doing! The Puff Puff Machine's de ...
+  104:  		Call  InterpNpcYaw  ( .NpcID:Lakitu_02  270`  0` )
   11C:  EndSwitch
   124:  Return
   12C:  End
@@ -1791,15 +1797,15 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 {
     0:  Switch  *MapVar[A]
     C:  	Case  ==  00000000
-   18:  		Call  SpeakToPlayer ( 00000003 00560202 00560201 00000010 001100BA ) % I said don't hit it! Don't you realize that if the ...
+   18:  		Call  SpeakToPlayer ( .NpcID:Magikoopa_03 00560202 00560201 00000010 001100BA ) % I said don't hit it! Don't you realize that if the ...
    38:  	Case  ==  00000001
-   44:  		Call  SpeakToPlayer ( 00000000 00490016 00490001 00000010 001100C0 ) % Didn't you hear me? Stop it! If you break that mac ...
+   44:  		Call  SpeakToPlayer ( .NpcID:Lakitu_00 00490016 00490001 00000010 001100C0 ) % Didn't you hear me? Stop it! If you break that mac ...
    64:  	Case  ==  00000002
-   70:  		Call  SpeakToPlayer ( 00000001 00490016 00490001 00000010 001100C0 ) % Didn't you hear me? Stop it! If you break that mac ...
+   70:  		Call  SpeakToPlayer ( .NpcID:Lakitu_01 00490016 00490001 00000010 001100C0 ) % Didn't you hear me? Stop it! If you break that mac ...
    90:  	Case  ==  00000003
-   9C:  		Call  SpeakToPlayer ( 00000002 00490016 00490001 00000010 001100C0 ) % Didn't you hear me? Stop it! If you break that mac ...
+   9C:  		Call  SpeakToPlayer ( .NpcID:Lakitu_02 00490016 00490001 00000010 001100C0 ) % Didn't you hear me? Stop it! If you break that mac ...
    BC:  EndSwitch
-   C4:  Call  SetNpcVar ( 00000003 00000000 00000001 )
+   C4:  Call  SetNpcVar ( .NpcID:Magikoopa_03 00000000 00000001 )
    DC:  Wait  5`
    E8:  Exec  $Script_802445D4
    F4:  Return
@@ -1814,7 +1820,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    20:  Call  DisablePlayerInput    ( .True )
    30:  Call  802D2C14  ( 00000001 )
    40:  Call  SetNpcFlagBits    ( .Npc:Partner 00000100 .True )
-   58:  Call  AdjustCam ( .Cam:Default *Fixed[8.0] 00000000 0000012C *Fixed[17.0] *Fixed[-6.0] )
+   58:  Call  AdjustCam ( .Cam:Default *Fixed[8.0]  0`  300` *Fixed[17.0] *Fixed[-6.0] )
    7C:  ExecWait  $Script_80244E2C
    88:  Switch  *AreaByte[7]
    94:  	Case  ==  00000000
@@ -1885,7 +1891,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    4C:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
    68:  Call  SetCamSpeed   ( .Cam:Default *Fixed[8.0] )
    7C:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-6.0] )
-   94:  Call  SetCamDistance        ( .Cam:Default 0000012C )
+   94:  Call  SetCamDistance        ( .Cam:Default  300` )
    A8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    C0:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
    D4:  ExecWait  $Script_80244E2C
@@ -1905,7 +1911,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 {
     0:  If  *MapVar[A]  ==  FFFFFFFF
    10:  	Set   *MapVar[A]  00000000
-   20:  	Call  GetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
+   20:  	Call  GetNpcPos ( .NpcID:Magikoopa_03 *Var0 *Var1 *Var2 )
    3C:  	ExecWait  $Script_80245378
    48:  	Set   *MapVar[A]  FFFFFFFF
    58:  EndIf
@@ -1917,7 +1923,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 {
     0:  If  *MapVar[A]  ==  FFFFFFFF
    10:  	Set   *MapVar[A]  00000001
-   20:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+   20:  	Call  GetNpcPos ( .NpcID:Lakitu_00 *Var0 *Var1 *Var2 )
    3C:  	ExecWait  $Script_80245378
    48:  	Set   *MapVar[A]  FFFFFFFF
    58:  EndIf
@@ -1929,7 +1935,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 {
     0:  If  *MapVar[A]  ==  FFFFFFFF
    10:  	Set   *MapVar[A]  00000002
-   20:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+   20:  	Call  GetNpcPos ( .NpcID:Lakitu_01 *Var0 *Var1 *Var2 )
    3C:  	ExecWait  $Script_80245378
    48:  	Set   *MapVar[A]  FFFFFFFF
    58:  EndIf
@@ -1941,7 +1947,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 {
     0:  If  *MapVar[A]  ==  FFFFFFFF
    10:  	Set   *MapVar[A]  00000003
-   20:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+   20:  	Call  GetNpcPos ( .NpcID:Lakitu_02 *Var0 *Var1 *Var2 )
    3C:  	ExecWait  $Script_80245378
    48:  	Set   *MapVar[A]  FFFFFFFF
    58:  EndIf
@@ -2004,7 +2010,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
   10C:  		EndIf
   114:  		Add   *AreaByte[6]  00000001
   124:  	Case  ==  00000002
-  130:  		Call  AdjustCam     ( .Cam:Default *Fixed[8.0] 00000000 0000012C *Fixed[19.0] *Fixed[-9.0] )
+  130:  		Call  AdjustCam     ( .Cam:Default *Fixed[8.0]  0`  300` *Fixed[19.0] *Fixed[-9.0] )
   154:  		Call  GetSelfNpcID  ( *Var0 )
   164:  		If  *Var0  ==  00000003
   174:  			Call  SpeakToPlayer ( .Npc:Self 00560202 00560201 00000005 001100B8 ) % Huff N. Puff is making a name for himself as an ev ...
@@ -2017,13 +2023,13 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
   20C:  			Wait  15`
   218:  			Call  EndSpeech     ( .Npc:Self 00490016 00490001 00000000 )
   234:  		EndIf
-  23C:  		Call  SetNpcVar ( 00000003 00000000 00000001 )
+  23C:  		Call  SetNpcVar ( .NpcID:Magikoopa_03 00000000 00000001 )
   254:  		Wait  5`
   260:  		Exec  $Script_802445D4
-  26C:  		Call  BindNpcInteract   ( 00000000 00000000 )
-  280:  		Call  BindNpcInteract   ( 00000001 00000000 )
-  294:  		Call  BindNpcInteract   ( 00000002 00000000 )
-  2A8:  		Call  BindNpcInteract   ( 00000003 00000000 )
+  26C:  		Call  BindNpcInteract   ( .NpcID:Lakitu_00 00000000 )
+  280:  		Call  BindNpcInteract   ( .NpcID:Lakitu_01 00000000 )
+  294:  		Call  BindNpcInteract   ( .NpcID:Lakitu_02 00000000 )
+  2A8:  		Call  BindNpcInteract   ( .NpcID:Magikoopa_03 00000000 )
   2BC:  EndSwitch
   2C4:  Return
   2CC:  End
@@ -2036,7 +2042,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    24:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802457D4 )
    38:  	Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_80244C84 )
    4C:  Else
-   54:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   54:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    70:  EndIf
    78:  Return
    80:  End
@@ -2047,7 +2053,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
     0:  If  *GB_StoryProgress  <  .Story:Ch6_DefeatedPuffPuffGuards % 34
    10:  	Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_80244C84 )
    24:  Else
-   2C:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   2C:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    48:  EndIf
    50:  Return
    58:  End
@@ -2059,7 +2065,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    10:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802457D4 )
    24:  	Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_80244C84 )
    38:  Else
-   40:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   40:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    5C:  EndIf
    64:  Return
    6C:  End
@@ -2071,7 +2077,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    10:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802457D4 )
    24:  	Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_80244C84 )
    38:  Else
-   40:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   40:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    5C:  EndIf
    64:  Return
    6C:  End
@@ -2083,7 +2089,7 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
    10:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802457D4 )
    24:  	Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_80244C84 )
    38:  Else
-   40:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   40:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    5C:  EndIf
    64:  Return
    6C:  End
@@ -2091,48 +2097,48 @@ PADDING: 80240E88 to 80240E90 (00000E88 to 00000E90)
 
 #new:NpcGroup $NpcGroup_80245CEC
 {
-	00000000 $NpcSettings_80243F10 ~Vec3f:NPC_80245CEC % 0 15 60
+	.NpcID:Lakitu_00 $NpcSettings_80243F10 ~Vec3f:NPC_Lakitu_00 % 0 15 60
 	00440D05 $Script_Init_80245B90 00000000 00000000 0000005A
 	~Items:25:SuperShroom:2:MapleSyrup:2:ThunderRage:2:StopWatch:2
 	~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_80245CEC
-	~AnimationTable:NPC_80245CEC % .Sprite:Lakitu
+	~Movement:NPC_Lakitu_00
+	~AnimationTable:NPC_Lakitu_00 % .Sprite:Lakitu
 	00000000 00000000 00000000 001A00E4 % These followers of Bowser run the Puff Puff Machin ...
 	%
 	% $NpcGroup_80245CEC[1F0]
-	00000001 $NpcSettings_80243F10 ~Vec3f:NPC_80245EDC % 65 15 60
+	.NpcID:Lakitu_01 $NpcSettings_80243F10 ~Vec3f:NPC_Lakitu_01 % 65 15 60
 	00440D05 $Script_Init_80245C04 00000000 00000000 0000010E
 	~Items:25:SuperShroom:2:MapleSyrup:2:ThunderRage:2:StopWatch:2
 	~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_80245EDC
-	~AnimationTable:NPC_80245EDC % .Sprite:Lakitu
+	~Movement:NPC_Lakitu_01
+	~AnimationTable:NPC_Lakitu_01 % .Sprite:Lakitu
 	00000000 00000000 00000000 001A00E4 % These followers of Bowser run the Puff Puff Machin ...
 	%
 	% $NpcGroup_80245CEC[3E0]
-	00000002 $NpcSettings_80243F10 ~Vec3f:NPC_802460CC % 135 15 35
+	.NpcID:Lakitu_02 $NpcSettings_80243F10 ~Vec3f:NPC_Lakitu_02 % 135 15 35
 	00440D05 $Script_Init_80245C78 00000000 00000000 0000010E
 	~Items:25:SuperShroom:2:MapleSyrup:2:ThunderRage:2:StopWatch:2
 	~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_802460CC
-	~AnimationTable:NPC_802460CC % .Sprite:Lakitu
+	~Movement:NPC_Lakitu_02
+	~AnimationTable:NPC_Lakitu_02 % .Sprite:Lakitu
 	00000000 00000000 00000000 001A00E4 % These followers of Bowser run the Puff Puff Machin ...
 	%
 	% $NpcGroup_80245CEC[5D0]
-	00000003 $NpcSettings_80243F3C ~Vec3f:NPC_802462BC % -60 0 50
+	.NpcID:Magikoopa_03 $NpcSettings_80243F3C ~Vec3f:NPC_Magikoopa_03 % -60 0 50
 	00440D05 $Script_Init_80245AA8 00000000 00000000 0000005A
 	~Items:25:SuperShroom:2:MapleSyrup:2:ThunderRage:2:StopWatch:2
 	~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_802462BC
-	~AnimationTable:NPC_802462BC % .Sprite:Magikoopa
+	~Movement:NPC_Magikoopa_03
+	~AnimationTable:NPC_Magikoopa_03 % .Sprite:Magikoopa
 	00000000 00000000 00000000 001A00E4 % These followers of Bowser run the Puff Puff Machin ...
 	%
 	% $NpcGroup_80245CEC[7C0]
-	00000004 $NpcSettings_80243F3C ~Vec3f:NPC_802464AC % 0 -1000 0
+	.NpcID:FlyingMagikoopa_04 $NpcSettings_80243F3C ~Vec3f:NPC_FlyingMagikoopa_04 % 0 -1000 0
 	00440D05 $Script_Init_80245B30 00000000 00000000 0000010E
 	~Items:25:SuperShroom:2:MapleSyrup:2:ThunderRage:2:StopWatch:2
 	~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_802464AC
-	~AnimationTable:NPC_802464AC % .Sprite:FlyingMagikoopa
+	~Movement:NPC_FlyingMagikoopa_04
+	~AnimationTable:NPC_FlyingMagikoopa_04 % .Sprite:FlyingMagikoopa
 	00000000 00000000 00000000 001A00E4 % These followers of Bowser run the Puff Puff Machin ...
 }
 

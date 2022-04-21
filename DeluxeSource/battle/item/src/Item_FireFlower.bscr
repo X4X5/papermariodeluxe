@@ -180,7 +180,7 @@
    74:  CVT.S.W   F0, F0
    78:  MFC1      A3, F0
    7C:  CLEAR     A0
-   80:  JAL       80071030
+   80:  JAL       ~Func:playFX_3F
    84:  SW        R0, 10 (SP)
    88:  LW        RA, 24 (SP)
    8C:  LW        S2, 20 (SP)
@@ -198,7 +198,7 @@
     8:  COPY      S0, A0
     C:  BEQ       A1, R0, .o48
    10:  SW        RA, 14 (SP)
-   14:  JAL       8011D82C
+   14:  JAL       ~Func:mdl_set_all_fog_mode
    18:  LI        A0, 1
    1C:  CLEAR     A0
    20:  COPY      A1, A0
@@ -322,10 +322,10 @@ PADDING: 802A13F8 to 802A1400 (00717058 to 00717060)
 #new:Script $Script_802A1704
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -397,7 +397,7 @@ PADDING: 802A13F8 to 802A1400 (00717058 to 00717060)
    7C:  EndThread
    84:  Wait  35`
    90:  Call  UseBattleCamPreset    ( 00000002 )
-   A0:  Call  MoveBattleCamOver     ( 00000014 )
+   A0:  Call  MoveBattleCamOver     (  20` )
    B0:  Wait  10`
    BC:  Call  GetActorPos   ( .Actor:Player *Var3 *Var4 *Var5 )
    D8:  Set   *Var0  00000028
@@ -425,7 +425,7 @@ PADDING: 802A13F8 to 802A1400 (00717058 to 00717060)
   238:  EndThread
   240:  Wait  80`
   24C:  Call  UseBattleCamPreset    ( 00000003 )
-  25C:  Call  MoveBattleCamOver ( 00000014 )
+  25C:  Call  MoveBattleCamOver (  20` )
   26C:  Call  InitTargetIterator ( )
   278:  Label  0
   284:  Call  SetGoalToTarget   ( .Actor:Self )
@@ -435,7 +435,7 @@ PADDING: 802A13F8 to 802A1400 (00717058 to 00717060)
   2D0:  EndIf
   2D8:  Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
   2F4:  Call  GetItemPower      ( .Item:FireFlower *Var0 *Var1 )
-  30C:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:IgnoreDefense|NoContact|Unblockable|Fire 00000000 *Var0 00000020 )
+  30C:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:IgnoreDefense|NoContact|NoOtherDamagePopups|Fire 00000000 *Var0 00000020 )
   32C:  Label  1
   338:  Wait  5`
   344:  Call  ChooseNextTarget  ( .Iter:Next *Var0 )

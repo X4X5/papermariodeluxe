@@ -270,7 +270,7 @@
    4C:  NOP
 	% LBL: from $JumpTable_802A2DB0 , entry 0`
    50:  LA        A1, $Function_802A123C
-   58:  JAL       ~Func:create_dynamic_entity_frontUI
+   58:  JAL       ~Func:create_generic_entity_frontUI
    5C:  CLEAR     A0
    60:  SAW       V0, $End[30]
    68:  JAL       ~Func:rand_int
@@ -487,7 +487,7 @@
   3DC:  SH        V0, 17A (V1)
   3E0:  SLL       V0, V0, 10
   3E4:  SRA       V0, V0, 10
-  3E8:  JAL       ~Func:free_dynamic_entity
+  3E8:  JAL       ~Func:free_generic_entity
   3EC:  SW        V0, 84 (A2)
         .o3F0
   3F0:  LW        A0, 0 (S1)
@@ -552,7 +552,7 @@
    8C:  CVT.S.W   F0, F0
    90:  MFC1      A3, F0
    94:  CLEAR     A0
-   98:  JAL       80071090
+   98:  JAL       ~Func:playFX_40
    9C:  SW        V0, 10 (SP)
    A0:  LW        RA, 28 (SP)
    A4:  LW        S3, 24 (SP)
@@ -604,7 +604,7 @@
    8C:  CVT.S.W   F0, F0
    90:  MFC1      A3, F0
    94:  LI        A0, 1
-   98:  JAL       80071090
+   98:  JAL       ~Func:playFX_40
    9C:  SW        V0, 10 (SP)
    A0:  LW        RA, 28 (SP)
    A4:  LW        S3, 24 (SP)
@@ -822,10 +822,10 @@ PADDING: 802A1BA4 to 802A1BB0 (00731EA4 to 00731EB0)
 #new:Script $Script_802A1EB4
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )

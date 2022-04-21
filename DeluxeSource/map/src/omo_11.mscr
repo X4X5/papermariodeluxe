@@ -1,6 +1,9 @@
 % Script File: omo_11.mscr
 % Decoded from: 0 to 2AE0 (omo_11)
 
+#define .NpcID:PyroGuy_00           00
+#define .NpcID:PyroGuy_01           01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFB0
@@ -793,7 +796,7 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
     8:  LW        V0, C (A0)
     C:  JAL       ~Func:get_variable
    10:  LW        A1, 0 (V0)
-   14:  JAL       800EB168
+   14:  JAL       ~Func:switch_to_partner
    18:  COPY      A0, V0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -839,7 +842,7 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
    54:  LW        A1, 48 (V0)
    58:  LW        A3, 50 (V0)
    5C:  MFC1      A2, F4
-   60:  JAL       80071750
+   60:  JAL       ~Func:playFX_52
    64:  CLEAR     A0
    68:  COPY      A0, S1
    6C:  COPY      A1, S0
@@ -889,7 +892,7 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
    40:  LW        A1, 48 (V0)
    44:  LW        A3, 50 (V0)
    48:  MFC1      A2, F2
-   4C:  JAL       80070BB0
+   4C:  JAL       ~Func:playFX_33
    50:  LI        A0, 4
    54:  LW        RA, 18 (SP)
    58:  LI        V0, 2
@@ -913,7 +916,7 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
    34:  LW        A1, 38 (V0)
    38:  LW        A3, 40 (V0)
    3C:  MFC1      A2, F4
-   40:  JAL       80070BB0
+   40:  JAL       ~Func:playFX_33
    44:  LI        A0, 9
    48:  LW        RA, 18 (SP)
    4C:  LI        V0, 2
@@ -981,7 +984,7 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
    EC:  LW        A1, 48 (V0)
    F0:  LW        A3, 50 (V0)
    F4:  MFC1      A2, F0
-   F8:  JAL       800716F0
+   F8:  JAL       ~Func:playFX_51
    FC:  ADDIU     S1, S1, 1
   100:  SW        V0, 8 (S0)
   104:  SWC1      F20, 2C (S0)
@@ -1291,7 +1294,7 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
    4C:  COPY      A3, A1
    50:  SW        V0, 88 (S1)
    54:  SW        R0, 70 (S1)
-   58:  JAL       ~Func:set_transition_stencil_color
+   58:  JAL       ~Func:set_screen_overlay_color
    5C:  SW        R0, 74 (S1)
         .o60
    60:  LW        V1, 70 (S1)
@@ -1348,7 +1351,7 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
   110:  LWC1      F0, 74 (S1)
   114:  CVT.S.W   F0, F0
   118:  MFC1      A1, F0
-  11C:  JAL       ~Func:set_transition_stencil_zoom_0
+  11C:  JAL       ~Func:set_screen_overlay_params_front
   120:  LI        A0, 1
   124:  COPY      V0, S2
   128:  LW        RA, 1C (SP)
@@ -1372,7 +1375,7 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 2
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -1393,7 +1396,7 @@ PADDING: 80240788 to 80240790 (00000788 to 00000790)
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 4
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -1479,8 +1482,8 @@ PADDING: 8024155C to 80241560 (0000155C to 00001560)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80242AAC )
    84:  ExecWait  $Script_MakeEntities
@@ -1724,7 +1727,7 @@ PADDING: 8024155C to 80241560 (0000155C to 00001560)
    E8:  Call  FindKeyItem   ( .Item:UltraStone *VarC )
    FC:  Call  $Function_802408B0 ( )
   108:  If  *Var0  ==  FFFFFFFF
-  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC 000000A0 00000028 ) % You have no member you can upgrade now.
+  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC  160`  40` ) % You have no member you can upgrade now.
   130:  	Wait  10`
   13C:  	Call  $Function_80240CA0        ( *Var9 )
   14C:  	Call  DisablePlayerInput        ( .False )
@@ -1735,9 +1738,9 @@ PADDING: 8024155C to 80241560 (0000155C to 00001560)
   190:  EndIf
   198:  If  *GF_Tutorial_SuperBlock  ==  .False
   1A8:  	Set   *GF_Tutorial_SuperBlock  .True
-  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA 000000A0 00000028 ) % This is a Super Block. With this, you can upgrade  ...
+  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA  160`  40` ) % This is a Super Block. With this, you can upgrade  ...
   1D0:  Else
-  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB 000000A0 00000028 ) % With this, you can upgrade one of your party membe ...
+  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB  160`  40` ) % With this, you can upgrade one of your party membe ...
   1F0:  EndIf
   1F8:  Call  $Function_8024095C ( )
   204:  If  *Var0  ==  FFFFFFFF
@@ -1758,7 +1761,7 @@ PADDING: 8024155C to 80241560 (0000155C to 00001560)
   2D4:  	Call  802CF56C  ( 00000002 )
   2E4:  EndIf
   2EC:  Wait  10`
-  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF 000000A0 00000028 ) % Do you want to upgrade this member?
+  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF  160`  40` ) % Do you want to upgrade this member?
   310:  Call  ShowChoice    ( 001E000D ) % Yes No
   320:  Call  CloseMessage ( )
   32C:  If  *Var0  !=  00000000
@@ -1775,9 +1778,9 @@ PADDING: 8024155C to 80241560 (0000155C to 00001560)
   3C8:  Call  $Function_80240CA0    ( *Var9 )
   3D8:  Call  $Function_80240BD8 ( )
   3E4:  If  *VarD  ==  00000001
-  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD 000000A0 00000028 ) % is upgraded to Super-rank!
+  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD  160`  40` ) % is upgraded to Super-rank!
   40C:  Else
-  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE 000000A0 00000028 ) % is upgraded to Ultra-rank!
+  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE  160`  40` ) % is upgraded to Ultra-rank!
   42C:  EndIf
   434:  Call  DisablePlayerInput        ( .False )
   444:  Call  EnablePartnerAI ( )
@@ -1844,21 +1847,21 @@ PADDING: 80242648 to 80242650 (00002648 to 00002650)
 
 #new:NpcGroup $NpcGroup_802426CC
 {
-	00000000 $NpcSettings_802426A0 ~Vec3f:NPC_802426CC % -180 0 70
+	.NpcID:PyroGuy_00 $NpcSettings_802426A0 ~Vec3f:NPC_PyroGuy_00 % -180 0 70
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802426CC
-	~AnimationTable:NPC_802426CC % .Sprite:PyroGuy
+	~Movement:NPC_PyroGuy_00
+	~AnimationTable:NPC_PyroGuy_00 % .Sprite:PyroGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802428BC
 {
-	00000001 $NpcSettings_802426A0 ~Vec3f:NPC_802428BC % 330 0 83
+	.NpcID:PyroGuy_01 $NpcSettings_802426A0 ~Vec3f:NPC_PyroGuy_01 % 330 0 83
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802428BC
-	~AnimationTable:NPC_802428BC % .Sprite:PyroGuy
+	~Movement:NPC_PyroGuy_01
+	~AnimationTable:NPC_PyroGuy_01 % .Sprite:PyroGuy
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

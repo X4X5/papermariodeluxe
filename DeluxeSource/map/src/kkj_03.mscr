@@ -1,6 +1,8 @@
 % Script File: kkj_03.mscr
 % Decoded from: 0 to 1410 (kkj_03)
 
+#define .NpcID:BattleKooper_00      00
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -370,8 +372,8 @@ PADDING: 802404EC to 802404F0 (000004EC to 000004F0)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachCastleGrounds
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs      ( .False $NpcGroupList_80240B1C )
@@ -393,10 +395,10 @@ PADDING: 802404EC to 802404F0 (000004EC to 000004F0)
   188:  	Set   *VarC  00000000
   198:  	Exec  $Script_UpdateTexturePan_80240450
   1A4:  EndThread
-  1AC:  Call  802C90FC      ( 00000093 00000000 FFFFFFFF )
-  1C4:  Call  802C9428      ( 00000000 $DisplayList_802404F0 00000000 )
+  1AC:  Call  SetModelCustomGfx ( ~Model:o715 00000000 FFFFFFFF )
+  1C4:  Call  SetCustomGfx      ( 00000000 $DisplayList_802404F0 00000000 )
   1DC:  Exec  $Script_802403A0
-  1E8:  Call  UseDoorSounds ( .DoorSounds:Large )
+  1E8:  Call  UseDoorSounds     ( .DoorSounds:Large )
   1F8:  Exec  $Script_80240614
   204:  Exec  $Script_EnterDoubleDoor_80240640
   210:  Wait  1`
@@ -415,11 +417,11 @@ PADDING: 802408FC to 80240900 (000008FC to 00000900)
 
 #new:NpcGroup $NpcGroup_8024092C
 {
-	00000000 $NpcSettings_80240900 ~Vec3f:NPC_8024092C % 670 0 -12
+	.NpcID:BattleKooper_00 $NpcSettings_80240900 ~Vec3f:NPC_BattleKooper_00 % 670 0 -12
 	00020F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024092C
-	~AnimationTable:NPC_8024092C % .Sprite:BattleKooper
+	~Movement:NPC_BattleKooper_00
+	~AnimationTable:NPC_BattleKooper_00 % .Sprite:BattleKooper
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -445,61 +447,61 @@ PADDING: 80240B34 to 80240B40 (00000B34 to 00000B40)
    68:  Call  FadeOutMusic      ( 00000000 0000029A )
    7C:  Wait  20`
    88:  Call  SetMusicTrack     ( 00000000 .Song:PrisonerPeachTheme 00000000 00000008 )
-   A4:  Call  PlayerFaceNpc     ( 00000000 00000000 )
-   B8:  Call  SetNpcAnimation   ( 00000000 000A0002 )
-   CC:  Call  SetNpcSpeed       ( 00000000 *Fixed[2.0] )
-   E0:  Call  NpcMoveTo ( 00000000 00000271 00000000 00000000 )
-   FC:  Call  SetNpcAnimation   ( 00000000 000A0001 )
+   A4:  Call  PlayerFaceNpc     ( .NpcID:BattleKooper_00 .False )
+   B8:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000A0002 )
+   CC:  Call  SetNpcSpeed       ( .NpcID:BattleKooper_00 *Fixed[2.0] )
+   E0:  Call  NpcMoveTo ( .NpcID:BattleKooper_00  625`  0`  0` )
+   FC:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000A0001 )
   110:  Wait  10`
-  11C:  Call  SetNpcAnimation   ( 00000000 000C0000 )
+  11C:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000C0000 )
   130:  Wait  10`
-  13C:  Call  SetNpcAnimation   ( 00000000 000C0026 )
-  150:  Call  SpeakToPlayer     ( 00000000 000C0001 000C0026 00000000 0000004B ) % Oh, Mario! You came to the party to see me! You're ...
-  170:  Call  SetNpcAnimation   ( 00000000 000C0002 )
+  13C:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000C0026 )
+  150:  Call  SpeakToPlayer     ( .NpcID:BattleKooper_00 000C0001 000C0026 00000000 0000004B ) % Oh, Mario! You came to the party to see me! You're ...
+  170:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000C0002 )
   184:  Wait  10`
-  190:  Call  SetNpcAnimation   ( 00000000 000A0001 )
+  190:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000A0001 )
   1A4:  Thread
-  1AC:  	Call  SetCamProperties  ( .Cam:Default *Fixed[5.0] 00000258 00000000 FFFFFFF4 *Fixed[325.0] *Fixed[17.0] *Fixed[-9.0] )
+  1AC:  	Call  SetCamProperties  ( .Cam:Default *Fixed[5.0]  600`  0`  -12` *Fixed[325.0] *Fixed[17.0] *Fixed[-9.0] )
   1D8:  EndThread
-  1E0:  Call  PlayerMoveTo      ( 0000023F 00000000 00000014 )
+  1E0:  Call  PlayerMoveTo      (  575`  0`  20` )
   1F8:  Wait  10`
-  204:  Call  SetNpcAnimation   ( 00000000 000C0000 )
+  204:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000C0000 )
   218:  Wait  10`
-  224:  Call  SetNpcAnimation   ( 00000000 000C0026 )
-  238:  Call  SpeakToPlayer     ( 00000000 000C0001 000C0026 00000000 0000004C ) % I was just resting a bit. It gets tiring, greeting ...
+  224:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000C0026 )
+  238:  Call  SpeakToPlayer     ( .NpcID:BattleKooper_00 000C0001 000C0026 00000000 0000004C ) % I was just resting a bit. It gets tiring, greeting ...
   258:  Call  SetPlayerAnimation    ( .PlayerAnim:NodYes )
   268:  Wait  20`
   274:  Call  SetPlayerAnimation    ( 00010002 )
   284:  Wait  10`
-  290:  Call  SpeakToPlayer     ( 00000000 000C0001 000C0026 00000000 0000004D ) % It was a lovely day today, so I'm sure it's comfor ...
-  2B0:  Call  SetNpcAnimation   ( 00000000 000C0002 )
+  290:  Call  SpeakToPlayer     ( .NpcID:BattleKooper_00 000C0001 000C0026 00000000 0000004D ) % It was a lovely day today, so I'm sure it's comfor ...
+  2B0:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000C0002 )
   2C4:  Wait  10`
-  2D0:  Call  SetNpcAnimation   ( 00000000 000A0001 )
+  2D0:  Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000A0001 )
   2E4:  Wait  10`
   2F0:  Call  FadeOutMusic      ( 00000000 000003E8 )
   304:  Thread
   30C:  	Wait  10`
-  318:  	Call  PlayerMoveTo      ( 0000024E 00000000 0000000A )
+  318:  	Call  PlayerMoveTo      (  590`  0`  10` )
   330:  	Wait  5`
   33C:  	Call  PlaySoundAtPlayer ( 00000262 00000000 )
-  350:  	Call  ShowEmote ( 00000000 .Emote:Exclamation FFFFFFD3 00000014 00000000 00000000 00000000 00000000 00000000 )
+  350:  	Call  ShowEmote ( .NpcID:BattleKooper_00 .Emote:Exclamation  -45`  20` .False  0`  0`  0`  0` )
   380:  EndThread
   388:  Thread
-  390:  	Call  InterpNpcYaw      ( 00000000 0000005A 00000007 )
-  3A8:  	Call  SetNpcAnimation   ( 00000000 000A0002 )
-  3BC:  	Call  NpcMoveTo ( 00000000 00000280 00000000 0000000A )
-  3D8:  	Call  SetNpcAnimation   ( 00000000 000A0001 )
-  3EC:  	Call  PlaySoundAtNpc    ( 00000000 00000262 00000000 )
-  404:  	Call  ShowEmote ( 00000000 .Emote:Exclamation FFFFFFD3 00000014 00000001 00000000 00000000 00000000 00000000 )
+  390:  	Call  InterpNpcYaw      ( .NpcID:BattleKooper_00  90`  7` )
+  3A8:  	Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000A0002 )
+  3BC:  	Call  NpcMoveTo ( .NpcID:BattleKooper_00  640`  0`  10` )
+  3D8:  	Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000A0001 )
+  3EC:  	Call  PlaySoundAtNpc    ( .NpcID:BattleKooper_00 00000262 00000000 )
+  404:  	Call  ShowEmote ( .NpcID:BattleKooper_00 .Emote:Exclamation  -45`  20` .True  0`  0`  0`  0` )
   434:  	Wait  20`
-  440:  	Call  SetNpcAnimation   ( 00000000 000C0011 )
+  440:  	Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000C0011 )
   454:  	Wait  60`
-  460:  	Call  InterpNpcYaw      ( 00000000 0000010E 00000007 )
+  460:  	Call  InterpNpcYaw      ( .NpcID:BattleKooper_00  270`  7` )
   478:  EndThread
   480:  Wait  17`
   48C:  Thread
   494:  	Call  PlaySound ( 80000056 )
-  4A4:  	Call  ShakeCam  ( .Cam:Default 00000000 000000C8 *Fixed[1.0] )
+  4A4:  	Call  ShakeCam  ( .Cam:Default 00000000  200` *Fixed[1.0] )
   4C0:  EndThread
   4C8:  Wait  60`
   4D4:  Call  GotoMap   ( $ASCII_802413F8 00000000 ) % osr_04
@@ -537,21 +539,21 @@ PADDING: 80240B34 to 80240B40 (00000B34 to 00000B40)
 #new:Script $Script_80241140
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  SetNpcPos     ( 00000000 000002A8 00000000 FFFFFFF1 )
+   10:  Call  SetNpcPos     ( .NpcID:BattleKooper_00  680`  0`  -15` )
    2C:  Call  EnableGroup   ( ~Model:g156 .True )
    40:  Exec  $Script_80241054
    4C:  Exec  $Script_802410D4
-   58:  Call  UseSettingsFrom       ( .Cam:Default 00000258 00000000 FFFFFFF1 )
-   74:  Call  SetPanTarget  ( .Cam:Default 00000258 00000000 FFFFFFF1 )
+   58:  Call  UseSettingsFrom       ( .Cam:Default  600`  0`  -15` )
+   74:  Call  SetPanTarget  ( .Cam:Default  600`  0`  -15` )
    90:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    A4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    BC:  Thread
-   C4:  	Call  SetPlayerJumpscale    ( 00000000 )
+   C4:  	Call  SetPlayerJumpscale    (  0` )
    D4:  	Loop
-   E0:  		Call  InterpPlayerYaw   ( 0000010E 00000000 )
-   F4:  		Call  PlayerJump1       ( 00000226 00000000 00000000 00000014 )
-  110:  		Call  InterpPlayerYaw   ( 0000005A 00000000 )
-  124:  		Call  PlayerJump1       ( 00000276 00000000 00000000 00000014 )
+   E0:  		Call  InterpPlayerYaw   (  270`  0` )
+   F4:  		Call  PlayerJump1       (  550`  0`  0`  20` )
+  110:  		Call  InterpPlayerYaw   (  90`  0` )
+  124:  		Call  PlayerJump1       (  630`  0`  0`  20` )
   140:  	EndLoop
   148:  EndThread
   150:  Thread
@@ -563,15 +565,15 @@ PADDING: 80240B34 to 80240B40 (00000B34 to 00000B40)
   19C:  	EndLoop
   1A4:  EndThread
   1AC:  Thread
-  1B4:  	Call  SetNpcAnimation   ( 00000000 000A0004 )
+  1B4:  	Call  SetNpcAnimation   ( .NpcID:BattleKooper_00 000A0004 )
   1C8:  	Loop
-  1D4:  		Call  NpcMoveTo ( 00000000 00000258 00000000 00000014 )
-  1F0:  		Call  NpcMoveTo ( 00000000 000002A8 00000000 00000014 )
+  1D4:  		Call  NpcMoveTo ( .NpcID:BattleKooper_00  600`  0`  20` )
+  1F0:  		Call  NpcMoveTo ( .NpcID:BattleKooper_00  680`  0`  20` )
   20C:  	EndLoop
   214:  EndThread
   21C:  Thread
   224:  	Call  PlaySound ( 80000056 )
-  234:  	Call  ShakeCam  ( .Cam:Default 00000000 000000C8 *Fixed[1.0] )
+  234:  	Call  ShakeCam  ( .Cam:Default 00000000  200` *Fixed[1.0] )
   250:  EndThread
   258:  Wait  100`
   264:  Call  GotoMap   ( $ASCII_80241400 00000001 ) % osr_03

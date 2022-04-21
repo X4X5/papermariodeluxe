@@ -1,6 +1,11 @@
 % Script File: kpa_11.mscr
 % Decoded from: 0 to 2090 (kpa_11)
 
+#define .NpcID:WorldKoopatrol_00    00
+#define .NpcID:Toad_01              01
+#define .NpcID:Toad_02              02
+#define .NpcID:ToadGuard_03         03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -970,8 +975,8 @@ PADDING: 80240BF8 to 80240C00 (00000BF8 to 00000C00)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80241FE4 )
    84:  ExecWait  $Script_MakeEntities
@@ -1017,7 +1022,7 @@ PADDING: 802414BC to 802414C0 (000014BC to 000014C0)
 {
     0:  Call  MakeEntity    ( .Entity:SavePoint ~Vec4d:Entity802414C0 80000000 )
    24:  If  *GF_KPA11_Defeated_Guard  ==  .True
-   34:  	Call  MakeItemEntity    ( .Item:CastleKey2 ~Vec3d:Item802414F4 .ItemSpawnMode:Fixed_NeverVanish *GF_KPA11_Item_CastleKey2 )
+   34:  	Call  MakeItemEntity    ( .Item:BowserCastleKey ~Vec3d:Item802414F4 .ItemSpawnMode:Fixed_NeverVanish *GF_KPA11_Item_CastleKey2 )
    58:  EndIf
    60:  Call  MakeEntity        ( .Entity:YellowBlock ~Vec4d:Entity80241520 .Item:LifeShroom 80000000 )
    88:  Call  AssignBlockFlag   ( *GF_KPA10_ItemBlock_LifeShroom )
@@ -1078,13 +1083,13 @@ MISSING: 80241668 to 80241694 (00001668 to 00001694)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Set   *GF_KPA11_Defeated_Guard  .True
    38:  		Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-   54:  		Call  MakeItemEntity    ( .Item:CastleKey2 *Var0 *Var1 *Var2 .ItemSpawnMode:Toss_NeverVanish *GF_KPA11_Item_CastleKey2 )
+   54:  		Call  MakeItemEntity    ( .Item:BowserCastleKey *Var0 *Var1 *Var2 .ItemSpawnMode:Toss_NeverVanish *GF_KPA11_Item_CastleKey2 )
    78:  		Call  DoNpcDefeat ( )
    84:  	Case  ==  .Outcome:PlayerFled % 2
    90:  	Case  ==  .Outcome:EnemyFled % 3
    9C:  		Set   *GF_KPA11_Defeated_Guard  .True
    AC:  		Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-   C8:  		Call  MakeItemEntity    ( .Item:CastleKey2 *Var0 *Var1 *Var2 .ItemSpawnMode:Toss_NeverVanish *GF_KPA11_Item_CastleKey2 )
+   C8:  		Call  MakeItemEntity    ( .Item:BowserCastleKey *Var0 *Var1 *Var2 .ItemSpawnMode:Toss_NeverVanish *GF_KPA11_Item_CastleKey2 )
    EC:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
   104:  		Call  RemoveNpc ( .Npc:Self )
   114:  EndSwitch
@@ -1105,11 +1110,11 @@ MISSING: 80241668 to 80241694 (00001668 to 00001694)
 
 #new:NpcGroup $NpcGroup_80241814
 {
-	00000000 $NpcSettings_80241610 ~Vec3f:NPC_80241814 % 550 30 -145
+	.NpcID:WorldKoopatrol_00 $NpcSettings_80241610 ~Vec3f:NPC_WorldKoopatrol_00 % 550 30 -145
 	00842C00 $Script_Init_802417C0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241814
-	~AnimationTable:NPC_80241814 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_00
+	~AnimationTable:NPC_WorldKoopatrol_00 % .Sprite:WorldKoopatrol
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1121,27 +1126,27 @@ MISSING: 80241668 to 80241694 (00001668 to 00001694)
 
 #new:NpcGroup $NpcGroup_80241A14
 {
-	00000001 $NpcSettings_8024163C ~Vec3f:NPC_80241A14 % 845 30 -285
+	.NpcID:Toad_01 $NpcSettings_8024163C ~Vec3f:NPC_Toad_01 % 845 30 -285
 	00002D01 $Script_Init_80241A04 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241A14
-	~AnimationTable:NPC_80241A14 % .Sprite:Toad
+	~Movement:NPC_Toad_01
+	~AnimationTable:NPC_Toad_01 % .Sprite:Toad
 	00000000 00000000 00000000 001A0113 % This Toad worked in the castle. Even though he's i ...
 	%
 	% $NpcGroup_80241A14[1F0]
-	00000002 $NpcSettings_8024163C ~Vec3f:NPC_80241C04 % 872 30 -315
+	.NpcID:Toad_02 $NpcSettings_8024163C ~Vec3f:NPC_Toad_02 % 872 30 -315
 	00002D01 $Script_Init_80241A04 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241C04
-	~AnimationTable:NPC_80241C04 % .Sprite:Toad
+	~Movement:NPC_Toad_02
+	~AnimationTable:NPC_Toad_02 % .Sprite:Toad
 	00000000 00000000 00000000 001A0114 % This Toad's been captured. He looks like he's all  ...
 	%
 	% $NpcGroup_80241A14[3E0]
-	00000003 $NpcSettings_8024163C ~Vec3f:NPC_80241DF4 % 900 30 -285
+	.NpcID:ToadGuard_03 $NpcSettings_8024163C ~Vec3f:NPC_ToadGuard_03 % 900 30 -285
 	00002D01 $Script_Init_80241A04 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241DF4
-	~AnimationTable:NPC_80241DF4 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_03
+	~AnimationTable:NPC_ToadGuard_03 % .Sprite:ToadGuard
 	00000000 00000000 00000000 001A0115 % He was a soldier at Princess Peach's Castle. He wa ...
 }
 

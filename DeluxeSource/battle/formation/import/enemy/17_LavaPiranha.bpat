@@ -52,6 +52,61 @@
    54:  ADDIU     SP, SP, 20
 }
 
+#new:Function $Function_80218058_17 {
+    0:  ADDIU     SP, SP, FE60
+    4:  SW        S3, 194 (SP)
+    8:  COPY      S3, A0
+    C:  SW        S1, 18C (SP)
+   10:  ADDIU     S1, SP, 10
+   14:  COPY      A0, S1
+   18:  LI        A1, 1
+   1C:  SW        RA, 198 (SP)
+   20:  SW        S2, 190 (SP)
+   24:  SW        S0, 188 (SP)
+   28:  LW        V1, 90 (S3)
+   2C:  CLEAR     S2
+   30:  SW        S3, 17C (SP)
+   34:  SLLV      V0, V1, A1
+   38:  ADDU      V0, V0, V1
+   3C:  SW        V0, 178 (SP)
+   40:  LW        V1, 90 (S3)
+   44:  ADDIU     V0, SP, 178
+   48:  SW        R0, 184 (SP)
+   4C:  SW        V0, 1C (SP)
+   50:  JAL       ~Func:LoadPath
+   54:  SW        V1, 180 (SP)
+   58:  COPY      S0, S3
+        .o5C
+   5C:  COPY      A0, S1
+   60:  JAL       ~Func:GetNextPathPos
+   64:  LI        A1, 1
+   68:  COPY      A0, S1
+   6C:  LI        A1, *Var1
+   70:  JAL       ~Func:get_float_variable
+   74:  RESERVED
+   78:  COPY      A0, S1
+   7C:  LI        A1, *Var2
+   84:  JAL       ~Func:get_float_variable
+   88:  SWC1      F0, 98 (S0)
+   8C:  COPY      A0, S1
+   90:  LI        A1, *Var3
+   98:  JAL       ~Func:get_float_variable
+   9C:  SWC1      F0, 9C (S0)
+   A0:  SWC1      F0, A0 (S0)
+   A4:  ADDIU     S0, S0, C
+   A8:  LW        V0, 84 (S1)
+   AC:  BNE       V0, R0, .o5C
+   B0:  ADDIU     S2, S2, 1
+   B4:  SW        S2, 1DC (S3)
+   B8:  LW        RA, 198 (SP)
+   BC:  LW        S3, 194 (SP)
+   C0:  LW        S2, 190 (SP)
+   C4:  LW        S1, 18C (SP)
+   C8:  LW        S0, 188 (SP)
+   CC:  JR        RA
+   D0:  ADDIU     SP, SP, 1A0
+}
+
 #new:Function $Function_8021812C_17 {
     0:  ADDIU     SP, SP, FFD8
     4:  SW        S1, 14 (SP)
@@ -574,7 +629,7 @@
     8:  LA        A1, $Function_802188B0_17
    10:  SW        RA, 10 (SP)
    14:  SAW       V0, $End[780]
-   1C:  JAL       ~Func:create_dynamic_entity_world
+   1C:  JAL       ~Func:create_generic_entity_world
    20:  CLEAR     A0
    24:  LW        RA, 10 (SP)
    28:  LI        V0, 2
@@ -1979,6 +2034,96 @@ $AnimatedModelNode_8021C624_17 $AnimatedModelNode_8021C5F8_17 $AnimatedModelNode
 $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode_8021C6FC_17 $AnimatedModelNode_8021C6D0_17 $AnimatedModelNode_8021C6A4_17 $AnimatedModelNode_8021C678_17 00000000 
 }
 
+#new:IntTable $IntTable_8021C940_17 {
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000001 11000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000011 21100000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000012 22100000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000112 22110000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000122 22210000 00000000 00000000 00000000 00000000 00000000 
+00000000 00001122 22211000 00000000 00000000 00000000 00000000 00000000 
+00000000 00001222 22221000 00000000 00000000 00000000 00000000 00000000 
+33333333 33311222 22221133 33333333 33333333 33333333 33333333 33333333 
+33333333 33312222 22222133 33333333 33333333 33333333 33333333 33333333 
+33333333 33112222 22222113 33333333 33333333 33333333 33333333 33333333 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+44444444 44444444 44444444 44444444 44444444 44444444 44444444 44444444 
+33333333 33333333 33333333 33333333 33333333 31122222 22222113 33333333 
+33333333 33333333 33333333 33333333 33333333 33122222 22222133 33333333 
+33333333 33333333 33333333 33333333 33333333 33112222 22221133 33333333 
+00000000 00000000 00000000 00000000 00000000 00012222 22221000 00000000 
+00000000 00000000 00000000 00000000 00000000 00011222 22211000 00000000 
+00000000 00000000 00000000 00000000 00000000 00001222 22210000 00000000 
+00000000 00000000 00000000 00000000 00000000 00001122 22110000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000122 22100000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000112 21100000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000011 11000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+}
+
+#new:IntTable $IntTable_8021CD40_17 {
+014041C1 E7390241 044F0000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+}
+
+#new:DisplayList $DisplayList_8021CF40_17 {
+G_RDPPIPESYNC
+G_TEXTURE        (G_TX_RENDERTILE, 0.999985, 0.999985, 0, true)
+G_SetOtherMode_H (G_MDSFT_CYCLETYPE, G_CYC_1CYCLE)
+G_SetOtherMode_H (G_MDSFT_TEXTPERSP, 1)
+G_SetOtherMode_H (G_MDSFT_TEXTDETAIL, G_TD_CLAMP)
+G_SetOtherMode_H (G_MDSFT_TEXTLOD, G_TL_TILE)
+G_SetOtherMode_H (G_MDSFT_TEXTFILT, G_TF_BILERP)
+G_SetOtherMode_H (G_MDSFT_TEXTCONV, G_TC_FILT)
+G_SetOtherMode_L (G_MDSFT_RENDERMODE, ...
+	                  AA_EN, Z_CMP, Z_UPD, CVG_DST_FULL, CVG_X_ALPHA, ZMODE_OPA, ...
+	                  G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM, ...
+	                  G_BL_CLR_IN, G_BL_A_IN, G_BL_CLR_MEM, G_BL_A_MEM)
+G_SETCOMBINE     (G_CCMUX_0, G_CCMUX_0, G_CCMUX_0, G_CCMUX_TEXEL0, ...
+	                  G_ACMUX_0, G_ACMUX_0, G_ACMUX_0, G_ACMUX_TEXEL0, ...
+	                  G_CCMUX_0, G_CCMUX_0, G_CCMUX_0, G_CCMUX_TEXEL0, ...
+	                  G_ACMUX_0, G_ACMUX_0, G_ACMUX_0, G_ACMUX_TEXEL0)
+G_SetOtherMode_H (G_MDSFT_TEXTLUT, G_TT_RGBA16)
+G_SETIMG         (RGBA-16, 1`, $IntTable_8021CD40_17)
+G_RDPTILESYNC
+G_SETTILE        (G_TX_LOADTILE, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0) % invalid format (0:0)
+G_RDPLOADSYNC
+G_LOADTLUT       (G_TX_LOADTILE, 16`)
+G_RDPPIPESYNC
+G_SETIMG         (CI-8, 32`, $IntTable_8021C940_17)
+G_SETTILE        (G_TX_LOADTILE, CI-8, 4, 0, 0, 2, 5, 0, 0, 6, 0)
+G_RDPLOADSYNC
+G_LOADTILE       (G_TX_LOADTILE, 0.000000, 0.000000, 31.500000, 31.000000)
+G_RDPPIPESYNC
+G_SETTILE        (G_TX_RENDERTILE, CI-4, 4, 0, 0, 2, 5, 0, 0, 6, 0)
+G_SETTILESIZE    (G_TX_RENDERTILE, 0, 0, 64`, 32`)
+G_GEOMETRYMODE   (Clear, ALL)
+G_GEOMETRYMODE   (Set, G_ZBUFFER, G_SHADE)
+G_ENDDL
+}
+
 #new:IdleAnimations $IdleAnimations_8021D018_17 {
 .Status:Normal    00790003
 .Status:Stone     00790000
@@ -2083,7 +2228,7 @@ $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode
    EC:  Call  SetActorVar       ( .Actor:Self 0000000D *Var0 )
   104:  Call  SetActorVar       ( .Actor:Self 00000007 00790003 )
   11C:  Call  SetActorVar       ( .Actor:Self 00000008 00790009 )
-  134:  Call  ForceHomePos      ( .Actor:Self 0000003D 0000003D 00000000 )
+  134:  Call  ForceHomePos      ( .Actor:Self  61`  61`  0` )
   150:  Call  LoadAnimatedModel ( 00000000 $AnimatedModelTree_8021C4C0_17 )
   164:  Call  OverrideBattleDmaDest ( $End[9230] )
   174:  Call  LoadBattleDmaData ( 00000000 )
@@ -2113,14 +2258,14 @@ $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode
   368:  Wait  2`
   374:  Exec  $Script_8021DEEC_17 
   380:  Call  CreateNpc ( 00000000 00B70000 )
-  394:  Call  SetNpcYaw ( 00000000 0000005A )
-  3A8:  Call  SetNpcPos ( 00000000 FFFFFED4 00000000 00000000 )
+  394:  Call  SetNpcYaw ( 00000000  90` )
+  3A8:  Call  SetNpcPos ( 00000000  -300`  0`  0` )
   3C4:  Call  BindTakeTurn      ( .Actor:Self $Script_TakeTurn_8021FC10_17 )
   3D8:  Call  BindIdle  ( .Actor:Self $Script_Idle_8021D6EC_17 )
   3EC:  Call  BindHandleEvent   ( .Actor:Self $Script_HandleEvent_8021F5A4_17 )
   400:  Call  BindNextTurn      ( .Actor:Self $Script_NextTurn_8021D8EC_17 )
-  414:  Call  ForceHomePos      ( .Actor:Enemy1 00000039 00000039 00000000 )
-  430:  Call  ForceHomePos      ( .Actor:Enemy2 0000006B 00000047 00000014 )
+  414:  Call  ForceHomePos      ( .Actor:Enemy1  57`  57`  0` )
+  430:  Call  ForceHomePos      ( .Actor:Enemy2  107`  71`  20` )
   44C:  Call  HPBarToHome       ( .Actor:Enemy1 )
   45C:  Call  HPBarToHome       ( .Actor:Enemy2 )
   46C:  Call  $Function_802188FC_17 ( )
@@ -2200,7 +2345,7 @@ $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode
    C4:  Call  SetNpcAnimation   ( 00000000 00B70002 )
    D8:  Call  SetNpcAnimationSpeed  ( 00000000 *Fixed[2.0] )
    EC:  Call  SetNpcSpeed       ( 00000000 *Fixed[10.0] )
-  100:  Call  NpcMoveTo ( 00000000 00000046 00000000 00000000 )
+  100:  Call  NpcMoveTo ( 00000000  70`  0`  0` )
   11C:  Call  PlaySoundAtNpc    ( 00000000 000000E8 00000000 )
   134:  Call  SetNpcAnimationSpeed  ( 00000000 *Fixed[1.0] )
   148:  Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
@@ -2212,10 +2357,10 @@ $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode
   1E4:  		Wait  2`
   1F0:  	EndLoop
   1F8:  EndThread
-  200:  Call  NpcJump0  ( 00000000 00000046 000000B4 00000000 00000014 )
+  200:  Call  NpcJump0  ( 00000000  70`  180`  0`  20` )
   220:  Call  SpeakToPlayer ( 00000000 FFFFFFFF FFFFFFFF 00000000 00100105 ) % Ow ow OW!! HOT!!!! Oh, it burns! Really!
-  240:  Call  SetNpcYaw ( 00000000 0000010E )
-  254:  Call  SetNpcPos ( 00000000 00000032 000000B4 00000000 )
+  240:  Call  SetNpcYaw ( 00000000  270` )
+  254:  Call  SetNpcPos ( 00000000  50`  180`  0` )
   270:  Thread
   278:  	Loop  0000000A 
   284:  		Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
@@ -2223,13 +2368,13 @@ $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode
   2E4:  		Wait  2`
   2F0:  	EndLoop
   2F8:  EndThread
-  300:  Call  NpcJump0  ( 00000000 00000032 00000000 00000000 00000014 )
-  320:  Call  NpcJump0  ( 00000000 00000032 00000000 00000000 00000006 )
-  340:  Call  NpcJump0  ( 00000000 00000032 00000000 00000000 00000003 )
+  300:  Call  NpcJump0  ( 00000000  50`  0`  0`  20` )
+  320:  Call  NpcJump0  ( 00000000  50`  0`  0`  6` )
+  340:  Call  NpcJump0  ( 00000000  50`  0`  0`  3` )
   360:  Wait  8`
   36C:  Call  SetNpcAnimation   ( 00000000 00B70005 )
   380:  Call  SetNpcJumpscale   ( 00000000 *Fixed[0.7] )
-  394:  Call  NpcJump0  ( 00000000 00000032 00000000 00000000 0000000C )
+  394:  Call  NpcJump0  ( 00000000  50`  0`  0`  12` )
   3B4:  Thread
   3BC:  	Loop  00000004 
   3C8:  		Call  PlaySoundAtNpc    ( 00000000 000020BA 00000000 )
@@ -2240,12 +2385,12 @@ $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode
   418:  EndThread
   420:  Call  SetNpcAnimation   ( 00000000 00B70003 )
   434:  Call  SetNpcSpeed       ( 00000000 *Fixed[8.0] )
-  448:  Call  NpcMoveTo ( 00000000 FFFFFFC4 00000000 00000000 )
+  448:  Call  NpcMoveTo ( 00000000  -60`  0`  0` )
   464:  Call  SpeakToPlayer     ( 00000000 00B70004 00B70001 00000005 00100106 ) % So sorry, old chap, but that's all I can do at the ...
   484:  Call  PlaySoundAtActor  ( .Actor:Self 00000174 )
   498:  Call  SetNpcAnimation   ( 00000000 00B70003 )
   4AC:  Call  SetNpcSpeed       ( 00000000 *Fixed[6.0] )
-  4C0:  Call  NpcMoveTo ( 00000000 FFFFFED4 00000000 00000000 )
+  4C0:  Call  NpcMoveTo ( 00000000  -300`  0`  0` )
   4DC:  Call  802535B4  ( 00000001 )
   4EC:  Call  EnableIdleScript  ( .Actor:Self 00000001 )
   500:  Call  UseIdleAnimation  ( .Actor:Self .True )
@@ -2520,13 +2665,13 @@ $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode
   2FC:  EndSwitch
   304:  Call  GetActorVar   ( .Actor:Self 00000000 *Var0 )
   31C:  If  *Var0  ==  00000000 
-  32C:  	Call  ForceHomePos  ( .Actor:Self 0000003D 0000003D 00000000 )
+  32C:  	Call  ForceHomePos  ( .Actor:Self  61`  61`  0` )
   348:  Else
   350:  	Call  GetActorVar   ( .Actor:Self 00000005 *Var1 )
   368:  	If  *Var1  ==  00000001 
-  378:  		Call  ForceHomePos  ( .Actor:Self 0000003D 0000003D 00000000 )
+  378:  		Call  ForceHomePos  ( .Actor:Self  61`  61`  0` )
   394:  	Else
-  39C:  		Call  ForceHomePos  ( .Actor:Self 00000053 00000043 00000000 )
+  39C:  		Call  ForceHomePos  ( .Actor:Self  83`  67`  0` )
   3B8:  	EndIf
   3C0:  EndIf
   3C8:  Call  GetStatusFlags    ( .Actor:Self *Var0 )
@@ -2598,10 +2743,10 @@ $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode
    F4:  			If  *Var0  <=  00000000 
   104:  				Call  EnableIdleScript      ( .Actor:Self 00000000 )
   118:  				Call  UseBattleCamPreset    ( 00000013 )
-  128:  				Call  SetBattleCamTarget    ( 00000050 00000046 00000000 )
-  140:  				Call  SetBattleCamZoom      ( 0000012C )
-  150:  				Call  SetBattleCamOffsetZ   ( 0000001E )
-  160:  				Call  MoveBattleCamOver     ( 0000001E )
+  128:  				Call  SetBattleCamTarget    (  80`  70`  0` )
+  140:  				Call  SetBattleCamZoom      (  300` )
+  150:  				Call  SetBattleCamOffsetZ   (  30` )
+  160:  				Call  MoveBattleCamOver     (  30` )
   170:  				Wait  30`
   17C:  				Loop  0000000A 
   188:  					Call  OverrideBattleDmaDest ( $End[9230] )
@@ -2610,7 +2755,7 @@ $AnimatedModelNode_8021C754_17 $AnimatedModelNode_8021C728_17 $AnimatedModelNode
   1BC:  					Wait  4`
   1C8:  				EndLoop
   1D0:  				Call  UseBattleCamPreset    ( 00000002 )
-  1E0:  				Call  MoveBattleCamOver     ( 0000000F )
+  1E0:  				Call  MoveBattleCamOver     (  15` )
   1F0:  				Call  PlaySoundAtActor      ( .Actor:Self 000003BB )
   204:  				Set   *Var0  00000200 
   214:  				ExecWait  $Script_80222EF0_17 
@@ -2648,13 +2793,13 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
    28:  Thread
    30:  	Wait  8`
    3C:  	Call  UseBattleCamPreset    ( 00000013 )
-   4C:  	Call  SetBattleCamTarget    ( 00000050 00000046 00000000 )
-   64:  	Call  SetBattleCamZoom      ( 0000012C )
-   74:  	Call  SetBattleCamOffsetZ   ( 0000001E )
-   84:  	Call  MoveBattleCamOver     ( 0000002D )
+   4C:  	Call  SetBattleCamTarget    (  80`  70`  0` )
+   64:  	Call  SetBattleCamZoom      (  300` )
+   74:  	Call  SetBattleCamOffsetZ   (  30` )
+   84:  	Call  MoveBattleCamOver     (  45` )
    94:  	Wait  57`
    A0:  	Call  UseBattleCamPreset    ( 00000002 )
-   B0:  	Call  MoveBattleCamOver     ( 0000000F )
+   B0:  	Call  MoveBattleCamOver     (  15` )
    C0:  EndThread
    C8:  Call  OverrideBattleDmaDest ( $End[9230] )
    D8:  Call  LoadBattleDmaData ( 00000002 )
@@ -2705,7 +2850,7 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
   464:  Set   *VarF  *Var0 
   474:  Switch  *VarF 
   480:  	CaseOR  ==  .HitResult:Hit % 0
-  48C:  	CaseOR  ==  00000002 % 2
+  48C:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   498:  	CaseOR  ==  0000000A % A
   4A4:  		Call  SetAnimation  ( .Actor:Self 00000001 00790003 )
   4BC:  		Wait  19`
@@ -2730,13 +2875,13 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
    28:  Thread
    30:  	Wait  8`
    3C:  	Call  UseBattleCamPreset    ( 00000013 )
-   4C:  	Call  SetBattleCamTarget    ( 00000050 00000046 00000000 )
-   64:  	Call  SetBattleCamZoom      ( 0000012C )
-   74:  	Call  SetBattleCamOffsetZ   ( 0000001E )
-   84:  	Call  MoveBattleCamOver     ( 0000002D )
+   4C:  	Call  SetBattleCamTarget    (  80`  70`  0` )
+   64:  	Call  SetBattleCamZoom      (  300` )
+   74:  	Call  SetBattleCamOffsetZ   (  30` )
+   84:  	Call  MoveBattleCamOver     (  45` )
    94:  	Wait  54`
    A0:  	Call  UseBattleCamPreset    ( 00000002 )
-   B0:  	Call  MoveBattleCamOver     ( 0000000F )
+   B0:  	Call  MoveBattleCamOver     (  15` )
    C0:  EndThread
    C8:  Call  OverrideBattleDmaDest ( $End[9230] )
    D8:  Call  LoadBattleDmaData ( 00000002 )
@@ -2827,10 +2972,10 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
   128:  	Call  SetAnimatorFlags      ( *Var0 00040000 00000000 )
   140:  	Call  CancelEnemyTurn       ( 00000001 )
   150:  	Call  UseBattleCamPreset    ( 00000013 )
-  160:  	Call  SetBattleCamTarget    ( 0000005A 0000005A 00000000 )
-  178:  	Call  SetBattleCamZoom      ( 00000168 )
-  188:  	Call  SetBattleCamOffsetZ   ( 00000000 )
-  198:  	Call  MoveBattleCamOver     ( 000000F0 )
+  160:  	Call  SetBattleCamTarget    (  90`  90`  0` )
+  178:  	Call  SetBattleCamZoom      (  360` )
+  188:  	Call  SetBattleCamOffsetZ   (  0` )
+  198:  	Call  MoveBattleCamOver     (  240` )
   1A8:  	Call  OverrideBattleDmaDest ( $End[9230] )
   1B8:  	Call  LoadBattleDmaData     ( 00000009 )
   1C8:  	Call  PlayModelAnimation    ( 00000000 $End[9230] )
@@ -2848,7 +2993,7 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
   290:  	Wait  4`
   29C:  	Thread
   2A4:  		Call  PlaySound ( 000003BC )
-  2B4:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000077 *Fixed[0.3] )
+  2B4:  		Call  ShakeCam  ( .Cam:Battle 00000000  119` *Fixed[0.3] )
   2D0:  		Call  PlaySound ( 000007BC )
   2E0:  	EndThread
   2E8:  	Call  $Function_80218000_17 ( 00000050 000000EA )
@@ -2920,25 +3065,25 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
   6EC:  	EndThread
   6F4:  	Wait  35`
   700:  	Call  UseBattleCamPreset    ( 00000013 )
-  710:  	Call  SetBattleCamTarget    ( 0000005A 0000005A 00000000 )
-  728:  	Call  SetBattleCamZoom      ( 00000168 )
-  738:  	Call  SetBattleCamOffsetZ   ( FFFFFFD3 )
-  748:  	Call  MoveBattleCamOver     ( 0000006E )
+  710:  	Call  SetBattleCamTarget    (  90`  90`  0` )
+  728:  	Call  SetBattleCamZoom      (  360` )
+  738:  	Call  SetBattleCamOffsetZ   (  -45` )
+  748:  	Call  MoveBattleCamOver     (  110` )
   758:  	Wait  60`
   764:  	Call  SetAnimatedModelRootPosition  ( 00000000 00000000 FFFFFF06 00000000 )
   780:  	Call  SetAnimatedModelRootPosition  ( 00000001 00000000 FFFFFF06 00000000 )
   79C:  	Call  SetAnimatedModelRootPosition  ( 00000002 00000000 FFFFFF06 00000000 )
-  7B8:  	Call  SetActorPos   ( .Actor:Self 00000064 00000000 00000000 )
+  7B8:  	Call  SetActorPos   ( .Actor:Self  100`  0`  0` )
   7D4:  	Call  DropStarPoints        ( .Actor:Self )
   7E4:  	Call  PlaySoundAtActor      ( .Actor:Self .Sound:Death )
-  7F8:  	Call  ForceHomePos  ( .Actor:Self 0000003D 0000003D 00000000 )
+  7F8:  	Call  ForceHomePos  ( .Actor:Self  61`  61`  0` )
   814:  	Wait  65`
   820:  	Call  UseBattleCamPreset    ( 00000013 )
   830:  	Call  GetActorPos   ( .Actor:Player *Var0 *Var1 *Var2 )
   84C:  	Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-  864:  	Call  SetBattleCamZoom      ( 000000F0 )
-  874:  	Call  SetBattleCamOffsetZ   ( 00000028 )
-  884:  	Call  MoveBattleCamOver     ( 00000014 )
+  864:  	Call  SetBattleCamZoom      (  240` )
+  874:  	Call  SetBattleCamOffsetZ   (  40` )
+  884:  	Call  MoveBattleCamOver     (  20` )
   894:  	Wait  20`
   8A0:  	Thread
   8A8:  		Call  $Function_80218A98_17 ( )
@@ -2946,7 +3091,7 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
   8BC:  	Wait  80`
   8C8:  	Thread
   8D0:  		Call  PlaySound ( 000003BC )
-  8E0:  		Call  ShakeCam  ( .Cam:Battle 00000000 000000A5 *Fixed[1.2] )
+  8E0:  		Call  ShakeCam  ( .Cam:Battle 00000000  165` *Fixed[1.2] )
   8FC:  		Call  PlaySound ( 000007BC )
   90C:  	EndThread
   914:  	Call  $Function_80218000_17 ( 00000050 0000012C )
@@ -2962,16 +3107,16 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
   A10:  	Call  PlayEffect        ( ~FX:EmoteIcon:Question 00000000 *Var0 *Var1 *Var2 00000014 0000013B 0000001E 00000000 00000000 00000000 00000000 00000000 )
   A54:  	Wait  50`
   A60:  	Call  UseBattleCamPreset    ( 00000013 )
-  A70:  	Call  SetBattleCamTarget    ( 0000005A 0000005A 00000000 )
-  A88:  	Call  SetBattleCamZoom  ( 00000168 )
-  A98:  	Call  SetBattleCamOffsetZ   ( FFFFFFC4 )
-  AA8:  	Call  MoveBattleCamOver ( 0000001E )
+  A70:  	Call  SetBattleCamTarget    (  90`  90`  0` )
+  A88:  	Call  SetBattleCamZoom  (  360` )
+  A98:  	Call  SetBattleCamOffsetZ   (  -60` )
+  AA8:  	Call  MoveBattleCamOver (  30` )
   AB8:  	Wait  40`
   AC4:  	Call  UseBattleCamPreset    ( 00000013 )
-  AD4:  	Call  SetBattleCamTarget    ( 0000005A 0000005A 00000000 )
-  AEC:  	Call  SetBattleCamZoom  ( 000000C8 )
-  AFC:  	Call  SetBattleCamOffsetZ   ( FFFFFFC4 )
-  B0C:  	Call  MoveBattleCamOver ( 00000028 )
+  AD4:  	Call  SetBattleCamTarget    (  90`  90`  0` )
+  AEC:  	Call  SetBattleCamZoom  (  200` )
+  AFC:  	Call  SetBattleCamOffsetZ   (  -60` )
+  B0C:  	Call  MoveBattleCamOver (  40` )
   B1C:  	Wait  40`
   B28:  	Thread
   B30:  		Call  UseIdleAnimation  ( .Actor:Player .False )
@@ -2980,22 +3125,22 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
   B68:  		Call  UseIdleAnimation  ( .Actor:Player .True )
   B7C:  	EndThread
   B84:  	Call  UseBattleCamPreset    ( 00000013 )
-  B94:  	Call  SetBattleCamTarget    ( 0000001E 0000005A 00000000 )
-  BAC:  	Call  SetBattleCamZoom      ( 000001CC )
-  BBC:  	Call  SetBattleCamOffsetZ   ( 00000000 )
-  BCC:  	Call  MoveBattleCamOver     ( 0000001E )
+  B94:  	Call  SetBattleCamTarget    (  30`  90`  0` )
+  BAC:  	Call  SetBattleCamZoom      (  460` )
+  BBC:  	Call  SetBattleCamOffsetZ   (  0` )
+  BCC:  	Call  MoveBattleCamOver     (  30` )
   BDC:  	Call  $Function_80218000_17 ( 000000B4 00000010 )
   BF0:  	Thread
-  BF8:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[3.0] )
-  C14:  		Call  ShakeCam  ( .Cam:Battle 00000000 0000000A *Fixed[1.0] )
+  BF8:  		Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[3.0] )
+  C14:  		Call  ShakeCam  ( .Cam:Battle 00000000  10` *Fixed[1.0] )
   C30:  	EndThread
   C38:  	ChildThread
   C40:  		Wait  50`
   C4C:  		Call  UseBattleCamPreset    ( 00000013 )
-  C5C:  		Call  SetBattleCamTarget    ( 0000005A 0000005A 00000000 )
-  C74:  		Call  SetBattleCamZoom      ( 00000168 )
-  C84:  		Call  SetBattleCamOffsetZ   ( 00000000 )
-  C94:  		Call  MoveBattleCamOver     ( 00000028 )
+  C5C:  		Call  SetBattleCamTarget    (  90`  90`  0` )
+  C74:  		Call  SetBattleCamZoom      (  360` )
+  C84:  		Call  SetBattleCamOffsetZ   (  0` )
+  C94:  		Call  MoveBattleCamOver     (  40` )
   CA4:  		Wait  85`
   CB0:  	EndChildThread
   CB8:  	Call  SetActorVar   ( .Actor:Self 00000000 00000001 )
@@ -3118,8 +3263,8 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
  15E8:  	Call  PlayModelAnimation    ( 00000003 $End[1230] )
  15FC:  	Thread
  1604:  		Call  PlaySound ( 000003BC )
- 1614:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000064 *Fixed[0.5] )
- 1630:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000008 *Fixed[0.2] )
+ 1614:  		Call  ShakeCam  ( .Cam:Battle 00000000  100` *Fixed[0.5] )
+ 1630:  		Call  ShakeCam  ( .Cam:Battle 00000000  8` *Fixed[0.2] )
  164C:  		Call  PlaySound ( 000007BC )
  165C:  	EndThread
  1664:  	Call  $Function_80218000_17 ( 00000050 000000D8 )
@@ -3251,10 +3396,10 @@ $LavaBud_17 $Vector3D_8021FEF8_17 00000046 00000002 00000032 0000000E 00000014
  1EB0:  	Call  PlayEffect    ( ~FX:ShockWave:White FFFFFFC4 00000000 00000002 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
  1EF4:  	Thread
  1EFC:  		Call  $Function_80218000_17 ( 000000B4 00000010 )
- 1F10:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000005 *Fixed[4.0] )
+ 1F10:  		Call  ShakeCam  ( .Cam:Battle 00000000  5` *Fixed[4.0] )
  1F2C:  	EndThread
  1F34:  	Wait  3`
- 1F40:  	Call  SetActorPos       ( .Actor:Self FFFFFFC4 00000000 00000000 )
+ 1F40:  	Call  SetActorPos       ( .Actor:Self  -60`  0`  0` )
  1F5C:  	Call  DropStarPoints    ( .Actor:Self )
  1F6C:  	Call  PlaySoundAtActor  ( .Actor:Self .Sound:Death )
  1F80:  	Wait  15`
@@ -3403,7 +3548,7 @@ FFFFFFF9 FFFFFFF9 FFFFFFF9 00000063
   628:  		Call  SetActorVar       ( .Actor:Enemy0 00000007 00790004 )
   640:  		Call  SetActorVar       ( .Actor:Enemy0 00000008 0079000A )
   658:  		Call  SetActorVar       ( .Actor:Enemy0 00000005 00000001 )
-  670:  		Call  ForceHomePos      ( .Actor:Self 0000003D 0000003D 00000000 )
+  670:  		Call  ForceHomePos      ( .Actor:Self  61`  61`  0` )
   68C:  		Call  SetActorFlagBits  ( .Actor:Self 00040000 .False )
   6A4:  EndSwitch
   6AC:  Return
@@ -3932,16 +4077,16 @@ FFFFFFF9 FFFFFFF9 FFFFFFF9 00000063
   1E0:  			Call  GetActorVar       ( .Actor:Self 00000000 *Var0 )
   1F8:  			If  *Var0  ==  00000001 
   208:  				Call  UseBattleCamPreset    ( 00000013 )
-  218:  				Call  SetBattleCamTarget    ( 00000028 0000001E 00000000 )
-  230:  				Call  SetBattleCamZoom      ( 0000010E )
-  240:  				Call  SetBattleCamOffsetZ   ( 00000014 )
-  250:  				Call  MoveBattleCamOver     ( 0000001E )
+  218:  				Call  SetBattleCamTarget    (  40`  30`  0` )
+  230:  				Call  SetBattleCamZoom      (  270` )
+  240:  				Call  SetBattleCamOffsetZ   (  20` )
+  250:  				Call  MoveBattleCamOver     (  30` )
   260:  			Else
   268:  				Call  UseBattleCamPreset    ( 00000013 )
-  278:  				Call  SetBattleCamTarget    ( 0000006E 00000023 00000000 )
-  290:  				Call  SetBattleCamZoom      ( 0000012C )
-  2A0:  				Call  SetBattleCamOffsetZ   ( 00000014 )
-  2B0:  				Call  MoveBattleCamOver     ( 0000001E )
+  278:  				Call  SetBattleCamTarget    (  110`  35`  0` )
+  290:  				Call  SetBattleCamZoom      (  300` )
+  2A0:  				Call  SetBattleCamOffsetZ   (  20` )
+  2B0:  				Call  MoveBattleCamOver     (  30` )
   2C0:  			EndIf
   2C8:  			Wait  30`
   2D4:  			Loop  0000000A 
@@ -3955,7 +4100,7 @@ FFFFFFF9 FFFFFFF9 FFFFFFF9 00000063
   33C:  				Wait  4`
   348:  			EndLoop
   350:  			Call  UseBattleCamPreset    ( 00000002 )
-  360:  			Call  MoveBattleCamOver     ( 0000000F )
+  360:  			Call  MoveBattleCamOver     (  15` )
   370:  			Call  GetEnemyMaxHP ( .Actor:Self *Var0 )
   384:  			Call  SetEnemyHP    ( .Actor:Self *Var0 )
   398:  			Call  SetAnimation  ( .Actor:Self 00000001 007B0004 )
@@ -4036,12 +4181,12 @@ FFFFFFF9 FFFFFFF9 FFFFFFF9 00000063
    A8:  	Wait  8`
    B4:  	Call  UseBattleCamPreset    ( 00000013 )
    C4:  	Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-   DC:  	Call  SetBattleCamZoom      ( 0000012C )
-   EC:  	Call  SetBattleCamOffsetZ   ( 0000001E )
-   FC:  	Call  MoveBattleCamOver     ( 0000001E )
+   DC:  	Call  SetBattleCamZoom      (  300` )
+   EC:  	Call  SetBattleCamOffsetZ   (  30` )
+   FC:  	Call  MoveBattleCamOver     (  30` )
   10C:  	Wait  45`
   118:  	Call  UseBattleCamPreset    ( 00000002 )
-  128:  	Call  MoveBattleCamOver     ( 00000014 )
+  128:  	Call  MoveBattleCamOver     (  20` )
   138:  EndThread
   140:  Call  GetActorVar   ( .Actor:Self 00000000 *Var0 )
   158:  If  *Var0  ==  00000001 
@@ -4098,7 +4243,7 @@ FFFFFFF9 FFFFFFF9 FFFFFFF9 00000063
   4A8:  	Call  SetHomePos    ( *Var5 *Var0 *Var1 *Var2 )
   4C4:  	Call  SetActorSpeed ( *Var5 *Fixed[4.0] )
   4D8:  	Call  SetActorJumpGravity   ( *Var5 *Fixed[1.0] )
-  4EC:  	Call  FlyToGoal     ( *Var5 00000018 FFFFFFD6 .Easing:QuarticOut )
+  4EC:  	Call  FlyToGoal     ( *Var5  24`  -42` .Easing:QuarticOut )
   508:  Else
   510:  	Call  GetActorPos   ( *Var5 *Var0 *Var1 *Var2 )
   52C:  	Set   *Var0  00000012 
@@ -4107,7 +4252,7 @@ FFFFFFF9 FFFFFFF9 FFFFFFF9 00000063
   568:  	Call  SetHomePos    ( *Var5 *Var0 *Var1 *Var2 )
   584:  	Call  SetActorSpeed ( *Var5 *Fixed[5.0] )
   598:  	Call  SetActorJumpGravity   ( *Var5 *Fixed[1.2] )
-  5AC:  	Call  FlyToGoal     ( *Var5 00000010 FFFFFFF1 .Easing:CubicOut )
+  5AC:  	Call  FlyToGoal     ( *Var5  16`  -15` .Easing:CubicOut )
   5C8:  EndIf
   5D0:  Call  HPBarToHome   ( *Var5 )
   5E0:  Call  GetActorVar   ( .Actor:Self 00000000 *Var0 )
@@ -4494,12 +4639,12 @@ $PetitPiranhaBomb_17 $Vector3D_80226AF8_17 0000005F 00000000 00000000 00000000 0
    44:  	Sub   *Var1  00000019 
    54:  	Call  UseBattleCamPreset    ( 00000013 )
    64:  	Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-   7C:  	Call  SetBattleCamZoom      ( 0000015E )
-   8C:  	Call  SetBattleCamOffsetZ   ( 0000001E )
-   9C:  	Call  MoveBattleCamOver     ( 0000001E )
+   7C:  	Call  SetBattleCamZoom      (  350` )
+   8C:  	Call  SetBattleCamOffsetZ   (  30` )
+   9C:  	Call  MoveBattleCamOver     (  30` )
    AC:  	Wait  45`
    B8:  	Call  UseBattleCamPreset    ( 00000002 )
-   C8:  	Call  MoveBattleCamOver     ( 00000014 )
+   C8:  	Call  MoveBattleCamOver     (  20` )
    D8:  EndThread
    E0:  Call  GetActorVar   ( .Actor:Self 00000000 *Var0 )
    F8:  If  *Var0  ==  00000001 
@@ -4550,7 +4695,7 @@ $PetitPiranhaBomb_17 $Vector3D_80226AF8_17 0000005F 00000000 00000000 00000000 0
   3F0:  		Call  SetGoalPos    ( *Var5 *Var0 *Var1 *Var2 )
   40C:  		Call  SetActorSpeed ( *Var5 *Fixed[13.0] )
   420:  		Call  SetActorJumpGravity   ( *Var5 *Fixed[1.8] )
-  434:  		Call  FlyToGoal     ( *Var5 00000000 00000000 .Easing:Linear )
+  434:  		Call  FlyToGoal     ( *Var5  0`  0` .Easing:Linear )
   450:  		If  *Var9  ==  .HitResult:Lucky % 5
   460:  			Call  EnemyTestTarget   ( *Var5 *Var0 ~Flags:DamageType:TriggerLucky 00000000 00000000 00000000 )
   484:  		EndIf
@@ -4563,7 +4708,7 @@ $PetitPiranhaBomb_17 $Vector3D_80226AF8_17 0000005F 00000000 00000000 00000000 0
   4D8:  Call  SetGoalToTarget   ( *Var5 )
   4E8:  Call  SetActorSpeed     ( *Var5 *Fixed[13.0] )
   4FC:  Call  SetActorJumpGravity   ( *Var5 *Fixed[1.8] )
-  510:  Call  FlyToGoal ( *Var5 00000000 00000000 .Easing:Linear )
+  510:  Call  FlyToGoal ( *Var5  0`  0` .Easing:Linear )
   52C:  Wait  2`
   538:  Call  SetGoalToTarget   ( *Var5 )
   548:  Call  SetTargetActor    ( .Actor:Self .Actor:Player )
@@ -4571,7 +4716,7 @@ $PetitPiranhaBomb_17 $Vector3D_80226AF8_17 0000005F 00000000 00000000 00000000 0
   56C:  Call  EnemyDamageTarget ( .Actor:Self *Var9 ~Flags:DamageType:Fire 0000FFFF 00000000 00000004 00000020 )
   594:  Switch  *Var9 
   5A0:  	CaseOR  ==  .HitResult:Hit % 0
-  5AC:  	CaseOR  ==  00000002 % 2
+  5AC:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   5B8:  	CaseOR  ==  0000000A % A
   5C4:  		Call  SetPartFlagBits   ( *Var5 00000001 00000001 .True )
   5E0:  		Call  SetGoalToTarget   ( *Var5 )
@@ -4714,5 +4859,9 @@ $PetitPiranhaBomb_17 $Vector3D_80226AF8_17 0000005F 00000000 00000000 00000000 0
    18:  Goto  0
    24:  Return
    2C:  End
+}
+
+#new:ConstDouble $ConstDouble_8022AC40_17 {
+90.000000d
 }
 

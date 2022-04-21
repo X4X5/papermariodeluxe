@@ -1,6 +1,15 @@
 % Script File: jan_00.mscr
 % Decoded from: 0 to 7AF0 (jan_00)
 
+#define .NpcID:Kolorado_00          00
+#define .NpcID:Kolorado_01          01
+#define .NpcID:JrTroopa_02          02
+#define .NpcID:HeartPlant_03        03
+#define .NpcID:HeartPlant_04        04
+#define .NpcID:HeartPlant_05        05
+#define .NpcID:HeartPlant_06        06
+#define .NpcID:HeartPlant_07        07
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -242,7 +251,7 @@
    10:  COPY      A3, A0
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -1220,7 +1229,7 @@
    3C:  MFC1      A1, F0
    40:  MFC1      A2, F4
    44:  MFC1      A3, F2
-   48:  JAL       800705B0
+   48:  JAL       ~Func:playFX_23
    4C:  SWC1      F6, 10 (SP)
         .o50
    50:  LW        RA, 18 (SP)
@@ -1518,7 +1527,7 @@ PADDING: 80241194 to 802411A0 (00001194 to 000011A0)
    10:  ADDIU     A3, SP, 18
    14:  SW        RA, 28 (SP)
    18:  SW        S1, 24 (SP)
-   1C:  JAL       8011C2B0
+   1C:  JAL       ~Func:mdl_get_copied_vertices
    20:  SW        S0, 20 (SP)
    24:  LA        S1, $???_80245954
    2C:  LW        A0, 10 (SP)
@@ -1533,7 +1542,7 @@ PADDING: 80241194 to 802411A0 (00001194 to 000011A0)
    54:  ADDIU     V0, V0, 8
    58:  SW        V0, 0 (V1)
    5C:  LUI       V0, DE00
-   60:  JAL       8011C2EC
+   60:  JAL       ~Func:mdl_get_copied_gfx
    64:  SW        V0, 0 (S0)
    68:  LW        V1, 0 (S1)
    6C:  BLTZ      V1, .o7C
@@ -1563,7 +1572,7 @@ PADDING: 80241194 to 802411A0 (00001194 to 000011A0)
    10:  ADDIU     A3, SP, 18
    14:  SW        RA, 28 (SP)
    18:  SW        S1, 24 (SP)
-   1C:  JAL       8011C2B0
+   1C:  JAL       ~Func:mdl_get_copied_vertices
    20:  SW        S0, 20 (SP)
    24:  LA        S1, $???_80245958
    2C:  LW        A0, 10 (SP)
@@ -1578,7 +1587,7 @@ PADDING: 80241194 to 802411A0 (00001194 to 000011A0)
    54:  ADDIU     V0, V0, 8
    58:  SW        V0, 0 (V1)
    5C:  LUI       V0, DE00
-   60:  JAL       8011C2EC
+   60:  JAL       ~Func:mdl_get_copied_gfx
    64:  SW        V0, 0 (S0)
    68:  LW        V1, 0 (S1)
    6C:  BLTZ      V1, .o7C
@@ -1992,8 +2001,8 @@ PADDING: 80241C4C to 80241C50 (00001C4C to 00001C50)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Set   *GF_Map_JadeJungle  .True
@@ -2234,7 +2243,7 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -2274,7 +2283,7 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -2348,27 +2357,27 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
 
 #new:Script $Script_80242DB0
 {
-    0:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+    0:  Call  GetNpcPos     ( .NpcID:Kolorado_00 *Var0 *Var1 *Var2 )
    1C:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    38:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
    54:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    6C:  If  *Var0  ==  00000000
    7C:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    90:  Else
-   98:  	Call  SetCamSpeed   ( .Cam:Default 00000001 )
+   98:  	Call  SetCamSpeed   ( .Cam:Default  1` )
    AC:  EndIf
    B4:  Wait  1`
    C0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
-   D8:  Call  SetCamSpeed   ( .Cam:Default 00000001 )
+   D8:  Call  SetCamSpeed   ( .Cam:Default  1` )
    EC:  Label  0
    F8:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   110:  If  *Var0  >  FFFFFED4
-  120:  	Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  120:  	Call  GetNpcPos     ( .NpcID:Kolorado_00 *Var0 *Var1 *Var2 )
   13C:  	Call  SetCamTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   158:  Else
   160:  	Set   *Var3  *Var0
   170:  	Sub   *Var3  FFFFFED4
-  180:  	Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  180:  	Call  GetNpcPos     ( .NpcID:Kolorado_00 *Var0 *Var1 *Var2 )
   19C:  	Sub   *Var0  *Var3
   1AC:  	Call  SetCamTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   1C8:  EndIf
@@ -2382,14 +2391,14 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Thread
-   18:  	Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000136 )
-   34:  	Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000136 )
+   18:  	Call  UseSettingsFrom   ( .Cam:Default  0`  0`  310` )
+   34:  	Call  SetPanTarget  ( .Cam:Default  0`  0`  310` )
    50:  	Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-7.5] )
    68:  	Call  SetCamPosA    ( .Cam:Default *Fixed[5.0] *Fixed[0.0] )
    80:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    94:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    AC:  	Wait  60`
-   B8:  	Call  SetPanTarget  ( .Cam:Default 000000B4 00000000 00000000 )
+   B8:  	Call  SetPanTarget  ( .Cam:Default  180`  0`  0` )
    D4:  	Call  SetCamDistance    ( .Cam:Default *Fixed[500.0] )
    E8:  	Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-7.5] )
   100:  	Call  SetCamPosA    ( .Cam:Default *Fixed[0.0] *Fixed[0.0] )
@@ -2413,68 +2422,68 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
   210:  Wait  1`
   21C:  If  *GB_StoryProgress  <  .Story:Ch5_ReachedLavaLavaIsland % B
   22C:  	Call  $Function_80240B4C    ( 00000003 *Var0 *Var1 *Var2 )
-  248:  	Call  SetNpcFlagBits    ( 00000001 00000100 .True )
-  260:  	Call  SetNpcAnimation   ( 00000001 00B60004 )
-  274:  	Call  NpcMoveTo ( 00000001 *Var0 *Var2 0000000A )
-  290:  	Call  SetNpcAnimation   ( 00000001 00B6000E )
-  2A4:  	Call  SetNpcJumpscale   ( 00000001 *Fixed[1.0] )
-  2B8:  	Call  PlaySoundAtNpc    ( 00000001 0000032C 00000000 )
-  2D0:  	Call  NpcJump0  ( 00000001 000000E0 00000000 00000014 00000014 )
-  2F0:  	Call  SetNpcAnimation   ( 00000001 00B60004 )
-  304:  	Call  NpcMoveTo ( 00000001 00000122 00000014 00000014 )
-  320:  	Call  SetNpcAnimation   ( 00000001 00B60001 )
-  334:  	Call  SetNpcFlagBits    ( 00000001 00000100 .False )
-  34C:  	Call  InterpNpcYaw      ( 00000001 0000010E 00000000 )
+  248:  	Call  SetNpcFlagBits    ( .NpcID:Kolorado_01 00000100 .True )
+  260:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60004 )
+  274:  	Call  NpcMoveTo ( .NpcID:Kolorado_01 *Var0 *Var2  10` )
+  290:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B6000E )
+  2A4:  	Call  SetNpcJumpscale   ( .NpcID:Kolorado_01 *Fixed[1.0] )
+  2B8:  	Call  PlaySoundAtNpc    ( .NpcID:Kolorado_01 0000032C 00000000 )
+  2D0:  	Call  NpcJump0  ( .NpcID:Kolorado_01  224`  0`  20`  20` )
+  2F0:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60004 )
+  304:  	Call  NpcMoveTo ( .NpcID:Kolorado_01  290`  20`  20` )
+  320:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60001 )
+  334:  	Call  SetNpcFlagBits    ( .NpcID:Kolorado_01 00000100 .False )
+  34C:  	Call  InterpNpcYaw      ( .NpcID:Kolorado_01  270`  0` )
   364:  EndIf
   36C:  Call  $Function_80240B4C    ( 00000003 *Var0 *Var1 *Var2 )
-  388:  Call  PlayerMoveTo      ( *Var0 *Var2 0000000F )
+  388:  Call  PlayerMoveTo      ( *Var0 *Var2  15` )
   3A0:  Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  3B0:  Call  PlayerJump        ( ~Vec3d:JumpDest_80243358 00000014 )
+  3B0:  Call  PlayerJump        ( ~Vec3d:JumpDest_80243358  20` )
   3CC:  Call  SetPlayerAnimation    ( .PlayerAnim:Walking )
-  3DC:  Call  PlayerMoveTo      ( 00000104 00000014 0000000F )
+  3DC:  Call  PlayerMoveTo      (  260`  20`  15` )
   3F4:  Call  SetPlayerAnimation    ( 00010002 )
   404:  Call  $Function_80240B4C    ( 00000003 *Var0 *Var1 *Var2 )
   420:  Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
-  434:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2 00000014 )
+  434:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2  20` )
   450:  Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[1.0] )
-  464:  Call  NpcJump0  ( .Npc:Partner 000000E0 00000000 00000014 00000014 )
+  464:  Call  NpcJump0  ( .Npc:Partner  224`  0`  20`  20` )
   484:  Call  PartnerIsFlying   ( *Var0 )
   494:  If  *Var0  ==  .False
   4A4:  	Call  EnablePartnerAI ( )
   4B0:  	Wait  10`
   4BC:  	Call  DisablePartnerAI  ( 00000000 )
   4CC:  EndIf
-  4D4:  Call  NpcMoveTo ( .Npc:Partner 000000E6 00000014 0000000A )
+  4D4:  Call  NpcMoveTo ( .Npc:Partner  230`  20`  10` )
   4F0:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
-  504:  Call  SetNpcAnimation   ( 00000000 00B6000A )
-  518:  Call  SetNpcJumpscale   ( 00000000 00000000 )
-  52C:  Call  NpcJump0  ( 00000000 0000009E FFFFFFF6 FFFFFFDA 00000014 )
-  54C:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
-  560:  Call  SpeakToPlayer     ( 00000000 00B60004 00B60000 00000005 00100000 ) % If you want me to take you back to Toad Town, just ...
+  504:  Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B6000A )
+  518:  Call  SetNpcJumpscale   ( .NpcID:Kolorado_00 00000000 )
+  52C:  Call  NpcJump0  ( .NpcID:Kolorado_00  158`  -10`  -38`  20` )
+  54C:  Call  InterpPlayerYaw   (  270`  0` )
+  560:  Call  SpeakToPlayer     ( .NpcID:Kolorado_00 00B60004 00B60000 00000005 00100000 ) % If you want me to take you back to Toad Town, just ...
   580:  Call  SetMusicTrack     ( 00000000 .Song:YoshisVillage 00000000 00000008 )
   59C:  If  *GB_StoryProgress  <  .Story:Ch5_ReachedLavaLavaIsland % B
-  5AC:  	Call  AdjustCam     ( .Cam:Default *Fixed[5.0] 00000000 0000012C 0000000F *Fixed[-6.0] )
-  5D0:  	Call  InterpNpcYaw  ( 00000001 0000005A 00000000 )
+  5AC:  	Call  AdjustCam     ( .Cam:Default *Fixed[5.0]  0`  300`  15` *Fixed[-6.0] )
+  5D0:  	Call  InterpNpcYaw  ( .NpcID:Kolorado_01  90`  0` )
   5E8:  	Wait  20`
-  5F4:  	Call  SpeakToPlayer ( 00000001 00B60008 00B60001 00000001 00100001 ) % Yes, well. Finally made it, eh? So this is Lavalav ...
+  5F4:  	Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60008 00B60001 00000001 00100001 ) % Yes, well. Finally made it, eh? So this is Lavalav ...
   614:  	Wait  5`
-  620:  	Call  InterpNpcYaw  ( 00000001 0000010E 00000004 )
+  620:  	Call  InterpNpcYaw  ( .NpcID:Kolorado_01  270`  4` )
   638:  	Wait  10`
-  644:  	Call  InterpNpcYaw  ( 00000001 0000005A 00000004 )
+  644:  	Call  InterpNpcYaw  ( .NpcID:Kolorado_01  90`  4` )
   65C:  	Wait  15`
   668:  	Thread
-  670:  		Call  PlaySoundAtNpc    ( 00000001 0000032C 00000000 )
-  688:  		Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
-  6A4:  		Call  NpcJump0      ( 00000001 *Var0 *Var1 *Var2 0000000F )
+  670:  		Call  PlaySoundAtNpc    ( .NpcID:Kolorado_01 0000032C 00000000 )
+  688:  		Call  GetNpcPos     ( .NpcID:Kolorado_01 *Var0 *Var1 *Var2 )
+  6A4:  		Call  NpcJump0      ( .NpcID:Kolorado_01 *Var0 *Var1 *Var2  15` )
   6C4:  		Wait  25`
-  6D0:  		Call  NpcFacePlayer ( 00000001 00000004 )
+  6D0:  		Call  NpcFacePlayer ( .NpcID:Kolorado_01 00000004 )
   6E4:  	EndThread
-  6EC:  	Call  SpeakToPlayer ( 00000001 00B60007 00B60002 00000005 00100002 ) % Gracious! Behold, Mario! There! Off in the distanc ...
-  70C:  	Call  SetNpcAnimation   ( 00000000 00B60001 )
-  720:  	Call  SetNpcSpeed   ( 00000001 *Fixed[6.0] )
-  734:  	Call  SetNpcAnimation   ( 00000001 00B60004 )
-  748:  	Call  NpcMoveTo     ( 00000001 0000014A 000000BE 00000000 )
-  764:  	Call  SetNpcPos     ( 00000001 00000000 FFFFFC18 00000000 )
+  6EC:  	Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60007 00B60002 00000005 00100002 ) % Gracious! Behold, Mario! There! Off in the distanc ...
+  70C:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B60001 )
+  720:  	Call  SetNpcSpeed   ( .NpcID:Kolorado_01 *Fixed[6.0] )
+  734:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60004 )
+  748:  	Call  NpcMoveTo     ( .NpcID:Kolorado_01  330`  190`  0` )
+  764:  	Call  SetNpcPos     ( .NpcID:Kolorado_01  0`  -1000`  0` )
   780:  	Set   *GB_StoryProgress  .Story:Ch5_ReachedLavaLavaIsland
   790:  	SetF  *Var9  *Fixed[4.0]
   7A0:  Else
@@ -2492,9 +2501,9 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
 #new:Script $Script_802437C4
 {
     0:  Label  0
-    C:  Call  GetNpcYaw ( 00000000 *Var0 )
-   20:  Call  InterpPlayerYaw   ( *Var0 00000000 )
-   34:  Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000000 )
+    C:  Call  GetNpcYaw ( .NpcID:Kolorado_00 *Var0 )
+   20:  Call  InterpPlayerYaw   ( *Var0  0` )
+   34:  Call  InterpNpcYaw      ( .Npc:Partner *Var0  0` )
    4C:  Wait  1`
    58:  Goto  0
    64:  Return
@@ -2503,8 +2512,8 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
 
 #new:Script $Script_Idle_80243838
 {
-    0:  Call  UseSettingsFrom   ( .Cam:Default 000000FA 00000000 000000C8 )
-   1C:  Call  SetPanTarget  ( .Cam:Default 000000FA 00000000 000000C8 )
+    0:  Call  UseSettingsFrom   ( .Cam:Default  250`  0`  200` )
+   1C:  Call  SetPanTarget  ( .Cam:Default  250`  0`  200` )
    38:  Call  SetCamPosA    ( .Cam:Default *Fixed[20.0] *Fixed[0.0] )
    50:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    64:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2525,21 +2534,21 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
 #new:Script $Script_Interact_80243908
 {
     0:  Call  DisablePlayerPhysics  ( .True )
-   10:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
-   24:  Call  SpeakToPlayer     ( 00000000 00B60004 00B60000 00000005 00100003 ) % Do you want to go back to Toad Town?
+   10:  Call  InterpPlayerYaw   (  270`  0` )
+   24:  Call  SpeakToPlayer     ( .NpcID:Kolorado_00 00B60004 00B60000 00000005 00100003 ) % Do you want to go back to Toad Town?
    44:  Call  ShowChoice        ( 001E0010 ) % Yes No
    54:  If  *Var0  ==  00000001
-   64:  	Call  ContinueSpeech        ( 00000000 00B60004 00B60000 00000005 00100005 ) % If you want me to take you back to Toad Town, just ...
+   64:  	Call  ContinueSpeech        ( .NpcID:Kolorado_00 00B60004 00B60000 00000005 00100005 ) % If you want me to take you back to Toad Town, just ...
    84:  	Call  DisablePlayerPhysics  ( .False )
    94:  	Return
    9C:  EndIf
    A4:  Call  EndSpeech ( .Npc:Self FFFFFFFF FFFFFFFF 00000005 )
    C0:  If  *GB_StoryProgress  ==  .Story:Ch5_TradedVaseForSeed % 28
-   D0:  	Call  NpcFacePlayer ( 00000001 00000000 )
+   D0:  	Call  NpcFacePlayer ( .NpcID:Kolorado_01 00000000 )
    E4:  EndIf
    EC:  Call  SetNpcJumpscale   ( .Npc:Self 00000000 )
   100:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-  11C:  Call  NpcJump0  ( .Npc:Self 0000009E FFFFFFCE FFFFFFDA 00000014 )
+  11C:  Call  NpcJump0  ( .Npc:Self  158`  -50`  -38`  20` )
   13C:  Set   *Var0  00000000
   14C:  Exec  $Script_80242DB0
   158:  Call  DisablePartnerAI  ( 00000000 )
@@ -2549,56 +2558,56 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
   1AC:  Call  GetPlayerPos      ( *Var3 *Var4 *Var5 )
   1C4:  Call  $Function_80240B4C    ( 00000003 *Var0 *Var1 *Var2 )
   1E0:  Call  SetPlayerJumpscale    ( *Fixed[0.5] )
-  1F0:  Call  PlayerJump        ( *Var0 *Var1 *Var2 00000014 )
+  1F0:  Call  PlayerJump        ( *Var0 *Var1 *Var2  20` )
   20C:  Call  $Function_80240B4C    ( 00000000 *Var0 *Var1 *Var2 )
-  228:  Call  PlayerMoveTo      ( *Var0 *Var2 0000000A )
-  240:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  228:  Call  PlayerMoveTo      ( *Var0 *Var2  10` )
+  240:  Call  InterpPlayerYaw   (  90`  0` )
   254:  Call  SetPlayerAnimation    ( 00010002 )
   264:  Thread
   26C:  	Call  $Function_80240CF8    ( 00000000 )
   27C:  EndThread
-  284:  Call  NpcMoveTo ( .Npc:Partner *Var3 *Var5 00000014 )
+  284:  Call  NpcMoveTo ( .Npc:Partner *Var3 *Var5  20` )
   2A0:  Call  $Function_80240B4C    ( 00000003 *Var0 *Var1 *Var2 )
   2BC:  Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
   2D0:  Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.5] )
-  2E4:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 00000012 )
+  2E4:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  18` )
   304:  Call  $Function_80240B4C    ( 00000001 *Var0 *Var1 *Var2 )
-  320:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2 00000012 )
+  320:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2  18` )
   33C:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
-  350:  Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+  350:  Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
   368:  Thread
   370:  	Call  $Function_80240CF8    ( 00000001 )
   380:  EndThread
   388:  If  *GB_StoryProgress  ==  .Story:Ch5_TradedVaseForSeed % 28
-  398:  	Call  SetNpcAnimation   ( 00000001 00B60004 )
+  398:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60004 )
   3AC:  	Call  LoadPath  ( 00000014 $VectorList_802438E4 00000003 .Easing:Linear )
   3C8:  	Loop
   3D4:  		Call  GetNextPathPos ( )
-  3E0:  		Call  SetNpcPos ( 00000001 *Var1 *Var2 *Var3 )
+  3E0:  		Call  SetNpcPos ( .NpcID:Kolorado_01 *Var1 *Var2 *Var3 )
   3FC:  		Wait  1`
   408:  		If  *Var0  ==  00000000
   418:  			BreakLoop
   420:  		EndIf
   428:  	EndLoop
   430:  	Call  $Function_80240B4C    ( 00000002 *Var0 *Var1 *Var2 )
-  44C:  	Call  SetNpcAnimation   ( 00000001 00B6000E )
-  460:  	Call  SetNpcJumpscale   ( 00000001 *Fixed[0.5] )
-  474:  	Call  PlaySoundAtNpc    ( 00000001 0000032C 00000000 )
-  48C:  	Call  NpcJump0  ( 00000001 *Var0 *Var1 *Var2 00000014 )
-  4AC:  	Call  SetNpcAnimation   ( 00000001 00B60001 )
-  4C0:  	Call  InterpNpcYaw      ( 00000001 0000005A 00000000 )
+  44C:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B6000E )
+  460:  	Call  SetNpcJumpscale   ( .NpcID:Kolorado_01 *Fixed[0.5] )
+  474:  	Call  PlaySoundAtNpc    ( .NpcID:Kolorado_01 0000032C 00000000 )
+  48C:  	Call  NpcJump0  ( .NpcID:Kolorado_01 *Var0 *Var1 *Var2  20` )
+  4AC:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60001 )
+  4C0:  	Call  InterpNpcYaw      ( .NpcID:Kolorado_01  90`  0` )
   4D8:  	Thread
   4E0:  		Call  $Function_80240CF8    ( 00000002 )
   4F0:  	EndThread
-  4F8:  	Call  SpeakToPlayer ( 00000001 00B60008 00B60001 00000000 00100007 ) % What a heady adventure! Adieu, Lavalava Island! Pe ...
+  4F8:  	Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60008 00B60001 00000000 00100007 ) % What a heady adventure! Adieu, Lavalava Island! Pe ...
   518:  EndIf
   520:  If  *GB_StoryProgress  >=  .Story:Ch5_SushieJoinedParty % F
   530:  	If  *GF_MAC01_Defeated_JrTroopa4  ==  .True
   540:  		Goto  5A
   54C:  	EndIf
-  554:  	Call  SetNpcVar ( 00000002 00000000 00000001 )
+  554:  	Call  SetNpcVar ( .NpcID:JrTroopa_02 00000000 00000001 )
   56C:  	Loop
-  578:  		Call  GetNpcVar ( 00000002 00000000 *Var0 )
+  578:  		Call  GetNpcVar ( .NpcID:JrTroopa_02 00000000 *Var0 )
   590:  		Wait  1`
   59C:  		If  *Var0  !=  00000001
   5AC:  			BreakLoop
@@ -2624,20 +2633,20 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
     0:  Call  SetNpcFlagBits    ( .Npc:Self 01000000 .True )
    18:  Call  SetNpcFlagBits    ( .Npc:Self 00000010 .False )
    30:  Call  SetNpcAnimation   ( .Npc:Self 00B60000 )
-   44:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000000 )
+   44:  Call  InterpNpcYaw      ( .Npc:Self  90`  0` )
    5C:  Call  GetEntryID        ( *Var0 )
    6C:  If  *Var0  ==  ~Entry:Entry0
    7C:  	Call  DisablePlayerPhysics  ( .True )
-   8C:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
+   8C:  	Call  InterpPlayerYaw   (  90`  0` )
    A0:  	Call  DisablePartnerAI  ( 00000000 )
    B0:  	Call  SetNpcFlagBits    ( .Npc:Partner 00008048 .True )
    C8:  	Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   E0:  	Call  SetNpcYaw ( .Npc:Partner 0000005A )
+   E0:  	Call  SetNpcYaw ( .Npc:Partner  90` )
    F4:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   108:  	Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80243838 )
   11C:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80243908 )
   130:  Else
-  138:  	Call  SetNpcPos ( .Npc:Self 0000009E FFFFFFF6 FFFFFFDA )
+  138:  	Call  SetNpcPos ( .Npc:Self  158`  -10`  -38` )
   154:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80243908 )
   168:  EndIf
   170:  Return
@@ -2657,8 +2666,8 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
 #new:Script $Script_Init_80244158
 {
     0:  If  *GB_StoryProgress  ==  .Story:Ch5_TradedVaseForSeed % 28
-   10:  	Call  SetNpcPos ( .Npc:Self 00000122 00000000 00000014 )
-   2C:  	Call  InterpNpcYaw      ( .Npc:Self 0000010E 00000001 )
+   10:  	Call  SetNpcPos ( .Npc:Self  290`  0`  20` )
+   2C:  	Call  InterpNpcYaw      ( .Npc:Self  270`  1` )
    44:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802440F8 )
    58:  EndIf
    60:  Return
@@ -2668,9 +2677,9 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
 #new:Script $Script_802441C8
 {
     0:  Loop
-    C:  	Call  PlayerFaceNpc ( 00000002 00000000 )
-   20:  	Call  NpcFaceNpc    ( 00000001 00000002 00000000 )
-   38:  	Call  NpcFaceNpc    ( .Npc:Partner 00000002 00000000 )
+    C:  	Call  PlayerFaceNpc ( .NpcID:JrTroopa_02 .False )
+   20:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .NpcID:JrTroopa_02 00000000 )
+   38:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:JrTroopa_02 00000000 )
    50:  	Wait  1`
    5C:  EndLoop
    64:  Return
@@ -2692,17 +2701,17 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
    B4:  Thread
    BC:  	Call  $Function_80241134 ( )
    C8:  EndThread
-   D0:  Call  UseSettingsFrom   ( .Cam:Default 00000055 00000000 00000140 )
-   EC:  Call  SetPanTarget  ( .Cam:Default 00000055 00000000 00000140 )
-  108:  Call  SetCamDistance    ( .Cam:Default 0000012C )
+   D0:  Call  UseSettingsFrom   ( .Cam:Default  85`  0`  320` )
+   EC:  Call  SetPanTarget  ( .Cam:Default  85`  0`  320` )
+  108:  Call  SetCamDistance    ( .Cam:Default  300` )
   11C:  Call  SetCamPitch   ( .Cam:Default *Fixed[22.5] *Fixed[-12.5] )
   134:  Call  SetCamPosA    ( .Cam:Default *Fixed[23.0] *Fixed[0.0] )
   14C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   160:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   178:  Call  SetNpcAnimation   ( .Npc:Self 0021000C )
   18C:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[4.0] )
-  1A0:  Call  NpcMoveTo     ( .Npc:Self 00000050 0000005A 00000000 )
-  1BC:  Call  SetPanTarget  ( .Cam:Default 000000FA 00000000 0000005A )
+  1A0:  Call  NpcMoveTo     ( .Npc:Self  80`  90`  0` )
+  1BC:  Call  SetPanTarget  ( .Cam:Default  250`  0`  90` )
   1D8:  Call  SetCamDistance    ( .Cam:Default *Fixed[250.0] )
   1EC:  Call  SetCamPitch   ( .Cam:Default *Fixed[14.5] *Fixed[-10.0] )
   204:  Call  SetCamSpeed   ( .Cam:Default *Fixed[2.7] )
@@ -2711,7 +2720,7 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
   244:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
   258:  Call  StopSound     ( 80000055 )
   268:  Call  PlaySoundAtNpc    ( .Npc:Self .Sound:JrTroopaSplash 00000000 )
-  280:  Call  NpcJump0      ( .Npc:Self 000000FA 00000000 0000005A 00000014 )
+  280:  Call  NpcJump0      ( .Npc:Self  250`  0`  90`  20` )
   2A0:  Kill  *Var9
   2AC:  Thread
   2B4:  	Wait  15`
@@ -2724,9 +2733,9 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
   33C:  Wait  20`
   348:  Call  SetNpcAnimation   ( .Npc:Self 00210013 )
   35C:  Call  PlaySoundAtNpc    ( .Npc:Self 00000262 00000000 )
-  374:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+  374:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation  0`  20` .True  0`  0`  0`  0` )
   3A4:  Wait  20`
-  3B0:  Call  NpcJump0  ( .Npc:Self 000000FA 00000000 0000005A 0000000A )
+  3B0:  Call  NpcJump0  ( .Npc:Self  250`  0`  90`  10` )
   3D0:  Call  SpeakToPlayer     ( .Npc:Self 00210013 00210013 00000000 0010000B ) % What!? Wait! Where are you going! Wait! Mario, wai ...
   3F0:  Call  SetNpcAnimation   ( .Npc:Self 0021000A )
   404:  Wait  10`
@@ -2734,21 +2743,21 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
   418:  	Call  SpeakToPlayer     ( .Npc:Self 0021000B 0021000A 00000000 0010000C ) % Shooooooooooooooooooooot!!
   438:  	Call  SetNpcAnimation   ( .Npc:Self 0021000C )
   44C:  EndThread
-  454:  Call  UseSettingsFrom   ( .Cam:Default 00000055 00000000 00000140 )
-  470:  Call  SetPanTarget      ( .Cam:Default 00000055 00000000 00000140 )
-  48C:  Call  SetCamDistance    ( .Cam:Default 0000012C )
+  454:  Call  UseSettingsFrom   ( .Cam:Default  85`  0`  320` )
+  470:  Call  SetPanTarget      ( .Cam:Default  85`  0`  320` )
+  48C:  Call  SetCamDistance    ( .Cam:Default  300` )
   4A0:  Call  SetCamPitch       ( .Cam:Default *Fixed[20.0] *Fixed[-10.0] )
   4B8:  Call  SetCamPosA        ( .Cam:Default *Fixed[24.0] *Fixed[0.0] )
   4D0:  Call  SetCamSpeed       ( .Cam:Default *Fixed[2.0] )
   4E4:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   4FC:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.5] )
-  510:  Call  NpcJump0  ( .Npc:Self 00000050 FFFFFFCE 0000005A 00000014 )
+  510:  Call  NpcJump0  ( .Npc:Self  80`  -50`  90`  20` )
   530:  Call  PlaySoundAtNpc    ( .Npc:Self .Sound:JrTroopaSplash 00000000 )
   548:  Call  SetNpcRotation    ( .Npc:Self 00000000 FFFFFFEC 00000000 )
   564:  Call  PlaySoundAtNpc    ( .Npc:Self 80000055 00000000 )
   57C:  Thread
   584:  	Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
-  598:  	Call  NpcMoveTo     ( .Npc:Self FFFFFDD5 FFFFFFE0 00000000 )
+  598:  	Call  NpcMoveTo     ( .Npc:Self  -555`  -32`  0` )
   5B4:  EndThread
   5BC:  Wait  100`
   5C8:  Call  GotoMap   ( $ASCII_80247AB0 00000001 ) % mac_06
@@ -2760,7 +2769,7 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
 #new:Script $Script_Init_80244834
 {
     0:  If  *GF_MAC01_Defeated_JrTroopa4  ==  .False
-   10:  	Call  SetNpcPos     ( .Npc:Self FFFFFDEE FFFFFFCE 00000014 )
+   10:  	Call  SetNpcPos     ( .Npc:Self  -530`  -50`  20` )
    2C:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_8024423C )
    40:  EndIf
    48:  Return
@@ -2769,77 +2778,77 @@ PADDING: 8024218C to 80242190 (0000218C to 00002190)
 
 #new:NpcGroup $NpcGroup_8024488C
 {
-	00000000 $NpcSettings_80242190 ~Vec3f:NPC_8024488C % 0 -1000 0
+	.NpcID:Kolorado_00 $NpcSettings_80242190 ~Vec3f:NPC_Kolorado_00 % 0 -1000 0
 	00400F09 $Script_Init_80243F78 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024488C
-	~AnimationTable:NPC_8024488C % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_00
+	~AnimationTable:NPC_Kolorado_00 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0055 % Some folk are calling it a tuna, but it's obviousl ...
 	%
 	% $NpcGroup_8024488C[1F0]
-	00000001 $NpcSettings_802421BC ~Vec3f:NPC_80244A7C % 0 -1000 0
+	.NpcID:Kolorado_01 $NpcSettings_802421BC ~Vec3f:NPC_Kolorado_01 % 0 -1000 0
 	0040090D $Script_Init_80244158 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244A7C
-	~AnimationTable:NPC_80244A7C % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_01
+	~AnimationTable:NPC_Kolorado_01 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 	%
 	% $NpcGroup_8024488C[3E0]
-	00000002 $NpcSettings_802421E8 ~Vec3f:NPC_80244C6C % 0 -1000 0
+	.NpcID:JrTroopa_02 $NpcSettings_802421E8 ~Vec3f:NPC_JrTroopa_02 % 0 -1000 0
 	0040090D $Script_Init_80244834 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244C6C
-	~AnimationTable:NPC_80244C6C % .Sprite:JrTroopa
+	~Movement:NPC_JrTroopa_02
+	~AnimationTable:NPC_JrTroopa_02 % .Sprite:JrTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244E5C
 {
-	00000003 $NpcSettings_8024239C ~Vec3f:NPC_80244E5C % 455 0 115
+	.NpcID:HeartPlant_03 $NpcSettings_8024239C ~Vec3f:NPC_HeartPlant_03 % 455 0 115
 	00408905 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80244E5C
-	~AnimationTable:NPC_80244E5C % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_03
+	~AnimationTable:NPC_HeartPlant_03 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_8024504C
 {
-	00000004 $NpcSettings_8024239C ~Vec3f:NPC_8024504C % 167 0 404
+	.NpcID:HeartPlant_04 $NpcSettings_8024239C ~Vec3f:NPC_HeartPlant_04 % 167 0 404
 	00408905 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024504C
-	~AnimationTable:NPC_8024504C % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_04
+	~AnimationTable:NPC_HeartPlant_04 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_8024523C
 {
-	00000005 $NpcSettings_8024239C ~Vec3f:NPC_8024523C % 90 0 316
+	.NpcID:HeartPlant_05 $NpcSettings_8024239C ~Vec3f:NPC_HeartPlant_05 % 90 0 316
 	00408905 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024523C
-	~AnimationTable:NPC_8024523C % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_05
+	~AnimationTable:NPC_HeartPlant_05 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_8024542C
 {
-	00000006 $NpcSettings_8024239C ~Vec3f:NPC_8024542C % 424 0 182
+	.NpcID:HeartPlant_06 $NpcSettings_8024239C ~Vec3f:NPC_HeartPlant_06 % 424 0 182
 	00408905 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024542C
-	~AnimationTable:NPC_8024542C % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_06
+	~AnimationTable:NPC_HeartPlant_06 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_8024561C
 {
-	00000007 $NpcSettings_8024239C ~Vec3f:NPC_8024561C % 143 0 260
+	.NpcID:HeartPlant_07 $NpcSettings_8024239C ~Vec3f:NPC_HeartPlant_07 % 143 0 260
 	00408905 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024561C
-	~AnimationTable:NPC_8024561C % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_07
+	~AnimationTable:NPC_HeartPlant_07 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
@@ -3110,12 +3119,12 @@ PADDING: 80245944 to 80245950 (00005944 to 00005950)
 #new:Script $Script_802467AC
 {
     0:  SetGroup  00000000
-    C:  Call  802C9C70  ( 00000001 00000056 00000001 )
-   24:  Call  802C94A0  ( 00000001 $Function_802415B0 00000000 )
-   3C:  Call  802C90FC  ( 00000056 00000001 FFFFFFFF )
-   54:  Call  802C9C70  ( 00000002 00000055 00000001 )
-   6C:  Call  802C94A0  ( 00000002 $Function_80241654 00000000 )
-   84:  Call  802C90FC  ( 00000055 00000002 FFFFFFFF )
+    C:  Call  MakeLocalVertexCopy   ( 00000001 ~Model:karada .True )
+   24:  Call  SetCustomGfxBuilders  ( 00000001 $Function_802415B0 00000000 )
+   3C:  Call  SetModelCustomGfx     ( ~Model:karada 00000001 FFFFFFFF )
+   54:  Call  MakeLocalVertexCopy   ( 00000002 ~Model:onaka .True )
+   6C:  Call  SetCustomGfxBuilders  ( 00000002 $Function_80241654 00000000 )
+   84:  Call  SetModelCustomGfx     ( ~Model:onaka 00000002 FFFFFFFF )
    9C:  Thread
    A4:  	Label  0
    B0:  	Call  $Function_802411EC    ( 00000000 *Var0 *Var1 *Var2 )
@@ -3132,7 +3141,7 @@ PADDING: 80245944 to 80245950 (00005944 to 00005950)
   19C:  	Call  TranslateModel    ( ~Model:o167 *Var0 *Var1 *Var2 )
   1B8:  	Call  TranslateModel    ( ~Model:o168 *Var0 *Var1 *Var2 )
   1D4:  	Call  TranslateGroup    ( ~Model:dou *Var0 *Var1 *Var2 )
-  1F0:  	Call  GetNpcYaw ( 00000000 *Var0 )
+  1F0:  	Call  GetNpcYaw ( .NpcID:Kolorado_00 *Var0 )
   204:  	MulF  *Var0  FFFFFFFF
   214:  	AddF  *Var0  FFFFFFA6
   224:  	Call  TranslateModel    ( ~Model:bero FFFFFF9C 00000000 00000000 )
@@ -3168,7 +3177,7 @@ PADDING: 80245944 to 80245950 (00005944 to 00005950)
   588:  	Call  TranslateModel    ( ~Model:o167 00000064 00000000 00000000 )
   5A4:  	Call  TranslateModel    ( ~Model:o168 00000064 00000000 00000000 )
   5C0:  	Call  TranslateGroup    ( ~Model:dou 00000064 00000000 00000000 )
-  5DC:  	Call  GetNpcAnimation   ( 00000000 *Var0 )
+  5DC:  	Call  GetNpcAnimation   ( .NpcID:Kolorado_00 *Var0 )
   5F0:  	If  *Var0  !=  *VarB
   600:  		Set   *VarB  *Var0
   610:  		Set   *VarC  00000000
@@ -3221,7 +3230,7 @@ PADDING: 80245944 to 80245950 (00005944 to 00005950)
 % Origin: HEURISTIC
 #new:Script $Script_80247040
 {
-    0:  Call  SetNpcAnimation   ( 00000000 00B60003 )
+    0:  Call  SetNpcAnimation   ( .NpcID:Kolorado_00 00B60003 )
    14:  Return
    1C:  End
 }

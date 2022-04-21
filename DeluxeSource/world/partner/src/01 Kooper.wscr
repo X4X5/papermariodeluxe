@@ -472,7 +472,7 @@
   1D8:  BEQ       R0, R0, .o394
   1DC:  ORI       A0, A0, 2
         .o1E0
-  1E0:  JAL       ~Func:suggest_player_anim
+  1E0:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   1E4:  ORI       A0, A0, 6
   1E8:  LWC1      F4, 28 (S4)
   1EC:  LUI       V0, 2
@@ -579,7 +579,7 @@
         .o390
   390:  ORI       A0, A0, 5
         .o394
-  394:  JAL       ~Func:suggest_player_anim
+  394:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   398:  NOP
   39C:  BEQ       R0, R0, .oD68
   3A0:  SW        R0, 70 (S5)
@@ -621,7 +621,7 @@
   43C:  ORI       V0, V0, 2
   440:  ORI       V1, V1, 1
   444:  SW        V0, 0 (S4)
-  448:  JAL       ~Func:suggest_player_anim
+  448:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   44C:  SH        V1, 2 (A1)
   450:  LI        A0, 2081
   454:  CLEAR     A1
@@ -657,7 +657,7 @@
   4D0:  LI        V0, 1
   4D4:  SW        V0, 0 (V1)
   4D8:  LI        A0, 00010008
-  4DC:  JAL       ~Func:suggest_player_anim
+  4DC:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   4E0:  RESERVED
   4E4:  LUI       A0, 1
         .o4E8
@@ -766,7 +766,7 @@
   690:  LW        A1, 38 (S0)
   694:  LW        A3, 40 (S0)
   698:  MFC1      A2, F4
-  69C:  JAL       80070190
+  69C:  JAL       ~Func:playFX_18
   6A0:  COPY      A0, S2
   6A4:  JAL       ~Func:start_bounce_b
   6A8:  NOP
@@ -868,7 +868,7 @@
   82C:  LW        A1, 38 (S0)
   830:  LW        A3, 40 (S0)
   834:  MFC1      A2, F4
-  838:  JAL       80070190
+  838:  JAL       ~Func:playFX_18
   83C:  LI        A0, 3
   840:  CLEAR     A0
   844:  COPY      A1, A0
@@ -1023,7 +1023,7 @@
   AA0:  LW        A1, 38 (S0)
   AA4:  LW        A3, 40 (S0)
   AA8:  MFC1      A2, F4
-  AAC:  JAL       80070190
+  AAC:  JAL       ~Func:playFX_18
   AB0:  LI        A0, 3
   AB4:  CLEAR     A0
   AB8:  COPY      A1, A0
@@ -1324,7 +1324,7 @@
   F88:  LW        A1, 38 (S0)
   F8C:  LW        A3, 40 (S0)
   F90:  MFC1      A2, F4
-  F94:  JAL       80070190
+  F94:  JAL       ~Func:playFX_18
   F98:  LI        A0, 3
   F9C:  BEQ       R0, R0, .o10C8
   FA0:  SW        R0, 70 (S5)

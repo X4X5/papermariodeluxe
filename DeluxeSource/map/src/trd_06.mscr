@@ -1,6 +1,19 @@
 % Script File: trd_06.mscr
 % Decoded from: 0 to 51F0 (trd_06)
 
+#define .NpcID:WorldBombette_01     01
+#define .NpcID:WorldBombomb_02      02
+#define .NpcID:WorldBombomb_03      03
+#define .NpcID:WorldBombomb_04      04
+#define .NpcID:WorldBombomb_05      05
+#define .NpcID:KoopaTroopa_10       0A
+#define .NpcID:Bombomb_11           0B
+#define .NpcID:Bombomb_12           0C
+#define .NpcID:KoopaBros_15         0F
+#define .NpcID:KoopaBros_16         10
+#define .NpcID:KoopaBros_17         11
+#define .NpcID:KoopaBros_18         12
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -236,7 +249,6 @@
 PADDING: 8024030C to 80240310 (0000030C to 00000310)
 00000000
 
-% Origin: HEURISTIC
 #new:Function $Function_80240310
 {
     0:  ADDIU     SP, SP, FF10
@@ -533,7 +545,7 @@ PADDING: 8024030C to 80240310 (0000030C to 00000310)
    C8:  SWC1      F0, 18 (S0)
    CC:  CLEAR     A0
    D0:  LA        A1, $Function_80240310
-   D8:  JAL       ~Func:create_dynamic_entity_world
+   D8:  JAL       ~Func:create_generic_entity_world
    DC:  SW        V0, 4 (S0)
    E0:  SW        V0, 8 (S0)
    E4:  LW        RA, 14 (SP)
@@ -551,7 +563,7 @@ PADDING: 8024030C to 80240310 (0000030C to 00000310)
    10:  SW        RA, 14 (SP)
    14:  JAL       8013A854
    18:  LW        A0, 4 (S0)
-   1C:  JAL       ~Func:free_dynamic_entity
+   1C:  JAL       ~Func:free_generic_entity
    20:  LW        A0, 8 (S0)
    24:  LW        RA, 14 (SP)
    28:  LW        S0, 10 (SP)
@@ -793,7 +805,7 @@ PADDING: 80240AEC to 80240AF0 (00000AEC to 00000AF0)
    AC:  BEQ       R0, R0, .o164
    B0:  NOP
         .oB4
-   B4:  JAL       800EB168
+   B4:  JAL       ~Func:switch_to_partner
    B8:  CLEAR     A0
    BC:  LI        V0, 1E
    C0:  SW        V0, 74 (S2)
@@ -991,8 +1003,8 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
    78:  		Call  DisablePlayerInput    ( .True )
    88:  		Call  DisablePlayerPhysics  ( .True )
    98:  		Call  DisablePartnerAI  ( 00000000 )
-   A8:  		Call  SetPlayerPos      ( 00000000 FFFFFC18 00000000 )
-   C0:  		Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   A8:  		Call  SetPlayerPos      (  0`  -1000`  0` )
+   C0:  		Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    DC:  		Call  SetNpcFlagBits    ( .Npc:Partner 00000004 .True )
    F4:  		Call  EnableNpcShadow   ( .Npc:Partner .False )
   108:  		Exec  $Script_802448D8
@@ -1028,30 +1040,30 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
   148:  	If  *Var0  <  0000006E
   158:  		If  *Var2  <  0000008C
   168:  			Wait  25`
-  174:  			Call  SetNpcFlagBits    ( 00000002 00000100 .True )
-  18C:  			Call  SetNpcFlagBits    ( 00000003 00000100 .True )
-  1A4:  			Call  SetNpcFlagBits    ( 00000004 00000100 .True )
-  1BC:  			Call  SetNpcFlagBits    ( 00000005 00000100 .True )
+  174:  			Call  SetNpcFlagBits    ( .NpcID:WorldBombomb_02 00000100 .True )
+  18C:  			Call  SetNpcFlagBits    ( .NpcID:WorldBombomb_03 00000100 .True )
+  1A4:  			Call  SetNpcFlagBits    ( .NpcID:WorldBombomb_04 00000100 .True )
+  1BC:  			Call  SetNpcFlagBits    ( .NpcID:WorldBombomb_05 00000100 .True )
   1D4:  			Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  1E4:  			Call  PlayerMoveTo      ( 0000006E 0000008C 00000000 )
-  1FC:  			Call  PlayerFaceNpc     ( .Npc:Partner 00000000 )
-  210:  			Call  SetNpcFlagBits    ( 00000002 00000100 .False )
-  228:  			Call  SetNpcFlagBits    ( 00000003 00000100 .False )
-  240:  			Call  SetNpcFlagBits    ( 00000004 00000100 .False )
-  258:  			Call  SetNpcFlagBits    ( 00000005 00000100 .False )
+  1E4:  			Call  PlayerMoveTo      (  110`  140`  0` )
+  1FC:  			Call  PlayerFaceNpc     ( .Npc:Partner .False )
+  210:  			Call  SetNpcFlagBits    ( .NpcID:WorldBombomb_02 00000100 .False )
+  228:  			Call  SetNpcFlagBits    ( .NpcID:WorldBombomb_03 00000100 .False )
+  240:  			Call  SetNpcFlagBits    ( .NpcID:WorldBombomb_04 00000100 .False )
+  258:  			Call  SetNpcFlagBits    ( .NpcID:WorldBombomb_05 00000100 .False )
   270:  		EndIf
   278:  	EndIf
   280:  EndThread
   288:  Call  DisablePartnerAI  ( 00000000 )
   298:  Call  SetNpcAnimation   ( .Npc:Partner 00030005 )
   2AC:  Call  SetNpcSpeed       ( .Npc:Partner *Fixed[3.5] )
-  2C0:  Call  NpcMoveTo ( .Npc:Partner 0000009C 0000009C 00000000 )
+  2C0:  Call  NpcMoveTo ( .Npc:Partner  156`  156`  0` )
   2DC:  Call  SetNpcAnimation   ( .Npc:Partner 00030003 )
   2F0:  Wait  30`
   2FC:  Call  SpeakToPlayer     ( .Npc:Partner 0003000E 00030003 00000000 000C00E2 ) % See that? You see what I bring to the party, Mario ...
-  31C:  Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+  31C:  Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
   334:  Wait  20`
-  340:  Call  InterpNpcYaw      ( .Npc:Partner 0000010E 00000000 )
+  340:  Call  InterpNpcYaw      ( .Npc:Partner  270`  0` )
   358:  Wait  10`
   364:  Call  SpeakToPlayer     ( .Npc:Partner 0003000E 00030003 00000000 000C00E3 ) % Well, anyway, we can get out now, right? And so ca ...
   384:  Call  SetPlayerFlagBits ( 000000C0 .False )
@@ -1067,7 +1079,7 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
   410:  	If  *Var0  >  FFFFFF88
   420:  		Goto  0
   42C:  	EndIf
-  434:  	Call  SetNpcVar ( 0000000A 00000000 00000001 )
+  434:  	Call  SetNpcVar ( .NpcID:KoopaTroopa_10 00000000 00000001 )
   44C:  EndThread
   454:  Unbind
   45C:  Return
@@ -1095,8 +1107,8 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
 {
     0:  Set   *GB_WorldLocation  .Location:KoopaBrosFortress
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Switch  *GB_StoryProgress
@@ -1168,7 +1180,7 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
 
 #new:Script $Script_80241A30
 {
-    0:  Call  SetPlayerPos  ( 00000000 00000082 00000000 )
+    0:  Call  SetPlayerPos  (  0`  130`  0` )
    18:  Thread
    20:  	Wait  5`
    2C:  	Call  PlaySound ( 00000175 )
@@ -1206,7 +1218,7 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
 #new:Script $Script_80241C1C
 {
     0:  Call  $Function_80240A70 ( )
-    C:  Call  SetNpcPos ( .Npc:Partner 00000000 *Var0 00000000 )
+    C:  Call  SetNpcPos ( .Npc:Partner  0` *Var0  0` )
    28:  Thread
    30:  	Wait  5`
    3C:  	Call  PlaySound ( 00000176 )
@@ -1266,7 +1278,7 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
   10C:  Wait  1`
   118:  Call  SetPlayerJumpscale    ( *Fixed[1.0] )
   128:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  140:  Call  PlayerJump    ( *Var0 FFFFFC18 *Var2 0000000A )
+  140:  Call  PlayerJump    ( *Var0  -1000` *Var2  10` )
   15C:  Thread
   164:  	Call  MakeLerp  ( 00000096 00000000 0000000A .Easing:CosInOut )
   180:  	Label  1
@@ -1280,39 +1292,39 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
   1EC:  Wait  1`
   1F8:  Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[1.0] )
   20C:  Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  228:  Call  NpcJump0  ( .Npc:Partner *Var0 00000000 *Var2 0000000A )
+  228:  Call  NpcJump0  ( .Npc:Partner *Var0  0` *Var2  10` )
   248:  Return
   250:  End
 }
 
 #new:Script $Script_8024207C
 {
-    0:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
-   1C:  Call  SetPanTarget      ( .Cam:Default 00000000 00000000 00000000 )
+    0:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
+   1C:  Call  SetPanTarget      ( .Cam:Default  0`  0`  0` )
    38:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
-   4C:  Call  SetCamPosA        ( .Cam:Default 0000012C FFFFFE0C )
-   64:  Call  SetCamPosB        ( .Cam:Default FFFFFF9C 00000000 )
-   7C:  Call  SetCamDistance    ( .Cam:Default 00000168 )
+   4C:  Call  SetCamPosA        ( .Cam:Default  300`  -500` )
+   64:  Call  SetCamPosB        ( .Cam:Default  -100`  0` )
+   7C:  Call  SetCamDistance    ( .Cam:Default  360` )
    90:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    A8:  Call  DisablePartnerAI  ( 00000000 )
    B8:  Call  DisablePlayerInput    ( .True )
    C8:  Call  DisablePlayerPhysics  ( .True )
    D8:  Call  SetPlayerActionState  ( .ActionState:Idle )
-   E8:  Call  InterpPlayerYaw   ( 0000010E 00000001 )
-   FC:  Call  SetPlayerPos      ( 00000000 0000012C 00000000 )
-  114:  Call  SetNpcPos ( .Npc:Partner 00000000 0000012C 00000000 )
+   E8:  Call  InterpPlayerYaw   (  270`  1` )
+   FC:  Call  SetPlayerPos      (  0`  300`  0` )
+  114:  Call  SetNpcPos ( .Npc:Partner  0`  300`  0` )
   130:  Call  SetNpcFlagBits    ( .Npc:Partner 00000004 .True )
   148:  Wait  30`
   154:  Call  $Function_80240724 ( )
   160:  ExecWait  $Script_80241A30
-  16C:  Call  InterpNpcYaw      ( 00000001 0000005A 00000000 )
+  16C:  Call  InterpNpcYaw      ( .NpcID:WorldBombette_01  90`  0` )
   184:  Call  SetNpcFlagBits    ( .Npc:Partner 00000204 .False )
   19C:  Call  SetNpcFlagBits    ( .Npc:Partner 00000108 .True )
   1B4:  ExecWait  $Script_80241C1C
-  1C0:  Call  InterpNpcYaw      ( 00000001 0000010E 00000000 )
+  1C0:  Call  InterpNpcYaw      ( .NpcID:WorldBombette_01  270`  0` )
   1D8:  Wait  20`
-  1E4:  Call  InterpNpcYaw      ( 00000001 0000005A 00000000 )
-  1FC:  Call  SpeakToPlayer     ( 00000001 0003000E 00030003 00000000 000C00D8 ) % Oh, what was that? Where did that fall from?
+  1E4:  Call  InterpNpcYaw      ( .NpcID:WorldBombette_01  90`  0` )
+  1FC:  Call  SpeakToPlayer     ( .NpcID:WorldBombette_01 0003000E 00030003 00000000 000C00D8 ) % Oh, what was that? Where did that fall from?
   21C:  Call  $Function_80240A5C ( )
   228:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .True )
   240:  Call  SetNpcFlagBits    ( .Npc:Partner 00000108 .False )
@@ -1321,41 +1333,41 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
   26C:  	Call  SetNpcRotation    ( .Npc:Partner 00000000 00000000 00000000 )
   288:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[1.0] )
   29C:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-  2B8:  	Call  NpcJump0  ( .Npc:Partner *Var0 00000000 *Var2 0000000A )
+  2B8:  	Call  NpcJump0  ( .Npc:Partner *Var0  0` *Var2  10` )
   2D8:  EndThread
   2E0:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   2F8:  Add   *Var1  000003E8
   308:  Call  SetPlayerPos  ( *Var0 *Var1 *Var2 )
   320:  Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  330:  Call  PlayerJump    ( *Var0 00000000 *Var2 0000000A )
+  330:  Call  PlayerJump    ( *Var0  0` *Var2  10` )
   34C:  Wait  15`
   358:  Call  SetPlayerAnimation    ( 00010002 )
   368:  Call  DisablePlayerPhysics  ( .False )
   378:  If  *GB_StoryProgress  <  .Story:Ch1_BombetteJoinedParty % FFFFFFAD
-  388:  	Call  SetCamSpeed   ( .Cam:Default 00000003 )
-  39C:  	Call  SetCamDistance    ( .Cam:Default 0000012C )
-  3B0:  	Call  SetPanTarget  ( .Cam:Default 0000001B 00000000 0000001E )
+  388:  	Call  SetCamSpeed   ( .Cam:Default  3` )
+  39C:  	Call  SetCamDistance    ( .Cam:Default  300` )
+  3B0:  	Call  SetPanTarget  ( .Cam:Default  27`  0`  30` )
   3CC:  	Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
-  3E0:  	Call  NpcMoveTo     ( .Npc:Partner FFFFFFEB 0000002F 0000000A )
-  3FC:  	Call  NpcMoveTo     ( .Npc:Partner 00000032 00000023 0000000F )
-  418:  	Call  NpcMoveTo     ( .Npc:Partner 00000049 00000016 0000000A )
+  3E0:  	Call  NpcMoveTo     ( .Npc:Partner  -21`  47`  10` )
+  3FC:  	Call  NpcMoveTo     ( .Npc:Partner  50`  35`  15` )
+  418:  	Call  NpcMoveTo     ( .Npc:Partner  73`  22`  10` )
   434:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
-  448:  	Call  GetAngleToNPC ( 00000001 *Var0 )
-  45C:  	Call  InterpPlayerYaw   ( *Var0 00000000 )
-  470:  	Call  InterpNpcYaw  ( .Npc:Partner *Var0 00000000 )
+  448:  	Call  GetAngleToNPC ( .NpcID:WorldBombette_01 *Var0 )
+  45C:  	Call  InterpPlayerYaw   ( *Var0  0` )
+  470:  	Call  InterpNpcYaw  ( .Npc:Partner *Var0  0` )
   488:  	Wait  1`
-  494:  	Call  SpeakToPlayer ( 00000001 0003000E 00030003 00000000 000C00D9 ) % Oh... I wondered what just fell, but...aren't you. ...
+  494:  	Call  SpeakToPlayer ( .NpcID:WorldBombette_01 0003000E 00030003 00000000 000C00D9 ) % Oh... I wondered what just fell, but...aren't you. ...
   4B4:  	Thread
   4BC:  		Wait  5`
   4C8:  		Call  SetPlayerAnimation    ( 00080007 )
   4D8:  		Wait  30`
   4E4:  		Call  SetPlayerAnimation    ( 00010002 )
   4F4:  	EndThread
-  4FC:  	Call  EndSpeech     ( 00000001 0003000E 00030003 00000000 )
+  4FC:  	Call  EndSpeech     ( .NpcID:WorldBombette_01 0003000E 00030003 00000000 )
   518:  	Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   530:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
   544:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  558:  	Call  SetNpcVar     ( 00000001 00000000 00000001 )
+  558:  	Call  SetNpcVar     ( .NpcID:WorldBombette_01 00000000 00000001 )
   570:  EndIf
   578:  Call  EnablePartnerAI ( )
   584:  Call  DisablePlayerInput    ( .False )
@@ -1377,22 +1389,22 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
 
 #new:Script $Script_80242678
 {
-    0:  Call  SetPanTarget      ( .Cam:Default 00000060 00000000 00000081 )
+    0:  Call  SetPanTarget      ( .Cam:Default  96`  0`  129` )
    1C:  Call  SetCamSpeed       ( .Cam:Default *Fixed[0.6] )
    30:  Call  DisablePlayerInput    ( .True )
    40:  Call  DisablePartnerAI  ( 00000000 )
    50:  Thread
    58:  	Call  SetNpcAnimation   ( .Npc:Partner 00030005 )
    6C:  	Call  SetNpcSpeed       ( .Npc:Partner *Fixed[3.0] )
-   80:  	Call  NpcMoveTo ( .Npc:Partner 0000007C 00000081 00000000 )
+   80:  	Call  NpcMoveTo ( .Npc:Partner  124`  129`  0` )
    9C:  	Call  GetAngleToPlayer  ( .Npc:Partner *Var0 )
-   B0:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000005 )
+   B0:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0  5` )
    C8:  EndThread
    D0:  Wait  30`
    DC:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-   EC:  Call  PlayerMoveTo      ( 00000060 00000081 00000000 )
+   EC:  Call  PlayerMoveTo      (  96`  129`  0` )
   104:  Call  GetAngleToNPC     ( .Npc:Partner *Var0 )
-  118:  Call  InterpPlayerYaw   ( *Var0 00000005 )
+  118:  Call  InterpPlayerYaw   ( *Var0  5` )
   12C:  Call  SpeakToPlayer     ( .Npc:Partner 0003000E 00030003 00000000 000C00E1 ) % See, if there are any cracks in a wall, I can prob ...
   14C:  Call  DisablePlayerInput    ( .False )
   15C:  Call  EnablePartnerAI ( )
@@ -1403,7 +1415,7 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
 #new:Script $Script_Interact_802427F0
 {
     0:  Thread
-    8:  	Call  AdjustCam ( .Cam:Default *Fixed[5.0] 00000000 *Fixed[300.0] *Fixed[18.0] *Fixed[-7.0] )
+    8:  	Call  AdjustCam ( .Cam:Default *Fixed[5.0]  0` *Fixed[300.0] *Fixed[18.0] *Fixed[-7.0] )
    2C:  EndThread
    34:  Call  GetAngleToPlayer  ( .Npc:Self *Var0 )
    48:  If  *Var0  <  000000B4
@@ -1420,8 +1432,8 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
    F4:  If  *VarA  <  00000014
   104:  	Add   *Var2  *Var1
   114:  	Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  124:  	Call  PlayerMoveTo      ( *Var2 *Var4 00000000 )
-  13C:  	Call  PlayerFaceNpc     ( 00000001 00000003 )
+  124:  	Call  PlayerMoveTo      ( *Var2 *Var4  0` )
+  13C:  	Call  PlayerFaceNpc     ( .NpcID:WorldBombette_01 00000003 )
   150:  EndIf
   158:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   16C:  If  *GF_TRD06_Met_Bombette  ==  .False
@@ -1447,7 +1459,7 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
   2D4:  	Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
   2EC:  	Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.8] )
   300:  	Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-  31C:  	Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 0000000F )
+  31C:  	Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  15` )
   33C:  	Call  SetNpcFlagBits    ( .Npc:Self 00000100 .False )
   354:  	Call  ContinueSpeech    ( .Npc:Self 0003000E 00030003 00000000 000C00DE ) % Oh, how nice! We'll be good friends from now on, I ...
   374:  	Call  $Function_80240AF0    ( 00000001 00000003 )
@@ -1455,7 +1467,7 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
   398:  	Call  $Function_80240C80 ( )
   3A4:  	Exec  $Script_80240E14
   3B0:  	Wait  15`
-  3BC:  	Call  ShowMessageAtScreenPos    ( 001D018B 000000A0 00000028 ) % Bombette joined your party!! Press to make Bombett ...
+  3BC:  	Call  ShowMessageAtScreenPos    ( 001D018B  160`  40` ) % Bombette joined your party!! Press to make Bombett ...
   3D4:  	Exec  $Script_80240E38
   3E0:  	Wait  10`
   3EC:  	Call  SpeakToPlayer     ( .Npc:Partner 0003000E 00030003 00000000 000C00DF ) % Now. Let's think of a way to get out of here.
@@ -1465,7 +1477,7 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
   434:  	Call  SetPlayerAnimation    ( 00010002 )
   444:  	Wait  25`
   450:  	Call  PlaySoundAtNpc    ( .Npc:Partner 00000262 00000000 )
-  468:  	Call  ShowEmote ( .Npc:Partner .Emote:Exclamation FFFFFFD3 0000001E 00000001 00000000 00000000 00000000 00000000 )
+  468:  	Call  ShowEmote ( .Npc:Partner .Emote:Exclamation  -45`  30` .True  0`  0`  0`  0` )
   498:  	Wait  40`
   4A4:  	Call  SpeakToPlayer     ( .Npc:Partner 0003000E 00030003 00000000 000C00E0 ) % Oh, gee, I almost forgot! I haven't even told you  ...
   4C4:  	ExecWait  $Script_80242678
@@ -1505,37 +1517,37 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
    F8:  If  *Var1  ==  00000001
   108:  	Goto  A
   114:  EndIf
-  11C:  Call  SetNpcPos ( 0000000A FFFFFEA2 00000000 00000000 )
-  138:  Call  SetNpcPos ( 0000000B FFFFFE8E 00000000 00000000 )
-  154:  Call  SetNpcPos ( 0000000C FFFFFE7A 00000000 00000000 )
-  170:  Call  SetNpcSpeed       ( 0000000A *Fixed[4.0] )
-  184:  Call  SetNpcSpeed       ( 0000000B *Fixed[4.0] )
-  198:  Call  SetNpcSpeed       ( 0000000C *Fixed[4.0] )
-  1AC:  Call  SetNpcAnimation   ( 0000000A 00290104 )
-  1C0:  Call  SetNpcAnimation   ( 0000000B 002C0006 )
-  1D4:  Call  SetNpcAnimation   ( 0000000C 002C0006 )
-  1E8:  Call  SetNpcFlagBits    ( 0000000A 00000100 .True )
-  200:  Call  SetNpcFlagBits    ( 0000000B 00000100 .True )
-  218:  Call  SetNpcFlagBits    ( 0000000C 00000100 .True )
+  11C:  Call  SetNpcPos ( .NpcID:KoopaTroopa_10  -350`  0`  0` )
+  138:  Call  SetNpcPos ( .NpcID:Bombomb_11  -370`  0`  0` )
+  154:  Call  SetNpcPos ( .NpcID:Bombomb_12  -390`  0`  0` )
+  170:  Call  SetNpcSpeed       ( .NpcID:KoopaTroopa_10 *Fixed[4.0] )
+  184:  Call  SetNpcSpeed       ( .NpcID:Bombomb_11 *Fixed[4.0] )
+  198:  Call  SetNpcSpeed       ( .NpcID:Bombomb_12 *Fixed[4.0] )
+  1AC:  Call  SetNpcAnimation   ( .NpcID:KoopaTroopa_10 00290104 )
+  1C0:  Call  SetNpcAnimation   ( .NpcID:Bombomb_11 002C0006 )
+  1D4:  Call  SetNpcAnimation   ( .NpcID:Bombomb_12 002C0006 )
+  1E8:  Call  SetNpcFlagBits    ( .NpcID:KoopaTroopa_10 00000100 .True )
+  200:  Call  SetNpcFlagBits    ( .NpcID:Bombomb_11 00000100 .True )
+  218:  Call  SetNpcFlagBits    ( .NpcID:Bombomb_12 00000100 .True )
   230:  Thread
-  238:  	Call  NpcMoveTo ( 0000000A FFFFFF13 00000000 00000000 )
+  238:  	Call  NpcMoveTo ( .NpcID:KoopaTroopa_10  -237`  0`  0` )
   254:  EndThread
   25C:  Thread
   264:  	Wait  10`
-  270:  	Call  NpcMoveTo ( 0000000B FFFFFEEE 00000019 00000000 )
+  270:  	Call  NpcMoveTo ( .NpcID:Bombomb_11  -274`  25`  0` )
   28C:  EndThread
   294:  Wait  15`
-  2A0:  Call  NpcMoveTo ( 0000000C FFFFFEF6 FFFFFFF1 00000000 )
-  2BC:  Call  UseSettingsFrom   ( .Cam:Default FFFFFEFC 00000000 00000000 )
-  2D8:  Call  SetPanTarget      ( .Cam:Default FFFFFEFC 00000000 00000000 )
-  2F4:  Call  SetCamDistance    ( .Cam:Default 0000012C )
+  2A0:  Call  NpcMoveTo ( .NpcID:Bombomb_12  -266`  -15`  0` )
+  2BC:  Call  UseSettingsFrom   ( .Cam:Default  -260`  0`  0` )
+  2D8:  Call  SetPanTarget      ( .Cam:Default  -260`  0`  0` )
+  2F4:  Call  SetCamDistance    ( .Cam:Default  300` )
   308:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   31C:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
-  334:  Call  SetNpcAnimation   ( 0000000B 002C0002 )
-  348:  Call  SetNpcAnimation   ( 0000000C 002C0002 )
-  35C:  Call  SpeakToPlayer     ( 0000000A 00290104 00290101 00000000 000C00F0 ) % What's all this noise?! In case you Bob-ombs forgo ...
-  37C:  Call  SetNpcAnimation   ( 0000000B 002C0006 )
-  390:  Call  SetNpcAnimation   ( 0000000C 002C0006 )
+  334:  Call  SetNpcAnimation   ( .NpcID:Bombomb_11 002C0002 )
+  348:  Call  SetNpcAnimation   ( .NpcID:Bombomb_12 002C0002 )
+  35C:  Call  SpeakToPlayer     ( .NpcID:KoopaTroopa_10 00290104 00290101 00000000 000C00F0 ) % What's all this noise?! In case you Bob-ombs forgo ...
+  37C:  Call  SetNpcAnimation   ( .NpcID:Bombomb_11 002C0006 )
+  390:  Call  SetNpcAnimation   ( .NpcID:Bombomb_12 002C0006 )
   3A4:  Call  PanToTarget       ( .Cam:Default 00000000 00000000 )
   3BC:  Thread
   3C4:  	Wait  60`
@@ -1551,25 +1563,25 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
   474:  	Call  PlaySoundAtCollider   ( ~Collider:ttw .Sound:MetalDoorClose 00000000 )
   48C:  EndThread
   494:  Thread
-  49C:  	Call  NpcMoveTo ( 0000000A FFFFFF17 00000093 00000000 )
-  4B8:  	Call  NpcMoveTo ( 0000000A FFFFFF59 000000DA 00000000 )
+  49C:  	Call  NpcMoveTo ( .NpcID:KoopaTroopa_10  -233`  147`  0` )
+  4B8:  	Call  NpcMoveTo ( .NpcID:KoopaTroopa_10  -167`  218`  0` )
   4D4:  EndThread
   4DC:  Thread
-  4E4:  	Call  NpcMoveTo ( 0000000B FFFFFF02 00000090 00000000 )
-  500:  	Call  NpcMoveTo ( 0000000B FFFFFF35 000000DE 00000000 )
+  4E4:  	Call  NpcMoveTo ( .NpcID:Bombomb_11  -254`  144`  0` )
+  500:  	Call  NpcMoveTo ( .NpcID:Bombomb_11  -203`  222`  0` )
   51C:  EndThread
   524:  Wait  15`
-  530:  Call  NpcMoveTo ( 0000000C FFFFFEF7 00000000 00000000 )
-  54C:  Call  NpcMoveTo ( 0000000C FFFFFF46 000000AF 00000000 )
+  530:  Call  NpcMoveTo ( .NpcID:Bombomb_12  -265`  0`  0` )
+  54C:  Call  NpcMoveTo ( .NpcID:Bombomb_12  -186`  175`  0` )
   568:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
-  57C:  Call  SetNpcJumpscale   ( 0000000A *Fixed[1.0] )
-  590:  Call  GetNpcPos ( 0000000A *Var0 *Var1 *Var2 )
-  5AC:  Call  NpcJump0  ( 0000000A *Var0 *Var1 *Var2 0000000A )
-  5CC:  Call  SetNpcAnimation   ( 0000000B 002C0002 )
-  5E0:  Call  SetNpcAnimation   ( 0000000C 002C0002 )
-  5F4:  Call  SpeakToPlayer     ( 0000000A 00290104 00290101 00000000 000C00F1 ) % What in the...Mario!? What're you doing here? Noth ...
-  614:  Call  SetNpcAnimation   ( 0000000B 002C0006 )
-  628:  Call  SetNpcAnimation   ( 0000000C 002C0006 )
+  57C:  Call  SetNpcJumpscale   ( .NpcID:KoopaTroopa_10 *Fixed[1.0] )
+  590:  Call  GetNpcPos ( .NpcID:KoopaTroopa_10 *Var0 *Var1 *Var2 )
+  5AC:  Call  NpcJump0  ( .NpcID:KoopaTroopa_10 *Var0 *Var1 *Var2  10` )
+  5CC:  Call  SetNpcAnimation   ( .NpcID:Bombomb_11 002C0002 )
+  5E0:  Call  SetNpcAnimation   ( .NpcID:Bombomb_12 002C0002 )
+  5F4:  Call  SpeakToPlayer     ( .NpcID:KoopaTroopa_10 00290104 00290101 00000000 000C00F1 ) % What in the...Mario!? What're you doing here? Noth ...
+  614:  Call  SetNpcAnimation   ( .NpcID:Bombomb_11 002C0006 )
+  628:  Call  SetNpcAnimation   ( .NpcID:Bombomb_12 002C0006 )
   63C:  Call  DisablePlayerInput    ( .False )
   64C:  Call  StartBossBattle   ( .Song:SpecialBattle )
   65C:  Return
@@ -1707,76 +1719,76 @@ PADDING: 80240E74 to 80240E80 (00000E74 to 00000E80)
 
 #new:NpcGroup $NpcGroup_8024387C
 {
-	00000001 $NpcSettings_80242620 ~Vec3f:NPC_8024387C % 0 0 0
+	.NpcID:WorldBombette_01 $NpcSettings_80242620 ~Vec3f:NPC_WorldBombette_01 % 0 0 0
 	00000D01 $Script_Init_80242CEC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024387C
-	~AnimationTable:NPC_8024387C % .Sprite:WorldBombette
+	~Movement:NPC_WorldBombette_01
+	~AnimationTable:NPC_WorldBombette_01 % .Sprite:WorldBombette
 	00000000 00000000 00000000 001A007D % She's named Bombette. That pink is adorable! She d ...
 }
 
 #new:NpcGroup $NpcGroup_80243A6C
 {
-	0000000A $NpcSettings_8024264C ~Vec3f:NPC_80243A6C % 0 -1000 0
+	.NpcID:KoopaTroopa_10 $NpcSettings_8024264C ~Vec3f:NPC_KoopaTroopa_10 % 0 -1000 0
 	00040801 $Script_Init_80243414 00000000 00000000 00000000
 	~Items:5:Mushroom:5:HoneySyrup:5
 	~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80243A6C
-	~AnimationTable:NPC_80243A6C % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_10
+	~AnimationTable:NPC_KoopaTroopa_10 % .Sprite:KoopaTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80243A6C[1F0]
-	0000000B $NpcSettings_80242620 ~Vec3f:NPC_80243C5C % 0 -1000 0
+	.NpcID:Bombomb_11 $NpcSettings_80242620 ~Vec3f:NPC_Bombomb_11 % 0 -1000 0
 	00040801 $Script_Init_80243474 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243C5C
-	~AnimationTable:NPC_80243C5C % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_11
+	~AnimationTable:NPC_Bombomb_11 % .Sprite:Bombomb
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80243A6C[3E0]
-	0000000C $NpcSettings_80242620 ~Vec3f:NPC_80243E4C % 0 -1000 0
+	.NpcID:Bombomb_12 $NpcSettings_80242620 ~Vec3f:NPC_Bombomb_12 % 0 -1000 0
 	00040801 $Script_Init_80243474 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243E4C
-	~AnimationTable:NPC_80243E4C % .Sprite:Bombomb
+	~Movement:NPC_Bombomb_12
+	~AnimationTable:NPC_Bombomb_12 % .Sprite:Bombomb
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024403C
 {
-	00000002 $NpcSettings_80242620 ~Vec3f:NPC_8024403C % 25 0 127
+	.NpcID:WorldBombomb_02 $NpcSettings_80242620 ~Vec3f:NPC_WorldBombomb_02 % 25 0 127
 	00000801 $Script_Init_802437EC 00000000 00000000 0000010E
 	~Items:5:HoneySyrup:5:FireFlower:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024403C
-	~AnimationTable:NPC_8024403C % .Sprite:WorldBombomb
+	~Movement:NPC_WorldBombomb_02
+	~AnimationTable:NPC_WorldBombomb_02 % .Sprite:WorldBombomb
 	00000000 00000000 00000000 001A007E % That Bob-omb's been jailed. I wonder what he did t ...
 	%
 	% $NpcGroup_8024403C[1F0]
-	00000003 $NpcSettings_80242620 ~Vec3f:NPC_8024422C % -30 0 130
+	.NpcID:WorldBombomb_03 $NpcSettings_80242620 ~Vec3f:NPC_WorldBombomb_03 % -30 0 130
 	00000801 $Script_Init_80243810 00000000 00000000 0000005A
 	~Items:5:HoneySyrup:5:FireFlower:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024422C
-	~AnimationTable:NPC_8024422C % .Sprite:WorldBombomb
+	~Movement:NPC_WorldBombomb_03
+	~AnimationTable:NPC_WorldBombomb_03 % .Sprite:WorldBombomb
 	00000000 00000000 00000000 001A007F % That Bob-omb's been jailed. Do the Koopa Bros. hav ...
 	%
 	% $NpcGroup_8024403C[3E0]
-	00000004 $NpcSettings_80242620 ~Vec3f:NPC_8024441C % -140 0 -90
+	.NpcID:WorldBombomb_04 $NpcSettings_80242620 ~Vec3f:NPC_WorldBombomb_04 % -140 0 -90
 	00000801 $Script_Init_80243834 00000000 00000000 0000010E
 	~Items:5:HoneySyrup:5:FireFlower:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024441C
-	~AnimationTable:NPC_8024441C % .Sprite:WorldBombomb
+	~Movement:NPC_WorldBombomb_04
+	~AnimationTable:NPC_WorldBombomb_04 % .Sprite:WorldBombomb
 	00000000 00000000 00000000 001A0080 % That Bob-omb's been jailed. It really seems to dis ...
 	%
 	% $NpcGroup_8024403C[5D0]
-	00000005 $NpcSettings_80242620 ~Vec3f:NPC_8024460C % -75 0 -80
+	.NpcID:WorldBombomb_05 $NpcSettings_80242620 ~Vec3f:NPC_WorldBombomb_05 % -75 0 -80
 	00000801 $Script_Init_80243858 00000000 00000000 0000005A
 	~Items:5:HoneySyrup:5:FireFlower:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024460C
-	~AnimationTable:NPC_8024460C % .Sprite:WorldBombomb
+	~Movement:NPC_WorldBombomb_05
+	~AnimationTable:NPC_WorldBombomb_05 % .Sprite:WorldBombomb
 	00000000 00000000 00000000 001A0081 % That Bob-omb's been jailed. I wonder if they get h ...
 }
 
@@ -1827,9 +1839,9 @@ MISSING: 802448AC to 802448D8 (000048AC to 000048D8)
 #new:Script $Script_802448D8
 {
     0:  Wait  60`
-    C:  Call  EnableNpcAI   ( 00000010 .False )
-   20:  Call  SpeakToPlayer ( 00000010 00660118 00660118 00000000 000C010C ) % Hey! Helloooooo? Somebody, let us outta here!
-   40:  Call  EnableNpcAI   ( 00000010 .True )
+    C:  Call  EnableNpcAI   ( .NpcID:KoopaBros_16 .False )
+   20:  Call  SpeakToPlayer ( .NpcID:KoopaBros_16 00660118 00660118 00000000 000C010C ) % Hey! Helloooooo? Somebody, let us outta here!
+   40:  Call  EnableNpcAI   ( .NpcID:KoopaBros_16 .True )
    54:  Wait  30`
    60:  Call  FadeOutMusic  ( 00000000 000007D0 )
    74:  Wait  30`
@@ -1842,35 +1854,35 @@ MISSING: 802448AC to 802448D8 (000048AC to 000048D8)
 
 #new:NpcGroup $NpcGroup_80244998
 {
-	00000010 $NpcSettings_80244880 ~Vec3f:NPC_80244998 % 60 0 -60
+	.NpcID:KoopaBros_16 $NpcSettings_80244880 ~Vec3f:NPC_KoopaBros_16 % 60 0 -60
 	00000E01 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244998
-	~AnimationTable:NPC_80244998 % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_16
+	~AnimationTable:NPC_KoopaBros_16 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80244998[1F0]
-	0000000F $NpcSettings_80244880 ~Vec3f:NPC_80244B88 % 60 0 0
+	.NpcID:KoopaBros_15 $NpcSettings_80244880 ~Vec3f:NPC_KoopaBros_15 % 60 0 0
 	00000E01 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244B88
-	~AnimationTable:NPC_80244B88 % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_15
+	~AnimationTable:NPC_KoopaBros_15 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80244998[3E0]
-	00000011 $NpcSettings_80244880 ~Vec3f:NPC_80244D78 % -10 0 -60
+	.NpcID:KoopaBros_17 $NpcSettings_80244880 ~Vec3f:NPC_KoopaBros_17 % -10 0 -60
 	00000E01 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244D78
-	~AnimationTable:NPC_80244D78 % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_17
+	~AnimationTable:NPC_KoopaBros_17 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80244998[5D0]
-	00000012 $NpcSettings_80244880 ~Vec3f:NPC_80244F68 % 0 0 0
+	.NpcID:KoopaBros_18 $NpcSettings_80244880 ~Vec3f:NPC_KoopaBros_18 % 0 0 0
 	00000E01 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244F68
-	~AnimationTable:NPC_80244F68 % .Sprite:KoopaBros
+	~Movement:NPC_KoopaBros_18
+	~AnimationTable:NPC_KoopaBros_18 % .Sprite:KoopaBros
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

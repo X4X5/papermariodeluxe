@@ -1,6 +1,9 @@
 % Script File: kkj_14.mscr
 % Decoded from: 0 to A6F0 (kkj_14)
 
+#define .NpcID:WorldKoopatrol_02    02
+#define .NpcID:WorldKammy_03        03
+
 #new:Function_Init $Function_Init
 {
     0:  ADDIU     SP, SP, FFE8
@@ -521,7 +524,7 @@ PADDING: 8024071C to 80240720 (0000071C to 00000720)
 #new:Script $Script_80240A6C
 {
     0:  Call  DisablePlayerInput        ( .True )
-   10:  Call  ShowMessageAtScreenPos    ( 001D0163 000000A0 00000028 ) % It doesn't seem to open.
+   10:  Call  ShowMessageAtScreenPos    ( 001D0163  160`  40` ) % It doesn't seem to open.
    28:  Call  DisablePlayerInput        ( .False )
    38:  Return
    40:  End
@@ -595,8 +598,8 @@ PADDING: 8024071C to 80240720 (0000071C to 00000720)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachsCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  GetEntryID        ( *Var0 )
    80:  If  *Var0  >=  ~Entry:Entry3
@@ -667,8 +670,8 @@ PADDING: 8024071C to 80240720 (0000071C to 00000720)
   444:  	Set   *VarC  00000000
   454:  	Exec  $Script_UpdateTexturePan_80240680
   460:  EndThread
-  468:  Call  802C90FC  ( 00000036 00000000 FFFFFFFF )
-  480:  Call  802C9428  ( 00000000 $DisplayList_80240720 00000000 )
+  468:  Call  SetModelCustomGfx ( ~Model:o154 00000000 FFFFFFFF )
+  480:  Call  SetCustomGfx      ( 00000000 $DisplayList_80240720 00000000 )
   498:  Return
   4A0:  End
 }
@@ -696,15 +699,15 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
   110:  				Set   *AreaFlag[014]  .True
   120:  				Call  EnablePartnerAI ( )
   12C:  			Else
-  134:  				Call  ShowMessageAtScreenPos    ( 0014017B 000000A0 00000028 ) % A rather large fireplace. The fire feels quite war ...
+  134:  				Call  ShowMessageAtScreenPos    ( 0014017B  160`  40` ) % A rather large fireplace. The fire feels quite war ...
   14C:  			EndIf
   154:  		Else
-  15C:  			Call  ShowMessageAtScreenPos    ( 0014017B 000000A0 00000028 ) % A rather large fireplace. The fire feels quite war ...
+  15C:  			Call  ShowMessageAtScreenPos    ( 0014017B  160`  40` ) % A rather large fireplace. The fire feels quite war ...
   174:  		EndIf
   17C:  	Case  .Story:Ch2_BeganPeachMission  to  .Story:Ch7_BeganPeachMission % FFFFFFCA to 58
-  18C:  		Call  ShowMessageAtScreenPos    ( 0014017B 000000A0 00000028 ) % A rather large fireplace. The fire feels quite war ...
+  18C:  		Call  ShowMessageAtScreenPos    ( 0014017B  160`  40` ) % A rather large fireplace. The fire feels quite war ...
   1A4:  	Default
-  1AC:  		Call  ShowMessageAtScreenPos    ( 00000043 000000A0 00000028 ) % What a big fireplace! And what a cozy fire!
+  1AC:  		Call  ShowMessageAtScreenPos    ( 00000043  160`  40` ) % What a big fireplace! And what a cozy fire!
   1C4:  EndSwitch
   1CC:  Call  DisablePlayerInput    ( .False )
   1DC:  Return
@@ -730,15 +733,15 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
    F0:  				Set   *AreaFlag[015]  .True
   100:  				Call  EnablePartnerAI ( )
   10C:  			Else
-  114:  				Call  ShowMessageAtScreenPos    ( 0014017C 000000A0 00000028 ) % Princess Peach's dresses. Her favorite outfits!
+  114:  				Call  ShowMessageAtScreenPos    ( 0014017C  160`  40` ) % Princess Peach's dresses. Her favorite outfits!
   12C:  			EndIf
   134:  		Else
-  13C:  			Call  ShowMessageAtScreenPos    ( 0014017C 000000A0 00000028 ) % Princess Peach's dresses. Her favorite outfits!
+  13C:  			Call  ShowMessageAtScreenPos    ( 0014017C  160`  40` ) % Princess Peach's dresses. Her favorite outfits!
   154:  		EndIf
   15C:  	Case  .Story:Ch2_BeganPeachMission  to  .Story:Ch7_BeganPeachMission % FFFFFFCA to 58
-  16C:  		Call  ShowMessageAtScreenPos    ( 0014017C 000000A0 00000028 ) % Princess Peach's dresses. Her favorite outfits!
+  16C:  		Call  ShowMessageAtScreenPos    ( 0014017C  160`  40` ) % Princess Peach's dresses. Her favorite outfits!
   184:  	Default
-  18C:  		Call  ShowMessageAtScreenPos    ( 00000044 000000A0 00000028 ) % Her dresses are beautiful, but they all look the s ...
+  18C:  		Call  ShowMessageAtScreenPos    ( 00000044  160`  40` ) % Her dresses are beautiful, but they all look the s ...
   1A4:  EndSwitch
   1AC:  Call  DisablePlayerInput    ( .False )
   1BC:  Return
@@ -752,7 +755,7 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
    1C:  	Case  .Story:Ch1_BeganPeachMission  to  .Story:Ch7_BeganPeachMission % FFFFFFB4 to 58
    2C:  		Call  $Function_802403A0    ( *Var0 )
    3C:  		If  *Var0  ==  00000000
-   4C:  			Call  InterpPlayerYaw   ( 0000002D 0000000A )
+   4C:  			Call  InterpPlayerYaw   (  45`  10` )
    60:  			Wait  10`
    6C:  			Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
    84:  			Add   *Var0  00000005
@@ -769,7 +772,7 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
   170:  			Call  EnablePartnerAI ( )
   17C:  		EndIf
   184:  	Default
-  18C:  		Call  ShowMessageAtScreenPos    ( 00000045 000000A0 00000028 ) % These are cosmetics. Mario looks fine without them ...
+  18C:  		Call  ShowMessageAtScreenPos    ( 00000045  160`  40` ) % These are cosmetics. Mario looks fine without them ...
   1A4:  EndSwitch
   1AC:  Call  DisablePlayerInput    ( .False )
   1BC:  Return
@@ -795,15 +798,15 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
    F0:  				Set   *AreaFlag[017]  .True
   100:  				Call  EnablePartnerAI ( )
   10C:  			Else
-  114:  				Call  ShowMessageAtScreenPos    ( 0014017D 000000A0 00000028 ) % A photo of Mario.
+  114:  				Call  ShowMessageAtScreenPos    ( 0014017D  160`  40` ) % A photo of Mario.
   12C:  			EndIf
   134:  		Else
-  13C:  			Call  ShowMessageAtScreenPos    ( 0014017D 000000A0 00000028 ) % A photo of Mario.
+  13C:  			Call  ShowMessageAtScreenPos    ( 0014017D  160`  40` ) % A photo of Mario.
   154:  		EndIf
   15C:  	Case  .Story:Ch2_BeganPeachMission  to  .Story:Ch7_BeganPeachMission % FFFFFFCA to 58
-  16C:  		Call  ShowMessageAtScreenPos    ( 0014017D 000000A0 00000028 ) % A photo of Mario.
+  16C:  		Call  ShowMessageAtScreenPos    ( 0014017D  160`  40` ) % A photo of Mario.
   184:  	Default
-  18C:  		Call  ShowMessageAtScreenPos    ( 00000046 000000A0 00000028 ) % A framed photo of Mario!
+  18C:  		Call  ShowMessageAtScreenPos    ( 00000046  160`  40` ) % A framed photo of Mario!
   1A4:  EndSwitch
   1AC:  Call  DisablePlayerInput    ( .False )
   1BC:  Return
@@ -829,15 +832,15 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
    F0:  				Set   *AreaFlag[018]  .True
   100:  				Call  EnablePartnerAI ( )
   10C:  			Else
-  114:  				Call  ShowMessageAtScreenPos    ( 0014017E 000000A0 00000028 ) % A soft and comfortable bed.
+  114:  				Call  ShowMessageAtScreenPos    ( 0014017E  160`  40` ) % A soft and comfortable bed.
   12C:  			EndIf
   134:  		Else
-  13C:  			Call  ShowMessageAtScreenPos    ( 0014017E 000000A0 00000028 ) % A soft and comfortable bed.
+  13C:  			Call  ShowMessageAtScreenPos    ( 0014017E  160`  40` ) % A soft and comfortable bed.
   154:  		EndIf
   15C:  	Case  .Story:Ch2_BeganPeachMission  to  .Story:Ch7_BeganPeachMission % FFFFFFCA to 58
-  16C:  		Call  ShowMessageAtScreenPos    ( 0014017E 000000A0 00000028 ) % A soft and comfortable bed.
+  16C:  		Call  ShowMessageAtScreenPos    ( 0014017E  160`  40` ) % A soft and comfortable bed.
   184:  	Default
-  18C:  		Call  ShowMessageAtScreenPos    ( 00000047 000000A0 00000028 ) % Quite a fluffy bed. It looks like this bed was des ...
+  18C:  		Call  ShowMessageAtScreenPos    ( 00000047  160`  40` ) % Quite a fluffy bed. It looks like this bed was des ...
   1A4:  EndSwitch
   1AC:  Call  DisablePlayerInput    ( .False )
   1BC:  Return
@@ -863,15 +866,15 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
    F0:  				Set   *AreaFlag[019]  .True
   100:  				Call  EnablePartnerAI ( )
   10C:  			Else
-  114:  				Call  ShowMessageAtScreenPos    ( 0014017F 000000A0 00000028 ) % A bouquet of Princess Peach's favorite flowers. It ...
+  114:  				Call  ShowMessageAtScreenPos    ( 0014017F  160`  40` ) % A bouquet of Princess Peach's favorite flowers. It ...
   12C:  			EndIf
   134:  		Else
-  13C:  			Call  ShowMessageAtScreenPos    ( 0014017F 000000A0 00000028 ) % A bouquet of Princess Peach's favorite flowers. It ...
+  13C:  			Call  ShowMessageAtScreenPos    ( 0014017F  160`  40` ) % A bouquet of Princess Peach's favorite flowers. It ...
   154:  		EndIf
   15C:  	Case  .Story:Ch2_BeganPeachMission  to  .Story:Ch7_BeganPeachMission % FFFFFFCA to 58
-  16C:  		Call  ShowMessageAtScreenPos    ( 0014017F 000000A0 00000028 ) % A bouquet of Princess Peach's favorite flowers. It ...
+  16C:  		Call  ShowMessageAtScreenPos    ( 0014017F  160`  40` ) % A bouquet of Princess Peach's favorite flowers. It ...
   184:  	Default
-  18C:  		Call  ShowMessageAtScreenPos    ( 00000048 000000A0 00000028 ) % A vase full of lovely flowers. They smell heavenly ...
+  18C:  		Call  ShowMessageAtScreenPos    ( 00000048  160`  40` ) % A vase full of lovely flowers. They smell heavenly ...
   1A4:  EndSwitch
   1AC:  Call  DisablePlayerInput    ( .False )
   1BC:  Return
@@ -991,12 +994,12 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
    D0:  	EndThread
    D8:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    F0:  	Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  100:  	Call  PlayerJump1   ( *Var0 *Var1 *Var2 0000000A )
+  100:  	Call  PlayerJump1   ( *Var0 *Var1 *Var2  10` )
   11C:  	Call  SetPlayerAnimation    ( 000D0012 )
   12C:  	Wait  20`
   138:  	Call  SetPlayerAnimation    ( 000A0001 )
-  148:  	Call  InterpPlayerYaw       ( 000000E1 00000000 )
-  15C:  	Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000000 )
+  148:  	Call  InterpPlayerYaw       (  225`  0` )
+  15C:  	Call  InterpNpcYaw  ( .Npc:Partner  270`  0` )
   174:  	ExecWait  $Script_80241F80
   180:  	Unbind
   188:  EndIf
@@ -1031,18 +1034,18 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
   12C:  	EndThread
   134:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   14C:  	Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  15C:  	Call  PlayerJump1   ( *Var0 *Var1 *Var2 0000000A )
+  15C:  	Call  PlayerJump1   ( *Var0 *Var1 *Var2  10` )
   178:  	Call  SetPlayerAnimation    ( 000D0012 )
   188:  	Wait  20`
   194:  	Call  SetPlayerAnimation    ( 000A0001 )
-  1A4:  	Call  InterpPlayerYaw       ( 000000E1 00000000 )
-  1B8:  	Call  InterpNpcYaw  ( .Npc:Partner 000000E1 00000000 )
+  1A4:  	Call  InterpPlayerYaw       (  225`  0` )
+  1B8:  	Call  InterpNpcYaw  ( .Npc:Partner  225`  0` )
   1D0:  	If  *AreaFlag[005]  ==  .False
   1E0:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   1F8:  		Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-  214:  		Call  SetPanTarget  ( .Cam:Default FFFFFF88 00000019 00000000 )
+  214:  		Call  SetPanTarget  ( .Cam:Default  -120`  25`  0` )
   230:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
-  244:  		Call  SetCamDistance    ( .Cam:Default 0000012C )
+  244:  		Call  SetCamDistance    ( .Cam:Default  300` )
   258:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   270:  		Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   284:  	EndIf
@@ -1074,8 +1077,8 @@ PADDING: 8024124C to 80241250 (0000124C to 00001250)
    7C:  If  *GF_KKJ14_OpenedPassage  ==  .False
    8C:  	Call  EnableGroup   ( ~Model:g27 .False )
    A0:  	Exec  $Script_80241D3C
-   AC:  	Call  802C90FC      ( 00000050 00000001 FFFFFFFF )
-   C4:  	Call  802C94A0      ( 00000001 $Function_802403F8 00000000 )
+   AC:  	Call  SetModelCustomGfx     ( ~Model:o157 00000001 FFFFFFFF )
+   C4:  	Call  SetCustomGfxBuilders  ( 00000001 $Function_802403F8 00000000 )
    DC:  	Switch  *GB_StoryProgress
    E8:  		Case  <  .Story:Ch0_WakeUp % FFFFFF81
    F4:  		Case  <  .Story:Ch2_BeganPeachMission % FFFFFFCA
@@ -1135,16 +1138,16 @@ PADDING: 802429C4 to 802429D0 (000029C4 to 000029D0)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  SetMusicTrack ( 00000000 .Song:PeachCaught 00000000 00000008 )
-   3C:  Call  SetPlayerPos  ( FFFFFE20 0000001E FFFFFFE2 )
+   3C:  Call  SetPlayerPos  (  -480`  30`  -30` )
    54:  Call  SetPlayerAnimation    ( 000C0018 )
    64:  Call  DisablePartnerAI      ( 00000000 )
-   74:  Call  SetNpcPos     ( .Npc:Partner FFFFFE20 0000001E FFFFFFE2 )
-   90:  Call  SetNpcPos     ( 00000000 FFFFFE14 00000000 FFFFFFE2 )
-   AC:  Call  SetNpcPos     ( 00000001 FFFFFE34 00000000 FFFFFFE2 )
-   C8:  Call  SetNpcYaw     ( 00000000 0000005A )
-   DC:  Call  SetNpcYaw     ( 00000001 0000005A )
-   F0:  Call  UseSettingsFrom       ( .Cam:Default FFFFFED4 00000000 FFFFFFE2 )
-  10C:  Call  SetPanTarget  ( .Cam:Default FFFFFED4 00000000 FFFFFFE2 )
+   74:  Call  SetNpcPos     ( .Npc:Partner  -480`  30`  -30` )
+   90:  Call  SetNpcPos     ( 00000000  -492`  0`  -30` )
+   AC:  Call  SetNpcPos     ( 00000001  -460`  0`  -30` )
+   C8:  Call  SetNpcYaw     ( 00000000  90` )
+   DC:  Call  SetNpcYaw     ( 00000001  90` )
+   F0:  Call  UseSettingsFrom       ( .Cam:Default  -300`  0`  -30` )
+  10C:  Call  SetPanTarget  ( .Cam:Default  -300`  0`  -30` )
   128:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   13C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   154:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -1172,25 +1175,25 @@ PADDING: 802429C4 to 802429D0 (000029C4 to 000029D0)
   2C4:  			BreakLoop
   2CC:  		EndIf
   2D4:  	EndLoop
-  2DC:  	Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  2DC:  	Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   2F4:  EndThread
   2FC:  Call  SetNpcVar ( 00000000 00000000 00000001 )
   314:  Thread
   31C:  	Call  SetNpcAnimation   ( 00000000 00580014 )
   330:  	Call  SetNpcSpeed   ( 00000000 *Fixed[5.0] )
-  344:  	Call  NpcMoveTo     ( 00000000 FFFFFEC4 FFFFFFE0 00000000 )
+  344:  	Call  NpcMoveTo     ( 00000000  -316`  -32`  0` )
   360:  	Call  SetNpcVar     ( 00000000 00000000 00000000 )
   378:  EndThread
   380:  Thread
   388:  	Call  SetNpcAnimation   ( 00000001 00580014 )
   39C:  	Call  SetNpcSpeed       ( 00000001 *Fixed[5.0] )
-  3B0:  	Call  NpcMoveTo ( 00000001 FFFFFEE4 FFFFFFE4 00000000 )
+  3B0:  	Call  NpcMoveTo ( 00000001  -284`  -28`  0` )
   3CC:  EndThread
   3D4:  Loop
   3E0:  	Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
   3FC:  	Add   *Var0  0000000A
   40C:  	Add   *Var2  00000002
-  41C:  	Call  SetPlayerPos  ( *Var0 0000001E *Var2 )
+  41C:  	Call  SetPlayerPos  ( *Var0  30` *Var2 )
   434:  	Wait  1`
   440:  	Call  GetNpcVar     ( 00000000 00000000 *Var0 )
   458:  	If  *Var0  ==  00000000
@@ -1230,15 +1233,15 @@ PADDING: 802429C4 to 802429D0 (000029C4 to 000029D0)
   69C:  	Call  SetNpcAnimation   ( 00000000 00580001 )
   6B0:  	Wait  20`
   6BC:  	Call  SetNpcAnimation   ( 00000000 00580006 )
-  6D0:  	Call  NpcMoveTo ( 00000000 FFFFFE32 FFFFFFE2 00000000 )
-  6EC:  	Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+  6D0:  	Call  NpcMoveTo ( 00000000  -462`  -30`  0` )
+  6EC:  	Call  SetNpcPos ( 00000000  0`  -1000`  0` )
   708:  EndThread
   710:  Thread
   718:  	Call  SetNpcAnimation   ( 00000001 00580001 )
   72C:  	Wait  20`
   738:  	Call  SetNpcAnimation   ( 00000001 00580006 )
-  74C:  	Call  NpcMoveTo ( 00000001 FFFFFE52 FFFFFFE2 00000000 )
-  768:  	Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
+  74C:  	Call  NpcMoveTo ( 00000001  -430`  -30`  0` )
+  768:  	Call  SetNpcPos ( 00000001  0`  -1000`  0` )
   784:  	Call  MakeLerp  ( 00000078 00000000 00000008 .Easing:Linear )
   7A0:  	Loop
   7AC:  		Call  UpdateLerp ( )
@@ -1262,7 +1265,7 @@ PADDING: 802429C4 to 802429D0 (000029C4 to 000029D0)
   8D4:  		BreakLoop
   8DC:  	EndIf
   8E4:  EndLoop
-  8EC:  Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  8EC:  Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   904:  Call  SetPlayerAnimation    ( 000A0001 )
   914:  If  *GB_StoryProgress  ==  .Story:Ch6_BeganPeachMission % 3A
   924:  	Call  SpeakToPlayer ( .Npc:Partner 00200009 00200001 00000000 00140159 ) % Are you all right, Princess? You're not hurt, are  ...
@@ -1490,19 +1493,19 @@ PADDING: 802442E8 to 802442F0 (000042E8 to 000042F0)
 	00000000 00000000 $ExtraAnimationList_802443B4 00000000 % no tattle string
 	%
 	% $NpcGroup_802443D4[3E0]
-	00000002 $NpcSettings_80244348 ~Vec3f:NPC_802447B4 % 0 -500 0
+	.NpcID:WorldKoopatrol_02 $NpcSettings_80244348 ~Vec3f:NPC_WorldKoopatrol_02 % 0 -500 0
 	0000070D 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802447B4
-	~AnimationTable:NPC_802447B4 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_02
+	~AnimationTable:NPC_WorldKoopatrol_02 % .Sprite:WorldKoopatrol
 	00000000 00000000 $ExtraAnimationList_802443B4 00000000 % no tattle string
 	%
 	% $NpcGroup_802443D4[5D0]
-	00000003 $NpcSettings_8024431C ~Vec3f:NPC_802449A4 % 0 -500 0
+	.NpcID:WorldKammy_03 $NpcSettings_8024431C ~Vec3f:NPC_WorldKammy_03 % 0 -500 0
 	0000050D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802449A4
-	~AnimationTable:NPC_802449A4 % .Sprite:WorldKammy
+	~Movement:NPC_WorldKammy_03
+	~AnimationTable:NPC_WorldKammy_03 % .Sprite:WorldKammy
 	00000000 00000000 $ExtraAnimationList_8024439C 00000000 % no tattle string
 }
 
@@ -1571,10 +1574,10 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
 #new:Script $Script_80244D88
 {
     0:  Loop
-    C:  	Call  NpcFlyTo  ( .Npc:Partner 00000208 00000046 FFFFFFC4 0000001E FFFFFFF6 .Easing:Linear )
-   34:  	Call  NpcFlyTo  ( .Npc:Partner 00000208 00000046 FFFFFFC3 0000000A FFFFFFFB .Easing:Linear )
+    C:  	Call  NpcFlyTo  ( .Npc:Partner  520`  70`  -60`  30`  -10` .Easing:Linear )
+   34:  	Call  NpcFlyTo  ( .Npc:Partner  520`  70`  -61`  10`  -5` .Easing:Linear )
    5C:  	Call  PlaySoundAtNpc    ( .Npc:Partner 000001D8 00000000 )
-   74:  	Call  NpcFlyTo  ( .Npc:Partner 00000208 00000046 FFFFFFC2 0000000A FFFFFFFB .Easing:Linear )
+   74:  	Call  NpcFlyTo  ( .Npc:Partner  520`  70`  -62`  10`  -5` .Easing:Linear )
    9C:  	Call  PlaySoundAtNpc    ( .Npc:Partner 000001D8 00000000 )
    B4:  EndLoop
    BC:  Return
@@ -1586,40 +1589,40 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  $Function_80240480 ( )
    1C:  Call  SetPlayerAnimation    ( 000C000E )
-   2C:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+   2C:  Call  InterpPlayerYaw   (  270`  0` )
    40:  Call  DisablePartnerAI  ( 00000000 )
-   50:  Call  SetNpcPos     ( .Npc:Partner 00000208 0000003C FFFFFFDD )
-   6C:  Call  SetNpcPos     ( 00000000 FFFFFE3E 00000000 FFFFFFEC )
-   88:  Call  SetNpcPos     ( 00000001 FFFFFE02 00000000 FFFFFFEC )
-   A4:  Call  SetNpcYaw     ( 00000000 0000005A )
-   B8:  Call  SetNpcYaw     ( 00000001 0000005A )
-   CC:  Call  AdjustCam     ( .Cam:Default *Fixed[90.0] 00000014 000000FA *Fixed[17.0] *Fixed[-11.0] )
+   50:  Call  SetNpcPos     ( .Npc:Partner  520`  60`  -35` )
+   6C:  Call  SetNpcPos     ( 00000000  -450`  0`  -20` )
+   88:  Call  SetNpcPos     ( 00000001  -510`  0`  -20` )
+   A4:  Call  SetNpcYaw     ( 00000000  90` )
+   B8:  Call  SetNpcYaw     ( 00000001  90` )
+   CC:  Call  AdjustCam     ( .Cam:Default *Fixed[90.0]  20`  250` *Fixed[17.0] *Fixed[-11.0] )
    F0:  Wait  30`
    FC:  Call  SpeakToPlayer ( .Npc:Player 000C000F 000C000E 00000005 00140016 ) % Sniffle...
   11C:  Wait  5`
-  128:  Call  InterpPlayerYaw   ( 0000005A 00000005 )
-  13C:  Call  PlayerMoveTo  ( 00000014 0000001E 0000001E )
+  128:  Call  InterpPlayerYaw   (  90`  5` )
+  13C:  Call  PlayerMoveTo  (  20`  30`  30` )
   154:  Call  SpeakToPlayer ( .Npc:Player 000C000F 000C000E 00000005 00140017 ) % Mario's probably hurt...
   174:  Wait  5`
-  180:  Call  InterpPlayerYaw   ( 0000010E 00000005 )
-  194:  Call  PlayerMoveTo  ( FFFFFFEC 0000001E 0000001E )
+  180:  Call  InterpPlayerYaw   (  270`  5` )
+  194:  Call  PlayerMoveTo  (  -20`  30`  30` )
   1AC:  Call  SpeakToPlayer ( .Npc:Player 000C000F 000C000E 00000005 00140018 ) % Everyone's in prison...
   1CC:  Wait  5`
-  1D8:  Call  InterpPlayerYaw   ( 0000005A 00000005 )
-  1EC:  Call  PlayerMoveTo  ( 00000014 0000001E 0000001E )
+  1D8:  Call  InterpPlayerYaw   (  90`  5` )
+  1EC:  Call  PlayerMoveTo  (  20`  30`  30` )
   204:  Call  SpeakToPlayer ( .Npc:Player 000C000F 000C000E 00000005 00140019 ) % The Mushroom Kingdom will be destroyed if things c ...
   224:  Wait  30`
   230:  Call  $Function_8024049C ( )
   23C:  Call  SetPlayerAnimation    ( 000A0001 )
   24C:  Call  PlaySoundAtPlayer ( 00000262 00000000 )
-  260:  Call  ShowEmote     ( 00000000 .Emote:Exclamation FFFFFFD3 0000001E 00000000 00000000 00000000 00000000 00000000 )
+  260:  Call  ShowEmote     ( 00000000 .Emote:Exclamation  -45`  30` .False  0`  0`  0`  0` )
   290:  Wait  10`
-  29C:  Call  InterpPlayerYaw   ( 0000010E 00000003 )
+  29C:  Call  InterpPlayerYaw   (  270`  3` )
   2B0:  Wait  15`
   2BC:  Call  SetMusicTrack ( 00000000 .Song:BowserTheme 00000000 00000008 )
   2D8:  Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
-  2EC:  Call  SetPanTarget  ( .Cam:Default FFFFFEB6 00000000 00000000 )
-  308:  Call  SetCamPosA    ( .Cam:Default FFFFFEB6 00000020 )
+  2EC:  Call  SetPanTarget  ( .Cam:Default  -330`  0`  0` )
+  308:  Call  SetCamPosA    ( .Cam:Default  -330`  32` )
   320:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   334:  Wait  3`
   340:  Exec  $Script_80244C28
@@ -1628,15 +1631,15 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
   370:  Thread
   378:  	Call  SetNpcAnimation   ( 00000000 00800004 )
   38C:  	Call  SetNpcSpeed   ( 00000000 *Fixed[3.0] )
-  3A0:  	Call  NpcMoveTo     ( 00000000 FFFFFED4 FFFFFFEC 00000000 )
-  3BC:  	Call  NpcMoveTo     ( 00000000 FFFFFFCE 0000001E 00000000 )
+  3A0:  	Call  NpcMoveTo     ( 00000000  -300`  -20`  0` )
+  3BC:  	Call  NpcMoveTo     ( 00000000  -50`  30`  0` )
   3D8:  	Call  SetNpcAnimation   ( 00000000 00800002 )
   3EC:  	Call  SetNpcVar     ( 00000000 00000000 00000000 )
   404:  EndThread
   40C:  Thread
   414:  	Call  SetNpcAnimation   ( 00000001 00600002 )
   428:  	Call  SetNpcSpeed       ( 00000001 *Fixed[3.0] )
-  43C:  	Call  NpcMoveTo ( 00000001 FFFFFF92 0000001E 00000000 )
+  43C:  	Call  NpcMoveTo ( 00000001  -110`  30`  0` )
   458:  	Call  SetNpcAnimation   ( 00000001 00600001 )
   46C:  EndThread
   474:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
@@ -1681,13 +1684,13 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
   738:  Wait  15`
   744:  Thread
   74C:  	Call  SetNpcAnimation   ( 00000000 00800004 )
-  760:  	Call  NpcMoveTo ( 00000000 FFFFFE3E 0000001E 00000000 )
+  760:  	Call  NpcMoveTo ( 00000000  -450`  30`  0` )
   77C:  EndThread
   784:  Thread
-  78C:  	Call  InterpNpcYaw      ( 00000001 0000010E 00000005 )
+  78C:  	Call  InterpNpcYaw      ( 00000001  270`  5` )
   7A4:  	Wait  60`
   7B0:  	Call  SetNpcAnimation   ( 00000001 00600002 )
-  7C4:  	Call  NpcMoveTo ( 00000001 FFFFFE02 0000001E 00000000 )
+  7C4:  	Call  NpcMoveTo ( 00000001  -510`  30`  0` )
   7E0:  	Call  SetNpcAnimation   ( 00000001 00600001 )
   7F4:  EndThread
   7FC:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -1712,9 +1715,9 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
   964:  Call  PlaySoundAt   ( 000001D8 00000000 *Var0 *Var1 *Var2 )
   984:  Wait  10`
   990:  Call  PlaySoundAtPlayer     ( 00000263 00000000 )
-  9A4:  Call  ShowEmote     ( 00000000 .Emote:Question FFFFFFD3 00000014 00000000 00000000 00000000 00000000 00000000 )
+  9A4:  Call  ShowEmote     ( 00000000 .Emote:Question  -45`  20` .False  0`  0`  0`  0` )
   9D4:  Wait  20`
-  9E0:  Call  InterpPlayerYaw       ( 00000087 00000005 )
+  9E0:  Call  InterpPlayerYaw       (  135`  5` )
   9F4:  Wait  10`
   A00:  Call  SetPlayerAnimation    ( 000C0000 )
   A10:  Wait  10`
@@ -1723,21 +1726,21 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
   A4C:  Set   *AreaFlag[003]  .False
   A5C:  Exec  $Script_80244D88 *VarA
   A6C:  Thread
-  A74:  	Call  UseSettingsFrom   ( .Cam:Default 0000019D 00000000 FFFFFFBE )
+  A74:  	Call  UseSettingsFrom   ( .Cam:Default  413`  0`  -66` )
   A90:  	Call  SetCamType    ( .Cam:Default 00000004 .False )
-  AA8:  	Call  SetCamPosA    ( .Cam:Default 00000152 0000002C )
-  AC0:  	Call  SetCamPosB    ( .Cam:Default 0000019D FFFFFFBE )
+  AA8:  	Call  SetCamPosA    ( .Cam:Default  338`  44` )
+  AC0:  	Call  SetCamPosB    ( .Cam:Default  413`  -66` )
   AD8:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
   AEC:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   B04:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   B18:  EndThread
   B20:  Wait  10`
   B2C:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  B3C:  Call  PlayerMoveTo      ( 000000B3 FFFFFFFC 00000000 )
-  B54:  Call  PlayerMoveTo      ( 000001B7 FFFFFFF0 00000000 )
+  B3C:  Call  PlayerMoveTo      (  179`  -4`  0` )
+  B54:  Call  PlayerMoveTo      (  439`  -16`  0` )
   B6C:  Set   *AreaFlag[003]  .True
   B7C:  Kill  *VarA
-  B88:  Call  InterpNpcYaw      ( .Npc:Partner 0000010E 00000000 )
+  B88:  Call  InterpNpcYaw      ( .Npc:Partner  270`  0` )
   BA0:  Wait  15`
   BAC:  Call  SetPlayerAnimation    ( 000C000B )
   BBC:  Call  PlaySoundAtCollider   ( ~Collider:tte 000001CB 00000000 )
@@ -1774,7 +1777,7 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
   DC4:  		EndIf
   DCC:  		Wait  1`
   DD8:  	EndLoop
-  DE0:  	Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  DE0:  	Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   DF8:  EndThread
   E00:  Loop
   E0C:  	Wait  1`
@@ -1783,7 +1786,7 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
   E44:  		BreakLoop
   E4C:  	EndIf
   E54:  EndLoop
-  E5C:  Call  InterpPlayerYaw       ( 000000DC 00000005 )
+  E5C:  Call  InterpPlayerYaw       (  220`  5` )
   E70:  Call  SetPlayerAnimation    ( 000A0001 )
   E80:  Thread
   E88:  	Wait  40`
@@ -1792,8 +1795,8 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
   EB4:  Wait  10`
   EC0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   ED8:  Wait  30`
-  EE4:  Call  UseSettingsFrom   ( .Cam:Default 00000172 0000001E 00000000 )
-  F00:  Call  SetPanTarget  ( .Cam:Default 00000172 0000001E 00000000 )
+  EE4:  Call  UseSettingsFrom   ( .Cam:Default  370`  30`  0` )
+  F00:  Call  SetPanTarget  ( .Cam:Default  370`  30`  0` )
   F1C:  Call  SetCamDistance    ( .Cam:Default *Fixed[300.0] )
   F30:  Call  SetCamPosB    ( .Cam:Default *Fixed[370.0] *Fixed[32.0] )
   F48:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
@@ -1805,13 +1808,13 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
   FB0:  		BreakLoop
   FB8:  	EndIf
   FC0:  EndLoop
-  FC8:  Call  SetPanTarget  ( .Cam:Default 00000140 0000001E 00000011 )
+  FC8:  Call  SetPanTarget  ( .Cam:Default  320`  30`  17` )
   FE4:  Call  SetCamDistance        ( .Cam:Default *Fixed[200.0] )
   FF8:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-16.0] )
  1010:  Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
  1024:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
  1038:  Call  SpeakToPlayer ( .Npc:Partner 00200009 00200001 00000000 00140022 ) % Hello, Princess Peach! Pleased to meet you! My nam ...
- 1058:  Call  SetPanTarget  ( .Cam:Default 00000172 0000001E 00000011 )
+ 1058:  Call  SetPanTarget  ( .Cam:Default  370`  30`  17` )
  1074:  Call  SetCamDistance        ( .Cam:Default *Fixed[300.0] )
  1088:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-10.0] )
  10A0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
@@ -1819,14 +1822,14 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
  10C0:  Call  SpeakToPlayer ( .Npc:Player 000D0004 000A0001 00000005 00140023 ) % But you're... You're a Star Kid, aren't you? How'd ...
  10E0:  Call  SpeakToPlayer ( .Npc:Partner 00200009 00200001 00000000 00140024 ) % I came from Star Haven to grant your wish! It's ou ...
  1100:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.4] )
- 1114:  Call  SetPanTarget  ( .Cam:Default 0000015E 0000001E 00000011 )
- 1130:  Call  PlayerMoveTo  ( 0000017C 00000000 0000001E )
+ 1114:  Call  SetPanTarget  ( .Cam:Default  350`  30`  17` )
+ 1130:  Call  PlayerMoveTo  (  380`  0`  30` )
  1148:  Call  SpeakToPlayer ( .Npc:Player 000D0004 000A0001 00000005 00140025 ) % Oh! You came because I wished that somebody could  ...
  1168:  Call  SpeakToPlayer ( .Npc:Partner 00200009 00200001 00000000 00140026 ) % Yes, of course!
  1188:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
- 119C:  Call  SetCamDistance        ( .Cam:Default 000000C8 )
- 11B0:  Call  SetCamPitch   ( .Cam:Default 00000011 FFFFFFF2 )
- 11C8:  Call  SetPanTarget  ( .Cam:Default 0000017C 0000001E 00000011 )
+ 119C:  Call  SetCamDistance        ( .Cam:Default  200` )
+ 11B0:  Call  SetCamPitch   ( .Cam:Default  17`  -14` )
+ 11C8:  Call  SetPanTarget  ( .Cam:Default  380`  30`  17` )
  11E4:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
  11F8:  Call  SetPlayerAnimation    ( 000C0000 )
  1208:  Wait  10`
@@ -1837,14 +1840,14 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
  1260:  Call  SetPlayerAnimation    ( 000A0001 )
  1270:  Call  SetNpcAnimation       ( .Npc:Partner 00200010 )
  1284:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
- 1298:  Call  SetCamPitch   ( .Cam:Default 00000011 FFFFFFF0 )
- 12B0:  Call  SetPanTarget  ( .Cam:Default 00000140 0000001E 00000011 )
+ 1298:  Call  SetCamPitch   ( .Cam:Default  17`  -16` )
+ 12B0:  Call  SetPanTarget  ( .Cam:Default  320`  30`  17` )
  12CC:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
  12E0:  Call  SpeakToPlayer ( .Npc:Partner 00200010 00200010 00000000 00140028 ) % ...... Uh...sorry... That's a little much for a no ...
  1300:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
- 1314:  Call  SetCamDistance        ( .Cam:Default 0000012C )
- 1328:  Call  SetCamPitch   ( .Cam:Default 00000011 FFFFFFF6 )
- 1340:  Call  SetPanTarget  ( .Cam:Default 0000015E 0000001E 00000011 )
+ 1314:  Call  SetCamDistance        ( .Cam:Default  300` )
+ 1328:  Call  SetCamPitch   ( .Cam:Default  17`  -10` )
+ 1340:  Call  SetPanTarget  ( .Cam:Default  350`  30`  17` )
  135C:  Call  SetPlayerAnimation    ( 000C0000 )
  136C:  Wait  10`
  1378:  Call  SetPlayerAnimation    ( 000C0026 )
@@ -1863,7 +1866,7 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
  146C:  Wait  30`
  1478:  Call  SetPlayerAnimation    ( 000C000D )
  1488:  Call  PlaySoundAtPlayer     ( 00000262 00000000 )
- 149C:  Call  ShowEmote     ( 00000000 .Emote:Exclamation FFFFFFD3 0000001E 00000000 00000000 00000000 00000000 00000000 )
+ 149C:  Call  ShowEmote     ( 00000000 .Emote:Exclamation  -45`  30` .False  0`  0`  0`  0` )
  14CC:  Wait  30`
  14D8:  Call  SetPlayerAnimation    ( 000A0001 )
  14E8:  Call  SetPlayerAnimation    ( 000C0000 )
@@ -1886,10 +1889,10 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
  1624:  Call  SetCamSpeed   ( .Cam:Default *Fixed[5.0] )
  1638:  Call  SetCamDistance        ( .Cam:Default *Fixed[200.0] )
  164C:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-12.5] )
- 1664:  Call  SetPanTarget  ( .Cam:Default 0000016D 0000001E 00000011 )
+ 1664:  Call  SetPanTarget  ( .Cam:Default  365`  30`  17` )
  1680:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
  1698:  Thread
- 16A0:  	Call  NpcFlyTo  ( .Npc:Partner 0000015E 00000032 FFFFFFFE 0000001E FFFFFFFB .Easing:Linear )
+ 16A0:  	Call  NpcFlyTo  ( .Npc:Partner  350`  50`  -2`  30`  -5` .Easing:Linear )
  16C8:  EndThread
  16D0:  Wait  40`
  16DC:  Call  SetNpcAnimation   ( .Npc:Partner 00200017 )
@@ -1917,12 +1920,12 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
  1844:  Wait  10`
  1850:  Call  SetNpcAnimation   ( .Npc:Partner 00200001 )
  1864:  Wait  20`
- 1870:  Call  InterpNpcYaw      ( .Npc:Partner 0000010E 00000000 )
+ 1870:  Call  InterpNpcYaw      ( .Npc:Partner  270`  0` )
  1888:  Call  SetNpcAnimation   ( .Npc:Partner 00200005 )
  189C:  Wait  10`
- 18A8:  Call  SetCamDistance    ( .Cam:Default 00000190 )
- 18BC:  Call  SetCamPitch       ( .Cam:Default 00000011 FFFFFFF6 )
- 18D4:  Call  SetPanTarget      ( .Cam:Default 00000163 0000001E 00000011 )
+ 18A8:  Call  SetCamDistance    ( .Cam:Default  400` )
+ 18BC:  Call  SetCamPitch       ( .Cam:Default  17`  -10` )
+ 18D4:  Call  SetPanTarget      ( .Cam:Default  355`  30`  17` )
  18F0:  Thread
  18F8:  	Loop
  1904:  		Wait  1`
@@ -1931,7 +1934,7 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
  193C:  			BreakLoop
  1944:  		EndIf
  194C:  	EndLoop
- 1954:  	Call  InterpPlayerYaw       ( 0000005A 00000005 )
+ 1954:  	Call  InterpPlayerYaw       (  90`  5` )
  1968:  	Call  SetPlayerAnimation    ( 000C0000 )
  1978:  	Wait  10`
  1984:  	Call  SetPlayerAnimation    ( 000C0026 )
@@ -1946,7 +1949,7 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
  1A14:  		EndIf
  1A1C:  		Wait  1`
  1A28:  	EndLoop
- 1A30:  	Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+ 1A30:  	Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
  1A48:  EndThread
  1A50:  Call  LoadPath  ( 0000003C $VectorList_80244BEC 00000005 .Easing:Linear )
  1A6C:  Loop
@@ -1958,21 +1961,21 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
  1AC4:  	EndIf
  1ACC:  EndLoop
  1AD4:  Call  SetNpcAnimation   ( .Npc:Partner 00200001 )
- 1AE8:  Call  InterpNpcYaw      ( .Npc:Partner 0000010E 00000000 )
+ 1AE8:  Call  InterpNpcYaw      ( .Npc:Partner  270`  0` )
  1B00:  Loop
  1B0C:  	Wait  1`
  1B18:  	If  *AreaFlag[003]  ==  .True
  1B28:  		BreakLoop
  1B30:  	EndIf
  1B38:  EndLoop
- 1B40:  Call  SetCamDistance        ( .Cam:Default 000000FA )
- 1B54:  Call  SetCamPitch   ( .Cam:Default 00000011 FFFFFFF3 )
- 1B6C:  Call  SetPanTarget  ( .Cam:Default 00000195 0000001E 00000011 )
+ 1B40:  Call  SetCamDistance        ( .Cam:Default  250` )
+ 1B54:  Call  SetCamPitch   ( .Cam:Default  17`  -13` )
+ 1B6C:  Call  SetPanTarget  ( .Cam:Default  405`  30`  17` )
  1B88:  Call  SetCamPosB    ( .Cam:Default *Fixed[400.0] *Fixed[32.0] )
  1BA0:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
  1BB4:  Call  SpeakToPlayer ( .Npc:Player 000C0001 000C0026 00000005 0014002F ) % Please tell Mario that...
  1BD4:  Call  SetNpcAnimation       ( .Npc:Partner 00200005 )
- 1BE8:  Call  NpcFlyTo      ( .Npc:Partner 000001A4 0000003C 00000000 00000014 00000000 .Easing:Linear )
+ 1BE8:  Call  NpcFlyTo      ( .Npc:Partner  420`  60`  0`  20`  0` .Easing:Linear )
  1C10:  Call  SetNpcAnimation       ( .Npc:Partner 00200001 )
  1C24:  Call  SpeakToPlayer ( .Npc:Player 000C0001 000C0026 00000005 00140030 ) % I'm fine and he shouldn't worry... ...OK? Can you  ...
  1C44:  Call  SetPlayerAnimation    ( 000C0002 )
@@ -1990,14 +1993,14 @@ PADDING: 80244BAC to 80244BB0 (00004BAC to 00004BB0)
  1CF4:  	EndLoop
  1CFC:  EndThread
  1D04:  Call  GetNpcPos     ( .Npc:Partner *Var0 *Var1 *Var2 )
- 1D20:  Call  NpcJump0      ( .Npc:Partner *Var0 *Var1 *Var2 0000000A )
+ 1D20:  Call  NpcJump0      ( .Npc:Partner *Var0 *Var1 *Var2  10` )
  1D40:  Call  SpeakToPlayer ( .Npc:Partner 00200009 00200001 00000000 00140031 ) % Of course! I'll tell him your exact words, Princes ...
  1D60:  Call  SetNpcAnimation       ( .Npc:Partner 00200005 )
  1D74:  Call  SetNpcFlagBits        ( .Npc:Partner 00000040 .True )
- 1D8C:  Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000005 )
+ 1D8C:  Call  InterpNpcYaw  ( .Npc:Partner  90`  5` )
  1DA4:  Wait  10`
  1DB0:  Call  FadeOutMusic  ( 00000000 000007D0 )
- 1DC4:  Call  NpcFlyTo      ( .Npc:Partner 00000258 00000064 FFFFFFB0 00000028 00000000 .Easing:Linear )
+ 1DC4:  Call  NpcFlyTo      ( .Npc:Partner  600`  100`  -80`  40`  0` .Easing:Linear )
  1DEC:  Wait  30`
  1DF8:  Call  GotoMap       ( $ASCII_8024A6E8 00000002 ) % kkj_26
  1E0C:  Wait  100`
@@ -2014,23 +2017,23 @@ PADDING: 80246C8C to 80246C90 (00006C8C to 00006C90)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Thread
-   28:  	Call  AdjustCam ( .Cam:Default *Fixed[0.5] 00000014 0000012C *Fixed[17.0] *Fixed[-11.0] )
+   28:  	Call  AdjustCam ( .Cam:Default *Fixed[0.5]  20`  300` *Fixed[17.0] *Fixed[-11.0] )
    4C:  EndThread
    54:  Call  DisablePartnerAI  ( 00000000 )
-   64:  Call  SetNpcPos ( .Npc:Partner FFFFFF38 0000005D FFFFFFEF )
-   80:  Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+   64:  Call  SetNpcPos ( .Npc:Partner  -200`  93`  -17` )
+   80:  Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
    98:  Thread
    A0:  	Wait  120`
-   AC:  	Call  NpcFlyTo      ( .Npc:Partner FFFFFF9C 00000028 00000000 0000003C 00000028 .Easing:Linear )
+   AC:  	Call  NpcFlyTo      ( .Npc:Partner  -100`  40`  0`  60`  40` .Easing:Linear )
    D4:  	Wait  5`
-   E0:  	Call  InterpNpcYaw  ( .Npc:Partner 0000010E 00000005 )
+   E0:  	Call  InterpNpcYaw  ( .Npc:Partner  270`  5` )
    F8:  EndThread
   100:  Loop  00000003
-  10C:  	Call  PlayerMoveTo  ( FFFFFF92 00000000 0000001E )
-  124:  	Call  PlayerMoveTo  ( FFFFFF74 00000000 0000001E )
+  10C:  	Call  PlayerMoveTo  (  -110`  0`  30` )
+  124:  	Call  PlayerMoveTo  (  -140`  0`  30` )
   13C:  EndLoop
   144:  Wait  5`
-  150:  Call  InterpPlayerYaw   ( 0000005A 00000005 )
+  150:  Call  InterpPlayerYaw   (  90`  5` )
   164:  Wait  10`
   170:  Call  SpeakToPlayer     ( .Npc:Player 000D0004 000A0001 00000005 00140033 ) % I wonder what Mario is doing right now... I wonder ...
   190:  Call  SpeakToPlayer     ( .Npc:Partner 00200009 00200001 00000000 00140034 ) % He'll be all right, Princess. Why, I bet he's savi ...
@@ -2038,7 +2041,7 @@ PADDING: 80246C8C to 80246C90 (00006C8C to 00006C90)
   1D0:  Call  SpeakToPlayer     ( .Npc:Partner 00200009 00200001 00000000 00140036 ) % But there are tons of guards just beyond your door ...
   1F0:  Call  SetPlayerAnimation    ( 000C000D )
   200:  Call  PlaySoundAtPlayer ( 00000262 00000000 )
-  214:  Call  ShowEmote ( 00000000 .Emote:Exclamation 00000000 0000001E 00000000 00000000 00000000 00000000 00000000 )
+  214:  Call  ShowEmote ( 00000000 .Emote:Exclamation  0`  30` .False  0`  0`  0`  0` )
   244:  Wait  30`
   250:  Call  SetPlayerAnimation    ( 000A0001 )
   260:  Call  SetPlayerAnimation    ( 000C0000 )
@@ -2132,8 +2135,8 @@ PADDING: 80246FDC to 80246FE0 (00006FDC to 00006FE0)
 
 #new:Script $Script_802472E4
 {
-    0:  Call  UseSettingsFrom   ( .Cam:Default FFFFFEB6 00000000 FFFFFFE2 )
-   1C:  Call  SetPanTarget  ( .Cam:Default FFFFFEB6 00000000 FFFFFFE2 )
+    0:  Call  UseSettingsFrom   ( .Cam:Default  -330`  0`  -30` )
+   1C:  Call  SetPanTarget  ( .Cam:Default  -330`  0`  -30` )
    38:  Call  SetCamDistance    ( .Cam:Default *Fixed[325.0] )
    4C:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-11.0] )
    64:  Call  SetCamPosA    ( .Cam:Default *Fixed[-310.0] *Fixed[32.0] )
@@ -2148,18 +2151,18 @@ PADDING: 80246FDC to 80246FE0 (00006FDC to 00006FE0)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  SetMusicTrack ( 00000000 .Song:BowserTheme 00000000 00000008 )
    2C:  Call  DisablePartnerAI      ( 00000000 )
-   3C:  Call  SetNpcPos     ( .Npc:Partner 0000006E 00000000 FFFFFF42 )
-   58:  Call  SetNpcYaw     ( .Npc:Partner 0000010E )
-   6C:  Call  InterpPlayerYaw       ( 0000010E 00000000 )
+   3C:  Call  SetNpcPos     ( .Npc:Partner  110`  0`  -190` )
+   58:  Call  SetNpcYaw     ( .Npc:Partner  270` )
+   6C:  Call  InterpPlayerYaw       (  270`  0` )
    80:  ExecWait  $Script_802472E4
    8C:  Exec  $Script_80247028
    98:  Wait  10`
-   A4:  Call  SetNpcPos     ( 00000000 FFFFFE2A 00000000 FFFFFFE2 )
+   A4:  Call  SetNpcPos     ( 00000000  -470`  0`  -30` )
    C0:  Call  SetNpcVar     ( 00000000 00000000 00000001 )
    D8:  Thread
    E0:  	Call  SetNpcAnimation   ( 00000000 00800004 )
    F4:  	Call  SetNpcSpeed       ( 00000000 *Fixed[3.0] )
-  108:  	Call  NpcMoveTo ( 00000000 FFFFFFE2 0000001E 00000000 )
+  108:  	Call  NpcMoveTo ( 00000000  -30`  30`  0` )
   124:  	Call  SetNpcAnimation   ( 00000000 00800002 )
   138:  	Call  SetNpcVar ( 00000000 00000000 00000000 )
   150:  EndThread
@@ -2179,7 +2182,7 @@ PADDING: 80246FDC to 80246FE0 (00006FDC to 00006FE0)
   240:  Wait  1`
   24C:  Call  EndSpeech     ( 00000000 00800006 00800002 00000000 )
   268:  Call  SetPlayerAnimation    ( 000C0012 )
-  278:  Call  InterpPlayerYaw   ( 0000005A 00000003 )
+  278:  Call  InterpPlayerYaw   (  90`  3` )
   28C:  Wait  10`
   298:  Call  SpeakToPlayer ( .Npc:Player 000C0013 000C0012 00000005 0014005D ) % Well, tough luck! I'm in a very bad mood, you mons ...
   2B8:  Call  SpeakToPlayer ( 00000000 00800007 00800007 00000005 0014005E ) % Gwaa ha ha! Oh, that's rich! You know I can't do t ...
@@ -2187,37 +2190,37 @@ PADDING: 80246FDC to 80246FE0 (00006FDC to 00006FE0)
   2EC:  Call  EndSpeech     ( 00000000 00800006 00800002 00000005 )
   308:  Wait  10`
   314:  Call  SetPlayerAnimation    ( 000A0001 )
-  324:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
-  338:  Call  InterpNpcYaw  ( 00000000 0000010E 00000000 )
+  324:  Call  InterpPlayerYaw   (  270`  0` )
+  338:  Call  InterpNpcYaw  ( 00000000  270`  0` )
   350:  ExecWait  $Script_802472E4
   35C:  Wait  5`
   368:  Exec  $Script_80247184
   374:  Call  SetMusicTrack ( 00000000 .Song:KammyKoopaTheme 00000000 00000008 )
-  390:  Call  SetNpcPos     ( 00000001 FFFFFE2A 00000000 FFFFFFE2 )
+  390:  Call  SetNpcPos     ( 00000001  -470`  0`  -30` )
   3AC:  Call  SetNpcAnimation   ( 00000001 00600003 )
   3C0:  Call  SetNpcSpeed   ( 00000001 *Fixed[5.0] )
-  3D4:  Call  NpcMoveTo     ( 00000001 FFFFFEAC FFFFFFE2 00000000 )
+  3D4:  Call  NpcMoveTo     ( 00000001  -340`  -30`  0` )
   3F0:  Call  SetNpcAnimation   ( 00000001 00600001 )
   404:  Wait  10`
   410:  Call  SpeakToNpc    ( 00000001 00600004 00600001 00000000 00000000 0014005F ) % Your Nastiness!
-  434:  Call  SetCamDistance    ( .Cam:Default 0000015E )
-  448:  Call  SetPanTarget  ( .Cam:Default FFFFFFE2 00000000 FFFFFFE2 )
-  464:  Call  SetCamPosA    ( .Cam:Default FFFFFEE1 00000020 )
+  434:  Call  SetCamDistance    ( .Cam:Default  350` )
+  448:  Call  SetPanTarget  ( .Cam:Default  -30`  0`  -30` )
+  464:  Call  SetCamPosA    ( .Cam:Default  -287`  32` )
   47C:  Wait  5`
   488:  Call  SetNpcAnimation   ( 00000001 00600003 )
   49C:  Call  SetNpcSpeed   ( 00000001 *Fixed[5.0] )
-  4B0:  Call  NpcMoveTo     ( 00000001 FFFFFF92 0000001E 00000000 )
+  4B0:  Call  NpcMoveTo     ( 00000001  -110`  30`  0` )
   4CC:  Call  SetNpcAnimation   ( 00000001 00600001 )
   4E0:  Call  SpeakToNpc    ( 00000001 00600004 00600001 00000000 00000000 00140060 ) % We have a problem!
   504:  Call  SpeakToNpc    ( 00000000 00800006 00800002 00000000 00000001 00140061 ) % Why, Kammy Koopa! What's got you so riled up? You  ...
   528:  Call  SetNpcAnimation   ( 00000001 00600002 )
-  53C:  Call  NpcMoveTo     ( 00000001 FFFFFFA6 00000028 0000000A )
+  53C:  Call  NpcMoveTo     ( 00000001  -90`  40`  10` )
   558:  Call  SetNpcAnimation   ( 00000001 00600001 )
   56C:  Wait  10`
   578:  Call  SpeakToNpc    ( 00000001 00600004 00600001 00000000 00000000 00140062 ) % Psst...Psst...Psst...
   59C:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
   5B8:  Call  SetNpcAnimation   ( 00000000 0080000D )
-  5CC:  Call  NpcJump0      ( 00000000 *Var0 *Var1 *Var2 0000000A )
+  5CC:  Call  NpcJump0      ( 00000000 *Var0 *Var1 *Var2  10` )
   5EC:  Call  SetNpcAnimation   ( 00000000 00800002 )
   600:  Wait  10`
   60C:  Call  SpeakToNpc    ( 00000000 00800006 00800002 00000000 00000001 00140063 ) % Whaaaat!!? The Star Spirit flew away from Tubba Bl ...
@@ -2228,14 +2231,14 @@ PADDING: 80246FDC to 80246FE0 (00006FDC to 00006FE0)
   698:  Thread
   6A0:  	Call  SetNpcAnimation   ( 00000000 00800004 )
   6B4:  	Call  SetNpcSpeed       ( 00000000 *Fixed[3.0] )
-  6C8:  	Call  NpcMoveTo ( 00000000 FFFFFE2A FFFFFFE2 00000000 )
+  6C8:  	Call  NpcMoveTo ( 00000000  -470`  -30`  0` )
   6E4:  EndThread
   6EC:  Call  SetNpcVar ( 00000001 00000000 00000001 )
   704:  Thread
   70C:  	Wait  40`
   718:  	Call  SetNpcAnimation   ( 00000001 00600002 )
   72C:  	Call  SetNpcSpeed   ( 00000001 *Fixed[3.0] )
-  740:  	Call  NpcMoveTo     ( 00000001 FFFFFE2A FFFFFFE2 00000000 )
+  740:  	Call  NpcMoveTo     ( 00000001  -470`  -30`  0` )
   75C:  	Call  SetNpcVar     ( 00000001 00000000 00000000 )
   774:  EndThread
   77C:  Thread
@@ -2262,8 +2265,8 @@ PADDING: 80246FDC to 80246FE0 (00006FDC to 00006FE0)
   8A4:  Wait  30`
   8B0:  Call  SetMusicTrack ( 00000000 .Song:PrisonerPeachTheme 00000000 00000008 )
   8CC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-  8E0:  Call  SetCamDistance    ( .Cam:Default 0000012C )
-  8F4:  Call  SetPanTarget  ( .Cam:Default 00000014 00000000 0000001E )
+  8E0:  Call  SetCamDistance    ( .Cam:Default  300` )
+  8F4:  Call  SetPanTarget  ( .Cam:Default  20`  0`  30` )
   910:  Wait  3`
   91C:  Thread
   924:  	Loop
@@ -2273,7 +2276,7 @@ PADDING: 80246FDC to 80246FE0 (00006FDC to 00006FE0)
   964:  		EndIf
   96C:  		Wait  1`
   978:  	EndLoop
-  980:  	Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
+  980:  	Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
   998:  EndThread
   9A0:  Call  LoadPath  ( 00000050 $VectorList_80246FE0 00000006 .Easing:Linear )
   9BC:  Loop
@@ -2331,11 +2334,11 @@ PADDING: 80246FDC to 80246FE0 (00006FDC to 00006FE0)
 #new:Script $Script_80247F7C
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+   10:  Call  InterpPlayerYaw   (  270`  0` )
    24:  Call  DisablePartnerAI  ( 00000000 )
-   34:  Call  SetNpcPos ( .Npc:Partner FFFFFFD8 0000005A 00000000 )
-   50:  Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
-   68:  Call  AdjustCam ( .Cam:Default *Fixed[90.0] FFFFFFEC 000000FA *Fixed[17.0] *Fixed[-11.0] )
+   34:  Call  SetNpcPos ( .Npc:Partner  -40`  90`  0` )
+   50:  Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
+   68:  Call  AdjustCam ( .Cam:Default *Fixed[90.0]  -20`  250` *Fixed[17.0] *Fixed[-11.0] )
    8C:  Call  LoadPath  ( 00000018 $VectorList_80247F10 00000003 .Easing:Linear )
    A8:  Loop
    B4:  	Call  GetNextPathPos ( )
@@ -2386,17 +2389,17 @@ PADDING: 802482B4 to 802482C0 (000082B4 to 000082C0)
 #new:Script $Script_802482C0
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  InterpPlayerYaw       ( 0000010E 00000000 )
+   10:  Call  InterpPlayerYaw       (  270`  0` )
    24:  Call  DisablePartnerAI      ( 00000000 )
-   34:  Call  SetNpcPos     ( .Npc:Partner FFFFFFC4 0000001E 00000000 )
-   50:  Call  SetNpcYaw     ( .Npc:Partner 0000005A )
-   64:  Call  AdjustCam     ( .Cam:Default *Fixed[90.0] FFFFFFEC 000000FA *Fixed[17.0] *Fixed[-11.0] )
+   34:  Call  SetNpcPos     ( .Npc:Partner  -60`  30`  0` )
+   50:  Call  SetNpcYaw     ( .Npc:Partner  90` )
+   64:  Call  AdjustCam     ( .Cam:Default *Fixed[90.0]  -20`  250` *Fixed[17.0] *Fixed[-11.0] )
    88:  Wait  30`
    94:  Call  SpeakToPlayer ( .Npc:Player 000D0004 000A0001 00000005 00140097 ) % Hey... Twink. Those guards have stopped paying att ...
    B4:  Call  SpeakToPlayer ( .Npc:Partner 00200009 00200001 00000000 00140098 ) % Do you think it's still safe to use that secret pa ...
    D4:  Call  SpeakToPlayer ( .Npc:Player 000D0004 000A0001 00000005 00140099 ) % It's still all right, Twink. Bowser hasn't noticed ...
    F4:  Thread
-   FC:  	Call  NpcFlyTo  ( .Npc:Partner FFFFFFE2 00000037 0000001E 0000001E FFFFFFFB .Easing:Linear )
+   FC:  	Call  NpcFlyTo  ( .Npc:Partner  -30`  55`  30`  30`  -5` .Easing:Linear )
   124:  	Call  EnablePartnerAI ( )
   130:  EndThread
   138:  Call  ResetCam  ( .Cam:Default *Fixed[2.0] )
@@ -2411,12 +2414,12 @@ PADDING: 8024842C to 80248430 (0000842C to 00008430)
 #new:Script $Script_80248430
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+   10:  Call  InterpPlayerYaw   (  270`  0` )
    24:  Call  DisablePartnerAI  ( 00000000 )
-   34:  Call  SetNpcPos     ( .Npc:Partner FFFFFF56 00000028 FFFFFFFB )
-   50:  Call  InterpNpcYaw  ( .Npc:Partner 0000005A 00000000 )
-   68:  Call  UseSettingsFrom   ( .Cam:Default FFFFFF74 00000000 00000000 )
-   84:  Call  SetPanTarget  ( .Cam:Default FFFFFF74 00000000 00000000 )
+   34:  Call  SetNpcPos     ( .Npc:Partner  -170`  40`  -5` )
+   50:  Call  InterpNpcYaw  ( .Npc:Partner  90`  0` )
+   68:  Call  UseSettingsFrom   ( .Cam:Default  -140`  0`  0` )
+   84:  Call  SetPanTarget  ( .Cam:Default  -140`  0`  0` )
    A0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    B4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    CC:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -2428,13 +2431,13 @@ PADDING: 8024842C to 80248430 (0000842C to 00008430)
   140:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   154:  EndThread
   15C:  Loop  00000002
-  168:  	Call  PlayerMoveTo  ( FFFFFF92 00000000 00000019 )
+  168:  	Call  PlayerMoveTo  (  -110`  0`  25` )
   180:  	Wait  5`
-  18C:  	Call  PlayerMoveTo  ( FFFFFF7E 00000000 00000019 )
+  18C:  	Call  PlayerMoveTo  (  -130`  0`  25` )
   1A4:  	Wait  5`
   1B0:  EndLoop
-  1B8:  Call  PlayerMoveTo      ( FFFFFF92 00000000 00000019 )
-  1D0:  Call  InterpPlayerYaw   ( 0000010E 00000005 )
+  1B8:  Call  PlayerMoveTo      (  -110`  0`  25` )
+  1D0:  Call  InterpPlayerYaw   (  270`  5` )
   1E4:  Call  SpeakToPlayer     ( .Npc:Player 000D0004 000A0001 00000005 001400EB ) % ... ...Hey, Twink... How would you feel about snea ...
   204:  Call  SpeakToPlayer     ( .Npc:Partner 00200009 00200001 00000000 001400EC ) % Princess Peach! You've gotten so bold! And here I  ...
   224:  Call  SetPlayerAnimation    ( 000C0000 )
@@ -2446,7 +2449,7 @@ PADDING: 8024842C to 80248430 (0000842C to 00008430)
   28C:  Call  SetPlayerAnimation    ( 000A0001 )
   29C:  Call  SpeakToPlayer     ( .Npc:Partner 00200009 00200001 00000000 001400EE ) % OK, OK... ...I believe you, Peach. You're the prin ...
   2BC:  Thread
-  2C4:  	Call  NpcFlyTo  ( .Npc:Partner FFFFFF74 00000037 00000000 0000001E FFFFFFFB .Easing:Linear )
+  2C4:  	Call  NpcFlyTo  ( .Npc:Partner  -140`  55`  0`  30`  -5` .Easing:Linear )
   2EC:  	Call  EnablePartnerAI ( )
   2F8:  EndThread
   300:  Call  ResetCam  ( .Cam:Default *Fixed[2.0] )
@@ -2461,12 +2464,12 @@ PADDING: 80248764 to 80248770 (00008764 to 00008770)
 #new:Script $Script_80248770
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+   10:  Call  InterpPlayerYaw   (  270`  0` )
    24:  Call  DisablePartnerAI  ( 00000000 )
-   34:  Call  SetNpcPos ( .Npc:Partner FFFFFF74 00000019 00000000 )
-   50:  Call  SetNpcYaw ( .Npc:Partner 0000005A )
-   64:  Call  UseSettingsFrom   ( .Cam:Default FFFFFF9C 00000000 00000000 )
-   80:  Call  SetPanTarget      ( .Cam:Default FFFFFF9C 00000000 00000000 )
+   34:  Call  SetNpcPos ( .Npc:Partner  -140`  25`  0` )
+   50:  Call  SetNpcYaw ( .Npc:Partner  90` )
+   64:  Call  UseSettingsFrom   ( .Cam:Default  -100`  0`  0` )
+   80:  Call  SetPanTarget      ( .Cam:Default  -100`  0`  0` )
    9C:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    B0:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    C8:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
@@ -2483,7 +2486,7 @@ PADDING: 80248764 to 80248770 (00008764 to 00008770)
   18C:  Call  SetPlayerAnimation    ( 000A0001 )
   19C:  Call  SpeakToPlayer     ( .Npc:Partner 00200009 00200001 00000000 00140130 ) % Yeah... I bet you can... Why don't you try it out? ...
   1BC:  Thread
-  1C4:  	Call  NpcFlyTo  ( .Npc:Partner FFFFFFA6 00000037 00000000 0000001E FFFFFFFB .Easing:Linear )
+  1C4:  	Call  NpcFlyTo  ( .Npc:Partner  -90`  55`  0`  30`  -5` .Easing:Linear )
   1EC:  	Call  EnablePartnerAI ( )
   1F8:  EndThread
   200:  Call  ResetCam  ( .Cam:Default *Fixed[2.0] )
@@ -2524,27 +2527,27 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
    78:  	Sub   *Var2  00000002
    88:  	Call  SetNpcAnimation   ( 00000001 00580006 )
    9C:  	Call  SetNpcSpeed   ( 00000001 *Fixed[5.0] )
-   B0:  	Call  NpcMoveTo     ( 00000001 *Var0 00000046 00000000 )
+   B0:  	Call  NpcMoveTo     ( 00000001 *Var0  70`  0` )
    CC:  	Call  NpcFacePlayer ( 00000001 00000005 )
-   E0:  	Call  NpcMoveTo     ( 00000001 *Var0 *Var2 00000000 )
+   E0:  	Call  NpcMoveTo     ( 00000001 *Var0 *Var2  0` )
    FC:  	Call  SetNpcAnimation   ( 00000001 00580001 )
   110:  EndThread
-  118:  Call  SetNpcVar ( 00000002 00000000 00000001 )
+  118:  Call  SetNpcVar ( .NpcID:WorldKoopatrol_02 00000000 00000001 )
   130:  Thread
   138:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   150:  	Add   *Var0  0000001A
   160:  	Add   *Var2  00000002
-  170:  	Call  SetNpcAnimation   ( 00000002 00580006 )
-  184:  	Call  SetNpcSpeed   ( 00000002 *Fixed[5.0] )
-  198:  	Call  NpcMoveTo     ( 00000002 *Var0 00000046 00000000 )
-  1B4:  	Call  NpcFacePlayer ( 00000002 00000005 )
-  1C8:  	Call  NpcMoveTo     ( 00000002 *Var0 *Var2 00000000 )
-  1E4:  	Call  SetNpcAnimation   ( 00000002 00580001 )
-  1F8:  	Call  SetNpcVar     ( 00000002 00000000 00000000 )
+  170:  	Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_02 00580006 )
+  184:  	Call  SetNpcSpeed   ( .NpcID:WorldKoopatrol_02 *Fixed[5.0] )
+  198:  	Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_02 *Var0  70`  0` )
+  1B4:  	Call  NpcFacePlayer ( .NpcID:WorldKoopatrol_02 00000005 )
+  1C8:  	Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_02 *Var0 *Var2  0` )
+  1E4:  	Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_02 00580001 )
+  1F8:  	Call  SetNpcVar     ( .NpcID:WorldKoopatrol_02 00000000 00000000 )
   210:  EndThread
   218:  Loop
   224:  	Wait  1`
-  230:  	Call  GetNpcVar ( 00000002 00000000 *Var0 )
+  230:  	Call  GetNpcVar ( .NpcID:WorldKoopatrol_02 00000000 *Var0 )
   248:  	If  *Var0  ==  00000000
   258:  		BreakLoop
   260:  	EndIf
@@ -2574,21 +2577,21 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
    E4:  	Call  SetNpcAnimation   ( 00000001 00580001 )
    F8:  EndThread
   100:  Thread
-  108:  	Call  SetNpcAnimation   ( 00000002 00580018 )
-  11C:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+  108:  	Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_02 00580018 )
+  11C:  	Call  GetNpcPos ( .NpcID:WorldKoopatrol_02 *Var0 *Var1 *Var2 )
   138:  	Loop  00000005
   144:  		Loop  00000005
   150:  			Sub   *Var0  00000002
-  160:  			Call  SetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+  160:  			Call  SetNpcPos ( .NpcID:WorldKoopatrol_02 *Var0 *Var1 *Var2 )
   17C:  			Wait  1`
   188:  		EndLoop
   190:  		Loop  00000005
   19C:  			Add   *Var0  00000002
-  1AC:  			Call  SetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+  1AC:  			Call  SetNpcPos ( .NpcID:WorldKoopatrol_02 *Var0 *Var1 *Var2 )
   1C8:  			Wait  1`
   1D4:  		EndLoop
   1DC:  	EndLoop
-  1E4:  	Call  SetNpcAnimation   ( 00000002 00580001 )
+  1E4:  	Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_02 00580001 )
   1F8:  EndThread
   200:  Thread
   208:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -2612,19 +2615,19 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
   354:  Set   *Var0  00000000
   364:  Set   *Var1  0000002D
   374:  Loop  00000014
-  380:  	Call  InterpPlayerYaw   ( *Var0 00000000 )
+  380:  	Call  InterpPlayerYaw   ( *Var0  0` )
   394:  	Add   *Var0  *Var1
   3A4:  	Add   *Var1  00000002
   3B4:  	Wait  1`
   3C0:  EndLoop
   3C8:  Call  SetPlayerAnimation    ( 000C001E )
   3D8:  Loop  00000014
-  3E4:  	Call  InterpPlayerYaw   ( *Var0 00000000 )
+  3E4:  	Call  InterpPlayerYaw   ( *Var0  0` )
   3F8:  	Add   *Var0  *Var1
   408:  	Sub   *Var1  00000002
   418:  	Wait  1`
   424:  EndLoop
-  42C:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  42C:  Call  InterpPlayerYaw   (  270`  0` )
   440:  Return
   448:  End
 }
@@ -2635,13 +2638,13 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
     8:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
    24:  	Call  SetNpcAnimation   ( 00000001 00580012 )
    38:  	Add   *Var0  0000000A
-   48:  	Call  NpcMoveTo ( 00000001 *Var0 *Var2 0000000A )
+   48:  	Call  NpcMoveTo ( 00000001 *Var0 *Var2  10` )
    64:  EndThread
    6C:  Thread
-   74:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-   90:  	Call  SetNpcAnimation   ( 00000002 00580012 )
+   74:  	Call  GetNpcPos ( .NpcID:WorldKoopatrol_02 *Var0 *Var1 *Var2 )
+   90:  	Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_02 00580012 )
    A4:  	Sub   *Var0  0000000A
-   B4:  	Call  NpcMoveTo ( 00000002 *Var0 *Var2 0000000A )
+   B4:  	Call  NpcMoveTo ( .NpcID:WorldKoopatrol_02 *Var0 *Var2  10` )
    D0:  EndThread
    D8:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    F0:  Wait  1`
@@ -2662,11 +2665,11 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
 
 #new:Script $Script_80249298
 {
-    0:  Call  InterpNpcYaw  ( 00000001 0000010E 00000003 )
+    0:  Call  InterpNpcYaw  ( 00000001  270`  3` )
    18:  Wait  10`
    24:  Thread
    2C:  	Loop
-   38:  		Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+   38:  		Call  GetNpcPos     ( .NpcID:WorldKoopatrol_02 *Var0 *Var1 *Var2 )
    54:  		Sub   *Var0  00000016
    64:  		Add   *Var1  0000001E
    74:  		Add   *Var2  00000002
@@ -2677,14 +2680,14 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
    B8:  Thread
    C0:  	Call  SetNpcAnimation   ( 00000001 00580014 )
    D4:  	Call  SetNpcSpeed   ( 00000001 *Fixed[5.0] )
-   E8:  	Call  NpcMoveTo     ( 00000001 0000016C 00000044 00000000 )
-  104:  	Call  NpcMoveTo     ( 00000001 00000054 00000044 00000000 )
+   E8:  	Call  NpcMoveTo     ( 00000001  364`  68`  0` )
+  104:  	Call  NpcMoveTo     ( 00000001  84`  68`  0` )
   120:  EndThread
   128:  Thread
-  130:  	Call  SetNpcAnimation   ( 00000002 00580014 )
-  144:  	Call  SetNpcSpeed   ( 00000002 *Fixed[5.0] )
-  158:  	Call  NpcMoveTo     ( 00000002 0000018C 00000048 00000000 )
-  174:  	Call  NpcMoveTo     ( 00000002 00000074 00000048 00000000 )
+  130:  	Call  SetNpcAnimation   ( .NpcID:WorldKoopatrol_02 00580014 )
+  144:  	Call  SetNpcSpeed   ( .NpcID:WorldKoopatrol_02 *Fixed[5.0] )
+  158:  	Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_02  396`  72`  0` )
+  174:  	Call  NpcMoveTo     ( .NpcID:WorldKoopatrol_02  116`  72`  0` )
   190:  EndThread
   198:  Return
   1A0:  End
@@ -2735,8 +2738,8 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
 
 #new:Script $Script_8024964C
 {
-    0:  Call  UseSettingsFrom   ( .Cam:Default FFFFFEAC 00000000 FFFFFFE2 )
-   1C:  Call  SetPanTarget  ( .Cam:Default FFFFFEAC 00000000 FFFFFFE2 )
+    0:  Call  UseSettingsFrom   ( .Cam:Default  -340`  0`  -30` )
+   1C:  Call  SetPanTarget  ( .Cam:Default  -340`  0`  -30` )
    38:  Call  SetCamDistance    ( .Cam:Default *Fixed[275.0] )
    4C:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-13.0] )
    64:  Call  SetCamPosA    ( .Cam:Default *Fixed[-310.0] *Fixed[32.0] )
@@ -2749,8 +2752,8 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
 
 #new:Script $Script_80249718
 {
-    0:  Call  UseSettingsFrom   ( .Cam:Default 0000017C 0000001E 0000000A )
-   1C:  Call  SetPanTarget  ( .Cam:Default 0000017C 0000001E 0000000A )
+    0:  Call  UseSettingsFrom   ( .Cam:Default  380`  30`  10` )
+   1C:  Call  SetPanTarget  ( .Cam:Default  380`  30`  10` )
    38:  Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
    4C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    60:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2765,8 +2768,8 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  DisablePartnerAI      ( 00000000 )
    30:  Call  SetMusicTrack ( 00000000 .Song:BowserTheme 00000000 00000008 )
-   4C:  Call  SetNpcPos     ( .Npc:Partner 000001B8 00000041 00000000 )
-   68:  Call  SetNpcYaw     ( .Npc:Partner 0000010E )
+   4C:  Call  SetNpcPos     ( .Npc:Partner  440`  65`  0` )
+   68:  Call  SetNpcYaw     ( .Npc:Partner  270` )
    7C:  Call  RotateModel   ( ~Model:o83 00000050 00000000 FFFFFFFF 00000000 )
    9C:  Call  RotateModel   ( ~Model:o85 00000050 00000000 00000001 00000000 )
    BC:  Call  RotateModel   ( ~Model:o84 00000050 00000000 FFFFFFFF 00000000 )
@@ -2775,9 +2778,9 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
   108:  Wait  30`
   114:  Exec  $Script_80249440
   120:  Call  SetNpcAnimation       ( 00000000 00800004 )
-  134:  Call  SetNpcPos     ( 00000000 FFFFFE2A 00000000 FFFFFFE2 )
+  134:  Call  SetNpcPos     ( 00000000  -470`  0`  -30` )
   150:  Call  SetNpcSpeed   ( 00000000 *Fixed[3.0] )
-  164:  Call  NpcMoveTo     ( 00000000 FFFFFEDE FFFFFFE2 00000000 )
+  164:  Call  NpcMoveTo     ( 00000000  -290`  -30`  0` )
   180:  Call  SetNpcAnimation       ( 00000000 00800002 )
   194:  Wait  10`
   1A0:  Call  SpeakToPlayer ( 00000000 00800006 00800002 00000000 00140161 ) % Oh, Princess Peach! Your cuddly old Bowser's here!
@@ -2793,10 +2796,10 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
   24C:  	EndIf
   254:  EndLoop
   25C:  Call  SetNpcAnimation   ( .Npc:Partner 00200002 )
-  270:  Call  SetNpcPos     ( 00000000 00000064 00000000 00000014 )
+  270:  Call  SetNpcPos     ( 00000000  100`  0`  20` )
   28C:  Call  SetNpcFlagBits    ( 00000000 00000200 .True )
   2A4:  Call  SetNpcAnimation   ( 00000000 00800004 )
-  2B8:  Call  NpcMoveTo     ( 00000000 0000012C 00000014 00000000 )
+  2B8:  Call  NpcMoveTo     ( 00000000  300`  20`  0` )
   2D4:  Call  SetNpcAnimation   ( 00000000 00800002 )
   2E8:  Wait  10`
   2F4:  Call  SetCamDistance    ( .Cam:Default *Fixed[325.0] )
@@ -2805,11 +2808,11 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
   334:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   34C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   360:  Call  SpeakToPlayer ( 00000000 00800006 00800002 00000000 00140162 ) % Can't we have a friendly conversation for a change ...
-  380:  Call  InterpPlayerYaw   ( 0000005A 00000005 )
+  380:  Call  InterpPlayerYaw   (  90`  5` )
   394:  Call  SetPlayerAnimation    ( 000C0012 )
   3A4:  Call  SpeakToPlayer ( .Npc:Player 000C0013 000C0012 00000005 00140163 ) % I have nothing to say to you.
   3C4:  Call  SpeakToPlayer ( 00000000 00800006 00800002 00000005 00140164 ) % Oh, don't be such a pill. You're stuck with me for ...
-  3E4:  Call  InterpPlayerYaw   ( 0000010E 00000005 )
+  3E4:  Call  InterpPlayerYaw   (  270`  5` )
   3F8:  Wait  10`
   404:  Call  SpeakToPlayer ( .Npc:Player 000C0013 000C0012 00000005 00140165 ) % Mario is coming, Bowser. And you can't stop him.
   424:  Call  SpeakToPlayer ( 00000000 00800007 00800007 00000005 00140166 ) % Gwaa ha ha ha!! Oh, you poor, silly girl! I'm invi ...
@@ -2820,34 +2823,34 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
   4A0:  Call  SetPlayerAnimation    ( 000A0001 )
   4B0:  ExecWait  $Script_8024964C
   4BC:  Exec  $Script_8024959C
-  4C8:  Call  SetNpcAnimation   ( 00000003 00600003 )
-  4DC:  Call  SetNpcPos     ( 00000003 FFFFFE2A 00000000 FFFFFFE2 )
+  4C8:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_03 00600003 )
+  4DC:  Call  SetNpcPos     ( .NpcID:WorldKammy_03  -470`  0`  -30` )
   4F8:  Call  SetNpcSpeed   ( 00000000 *Fixed[5.0] )
-  50C:  Call  NpcMoveTo     ( 00000003 FFFFFEAC FFFFFFE2 00000000 )
-  528:  Call  SetNpcAnimation   ( 00000003 00600001 )
+  50C:  Call  NpcMoveTo     ( .NpcID:WorldKammy_03  -340`  -30`  0` )
+  528:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_03 00600001 )
   53C:  Wait  10`
-  548:  Call  SpeakToNpc    ( 00000003 00600004 00600001 00000000 00000000 00140168 ) % Your Raunchiness! We have an emergency!
+  548:  Call  SpeakToNpc    ( .NpcID:WorldKammy_03 00600004 00600001 00000000 00000000 00140168 ) % Your Raunchiness! We have an emergency!
   56C:  Call  SetNpcAnimation   ( 00000000 00800002 )
-  580:  Call  SetNpcYaw     ( 00000000 0000010E )
-  594:  Call  SetNpcYaw     ( .Npc:Partner 0000010E )
-  5A8:  Call  UseSettingsFrom   ( .Cam:Default 000000FA 0000001E 0000000A )
-  5C4:  Call  SetPanTarget  ( .Cam:Default 000000FA 0000001E 0000000A )
+  580:  Call  SetNpcYaw     ( 00000000  270` )
+  594:  Call  SetNpcYaw     ( .Npc:Partner  270` )
+  5A8:  Call  UseSettingsFrom   ( .Cam:Default  250`  30`  10` )
+  5C4:  Call  SetPanTarget  ( .Cam:Default  250`  30`  10` )
   5E0:  Call  SetCamDistance    ( .Cam:Default *Fixed[325.0] )
   5F4:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-11.0] )
   60C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   624:  Wait  10`
-  630:  Call  SetNpcPos     ( 00000003 00000032 00000000 FFFFFFF6 )
-  64C:  Call  SetNpcAnimation   ( 00000003 00600003 )
-  660:  Call  NpcMoveTo     ( 00000003 000000B4 FFFFFFF6 00000000 )
-  67C:  Call  SetNpcAnimation   ( 00000003 00600001 )
+  630:  Call  SetNpcPos     ( .NpcID:WorldKammy_03  50`  0`  -10` )
+  64C:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_03 00600003 )
+  660:  Call  NpcMoveTo     ( .NpcID:WorldKammy_03  180`  -10`  0` )
+  67C:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_03 00600001 )
   690:  Wait  10`
-  69C:  Call  SpeakToNpc    ( 00000000 00800006 00800002 00000000 00000003 00140169 ) % Grr! It'd better be important! I'm right in the mi ...
-  6C0:  Call  SpeakToNpc    ( 00000003 00600004 00600001 00000000 00000000 0014016A ) % Uh... Mario has now saved all of the Star Spirits! ...
+  69C:  Call  SpeakToNpc    ( 00000000 00800006 00800002 00000000 .NpcID:WorldKammy_03 00140169 ) % Grr! It'd better be important! I'm right in the mi ...
+  6C0:  Call  SpeakToNpc    ( .NpcID:WorldKammy_03 00600004 00600001 00000000 00000000 0014016A ) % Uh... Mario has now saved all of the Star Spirits! ...
   6E4:  Call  SetNpcAnimation   ( 00000000 0080000D )
   6F8:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
-  714:  Call  NpcJump0      ( 00000000 *Var0 *Var1 *Var2 0000000A )
+  714:  Call  NpcJump0      ( 00000000 *Var0 *Var1 *Var2  10` )
   734:  Call  SetNpcAnimation   ( 00000000 00800002 )
-  748:  Call  SpeakToNpc    ( 00000000 00800006 00800002 00000000 00000003 0014016B ) % What! Gah! Mar-i-ooooo! OK. Listen, Kammy Koopa. S ...
+  748:  Call  SpeakToNpc    ( 00000000 00800006 00800002 00000000 .NpcID:WorldKammy_03 0014016B ) % What! Gah! Mar-i-ooooo! OK. Listen, Kammy Koopa. S ...
   76C:  Wait  10`
   778:  Thread
   780:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -2857,14 +2860,14 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
   7E4:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   7FC:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   810:  EndThread
-  818:  Call  InterpNpcYaw  ( 00000000 0000010E 0000000A )
+  818:  Call  InterpNpcYaw  ( 00000000  270`  10` )
   830:  Wait  10`
   83C:  Call  SpeakToPlayer ( 00000000 00800006 00800002 00000000 0014016C ) % Princess Peach, why don't you come with me to watc ...
   85C:  Wait  10`
-  868:  Call  SetNpcPos     ( 00000001 00000030 00000000 00000046 )
-  884:  Call  SetNpcPos     ( 00000002 00000064 00000000 00000046 )
+  868:  Call  SetNpcPos     ( 00000001  48`  0`  70` )
+  884:  Call  SetNpcPos     ( .NpcID:WorldKoopatrol_02  100`  0`  70` )
   8A0:  Call  SetNpcFlagBits    ( 00000001 00000200 .True )
-  8B8:  Call  SetNpcFlagBits    ( 00000002 00000200 .True )
+  8B8:  Call  SetNpcFlagBits    ( .NpcID:WorldKoopatrol_02 00000200 .True )
   8D0:  Wait  10`
   8DC:  ExecWait  $Script_80248A10
   8E8:  ExecWait  $Script_80248C9C
@@ -2881,17 +2884,17 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
   98C:  Call  SpeakToPlayer ( .Npc:Partner 0020000A 00200002 00000005 0014016E ) % You big...Koopa! Show some respect to the princess ...
   9AC:  Call  SetNpcVar     ( 00000000 00000000 00000000 )
   9C4:  Thread
-  9CC:  	Call  NpcFlyTo  ( .Npc:Partner 0000019A 00000050 0000000A 00000007 00000000 .Easing:Linear )
+  9CC:  	Call  NpcFlyTo  ( .Npc:Partner  410`  80`  10`  7`  0` .Easing:Linear )
   9F4:  	Loop  00000002
-  A00:  		Call  NpcFlyTo      ( .Npc:Partner 00000190 00000046 0000000A 00000005 00000000 .Easing:Linear )
+  A00:  		Call  NpcFlyTo      ( .Npc:Partner  400`  70`  10`  5`  0` .Easing:Linear )
   A28:  		Call  PlayEffect    ( ~FX:Steam:TinyOutward 00000190 00000046 0000000A 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  A6C:  		Call  NpcFlyTo      ( .Npc:Partner 0000019A 00000050 0000000A 00000005 00000000 .Easing:Linear )
+  A6C:  		Call  NpcFlyTo      ( .Npc:Partner  410`  80`  10`  5`  0` .Easing:Linear )
   A94:  	EndLoop
-  A9C:  	Call  NpcFlyTo  ( .Npc:Partner 00000168 00000050 0000000A 00000007 00000000 .Easing:Linear )
+  A9C:  	Call  NpcFlyTo  ( .Npc:Partner  360`  80`  10`  7`  0` .Easing:Linear )
   AC4:  	Loop
-  AD0:  		Call  NpcFlyTo  ( .Npc:Partner 00000168 00000046 0000000A 00000005 00000000 .Easing:Linear )
+  AD0:  		Call  NpcFlyTo  ( .Npc:Partner  360`  70`  10`  5`  0` .Easing:Linear )
   AF8:  		Call  PlayEffect    ( ~FX:Steam:TinyOutward 00000168 00000046 0000000A 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  B3C:  		Call  NpcFlyTo  ( .Npc:Partner 0000015E 00000050 0000000A 00000005 00000000 .Easing:Linear )
+  B3C:  		Call  NpcFlyTo  ( .Npc:Partner  350`  80`  10`  5`  0` .Easing:Linear )
   B64:  		Call  GetNpcVar ( 00000000 00000000 *Var0 )
   B7C:  		If  *Var0  ==  00000001
   B8C:  			BreakLoop
@@ -2911,15 +2914,15 @@ PADDING: 802489A4 to 802489B0 (000089A4 to 000089B0)
   C70:  	EndIf
   C78:  EndLoop
   C80:  Call  SetNpcAnimation   ( 00000000 00800004 )
-  C94:  Call  NpcMoveTo     ( 00000000 00000136 00000014 00000005 )
+  C94:  Call  NpcMoveTo     ( 00000000  310`  20`  5` )
   CB0:  Call  SetNpcAnimation   ( 00000000 00800016 )
   CC4:  Wait  3`
-  CD0:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  CD0:  Call  InterpPlayerYaw   (  90`  0` )
   CE4:  Call  PlaySoundAt   ( 000000E1 00000000 0000015E 00000050 0000000A )
   D04:  Call  PlayEffect    ( ~FX:Firework:White 0000015E 00000050 0000000A 00000001 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   D48:  Call  SetNpcFlagBits    ( .Npc:Partner 00000040 .True )
   D60:  Call  SetNpcSpeed   ( .Npc:Partner *Fixed[7.5] )
-  D74:  Call  NpcFlyTo      ( .Npc:Partner 000001F4 00000082 0000000A 00000000 00000000 .Easing:Linear )
+  D74:  Call  NpcFlyTo      ( .Npc:Partner  500`  130`  10`  0`  0` .Easing:Linear )
   D9C:  Call  SpeakToPlayer ( .Npc:Player 000C001E 000C001E 00000005 00140171 ) % Twiiiiink!
   DBC:  Wait  10`
   DC8:  Call  SetNpcAnimation   ( 00000000 00800002 )

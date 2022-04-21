@@ -1,6 +1,7 @@
 % Script File: isk_03.mscr
 % Decoded from: 0 to 17E0 (isk_03)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %  369.0   50.0  408.0   59.0
@@ -63,8 +64,8 @@
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:isk_03 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  If  *GB_StoryProgress  <  .Story:Ch2_DrainedFirstSandRoom % FFFFFFC3
@@ -116,12 +117,12 @@ PADDING: 802403B8 to 802403C0 (000003B8 to 000003C0)
 #new:Script $Script_802404AC
 {
     0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
-   14:  Call  UseSettingsFrom   ( .Cam:Default 000001C6 00000023 0000011D )
-   30:  Call  SetCamDistance    ( .Cam:Default 00000190 )
-   44:  Call  SetCamPosA    ( .Cam:Default 000000FA 00000028 )
-   5C:  Call  SetCamPosB    ( .Cam:Default 00000236 FFFFFFCE )
+   14:  Call  UseSettingsFrom   ( .Cam:Default  454`  35`  285` )
+   30:  Call  SetCamDistance    ( .Cam:Default  400` )
+   44:  Call  SetCamPosA    ( .Cam:Default  250`  40` )
+   5C:  Call  SetCamPosB    ( .Cam:Default  566`  -50` )
    74:  Call  SetCamPitch   ( .Cam:Default *Fixed[13.6] *Fixed[-1.5] )
-   8C:  Call  SetPanTarget  ( .Cam:Default 000001AD 00000023 00000116 )
+   8C:  Call  SetPanTarget  ( .Cam:Default  429`  35`  278` )
    A8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    C0:  Return
    C8:  End
@@ -131,7 +132,7 @@ PADDING: 802403B8 to 802403C0 (000003B8 to 000003C0)
 {
     0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.5] )
    14:  Call  SetCamPitch   ( .Cam:Default *Fixed[3.4] *Fixed[-5.5] )
-   2C:  Call  SetPanTarget  ( .Cam:Default 000001AD FFFFFF67 00000116 )
+   2C:  Call  SetPanTarget  ( .Cam:Default  429`  -153`  278` )
    48:  Return
    50:  End
 }
@@ -139,7 +140,7 @@ PADDING: 802403B8 to 802403C0 (000003B8 to 000003C0)
 #new:Script $Script_802405D4
 {
     0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-   14:  Call  UseSettingsFrom   ( .Cam:Default 000001AE 00000023 00000127 )
+   14:  Call  UseSettingsFrom   ( .Cam:Default  430`  35`  295` )
    30:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    48:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    64:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -280,7 +281,7 @@ PADDING: 802403B8 to 802403C0 (000003B8 to 000003C0)
 
 #new:Script $Script_80240D5C
 {
-    0:  Call  802C971C  ( 00000043 )
+    0:  Call  MakeTransformGroup    ( ~Model:g210 )
    10:  Call  MakeLerp  ( FFFFFF38 00000000 00000078 .Easing:Linear )
    2C:  Label  A
    38:  Call  UpdateLerp ( )
@@ -312,7 +313,7 @@ PADDING: 802403B8 to 802403C0 (000003B8 to 000003C0)
 #new:Script $Script_80240EB8
 {
     0:  Wait  5`
-    C:  Call  InterpPlayerYaw       ( 000000B3 00000000 )
+    C:  Call  InterpPlayerYaw       (  179`  0` )
    20:  Call  EnableModel   ( ~Model:o1343 .True )
    34:  Call  EnableModel   ( ~Model:o1344 .True )
    48:  Call  EnableModel   ( ~Model:o1345 .True )
@@ -363,7 +364,7 @@ PADDING: 802403B8 to 802403C0 (000003B8 to 000003C0)
 #new:Script $Script_802411A0
 {
     0:  Set   *AreaFlag[001]  .False
-   10:  Call  802C971C  ( 0000003C )
+   10:  Call  MakeTransformGroup    ( ~Model:g206 )
    20:  If  *GB_StoryProgress  <  .Story:Ch2_DrainedFirstSandRoom % FFFFFFC3
    30:  	Bind  $Script_80240EB8 .Trigger:AreaFlagSet *AreaFlag[001] 00000001 00000000
    4C:  	Call  EnableModel   ( ~Model:o1343 .False )
@@ -445,7 +446,7 @@ PADDING: 802414EC to 802414F0 (000014EC to 000014F0)
    B8:  	Thread
    C0:  		Call  DisablePartnerAI  ( 00000000 )
    D0:  		Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[2.5] )
-   E4:  		Call  NpcJump0  ( .Npc:Partner 000001D6 00000032 0000010C 0000000A )
+   E4:  		Call  NpcJump0  ( .Npc:Partner  470`  50`  268`  10` )
   104:  		Wait  10`
   110:  		Call  EnablePartnerAI ( )
   11C:  	EndThread

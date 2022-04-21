@@ -1,6 +1,8 @@
 % Script File: kpa_134.mscr
 % Decoded from: 0 to 3890 (kpa_134)
 
+#define .NpcID:Toad_00              00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -654,8 +656,8 @@ PADDING: 802407E8 to 802407F0 (000007E8 to 000007F0)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80242F40 )
    84:  ExecWait  $Script_MakeEntities
@@ -736,8 +738,8 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
 
 #new:Script $Script_802410C0
 {
-    0:  Call  SetRenderMode ( ~Model:s_sui 00000016 )
-   14:  Call  SetRenderMode ( ~Model:o385 00000016 )
+    0:  Call  SetRenderMode ( ~Model:s_sui .RenderMode:Surface_XLU_Layer2 )
+   14:  Call  SetRenderMode ( ~Model:o385 .RenderMode:Surface_XLU_Layer2 )
    28:  Call  EnableModel   ( ~Model:o388 .False )
    3C:  Call  EnableModel   ( ~Model:o389 .False )
    50:  Call  TranslateModel    ( ~Model:o387 00000000 0000001E 00000000 )
@@ -794,7 +796,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
    C4:  		Get1Int  *Var2
    D0:  		Add   *Var0  *Var2
    E0:  		Add   *Var1  *Var2
-   F0:  		Call  SetPlayerPos      ( 00000032 *Var0 FFFFFFDE )
+   F0:  		Call  SetPlayerPos      (  50` *Var0  -34` )
   108:  		Call  TranslateModel    ( ~Model:o387 00000000 *Var1 00000000 )
   124:  		Wait  1`
   130:  	EndLoop
@@ -822,7 +824,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
 {
     0:  Wait  20`
     C:  Thread
-   14:  	Call  ShakeCam  ( .Cam:Default 00000000 00000078 *Fixed[1.0] )
+   14:  	Call  ShakeCam  ( .Cam:Default 00000000  120` *Fixed[1.0] )
    30:  EndThread
    38:  Thread
    40:  	Call  802CA988  ( 00000000 *Var4 *Var5 *Var6 *Var7 )
@@ -866,7 +868,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
   2D4:  Call  ModifyColliderFlags   ( 00000000 ~Collider:migi 7FFFFE00 )
   2EC:  Call  ModifyColliderFlags   ( 00000000 ~Collider:deiliaw 7FFFFE00 )
   304:  Wait  10`
-  310:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
+  310:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
   330:  Call  ResetCam  ( .Cam:Default *Fixed[90.0] )
   344:  Call  PanToTarget       ( .Cam:Default 00000000 00000000 )
   35C:  Call  DisablePlayerPhysics  ( .False )
@@ -887,7 +889,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
 {
     0:  Wait  20`
     C:  Thread
-   14:  	Call  ShakeCam  ( .Cam:Default 00000000 000000DC *Fixed[1.0] )
+   14:  	Call  ShakeCam  ( .Cam:Default 00000000  220` *Fixed[1.0] )
    30:  EndThread
    38:  Thread
    40:  	Wait  60`
@@ -971,7 +973,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
   588:  	Call  EnableModel   ( ~Model:o388 .False )
   59C:  EndThread
   5A4:  Wait  230`
-  5B0:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
+  5B0:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
   5D0:  Call  ResetCam  ( .Cam:Default *Fixed[90.0] )
   5E4:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   5FC:  Call  ModifyColliderFlags   ( 00000001 ~Collider:hidari 7FFFFE00 )
@@ -1013,7 +1015,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
    C4:  		Get1Int  *Var2
    D0:  		Add   *Var0  *Var2
    E0:  		Add   *Var1  *Var2
-   F0:  		Call  SetPlayerPos      ( 000002A8 *Var0 FFFFFFDD )
+   F0:  		Call  SetPlayerPos      (  680` *Var0  -35` )
   108:  		Call  TranslateModel    ( ~Model:o505 00000000 *Var1 00000000 )
   124:  		Wait  1`
   130:  	EndLoop
@@ -1041,7 +1043,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
 {
     0:  Wait  20`
     C:  Thread
-   14:  	Call  ShakeCam  ( .Cam:Default 00000000 00000078 *Fixed[1.0] )
+   14:  	Call  ShakeCam  ( .Cam:Default 00000000  120` *Fixed[1.0] )
    30:  EndThread
    38:  Call  EnableModel   ( ~Model:s_sui .False )
    4C:  Call  EnableModel   ( ~Model:o385 .True )
@@ -1080,7 +1082,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
   274:  Call  PlaySound ( 0000062B )
   284:  Call  802D62E4  ( 0000022B )
   294:  Wait  10`
-  2A0:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
+  2A0:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
   2C0:  Call  ResetCam  ( .Cam:Default *Fixed[90.0] )
   2D4:  Call  PanToTarget       ( .Cam:Default 00000000 00000000 )
   2EC:  Call  DisablePlayerPhysics  ( .False )
@@ -1101,7 +1103,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
 {
     0:  Wait  20`
     C:  Thread
-   14:  	Call  ShakeCam  ( .Cam:Default 00000000 000000DC *Fixed[1.0] )
+   14:  	Call  ShakeCam  ( .Cam:Default 00000000  220` *Fixed[1.0] )
    30:  EndThread
    38:  Call  EnableModel   ( ~Model:s_sui .True )
    4C:  Call  EnableModel   ( ~Model:o385 .False )
@@ -1186,7 +1188,7 @@ PADDING: 802410B4 to 802410C0 (000010B4 to 000010C0)
   59C:  	Call  EnableModel   ( ~Model:o388 .False )
   5B0:  EndThread
   5B8:  Wait  230`
-  5C4:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
+  5C4:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
   5E4:  Call  ResetCam  ( .Cam:Default *Fixed[90.0] )
   5F8:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   610:  Call  DisablePlayerPhysics  ( .False )
@@ -1222,11 +1224,11 @@ MISSING: 80242CFC to 80242D28 (00002CFC to 00002D28)
 
 #new:NpcGroup $NpcGroup_80242D50
 {
-	00000000 $NpcSettings_80242CD0 ~Vec3f:NPC_80242D50 % 0 -1000 0
+	.NpcID:Toad_00 $NpcSettings_80242CD0 ~Vec3f:NPC_Toad_00 % 0 -1000 0
 	00206D01 $Script_Init_80242D28 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80242D50
-	~AnimationTable:NPC_80242D50 % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1359,7 +1361,7 @@ PADDING: 80243404 to 80243410 (00003404 to 00003410)
 
 #new:ItemList $ItemList_80243598
 {
-	.Item:CastleKey2
+	.Item:BowserCastleKey
 	00000000
 }
 
@@ -1367,7 +1369,7 @@ PADDING: 80243404 to 80243410 (00003404 to 00003410)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf

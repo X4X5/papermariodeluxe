@@ -1,6 +1,9 @@
 % Script File: jan_12.mscr
 % Decoded from: 0 to 3700 (jan_12)
 
+#define .NpcID:JungleGuy_00         00
+#define .NpcID:JungleGuy_01         01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFC8
@@ -1343,8 +1346,8 @@ PADDING: 80241258 to 80241260 (00001258 to 00001260)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_8024337C )
    84:  ExecWait  $Script_MakeEntities
@@ -1441,8 +1444,8 @@ PADDING: 80241258 to 80241260 (00001258 to 00001260)
   4CC:  		Wait  1`
   4D8:  	EndLoop
   4E0:  	Call  GetModelCenter    ( *VarF )
-  4F0:  	Call  SetPlayerJumpscale    ( 00000001 )
-  500:  	Call  PlayerJump        ( *Var6 *Var1 *Var4 0000000A )
+  4F0:  	Call  SetPlayerJumpscale    (  1` )
+  500:  	Call  PlayerJump        ( *Var6 *Var1 *Var4  10` )
   51C:  	Call  SetPlayerActionState  ( .ActionState:Idle )
   52C:  	Call  GetModelCenter    ( *VarD )
   53C:  	Call  PlaySoundAt       ( 00002089 00000000 *Var0 *Var1 *Var2 )
@@ -1561,7 +1564,7 @@ PADDING: 80241258 to 80241260 (00001258 to 00001260)
 {
     0:  Call  GetModelCenter    ( *Var9 )
    10:  Add   *Var2  0000000A
-   20:  Call  MakeItemEntity    ( .Item:Egg2 *Var0 00000064 *Var2 .ItemSpawnMode:Fall *GF_JAN12_PullVine_Egg2 )
+   20:  Call  MakeItemEntity    ( .Item:Egg *Var0 00000064 *Var2 .ItemSpawnMode:Fall *GF_JAN12_PullVine_Egg2 )
    44:  Return
    4C:  End
 }
@@ -1877,7 +1880,7 @@ MISSING: 80242D10 to 80242D38 (00002D10 to 00002D38)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1942,19 +1945,19 @@ MISSING: 80242D10 to 80242D38 (00002D10 to 00002D38)
 
 #new:NpcGroup $NpcGroup_80242F9C
 {
-	00000000 $NpcSettings_80242E9C ~Vec3f:NPC_80242F9C % 165 0 15
+	.NpcID:JungleGuy_00 $NpcSettings_80242E9C ~Vec3f:NPC_JungleGuy_00 % 165 0 15
 	00400D00 00000000 00000000 00000000 0000010E
 	~Items:5:SleepySheep:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80242F9C
-	~AnimationTable:NPC_80242F9C % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_00
+	~AnimationTable:NPC_JungleGuy_00 % .Sprite:JungleGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242F9C[1F0]
-	00000001 $NpcSettings_80242F70 ~Vec3f:NPC_8024318C % 0 -1000 0
+	.NpcID:JungleGuy_01 $NpcSettings_80242F70 ~Vec3f:NPC_JungleGuy_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024318C
-	~AnimationTable:NPC_8024318C % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_01
+	~AnimationTable:NPC_JungleGuy_01 % .Sprite:JungleGuy
 	00000000 00000000 $ExtraAnimationList_80242D38 00000000 % no tattle string
 }
 

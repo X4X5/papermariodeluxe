@@ -1,6 +1,10 @@
 % Script File: pra_35.mscr
 % Decoded from: 0 to 44B0 (pra_35)
 
+#define .NpcID:WorldClubba_00       00
+#define .NpcID:WorldClubba_01       01
+#define .NpcID:Duplighost_04        04
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -13,7 +17,6 @@
 PADDING: 80240018 to 80240020 (00000018 to 00000020)
 00000000 00000000
 
-% Origin: HEURISTIC
 #new:Function $Function_80240020
 {
     0:  LI        V0, FEFFFFFF
@@ -30,7 +33,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  COPY      V0, A0
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240054
 {
     0:  SRA       V0, A0, 10
@@ -84,7 +86,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
     8:  COPY      S0, A0
     C:  LA        A1, $Function_80240128
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  CLEAR     A0
    20:  LW        V1, 13C (S0)
    24:  SW        V0, 0 (V1)
@@ -95,7 +97,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    38:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240128
 {
     0:  ADDIU     SP, SP, FFB0
@@ -213,7 +214,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   1C4:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802402F0
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -244,7 +244,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    1C:  BEQ       V0, R0, .o50
    20:  NOP
    24:  LA        A1, $Function_80240500
-   2C:  JAL       ~Func:create_dynamic_entity_world
+   2C:  JAL       ~Func:create_generic_entity_world
    30:  CLEAR     A0
    34:  LW        V1, 13C (S0)
    38:  SW        V0, 0 (V1)
@@ -260,7 +260,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    60:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240500
 {
     0:  ADDIU     SP, SP, FFB0
@@ -364,7 +363,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   188:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_8024068C
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -385,7 +383,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
 	27BD0140
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240870
 {
     0:  ADDIU     SP, SP, FE80
@@ -525,7 +522,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   224:  COPY      A0, S3
   228:  ADDIU     A1, SP, 120
   22C:  ADDIU     A2, SP, 124
-  230:  JAL       ~Func:player_get_spin_history
+  230:  JAL       ~Func:phys_get_spin_history
   234:  ADDIU     A3, SP, 128
   238:  LW        A2, 124 (SP)
   23C:  LUI       V0, 8000
@@ -733,7 +730,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
         .o8C
    8C:  LA        A0, $Function_80240EB8
         .o94
-   94:  JAL       ~Func:create_dynamic_entity_world
+   94:  JAL       ~Func:create_generic_entity_world
    98:  CLEAR     A1
    9C:  LW        V1, 13C (S0)
    A0:  SW        V0, 4 (V1)
@@ -789,7 +786,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   144:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240E84
 {
     0:  ADDIU     SP, SP, FFE8
@@ -808,7 +804,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EB8
 {
     0:  ADDIU     SP, SP, FFE8
@@ -827,7 +822,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EEC
 {
     0:  ADDIU     SP, SP, FFE8
@@ -3077,8 +3071,8 @@ MISSING: 80243150 to 80243160 (00003150 to 00003160)
 {
     0:  Set   *GB_WorldLocation  .Location:CrystalPalace
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000018 00000018 00000028 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  24`  24`  40` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80243DB0 )
@@ -3113,7 +3107,7 @@ PADDING: 802434A4 to 802434B0 (000034A4 to 000034B0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -3223,29 +3217,29 @@ MISSING: 8024356C to 80243594 (0000356C to 00003594)
 
 #new:NpcGroup $NpcGroup_802437E0
 {
-	00000000 $NpcSettings_8024363C ~Vec3f:NPC_802437E0 % 200 0 75
+	.NpcID:WorldClubba_00 $NpcSettings_8024363C ~Vec3f:NPC_WorldClubba_00 % 200 0 75
 	00000C00 $Script_Init_802437B8 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802437E0
-	~AnimationTable:NPC_802437E0 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_00
+	~AnimationTable:NPC_WorldClubba_00 % .Sprite:WorldClubba
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802437E0[1F0]
-	00000001 $NpcSettings_80243710 ~Vec3f:NPC_802439D0 % 0 -1000 0
+	.NpcID:WorldClubba_01 $NpcSettings_80243710 ~Vec3f:NPC_WorldClubba_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802439D0
-	~AnimationTable:NPC_802439D0 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_01
+	~AnimationTable:NPC_WorldClubba_01 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_80243594 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243BC0
 {
-	00000004 $NpcSettings_8024378C ~Vec3f:NPC_80243BC0 % 200 0 -75
+	.NpcID:Duplighost_04 $NpcSettings_8024378C ~Vec3f:NPC_Duplighost_04 % 200 0 -75
 	00200C00 $Script_Init_802437B8 00000000 00000000 0000005A
 	~Items:5:Mystery:A ~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_80243BC0
-	~AnimationTable:NPC_80243BC0 % .Sprite:Duplighost
+	~Movement:NPC_Duplighost_04
+	~AnimationTable:NPC_Duplighost_04 % .Sprite:Duplighost
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 

@@ -1,6 +1,7 @@
 % Script File: pra_22.mscr
 % Decoded from: 0 to 1170 (pra_22)
 
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -315,7 +316,7 @@ PADDING: 8024036C to 80240370 (0000036C to 00000370)
    6C:  		Set   *Var8  FFFFFFFF
    7C:  		Return
    84:  	Else
-   8C:  		Call  SetPlayerActionState  ( 00000014 )
+   8C:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
    9C:  	EndIf
    A4:  	Wait  1`
    B0:  EndLoop
@@ -326,15 +327,15 @@ PADDING: 8024036C to 80240370 (0000036C to 00000370)
    F0:  EndIf
    F8:  Call  DisablePlayerInput    ( .True )
   108:  Thread
-  110:  	Call  ShakeCam  ( .Cam:Default 00000000 00000064 *Fixed[0.6] )
+  110:  	Call  ShakeCam  ( .Cam:Default 00000000  100` *Fixed[0.6] )
   12C:  EndThread
   134:  Thread
   13C:  	If  *Var6  >=  *Var7
-  14C:  		Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  14C:  		Call  InterpPlayerYaw   (  270`  0` )
   160:  	Else
-  168:  		Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  168:  		Call  InterpPlayerYaw   (  90`  0` )
   17C:  	EndIf
-  184:  	Call  SetPlayerActionState  ( 00000014 )
+  184:  	Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   194:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   1AC:  	Set   *Var1  *Var0
   1BC:  	Set   *Var2  *Var7
@@ -343,7 +344,7 @@ PADDING: 8024036C to 80240370 (0000036C to 00000370)
   1EC:  	Call  MakeLerp  ( *Var0 *Var1 00000064 .Easing:Linear )
   208:  	Set   *Var3  00000000
   218:  	Loop
-  224:  		Call  SetPlayerActionState  ( 00000014 )
+  224:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   234:  		Call  UpdateLerp ( )
   240:  		Call  $Function_802400DC ( )
   24C:  		If  *VarA  ==  00000001
@@ -410,7 +411,7 @@ PADDING: 8024036C to 80240370 (0000036C to 00000370)
    E4:  	Set   *GB_StoryProgress  .Story:Ch7_FoundHiddenRoomUnderStatue
    F4:  	Set   *GB_PRA_TwinStatueState  *Var8
   104:  	Thread
-  10C:  		Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[1.0] )
+  10C:  		Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[1.0] )
   128:  	EndThread
   130:  	Unbind
   138:  EndIf
@@ -422,8 +423,8 @@ PADDING: 8024036C to 80240370 (0000036C to 00000370)
 {
     0:  Set   *GB_WorldLocation  .Location:CrystalPalace
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000018 00000018 00000028 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  24`  24`  40` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  ExecWait  $Script_MakeEntities

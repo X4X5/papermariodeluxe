@@ -1,6 +1,24 @@
 % Script File: pra_19.mscr
 % Decoded from: 0 to 79F0 (pra_19)
 
+#define .NpcID:WorldKooper_00       00
+#define .NpcID:Goompa_01            01
+#define .NpcID:Luigi_02             02
+#define .NpcID:KoopaKoot_03         03
+#define .NpcID:Kolorado_04          04
+#define .NpcID:Duplighost_05        05
+#define .NpcID:WorldKooper_06       06
+#define .NpcID:Duplighost_07        07
+#define .NpcID:Duplighost_08        08
+#define .NpcID:Duplighost_09        09
+#define .NpcID:Duplighost_10        0A
+#define .NpcID:Duplighost_11        0B
+#define .NpcID:WorldKooper_12       0C
+#define .NpcID:Goompa_13            0D
+#define .NpcID:Luigi_14             0E
+#define .NpcID:KoopaKoot_15         0F
+#define .NpcID:Kolorado_16          10
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -13,7 +31,6 @@
 PADDING: 80240018 to 80240020 (00000018 to 00000020)
 00000000 00000000
 
-% Origin: HEURISTIC
 #new:Function $Function_80240020
 {
     0:  LI        V0, FEFFFFFF
@@ -30,7 +47,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  COPY      V0, A0
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240054
 {
     0:  SRA       V0, A0, 10
@@ -84,7 +100,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
     8:  COPY      S0, A0
     C:  LA        A1, $Function_80240128
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  CLEAR     A0
    20:  LW        V1, 13C (S0)
    24:  SW        V0, 0 (V1)
@@ -95,7 +111,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    38:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240128
 {
     0:  ADDIU     SP, SP, FFB0
@@ -213,7 +228,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   1C4:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802402F0
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -244,7 +258,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    1C:  BEQ       V0, R0, .o50
    20:  NOP
    24:  LA        A1, $Function_80240500
-   2C:  JAL       ~Func:create_dynamic_entity_world
+   2C:  JAL       ~Func:create_generic_entity_world
    30:  CLEAR     A0
    34:  LW        V1, 13C (S0)
    38:  SW        V0, 0 (V1)
@@ -260,7 +274,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    60:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240500
 {
     0:  ADDIU     SP, SP, FFB0
@@ -364,7 +377,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   188:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_8024068C
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -385,7 +397,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
 	27BD0140
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240870
 {
     0:  ADDIU     SP, SP, FE80
@@ -525,7 +536,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   224:  COPY      A0, S3
   228:  ADDIU     A1, SP, 120
   22C:  ADDIU     A2, SP, 124
-  230:  JAL       ~Func:player_get_spin_history
+  230:  JAL       ~Func:phys_get_spin_history
   234:  ADDIU     A3, SP, 128
   238:  LW        A2, 124 (SP)
   23C:  LUI       V0, 8000
@@ -733,7 +744,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
         .o8C
    8C:  LA        A0, $Function_80240EB8
         .o94
-   94:  JAL       ~Func:create_dynamic_entity_world
+   94:  JAL       ~Func:create_generic_entity_world
    98:  CLEAR     A1
    9C:  LW        V1, 13C (S0)
    A0:  SW        V0, 4 (V1)
@@ -789,7 +800,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   144:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240E84
 {
     0:  ADDIU     SP, SP, FFE8
@@ -808,7 +818,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EB8
 {
     0:  ADDIU     SP, SP, FFE8
@@ -827,7 +836,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EEC
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1154,7 +1162,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    64:  MFC1      A2, F0
    68:  MTC1      S0, F14
    6C:  NOP
-   70:  JAL       8006F8F0
+   70:  JAL       ~Func:playFX_01
    74:  CVT.S.W   F14, F14
    78:  LW        RA, 1C (SP)
    7C:  LW        S2, 18 (SP)
@@ -1269,7 +1277,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
     8:  COPY      S0, A0
     C:  LA        A1, $Function_80241530
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  CLEAR     A0
    20:  LW        V1, 13C (S0)
    24:  SW        V0, 0 (V1)
@@ -1280,7 +1288,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    38:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80241530
 {
     0:  ADDIU     SP, SP, FFB0
@@ -1327,7 +1334,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    AC:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802415E0
 {
     0:  ADDIU     SP, SP, FF10
@@ -1754,8 +1760,8 @@ PADDING: 80241A4C to 80241A50 (00001A4C to 00001A50)
 {
     0:  Set   *GB_WorldLocation  .Location:CrystalPalace
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000018 00000018 00000028 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  24`  24`  40` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_802479AC )
@@ -1951,7 +1957,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
    24:  Call  SpeakToPlayer     ( *Var3 *Var6 *Var7 00000000 *Var5 ) % variable string ID
    44:  Call  GetNpcPos ( *Var3 *Var0 *Var1 *Var2 )
    60:  Call  $Function_80241310    ( *Var0 *Var1 *Var2 )
-   78:  Call  SetNpcPos ( *Var3 00000000 FFFFFC18 00000000 )
+   78:  Call  SetNpcPos ( *Var3  0`  -1000`  0` )
    94:  Call  SetNpcFlagBits    ( *Var3 00000100 .False )
    AC:  Call  SetNpcPos ( *Var4 *Var0 *Var1 *Var2 )
    C8:  Call  PlaySoundAtNpc    ( *Var4 .Sound:SmokeBurst 00000000 )
@@ -1968,11 +1974,11 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   188:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   1A0:  Thread
   1A8:  	Call  SetNpcAnimation   ( *Var4 004E0004 )
-  1BC:  	Call  InterpNpcYaw  ( *Var4 0000005A 00000000 )
+  1BC:  	Call  InterpNpcYaw  ( *Var4  90`  0` )
   1D4:  	Call  SetNpcSpeed   ( *Var4 *Fixed[6.5] )
   1E8:  	Call  PlaySoundAtNpc    ( *Var4 000002CB 00000000 )
-  200:  	Call  NpcMoveTo     ( *Var4 00000000 *Var2 00000000 )
-  21C:  	Call  SetNpcPos     ( *Var4 00000000 FFFFFC18 00000000 )
+  200:  	Call  NpcMoveTo     ( *Var4  0` *Var2  0` )
+  21C:  	Call  SetNpcPos     ( *Var4  0`  -1000`  0` )
   238:  EndThread
   240:  Wait  15`
   24C:  Return
@@ -1983,9 +1989,9 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 {
     0:  Call  SetNpcJumpscale   ( *Var3 *Fixed[1.0] )
    14:  Call  GetNpcPos ( *Var3 *Var0 *Var1 *Var2 )
-   30:  Call  NpcJump0  ( *Var3 *Var0 *Var1 *Var2 0000000A )
+   30:  Call  NpcJump0  ( *Var3 *Var0 *Var1 *Var2  10` )
    50:  Call  GetNpcPos ( *Var3 *Var0 *Var1 *Var2 )
-   6C:  Call  NpcJump0  ( *Var3 *Var0 *Var1 *Var2 0000000A )
+   6C:  Call  NpcJump0  ( *Var3 *Var0 *Var1 *Var2  10` )
    8C:  Return
    94:  End
 }
@@ -1994,46 +2000,46 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 {
     0:  If  *MapVar[2]  ==  00000000
    10:  	Thread
-   18:  		Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
-   34:  		Call  SetNpcPos     ( 00000001 00000000 FFFFFC18 00000000 )
+   18:  		Call  GetNpcPos     ( .NpcID:Goompa_01 *Var0 *Var1 *Var2 )
+   34:  		Call  SetNpcPos     ( .NpcID:Goompa_01  0`  -1000`  0` )
    50:  		Call  $Function_80241310    ( *Var0 *Var1 *Var2 )
-   68:  		Call  SetNpcPos     ( 00000007 *Var0 *Var1 *Var2 )
-   84:  		Call  PlaySoundAtNpc        ( 00000007 .Sound:SmokeBurst 00000000 )
+   68:  		Call  SetNpcPos     ( .NpcID:Duplighost_07 *Var0 *Var1 *Var2 )
+   84:  		Call  PlaySoundAtNpc        ( .NpcID:Duplighost_07 .Sound:SmokeBurst 00000000 )
    9C:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   B4:  		Call  NpcMoveTo     ( 00000007 *Var0 *Var2 0000001E )
+   B4:  		Call  NpcMoveTo     ( .NpcID:Duplighost_07 *Var0 *Var2  30` )
    D0:  	EndThread
    D8:  EndIf
    E0:  If  *MapVar[3]  ==  00000000
    F0:  	Thread
-   F8:  		Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
-  114:  		Call  SetNpcPos     ( 00000002 00000000 FFFFFC18 00000000 )
+   F8:  		Call  GetNpcPos     ( .NpcID:Luigi_02 *Var0 *Var1 *Var2 )
+  114:  		Call  SetNpcPos     ( .NpcID:Luigi_02  0`  -1000`  0` )
   130:  		Call  $Function_80241310    ( *Var0 *Var1 *Var2 )
-  148:  		Call  SetNpcPos     ( 00000008 *Var0 *Var1 *Var2 )
-  164:  		Call  PlaySoundAtNpc        ( 00000008 .Sound:SmokeBurst 00000000 )
+  148:  		Call  SetNpcPos     ( .NpcID:Duplighost_08 *Var0 *Var1 *Var2 )
+  164:  		Call  PlaySoundAtNpc        ( .NpcID:Duplighost_08 .Sound:SmokeBurst 00000000 )
   17C:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  194:  		Call  NpcMoveTo     ( 00000008 *Var0 *Var2 0000001E )
+  194:  		Call  NpcMoveTo     ( .NpcID:Duplighost_08 *Var0 *Var2  30` )
   1B0:  	EndThread
   1B8:  EndIf
   1C0:  If  *MapVar[4]  ==  00000000
   1D0:  	Thread
-  1D8:  		Call  GetNpcPos     ( 00000003 *Var0 *Var1 *Var2 )
-  1F4:  		Call  SetNpcPos     ( 00000003 00000000 FFFFFC18 00000000 )
+  1D8:  		Call  GetNpcPos     ( .NpcID:KoopaKoot_03 *Var0 *Var1 *Var2 )
+  1F4:  		Call  SetNpcPos     ( .NpcID:KoopaKoot_03  0`  -1000`  0` )
   210:  		Call  $Function_80241310    ( *Var0 *Var1 *Var2 )
-  228:  		Call  SetNpcPos     ( 00000009 *Var0 *Var1 *Var2 )
-  244:  		Call  PlaySoundAtNpc        ( 00000009 .Sound:SmokeBurst 00000000 )
+  228:  		Call  SetNpcPos     ( .NpcID:Duplighost_09 *Var0 *Var1 *Var2 )
+  244:  		Call  PlaySoundAtNpc        ( .NpcID:Duplighost_09 .Sound:SmokeBurst 00000000 )
   25C:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  274:  		Call  NpcMoveTo     ( 00000009 *Var0 *Var2 0000001E )
+  274:  		Call  NpcMoveTo     ( .NpcID:Duplighost_09 *Var0 *Var2  30` )
   290:  	EndThread
   298:  EndIf
   2A0:  If  *MapVar[5]  ==  00000000
   2B0:  	Thread
-  2B8:  		Call  GetNpcPos     ( 00000004 *Var0 *Var1 *Var2 )
-  2D4:  		Call  SetNpcPos     ( 00000004 00000000 FFFFFC18 00000000 )
+  2B8:  		Call  GetNpcPos     ( .NpcID:Kolorado_04 *Var0 *Var1 *Var2 )
+  2D4:  		Call  SetNpcPos     ( .NpcID:Kolorado_04  0`  -1000`  0` )
   2F0:  		Call  $Function_80241310    ( *Var0 *Var1 *Var2 )
-  308:  		Call  SetNpcPos     ( 0000000A *Var0 *Var1 *Var2 )
-  324:  		Call  PlaySoundAtNpc        ( 0000000A .Sound:SmokeBurst 00000000 )
+  308:  		Call  SetNpcPos     ( .NpcID:Duplighost_10 *Var0 *Var1 *Var2 )
+  324:  		Call  PlaySoundAtNpc        ( .NpcID:Duplighost_10 .Sound:SmokeBurst 00000000 )
   33C:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  354:  		Call  NpcMoveTo     ( 0000000A *Var0 *Var2 0000001E )
+  354:  		Call  NpcMoveTo     ( .NpcID:Duplighost_10 *Var0 *Var2  30` )
   370:  	EndThread
   378:  EndIf
   380:  Wait  20`
@@ -2046,16 +2052,16 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
     0:  Call  SetNpcFlagBits    ( *Var3 00000100 .True )
    18:  Call  SetNpcAnimation   ( *Var3 *Var4 )
    2C:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
-   44:  Call  NpcMoveTo ( *Var3 *Var0 *Var2 0000001E )
+   44:  Call  NpcMoveTo ( *Var3 *Var0 *Var2  30` )
    60:  Return
    68:  End
 }
 
 #new:Script $Script_80242E7C
 {
-    0:  Call  InterpNpcYaw  ( *Var3 *Var9 00000000 )
+    0:  Call  InterpNpcYaw  ( *Var3 *Var9  0` )
    18:  Loop  0000001E
-   24:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+   24:  	Call  GetNpcPos ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
    40:  	Add   *Var0  *Var4
    50:  	Add   *Var1  *Var5
    60:  	Add   *Var2  *Var6
@@ -2068,10 +2074,10 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 
 #new:Script $Script_80242F2C
 {
-    0:  Call  NpcMoveTo ( *Var3 *Var0 *Var2 00000014 )
+    0:  Call  NpcMoveTo ( *Var3 *Var0 *Var2  20` )
    1C:  Call  SetNpcAnimation   ( *Var3 *Var4 )
    30:  Call  SetNpcFlagBits    ( *Var3 00000100 .False )
-   48:  Call  InterpNpcYaw      ( *Var3 0000005A 00000000 )
+   48:  Call  InterpNpcYaw      ( *Var3  90`  0` )
    60:  Return
    68:  End
 }
@@ -2110,9 +2116,9 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   180:  Set   *Var3  00000000
   190:  Set   *Var4  00020005
   1A0:  ExecWait  $Script_80242E0C
-  1AC:  Call  InterpPlayerYaw   ( 0000005A 00000003 )
+  1AC:  Call  InterpPlayerYaw   (  90`  3` )
   1C0:  Call  SetPlayerAnimation    ( 00080009 )
-  1D0:  Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+  1D0:  Call  GetNpcPos ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   1EC:  Add   *Var1  0000001E
   1FC:  Call  SetPlayerPos      ( *Var0 *Var1 *Var2 )
   214:  Wait  10`
@@ -2120,7 +2126,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   228:  	Loop  00000023
   234:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   24C:  		Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-  268:  		Call  SetPanTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+  268:  		Call  SetPanTarget  ( .Cam:Default *Var0  0` *Var2 )
   284:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   298:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   2B0:  		Wait  1`
@@ -2129,7 +2135,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   2DC:  EndThread
   2E4:  Thread
   2EC:  	Loop  0000001E
-  2F8:  		Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  2F8:  		Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   314:  		Add   *Var1  0000001E
   324:  		Call  SetPlayerPos  ( *Var0 *Var1 *Var2 )
   33C:  		Wait  1`
@@ -2163,7 +2169,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   4C4:  	Set   *Var6  00000014
   4D4:  	Exec  $Script_80242E7C
   4E0:  EndIf
-  4E8:  Call  NpcMoveTo ( 00000000 00000172 00000049 0000001E )
+  4E8:  Call  NpcMoveTo ( .NpcID:WorldKooper_00  370`  73`  30` )
   504:  Call  DisablePlayerPhysics  ( .False )
   514:  If  *MapVar[2]  ==  00000000
   524:  	Set   *Var3  00000001
@@ -2198,7 +2204,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   6C4:  Set   *Var0  00000181
   6D4:  Set   *Var2  00000078
   6E4:  ExecWait  $Script_80242F2C
-  6F0:  Call  ShowMessageAtScreenPos    ( 00120165 000000A0 00000028 ) % You must choose the impostors!
+  6F0:  Call  ShowMessageAtScreenPos    ( 00120165  160`  40` ) % You must choose the impostors!
   708:  Call  DisablePlayerInput        ( .False )
   718:  Return
   720:  End
@@ -2206,41 +2212,41 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 
 #new:Script $Script_802436C4
 {
-    0:  Call  GetNpcPos ( 00000005 *Var3 *Var4 *Var5 )
+    0:  Call  GetNpcPos ( .NpcID:Duplighost_05 *Var3 *Var4 *Var5 )
    1C:  Thread
-   24:  	Call  GetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
+   24:  	Call  GetNpcPos ( .NpcID:Duplighost_05 *Var0 *Var1 *Var2 )
    40:  	Add   *Var0  0000000A
-   50:  	Call  NpcMoveTo ( 00000006 *Var0 *Var2 00000004 )
+   50:  	Call  NpcMoveTo ( .NpcID:WorldKooper_06 *Var0 *Var2  4` )
    6C:  	Wait  2`
-   78:  	Call  SetNpcAnimation   ( 00000006 0002000A )
+   78:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_06 0002000A )
    8C:  	Wait  2`
-   98:  	Call  SetNpcAnimation   ( 00000006 00020009 )
+   98:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_06 00020009 )
    AC:  EndThread
    B4:  Thread
-   BC:  	Call  SetNpcAnimation   ( 00000005 00010007 )
+   BC:  	Call  SetNpcAnimation   ( .NpcID:Duplighost_05 00010007 )
    D0:  	Wait  10`
-   DC:  	Call  SetNpcAnimation   ( 00000005 00010009 )
+   DC:  	Call  SetNpcAnimation   ( .NpcID:Duplighost_05 00010009 )
    F0:  EndThread
-   F8:  Call  SetNpcJumpscale   ( 00000005 *Fixed[2.0] )
-  10C:  Call  GetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
-  128:  Call  NpcJump0  ( 00000005 *Var0 *Var1 *Var2 0000000A )
+   F8:  Call  SetNpcJumpscale   ( .NpcID:Duplighost_05 *Fixed[2.0] )
+  10C:  Call  GetNpcPos ( .NpcID:Duplighost_05 *Var0 *Var1 *Var2 )
+  128:  Call  NpcJump0  ( .NpcID:Duplighost_05 *Var0 *Var1 *Var2  10` )
   148:  Label  A
-  154:  Call  GetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
-  170:  Call  SetNpcPos ( 00000006 *Var0 *Var1 *Var2 )
+  154:  Call  GetNpcPos ( .NpcID:Duplighost_05 *Var0 *Var1 *Var2 )
+  170:  Call  SetNpcPos ( .NpcID:WorldKooper_06 *Var0 *Var1 *Var2 )
   18C:  Set   *Var3  *Var0
   19C:  Add   *Var3  0000008C
   1AC:  Call  $Function_80241838    ( 00000006 *Var3 00000000 )
   1C4:  Call  $Function_80241838    ( 00000006 *Var0 00000001 )
-  1DC:  Call  SetNpcAnimation   ( 00000006 00020008 )
+  1DC:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_06 00020008 )
   1F0:  Thread
-  1F8:  	Call  SetNpcAnimation   ( 00000005 00010007 )
+  1F8:  	Call  SetNpcAnimation   ( .NpcID:Duplighost_05 00010007 )
   20C:  	Wait  10`
-  218:  	Call  SetNpcAnimation   ( 00000005 00010009 )
+  218:  	Call  SetNpcAnimation   ( .NpcID:Duplighost_05 00010009 )
   22C:  EndThread
-  234:  Call  SetNpcJumpscale   ( 00000005 *Fixed[2.0] )
-  248:  Call  GetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
-  264:  Call  NpcJump0  ( 00000005 *Var0 *Var1 *Var2 0000000A )
-  284:  Call  SetNpcAnimation   ( 00000006 00020009 )
+  234:  Call  SetNpcJumpscale   ( .NpcID:Duplighost_05 *Fixed[2.0] )
+  248:  Call  GetNpcPos ( .NpcID:Duplighost_05 *Var0 *Var1 *Var2 )
+  264:  Call  NpcJump0  ( .NpcID:Duplighost_05 *Var0 *Var1 *Var2  10` )
+  284:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_06 00020009 )
   298:  Goto  A
   2A4:  Return
   2AC:  End
@@ -2248,14 +2254,14 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 
 #new:Script $Script_80243978
 {
-    0:  Call  SetNpcPos ( *Var3 00000215 00000000 0000004D )
+    0:  Call  SetNpcPos ( *Var3  533`  0`  77` )
    1C:  Call  SetNpcFlagBits    ( *Var3 00000100 .True )
    34:  Call  SetNpcSpeed       ( *Var3 *Fixed[6.0] )
    48:  Call  SetNpcAnimation   ( *Var3 *Var4 )
-   5C:  Call  NpcMoveTo ( *Var3 *Var0 *Var2 00000000 )
+   5C:  Call  NpcMoveTo ( *Var3 *Var0 *Var2  0` )
    78:  Call  SetNpcFlagBits    ( *Var3 00000100 .False )
    90:  Call  SetNpcAnimation   ( *Var3 *Var5 )
-   A4:  Call  InterpNpcYaw      ( *Var3 0000005A 00000000 )
+   A4:  Call  InterpNpcYaw      ( *Var3  90`  0` )
    BC:  Return
    C4:  End
 }
@@ -2275,33 +2281,33 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
    7C:  	Goto  14
    88:  EndIf
    90:  Label  0
-   9C:  Call  SetNpcAnimation   ( 00000005 00010002 )
-   B0:  Call  SetNpcPos ( 00000005 00000035 00000000 FFFFFFB5 )
-   CC:  Call  SetNpcAnimation   ( 00000006 00020003 )
-   E0:  Call  SetNpcPos ( 00000006 00000017 00000000 FFFFFFB5 )
+   9C:  Call  SetNpcAnimation   ( .NpcID:Duplighost_05 00010002 )
+   B0:  Call  SetNpcPos ( .NpcID:Duplighost_05  53`  0`  -75` )
+   CC:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_06 00020003 )
+   E0:  Call  SetNpcPos ( .NpcID:WorldKooper_06  23`  0`  -75` )
    FC:  Label  1
   108:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   120:  Wait  1`
   12C:  If  *Var0  <  0000006E
   13C:  	Goto  1
   148:  EndIf
-  150:  Call  SetNpcSpeed       ( 00000005 *Fixed[3.0] )
-  164:  Call  SetNpcAnimation   ( 00000005 00010004 )
+  150:  Call  SetNpcSpeed       ( .NpcID:Duplighost_05 *Fixed[3.0] )
+  164:  Call  SetNpcAnimation   ( .NpcID:Duplighost_05 00010004 )
   178:  Thread
-  180:  	Call  SetNpcSpeed       ( 00000006 *Fixed[3.0] )
-  194:  	Call  SetNpcAnimation   ( 00000006 00020004 )
-  1A8:  	Call  NpcMoveTo ( 00000006 00000181 FFFFFFB5 00000000 )
-  1C4:  	Call  SetNpcAnimation   ( 00000006 00020003 )
+  180:  	Call  SetNpcSpeed       ( .NpcID:WorldKooper_06 *Fixed[3.0] )
+  194:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_06 00020004 )
+  1A8:  	Call  NpcMoveTo ( .NpcID:WorldKooper_06  385`  -75`  0` )
+  1C4:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_06 00020003 )
   1D8:  EndThread
-  1E0:  Call  NpcMoveTo ( 00000005 0000019F FFFFFFB5 00000000 )
-  1FC:  Call  SetNpcAnimation   ( 00000005 00010002 )
+  1E0:  Call  NpcMoveTo ( .NpcID:Duplighost_05  415`  -75`  0` )
+  1FC:  Call  SetNpcAnimation   ( .NpcID:Duplighost_05 00010002 )
   210:  Set   *GB_PRA19_TutorialState  00000001
   220:  Goto  B
   22C:  Label  A
-  238:  Call  SetNpcAnimation   ( 00000005 00010002 )
-  24C:  Call  SetNpcPos ( 00000005 0000019F 00000000 FFFFFFB5 )
-  268:  Call  SetNpcAnimation   ( 00000006 00020003 )
-  27C:  Call  SetNpcPos ( 00000006 00000181 00000000 FFFFFFB5 )
+  238:  Call  SetNpcAnimation   ( .NpcID:Duplighost_05 00010002 )
+  24C:  Call  SetNpcPos ( .NpcID:Duplighost_05  415`  0`  -75` )
+  268:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_06 00020003 )
+  27C:  Call  SetNpcPos ( .NpcID:WorldKooper_06  385`  0`  -75` )
   298:  Label  B
   2A4:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   2BC:  Wait  1`
@@ -2312,10 +2318,10 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   2F8:  Set   *GB_PRA19_TutorialState  00000002
   308:  Goto  15
   314:  Label  14
-  320:  Call  SetNpcAnimation   ( 00000005 00010002 )
-  334:  Call  SetNpcPos ( 00000005 0000019F 00000000 FFFFFFB5 )
-  350:  Call  SetNpcAnimation   ( 00000006 00020003 )
-  364:  Call  SetNpcPos ( 00000006 00000181 00000000 FFFFFFB5 )
+  320:  Call  SetNpcAnimation   ( .NpcID:Duplighost_05 00010002 )
+  334:  Call  SetNpcPos ( .NpcID:Duplighost_05  415`  0`  -75` )
+  350:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_06 00020003 )
+  364:  Call  SetNpcPos ( .NpcID:WorldKooper_06  385`  0`  -75` )
   380:  Exec  $Script_802436C4
   38C:  Label  15
   398:  Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
@@ -2334,7 +2340,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   470:  Wait  60`
   47C:  Call  SetPlayerAnimation    ( .PlayerAnim:Question )
   48C:  Call  PlaySoundAtPlayer ( 00000263 00000000 )
-  4A0:  Call  ShowEmote ( 00000000 .Emote:Question 00000000 0000001E 00000000 00000000 00000000 00000000 00000000 )
+  4A0:  Call  ShowEmote ( .NpcID:WorldKooper_00 .Emote:Question  0`  30` .False  0`  0`  0`  0` )
   4D0:  Wait  35`
   4DC:  Call  SetPlayerAnimation    ( 0001002B )
   4EC:  Call  PlaySoundAtCollider   ( ~Collider:o1054 000001E4 00000000 )
@@ -2379,7 +2385,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   788:  	Call  MakeLerp  ( 00000000 000007BC 0000001E .Easing:QuadraticOut )
   7A4:  	Loop
   7B0:  		Call  UpdateLerp ( )
-  7BC:  		Call  InterpPlayerYaw   ( *Var0 00000000 )
+  7BC:  		Call  InterpPlayerYaw   ( *Var0  0` )
   7D0:  		Call  $Function_802416F8 ( )
   7DC:  		Wait  1`
   7E8:  		If  *Var1  ==  00000000
@@ -2389,51 +2395,51 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   810:  	Call  SetPlayerFlagBits ( 10101000 .False )
   824:  EndThread
   82C:  Wait  60`
-  838:  Call  InterpPlayerYaw       ( 0000010E 00000000 )
+  838:  Call  InterpPlayerYaw       (  270`  0` )
   84C:  Call  SetPlayerAnimation    ( 00010002 )
   85C:  Wait  10`
-  868:  Call  GetNpcPos     ( 00000004 *Var0 *Var1 *Var2 )
+  868:  Call  GetNpcPos     ( .NpcID:Kolorado_04 *Var0 *Var1 *Var2 )
   884:  SetF  *VarA  *Fixed[3.0]
   894:  ExecWait  $Script_802424BC
   8A0:  Set   *Var3  00000004
   8B0:  Exec  $Script_802429D4
-  8BC:  Call  SpeakToPlayer ( 00000004 00B60008 00B60001 00000000 00120153 ) % Mario, I'm the real Kooper. But of course you know ...
-  8DC:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+  8BC:  Call  SpeakToPlayer ( .NpcID:Kolorado_04 00B60008 00B60001 00000000 00120153 ) % Mario, I'm the real Kooper. But of course you know ...
+  8DC:  Call  GetNpcPos     ( .NpcID:Goompa_01 *Var0 *Var1 *Var2 )
   8F8:  SetF  *VarA  *Fixed[3.0]
   908:  ExecWait  $Script_802424BC
   914:  Set   *Var3  00000001
   924:  Exec  $Script_802429D4
-  930:  Call  SpeakToPlayer ( 00000001 009D0008 009D0001 00000000 00120154 ) % Mario! Look at me! I'm the real deal! Nobody else  ...
-  950:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  930:  Call  SpeakToPlayer ( .NpcID:Goompa_01 009D0008 009D0001 00000000 00120154 ) % Mario! Look at me! I'm the real deal! Nobody else  ...
+  950:  Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   96C:  SetF  *VarA  *Fixed[3.0]
   97C:  ExecWait  $Script_802424BC
   988:  Set   *Var3  00000000
   998:  Exec  $Script_802429D4
-  9A4:  Call  SpeakToPlayer ( 00000000 0002000D 00020003 00000000 00120155 ) % Mario, come on! I'm Kooper! I mean, this is ridicu ...
-  9C4:  Call  GetNpcPos     ( 00000003 *Var0 *Var1 *Var2 )
+  9A4:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000D 00020003 00000000 00120155 ) % Mario, come on! I'm Kooper! I mean, this is ridicu ...
+  9C4:  Call  GetNpcPos     ( .NpcID:KoopaKoot_03 *Var0 *Var1 *Var2 )
   9E0:  SetF  *VarA  *Fixed[3.0]
   9F0:  ExecWait  $Script_802424BC
   9FC:  Set   *Var3  00000003
   A0C:  Exec  $Script_802429D4
-  A18:  Call  SpeakToPlayer ( 00000003 00B50004 00B50001 00000000 00120156 ) % I'm the real Kooper, sonny. You believe me, don't  ...
-  A38:  Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+  A18:  Call  SpeakToPlayer ( .NpcID:KoopaKoot_03 00B50004 00B50001 00000000 00120156 ) % I'm the real Kooper, sonny. You believe me, don't  ...
+  A38:  Call  GetNpcPos     ( .NpcID:Luigi_02 *Var0 *Var1 *Var2 )
   A54:  SetF  *VarA  *Fixed[3.0]
   A64:  ExecWait  $Script_802424BC
   A70:  Set   *Var3  00000002
   A80:  Exec  $Script_802429D4
-  A8C:  Call  SpeakToPlayer ( 00000002 00820014 00820004 00000000 00120157 ) % I'm the real Kooper. There isn't any doubt in your ...
-  AAC:  Call  GetNpcPos     ( 00000004 *Var0 *Var1 *Var2 )
+  A8C:  Call  SpeakToPlayer ( .NpcID:Luigi_02 00820014 00820004 00000000 00120157 ) % I'm the real Kooper. There isn't any doubt in your ...
+  AAC:  Call  GetNpcPos     ( .NpcID:Kolorado_04 *Var0 *Var1 *Var2 )
   AC8:  SetF  *VarA  *Fixed[3.0]
   AD8:  ExecWait  $Script_802424BC
-  AE4:  Call  SpeakToPlayer ( 00000004 00B60008 00B60001 00000000 00120158 ) % OK, old bean... You'd best smash these impostors o ...
-  B04:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+  AE4:  Call  SpeakToPlayer ( .NpcID:Kolorado_04 00B60008 00B60001 00000000 00120158 ) % OK, old bean... You'd best smash these impostors o ...
+  B04:  Call  GetNpcPos     ( .NpcID:Goompa_01 *Var0 *Var1 *Var2 )
   B20:  SetF  *VarA  *Fixed[3.0]
   B30:  ExecWait  $Script_802424BC
-  B3C:  Call  SpeakToPlayer ( 00000001 009D0008 009D0001 00000000 00120159 ) % That's a good idea.
-  B5C:  Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+  B3C:  Call  SpeakToPlayer ( .NpcID:Goompa_01 009D0008 009D0001 00000000 00120159 ) % That's a good idea.
+  B5C:  Call  GetNpcPos     ( .NpcID:Luigi_02 *Var0 *Var1 *Var2 )
   B78:  SetF  *VarA  *Fixed[3.0]
   B88:  ExecWait  $Script_802424BC
-  B94:  Call  SpeakToPlayer ( 00000002 00820014 00820004 00000000 0012015A ) % Brother, smash them all except me, OK?
+  B94:  Call  SpeakToPlayer ( .NpcID:Luigi_02 00820014 00820004 00000000 0012015A ) % Brother, smash them all except me, OK?
   BB4:  Call  ResetCam      ( .Cam:Default *Fixed[2.0] )
   BC8:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   BE0:  Call  DisablePlayerInput    ( .False )
@@ -2455,9 +2461,9 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   CD8:  				If  *MapVar[5]  ==  00000001
   CE8:  					Call  DisablePlayerInput    ( .True )
   CF8:  					Call  DisablePartnerAI      ( 00000000 )
-  D08:  					Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  D08:  					Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   D24:  					Call  SetNpcPos     ( .Npc:Partner *Var0 *Var1 *Var2 )
-  D40:  					Call  SetNpcPos     ( 00000000 00000000 FFFFFC18 00000000 )
+  D40:  					Call  SetNpcPos     ( .NpcID:WorldKooper_00  0`  -1000`  0` )
   D5C:  					Call  SetNpcFlagBits        ( .Npc:Partner 00000002 .False )
   D74:  					Call  GetAngleToNPC ( .Npc:Partner *VarA )
   D88:  					Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -2468,7 +2474,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   DD8:  					EndIf
   DE0:  					Call  SetNpcAnimation   ( .Npc:Partner 00020004 )
   DF4:  					Call  SetNpcFlagBits    ( .Npc:Partner 00000100 .True )
-  E0C:  					Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2 00000014 )
+  E0C:  					Call  NpcMoveTo ( .Npc:Partner *Var0 *Var2  20` )
   E28:  					Call  SetNpcAnimation   ( .Npc:Partner 00020003 )
   E3C:  					Call  SpeakToPlayer     ( .Npc:Partner 0002000D 00020003 00000000 00120166 ) % Yes! Yes! Good call, Mario! I knew you'd get it ri ...
   E5C:  					Wait  10`
@@ -2488,11 +2494,11 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
   F1C:  			Wait  1`
   F28:  		Case  ==  00000001
   F34:  			Call  DisablePlayerInput    ( .True )
-  F44:  			Call  SetNpcAnimation   ( 00000000 0002000C )
-  F58:  			Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+  F44:  			Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 0002000C )
+  F58:  			Call  GetNpcPos ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   F74:  			SetF  *VarA  *Fixed[6.0]
   F84:  			ExecWait  $Script_802424BC
-  F90:  			Call  SpeakToPlayer     ( 00000000 0002000C 0002000C 00000000 00120162 ) % Mario! Ow! You did that on purpose, didn't you!? T ...
+  F90:  			Call  SpeakToPlayer     ( .NpcID:WorldKooper_00 0002000C 0002000C 00000000 00120162 ) % Mario! Ow! You did that on purpose, didn't you!? T ...
   FB0:  			ExecWait  $Script_80242588
   FBC:  			Call  SetPlayerAnimation    ( 0001002B )
   FCC:  			ExecWait  $Script_80242A70
@@ -2504,7 +2510,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
  1048:  			BreakLoop
  1050:  		Case  ==  00000002
  105C:  			Call  DisablePlayerInput    ( .True )
- 106C:  			Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+ 106C:  			Call  GetNpcPos ( .NpcID:Goompa_01 *Var0 *Var1 *Var2 )
  1088:  			SetF  *VarA  *Fixed[6.0]
  1098:  			ExecWait  $Script_802424BC
  10A4:  			Set   *Var3  00000001
@@ -2518,7 +2524,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
  1120:  			Call  DisablePlayerInput    ( .False )
  1130:  		Case  ==  00000003
  113C:  			Call  DisablePlayerInput    ( .True )
- 114C:  			Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+ 114C:  			Call  GetNpcPos ( .NpcID:Luigi_02 *Var0 *Var1 *Var2 )
  1168:  			SetF  *VarA  *Fixed[6.0]
  1178:  			ExecWait  $Script_802424BC
  1184:  			Set   *Var3  00000002
@@ -2532,7 +2538,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
  1200:  			Call  DisablePlayerInput    ( .False )
  1210:  		Case  ==  00000004
  121C:  			Call  DisablePlayerInput    ( .True )
- 122C:  			Call  GetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
+ 122C:  			Call  GetNpcPos ( .NpcID:KoopaKoot_03 *Var0 *Var1 *Var2 )
  1248:  			SetF  *VarA  *Fixed[6.0]
  1258:  			ExecWait  $Script_802424BC
  1264:  			Set   *Var3  00000003
@@ -2546,7 +2552,7 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
  12E0:  			Call  DisablePlayerInput    ( .False )
  12F0:  		Case  ==  00000005
  12FC:  			Call  DisablePlayerInput    ( .True )
- 130C:  			Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+ 130C:  			Call  GetNpcPos ( .NpcID:Kolorado_04 *Var0 *Var1 *Var2 )
  1328:  			SetF  *VarA  *Fixed[6.0]
  1338:  			ExecWait  $Script_802424BC
  1344:  			Set   *Var3  00000004
@@ -2569,9 +2575,9 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 #new:Script $Script_Defeat_80244E4C
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+   10:  Call  GetNpcPos ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
    2C:  Call  SetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-   48:  Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+   48:  Call  SetNpcPos ( .NpcID:WorldKooper_00  0`  -1000`  0` )
    64:  Call  SetNpcFlagBits    ( .Npc:Partner 00000102 .False )
    7C:  Call  SetPlayerFlagBits ( 000000C0 .False )
    90:  Call  EnablePartnerAI ( )
@@ -2584,35 +2590,35 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 
 #new:Script $Script_Interact_80244F34
 {
-    0:  Call  SpeakToPlayer ( 00000000 0002000D 00020003 00000000 0012015D ) % Mario, open your eyes! I'm Kooper! I mean, serious ...
+    0:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000D 00020003 00000000 0012015D ) % Mario, open your eyes! I'm Kooper! I mean, serious ...
    20:  Return
    28:  End
 }
 
 #new:Script $Script_Interact_80244F64
 {
-    0:  Call  SpeakToPlayer ( 00000001 009D0008 009D0001 00000000 0012015C ) % Mario, listen. I'm the real Kooper. These others a ...
+    0:  Call  SpeakToPlayer ( .NpcID:Goompa_01 009D0008 009D0001 00000000 0012015C ) % Mario, listen. I'm the real Kooper. These others a ...
    20:  Return
    28:  End
 }
 
 #new:Script $Script_Interact_80244F94
 {
-    0:  Call  SpeakToPlayer ( 00000002 00820014 00820004 00000000 0012015F ) % Brother! I'm the real Kooper! As my brother, you m ...
+    0:  Call  SpeakToPlayer ( .NpcID:Luigi_02 00820014 00820004 00000000 0012015F ) % Brother! I'm the real Kooper! As my brother, you m ...
    20:  Return
    28:  End
 }
 
 #new:Script $Script_Interact_80244FC4
 {
-    0:  Call  SpeakToPlayer ( 00000003 00B50004 00B50001 00000000 0012015E ) % I'm the real Kooper, youngster. You're not saying  ...
+    0:  Call  SpeakToPlayer ( .NpcID:KoopaKoot_03 00B50004 00B50001 00000000 0012015E ) % I'm the real Kooper, youngster. You're not saying  ...
    20:  Return
    28:  End
 }
 
 #new:Script $Script_Interact_80244FF4
 {
-    0:  Call  SpeakToPlayer ( 00000004 00B60008 00B60001 00000000 0012015B ) % Listen, old chap, I'm the real Kooper. It's rather ...
+    0:  Call  SpeakToPlayer ( .NpcID:Kolorado_04 00B60008 00B60001 00000000 0012015B ) % Listen, old chap, I'm the real Kooper. It's rather ...
    20:  Return
    28:  End
 }
@@ -2743,109 +2749,109 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 
 #new:NpcGroup $NpcGroup_80245394
 {
-	00000000 $NpcSettings_802420C0 ~Vec3f:NPC_80245394 % 0 -1000 0
+	.NpcID:WorldKooper_00 $NpcSettings_802420C0 ~Vec3f:NPC_WorldKooper_00 % 0 -1000 0
 	03D40D09 $Script_Init_8024506C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245394
-	~AnimationTable:NPC_80245394 % .Sprite:WorldKooper
+	~Movement:NPC_WorldKooper_00
+	~AnimationTable:NPC_WorldKooper_00 % .Sprite:WorldKooper
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80245394[1F0]
-	00000001 $NpcSettings_802420EC ~Vec3f:NPC_80245584 % 0 -1000 0
+	.NpcID:Goompa_01 $NpcSettings_802420EC ~Vec3f:NPC_Goompa_01 % 0 -1000 0
 	03D40D09 $Script_Init_802450C0 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245584
-	~AnimationTable:NPC_80245584 % .Sprite:Goompa
+	~Movement:NPC_Goompa_01
+	~AnimationTable:NPC_Goompa_01 % .Sprite:Goompa
 	00000000 00000000 $ExtraAnimationList_80245330 00000000 % no tattle string
 	%
 	% $NpcGroup_80245394[3E0]
-	00000002 $NpcSettings_802420C0 ~Vec3f:NPC_80245774 % 0 -1000 0
+	.NpcID:Luigi_02 $NpcSettings_802420C0 ~Vec3f:NPC_Luigi_02 % 0 -1000 0
 	03D40D09 $Script_Init_80245114 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245774
-	~AnimationTable:NPC_80245774 % .Sprite:Luigi
+	~Movement:NPC_Luigi_02
+	~AnimationTable:NPC_Luigi_02 % .Sprite:Luigi
 	00000000 00000000 $ExtraAnimationList_80245344 00000000 % no tattle string
 	%
 	% $NpcGroup_80245394[5D0]
-	00000003 $NpcSettings_80242118 ~Vec3f:NPC_80245964 % 0 -1000 0
+	.NpcID:KoopaKoot_03 $NpcSettings_80242118 ~Vec3f:NPC_KoopaKoot_03 % 0 -1000 0
 	03D40D09 $Script_Init_80245168 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245964
-	~AnimationTable:NPC_80245964 % .Sprite:KoopaKoot
+	~Movement:NPC_KoopaKoot_03
+	~AnimationTable:NPC_KoopaKoot_03 % .Sprite:KoopaKoot
 	00000000 00000000 $ExtraAnimationList_80245358 00000000 % no tattle string
 	%
 	% $NpcGroup_80245394[7C0]
-	00000004 $NpcSettings_80242144 ~Vec3f:NPC_80245B54 % 0 -1000 0
+	.NpcID:Kolorado_04 $NpcSettings_80242144 ~Vec3f:NPC_Kolorado_04 % 0 -1000 0
 	03D40D09 $Script_Init_802451BC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245B54
-	~AnimationTable:NPC_80245B54 % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_04
+	~AnimationTable:NPC_Kolorado_04 % .Sprite:Kolorado
 	00000000 00000000 $ExtraAnimationList_8024536C 00000000 % no tattle string
 	%
 	% $NpcGroup_80245394[9B0]
-	00000005 $NpcSettings_80242170 ~Vec3f:NPC_80245D44 % 0 -1000 0
+	.NpcID:Duplighost_05 $NpcSettings_80242170 ~Vec3f:NPC_Duplighost_05 % 0 -1000 0
 	03D44D08 $Script_Init_80245210 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245D44
-	~AnimationTable:NPC_80245D44 % .Sprite:Duplighost
+	~Movement:NPC_Duplighost_05
+	~AnimationTable:NPC_Duplighost_05 % .Sprite:Duplighost
 	00000000 00000000 $ExtraAnimationList_80245380 00000000 % no tattle string
 	%
 	% $NpcGroup_80245394[BA0]
-	00000006 $NpcSettings_802420C0 ~Vec3f:NPC_80245F34 % 0 -1000 0
+	.NpcID:WorldKooper_06 $NpcSettings_802420C0 ~Vec3f:NPC_WorldKooper_06 % 0 -1000 0
 	03F40D08 $Script_Init_80245268 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245F34
-	~AnimationTable:NPC_80245F34 % .Sprite:WorldKooper
+	~Movement:NPC_WorldKooper_06
+	~AnimationTable:NPC_WorldKooper_06 % .Sprite:WorldKooper
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80246124
 {
-	00000007 $NpcSettings_80242170 ~Vec3f:NPC_80246124 % 0 -1000 0
+	.NpcID:Duplighost_07 $NpcSettings_80242170 ~Vec3f:NPC_Duplighost_07 % 0 -1000 0
 	00D40D00 $Script_Init_80245290 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246124
-	~AnimationTable:NPC_80246124 % .Sprite:Duplighost
+	~Movement:NPC_Duplighost_07
+	~AnimationTable:NPC_Duplighost_07 % .Sprite:Duplighost
 	00000000 00000000 $ExtraAnimationList_80245380 00000000 % no tattle string
 	%
 	% $NpcGroup_80246124[1F0]
-	00000008 $NpcSettings_80242170 ~Vec3f:NPC_80246314 % 0 -1000 0
+	.NpcID:Duplighost_08 $NpcSettings_80242170 ~Vec3f:NPC_Duplighost_08 % 0 -1000 0
 	00D40D00 $Script_Init_802452B8 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246314
-	~AnimationTable:NPC_80246314 % .Sprite:Duplighost
+	~Movement:NPC_Duplighost_08
+	~AnimationTable:NPC_Duplighost_08 % .Sprite:Duplighost
 	00000000 00000000 $ExtraAnimationList_80245380 00000000 % no tattle string
 	%
 	% $NpcGroup_80246124[3E0]
-	00000009 $NpcSettings_80242170 ~Vec3f:NPC_80246504 % 0 -1000 0
+	.NpcID:Duplighost_09 $NpcSettings_80242170 ~Vec3f:NPC_Duplighost_09 % 0 -1000 0
 	00D40D00 $Script_Init_802452E0 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246504
-	~AnimationTable:NPC_80246504 % .Sprite:Duplighost
+	~Movement:NPC_Duplighost_09
+	~AnimationTable:NPC_Duplighost_09 % .Sprite:Duplighost
 	00000000 00000000 $ExtraAnimationList_80245380 00000000 % no tattle string
 	%
 	% $NpcGroup_80246124[5D0]
-	0000000A $NpcSettings_80242170 ~Vec3f:NPC_802466F4 % 0 -1000 0
+	.NpcID:Duplighost_10 $NpcSettings_80242170 ~Vec3f:NPC_Duplighost_10 % 0 -1000 0
 	00D40D00 $Script_Init_80245308 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802466F4
-	~AnimationTable:NPC_802466F4 % .Sprite:Duplighost
+	~Movement:NPC_Duplighost_10
+	~AnimationTable:NPC_Duplighost_10 % .Sprite:Duplighost
 	00000000 00000000 $ExtraAnimationList_80245380 00000000 % no tattle string
 	%
 	% $NpcGroup_80246124[7C0]
-	0000000B $NpcSettings_80242170 ~Vec3f:NPC_802468E4 % 0 -1000 0
+	.NpcID:Duplighost_11 $NpcSettings_80242170 ~Vec3f:NPC_Duplighost_11 % 0 -1000 0
 	00E44D00 $Script_Init_80245024 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802468E4
-	~AnimationTable:NPC_802468E4 % .Sprite:Duplighost
+	~Movement:NPC_Duplighost_11
+	~AnimationTable:NPC_Duplighost_11 % .Sprite:Duplighost
 	00000000 00000000 $ExtraAnimationList_80245380 00000000 % no tattle string
 }
 
 #new:Script $Script_Idle_80246AD4
 {
     0:  Loop
-    C:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
-   28:  	Call  SetNpcPos ( 0000000C *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
+   28:  	Call  SetNpcPos ( .NpcID:WorldKooper_12 *Var0 *Var1 *Var2 )
    44:  	Wait  1`
    50:  EndLoop
    58:  Return
@@ -2855,8 +2861,8 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 #new:Script $Script_Idle_80246B3C
 {
     0:  Loop
-    C:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
-   28:  	Call  SetNpcPos ( 0000000D *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos ( .NpcID:Goompa_01 *Var0 *Var1 *Var2 )
+   28:  	Call  SetNpcPos ( .NpcID:Goompa_13 *Var0 *Var1 *Var2 )
    44:  	Wait  1`
    50:  EndLoop
    58:  Return
@@ -2866,8 +2872,8 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 #new:Script $Script_Idle_80246BA4
 {
     0:  Loop
-    C:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-   28:  	Call  SetNpcPos ( 0000000E *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos ( .NpcID:Luigi_02 *Var0 *Var1 *Var2 )
+   28:  	Call  SetNpcPos ( .NpcID:Luigi_14 *Var0 *Var1 *Var2 )
    44:  	Wait  1`
    50:  EndLoop
    58:  Return
@@ -2877,8 +2883,8 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 #new:Script $Script_Idle_80246C0C
 {
     0:  Loop
-    C:  	Call  GetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
-   28:  	Call  SetNpcPos ( 0000000F *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos ( .NpcID:KoopaKoot_03 *Var0 *Var1 *Var2 )
+   28:  	Call  SetNpcPos ( .NpcID:KoopaKoot_15 *Var0 *Var1 *Var2 )
    44:  	Wait  1`
    50:  EndLoop
    58:  Return
@@ -2888,8 +2894,8 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 #new:Script $Script_Idle_80246C74
 {
     0:  Loop
-    C:  	Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
-   28:  	Call  SetNpcPos ( 00000010 *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos ( .NpcID:Kolorado_04 *Var0 *Var1 *Var2 )
+   28:  	Call  SetNpcPos ( .NpcID:Kolorado_16 *Var0 *Var1 *Var2 )
    44:  	Wait  1`
    50:  EndLoop
    58:  Return
@@ -2998,43 +3004,43 @@ PADDING: 802420B8 to 802420C0 (000020B8 to 000020C0)
 
 #new:NpcGroup $NpcGroup_80246FFC
 {
-	0000000C $NpcSettings_802420C0 ~Vec3f:NPC_80246FFC % 0 -1000 0
+	.NpcID:WorldKooper_12 $NpcSettings_802420C0 ~Vec3f:NPC_WorldKooper_12 % 0 -1000 0
 	03F44D08 $Script_Init_80246E6C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246FFC
-	~AnimationTable:NPC_80246FFC % .Sprite:WorldKooper
+	~Movement:NPC_WorldKooper_12
+	~AnimationTable:NPC_WorldKooper_12 % .Sprite:WorldKooper
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80246FFC[1F0]
-	0000000D $NpcSettings_802420EC ~Vec3f:NPC_802471EC % 0 -1000 0
+	.NpcID:Goompa_13 $NpcSettings_802420EC ~Vec3f:NPC_Goompa_13 % 0 -1000 0
 	03F44D08 $Script_Init_80246EBC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802471EC
-	~AnimationTable:NPC_802471EC % .Sprite:Goompa
+	~Movement:NPC_Goompa_13
+	~AnimationTable:NPC_Goompa_13 % .Sprite:Goompa
 	00000000 00000000 $ExtraAnimationList_80245330 00000000 % no tattle string
 	%
 	% $NpcGroup_80246FFC[3E0]
-	0000000E $NpcSettings_802420C0 ~Vec3f:NPC_802473DC % 0 -1000 0
+	.NpcID:Luigi_14 $NpcSettings_802420C0 ~Vec3f:NPC_Luigi_14 % 0 -1000 0
 	03F44D08 $Script_Init_80246F0C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802473DC
-	~AnimationTable:NPC_802473DC % .Sprite:Luigi
+	~Movement:NPC_Luigi_14
+	~AnimationTable:NPC_Luigi_14 % .Sprite:Luigi
 	00000000 00000000 $ExtraAnimationList_80245344 00000000 % no tattle string
 	%
 	% $NpcGroup_80246FFC[5D0]
-	0000000F $NpcSettings_80242118 ~Vec3f:NPC_802475CC % 0 -1000 0
+	.NpcID:KoopaKoot_15 $NpcSettings_80242118 ~Vec3f:NPC_KoopaKoot_15 % 0 -1000 0
 	03F44D08 $Script_Init_80246F5C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802475CC
-	~AnimationTable:NPC_802475CC % .Sprite:KoopaKoot
+	~Movement:NPC_KoopaKoot_15
+	~AnimationTable:NPC_KoopaKoot_15 % .Sprite:KoopaKoot
 	00000000 00000000 $ExtraAnimationList_80245358 00000000 % no tattle string
 	%
 	% $NpcGroup_80246FFC[7C0]
-	00000010 $NpcSettings_80242144 ~Vec3f:NPC_802477BC % 0 -1000 0
+	.NpcID:Kolorado_16 $NpcSettings_80242144 ~Vec3f:NPC_Kolorado_16 % 0 -1000 0
 	03F44D08 $Script_Init_80246FAC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802477BC
-	~AnimationTable:NPC_802477BC % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_16
+	~AnimationTable:NPC_Kolorado_16 % .Sprite:Kolorado
 	00000000 00000000 $ExtraAnimationList_8024536C 00000000 % no tattle string
 }
 

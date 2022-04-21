@@ -1,6 +1,9 @@
 % Script File: flo_22.mscr
 % Decoded from: 0 to 2020 (flo_22)
 
+#define .NpcID:Bzzap_00             00
+#define .NpcID:Dayzee_01            01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -10,7 +13,7 @@
    10:  COPY      A3, A1
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -225,8 +228,8 @@ PADDING: 8024028C to 80240290 (0000028C to 00000290)
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   54:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   54:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80240DE4 )
    98:  Exec  $Script_80241F6C
@@ -277,19 +280,19 @@ PADDING: 80240518 to 80240520 (00000518 to 00000520)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Thread
    30:  			Wait  25`
-   3C:  			Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   3C:  			Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    58:  			Call  SetNpcFlagBits    ( .Npc:Self 00000002 .False )
    70:  		EndThread
    78:  		Call  DoNpcDefeat ( )
    84:  	Case  ==  .Outcome:PlayerLost % 1
-   90:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   90:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    AC:  	Case  ==  .Outcome:PlayerFled % 2
    B8:  		Call  SetNpcAnimation   ( .Npc:Self 004B0001 )
-   CC:  		Call  SetNpcPos ( .Npc:Self 0000001E 0000003C 00000000 )
+   CC:  		Call  SetNpcPos ( .Npc:Self  30`  60`  0` )
    E8:  		Wait  10`
    F4:  		Call  SetNpcJumpscale   ( .Npc:Self 00000000 )
-  108:  		Call  NpcJump0  ( .Npc:Self 0000001E 00000000 00000000 0000000F )
-  128:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  108:  		Call  NpcJump0  ( .Npc:Self  30`  0`  0`  15` )
+  128:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   144:  EndSwitch
   14C:  Return
   154:  End
@@ -327,24 +330,24 @@ PADDING: 80240518 to 80240520 (00000518 to 00000520)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Thread
    30:  			Wait  25`
-   3C:  			Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   3C:  			Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    58:  			Call  SetNpcFlagBits    ( .Npc:Self 00000002 .False )
    70:  		EndThread
    78:  		Call  DoNpcDefeat ( )
    84:  	Case  ==  .Outcome:PlayerLost % 1
-   90:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   90:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    AC:  	Case  ==  .Outcome:EnemyFled % 3
    B8:  		Call  SetNpcAnimation   ( .Npc:Self 00480001 )
    CC:  		Wait  10`
    D8:  		Call  SetNpcJumpscale   ( .Npc:Self *Fixed[2.0] )
-   EC:  		Call  NpcJump0  ( .Npc:Self 0000001E 00000000 00000000 0000000F )
-  10C:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   EC:  		Call  NpcJump0  ( .Npc:Self  30`  0`  0`  15` )
+  10C:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   128:  	Case  ==  .Outcome:PlayerFled % 2
   134:  		Call  SetNpcAnimation   ( .Npc:Self 00480001 )
   148:  		Wait  10`
   154:  		Call  SetNpcJumpscale   ( .Npc:Self *Fixed[2.0] )
-  168:  		Call  NpcJump0  ( .Npc:Self 0000001E 00000000 00000000 0000000F )
-  188:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  168:  		Call  NpcJump0  ( .Npc:Self  30`  0`  0`  15` )
+  188:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   1A4:  EndSwitch
   1AC:  Return
   1B4:  End
@@ -360,22 +363,22 @@ PADDING: 80240518 to 80240520 (00000518 to 00000520)
 
 #new:NpcGroup $NpcGroup_80240A04
 {
-	00000000 $NpcSettings_80240520 ~Vec3f:NPC_80240A04 % 0 -1000 0
+	.NpcID:Bzzap_00 $NpcSettings_80240520 ~Vec3f:NPC_Bzzap_00 % 0 -1000 0
 	00000F04 $Script_Init_80240740 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80240A04
-	~AnimationTable:NPC_80240A04 % .Sprite:Bzzap
+	~Movement:NPC_Bzzap_00
+	~AnimationTable:NPC_Bzzap_00 % .Sprite:Bzzap
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80240BF4
 {
-	00000001 $NpcSettings_80240520 ~Vec3f:NPC_80240BF4 % 0 -1000 0
+	.NpcID:Dayzee_01 $NpcSettings_80240520 ~Vec3f:NPC_Dayzee_01 % 0 -1000 0
 	00000F04 $Script_Init_802409CC 00000000 00000000 0000010E
 	~Items:15:MapleSyrup:6:HoneySyrup:4
 	~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:0:3
-	~Movement:NPC_80240BF4
-	~AnimationTable:NPC_80240BF4 % .Sprite:Dayzee
+	~Movement:NPC_Dayzee_01
+	~AnimationTable:NPC_Dayzee_01 % .Sprite:Dayzee
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
@@ -402,7 +405,7 @@ PADDING: 80240E08 to 80240E10 (00000E08 to 00000E10)
 {
     0:  Call  DisablePlayerInput        ( .True )
    10:  Wait  20`
-   1C:  Call  ShowMessageAtScreenPos    ( 001100DB 0000012C 00000078 ) % Sniffle... Sniffle.........
+   1C:  Call  ShowMessageAtScreenPos    ( 001100DB  300`  120` ) % Sniffle... Sniffle.........
    34:  Wait  10`
    40:  Call  DisablePlayerInput        ( .False )
    50:  Return
@@ -451,60 +454,60 @@ PADDING: 80240E08 to 80240E10 (00000E08 to 00000E10)
    58:  Switch  *Var8
    64:  	Case  <=  FFFFFFFF
    70:  	Case  <=  00000000
-   7C:  		Call  ShowMessageAtScreenPos    ( 001D015C 000000A0 00000028 ) % It's a well.
+   7C:  		Call  ShowMessageAtScreenPos    ( 001D015C  160`  40` ) % It's a well.
    94:  	Case  ==  0000009E
    A0:  		ExecWait  $Script_80240E84
    AC:  		Call  RemoveItemAt  ( *Var1 )
    BC:  		If  *GF_FLO22_ThrewBlueBerryDownWell  ==  .False
-   CC:  			Call  ShowMessageAtWorldPos ( 001100DD 00000023 00000023 00000000 ) % Sniffle!!!!! Who's throwing stuff down into my wel ...
+   CC:  			Call  ShowMessageAtWorldPos ( 001100DD  35`  35`  0` ) % Sniffle!!!!! Who's throwing stuff down into my wel ...
    E8:  			Set   *GF_FLO22_ThrewBlueBerryDownWell  .True
    F8:  			Call  MakeItemEntity    ( .Item:FlowerSaverB ~Vec3d:Item80241120 00000000 *GF_FLO22_Item_FlowerSaverB )
   11C:  			Set   *Var7  *Var0
-  12C:  			Call  SetNpcFlagBits    ( 00000000 00000002 .True )
-  144:  			Call  SetNpcFlagBits    ( 00000000 00000010 .False )
-  15C:  			Call  SetNpcPos ( 00000000 00000023 00000000 00000000 )
-  178:  			Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
+  12C:  			Call  SetNpcFlagBits    ( .NpcID:Bzzap_00 00000002 .True )
+  144:  			Call  SetNpcFlagBits    ( .NpcID:Bzzap_00 00000010 .False )
+  15C:  			Call  SetNpcPos ( .NpcID:Bzzap_00  35`  0`  0` )
+  178:  			Call  SetNpcJumpscale   ( .NpcID:Bzzap_00 *Fixed[1.0] )
   18C:  			Thread
-  194:  				Call  NpcJump0  ( 00000000 FFFFFFCB 00000000 00000000 00000019 )
-  1B4:  				Call  NpcJump0  ( 00000000 FFFFFFB7 00000000 00000000 0000000F )
-  1D4:  				Call  NpcJump0  ( 00000000 FFFFFFAD 00000000 00000000 00000008 )
+  194:  				Call  NpcJump0  ( .NpcID:Bzzap_00  -53`  0`  0`  25` )
+  1B4:  				Call  NpcJump0  ( .NpcID:Bzzap_00  -73`  0`  0`  15` )
+  1D4:  				Call  NpcJump0  ( .NpcID:Bzzap_00  -83`  0`  0`  8` )
   1F4:  			EndThread
   1FC:  			Loop  00000035
-  208:  				Call  GetNpcPos     ( 00000000 *Var1 *Var2 *Var3 )
+  208:  				Call  GetNpcPos     ( .NpcID:Bzzap_00 *Var1 *Var2 *Var3 )
   224:  				Call  SetItemPos    ( *Var7 *Var1 *Var2 *Var3 )
   240:  				Wait  1`
   24C:  			EndLoop
-  254:  			Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
-  270:  			Call  SetNpcFlagBits    ( 00000000 00000002 .False )
-  288:  			Call  SetNpcFlagBits    ( 00000000 00000010 .True )
+  254:  			Call  SetNpcPos ( .NpcID:Bzzap_00  0`  -1000`  0` )
+  270:  			Call  SetNpcFlagBits    ( .NpcID:Bzzap_00 00000002 .False )
+  288:  			Call  SetNpcFlagBits    ( .NpcID:Bzzap_00 00000010 .True )
   2A0:  		Else
-  2A8:  			Call  ShowMessageAtWorldPos ( 001100DE 00000023 00000023 00000000 ) % Sniffle!!!!! Burp... No more berries! I'm stuffed  ...
+  2A8:  			Call  ShowMessageAtWorldPos ( 001100DE  35`  35`  0` ) % Sniffle!!!!! Burp... No more berries! I'm stuffed  ...
   2C4:  		EndIf
   2CC:  	Default
   2D4:  		ExecWait  $Script_80240E84
   2E0:  		Call  RemoveItemAt  ( *Var1 )
-  2F0:  		Call  ShowMessageAtWorldPos ( 001100DC 00000023 00000023 00000000 ) % Sniffle... Who's throwing stuff down into my well? ...
+  2F0:  		Call  ShowMessageAtWorldPos ( 001100DC  35`  35`  0` ) % Sniffle... Who's throwing stuff down into my well? ...
   30C:  		Call  RandInt   ( 00000001 *Var1 )
   320:  		If  *Var1  ==  00000000
-  330:  			Call  SetNpcJumpscale   ( 00000000 *Fixed[0.0] )
-  344:  			Call  NpcFacePlayer ( 00000000 00000000 )
+  330:  			Call  SetNpcJumpscale   ( .NpcID:Bzzap_00 *Fixed[0.0] )
+  344:  			Call  NpcFacePlayer ( .NpcID:Bzzap_00 00000000 )
   358:  			Wait  1`
-  364:  			Call  SetNpcPos     ( 00000000 0000001E 00000000 00000000 )
-  380:  			Call  SetNpcAnimation   ( 00000000 004B0001 )
-  394:  			Call  NpcJump0      ( 00000000 0000001E 0000003C 00000000 00000014 )
+  364:  			Call  SetNpcPos     ( .NpcID:Bzzap_00  30`  0`  0` )
+  380:  			Call  SetNpcAnimation   ( .NpcID:Bzzap_00 004B0001 )
+  394:  			Call  NpcJump0      ( .NpcID:Bzzap_00  30`  60`  0`  20` )
   3B4:  			Wait  10`
-  3C0:  			Call  SetNpcAnimation   ( 00000000 004B0004 )
+  3C0:  			Call  SetNpcAnimation   ( .NpcID:Bzzap_00 004B0004 )
   3D4:  			Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   3EC:  			Add   *Var1  00000014
-  3FC:  			Call  NpcJump0      ( 00000000 *Var0 *Var1 *Var2 00000005 )
+  3FC:  			Call  NpcJump0      ( .NpcID:Bzzap_00 *Var0 *Var1 *Var2  5` )
   41C:  			Set   *MapVar[A]  00000001
   42C:  		Else
-  434:  			Call  SetNpcPos ( 00000001 0000001E 00000000 00000000 )
-  450:  			Call  SetNpcAnimation   ( 00000001 0048000E )
+  434:  			Call  SetNpcPos ( .NpcID:Dayzee_01  30`  0`  0` )
+  450:  			Call  SetNpcAnimation   ( .NpcID:Dayzee_01 0048000E )
   464:  			Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   47C:  			Add   *Var1  00000014
-  48C:  			Call  SetNpcJumpscale   ( 00000001 *Fixed[2.0] )
-  4A0:  			Call  NpcJump0  ( 00000001 *Var0 *Var1 *Var2 00000014 )
+  48C:  			Call  SetNpcJumpscale   ( .NpcID:Dayzee_01 *Fixed[2.0] )
+  4A0:  			Call  NpcJump0  ( .NpcID:Dayzee_01 *Var0 *Var1 *Var2  20` )
   4C0:  			Set   *MapVar[B]  00000001
   4D0:  		EndIf
   4D8:  EndSwitch

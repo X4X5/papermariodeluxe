@@ -1,6 +1,7 @@
 % Script File: kpa_100.mscr
 % Decoded from: 0 to 2E0 (kpa_100)
 
+
 #new:Function_Init $Function_Init
 {
     0:  ADDIU     SP, SP, FFE8
@@ -73,8 +74,8 @@ PADDING: 80240108 to 80240110 (00000108 to 00000110)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  ExecWait  $Script_80240270
@@ -91,7 +92,7 @@ PADDING: 8024026C to 80240270 (0000026C to 00000270)
 
 #new:Script $Script_80240270
 {
-    0:  Call  MakeItemEntity    ( .Item:CastleKey2 ~Vec3d:Item80240270 00000000 *GF_KPA100_Item_CastleKey2 )
+    0:  Call  MakeItemEntity    ( .Item:BowserCastleKey ~Vec3d:Item80240270 00000000 *GF_KPA100_Item_CastleKey2 )
    24:  Return
    2C:  End
 }

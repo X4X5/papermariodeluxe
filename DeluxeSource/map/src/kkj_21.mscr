@@ -1,6 +1,7 @@
 % Script File: kkj_21.mscr
 % Decoded from: 0 to 250 (kkj_21)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %  325.0    0.0  -30.0  270.0
@@ -48,8 +49,8 @@
 {
     0:  Set   *GB_WorldLocation  .Location:PeachsCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  UseDoorSounds     ( .DoorSounds:Basic )

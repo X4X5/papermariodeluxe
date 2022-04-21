@@ -1,6 +1,7 @@
 % Script File: mgm_03.mscr
 % Decoded from: 0 to E0 (mgm_03)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %    0.0  200.0    0.0   90.0
@@ -18,8 +19,8 @@
 #new:Script_Main $Script_Main
 {
     0:  Call  SetSpriteShading  ( .Shading:arn_09 )
-   10:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   30:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   10:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   30:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    4C:  Call  SetCamEnabled     ( .Cam:Default .True )
    60:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    74:  Return

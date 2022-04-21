@@ -207,11 +207,11 @@
   14C:  	Call  SetGoalToTarget   ( .Actor:Self )
   15C:  	Call  GetStatusFlags    ( .Actor:Self *Var0 )
   170:  	If  *Var0  !&  ~Flags:StatusFlags:Shrink % 80000
-  180:  		Call  AddGoalPos    ( .Actor:Self 0000001B 00000000 FFFFFFFA )
+  180:  		Call  AddGoalPos    ( .Actor:Self  27`  0`  -6` )
   19C:  	Else
-  1A4:  		Call  AddGoalPos    ( .Actor:Self 0000000A 00000000 FFFFFFFA )
+  1A4:  		Call  AddGoalPos    ( .Actor:Self  10`  0`  -6` )
   1C0:  	EndIf
-  1C8:  	Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  1C8:  	Call  RunToGoal     ( .Actor:Self  0` .False )
   1E0:  	Call  SetAnimation  ( .Actor:Self 00000001 003A0001 )
   1F8:  	Wait  10`
   204:  EndIf
@@ -229,13 +229,13 @@
   2DC:  		EndIf
   2E4:  		Call  YieldTurn ( )
   2F0:  		Call  UseBattleCamPreset    ( 00000002 )
-  300:  		Call  SetActorYaw   ( .Actor:Self 000000B4 )
+  300:  		Call  SetActorYaw   ( .Actor:Self  180` )
   314:  		Call  AddActorDecoration    ( .Actor:Self 00000001 00000000 .Decoration:Sweat )
   330:  		SetConst  *Var0  00000001 
   340:  		SetConst  *Var1  003A0002 
   350:  		ExecWait  DoReturnHome 
   35C:  		Call  RemoveActorDecoration ( .Actor:Self 00000001 00000000 )
-  374:  		Call  SetActorYaw   ( .Actor:Self 00000000 )
+  374:  		Call  SetActorYaw   ( .Actor:Self  0` )
   388:  		Call  EnableIdleScript      ( .Actor:Self 00000001 )
   39C:  		Call  UseIdleAnimation      ( .Actor:Self .True )
   3B0:  		Return
@@ -251,9 +251,9 @@
   440:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:NoContact 00000000 00000000 00000003 00000020 )
   468:  Switch  *Var0 
   474:  	CaseOR  ==  .HitResult:Hit % 0
-  480:  	CaseOR  ==  00000002 % 2
+  480:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   48C:  		Thread
-  494:  			Call  ShakeCam  ( .Cam:Battle 00000000 0000000A *Fixed[1.5] )
+  494:  			Call  ShakeCam  ( .Cam:Battle 00000000  10` *Fixed[1.5] )
   4B0:  		EndThread
   4B8:  		Call  UseBattleCamPreset    ( 00000002 )
   4C8:  		Wait  19`

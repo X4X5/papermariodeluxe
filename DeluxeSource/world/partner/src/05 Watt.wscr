@@ -24,7 +24,7 @@
    58:  LW        A1, 38 (A0)
    5C:  LW        A3, 40 (A0)
    60:  MFC1      A2, F4
-   64:  JAL       800723B0
+   64:  JAL       ~Func:playFX_73
    68:  CLEAR     A0
    6C:  SW        V0, 0 (S0)
         .o70
@@ -1014,7 +1014,7 @@
    40:  ORI       A0, A0, 7
    44:  LUI       A0, 6
         .o48
-   48:  JAL       ~Func:suggest_player_anim
+   48:  JAL       ~Func:suggest_player_anim_clearUnkFlag
    4C:  NOP
    50:  LW        RA, 10 (SP)
    54:  JR        RA

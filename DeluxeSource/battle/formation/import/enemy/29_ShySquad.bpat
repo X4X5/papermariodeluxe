@@ -195,14 +195,14 @@
   AB4:  Add   *Var0  000000BE 
   AC4:  Call  RandInt   ( 00000064 *Var2 )
   AD8:  Add   *Var2  FFFFFFCE 
-  AE8:  Call  SetActorPos   ( .Actor:Self *Var0 00000000 *Var2 )
+  AE8:  Call  SetActorPos   ( .Actor:Self *Var0  0` *Var2 )
   B04:  Set   *Var1  00000002 
   B14:  Loop  0000000F 
   B20:  	Call  RandInt       ( 00000064 *Var0 )
   B34:  	Add   *Var0  000000BE 
   B44:  	Call  RandInt       ( 00000064 *Var2 )
   B58:  	Add   *Var2  FFFFFFCE 
-  B68:  	Call  SetPartPos    ( .Actor:Self *Var1 *Var0 00000000 *Var2 )
+  B68:  	Call  SetPartPos    ( .Actor:Self *Var1 *Var0  0` *Var2 )
   B88:  	Add   *Var1  00000001 
   B98:  EndLoop
   BA0:  Set   *Var0  00000002 
@@ -210,8 +210,8 @@
   BBC:  	Call  CreatePartShadow  ( .Actor:Self *Var0 )
   BD0:  	Add   *Var0  00000001 
   BE0:  EndLoop
-  BE8:  Call  SetActorSize  ( .Actor:Self F1194D80 00000048 )
-  C00:  Call  SetPartSize   ( .Actor:Self 00000001 00000018 00000018 )
+  BE8:  Call  SetActorSize  ( .Actor:Self  -250000000`  72` )
+  C00:  Call  SetPartSize   ( .Actor:Self 00000001  24`  24` )
   C1C:  Return
   C24:  End
 }
@@ -230,18 +230,18 @@
    AC:  				Call  SetAnimation  ( .Actor:Self *Var0 006E0003 )
    C4:  				Add   *Var0  00000001 
    D4:  			EndLoop
-   DC:  			Call  SetHomePos        ( .Actor:Self 00000041 00000000 FFFFFFF6 )
+   DC:  			Call  SetHomePos        ( .Actor:Self  65`  0`  -10` )
    F8:  			Call  HPBarToHome       ( .Actor:Self )
-  108:  			Call  SetActorYaw       ( .Actor:Self 00000000 )
+  108:  			Call  SetActorYaw       ( .Actor:Self  0` )
   11C:  			Call  SetActorSpeed     ( .Actor:Self *Fixed[6.0] )
   130:  			Set   *Var1  006E0003 
   140:  			Call  PlaySoundAtActor  ( .Actor:Self .Sound:ShyGuyScreams1 )
   154:  			ExecWait  $Script_802325EC_29 
   160:  			Wait  10`
   16C:  			Call  UseBattleCamPreset    ( 00000013 )
-  17C:  			Call  SetBattleCamZoom  ( 00000168 )
-  18C:  			Call  SetBattleCamTarget    ( 00000048 0000002D 00000000 )
-  1A4:  			Call  MoveBattleCamOver ( 0000001E )
+  17C:  			Call  SetBattleCamZoom  (  360` )
+  18C:  			Call  SetBattleCamTarget    (  72`  45`  0` )
+  1A4:  			Call  MoveBattleCamOver (  30` )
   1B4:  			Wait  30`
   1C0:  			Call  802535B4  ( 00000000 )
   1D0:  			Call  ActorSpeak        ( 000F0065 .Actor:Self 00000009 006E0011 006E0011 ) % OK, guys! All together now! Let's rush him! Chaaaa ...
@@ -297,15 +297,15 @@
    50:  EndIf
    58:  Call  GetPartOffset ( .Actor:Self *Var0 *Var6 00000000 *Var7 )
    78:  If  *Var6  <  *Var2 
-   88:  	Call  SetPartYaw    ( .Actor:Self *Var0 000000B4 )
+   88:  	Call  SetPartYaw    ( .Actor:Self *Var0  180` )
    A0:  Else
-   A8:  	Call  SetPartYaw    ( .Actor:Self *Var0 00000000 )
+   A8:  	Call  SetPartYaw    ( .Actor:Self *Var0  0` )
    C0:  EndIf
    C8:  Call  GetDist2D ( *Var9 *Var6 *Var7 *Var2 *Var3 )
    E8:  If  *Var9  >=  *Var4 
    F8:  	Call  SetAnimation      ( .Actor:Self *Var0 *Var1 )
   110:  	Call  SetPartMoveSpeed  ( .Actor:Self *Var0 *Var4 )
-  128:  	Call  RunPartTo ( .Actor:Self *Var0 *Var2 00000000 *Var3 *Var5 )
+  128:  	Call  RunPartTo ( .Actor:Self *Var0 *Var2  0` *Var3 *Var5 )
   14C:  EndIf
   154:  Return
   15C:  End
@@ -328,7 +328,7 @@
    E4:  		Call  GetActorVar   ( .Actor:Self 00000003 *VarB )
    FC:  		Add   *VarA  *VarB 
   10C:  		If  *Var0  >=  *VarA 
-  11C:  			Call  SetPartYaw    ( .Actor:Self *Var0 00000000 )
+  11C:  			Call  SetPartYaw    ( .Actor:Self *Var0  0` )
   134:  			Call  SetAnimation  ( .Actor:Self *Var0 006E0001 )
   14C:  		EndIf
   154:  	EndThread
@@ -338,7 +338,7 @@
   188:  Call  SetGoalToHome ( .Actor:Self )
   198:  Call  GetGoalPos    ( .Actor:Self *VarD *VarE *VarF )
   1B4:  Call  SetGoalPos    ( .Actor:Self *VarD *VarE *VarF )
-  1D0:  Call  RunToGoal     ( .Actor:Self 00000000 .True )
+  1D0:  Call  RunToGoal     ( .Actor:Self  0` .True )
   1E8:  Return
   1F0:  End
 }
@@ -648,9 +648,9 @@
   420:  		SetConst  *Var1  006E000D 
   430:  		ExecWait  $Script_80233494_29 
   43C:  		Call  UseBattleCamPreset    ( 00000002 )
-  44C:  		Call  MoveBattleCamOver ( 00000014 )
+  44C:  		Call  MoveBattleCamOver (  20` )
   45C:  		Call  SetActorSpeed     ( .Actor:Self *Fixed[6.0] )
-  470:  		Call  SetActorYaw       ( .Actor:Self 000000B4 )
+  470:  		Call  SetActorYaw       ( .Actor:Self  180` )
   484:  		Set   *Var1  006E0003 
   494:  		ExecWait  $Script_802325EC_29 
   4A0:  	Case  ==  .Event:ShockDeath % 26
@@ -685,7 +685,7 @@
   624:  		Wait  1000`
   630:  	Case  ==  .Event:EndFirstStrike % 35
   63C:  		Call  SetActorSpeed ( .Actor:Self *Fixed[6.0] )
-  650:  		Call  SetActorYaw   ( .Actor:Self 000000B4 )
+  650:  		Call  SetActorYaw   ( .Actor:Self  180` )
   664:  		Set   *Var1  006E0003 
   674:  		ExecWait  $Script_802325EC_29 
   680:  		Call  HPBarToHome   ( .Actor:Self )
@@ -737,7 +737,7 @@
   1B0:  		Add   *Var1  *Var7 
   1C0:  		Add   *Var3  *Var8 
   1D0:  		Call  SetPartJumpGravity    ( .Actor:Self *Var0 *Fixed[0.5] )
-  1E8:  		Call  JumpPartTo    ( .Actor:Self *Var0 *Var1 00000000 *Var3 0000000F .True )
+  1E8:  		Call  JumpPartTo    ( .Actor:Self *Var0 *Var1  0` *Var3  15` .True )
   210:  		Call  80269E80  ( *Var5 )
   220:  		Switch  *Var5 
   22C:  			CaseOR  ==  0000000A 
@@ -881,9 +881,9 @@
    4C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
    68:  Add   *Var1  00000014 
    78:  Call  SetBattleCamTarget    ( *Var0 *Var1 *Var2 )
-   90:  Call  SetBattleCamZoom  ( 0000015E )
-   A0:  Call  SetBattleCamOffsetZ   ( 00000022 )
-   B0:  Call  MoveBattleCamOver ( 00000032 )
+   90:  Call  SetBattleCamZoom  (  350` )
+   A0:  Call  SetBattleCamOffsetZ   (  34` )
+   B0:  Call  MoveBattleCamOver (  50` )
    C0:  Set   *Var0  0000000F 
    D0:  Call  GetActorVar       ( .Actor:Self 00000003 *Var1 )
    E8:  Sub   *Var0  *Var1 
@@ -916,16 +916,16 @@
   2B0:  Add   *Var2  *Var5 
   2C0:  Call  GetPartMovementVar    ( .Actor:Self 00000010 00000005 *Var5 )
   2DC:  Add   *Var3  *Var5 
-  2EC:  Call  SetGoalPos    ( .Actor:Self *Var2 00000000 *Var3 )
-  308:  Call  RunToGoal     ( .Actor:Self 0000001E .True )
+  2EC:  Call  SetGoalPos    ( .Actor:Self *Var2  0` *Var3 )
+  308:  Call  RunToGoal     ( .Actor:Self  30` .True )
   320:  Set   *Var0  00000002 
   330:  Loop  0000000F 
   33C:  	Call  GetActorPos   ( .Actor:Player *Var4 *Var5 *Var6 )
   358:  	Call  GetPartOffset ( .Actor:Self *Var0 *Var1 *Var2 *Var3 )
   378:  	If  *Var1  <  *Var4 
-  388:  		Call  SetPartYaw    ( .Actor:Self *Var0 000000B4 )
+  388:  		Call  SetPartYaw    ( .Actor:Self *Var0  180` )
   3A0:  	Else
-  3A8:  		Call  SetPartYaw    ( .Actor:Self *Var0 00000000 )
+  3A8:  		Call  SetPartYaw    ( .Actor:Self *Var0  0` )
   3C0:  	EndIf
   3C8:  	Call  RandInt   ( 00000064 *Var7 )
   3DC:  	If  *Var7  <  00000032 
@@ -958,7 +958,7 @@
   61C:  		EndIf
   624:  		Wait  36`
   630:  		Call  UseBattleCamPreset    ( 00000002 )
-  640:  		Call  MoveBattleCamOver     ( 0000001E )
+  640:  		Call  MoveBattleCamOver     (  30` )
   650:  		Set   *Var0  0000000F 
   660:  		Call  GetActorVar   ( .Actor:Self 00000003 *Var1 )
   678:  		Sub   *Var0  *Var1 
@@ -972,7 +972,7 @@
   700:  				Call  PlaySoundAtActor  ( .Actor:Self 000003EC )
   714:  		EndSwitch
   71C:  		Call  SetActorSpeed     ( .Actor:Self *Fixed[6.0] )
-  730:  		Call  SetActorYaw       ( .Actor:Self 000000B4 )
+  730:  		Call  SetActorYaw       ( .Actor:Self  180` )
   744:  		Set   *Var1  006E0004 
   754:  		ExecWait  $Script_802325EC_29 
   760:  		Set   *Var1  006E0001 
@@ -1016,7 +1016,7 @@
   A08:  EndLoop
   A10:  Call  StopSound ( 000003AD )
   A20:  Call  UseBattleCamPreset    ( 00000002 )
-  A30:  Call  MoveBattleCamOver ( 0000001E )
+  A30:  Call  MoveBattleCamOver (  30` )
   A40:  Wait  20`
   A4C:  Set   *Var0  0000000F 
   A5C:  Call  GetActorVar       ( .Actor:Self 00000003 *Var1 )
@@ -1055,12 +1055,12 @@
    54:  EndLoop
    5C:  Call  UseBattleCamPreset    ( 0000000E )
    6C:  Call  BattleCamTargetActor  ( .Actor:Self )
-   7C:  Call  MoveBattleCamOver     ( 0000001E )
+   7C:  Call  MoveBattleCamOver     (  30` )
    8C:  Wait  30`
    98:  Call  ActorSpeak    ( 000F0066 .Actor:Self 00000001 FFFFFFFF FFFFFFFF ) % We're gonna lose!! Oh, no! We've gotta run!!!
    B8:  Call  8027D32C  ( FFFFFF81 )
    C8:  Call  UseBattleCamPreset    ( 00000002 )
-   D8:  Call  MoveBattleCamOver     ( 0000001E )
+   D8:  Call  MoveBattleCamOver     (  30` )
    E8:  Set   *Var0  00000002 
    F8:  Set   *Var1  006E0008 
   108:  Loop  0000000E 
@@ -1097,12 +1097,12 @@
   2DC:  		Call  PlaySoundAtActor  ( .Actor:Self .Sound:ShyGuyScreams2 )
   2F0:  EndSwitch
   2F8:  Call  SetActorSpeed ( .Actor:Self *Fixed[6.0] )
-  30C:  Call  SetActorYaw   ( .Actor:Self 000000B4 )
-  320:  Call  SetGoalPos    ( .Actor:Self 000000F0 00000000 00000000 )
-  33C:  Call  RunToGoal     ( .Actor:Self 00000000 .True )
+  30C:  Call  SetActorYaw   ( .Actor:Self  180` )
+  320:  Call  SetGoalPos    ( .Actor:Self  240`  0`  0` )
+  33C:  Call  RunToGoal     ( .Actor:Self  0` .True )
   354:  Wait  30`
   360:  Call  PlaySoundAtActor  ( .Actor:Self 000001E2 )
-  374:  Call  ShakeCam      ( .Cam:Battle 00000000 00000006 *Fixed[2.5] )
+  374:  Call  ShakeCam      ( .Cam:Battle 00000000  6` *Fixed[2.5] )
   390:  Call  GetActorVar   ( .Actor:Self 00000003 *Var0 )
   3A8:  If  *Var0  <  0000000E 
   3B8:  	Call  ActorSpeak    ( 000F0067 .Actor:Enemy0 00000001 FFFFFFFF FFFFFFFF ) % Wait! Stand your ground, men! Now's no time for co ...
@@ -1111,10 +1111,10 @@
   400:  EndIf
   408:  Thread
   410:  	Call  PlaySoundAtActor  ( .Actor:Self 000001E2 )
-  424:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[2.0] )
+  424:  	Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[2.0] )
   440:  	Wait  12`
   44C:  	Call  PlaySoundAtActor  ( .Actor:Self 000001E2 )
-  460:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[2.0] )
+  460:  	Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[2.0] )
   47C:  EndThread
   484:  Call  EndActorSpeech    ( .Actor:Enemy0 00000001 FFFFFFFF FFFFFFFF )
   4A0:  Call  SetActorSounds    ( .Actor:Self .ActorSound:Walk 00000000 00000000 )
@@ -1178,9 +1178,9 @@
   828:  	ExecWait  $Script_80232488_29 
   834:  EndThread
   83C:  Call  SetActorSpeed ( .Actor:Self *Fixed[10.0] )
-  850:  Call  SetActorYaw   ( .Actor:Self 00000000 )
-  864:  Call  SetGoalPos    ( .Actor:Self FFFFFF10 00000000 00000000 )
-  880:  Call  RunToGoal     ( .Actor:Self 00000000 .True )
+  850:  Call  SetActorYaw   ( .Actor:Self  0` )
+  864:  Call  SetGoalPos    ( .Actor:Self  -240`  0`  0` )
+  880:  Call  RunToGoal     ( .Actor:Self  0` .True )
   898:  ExecWait  $Script_80235D64_29 
   8A4:  Wait  10`
   8B0:  Call  802535B4      ( 00000001 )
@@ -1200,13 +1200,13 @@
     0:  Call  GetActorVar   ( .Actor:Self 00000003 *Var0 )
    18:  Switch  *Var0 
    24:  	Case  <=  00000001 
-   30:  		Call  SetActorSize  ( .Actor:Self F1194D80 00000048 )
+   30:  		Call  SetActorSize  ( .Actor:Self  -250000000`  72` )
    48:  	Case  <=  00000002 
-   54:  		Call  SetActorSize  ( .Actor:Self F1194D80 00000030 )
+   54:  		Call  SetActorSize  ( .Actor:Self  -250000000`  48` )
    6C:  	Case  <=  00000008 
-   78:  		Call  SetActorSize  ( .Actor:Self F1194D80 00000018 )
+   78:  		Call  SetActorSize  ( .Actor:Self  -250000000`  24` )
    90:  	Default
-   98:  		Call  SetActorSize  ( .Actor:Self F1194D80 F1194D80 )
+   98:  		Call  SetActorSize  ( .Actor:Self  -250000000`  -250000000` )
    B0:  EndSwitch
    B8:  Return
    C0:  End

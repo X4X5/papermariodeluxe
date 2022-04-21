@@ -1,6 +1,13 @@
 % Script File: omo_08.mscr
 % Decoded from: 0 to 8900 (omo_08)
 
+#define .NpcID:TrainStationToad_00  00
+#define .NpcID:TrainStationToad_01  01
+#define .NpcID:ShyGuy_02            02
+#define .NpcID:ShyGuy_03            03
+#define .NpcID:ShyGuy_04            04
+#define .NpcID:ShyGuy_05            05
+
 #new:Function $Function_80240000
 {
     0:  LA        V1, 800B1D80
@@ -1075,8 +1082,8 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_802486DC )
@@ -1193,10 +1200,10 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
 #new:Script $Script_802414B0
 {
     0:  Label  0
-    C:  Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-   28:  Call  GetNpcPos ( 00000003 *Var0 *Var2 *Var3 )
-   44:  Call  GetNpcPos ( 00000004 *Var0 *Var3 *Var4 )
-   60:  Call  GetNpcPos ( 00000005 *Var0 *Var4 *Var5 )
+    C:  Call  GetNpcPos ( .NpcID:ShyGuy_02 *Var0 *Var1 *Var2 )
+   28:  Call  GetNpcPos ( .NpcID:ShyGuy_03 *Var0 *Var2 *Var3 )
+   44:  Call  GetNpcPos ( .NpcID:ShyGuy_04 *Var0 *Var3 *Var4 )
+   60:  Call  GetNpcPos ( .NpcID:ShyGuy_05 *Var0 *Var4 *Var5 )
    7C:  Add   *Var1  *Var2
    8C:  Add   *Var1  *Var3
    9C:  Add   *Var1  *Var4
@@ -1381,7 +1388,7 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   5C0:  	Call  GetModelCenter    ( ~Model:b4_1 )
   5D0:  	Call  MakeItemEntity    ( .Item:Coin *Var0 00000028 *Var2 .ItemSpawnMode:BattleReward 00000000 )
   5F4:  	Wait  20`
-  600:  	Call  ResetCam  ( .Cam:Default 00000002 )
+  600:  	Call  ResetCam  ( .Cam:Default  2` )
   614:  EndThread
   61C:  Return
   624:  End
@@ -1412,10 +1419,10 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   124:  	Exec  $Script_80241450
   130:  	Wait  3`
   13C:  EndLoop
-  144:  Call  UseSettingsFrom   ( .Cam:Default 000000A0 0000000A FFFFFF38 )
-  160:  Call  SetPanTarget  ( .Cam:Default 000000A0 0000000A FFFFFF38 )
-  17C:  Call  SetCamDistance    ( .Cam:Default 000002BC )
-  190:  Call  SetCamPitch   ( .Cam:Default 00000028 *Fixed[-4.5] )
+  144:  Call  UseSettingsFrom   ( .Cam:Default  160`  10`  -200` )
+  160:  Call  SetPanTarget  ( .Cam:Default  160`  10`  -200` )
+  17C:  Call  SetCamDistance    ( .Cam:Default  700` )
+  190:  Call  SetCamPitch   ( .Cam:Default  40` *Fixed[-4.5] )
   1A8:  Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
   1BC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1D4:  Wait  30`
@@ -1432,7 +1439,7 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   270:  	Call  GetModelCenter    ( ~Model:o875 )
   280:  	Call  PlaySoundAt   ( 000001F3 00000000 *Var0 *Var1 *Var2 )
   2A0:  	Call  PlayEffect    ( ~FX:Steam:LargeOutward *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  2E4:  	Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.8] )
+  2E4:  	Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.8] )
   300:  EndThread
   308:  Wait  10`
   314:  Thread
@@ -1448,7 +1455,7 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   3A4:  	Call  GetModelCenter    ( ~Model:o877 )
   3B4:  	Call  PlaySoundAt   ( 000001F3 00000000 *Var0 *Var1 *Var2 )
   3D4:  	Call  PlayEffect    ( ~FX:Steam:LargeOutward *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  418:  	Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.8] )
+  418:  	Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.8] )
   434:  EndThread
   43C:  Wait  10`
   448:  Thread
@@ -1464,7 +1471,7 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   4D8:  	Call  GetModelCenter    ( ~Model:o879 )
   4E8:  	Call  PlaySoundAt   ( 000001F3 00000000 *Var0 *Var1 *Var2 )
   508:  	Call  PlayEffect    ( ~FX:Steam:LargeOutward *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  54C:  	Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.8] )
+  54C:  	Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.8] )
   568:  EndThread
   570:  Wait  10`
   57C:  Thread
@@ -1480,13 +1487,13 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   60C:  	Call  GetModelCenter    ( ~Model:o881 )
   61C:  	Call  PlaySoundAt   ( 000001F3 00000000 *Var0 *Var1 *Var2 )
   63C:  	Call  PlayEffect    ( ~FX:Steam:LargeOutward *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  680:  	Call  ShakeCam      ( .Cam:Default 00000000 00000003 *Fixed[0.8] )
+  680:  	Call  ShakeCam      ( .Cam:Default 00000000  3` *Fixed[0.8] )
   69C:  EndThread
   6A4:  Wait  100`
-  6B0:  Call  UseSettingsFrom   ( .Cam:Default 00000064 00000000 00000172 )
-  6CC:  Call  SetPanTarget  ( .Cam:Default 00000064 00000000 00000172 )
-  6E8:  Call  SetCamDistance    ( .Cam:Default FFFFFE3E )
-  6FC:  Call  SetCamPitch   ( .Cam:Default 00000010 *Fixed[-6.0] )
+  6B0:  Call  UseSettingsFrom   ( .Cam:Default  100`  0`  370` )
+  6CC:  Call  SetPanTarget  ( .Cam:Default  100`  0`  370` )
+  6E8:  Call  SetCamDistance    ( .Cam:Default  -450` )
+  6FC:  Call  SetCamPitch   ( .Cam:Default  16` *Fixed[-6.0] )
   714:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   728:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   740:  Wait  10`
@@ -1582,7 +1589,7 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   D90:  Call  ModifyColliderFlags   ( 00000000 ~Collider:o915 7FFFFE00 )
   DA8:  Call  ModifyColliderFlags   ( 00000000 ~Collider:o918 7FFFFE00 )
   DC0:  Wait  20`
-  DCC:  Call  ResetCam  ( .Cam:Default 00000002 )
+  DCC:  Call  ResetCam  ( .Cam:Default  2` )
   DE0:  Set   *GB_StoryProgress  .Story:Ch4_SolvedColorPuzzle
   DF0:  Call  DisablePlayerInput    ( .False )
   E00:  Return
@@ -1645,11 +1652,11 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   2D0:  	EndLoop
   2D8:  	Call  PlaySoundAtCollider   ( ~Collider:o907 0000032C 00000000 )
   2F0:  	Call  GetModelCenter    ( ~Model:b1_1 )
-  300:  	Call  SetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-  31C:  	Call  SetNpcJumpscale   ( 00000002 *Fixed[1.0] )
+  300:  	Call  SetNpcPos ( .NpcID:ShyGuy_02 *Var0 *Var1 *Var2 )
+  31C:  	Call  SetNpcJumpscale   ( .NpcID:ShyGuy_02 *Fixed[1.0] )
   330:  	Add   *Var2  0000003C
-  340:  	Call  NpcJump0  ( 00000002 *Var0 00000000 *Var2 00000014 )
-  360:  	Call  SetNpcFlagBits    ( 00000002 00000040 .False )
+  340:  	Call  NpcJump0  ( .NpcID:ShyGuy_02 *Var0  0` *Var2  20` )
+  360:  	Call  SetNpcFlagBits    ( .NpcID:ShyGuy_02 00000040 .False )
   378:  EndThread
   380:  Wait  3`
   38C:  Thread
@@ -1665,11 +1672,11 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   434:  	EndLoop
   43C:  	Call  PlaySoundAtCollider   ( ~Collider:o911 0000032C 00000000 )
   454:  	Call  GetModelCenter    ( ~Model:b2_1 )
-  464:  	Call  SetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
-  480:  	Call  SetNpcJumpscale   ( 00000003 *Fixed[1.0] )
+  464:  	Call  SetNpcPos ( .NpcID:ShyGuy_03 *Var0 *Var1 *Var2 )
+  480:  	Call  SetNpcJumpscale   ( .NpcID:ShyGuy_03 *Fixed[1.0] )
   494:  	Add   *Var2  0000003C
-  4A4:  	Call  NpcJump0  ( 00000003 *Var0 00000000 *Var2 00000014 )
-  4C4:  	Call  SetNpcFlagBits    ( 00000003 00000040 .False )
+  4A4:  	Call  NpcJump0  ( .NpcID:ShyGuy_03 *Var0  0` *Var2  20` )
+  4C4:  	Call  SetNpcFlagBits    ( .NpcID:ShyGuy_03 00000040 .False )
   4DC:  EndThread
   4E4:  Wait  3`
   4F0:  Thread
@@ -1685,11 +1692,11 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   598:  	EndLoop
   5A0:  	Call  PlaySoundAtCollider   ( ~Collider:o915 0000032C 00000000 )
   5B8:  	Call  GetModelCenter    ( ~Model:b3_1 )
-  5C8:  	Call  SetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
-  5E4:  	Call  SetNpcJumpscale   ( 00000004 *Fixed[1.0] )
+  5C8:  	Call  SetNpcPos ( .NpcID:ShyGuy_04 *Var0 *Var1 *Var2 )
+  5E4:  	Call  SetNpcJumpscale   ( .NpcID:ShyGuy_04 *Fixed[1.0] )
   5F8:  	Add   *Var2  0000003C
-  608:  	Call  NpcJump0  ( 00000004 *Var0 00000000 *Var2 00000014 )
-  628:  	Call  SetNpcFlagBits    ( 00000004 00000040 .False )
+  608:  	Call  NpcJump0  ( .NpcID:ShyGuy_04 *Var0  0` *Var2  20` )
+  628:  	Call  SetNpcFlagBits    ( .NpcID:ShyGuy_04 00000040 .False )
   640:  EndThread
   648:  Wait  3`
   654:  Thread
@@ -1705,12 +1712,12 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   6FC:  	EndLoop
   704:  	Call  PlaySoundAtCollider   ( ~Collider:o918 0000032C 00000000 )
   71C:  	Call  GetModelCenter    ( ~Model:b4_1 )
-  72C:  	Call  SetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
-  748:  	Call  SetNpcJumpscale   ( 00000005 *Fixed[1.0] )
+  72C:  	Call  SetNpcPos ( .NpcID:ShyGuy_05 *Var0 *Var1 *Var2 )
+  748:  	Call  SetNpcJumpscale   ( .NpcID:ShyGuy_05 *Fixed[1.0] )
   75C:  	Add   *Var2  0000003C
-  76C:  	Call  NpcJump0  ( 00000005 *Var0 00000000 *Var2 00000014 )
-  78C:  	Call  SetNpcFlagBits    ( 00000005 00000040 .False )
-  7A4:  	Call  ResetCam  ( .Cam:Default 00000001 )
+  76C:  	Call  NpcJump0  ( .NpcID:ShyGuy_05 *Var0  0` *Var2  20` )
+  78C:  	Call  SetNpcFlagBits    ( .NpcID:ShyGuy_05 00000040 .False )
+  7A4:  	Call  ResetCam  ( .Cam:Default  1` )
   7B8:  	Exec  $Script_802414B0
   7C4:  EndThread
   7CC:  Return
@@ -1750,11 +1757,11 @@ PADDING: 80240F14 to 80240F20 (00000F14 to 00000F20)
   1D0:  If  *MapVar[E]  ==  00000004
   1E0:  	Call  DisablePlayerInput    ( .True )
   1F0:  	Wait  5`
-  1FC:  	Call  UseSettingsFrom   ( .Cam:Default 00000064 00000000 00000172 )
-  218:  	Call  SetPanTarget      ( .Cam:Default 00000064 00000000 00000172 )
-  234:  	Call  SetCamDistance    ( .Cam:Default FFFFFE3E )
-  248:  	Call  SetCamPitch       ( .Cam:Default 00000010 *Fixed[-6.0] )
-  260:  	Call  SetCamSpeed       ( .Cam:Default 00000001 )
+  1FC:  	Call  UseSettingsFrom   ( .Cam:Default  100`  0`  370` )
+  218:  	Call  SetPanTarget      ( .Cam:Default  100`  0`  370` )
+  234:  	Call  SetCamDistance    ( .Cam:Default  -450` )
+  248:  	Call  SetCamPitch       ( .Cam:Default  16` *Fixed[-6.0] )
+  260:  	Call  SetCamSpeed       ( .Cam:Default  1` )
   274:  	Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   28C:  	Wait  30`
   298:  	Switch  *MapVar[F]
@@ -2098,7 +2105,7 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
 {
     0:  Label  0
     C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   24:  Call  SetCamTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+   24:  Call  SetCamTarget  ( .Cam:Default *Var0  0` *Var2 )
    40:  Wait  1`
    4C:  Goto  0
    58:  Return
@@ -2137,7 +2144,7 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
    AC:  EndLoop
    B4:  Loop
    C0:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   D8:  	Call  SetCamTarget  ( .Cam:Default *Var0 00000000 *Var2 )
+   D8:  	Call  SetCamTarget  ( .Cam:Default *Var0  0` *Var2 )
    F4:  	Wait  1`
   100:  EndLoop
   108:  Return
@@ -2146,7 +2153,7 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
 
 #new:Script $Script_8024513C
 {
-    0:  Call  SetNpcFlagBits    ( 00000000 00000140 .True )
+    0:  Call  SetNpcFlagBits    ( .NpcID:TrainStationToad_00 00000140 .True )
    18:  Call  SetNpcFlagBits    ( .Npc:Partner 00000140 .True )
    30:  Thread
    38:  	UseIntBuffer  *Var0
@@ -2154,12 +2161,12 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
    58:  	Call  AddVectorPolar    ( *Var1 *Var2 *Fixed[15.0] *Var3 )
    74:  	Call  SetPlayerAnimation    ( .PlayerAnim:Walking )
    84:  	Call  SetPlayerSpeed    ( *Fixed[4.0] )
-   94:  	Call  PlayerMoveTo      ( *Var1 *Var2 00000000 )
+   94:  	Call  PlayerMoveTo      ( *Var1 *Var2  0` )
    AC:  	Call  SetPlayerSpeed    ( *Fixed[0.7] )
-   BC:  	Call  PlayerMoveTo      ( *Var1 *Var2 00000000 )
-   D4:  	Call  SetPlayerPos      ( *Var1 00000032 *Var2 )
+   BC:  	Call  PlayerMoveTo      ( *Var1 *Var2  0` )
+   D4:  	Call  SetPlayerPos      ( *Var1  50` *Var2 )
    EC:  	Call  SetPlayerAnimation    ( 00010002 )
-   FC:  	Call  InterpPlayerYaw   ( *Var3 00000000 )
+   FC:  	Call  InterpPlayerYaw   ( *Var3  0` )
   110:  EndThread
   118:  Wait  5`
   124:  UseIntBuffer  *Var0
@@ -2168,11 +2175,11 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
   154:  AddF  *Var3  *Fixed[180.0]
   164:  Call  AddVectorPolar    ( *Var1 *Var2 *Fixed[15.0] *Var3 )
   180:  Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.7] )
-  194:  Call  NpcJump0  ( .Npc:Partner *Var1 00000032 *Var2 0000000A )
+  194:  Call  NpcJump0  ( .Npc:Partner *Var1  50` *Var2  10` )
   1B4:  Call  SetNpcSpeed       ( .Npc:Partner *Fixed[0.5] )
-  1C8:  Call  NpcMoveTo ( .Npc:Partner *Var1 *Var2 00000000 )
+  1C8:  Call  NpcMoveTo ( .Npc:Partner *Var1 *Var2  0` )
   1E4:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
-  1F8:  Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  1F8:  Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   210:  Wait  5`
   21C:  UseIntBuffer  *Var0
   228:  Get3Int  *Var1 *Var2 *Var3
@@ -2186,15 +2193,15 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
   29C:  SetF  *Var5  *Var2
   2AC:  SetF  *Var6  *Var3
   2BC:  Call  AddVectorPolar    ( *Var1 *Var2 *Fixed[100.0] *Var3 )
-  2D8:  Call  SetNpcSpeed   ( 00000000 *Fixed[3.0] )
-  2EC:  Call  SetNpcAnimation   ( 00000000 008C0003 )
-  300:  Call  NpcMoveTo     ( 00000000 *Var1 *Var2 00000000 )
-  31C:  Call  SetNpcAnimation   ( 00000000 008C0001 )
+  2D8:  Call  SetNpcSpeed   ( .NpcID:TrainStationToad_00 *Fixed[3.0] )
+  2EC:  Call  SetNpcAnimation   ( .NpcID:TrainStationToad_00 008C0003 )
+  300:  Call  NpcMoveTo     ( .NpcID:TrainStationToad_00 *Var1 *Var2  0` )
+  31C:  Call  SetNpcAnimation   ( .NpcID:TrainStationToad_00 008C0001 )
   330:  Call  AddVectorPolar    ( *Var4 *Var5 *Fixed[20.0] *Var6 )
-  34C:  Call  SetNpcJumpscale   ( 00000000 *Fixed[0.7] )
-  360:  Call  NpcJump0      ( 00000000 *Var4 00000032 *Var5 0000000A )
-  380:  Call  InterpNpcYaw  ( 00000000 *VarA 00000000 )
-  398:  Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000005 000F0009 ) % We're leaving! All aboard!
+  34C:  Call  SetNpcJumpscale   ( .NpcID:TrainStationToad_00 *Fixed[0.7] )
+  360:  Call  NpcJump0      ( .NpcID:TrainStationToad_00 *Var4  50` *Var5  10` )
+  380:  Call  InterpNpcYaw  ( .NpcID:TrainStationToad_00 *VarA  0` )
+  398:  Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000005 000F0009 ) % We're leaving! All aboard!
   3B8:  Call  PlaySound     ( 00000083 )
   3C8:  Call  SetMusicTrack ( 00000000 .Song:ToyboxTrain 00000000 00000008 )
   3E4:  Wait  10`
@@ -2206,7 +2213,7 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
 {
     0:  Call  StopSound ( 00000083 )
    10:  Call  SetMusicTrack     ( 00000000 .Song:ShyGuyToybox 00000000 00000008 )
-   2C:  Call  SetNpcFlagBits    ( 00000000 00000140 .True )
+   2C:  Call  SetNpcFlagBits    ( .NpcID:TrainStationToad_00 00000140 .True )
    44:  Call  SetNpcFlagBits    ( .Npc:Partner 00000140 .True )
    5C:  SetF  *Var0  *MapVar[B]
    6C:  SetF  *Var1  *MapVar[C]
@@ -2218,16 +2225,16 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
    C4:  EndIf
    CC:  Call  AddVectorPolar    ( *Var0 *Var1 *Fixed[100.0] *Var2 )
    E8:  Thread
-   F0:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  104:  	Call  NpcJump0  ( 00000000 *Var0 00000032 *Var1 0000000A )
-  124:  	Call  SetNpcAnimation   ( 00000000 008C0003 )
-  138:  	Call  SetNpcSpeed       ( 00000000 *Fixed[2.0] )
+   F0:  	Call  SetNpcJumpscale   ( .NpcID:TrainStationToad_00 *Fixed[1.0] )
+  104:  	Call  NpcJump0  ( .NpcID:TrainStationToad_00 *Var0  50` *Var1  10` )
+  124:  	Call  SetNpcAnimation   ( .NpcID:TrainStationToad_00 008C0003 )
+  138:  	Call  SetNpcSpeed       ( .NpcID:TrainStationToad_00 *Fixed[2.0] )
   14C:  	UseIntBuffer  *Var9
   158:  	Get2Int  *Var3 *Var4
-  168:  	Call  NpcMoveTo ( 00000000 *Var3 *Var4 00000000 )
-  184:  	Call  SetNpcAnimation   ( 00000000 008C0001 )
-  198:  	Call  InterpNpcYaw      ( 00000000 0000010E 0000000F )
-  1B0:  	Call  SetNpcFlagBits    ( 00000000 00000140 .False )
+  168:  	Call  NpcMoveTo ( .NpcID:TrainStationToad_00 *Var3 *Var4  0` )
+  184:  	Call  SetNpcAnimation   ( .NpcID:TrainStationToad_00 008C0001 )
+  198:  	Call  InterpNpcYaw      ( .NpcID:TrainStationToad_00  270`  15` )
+  1B0:  	Call  SetNpcFlagBits    ( .NpcID:TrainStationToad_00 00000140 .False )
   1C8:  EndThread
   1D0:  Wait  10`
   1DC:  Thread
@@ -2235,14 +2242,14 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
   1F4:  	Call  AddVectorPolar        ( *Var0 *Var1 *Fixed[20.0] *Var2 )
   210:  	Call  SetPlayerAnimation    ( .PlayerAnim:Walking )
   220:  	Call  SetPlayerSpeed        ( *Fixed[3.0] )
-  230:  	Call  PlayerMoveTo  ( *Var0 *Var1 00000000 )
+  230:  	Call  PlayerMoveTo  ( *Var0 *Var1  0` )
   248:  	Call  SetPlayerAnimation    ( 00010002 )
   258:  EndThread
   260:  Wait  10`
   26C:  Sub   *Var1  0000001E
   27C:  Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
   290:  Call  SetNpcSpeed       ( .Npc:Partner *Fixed[2.5] )
-  2A4:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var1 00000000 )
+  2A4:  Call  NpcMoveTo ( .Npc:Partner *Var0 *Var1  0` )
   2C0:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   2D4:  Call  SetNpcFlagBits    ( .Npc:Partner 00000140 .False )
   2EC:  Return
@@ -2661,7 +2668,7 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
   130:  	Call  $Function_80240000 ( )
   13C:  	Set   *Var9  $???_80246740
   14C:  	ExecWait  $Script_8024553C
-  158:  	Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F0010 ) % Station stop: Green Station! Welcome to Green Stat ...
+  158:  	Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0010 ) % Station stop: Green Station! Welcome to Green Stat ...
   178:  	Call  ModifyColliderFlags   ( 00000001 ~Collider:o1074 7FFFFE00 )
   190:  	Call  DisablePlayerPhysics  ( .False )
   1A0:  	Call  EnablePartnerAI ( )
@@ -2726,7 +2733,7 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
   130:  	Call  $Function_80240000 ( )
   13C:  	Set   *Var9  $???_80246740
   14C:  	ExecWait  $Script_8024553C
-  158:  	Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F0010 ) % Station stop: Green Station! Welcome to Green Stat ...
+  158:  	Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0010 ) % Station stop: Green Station! Welcome to Green Stat ...
   178:  	Call  ModifyColliderFlags   ( 00000001 ~Collider:o1074 7FFFFE00 )
   190:  	Call  DisablePlayerPhysics  ( .False )
   1A0:  	Call  EnablePartnerAI ( )
@@ -2766,10 +2773,10 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
 #new:Script $Script_80247100
 {
     0:  If  *MapFlag[01]  ==  .False
-   10:  	Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F0006 ) % Which way are you heading? Press one of those swit ...
+   10:  	Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0006 ) % Which way are you heading? Press one of those swit ...
    30:  Else
    38:  	If  *AreaFlag[002]  ==  .False
-   48:  		Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
+   48:  		Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
    68:  		If  *GF_OMO03_BlueSwitchActivated  ==  .False
    78:  			Call  ShowChoice    ( 001E0040 ) % Pink Station Blue Station Don't get on
    88:  			If  *Var0  !=  00000002
@@ -2782,7 +2789,7 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
    E0:  				Set   *AreaByte[6]  *Var1
    F0:  				ExecWait  $Script_80246918
    FC:  			Else
-  104:  				Call  ContinueSpeech    ( 00000000 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
+  104:  				Call  ContinueSpeech    ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
   124:  			EndIf
   12C:  		Else
   134:  			Call  ShowChoice    ( 001E0041 ) % Pink Station Blue Station Red Station Don't get on
@@ -2796,15 +2803,15 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
   19C:  				Set   *AreaByte[6]  *Var1
   1AC:  				ExecWait  $Script_80246918
   1B8:  			Else
-  1C0:  				Call  ContinueSpeech    ( 00000000 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
+  1C0:  				Call  ContinueSpeech    ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
   1E0:  			EndIf
   1E8:  		EndIf
   1F0:  	Else
   1F8:  		Switch  *GB_StoryProgress
   204:  			Case  <  .Story:Ch4_SolvedColorPuzzle % 0
-  210:  				Call  SpeakToPlayer ( 00000000 008C0006 008C0002 00000000 000F0016 ) % We can't go to Red Station. The tracks are broken, ...
+  210:  				Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0006 008C0002 00000000 000F0016 ) % We can't go to Red Station. The tracks are broken, ...
   230:  			Case  >=  .Story:Ch4_SolvedColorPuzzle % 0
-  23C:  				Call  SpeakToPlayer ( 00000000 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
+  23C:  				Call  SpeakToPlayer ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0007 ) % Where would you like to go?
   25C:  				Call  ShowChoice    ( 001E003F ) % Red Station Blue Station Pink Station Don't get on
   26C:  				If  *Var0  !=  00000003
   27C:  					Call  CloseMessage ( )
@@ -2816,7 +2823,7 @@ PADDING: 80243D2C to 80243D30 (00003D2C to 00003D30)
   2C4:  					Set   *AreaByte[6]  *Var1
   2D4:  					ExecWait  $Script_80246778
   2E0:  				Else
-  2E8:  					Call  ContinueSpeech    ( 00000000 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
+  2E8:  					Call  ContinueSpeech    ( .NpcID:TrainStationToad_00 008C0004 008C0001 00000000 000F0008 ) % Please ride with us again, OK?
   308:  				EndIf
   310:  		EndSwitch
   318:  	EndIf
@@ -2980,7 +2987,7 @@ PADDING: 80247634 to 80247640 (00007634 to 00007640)
    94:  		Case  ==  00000002
    A0:  			Call  DisablePlayerInput    ( .True )
    B0:  			Wait  25`
-   BC:  			Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   BC:  			Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    D8:  			Call  SetNpcFlagBits    ( .Npc:Self 00000002 .False )
    F0:  			Call  SetNpcFlagBits    ( .Npc:Self 00000040 .True )
   108:  			Call  SetSelfVar        ( 00000000 00000000 )
@@ -3017,59 +3024,59 @@ PADDING: 80247634 to 80247640 (00007634 to 00007640)
 
 #new:NpcGroup $NpcGroup_80247B3C
 {
-	00000000 $NpcSettings_80247650 ~Vec3f:NPC_80247B3C % -145 50 -110
+	.NpcID:TrainStationToad_00 $NpcSettings_80247650 ~Vec3f:NPC_TrainStationToad_00 % -145 50 -110
 	00400D05 $Script_Init_80247734 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80247B3C
-	~AnimationTable:NPC_80247B3C % .Sprite:TrainStationToad
+	~Movement:NPC_TrainStationToad_00
+	~AnimationTable:NPC_TrainStationToad_00 % .Sprite:TrainStationToad
 	00000000 00000000 00000000 001A00B8 % He's an employee of the Toy Box station. The emplo ...
 	%
 	% $NpcGroup_80247B3C[1F0]
-	00000001 $NpcSettings_80247650 ~Vec3f:NPC_80247D2C % -250 0 50
+	.NpcID:TrainStationToad_01 $NpcSettings_80247650 ~Vec3f:NPC_TrainStationToad_01 % -250 0 50
 	00400D05 $Script_Init_802478FC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80247D2C
-	~AnimationTable:NPC_80247D2C % .Sprite:TrainStationToad
+	~Movement:NPC_TrainStationToad_01
+	~AnimationTable:NPC_TrainStationToad_01 % .Sprite:TrainStationToad
 	00000000 00000000 00000000 001A00B8 % He's an employee of the Toy Box station. The emplo ...
 }
 
 #new:NpcGroup $NpcGroup_80247F1C
 {
-	00000002 $NpcSettings_802476CC ~Vec3f:NPC_80247F1C % 0 -1000 0
+	.NpcID:ShyGuy_02 $NpcSettings_802476CC ~Vec3f:NPC_ShyGuy_02 % 0 -1000 0
 	00200F04 $Script_Init_80247B04 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80247F1C
-	~AnimationTable:NPC_80247F1C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_02
+	~AnimationTable:NPC_ShyGuy_02 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024810C
 {
-	00000003 $NpcSettings_802476CC ~Vec3f:NPC_8024810C % 0 -1000 0
+	.NpcID:ShyGuy_03 $NpcSettings_802476CC ~Vec3f:NPC_ShyGuy_03 % 0 -1000 0
 	00200F04 $Script_Init_80247B04 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024810C
-	~AnimationTable:NPC_8024810C % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_03
+	~AnimationTable:NPC_ShyGuy_03 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802482FC
 {
-	00000004 $NpcSettings_802476CC ~Vec3f:NPC_802482FC % 0 -1000 0
+	.NpcID:ShyGuy_04 $NpcSettings_802476CC ~Vec3f:NPC_ShyGuy_04 % 0 -1000 0
 	00200F04 $Script_Init_80247B04 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802482FC
-	~AnimationTable:NPC_802482FC % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_04
+	~AnimationTable:NPC_ShyGuy_04 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802484EC
 {
-	00000005 $NpcSettings_802476CC ~Vec3f:NPC_802484EC % 0 -1000 0
+	.NpcID:ShyGuy_05 $NpcSettings_802476CC ~Vec3f:NPC_ShyGuy_05 % 0 -1000 0
 	00200F04 $Script_Init_80247B04 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802484EC
-	~AnimationTable:NPC_802484EC % .Sprite:ShyGuy
+	~Movement:NPC_ShyGuy_05
+	~AnimationTable:NPC_ShyGuy_05 % .Sprite:ShyGuy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

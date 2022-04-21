@@ -1,6 +1,30 @@
 % Script File: sam_05.mscr
 % Decoded from: 0 to 76B0 (sam_05)
 
+#define .NpcID:Gulpit_00            00
+#define .NpcID:Gulpit_01            01
+#define .NpcID:PutridPiranha_02     02
+#define .NpcID:PutridPiranha_03     03
+#define .NpcID:PutridPiranha_04     04
+#define .NpcID:PutridPiranha_05     05
+#define .NpcID:Monstar_06           06
+#define .NpcID:Twink_07             07
+#define .NpcID:Twink_08             08
+#define .NpcID:Twink_09             09
+#define .NpcID:Twink_10             0A
+#define .NpcID:Twink_11             0B
+#define .NpcID:Twink_12             0C
+#define .NpcID:Twink_13             0D
+#define .NpcID:Twink_14             0E
+#define .NpcID:Twink_15             0F
+#define .NpcID:Twink_16             10
+#define .NpcID:Twink_17             11
+#define .NpcID:Twink_18             12
+#define .NpcID:Twink_19             13
+#define .NpcID:Twink_20             14
+#define .NpcID:Twink_21             15
+#define .NpcID:Twink_22             16
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -2023,8 +2047,8 @@ PADDING: 80241DCC to 80241DD0 (00001DCC to 00001DD0)
 {
     0:  Set   *GB_WorldLocation  .Location:ShiverSnowfield
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GB_StoryProgress  <  .Story:Ch7_DefeatedMonstar % 45
    80:  	Call  MakeNpcs  ( .False $NpcGroupList_80245D94 )
@@ -2081,7 +2105,7 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -2352,8 +2376,8 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
 #new:Script $Script_Init_80242FC4
 {
     0:  Call  EnableNpcShadow   ( .Npc:Self .False )
-   14:  Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
-   30:  Call  SetNpcVar     ( 00000006 00000003 000000FF )
+   14:  Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
+   30:  Call  SetNpcVar     ( .NpcID:Monstar_06 00000003 000000FF )
    48:  Call  BindNpcAux    ( .Npc:Self $Script_80242FA8 )
    5C:  If  *GB_StoryProgress  >=  .Story:Ch7_DefeatedMonstar % 45
    6C:  	Call  RemoveNpc ( .Npc:Self )
@@ -2382,11 +2406,11 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
 
 #new:NpcGroup $NpcGroup_802430F0
 {
-	00000006 $NpcSettings_80242120 ~Vec3f:NPC_802430F0 % 0 -1000 0
+	.NpcID:Monstar_06 $NpcSettings_80242120 ~Vec3f:NPC_Monstar_06 % 0 -1000 0
 	00040F01 $Script_Init_80242FC4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802430F0
-	~AnimationTable:NPC_802430F0 % .Sprite:Monstar
+	~Movement:NPC_Monstar_06
+	~AnimationTable:NPC_Monstar_06 % .Sprite:Monstar
 	00000000 00000000 $ExtraAnimationList_802430CC 00000000 % no tattle string
 }
 
@@ -2397,186 +2421,186 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
 
 #new:NpcGroup $NpcGroup_802432F4
 {
-	00000007 $NpcSettings_8024214C ~Vec3f:NPC_802432F4 % 0 -1000 0
+	.NpcID:Twink_07 $NpcSettings_8024214C ~Vec3f:NPC_Twink_07 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802432F4
-	~AnimationTable:NPC_802432F4 % .Sprite:Twink
+	~Movement:NPC_Twink_07
+	~AnimationTable:NPC_Twink_07 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[1F0]
-	00000008 $NpcSettings_8024214C ~Vec3f:NPC_802434E4 % 0 -1000 0
+	.NpcID:Twink_08 $NpcSettings_8024214C ~Vec3f:NPC_Twink_08 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802434E4
-	~AnimationTable:NPC_802434E4 % .Sprite:Twink
+	~Movement:NPC_Twink_08
+	~AnimationTable:NPC_Twink_08 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[3E0]
-	00000009 $NpcSettings_8024214C ~Vec3f:NPC_802436D4 % 0 -1000 0
+	.NpcID:Twink_09 $NpcSettings_8024214C ~Vec3f:NPC_Twink_09 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802436D4
-	~AnimationTable:NPC_802436D4 % .Sprite:Twink
+	~Movement:NPC_Twink_09
+	~AnimationTable:NPC_Twink_09 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[5D0]
-	0000000A $NpcSettings_8024214C ~Vec3f:NPC_802438C4 % 0 -1000 0
+	.NpcID:Twink_10 $NpcSettings_8024214C ~Vec3f:NPC_Twink_10 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802438C4
-	~AnimationTable:NPC_802438C4 % .Sprite:Twink
+	~Movement:NPC_Twink_10
+	~AnimationTable:NPC_Twink_10 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[7C0]
-	0000000B $NpcSettings_8024214C ~Vec3f:NPC_80243AB4 % 0 -1000 0
+	.NpcID:Twink_11 $NpcSettings_8024214C ~Vec3f:NPC_Twink_11 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243AB4
-	~AnimationTable:NPC_80243AB4 % .Sprite:Twink
+	~Movement:NPC_Twink_11
+	~AnimationTable:NPC_Twink_11 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[9B0]
-	0000000C $NpcSettings_8024214C ~Vec3f:NPC_80243CA4 % 0 -1000 0
+	.NpcID:Twink_12 $NpcSettings_8024214C ~Vec3f:NPC_Twink_12 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243CA4
-	~AnimationTable:NPC_80243CA4 % .Sprite:Twink
+	~Movement:NPC_Twink_12
+	~AnimationTable:NPC_Twink_12 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[BA0]
-	0000000D $NpcSettings_8024214C ~Vec3f:NPC_80243E94 % 0 -1000 0
+	.NpcID:Twink_13 $NpcSettings_8024214C ~Vec3f:NPC_Twink_13 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243E94
-	~AnimationTable:NPC_80243E94 % .Sprite:Twink
+	~Movement:NPC_Twink_13
+	~AnimationTable:NPC_Twink_13 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[D90]
-	0000000E $NpcSettings_8024214C ~Vec3f:NPC_80244084 % 0 -1000 0
+	.NpcID:Twink_14 $NpcSettings_8024214C ~Vec3f:NPC_Twink_14 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244084
-	~AnimationTable:NPC_80244084 % .Sprite:Twink
+	~Movement:NPC_Twink_14
+	~AnimationTable:NPC_Twink_14 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[F80]
-	0000000F $NpcSettings_8024214C ~Vec3f:NPC_80244274 % 0 -1000 0
+	.NpcID:Twink_15 $NpcSettings_8024214C ~Vec3f:NPC_Twink_15 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244274
-	~AnimationTable:NPC_80244274 % .Sprite:Twink
+	~Movement:NPC_Twink_15
+	~AnimationTable:NPC_Twink_15 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[1170]
-	00000010 $NpcSettings_8024214C ~Vec3f:NPC_80244464 % 0 -1000 0
+	.NpcID:Twink_16 $NpcSettings_8024214C ~Vec3f:NPC_Twink_16 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244464
-	~AnimationTable:NPC_80244464 % .Sprite:Twink
+	~Movement:NPC_Twink_16
+	~AnimationTable:NPC_Twink_16 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[1360]
-	00000011 $NpcSettings_8024214C ~Vec3f:NPC_80244654 % 0 -1000 0
+	.NpcID:Twink_17 $NpcSettings_8024214C ~Vec3f:NPC_Twink_17 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244654
-	~AnimationTable:NPC_80244654 % .Sprite:Twink
+	~Movement:NPC_Twink_17
+	~AnimationTable:NPC_Twink_17 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[1550]
-	00000012 $NpcSettings_8024214C ~Vec3f:NPC_80244844 % 0 -1000 0
+	.NpcID:Twink_18 $NpcSettings_8024214C ~Vec3f:NPC_Twink_18 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244844
-	~AnimationTable:NPC_80244844 % .Sprite:Twink
+	~Movement:NPC_Twink_18
+	~AnimationTable:NPC_Twink_18 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[1740]
-	00000013 $NpcSettings_8024214C ~Vec3f:NPC_80244A34 % 0 -1000 0
+	.NpcID:Twink_19 $NpcSettings_8024214C ~Vec3f:NPC_Twink_19 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244A34
-	~AnimationTable:NPC_80244A34 % .Sprite:Twink
+	~Movement:NPC_Twink_19
+	~AnimationTable:NPC_Twink_19 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[1930]
-	00000014 $NpcSettings_8024214C ~Vec3f:NPC_80244C24 % 0 -1000 0
+	.NpcID:Twink_20 $NpcSettings_8024214C ~Vec3f:NPC_Twink_20 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244C24
-	~AnimationTable:NPC_80244C24 % .Sprite:Twink
+	~Movement:NPC_Twink_20
+	~AnimationTable:NPC_Twink_20 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[1B20]
-	00000015 $NpcSettings_8024214C ~Vec3f:NPC_80244E14 % 0 -1000 0
+	.NpcID:Twink_21 $NpcSettings_8024214C ~Vec3f:NPC_Twink_21 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80244E14
-	~AnimationTable:NPC_80244E14 % .Sprite:Twink
+	~Movement:NPC_Twink_21
+	~AnimationTable:NPC_Twink_21 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 	%
 	% $NpcGroup_802432F4[1D10]
-	00000016 $NpcSettings_8024214C ~Vec3f:NPC_80245004 % 0 -1000 0
+	.NpcID:Twink_22 $NpcSettings_8024214C ~Vec3f:NPC_Twink_22 % 0 -1000 0
 	00000F01 $Script_Init_80243094 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245004
-	~AnimationTable:NPC_80245004 % .Sprite:Twink
+	~Movement:NPC_Twink_22
+	~AnimationTable:NPC_Twink_22 % .Sprite:Twink
 	00000000 00000000 $ExtraAnimationList_802432E0 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802451F4
 {
-	00000000 $NpcSettings_802422D4 ~Vec3f:NPC_802451F4 % -75 0 0
+	.NpcID:Gulpit_00 $NpcSettings_802422D4 ~Vec3f:NPC_Gulpit_00 % -75 0 0
 	00000400 00000000 00000000 00000000 0000010E
 	~Items:5:Pebble:2:SuperShroom:8
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:4
-	~Movement:NPC_802451F4
-	~AnimationTable:NPC_802451F4 % .Sprite:Gulpit
+	~Movement:NPC_Gulpit_00
+	~AnimationTable:NPC_Gulpit_00 % .Sprite:Gulpit
 	00000003 00000000 $ExtraAnimationList_802423DC 00000000 % no tattle string
 	%
 	% $NpcGroup_802451F4[1F0]
-	00000001 $NpcSettings_802423A8 ~Vec3f:NPC_802453E4 % 0 -1000 0
+	.NpcID:Gulpit_01 $NpcSettings_802423A8 ~Vec3f:NPC_Gulpit_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802453E4
-	~AnimationTable:NPC_802453E4 % .Sprite:Gulpit
+	~Movement:NPC_Gulpit_01
+	~AnimationTable:NPC_Gulpit_01 % .Sprite:Gulpit
 	00000000 00000000 $ExtraAnimationList_802423D4 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802455D4
 {
-	00000002 $NpcSettings_802424FC ~Vec3f:NPC_802455D4 % 100 0 50
+	.NpcID:PutridPiranha_02 $NpcSettings_802424FC ~Vec3f:NPC_PutridPiranha_02 % 100 0 50
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:1:4
-	~Movement:NPC_802455D4
-	~AnimationTable:NPC_802455D4 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_02
+	~AnimationTable:NPC_PutridPiranha_02 % .Sprite:PutridPiranha
 	00000003 00000000 $ExtraAnimationList_80242668 00000000 % no tattle string
 	%
 	% $NpcGroup_802455D4[1F0]
-	00000003 $NpcSettings_80242634 ~Vec3f:NPC_802457C4 % 0 -1000 0
+	.NpcID:PutridPiranha_03 $NpcSettings_80242634 ~Vec3f:NPC_PutridPiranha_03 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802457C4
-	~AnimationTable:NPC_802457C4 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_03
+	~AnimationTable:NPC_PutridPiranha_03 % .Sprite:PutridPiranha
 	00000000 00000000 $ExtraAnimationList_80242660 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802459B4
 {
-	00000004 $NpcSettings_802424FC ~Vec3f:NPC_802459B4 % -400 0 0
+	.NpcID:PutridPiranha_04 $NpcSettings_802424FC ~Vec3f:NPC_PutridPiranha_04 % -400 0 0
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:1:4
-	~Movement:NPC_802459B4
-	~AnimationTable:NPC_802459B4 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_04
+	~AnimationTable:NPC_PutridPiranha_04 % .Sprite:PutridPiranha
 	00000003 00000000 $ExtraAnimationList_80242668 00000000 % no tattle string
 	%
 	% $NpcGroup_802459B4[1F0]
-	00000005 $NpcSettings_80242634 ~Vec3f:NPC_80245BA4 % 0 -1000 0
+	.NpcID:PutridPiranha_05 $NpcSettings_80242634 ~Vec3f:NPC_PutridPiranha_05 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245BA4
-	~AnimationTable:NPC_80245BA4 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_05
+	~AnimationTable:NPC_PutridPiranha_05 % .Sprite:PutridPiranha
 	00000000 00000000 $ExtraAnimationList_80242660 00000000 % no tattle string
 }
 
@@ -2609,12 +2633,12 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
    64:  Call  DisablePlayerInput    ( .True )
    74:  Call  802D2B6C ( )
    80:  Call  SetMusicTrack ( 00000000 .Song:MonstarTheme 00000000 00000008 )
-   9C:  Call  ShowMessageAtScreenPos    ( 001200E0 000000A0 00000028 ) % Boooooaaaaahhhh!!
+   9C:  Call  ShowMessageAtScreenPos    ( 001200E0  160`  40` ) % Boooooaaaaahhhh!!
    B4:  Call  SetNpcAnimation       ( .Npc:Self 007E0001 )
-   C8:  Call  SetNpcPos     ( 00000006 0000027B 00000055 00000000 )
-   E4:  Call  NpcMoveTo     ( 00000006 00000267 00000000 0000000A )
+   C8:  Call  SetNpcPos     ( .NpcID:Monstar_06  635`  85`  0` )
+   E4:  Call  NpcMoveTo     ( .NpcID:Monstar_06  615`  0`  10` )
   100:  Label  2
-  10C:  Call  GetNpcPos     ( 00000006 *Var0 *Var1 *Var2 )
+  10C:  Call  GetNpcPos     ( .NpcID:Monstar_06 *Var0 *Var1 *Var2 )
   128:  Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
   144:  Call  SetCamDistance        ( .Cam:Default *Fixed[250.0] )
   158:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-15.0] )
@@ -2624,14 +2648,14 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
   1B0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1C8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   1DC:  If  *Flag[00]  ==  .False
-  1EC:  	Call  SetNpcPos ( 00000006 00000267 00000055 00000000 )
+  1EC:  	Call  SetNpcPos ( .NpcID:Monstar_06  615`  85`  0` )
   208:  	Wait  1`
   214:  	Set   *Flag[00]  .True
   224:  EndIf
-  22C:  Call  SpeakToPlayer ( 00000006 007E0009 007E0001 00000100 00000032 00000064 001200E1 ) % Tuuuuurn back. Coooome no farther. Tuuuurn away, o ...
-  254:  Call  SetPlayerPos  ( 000001EF 00000050 00000000 )
+  22C:  Call  SpeakToPlayer ( .NpcID:Monstar_06 007E0009 007E0001 00000100  50`  100` 001200E1 ) % Tuuuuurn back. Coooome no farther. Tuuuurn away, o ...
+  254:  Call  SetPlayerPos  (  495`  80`  0` )
   26C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  284:  Call  GetNpcPos     ( 00000006 *Var3 *Var4 *Var5 )
+  284:  Call  GetNpcPos     ( .NpcID:Monstar_06 *Var3 *Var4 *Var5 )
   2A0:  AddF  *Var0  *Var3
   2B0:  AddF  *Var1  *Var4
   2C0:  AddF  *Var2  *Var5
@@ -2646,10 +2670,10 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
   378:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   390:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   3A4:  Wait  5`
-  3B0:  Call  SpeakToPlayer ( 00000006 007E0009 007E0001 00000100 00000000 00000064 001200E2 ) % Whaaaaat do you think? Scaaaary monster, aren't I? ...
+  3B0:  Call  SpeakToPlayer ( .NpcID:Monstar_06 007E0009 007E0001 00000100  0`  100` 001200E2 ) % Whaaaaat do you think? Scaaaary monster, aren't I? ...
   3D8:  Call  ShowChoice    ( 001E0015 ) % Go back Fight
   3E8:  If  *Var0  ==  00000000
-  3F8:  	Call  ContinueSpeech    ( 00000006 007E000B 007E000B 00000100 00000000 00000064 001200E3 ) % Yeeeeees. Veeeerrrry good. Veeeeerrry smart.
+  3F8:  	Call  ContinueSpeech    ( .NpcID:Monstar_06 007E000B 007E000B 00000100  0`  100` 001200E3 ) % Yeeeeees. Veeeerrrry good. Veeeeerrry smart.
   420:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   438:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   454:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -2674,13 +2698,13 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
   5B0:  	If  *Var3  >  000001A4
   5C0:  		Goto  4
   5CC:  	EndIf
-  5D4:  	Call  SetNpcPos ( 00000006 00000000 FFFFFC18 00000000 )
+  5D4:  	Call  SetNpcPos ( .NpcID:Monstar_06  0`  -1000`  0` )
   5F0:  	Set   *Flag[00]  .False
   600:  	Goto  0
   60C:  Else
   614:  	Call  CloseMessage ( )
   620:  	Call  SetNpcAnimation   ( .Npc:Self 007E000E )
-  634:  	Call  GetNpcPos     ( 00000006 *Var0 *Var1 *Var2 )
+  634:  	Call  GetNpcPos     ( .NpcID:Monstar_06 *Var0 *Var1 *Var2 )
   650:  	Add   *Var0  FFFFFFDD
   660:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   67C:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -2689,8 +2713,8 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
   6C4:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   6D8:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   6F0:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  704:  	Call  SpeakToPlayer ( 00000006 007E000E 007E000E 00000100 00000000 000000C8 001200E4 ) % Whaaat! Youuuu will regret this!
-  72C:  	Call  SetNpcVar     ( 00000006 00000000 00000001 )
+  704:  	Call  SpeakToPlayer ( .NpcID:Monstar_06 007E000E 007E000E 00000100  0`  200` 001200E4 ) % Whaaat! Youuuu will regret this!
+  72C:  	Call  SetNpcVar     ( .NpcID:Monstar_06 00000000 00000001 )
   744:  EndIf
   74C:  Return
   754:  End
@@ -2726,9 +2750,9 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
     0:  Call  RandInt   ( 00000004 *Var0 )
    14:  Wait  *Var0
    20:  Loop
-   2C:  	Call  InterpNpcYaw  ( *VarA 0000005A 00000000 )
+   2C:  	Call  InterpNpcYaw  ( *VarA  90`  0` )
    44:  	Wait  7`
-   50:  	Call  InterpNpcYaw  ( *VarA 0000010E 00000000 )
+   50:  	Call  InterpNpcYaw  ( *VarA  270`  0` )
    68:  	Wait  7`
    74:  EndLoop
    7C:  Return
@@ -2757,7 +2781,7 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
   120:  If  *Var0  ==  00000001
   130:  	Goto  0
   13C:  EndIf
-  144:  Call  SetNpcPos ( *VarA 00000000 FFFFFC18 00000000 )
+  144:  Call  SetNpcPos ( *VarA  0`  -1000`  0` )
   160:  Call  EnableNpcShadow   ( *Var0 .False )
   174:  Return
   17C:  End
@@ -2795,15 +2819,15 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
    48:  	EndIf
    50:  	Call  SetNpcPos ( *Var0 *Var1 *Var2 *Var3 )
    6C:  EndLoop
-   74:  Call  PlaySoundAtNpc    ( 00000006 0000013D 00000000 )
+   74:  Call  PlaySoundAtNpc    ( .NpcID:Monstar_06 0000013D 00000000 )
    8C:  Thread
-   94:  	Call  NpcMoveTo ( 00000006 00000267 FFFFFFFB 0000000A )
+   94:  	Call  NpcMoveTo ( .NpcID:Monstar_06  615`  -5`  10` )
    B0:  EndThread
    B8:  Exec  $Script_802468C4
    C4:  Call  MakeLerp  ( 000000DC 00000000 0000005A .Easing:CosInOut )
    E0:  Label  0
    EC:  Call  UpdateLerp ( )
-   F8:  Call  SetNpcVar ( 00000006 00000003 *Var0 )
+   F8:  Call  SetNpcVar ( .NpcID:Monstar_06 00000003 *Var0 )
   110:  Set   *Var2  000000FF
   120:  Sub   *Var2  *Var0
   130:  UseIntBuffer  $IntTable_8024655C
@@ -2818,7 +2842,7 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
   1B8:  If  *Var1  ==  00000001
   1C8:  	Goto  0
   1D4:  EndIf
-  1DC:  Call  SetNpcPos ( 00000006 00000000 FFFFFC18 00000000 )
+  1DC:  Call  SetNpcPos ( .NpcID:Monstar_06  0`  -1000`  0` )
   1F8:  Wait  10`
   204:  UseIntBuffer  $IntTable_8024655C
   210:  Set   *VarB  00000000
@@ -2838,11 +2862,11 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
 #new:Script $Script_80246CDC
 {
     0:  Call  ClearDefeatedEnemies ( )
-    C:  Call  SetNpcFlagBits    ( 00000006 00000200 .False )
-   24:  Call  SetNpcPos     ( 00000006 00000267 00000057 FFFFFFFC )
+    C:  Call  SetNpcFlagBits    ( .NpcID:Monstar_06 00000200 .False )
+   24:  Call  SetNpcPos     ( .NpcID:Monstar_06  615`  87`  -4` )
    40:  Call  SetNpcAnimation   ( .Npc:Self 007E000C )
    54:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   6C:  Call  GetNpcPos     ( 00000006 *Var3 *Var4 *Var5 )
+   6C:  Call  GetNpcPos     ( .NpcID:Monstar_06 *Var3 *Var4 *Var5 )
    88:  AddF  *Var0  *Var3
    98:  AddF  *Var1  *Var4
    A8:  AddF  *Var2  *Var5
@@ -2856,7 +2880,7 @@ PADDING: 8024211C to 80242120 (0000211C to 00002120)
   14C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   160:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   178:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  18C:  Call  SpeakToPlayer ( 00000006 007E000C 007E000C 00000100 000000AA 00000096 001200E8 ) % Noooo! Ruuuuun away!
+  18C:  Call  SpeakToPlayer ( .NpcID:Monstar_06 007E000C 007E000C 00000100  170`  150` 001200E8 ) % Noooo! Ruuuuun away!
   1B4:  ExecWait  $Script_80246A38
   1C0:  Set   *GB_StoryProgress  .Story:Ch7_DefeatedMonstar
   1D0:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )

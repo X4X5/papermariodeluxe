@@ -1,6 +1,13 @@
 % Script File: iwa_00.mscr
 % Decoded from: 0 to 2A70 (iwa_00)
 
+#define .NpcID:MontyMole_00         00
+#define .NpcID:MontyMole_01         01
+#define .NpcID:MontyMole_02         02
+#define .NpcID:MontyMole_03         03
+#define .NpcID:Whacka_04            04
+#define .NpcID:Whacka_05            05
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -153,7 +160,7 @@
   108:  LW        A1, 38 (S1)
   10C:  LW        A3, 40 (S1)
   110:  MFC1      A2, F4
-  114:  JAL       80070190
+  114:  JAL       ~Func:playFX_18
   118:  LI        A0, 1
         .o11C
   11C:  LW        S0, 74 (S2)
@@ -166,7 +173,7 @@
   13C:  LWC1      F14, 3C (S1)
   140:  LWC1      F12, 38 (S1)
   144:  MFC1      A2, F0
-  148:  JAL       8006F8F0
+  148:  JAL       ~Func:playFX_01
   14C:  ADD.S     F14, F14, F2
   150:  LW        V0, 74 (S2)
   154:  BNE       V0, S0, .o164
@@ -269,8 +276,8 @@ PADDING: 802402D4 to 802402E0 (000002D4 to 000002E0)
 {
     0:  Set   *GB_WorldLocation  .Location:MtRugged
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  MakeNpcs      ( .True $NpcGroupList_80242780 )
    84:  ExecWait  $Script_MakeEntities
@@ -374,8 +381,8 @@ PADDING: 802402D4 to 802402E0 (000002D4 to 000002E0)
   178:  	Add   *Var5  0000001E
   188:  	Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
   19C:  	Call  PlaySoundAtNpc    ( .Npc:Self .Sound:MolePop 00000000 )
-  1B4:  	Call  NpcJump0  ( .Npc:Self *Var4 *Var5 *Var6 00000014 )
-  1D4:  	Call  SetNpcPos ( *Var0 00000000 FFFFFC18 00000000 )
+  1B4:  	Call  NpcJump0  ( .Npc:Self *Var4 *Var5 *Var6  20` )
+  1D4:  	Call  SetNpcPos ( *Var0  0`  -1000`  0` )
   1F0:  	Call  SetSelfEnemyFlagBits  ( 00000020 00000000 )
   204:  	Call  NpcFacePlayer     ( .Npc:Self 00000000 )
   218:  	Call  SetSelfEnemyFlagBits  ( 40000000 00000001 )
@@ -464,7 +471,7 @@ PADDING: 802402D4 to 802402E0 (000002D4 to 000002E0)
   1C0:  	Add   *Var3  00000050
   1D0:  	Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.7] )
   1E4:  	Call  PlaySoundAtNpc    ( .Npc:Self .Sound:MolePop 00000000 )
-  1FC:  	Call  NpcJump0  ( .Npc:Self *Var1 *Var2 *Var3 00000014 )
+  1FC:  	Call  NpcJump0  ( .Npc:Self *Var1 *Var2 *Var3  20` )
   21C:  	Call  SetNpcFlagBits    ( .Npc:Self 00000040 .False )
   234:  	Call  SetSelfEnemyFlagBits  ( 00000020 00000000 )
   248:  	Call  NpcFacePlayer     ( .Npc:Self 00000000 )
@@ -522,37 +529,37 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
 
 #new:NpcGroup $NpcGroup_8024105C
 {
-	00000000 $NpcSettings_80240B28 ~Vec3f:NPC_8024105C % 880 70 67
+	.NpcID:MontyMole_00 $NpcSettings_80240B28 ~Vec3f:NPC_MontyMole_00 % 880 70 67
 	00000400 00000000 00000000 00000000 00000000
 	~Items:10:HoneySyrup:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024105C
-	~AnimationTable:NPC_8024105C % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_00
+	~AnimationTable:NPC_MontyMole_00 % .Sprite:MontyMole
 	00000001 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_8024105C[1F0]
-	00000001 $NpcSettings_80240B54 ~Vec3f:NPC_8024124C % 880 70 67
+	.NpcID:MontyMole_01 $NpcSettings_80240B54 ~Vec3f:NPC_MontyMole_01 % 880 70 67
 	00000F21 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024124C
-	~AnimationTable:NPC_8024124C % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_01
+	~AnimationTable:NPC_MontyMole_01 % .Sprite:MontyMole
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024143C
 {
-	00000002 $NpcSettings_80240F74 ~Vec3f:NPC_8024143C % 1220 -30 70
+	.NpcID:MontyMole_02 $NpcSettings_80240F74 ~Vec3f:NPC_MontyMole_02 % 1220 -30 70
 	00000400 00000000 00000000 00000000 00000000
 	~Items:10:HoneySyrup:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024143C
-	~AnimationTable:NPC_8024143C % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_02
+	~AnimationTable:NPC_MontyMole_02 % .Sprite:MontyMole
 	00000001 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_8024143C[1F0]
-	00000003 $NpcSettings_80240FA0 ~Vec3f:NPC_8024162C % 1220 -30 70
+	.NpcID:MontyMole_03 $NpcSettings_80240FA0 ~Vec3f:NPC_MontyMole_03 % 1220 -30 70
 	00000F21 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024162C
-	~AnimationTable:NPC_8024162C % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_03
+	~AnimationTable:NPC_MontyMole_03 % .Sprite:MontyMole
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -561,9 +568,9 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
     0:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    18:  Call  GetNpcPos     ( .Npc:Self *Var3 *Var4 *Var5 )
    34:  If  *Var0  <  *Var3
-   44:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+   44:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
    5C:  Else
-   64:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+   64:  	Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
    7C:  EndIf
    84:  Switch  *GB_IWA00_Whacka_HitCount
    90:  	Case  ==  00000000
@@ -590,8 +597,8 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00920001 )
    14:  Call  GetNpcPos     ( .Npc:Self *VarA *VarB *VarC )
-   30:  Call  SetNpcPos     ( 00000004 00000000 FFFFFC18 00000000 )
-   4C:  Call  SetNpcPos     ( 00000005 00000000 FFFFFC18 00000000 )
+   30:  Call  SetNpcPos     ( .NpcID:Whacka_04  0`  -1000`  0` )
+   4C:  Call  SetNpcPos     ( .NpcID:Whacka_05  0`  -1000`  0` )
    68:  Label  0
    74:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    8C:  If  *Var1  >=  00000014
@@ -606,11 +613,11 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
    FC:  	Wait  1`
   108:  	Goto  0
   114:  EndIf
-  11C:  Call  SetNpcPos ( 00000004 *VarA *VarB *VarC )
+  11C:  Call  SetNpcPos ( .NpcID:Whacka_04 *VarA *VarB *VarC )
   138:  Call  PlaySoundAtNpc    ( .Npc:Self .Sound:MoleSurface 00000000 )
   150:  Call  SetNpcAnimation   ( .Npc:Self 00920002 )
   164:  Wait  15`
-  170:  Call  SetNpcPos ( 00000005 *VarA *VarB *VarC )
+  170:  Call  SetNpcPos ( .NpcID:Whacka_05 *VarA *VarB *VarC )
   18C:  Wait  5`
   198:  Call  SetNpcAnimation   ( .Npc:Self 00920001 )
   1AC:  Wait  30`
@@ -621,9 +628,9 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
   1F8:  	Goto  A
   204:  EndIf
   20C:  Call  SetNpcAnimation   ( .Npc:Self 00920003 )
-  220:  Call  SetNpcPos ( 00000005 00000000 FFFFFC18 00000000 )
+  220:  Call  SetNpcPos ( .NpcID:Whacka_05  0`  -1000`  0` )
   23C:  Wait  15`
-  248:  Call  SetNpcPos ( 00000004 00000000 FFFFFC18 00000000 )
+  248:  Call  SetNpcPos ( .NpcID:Whacka_04  0`  -1000`  0` )
   264:  Goto  0
   270:  Return
   278:  End
@@ -651,15 +658,15 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
    E0:  	Return
    E8:  EndIf
    F0:  Call  DisablePlayerInput    ( .True )
-  100:  Call  BindNpcInteract   ( 00000004 00000000 )
-  114:  Call  EnableNpcAI       ( 00000004 .False )
+  100:  Call  BindNpcInteract   ( .NpcID:Whacka_04 00000000 )
+  114:  Call  EnableNpcAI       ( .NpcID:Whacka_04 .False )
   128:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   140:  Call  GetNpcPos ( .Npc:Self *Var3 *Var4 *Var5 )
   15C:  If  *Var0  <  *Var3
-  16C:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+  16C:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
   184:  	Set   *VarB  00000000
   194:  Else
-  19C:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+  19C:  	Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
   1B4:  	Set   *VarB  00000001
   1C4:  EndIf
   1CC:  Add   *GB_IWA00_Whacka_HitCount  00000001
@@ -669,16 +676,16 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
   204:  Switch  *VarA
   210:  	CaseOR  ==  00000002
   21C:  	CaseOR  ==  00000003
-  228:  		Call  PlaySoundAtNpc    ( 00000004 000000E1 00000000 )
+  228:  		Call  PlaySoundAtNpc    ( .NpcID:Whacka_04 000000E1 00000000 )
   240:  	EndCaseGroup
   248:  EndSwitch
   250:  Switch  *VarA
   25C:  	CaseOR  ==  00000001
   268:  	CaseOR  ==  00000002
   274:  		Wait  1`
-  280:  		Call  SetNpcAnimation   ( 00000004 00920004 )
+  280:  		Call  SetNpcAnimation   ( .NpcID:Whacka_04 00920004 )
   294:  		Wait  15`
-  2A0:  		Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+  2A0:  		Call  GetNpcPos ( .NpcID:Whacka_04 *Var0 *Var1 *Var2 )
   2BC:  		If  *VarB  ==  00000000
   2CC:  			Add   *Var0  0000000E
   2DC:  		Else
@@ -687,55 +694,55 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
   2FC:  		Add   *Var1  0000001E
   30C:  		Add   *Var2  00000002
   31C:  		Call  MakeItemEntity    ( .Item:WhackasBump *Var0 *Var1 *Var2 .ItemSpawnMode:Fall_NeverVanish 00000000 )
-  340:  		Call  SetNpcAnimation   ( 00000004 00920001 )
+  340:  		Call  SetNpcAnimation   ( .NpcID:Whacka_04 00920001 )
   354:  		Wait  5`
   360:  	EndCaseGroup
   368:  	Case  ==  00000003
-  374:  		Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+  374:  		Call  GetNpcPos ( .NpcID:Whacka_04 *Var0 *Var1 *Var2 )
   390:  		Add   *Var0  00000001
-  3A0:  		Call  SetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+  3A0:  		Call  SetNpcPos ( .NpcID:Whacka_04 *Var0 *Var1 *Var2 )
   3BC:  		Wait  1`
   3C8:  		Sub   *Var0  00000002
-  3D8:  		Call  SetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+  3D8:  		Call  SetNpcPos ( .NpcID:Whacka_04 *Var0 *Var1 *Var2 )
   3F4:  		Wait  1`
   400:  		Add   *Var0  00000002
-  410:  		Call  SetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+  410:  		Call  SetNpcPos ( .NpcID:Whacka_04 *Var0 *Var1 *Var2 )
   42C:  		Wait  1`
   438:  		Sub   *Var0  00000001
-  448:  		Call  SetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+  448:  		Call  SetNpcPos ( .NpcID:Whacka_04 *Var0 *Var1 *Var2 )
   464:  		Wait  1`
   470:  	EndCaseGroup
   478:  EndSwitch
   480:  If  *GB_IWA00_Whacka_HitCount  <  00000008
   490:  	Switch  *VarA
   49C:  		Case  ==  00000001
-  4A8:  			Call  SpeakToPlayer ( 00000004 00920005 00920001 00000000 000D002C ) % Whack-OW! Don't hit me!
+  4A8:  			Call  SpeakToPlayer ( .NpcID:Whacka_04 00920005 00920001 00000000 000D002C ) % Whack-OW! Don't hit me!
   4C8:  		Case  ==  00000002
-  4D4:  			Call  SpeakToPlayer ( 00000004 00920005 00920001 00000000 000D002D ) % Whack-a-bYAAARGH! Quit it!
+  4D4:  			Call  SpeakToPlayer ( .NpcID:Whacka_04 00920005 00920001 00000000 000D002D ) % Whack-a-bYAAARGH! Quit it!
   4F4:  		Case  ==  00000003
-  500:  			Call  SpeakToPlayer ( 00000004 00920005 00920001 00000000 000D002E ) % Whack-OOOG! That really hurts!
+  500:  			Call  SpeakToPlayer ( .NpcID:Whacka_04 00920005 00920001 00000000 000D002E ) % Whack-OOOG! That really hurts!
   520:  	EndSwitch
-  528:  	Call  SetNpcAnimation   ( 00000004 00920003 )
+  528:  	Call  SetNpcAnimation   ( .NpcID:Whacka_04 00920003 )
   53C:  	Wait  15`
   548:  Else
-  550:  	Call  SpeakToPlayer ( 00000004 00920005 00920001 00000000 000D002F ) % Whack-a-waaaaaaaaa.... I can't take this abuse!
+  550:  	Call  SpeakToPlayer ( .NpcID:Whacka_04 00920005 00920001 00000000 000D002F ) % Whack-a-waaaaaaaaa.... I can't take this abuse!
   570:  	Wait  2`
   57C:  EndIf
   584:  If  *GB_IWA00_Whacka_HitCount  >=  00000008
   594:  	Call  $Function_80240118 ( )
   5A0:  EndIf
-  5A8:  Call  SetNpcPos ( 00000004 00000000 FFFFFC18 00000000 )
-  5C4:  Call  SetNpcPos ( 00000005 00000000 FFFFFC18 00000000 )
+  5A8:  Call  SetNpcPos ( .NpcID:Whacka_04  0`  -1000`  0` )
+  5C4:  Call  SetNpcPos ( .NpcID:Whacka_05  0`  -1000`  0` )
   5E0:  Call  DisablePlayerInput    ( .False )
-  5F0:  Call  RemoveNpc ( 00000004 )
-  600:  Call  RemoveNpc ( 00000005 )
+  5F0:  Call  RemoveNpc ( .NpcID:Whacka_04 )
+  600:  Call  RemoveNpc ( .NpcID:Whacka_05 )
   610:  Return
   618:  End
 }
 
 #new:Script $Script_Init_8024228C
 {
-    0:  Call  SetNpcVar ( 00000004 00000008 00000000 )
+    0:  Call  SetNpcVar ( .NpcID:Whacka_04 00000008 00000000 )
    18:  If  *GB_IWA00_Whacka_HitCount  <  00000008
    28:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024181C )
    3C:  	Call  BindNpcIdle       ( .Npc:Self $Script_Idle_802419EC )
@@ -762,19 +769,19 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
 
 #new:NpcGroup $NpcGroup_802423A0
 {
-	00000004 $NpcSettings_80240FCC ~Vec3f:NPC_802423A0 % 725 -30 225
+	.NpcID:Whacka_04 $NpcSettings_80240FCC ~Vec3f:NPC_Whacka_04 % 725 -30 225
 	00400D05 $Script_Init_8024228C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802423A0
-	~AnimationTable:NPC_802423A0 % .Sprite:Whacka
+	~Movement:NPC_Whacka_04
+	~AnimationTable:NPC_Whacka_04 % .Sprite:Whacka
 	00000000 00000000 00000000 001A0089 % He's a Whacka. When you hit Whackas, they get Bump ...
 	%
 	% $NpcGroup_802423A0[1F0]
-	00000005 $NpcSettings_80240FCC ~Vec3f:NPC_80242590 % 725 -30 225
+	.NpcID:Whacka_05 $NpcSettings_80240FCC ~Vec3f:NPC_Whacka_05 % 725 -30 225
 	03704F0C $Script_Init_80242338 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242590
-	~AnimationTable:NPC_80242590 % .Sprite:Whacka
+	~Movement:NPC_Whacka_05
+	~AnimationTable:NPC_Whacka_05 % .Sprite:Whacka
 	00000000 00000000 00000000 001A0089 % He's a Whacka. When you hit Whackas, they get Bump ...
 }
 
@@ -817,7 +824,7 @@ MISSING: 80240F64 to 80240F74 (00000F64 to 00000F74)
    C4:  EndThread
    CC:  Wait  15`
    D8:  Call  ModifyColliderFlags   ( 00000000 ~Collider:st1 7FFFFE00 )
-   F0:  Call  PlayerMoveTo  ( 0000021F 00000011 00000014 )
+   F0:  Call  PlayerMoveTo  (  543`  17`  20` )
   108:  Call  DisablePlayerInput    ( .False )
   118:  Wait  100`
   124:  Thread

@@ -113,7 +113,7 @@
    84:  MFC1      A3, F2
    88:  LI        V1, 3C
    8C:  SW        V1, 14 (SP)
-   90:  JAL       800718D0
+   90:  JAL       ~Func:playFX_56
    94:  SWC1      F0, 10 (SP)
    98:  LA        S0, 800DC070
    A0:  LBU       V0, 97 (S0)
@@ -187,7 +187,7 @@
    9C:  MFC1      A3, F2
    A0:  LI        V0, 2D
    A4:  SWC1      F0, 10 (SP)
-   A8:  JAL       800720B0
+   A8:  JAL       ~Func:playFX_6B
    AC:  SW        V0, 14 (SP)
    B0:  LW        RA, 28 (SP)
    B4:  LW        S3, 24 (SP)
@@ -327,7 +327,7 @@ PADDING: 802A12DC to 802A12E0 (0074D84C to 0074D850)
    D4:  Call  80273444      ( *Var0 00000000 00000000 )
    EC:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   104:  Wait  1`
-  110:  Call  AddGoalPos    ( .Actor:Player FFFFFFEC 00000000 00000000 )
+  110:  Call  AddGoalPos    ( .Actor:Player  -20`  0`  0` )
   12C:  Call  80273444      ( 00000006 00000000 00000002 )
   144:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   15C:  Wait  5`
@@ -358,7 +358,7 @@ PADDING: 802A12DC to 802A12E0 (0074D84C to 0074D850)
    D4:  Call  80273444      ( *Var0 00000000 00000000 )
    EC:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   104:  Wait  1`
-  110:  Call  AddGoalPos    ( .Actor:Player FFFFFFE2 00000000 00000000 )
+  110:  Call  AddGoalPos    ( .Actor:Player  -30`  0`  0` )
   12C:  Call  80273444      ( 00000006 00000000 00000002 )
   144:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   15C:  Wait  2`
@@ -389,7 +389,7 @@ PADDING: 802A12DC to 802A12E0 (0074D84C to 0074D850)
    D4:  Call  80273444      ( *Var0 00000000 00000000 )
    EC:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   104:  Wait  1`
-  110:  Call  AddGoalPos    ( .Actor:Player FFFFFFEC 00000000 00000000 )
+  110:  Call  AddGoalPos    ( .Actor:Player  -20`  0`  0` )
   12C:  Call  80273444      ( 00000006 00000000 00000002 )
   144:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   15C:  Wait  2`
@@ -420,7 +420,7 @@ PADDING: 802A12DC to 802A12E0 (0074D84C to 0074D850)
    D4:  Call  80273444      ( *Var0 00000000 00000000 )
    EC:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   104:  Wait  1`
-  110:  Call  AddGoalPos    ( .Actor:Player FFFFFFEC 00000000 00000000 )
+  110:  Call  AddGoalPos    ( .Actor:Player  -20`  0`  0` )
   12C:  Call  80273444      ( 00000006 00000000 00000002 )
   144:  Call  SetAnimation  ( .Actor:Player 00000000 00010009 )
   15C:  Wait  2`
@@ -452,18 +452,18 @@ PADDING: 802A12DC to 802A12E0 (0074D84C to 0074D850)
    E8:  Call  $Function_802A1000 ( )
    F4:  Call  80273444  ( *Var0 00000000 00000000 )
   10C:  ChildThread
-  114:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[1.0] )
+  114:  	Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[1.0] )
   130:  EndChildThread
-  138:  Call  AddGoalPos    ( .Actor:Player FFFFFFE2 00000000 00000000 )
+  138:  Call  AddGoalPos    ( .Actor:Player  -30`  0`  0` )
   154:  Call  80273444      ( 00000008 00000000 00000002 )
   16C:  ChildThread
-  174:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[1.0] )
+  174:  	Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[1.0] )
   190:  EndChildThread
-  198:  Call  AddGoalPos    ( .Actor:Player FFFFFFEC 00000000 00000000 )
+  198:  Call  AddGoalPos    ( .Actor:Player  -20`  0`  0` )
   1B4:  Call  SetGoalPos    ( .Actor:Player *Var0 *Var1 *Var2 )
   1D0:  Call  80273444      ( 00000006 00000000 00000002 )
   1E8:  ChildThread
-  1F0:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[1.0] )
+  1F0:  	Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[1.0] )
   20C:  EndChildThread
   214:  Call  SetGoalToHome ( .Actor:Player )
   224:  Call  80273444      ( 00000004 00000000 00000002 )
@@ -480,7 +480,7 @@ PADDING: 802A12DC to 802A12E0 (0074D84C to 0074D850)
    2C:  Call  SetAnimation      ( .Actor:Player 00000000 0001000C )
    44:  Wait  2`
    50:  ChildThread
-   58:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000005 *Fixed[1.0] )
+   58:  	Call  ShakeCam  ( .Cam:Battle 00000000  5` *Fixed[1.0] )
    74:  EndChildThread
    7C:  Call  PlaySoundAtActor  ( .Actor:Player 00000162 )
    90:  Call  SetAnimation      ( .Actor:Player 00000000 00010030 )
@@ -612,7 +612,7 @@ PADDING: 802A12DC to 802A12E0 (0074D84C to 0074D850)
    C8:  Call  $Function_802A120C    ( *Var0 *Var1 *Var2 *Fixed[0.8] )
    E4:  Wait  30`
    F0:  Call  UseBattleCamPreset    ( 00000002 )
-  100:  Call  MoveBattleCamOver     ( 00000005 )
+  100:  Call  MoveBattleCamOver     (  5` )
   110:  Call  $Function_802A10E4 ( )
   11C:  If  *Var0  ==  00000000
   12C:  	Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )

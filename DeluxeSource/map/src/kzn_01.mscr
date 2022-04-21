@@ -1,6 +1,8 @@
 % Script File: kzn_01.mscr
 % Decoded from: 0 to D70 (kzn_01)
 
+#define .NpcID:PutridPiranha_00     00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -352,8 +354,8 @@ PADDING: 8024030C to 80240310 (0000030C to 00000310)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading  ( .Shading:kzn_01 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Set   *GF_Map_MtLavalava  .True
    80:  If  *GB_StoryProgress  <  .Story:Ch5_EnteredMtLavaLava % 19
@@ -391,13 +393,13 @@ MISSING: 802408AC to 802408D8 (000008AC to 000008D8)
    4C:  EndIf
    54:  Call  DisablePlayerInput    ( .True )
    64:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-   80:  Call  SetPanTarget      ( .Cam:Default 0000010E FFFFFF38 00000000 )
-   9C:  Call  SetCamDistance    ( .Cam:Default 00000190 )
+   80:  Call  SetPanTarget      ( .Cam:Default  270`  -200`  0` )
+   9C:  Call  SetCamDistance    ( .Cam:Default  400` )
    B0:  Call  SetCamSpeed       ( .Cam:Default *Fixed[2.5] )
    C4:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    DC:  Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
    F0:  Wait  10`
-   FC:  Call  SetNpcPos ( .Npc:Self 00000140 FFFFFF24 00000000 )
+   FC:  Call  SetNpcPos ( .Npc:Self  320`  -220`  0` )
   118:  Call  PlaySoundAtNpc    ( .Npc:Self .Sound:MoleSurface 00000000 )
   130:  Call  SetNpcAnimation   ( .Npc:Self 00360017 )
   144:  Wait  30`
@@ -407,7 +409,7 @@ MISSING: 802408AC to 802408D8 (000008AC to 000008D8)
   190:  Call  PlaySoundAtNpc    ( .Npc:Self .Sound:MoleDig 00000000 )
   1A8:  Call  SetNpcAnimation   ( .Npc:Self 00360018 )
   1BC:  Wait  25`
-  1C8:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  1C8:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   1E4:  Call  ResetCam  ( .Cam:Default *Fixed[3.0] )
   1F8:  Set   *GF_KZN01_IntruderAlert  .True
   208:  Call  DisablePlayerInput    ( .False )
@@ -428,11 +430,11 @@ MISSING: 802408AC to 802408D8 (000008AC to 000008D8)
 
 #new:NpcGroup $NpcGroup_80240B54
 {
-	00000000 $NpcSettings_80240880 ~Vec3f:NPC_80240B54 % 0 -1000 0
+	.NpcID:PutridPiranha_00 $NpcSettings_80240880 ~Vec3f:NPC_PutridPiranha_00 % 0 -1000 0
 	00200004 $Script_Init_80240B00 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_80240B54
-	~AnimationTable:NPC_80240B54 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_00
+	~AnimationTable:NPC_PutridPiranha_00 % .Sprite:PutridPiranha
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

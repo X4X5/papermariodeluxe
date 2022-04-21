@@ -81,12 +81,12 @@
    6C:  		Call  SetIdleAnimations ( .Actor:Self 00000001 $IdleAnimations_802294D0_1D )
    84:  		Call  SetAnimation  ( .Actor:Self 00000001 00520010 )
    9C:  		Call  GetActorVar   ( .Actor:Self 00000000 00000000 )
-   B4:  		Call  SetActorSize  ( .Actor:Self 00000018 0000000F )
+   B4:  		Call  SetActorSize  ( .Actor:Self  24`  15` )
    CC:  	Case  ==  00000001 
    D8:  		Call  SetIdleAnimations ( .Actor:Self 00000001 $IdleAnimations_802294DC_1D )
    F0:  		Call  SetAnimation  ( .Actor:Self 00000001 00520012 )
   108:  		Call  GetActorVar   ( .Actor:Self 00000000 00000001 )
-  120:  		Call  SetActorSize  ( .Actor:Self 0000000A 00000008 )
+  120:  		Call  SetActorSize  ( .Actor:Self  10`  8` )
   138:  EndSwitch
   140:  Return
   148:  End

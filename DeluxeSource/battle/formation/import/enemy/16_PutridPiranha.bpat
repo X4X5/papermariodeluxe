@@ -150,7 +150,7 @@
   104:  MFC1      A3, F2
   108:  COPY      S0, V0
   10C:  SWC1      F20, 10 (SP)
-  110:  JAL       80072230
+  110:  JAL       ~Func:playFX_6F
   114:  SW        S2, 14 (SP)
   118:  LW        V1, C (V0)
   11C:  SW        S3, 18 (V1)
@@ -239,11 +239,11 @@
     0:  Label  0
     C:  Call  GetStatusFlags    ( .Actor:Self *VarA )
    20:  If  *VarA  &  ~Flags:StatusFlags:Dizzy % 40000
-   30:  	Call  SetTargetOffset       ( .Actor:Self 00000001 FFFFFFE5 00000021 )
+   30:  	Call  SetTargetOffset       ( .Actor:Self 00000001  -27`  33` )
    4C:  	Call  8027D4C8  ( FFFFFF81 00000001 00000005 FFFFFFF5 )
    68:  	Call  $Function_80218130_16 ( FFFFFFDB 00000009 FFFFFFF9 0000001F )
    84:  Else
-   8C:  	Call  SetTargetOffset       ( .Actor:Self 00000001 FFFFFFF1 00000032 )
+   8C:  	Call  SetTargetOffset       ( .Actor:Self 00000001  -15`  50` )
    A8:  	Call  8027D4C8  ( FFFFFF81 00000001 00000003 FFFFFFF2 )
    C4:  	Call  $Function_80218130_16 ( FFFFFFEA 00000020 00000001 0000002C )
    E0:  EndIf
@@ -256,9 +256,9 @@
 #new:Script $Script_8021B354_16 {
     0:  Call  SetAnimation  ( .Actor:Self 00000001 00360003 )
    18:  Call  SetGoalToHome ( .Actor:Self )
-   28:  Call  RunToGoal     ( .Actor:Self 00000000 .False )
+   28:  Call  RunToGoal     ( .Actor:Self  0` .False )
    40:  Call  SetAnimation  ( .Actor:Self 00000001 00360001 )
-   58:  Call  SetActorYaw   ( .Actor:Self 00000000 )
+   58:  Call  SetActorYaw   ( .Actor:Self  0` )
    6C:  Return
    74:  End
 }
@@ -398,8 +398,8 @@
   180:  	Div   *Var5  00000002 
   190:  	Call  UseBattleCamPreset    ( 00000013 )
   1A0:  	Call  SetBattleCamTarget    ( *Var3 *Var4 *Var5 )
-  1B8:  	Call  SetBattleCamZoom  ( 0000012C )
-  1C8:  	Call  SetBattleCamOffsetZ   ( 00000028 )
+  1B8:  	Call  SetBattleCamZoom  (  300` )
+  1C8:  	Call  SetBattleCamOffsetZ   (  40` )
   1D8:  	Wait  20`
   1E4:  	Call  PlaySoundAtActor  ( .Actor:Self .Sound:MoleSurface )
   1F8:  	Call  SetActorPos       ( .Actor:Self *Var0 *Var1 *Var2 )
@@ -423,7 +423,7 @@
   34C:  	EndIf
   354:  	Set   *Var1  00000000 
   364:  	Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  380:  	Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  380:  	Call  RunToGoal     ( .Actor:Self  0` .False )
   398:  	Call  SetAnimation  ( .Actor:Self 00000001 00360001 )
   3B0:  EndIf
   3B8:  Thread
@@ -444,7 +444,7 @@
   4C4:  		EndIf
   4CC:  		Wait  14`
   4D8:  		Call  UseBattleCamPreset    ( 00000002 )
-  4E8:  		Call  MoveBattleCamOver     ( 00000014 )
+  4E8:  		Call  MoveBattleCamOver     (  20` )
   4F8:  		Call  YieldTurn ( )
   504:  		Call  GetBattlePhase        ( *Var0 )
   514:  		If  *Var0  ==  00000001 
@@ -463,7 +463,7 @@
   620:  		Else
   628:  			Call  SetAnimationRate  ( .Actor:Self 00000001 *Fixed[2.0] )
   640:  			Call  SetActorSpeed     ( .Actor:Self *Fixed[7.0] )
-  654:  			Call  SetActorYaw       ( .Actor:Self 000000B4 )
+  654:  			Call  SetActorYaw       ( .Actor:Self  180` )
   668:  			Call  AddActorDecoration    ( .Actor:Self 00000001 00000000 .Decoration:Sweat )
   684:  			ExecWait  $Script_8021B354_16 
   690:  			Call  RemoveActorDecoration ( .Actor:Self 00000001 00000000 )
@@ -484,7 +484,7 @@
   794:  Set   *VarF  *Var0 
   7A4:  Switch  *VarF 
   7B0:  	CaseOR  ==  .HitResult:Hit % 0
-  7BC:  	CaseOR  ==  00000002 % 2
+  7BC:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   7C8:  		Call  UseBattleCamPreset    ( 00000002 )
   7D8:  		Wait  10`
   7E4:  		Call  SetAnimation  ( .Actor:Self 00000001 00360007 )
@@ -536,7 +536,7 @@
   130:  EndIf
   138:  Set   *Var1  00000000 
   148:  Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  164:  Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  164:  Call  RunToGoal     ( .Actor:Self  0` .False )
   17C:  Call  SetAnimation  ( .Actor:Self 00000001 00360001 )
   194:  Call  SetAnimation  ( .Actor:Self 00000001 00360008 )
   1AC:  Wait  11`
@@ -571,7 +571,7 @@
   3B0:  		Call  YieldTurn ( )
   3BC:  		Call  SetAnimationRate  ( .Actor:Self 00000001 *Fixed[2.0] )
   3D4:  		Call  SetActorSpeed     ( .Actor:Self *Fixed[7.0] )
-  3E8:  		Call  SetActorYaw       ( .Actor:Self 000000B4 )
+  3E8:  		Call  SetActorYaw       ( .Actor:Self  180` )
   3FC:  		Call  AddActorDecoration    ( .Actor:Self 00000001 00000000 .Decoration:Sweat )
   418:  		ExecWait  $Script_8021B354_16 
   424:  		Call  RemoveActorDecoration ( .Actor:Self 00000001 00000000 )
@@ -587,7 +587,7 @@
   4D8:  Set   *VarF  *Var0 
   4E8:  Switch  *VarF 
   4F4:  	CaseOR  ==  .HitResult:Hit % 0
-  500:  	CaseOR  ==  00000002 % 2
+  500:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   50C:  		Call  UseBattleCamPreset    ( 00000002 )
   51C:  		Wait  10`
   528:  		Call  SetAnimation  ( .Actor:Self 00000001 0036000A )

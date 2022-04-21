@@ -1,6 +1,9 @@
 % Script File: kpa_01.mscr
 % Decoded from: 0 to 1660 (kpa_01)
 
+#define .NpcID:BonyBeetle_00        00
+#define .NpcID:BonyBeetle_01        01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -30,7 +33,7 @@
    68:  MFC1      A2, F6
    6C:  TRUNC.W.S F6, F0
    70:  MFC1      A3, F6
-   74:  JAL       ~Func:set_transition_stencil_center_worldpos
+   74:  JAL       ~Func:set_screen_overlay_center_worldpos
    78:  COPY      A1, A0
    7C:  LAB       V0, 8010EBB0
    84:  BEQ       V0, R0, .oD0
@@ -79,10 +82,10 @@
   11C:  LWC1      F6, 70 (S0)
   120:  CVT.S.W   F6, F6
   124:  MFC1      A1, F6
-  128:  JAL       ~Func:set_transition_stencil_alpha
+  128:  JAL       ~Func:set_screen_overlay_alpha
   12C:  LI        A0, 1
   130:  LUI       A1, 437F
-  134:  JAL       ~Func:set_transition_stencil_zoom_1
+  134:  JAL       ~Func:set_screen_overlay_params_back
   138:  ADDIU     A0, R0, B
   13C:  LW        RA, 24 (SP)
   140:  LW        S2, 20 (SP)
@@ -827,8 +830,8 @@ PADDING: 80240AFC to 80240B00 (00000AFC to 00000B00)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80241574 )
    84:  ExecWait  $Script_MakeEntities
@@ -943,21 +946,21 @@ MISSING: 802410E4 to 80241168 (000010E4 to 00001168)
 
 #new:NpcGroup $NpcGroup_80241194
 {
-	00000000 $NpcSettings_80241168 ~Vec3f:NPC_80241194 % 1740 -215 60
+	.NpcID:BonyBeetle_00 $NpcSettings_80241168 ~Vec3f:NPC_BonyBeetle_00 % 1740 -215 60
 	00002C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:4 ~FP:Standard:2 ~CoinBonus:0:4
-	~Movement:NPC_80241194
-	~AnimationTable:NPC_80241194 % .Sprite:BonyBeetle
+	~Movement:NPC_BonyBeetle_00
+	~AnimationTable:NPC_BonyBeetle_00 % .Sprite:BonyBeetle
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241384
 {
-	00000001 $NpcSettings_80241168 ~Vec3f:NPC_80241384 % 243 5 230
+	.NpcID:BonyBeetle_01 $NpcSettings_80241168 ~Vec3f:NPC_BonyBeetle_01 % 243 5 230
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:4 ~FP:Standard:2 ~CoinBonus:0:4
-	~Movement:NPC_80241384
-	~AnimationTable:NPC_80241384 % .Sprite:BonyBeetle
+	~Movement:NPC_BonyBeetle_01
+	~AnimationTable:NPC_BonyBeetle_01 % .Sprite:BonyBeetle
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

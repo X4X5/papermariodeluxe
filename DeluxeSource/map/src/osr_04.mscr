@@ -1,6 +1,7 @@
 % Script File: osr_04.mscr
 % Decoded from: 0 to 1FE0 (osr_04)
 
+
 #new:Function_Init $Function_Init
 {
     0:  ADDIU     SP, SP, FFE8
@@ -100,8 +101,8 @@
 {
     0:  Set   *GB_WorldLocation  .Location:None
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  FadeOutMusic      ( 00000000 000001F4 )
@@ -536,11 +537,11 @@ PADDING: 8024031C to 80240320 (0000031C to 00000320)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  EnableGroup   ( 0000002F .False )
-   34:  Call  SetPlayerPos  ( 00000000 00000000 000007D0 )
+   34:  Call  SetPlayerPos  (  0`  0`  2000` )
    4C:  Thread
    54:  	Call  PlaySound ( 80000057 )
-   64:  	Call  ShakeCam  ( .Cam:Default 00000000 000001C2 *Fixed[2.0] )
-   80:  	Call  ShakeCam  ( .Cam:Default 00000000 00000064 *Fixed[1.0] )
+   64:  	Call  ShakeCam  ( .Cam:Default 00000000  450` *Fixed[2.0] )
+   80:  	Call  ShakeCam  ( .Cam:Default 00000000  100` *Fixed[1.0] )
    9C:  EndThread
    A4:  Wait  50`
    B0:  Thread

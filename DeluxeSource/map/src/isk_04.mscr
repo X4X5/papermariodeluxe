@@ -1,6 +1,9 @@
 % Script File: isk_04.mscr
 % Decoded from: 0 to 24A0 (isk_04)
 
+#define .NpcID:BuzzyBeetle_00       00
+#define .NpcID:BuzzyBeetle_01       01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -665,7 +668,7 @@ PADDING: 80240928 to 80240930 (00000928 to 00000930)
     8:  LW        V0, C (A0)
     C:  JAL       ~Func:get_variable
    10:  LW        A1, 0 (V0)
-   14:  JAL       800EB168
+   14:  JAL       ~Func:switch_to_partner
    18:  COPY      A0, V0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -721,7 +724,7 @@ PADDING: 80240928 to 80240930 (00000928 to 00000930)
    AC:  MFC1      A0, F4
    B0:  TRUNC.W.S F4, F2
    B4:  MFC1      A1, F4
-   B8:  JAL       800EF3C0
+   B8:  JAL       ~Func:partner_set_goal_pos
    BC:  NOP
    C0:  JAL       800EF3D4
    C4:  CLEAR     A0
@@ -778,7 +781,7 @@ PADDING: 80240A6C to 80240A70 (00000A6C to 00000A70)
    60:  		Wait  20`
    6C:  		SetGroup  00000000
    78:  		Call  SetTimeFreezeMode ( 00000001 )
-   88:  		Call  ShowMessageAtScreenPos    ( 000D00DE 000000A0 00000028 ) % Fool! You have ignored my warning, haven't you? Yo ...
+   88:  		Call  ShowMessageAtScreenPos    ( 000D00DE  160`  40` ) % Fool! You have ignored my warning, haven't you? Yo ...
    A0:  		Set   *GF_ISK04_SecondWarning  .True
    B0:  		Call  DisablePlayerInput        ( .False )
    C0:  		Call  SetTimeFreezeMode ( 00000000 )
@@ -880,8 +883,8 @@ PADDING: 80240CCC to 80240CD0 (00000CCC to 00000CD0)
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:isk_04 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  GetDemoState      ( *Var0 )
@@ -931,7 +934,7 @@ PADDING: 80240CCC to 80240CD0 (00000CCC to 00000CD0)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf
@@ -971,7 +974,7 @@ PADDING: 80240CCC to 80240CD0 (00000CCC to 00000CD0)
    48:  	Call  ModifyColliderFlags   ( 00000000 ~Collider:deilittne 7FFFFE00 )
    60:  EndIf
    68:  If  *GF_ISK04_UnlockedDoor  ==  .False
-   78:  	Call  802C971C  ( 00000044 )
+   78:  	Call  MakeTransformGroup    ( ~Model:g304 )
    88:  	BindLock  $Script_80241180 .Trigger:WallPressA 00004000 $ItemList_80241090 00000000 00000001
    A8:  Else
    B0:  	Call  ModifyColliderFlags   ( 00000000 ~Collider:deilittsw 7FFFFE00 )
@@ -1099,21 +1102,21 @@ MISSING: 80241830 to 802418B4 (00001830 to 000018B4)
 
 #new:NpcGroup $NpcGroup_802418B4
 {
-	00000000 $NpcSettings_80241804 ~Vec3f:NPC_802418B4 % 561 25 47
+	.NpcID:BuzzyBeetle_00 $NpcSettings_80241804 ~Vec3f:NPC_BuzzyBeetle_00 % 561 25 47
 	00000400 00000000 00000000 00000000 00000163
 	~NoItems ~HP:Generous:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_802418B4
-	~AnimationTable:NPC_802418B4 % .Sprite:BuzzyBeetle
+	~Movement:NPC_BuzzyBeetle_00
+	~AnimationTable:NPC_BuzzyBeetle_00 % .Sprite:BuzzyBeetle
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241AA4
 {
-	00000001 $NpcSettings_80241804 ~Vec3f:NPC_80241AA4 % 608 -260 -158
+	.NpcID:BuzzyBeetle_01 $NpcSettings_80241804 ~Vec3f:NPC_BuzzyBeetle_01 % 608 -260 -158
 	00000C00 00000000 00000000 00000000 000000AF
 	~NoItems ~HP:Generous:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80241AA4
-	~AnimationTable:NPC_80241AA4 % .Sprite:BuzzyBeetle
+	~Movement:NPC_BuzzyBeetle_01
+	~AnimationTable:NPC_BuzzyBeetle_01 % .Sprite:BuzzyBeetle
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1242,18 +1245,18 @@ PADDING: 80241CB8 to 80241CC0 (00001CB8 to 00001CC0)
 #new:Script $Script_8024228C
 {
     0:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-   18:  Call  UseSettingsFrom   ( .Cam:Default 00000212 00000019 FFFFFFCE )
-   34:  Call  SetCamPitch   ( .Cam:Default 0000000C FFFFFFFD )
+   18:  Call  UseSettingsFrom   ( .Cam:Default  530`  25`  -50` )
+   34:  Call  SetCamPitch   ( .Cam:Default  12`  -3` )
    4C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-   60:  Call  SetPanTarget  ( .Cam:Default *Var0 00000019 *Var2 )
+   60:  Call  SetPanTarget  ( .Cam:Default *Var0  25` *Var2 )
    7C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    94:  Thread
    9C:  	Wait  1`
    A8:  	Loop
    B4:  		Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
    CC:  		Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
-   E8:  		Call  SetCamPitch   ( .Cam:Default 0000000C FFFFFFFD )
-  100:  		Call  SetPanTarget  ( .Cam:Default *Var0 00000019 *Var2 )
+   E8:  		Call  SetCamPitch   ( .Cam:Default  12`  -3` )
+  100:  		Call  SetPanTarget  ( .Cam:Default *Var0  25` *Var2 )
   11C:  		Wait  1`
   128:  	EndLoop
   130:  EndThread

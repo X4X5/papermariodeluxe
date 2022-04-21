@@ -1,6 +1,7 @@
 % Script File: flo_19.mscr
 % Decoded from: 0 to 3010 (flo_19)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -242,7 +243,7 @@
    10:  COPY      A3, A1
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -539,7 +540,7 @@
     8:  LWC1      F0, 84 (A0)
     C:  CVT.S.W   F0, F0
    10:  MFC1      A1, F0
-   14:  JAL       ~Func:set_transition_stencil_zoom_1
+   14:  JAL       ~Func:set_screen_overlay_params_back
    18:  LI        A0, 1
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -740,8 +741,8 @@ PADDING: 80240AF4 to 80240B00 (00000AF4 to 00000B00)
     0:  Set   *GB_WorldLocation  .Location:CloudyClimb
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   54:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   54:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *GF_Map_CloudyClimb  .True
    94:  ExecWait  $Script_80240AC0
@@ -1053,12 +1054,12 @@ PADDING: 80241A68 to 80241A70 (00001A68 to 00001A70)
    48:  Call  ModifyColliderFlags   ( 00000000 ~Collider:o108 7FFFFE00 )
    60:  Call  ModifyColliderFlags   ( 00000000 ~Collider:o122 7FFFFE00 )
    78:  Call  SetCamType    ( .Cam:Default 00000001 .False )
-   90:  Call  UseSettingsFrom       ( .Cam:Default 00000000 00000000 00000000 )
-   AC:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
-   C8:  Call  SetCamDistance        ( .Cam:Default 0000015E )
+   90:  Call  UseSettingsFrom       ( .Cam:Default  0`  0`  0` )
+   AC:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
+   C8:  Call  SetCamDistance        ( .Cam:Default  350` )
    DC:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[11.0] )
-   F4:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
-  10C:  Call  SetCamPosB    ( .Cam:Default 00000000 00000000 )
+   F4:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
+  10C:  Call  SetCamPosB    ( .Cam:Default  0`  0` )
   124:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   138:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   150:  Call  EnableGroup   ( ~Model:g16 .False )
@@ -1080,11 +1081,11 @@ PADDING: 80241A68 to 80241A70 (00001A68 to 00001A70)
   264:  	Call  SetPlayerAnimation    ( .PlayerAnim:Walking )
   274:  	Switch  *AreaFlag[010]
   280:  		Case  ==  00000000
-  28C:  			Call  InterpPlayerYaw   ( 0000005A 00000000 )
-  2A0:  			Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+  28C:  			Call  InterpPlayerYaw   (  90`  0` )
+  2A0:  			Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
   2B8:  		Case  ==  00000001
-  2C4:  			Call  InterpPlayerYaw   ( 0000010E 00000000 )
-  2D8:  			Call  InterpNpcYaw      ( .Npc:Partner 0000010E 00000000 )
+  2C4:  			Call  InterpPlayerYaw   (  270`  0` )
+  2D8:  			Call  InterpNpcYaw      ( .Npc:Partner  270`  0` )
   2F0:  	EndSwitch
   2F8:  EndThread
   300:  Call  TranslateModel    ( ~Model:o142 *Fixed[1.3134766] *Fixed[3.0] *Fixed[-0.56640625] )
@@ -1103,10 +1104,10 @@ PADDING: 80241A68 to 80241A70 (00001A68 to 00001A70)
   3D8:  	Call  EnableGroup   ( ~Model:g93 .True )
   3EC:  	Call  EnableGroup   ( ~Model:g15 .True )
   400:  	Call  EnableGroup   ( ~Model:g25 .True )
-  414:  	Call  SetCamDistance        ( .Cam:Default 000001C2 )
+  414:  	Call  SetCamDistance        ( .Cam:Default  450` )
   428:  	Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-6.0] )
-  440:  	Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
-  458:  	Call  SetCamPosB    ( .Cam:Default 00000000 00000000 )
+  440:  	Call  SetCamPosA    ( .Cam:Default  0`  0` )
+  458:  	Call  SetCamPosB    ( .Cam:Default  0`  0` )
   470:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   484:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   49C:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -1139,9 +1140,9 @@ PADDING: 80241A68 to 80241A70 (00001A68 to 00001A70)
   65C:  Call  EnablePartnerAI ( )
   668:  Call  ClearPartnerMoveHistory   ( .Npc:Partner )
   678:  Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  688:  Call  PlayerJump    ( ~Vec3d:JumpDest_8024234C 00000014 )
+  688:  Call  PlayerJump    ( ~Vec3d:JumpDest_8024234C  20` )
   6A4:  Call  SetPlayerActionState  ( .ActionState:Land )
-  6B4:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
+  6B4:  Call  InterpPlayerYaw       (  90`  0` )
   6C8:  Wait  5`
   6D4:  Set   *AreaFlag[02C]  .False
   6E4:  Call  StopSound ( 0000019C )
@@ -1168,9 +1169,9 @@ PADDING: 80241A68 to 80241A70 (00001A68 to 00001A70)
    B8:  	Set   *VarC  *Fixed[60.0]
    C8:  	Set   *VarD  *Fixed[28.0]
    D8:  	Set   *VarE  *Fixed[10.0]
-   E8:  	Call  PlayerMoveTo      ( *Var9 *VarB 00000008 )
+   E8:  	Call  PlayerMoveTo      ( *Var9 *VarB  8` )
   100:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.0] )
-  114:  	Call  NpcJump0  ( .Npc:Partner *VarC *VarD *VarE 00000005 )
+  114:  	Call  NpcJump0  ( .Npc:Partner *VarC *VarD *VarE  5` )
   134:  	Call  PlaySound ( 0000019D )
   144:  	Call  SetMusicTrack     ( 00000000 .Song:MagicBeanstalk 00000001 00000008 )
   160:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
@@ -1179,12 +1180,12 @@ PADDING: 80241A68 to 80241A70 (00001A68 to 00001A70)
   198:  	Switch  *Var4
   1A4:  		Case  <  0000005A
   1B0:  			Set   *AreaFlag[010]  .False
-  1C0:  			Call  InterpPlayerYaw   ( 0000005A 00000000 )
-  1D4:  			Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+  1C0:  			Call  InterpPlayerYaw   (  90`  0` )
+  1D4:  			Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
   1EC:  		Case  >=  0000010E
   1F8:  			Set   *AreaFlag[010]  .True
-  208:  			Call  InterpPlayerYaw   ( 0000010E 00000000 )
-  21C:  			Call  InterpNpcYaw      ( .Npc:Partner 0000010E 00000000 )
+  208:  			Call  InterpPlayerYaw   (  270`  0` )
+  21C:  			Call  InterpNpcYaw      ( .Npc:Partner  270`  0` )
   234:  	EndSwitch
   23C:  	Call  TranslateModel    ( ~Model:o142 *Fixed[1.3134766] *Fixed[3.0] *Fixed[-0.56640625] )
   258:  	Call  UpdateColliderTransform   ( ~Collider:o117 )
@@ -1204,9 +1205,9 @@ PADDING: 80241A68 to 80241A70 (00001A68 to 00001A70)
   334:  		Call  EnableGroup   ( ~Model:g15 .False )
   348:  		Call  EnableGroup   ( ~Model:g25 .False )
   35C:  		Call  SetCamType    ( .Cam:Default 00000001 .False )
-  374:  		Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
-  390:  		Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
-  3AC:  		Call  SetCamDistance    ( .Cam:Default 0000015E )
+  374:  		Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
+  390:  		Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
+  3AC:  		Call  SetCamDistance    ( .Cam:Default  350` )
   3C0:  		Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[7.0] )
   3D8:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   3EC:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -1266,12 +1267,12 @@ PADDING: 80241A68 to 80241A70 (00001A68 to 00001A70)
    C0:  Call  EnableGroup   ( ~Model:g15 .False )
    D4:  Call  EnableGroup   ( ~Model:g25 .False )
    E8:  Call  SetCamType    ( .Cam:Default 00000001 .False )
-  100:  Call  UseSettingsFrom       ( .Cam:Default 00000000 00000000 00000000 )
-  11C:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
-  138:  Call  SetCamDistance        ( .Cam:Default 00000320 )
+  100:  Call  UseSettingsFrom       ( .Cam:Default  0`  0`  0` )
+  11C:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
+  138:  Call  SetCamDistance        ( .Cam:Default  800` )
   14C:  Call  SetCamPitch   ( .Cam:Default *Fixed[-20.0] *Fixed[8.5] )
-  164:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
-  17C:  Call  SetCamPosB    ( .Cam:Default 00000000 00000000 )
+  164:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
+  17C:  Call  SetCamPosB    ( .Cam:Default  0`  0` )
   194:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   1A8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1C0:  Set   *VarF  00000064
@@ -1289,10 +1290,10 @@ PADDING: 80241A68 to 80241A70 (00001A68 to 00001A70)
   294:  			Call  EnableGroup   ( ~Model:g93 .True )
   2A8:  			Call  EnableGroup   ( ~Model:g15 .True )
   2BC:  			Call  EnableGroup   ( ~Model:g25 .True )
-  2D0:  			Call  SetCamDistance    ( .Cam:Default 000003E8 )
+  2D0:  			Call  SetCamDistance    ( .Cam:Default  1000` )
   2E4:  			Call  SetCamPitch   ( .Cam:Default *Fixed[45.0] *Fixed[-3.0] )
-  2FC:  			Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
-  314:  			Call  SetCamPosB    ( .Cam:Default 00000000 00000000 )
+  2FC:  			Call  SetCamPosA    ( .Cam:Default  0`  0` )
+  314:  			Call  SetCamPosB    ( .Cam:Default  0`  0` )
   32C:  			Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   340:  			Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   358:  			Set   *VarF  00000096

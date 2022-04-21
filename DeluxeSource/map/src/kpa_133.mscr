@@ -1,6 +1,8 @@
 % Script File: kpa_133.mscr
 % Decoded from: 0 to 1B20 (kpa_133)
 
+#define .NpcID:Toad_00              00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -496,8 +498,8 @@ PADDING: 80240558 to 80240560 (00000558 to 00000560)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_802417D0 )
    84:  ExecWait  $Script_MakeEntities
@@ -571,7 +573,7 @@ PADDING: 80240E0C to 80240E10 (00000E0C to 00000E10)
    D4:  	Call  $Function_80240310    ( FFFFFFA6 00000000 00000000 )
    EC:  	Exec  $Script_80240F44
    F8:  EndIf
-  100:  Call  MakeItemEntity    ( .Item:CastleKey2 ~Vec3d:Item80240F10 00000000 *GF_KPA133_Item_CastleKey2 )
+  100:  Call  MakeItemEntity    ( .Item:BowserCastleKey ~Vec3d:Item80240F10 00000000 *GF_KPA133_Item_CastleKey2 )
   124:  Return
   12C:  End
 }
@@ -599,11 +601,11 @@ PADDING: 80240E0C to 80240E10 (00000E0C to 00000E10)
   100:  		EndIf
   108:  		Thread
   110:  			Wait  2`
-  11C:  			Call  InterpPlayerYaw       ( *Var4 00000000 )
+  11C:  			Call  InterpPlayerYaw       ( *Var4  0` )
   130:  			Wait  2`
   13C:  			Call  SetPlayerJumpscale    ( *Fixed[2.0] )
   14C:  			Call  SetPlayerAnimation    ( 0001002B )
-  15C:  			Call  PlayerJump1   ( *Var3 *Var1 *Var2 0000000A )
+  15C:  			Call  PlayerJump1   ( *Var3 *Var1 *Var2  10` )
   178:  			Call  SetPlayerAnimation    ( 00010002 )
   188:  			Wait  5`
   194:  		EndThread
@@ -631,7 +633,7 @@ PADDING: 80240E0C to 80240E10 (00000E0C to 00000E10)
   40C:  EndThread
   414:  Thread
   41C:  	Wait  18`
-  428:  	Call  PlaySoundAtNpc    ( 00000000 000001EF 00000000 )
+  428:  	Call  PlaySoundAtNpc    ( .NpcID:Toad_00 000001EF 00000000 )
   440:  EndThread
   448:  Thread
   450:  	Call  MakeLerp  ( FFFFFFA6 00000000 0000000F .Easing:QuadraticIn )
@@ -646,17 +648,17 @@ PADDING: 80240E0C to 80240E10 (00000E0C to 00000E10)
   4D0:  EndThread
   4D8:  Thread
   4E0:  	Loop  00000017
-  4EC:  		Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+  4EC:  		Call  GetNpcPos ( .NpcID:Toad_00 *Var0 *Var1 *Var2 )
   508:  		Call  $Function_802403C0    ( *Var0 *Var1 *Var2 )
   520:  		Wait  1`
   52C:  	EndLoop
-  534:  	Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+  534:  	Call  SetNpcPos ( .NpcID:Toad_00  0`  -1000`  0` )
   550:  EndThread
   558:  Wait  3`
-  564:  Call  SetNpcPos ( 00000000 00000096 00000096 FFFFFF97 )
-  580:  Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  594:  Call  NpcJump0  ( 00000000 00000096 00000073 00000000 00000011 )
-  5B4:  Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+  564:  Call  SetNpcPos ( .NpcID:Toad_00  150`  150`  -105` )
+  580:  Call  SetNpcJumpscale   ( .NpcID:Toad_00 *Fixed[1.0] )
+  594:  Call  NpcJump0  ( .NpcID:Toad_00  150`  115`  0`  17` )
+  5B4:  Call  GetNpcPos ( .NpcID:Toad_00 *Var0 *Var1 *Var2 )
   5D0:  Wait  20`
   5DC:  Call  DisablePlayerInput    ( .False )
   5EC:  Return
@@ -689,11 +691,11 @@ MISSING: 8024158C to 802415B8 (0000158C to 000015B8)
 
 #new:NpcGroup $NpcGroup_802415E0
 {
-	00000000 $NpcSettings_80241560 ~Vec3f:NPC_802415E0 % 0 -1000 0
+	.NpcID:Toad_00 $NpcSettings_80241560 ~Vec3f:NPC_Toad_00 % 0 -1000 0
 	00206F01 $Script_Init_802415B8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802415E0
-	~AnimationTable:NPC_802415E0 % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -708,8 +710,8 @@ PADDING: 802417E8 to 802417F0 (000017E8 to 000017F0)
 
 #new:Script $Script_802417F0
 {
-    0:  Call  SetRenderMode ( ~Model:s_sui 00000016 )
-   14:  Call  SetRenderMode ( ~Model:sui 00000016 )
+    0:  Call  SetRenderMode ( ~Model:s_sui .RenderMode:Surface_XLU_Layer2 )
+   14:  Call  SetRenderMode ( ~Model:sui .RenderMode:Surface_XLU_Layer2 )
    28:  Switch  *GB_KPA_WaterLevel
    34:  	Case  ==  00000000
    40:  		Call  SetGroupEnabled       ( ~Model:suimen 00000000 )

@@ -1,6 +1,11 @@
 % Script File: dgb_02.mscr
 % Decoded from: 0 to 2940 (dgb_02)
 
+#define .NpcID:WorldClubba_10       0A
+#define .NpcID:WorldClubba_11       0B
+#define .NpcID:WorldClubba_30       1E
+#define .NpcID:WorldClubba_31       1F
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -1550,8 +1555,8 @@ PADDING: 80241548 to 80241550 (00001548 to 00001550)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GB_StoryProgress  <  .Story:Ch3_StarSpiritRescued % FFFFFFF1
    80:  	Call  MakeNpcs  ( .True $NpcGroupList_802425C8 )
@@ -1576,7 +1581,7 @@ PADDING: 80241AA8 to 80241AB0 (00001AA8 to 00001AB0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1685,37 +1690,37 @@ PADDING: 80241AA8 to 80241AB0 (00001AA8 to 00001AB0)
 
 #new:NpcGroup $NpcGroup_80241E08
 {
-	0000000A $NpcSettings_80241C3C ~Vec3f:NPC_80241E08 % -200 0 180
+	.NpcID:WorldClubba_10 $NpcSettings_80241C3C ~Vec3f:NPC_WorldClubba_10 % -200 0 180
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_80241E08
-	~AnimationTable:NPC_80241E08 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_10
+	~AnimationTable:NPC_WorldClubba_10 % .Sprite:WorldClubba
 	00000002 00000000 $ExtraAnimationList_80241B6C 00000000 % no tattle string
 	%
 	% $NpcGroup_80241E08[1F0]
-	0000000B $NpcSettings_80241DDC ~Vec3f:NPC_80241FF8 % 0 -1000 0
+	.NpcID:WorldClubba_11 $NpcSettings_80241DDC ~Vec3f:NPC_WorldClubba_11 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241FF8
-	~AnimationTable:NPC_80241FF8 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_11
+	~AnimationTable:NPC_WorldClubba_11 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_80241B94 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802421E8
 {
-	0000001E $NpcSettings_80241D08 ~Vec3f:NPC_802421E8 % 375 0 100
+	.NpcID:WorldClubba_30 $NpcSettings_80241D08 ~Vec3f:NPC_WorldClubba_30 % 375 0 100
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:2:3
-	~Movement:NPC_802421E8
-	~AnimationTable:NPC_802421E8 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_30
+	~AnimationTable:NPC_WorldClubba_30 % .Sprite:WorldClubba
 	00000002 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802421E8[1F0]
-	0000001F $NpcSettings_80241DDC ~Vec3f:NPC_802423D8 % 0 -1000 0
+	.NpcID:WorldClubba_31 $NpcSettings_80241DDC ~Vec3f:NPC_WorldClubba_31 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802423D8
-	~AnimationTable:NPC_802423D8 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_31
+	~AnimationTable:NPC_WorldClubba_31 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_80241B94 00000000 % no tattle string
 }
 

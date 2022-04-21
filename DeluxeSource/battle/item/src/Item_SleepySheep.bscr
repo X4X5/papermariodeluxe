@@ -372,7 +372,7 @@
   3A0:  MFC1      A2, F20
   3A4:  MFC1      A3, F24
   3A8:  LI        S5, 1
-  3AC:  JAL       ~Func:fx_walk_large
+  3AC:  JAL       ~Func:fx_land
   3B0:  SW        R0, 10 (SP)
   3B4:  ADDIU     S4, S4, C
         .o3B8
@@ -410,7 +410,7 @@
   450:  MFC1      A2, F20
   454:  MFC1      A3, F0
   458:  LI        A0, 2
-  45C:  JAL       ~Func:fx_walk_large
+  45C:  JAL       ~Func:fx_land
   460:  SW        R0, 10 (SP)
         .o464
   464:  LWC1      F2, 0 (S8)
@@ -659,10 +659,10 @@ PADDING: 802A1968 to 802A1970 (0071EFB8 to 0071EFC0)
 #new:Script $Script_802A1C74
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -1027,48 +1027,48 @@ PADDING: 802A329C to 802A32A0 (007208EC to 007208F0)
     0:  SetConst  *VarA  0000008F
    10:  ExecWait  $Script_802A1970
    1C:  Call  UseBattleCamPreset    ( 00000013 )
-   2C:  Call  SetBattleCamTarget    ( FFFFFFBD FFFFFFF1 FFFFFFFB )
-   44:  Call  SetBattleCamOffsetZ   ( 0000002D )
-   54:  Call  SetBattleCamZoom      ( 000000A9 )
-   64:  Call  MoveBattleCamOver     ( 00000032 )
+   2C:  Call  SetBattleCamTarget    (  -67`  -15`  -5` )
+   44:  Call  SetBattleCamOffsetZ   (  45` )
+   54:  Call  SetBattleCamZoom      (  169` )
+   64:  Call  MoveBattleCamOver     (  50` )
    74:  Thread
    7C:  	Call  PlaySoundAtActor  ( .Actor:Player 00000364 )
    90:  	Loop  00000007
    9C:  		Call  StartRumble   ( 00000002 )
-   AC:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-   C8:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.5] )
-   E4:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  100:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.2] )
-  11C:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  138:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[2.0] )
-  154:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.5] )
-  170:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  18C:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  1A8:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.25] )
+   AC:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+   C8:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.5] )
+   E4:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  100:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.2] )
+  11C:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  138:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[2.0] )
+  154:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.5] )
+  170:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  18C:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  1A8:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.25] )
   1C4:  		Wait  2`
-  1D0:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  1EC:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.5] )
-  208:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  224:  		Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.2] )
+  1D0:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  1EC:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.5] )
+  208:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  224:  		Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.2] )
   240:  	EndLoop
   248:  EndThread
   250:  Wait  20`
   25C:  Call  SetAnimation  ( .Actor:Player 00000000 00010002 )
   274:  Call  GetActorPos   ( .Actor:Player *Var0 *Var1 *Var2 )
   290:  Add   *Var1  00000020
-  2A0:  Call  ShowEmote     ( 00000000 .Emote:Question FFFFFFD3 00000014 00000002 *Var0 *Var1 *Var2 0000000A )
+  2A0:  Call  ShowEmote     ( 00000000 .Emote:Question  -45`  20` 00000002 *Var0 *Var1 *Var2  10` )
   2D0:  Wait  30`
-  2DC:  Call  SetActorYaw   ( .Actor:Player 0000001E )
+  2DC:  Call  SetActorYaw   ( .Actor:Player  30` )
   2F0:  Wait  1`
-  2FC:  Call  SetActorYaw   ( .Actor:Player 0000003C )
+  2FC:  Call  SetActorYaw   ( .Actor:Player  60` )
   310:  Wait  1`
-  31C:  Call  SetActorYaw   ( .Actor:Player 0000005A )
+  31C:  Call  SetActorYaw   ( .Actor:Player  90` )
   330:  Wait  1`
-  33C:  Call  SetActorYaw   ( .Actor:Player 00000078 )
+  33C:  Call  SetActorYaw   ( .Actor:Player  120` )
   350:  Wait  1`
-  35C:  Call  SetActorYaw   ( .Actor:Player 00000096 )
+  35C:  Call  SetActorYaw   ( .Actor:Player  150` )
   370:  Wait  1`
-  37C:  Call  SetActorYaw   ( .Actor:Player 000000B4 )
+  37C:  Call  SetActorYaw   ( .Actor:Player  180` )
   390:  Thread
   398:  	Call  $Function_802A123C ( )
   3A4:  EndThread
@@ -1079,7 +1079,7 @@ PADDING: 802A329C to 802A32A0 (007208EC to 007208F0)
   3D8:  	Call  $Function_802A1848 ( )
   3E4:  EndThread
   3EC:  Call  UseBattleCamPreset    ( 00000002 )
-  3FC:  Call  MoveBattleCamOver ( 00000014 )
+  3FC:  Call  MoveBattleCamOver (  20` )
   40C:  Wait  8`
   418:  Call  SetJumpAnimations ( .Actor:Player 00000000 0001002B 0001002B 00010008 )
   438:  Call  SetActorJumpGravity   ( .Actor:Player *Fixed[1.8] )
@@ -1088,17 +1088,17 @@ PADDING: 802A329C to 802A32A0 (007208EC to 007208F0)
   484:  Call  80273444  ( 0000000F 00000000 00000000 )
   49C:  Thread
   4A4:  	Wait  5`
-  4B0:  	Call  SetActorYaw   ( .Actor:Player 00000096 )
+  4B0:  	Call  SetActorYaw   ( .Actor:Player  150` )
   4C4:  	Wait  1`
-  4D0:  	Call  SetActorYaw   ( .Actor:Player 00000078 )
+  4D0:  	Call  SetActorYaw   ( .Actor:Player  120` )
   4E4:  	Wait  1`
-  4F0:  	Call  SetActorYaw   ( .Actor:Player 0000005A )
+  4F0:  	Call  SetActorYaw   ( .Actor:Player  90` )
   504:  	Wait  1`
-  510:  	Call  SetActorYaw   ( .Actor:Player 0000003C )
+  510:  	Call  SetActorYaw   ( .Actor:Player  60` )
   524:  	Wait  1`
-  530:  	Call  SetActorYaw   ( .Actor:Player 0000001E )
+  530:  	Call  SetActorYaw   ( .Actor:Player  30` )
   544:  	Wait  1`
-  550:  	Call  SetActorYaw   ( .Actor:Player 00000000 )
+  550:  	Call  SetActorYaw   ( .Actor:Player  0` )
   564:  EndThread
   56C:  Wait  40`
   578:  Call  CreateVirtualEntity   ( *VarA $EntityModelScript_802A3260 )
@@ -1113,9 +1113,9 @@ PADDING: 802A329C to 802A32A0 (007208EC to 007208F0)
   630:  Call  SetGoalToTarget       ( .Actor:Player )
   640:  Call  GetGoalPos    ( .Actor:Player *Var0 *Var1 *Var2 )
   65C:  Sub   *Var0  0000003C
-  66C:  Call  VirtualEntityMoveTo   ( *VarA *Var0 *Var1 *Var2 00000000 )
+  66C:  Call  VirtualEntityMoveTo   ( *VarA *Var0 *Var1 *Var2  0` )
   68C:  Call  GetGoalPos    ( .Actor:Player *Var0 *Var1 *Var2 )
-  6A8:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000000 )
+  6A8:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  0` )
   6C8:  Call  PlaySoundAtActor      ( .Actor:Player .Sound:HitBlock )
   6DC:  Thread
   6E4:  	Call  SetAnimation  ( .Actor:Player 00000000 00010023 )
@@ -1132,25 +1132,25 @@ PADDING: 802A329C to 802A32A0 (007208EC to 007208F0)
   7E8:  Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[1.4] )
   7FC:  Call  GetActorPos   ( .Actor:Player *Var0 *Var1 *Var2 )
   818:  Add   *Var0  0000003C
-  828:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000000 )
+  828:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  0` )
   848:  Call  PlayEffect    ( ~FX:Steam:LingeringRing *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   88C:  Call  SetAnimation  ( .Actor:Player 00000000 00010002 )
   8A4:  Add   *Var0  00000014
-  8B4:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000000 )
+  8B4:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  0` )
   8D4:  Call  PlayEffect    ( ~FX:Steam:LingeringRing *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   918:  Add   *Var0  0000000A
-  928:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000000 )
+  928:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  0` )
   948:  Call  PlayEffect    ( ~FX:Steam:LingeringRing *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   98C:  Wait  5`
   998:  Thread
   9A0:  	Call  GetActorPos   ( .Actor:Player *Var0 *Var1 *Var2 )
   9BC:  	Add   *Var0  0000010E
-  9CC:  	Call  VirtualEntityMoveTo   ( *VarA *Var0 *Var1 *Var2 00000000 )
+  9CC:  	Call  VirtualEntityMoveTo   ( *VarA *Var0 *Var1 *Var2  0` )
   9EC:  	Call  DeleteVirtualEntity   ( *VarA )
   9FC:  EndThread
   A04:  Wait  30`
   A10:  Call  UseBattleCamPreset    ( 00000003 )
-  A20:  Call  MoveBattleCamOver ( 00000014 )
+  A20:  Call  MoveBattleCamOver (  20` )
   A30:  Call  InitTargetIterator ( )
   A3C:  Label  0
   A48:  Call  SetGoalToTarget   ( .Actor:Self )

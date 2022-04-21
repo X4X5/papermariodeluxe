@@ -1,6 +1,9 @@
 % Script File: kpa_08.mscr
 % Decoded from: 0 to 25E0 (kpa_08)
 
+#define .NpcID:Magikoopa_00         00
+#define .NpcID:Magikoopa_01         01
+
 #new:Function $Function_80240000
 {
     0:  LA        V1, 800B1D80
@@ -361,7 +364,7 @@ PADDING: 8024009C to 802400A0 (0000009C to 000000A0)
   32C:  SWC1      F0, 18 (SP)
   330:  LW        A1, 38 (S1)
   334:  LW        A3, 40 (S1)
-  338:  JAL       8006FF50
+  338:  JAL       ~Func:playFX_12
   33C:  CLEAR     A0
   340:  SW        V0, 78 (S2)
   344:  SH        S0, 8E (S1)
@@ -965,7 +968,7 @@ PADDING: 8024009C to 802400A0 (0000009C to 000000A0)
   170:  LIF       F0, 0.09951172
   17C:  LI        V0, D
   180:  SW        V0, 14 (SP)
-  184:  JAL       8006FFB0
+  184:  JAL       ~Func:playFX_13
   188:  SWC1      F0, 10 (SP)
   18C:  LI        V0, F
   190:  SH        V0, 8E (S0)
@@ -1476,8 +1479,8 @@ PADDING: 80241568 to 80241570 (00001568 to 00001570)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_802424F0 )
    84:  ExecWait  $Script_MakeEntities
@@ -1706,7 +1709,7 @@ PADDING: 80241CEC to 80241CF0 (00001CEC to 00001CF0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1728,20 +1731,20 @@ MISSING: 802420E4 to 80242110 (000020E4 to 00002110)
 
 #new:NpcGroup $NpcGroup_80242110
 {
-	00000000 $NpcSettings_80241ED0 ~Vec3f:NPC_80242110 % -210 0 25
+	.NpcID:Magikoopa_00 $NpcSettings_80241ED0 ~Vec3f:NPC_Magikoopa_00 % -210 0 25
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:5:MapleSyrup:5:ThunderRage:5:StopWatch:5
 	~HP:Standard:2 ~FP:Standard:5 ~CoinBonus:1:3
-	~Movement:NPC_80242110
-	~AnimationTable:NPC_80242110 % .Sprite:Magikoopa
+	~Movement:NPC_Magikoopa_00
+	~AnimationTable:NPC_Magikoopa_00 % .Sprite:Magikoopa
 	00000003 00000000 $ExtraAnimationList_80241EFC 00000000 % no tattle string
 	%
 	% $NpcGroup_80242110[1F0]
-	00000001 $NpcSettings_802420B8 ~Vec3f:NPC_80242300 % 0 -1000 0
+	.NpcID:Magikoopa_01 $NpcSettings_802420B8 ~Vec3f:NPC_Magikoopa_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242300
-	~AnimationTable:NPC_80242300 % .Sprite:Magikoopa
+	~Movement:NPC_Magikoopa_01
+	~AnimationTable:NPC_Magikoopa_01 % .Sprite:Magikoopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

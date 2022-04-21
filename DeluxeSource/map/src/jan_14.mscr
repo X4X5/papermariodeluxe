@@ -1,6 +1,9 @@
 % Script File: jan_14.mscr
 % Decoded from: 0 to 38D0 (jan_14)
 
+#define .NpcID:Fuzzy_00             00
+#define .NpcID:Fuzzy_01             01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFC8
@@ -1027,7 +1030,7 @@ PADDING: 802404BC to 802404C0 (000004BC to 000004C0)
   20C:  LW        A1, 38 (S3)
   210:  LW        A2, 3C (S3)
   214:  LW        A3, 40 (S3)
-  218:  JAL       ~Func:fx_walk_normal
+  218:  JAL       ~Func:fx_walk
   21C:  LI        A0, 2
   220:  COPY      A0, S7
   224:  LI        V0, C
@@ -1310,8 +1313,8 @@ PADDING: 802412D4 to 802412E0 (000012D4 to 000012E0)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80243834 )
    84:  Exec  $Script_80242270
@@ -1410,8 +1413,8 @@ PADDING: 80241564 to 80241570 (00001564 to 00001570)
   4CC:  		Wait  1`
   4D8:  	EndLoop
   4E0:  	Call  GetModelCenter    ( *VarF )
-  4F0:  	Call  SetPlayerJumpscale    ( 00000001 )
-  500:  	Call  PlayerJump        ( *Var6 *Var1 *Var4 0000000A )
+  4F0:  	Call  SetPlayerJumpscale    (  1` )
+  500:  	Call  PlayerJump        ( *Var6 *Var1 *Var4  10` )
   51C:  	Call  SetPlayerActionState  ( .ActionState:Idle )
   52C:  	Call  GetModelCenter    ( *VarD )
   53C:  	Call  PlaySoundAt       ( 00002089 00000000 *Var0 *Var1 *Var2 )
@@ -1534,8 +1537,8 @@ PADDING: 80241564 to 80241570 (00001564 to 00001570)
    3C:  		Call  GetModelCenter    ( *Var9 )
    4C:  		Add   *Var0  FFFFFFEC
    5C:  		Add   *Var2  0000000F
-   6C:  		Call  SetNpcPos ( 00000000 *Var0 00000064 *Var2 )
-   88:  		Call  SetNpcFlagBits    ( 00000000 00008200 .True )
+   6C:  		Call  SetNpcPos ( .NpcID:Fuzzy_00 *Var0  100` *Var2 )
+   88:  		Call  SetNpcFlagBits    ( .NpcID:Fuzzy_00 00008200 .True )
    A0:  	Case  ==  00000003
    AC:  		Call  GetModelCenter    ( *Var9 )
    BC:  		Add   *Var2  0000000F
@@ -1544,8 +1547,8 @@ PADDING: 80241564 to 80241570 (00001564 to 00001570)
    FC:  		Call  GetModelCenter    ( *Var9 )
   10C:  		Add   *Var0  FFFFFFEC
   11C:  		Add   *Var2  0000000F
-  12C:  		Call  SetNpcPos ( 00000001 *Var0 00000064 *Var2 )
-  148:  		Call  SetNpcFlagBits    ( 00000001 00008200 .True )
+  12C:  		Call  SetNpcPos ( .NpcID:Fuzzy_01 *Var0  100` *Var2 )
+  148:  		Call  SetNpcFlagBits    ( .NpcID:Fuzzy_01 00008200 .True )
   160:  	Case  ==  00000005
   16C:  		Call  GetModelCenter    ( *Var9 )
   17C:  		Add   *Var2  0000000F
@@ -2047,23 +2050,23 @@ MISSING: 802432DC to 80243308 (000032DC to 00003308)
 
 #new:NpcGroup $NpcGroup_80243454
 {
-	00000000 $NpcSettings_80243308 ~Vec3f:NPC_80243454 % 0 -1000 0
+	.NpcID:Fuzzy_00 $NpcSettings_80243308 ~Vec3f:NPC_Fuzzy_00 % 0 -1000 0
 	00000D00 $Script_Init_80243430 00000000 00000000 0000010E
 	~Items:10:DizzyDial:5:VoltShroom:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80243454
-	~AnimationTable:NPC_80243454 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_00
+	~AnimationTable:NPC_Fuzzy_00 % .Sprite:Fuzzy
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243644
 {
-	00000001 $NpcSettings_80243308 ~Vec3f:NPC_80243644 % 0 -1000 0
+	.NpcID:Fuzzy_01 $NpcSettings_80243308 ~Vec3f:NPC_Fuzzy_01 % 0 -1000 0
 	00000D00 $Script_Init_80243430 00000000 00000000 0000010E
 	~Items:10:DizzyDial:5:VoltShroom:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80243644
-	~AnimationTable:NPC_80243644 % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_01
+	~AnimationTable:NPC_Fuzzy_01 % .Sprite:Fuzzy
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 

@@ -1,6 +1,23 @@
 % Script File: mac_05.mscr
 % Decoded from: 0 to 129D0 (mac_05)
 
+#define .NpcID:Toad_00              00
+#define .NpcID:Kolorado_01          01
+#define .NpcID:Fishmael_02          02
+#define .NpcID:Fuzzipede_03         03
+#define .NpcID:JrTroopa_04          04
+#define .NpcID:JrTroopa_05          05
+#define .NpcID:ChuckQuizmo_06       06
+#define .NpcID:Bartender_07         07
+#define .NpcID:Toad_08              08
+#define .NpcID:Chanterelle_09       09
+#define .NpcID:ArtistToad_10        0A
+#define .NpcID:Toad_11              0B
+#define .NpcID:Toad_12              0C
+#define .NpcID:Toad_13              0D
+#define .NpcID:Toad_14              0E
+#define .NpcID:Toad_15              0F
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1621,7 +1638,6 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
    1C:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802416EC
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1660,7 +1676,7 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
    18:  SW        S2, 18 (SP)
    1C:  BEQ       A1, R0, .oEC
    20:  SW        S0, 10 (SP)
-   24:  JAL       8011D82C
+   24:  JAL       ~Func:mdl_set_all_fog_mode
    28:  LI        A0, 1
    2C:  CLEAR     A0
    30:  COPY      A1, A0
@@ -1784,7 +1800,7 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
    8C:  LI        V0, 1
    90:  BNE       V1, V0, .o158
    94:  CLEAR     V0
-   98:  JAL       8011D82C
+   98:  JAL       ~Func:mdl_set_all_fog_mode
    9C:  CLEAR     A0
    A0:  CLEAR     S0
    A4:  LI        S3, FFFC
@@ -1913,7 +1929,7 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
    70:  MFC1      A1, F22
    74:  MFC1      A2, F20
    78:  MFC1      A3, F2
-   7C:  JAL       800715D0
+   7C:  JAL       ~Func:playFX_4E
    80:  CLEAR     A0
    84:  COPY      A0, S1
    88:  LI        A1, *Array[1]
@@ -1940,7 +1956,7 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
    E4:  MFC1      A1, F22
    E8:  MFC1      A2, F20
    EC:  MFC1      A3, F2
-   F0:  JAL       80071810
+   F0:  JAL       ~Func:playFX_54
    F4:  CLEAR     A0
    F8:  COPY      A0, S1
    FC:  LUI       A1, F4AC
@@ -1970,7 +1986,7 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
   164:  MFC1      A3, F2
   168:  CLEAR     A0
   16C:  SW        R0, 14 (SP)
-  170:  JAL       80072890
+  170:  JAL       ~Func:playFX_80
   174:  SWC1      F0, 10 (SP)
   178:  LW        V1, 0 (S0)
   17C:  LW        A0, C (V1)
@@ -2053,7 +2069,7 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
    8C:  JAL       ~Func:remove_effect
    90:  SW        R0, 18 (A1)
    94:  LAW       A0, $End[0]
-   9C:  JAL       ~Func:free_dynamic_entity
+   9C:  JAL       ~Func:free_generic_entity
    A0:  NOP
    A4:  LI        V0, 2
         .oA8
@@ -2463,7 +2479,6 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
    E4:  ADDIU     SP, SP, 28
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80242318
 {
     0:  ADDIU     SP, SP, FFE8
@@ -2489,7 +2504,7 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
    50:  NOP
         .o54
    54:  COPY      A2, A1
-   58:  JAL       80071690
+   58:  JAL       ~Func:playFX_50
    5C:  COPY      A3, A1
         .o60
    60:  LW        RA, 10 (SP)
@@ -2502,7 +2517,7 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
     0:  ADDIU     SP, SP, FFE8
     4:  LA        A1, $Function_80242318
     C:  SW        RA, 10 (SP)
-   10:  JAL       ~Func:create_dynamic_entity_frontUI
+   10:  JAL       ~Func:create_generic_entity_frontUI
    14:  CLEAR     A0
    18:  LW        RA, 10 (SP)
    1C:  SAW       V0, $End[0]
@@ -3476,7 +3491,7 @@ MISSING: 8024047C to 80240490 (0000047C to 00000490)
    5C:  MFC1      A1, F22
    60:  MFC1      A2, F20
    64:  MFC1      A3, F24
-   68:  JAL       800705B0
+   68:  JAL       ~Func:playFX_23
    6C:  SWC1      F0, 10 (SP)
    70:  LI        A0, 46
    74:  MFC1      A2, F22
@@ -3897,7 +3912,7 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
    10:  ADDIU     A3, SP, 18
    14:  SW        RA, 28 (SP)
    18:  SW        S1, 24 (SP)
-   1C:  JAL       8011C2B0
+   1C:  JAL       ~Func:mdl_get_copied_vertices
    20:  SW        S0, 20 (SP)
    24:  LA        S1, $???_80250A54
    2C:  LW        A0, 10 (SP)
@@ -3912,7 +3927,7 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
    54:  ADDIU     V0, V0, 8
    58:  SW        V0, 0 (V1)
    5C:  LUI       V0, DE00
-   60:  JAL       8011C2EC
+   60:  JAL       ~Func:mdl_get_copied_gfx
    64:  SW        V0, 0 (S0)
    68:  LW        V1, 0 (S1)
    6C:  BLTZ      V1, .o7C
@@ -3942,7 +3957,7 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
    10:  ADDIU     A3, SP, 18
    14:  SW        RA, 28 (SP)
    18:  SW        S1, 24 (SP)
-   1C:  JAL       8011C2B0
+   1C:  JAL       ~Func:mdl_get_copied_vertices
    20:  SW        S0, 20 (SP)
    24:  LA        S1, $???_80250A58
    2C:  LW        A0, 10 (SP)
@@ -3957,7 +3972,7 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
    54:  ADDIU     V0, V0, 8
    58:  SW        V0, 0 (V1)
    5C:  LUI       V0, DE00
-   60:  JAL       8011C2EC
+   60:  JAL       ~Func:mdl_get_copied_gfx
    64:  SW        V0, 0 (S0)
    68:  LW        V1, 0 (S1)
    6C:  BLTZ      V1, .o7C
@@ -4196,7 +4211,7 @@ PADDING: 802433E8 to 802433F0 (000033E8 to 000033F0)
    E0:  SWC1      F24, 10 (SP)
    E4:  SWC1      F22, 14 (SP)
    E8:  SWC1      F20, 18 (SP)
-   EC:  JAL       80070F70
+   EC:  JAL       ~Func:playFX_3D
    F0:  SW        V0, 20 (SP)
    F4:  LW        V1, 28 (SP)
    F8:  SW        V1, 84 (S1)
@@ -4390,7 +4405,7 @@ PADDING: 80243DA8 to 80243DB0 (00003DA8 to 00003DB0)
    20:  SDC1      F24, 50 (SP)
    24:  SDC1      F22, 48 (SP)
    28:  SDC1      F20, 40 (SP)
-   2C:  JAL       8011C2B0
+   2C:  JAL       ~Func:mdl_get_copied_vertices
    30:  ADDIU     A1, SP, 18
    34:  LW        V1, 20 (SP)
    38:  BLEZ      V1, .o1B0
@@ -4498,7 +4513,7 @@ PADDING: 80243DA8 to 80243DB0 (00003DA8 to 00003DB0)
   1C4:  ADDIU     V0, V0, 8
   1C8:  SW        V0, 0 (V1)
   1CC:  LUI       V0, DE00
-  1D0:  JAL       8011C2EC
+  1D0:  JAL       ~Func:mdl_get_copied_gfx
   1D4:  SW        V0, 0 (S0)
   1D8:  LA        V1, $???_80252744
   1E0:  LWC1      F0, 0 (V1)
@@ -4605,7 +4620,7 @@ PADDING: 80244364 to 80244370 (00004364 to 00004370)
 #new:Script $Script_80244370
 {
     0:  Call  DisablePlayerInput        ( .True )
-   10:  Call  ShowMessageAtScreenPos    ( 001D0174 000000A0 00000028 ) % Princess Peach's Castle
+   10:  Call  ShowMessageAtScreenPos    ( 001D0174  160`  40` ) % Princess Peach's Castle
    28:  Call  DisablePlayerInput        ( .False )
    38:  Return
    40:  End
@@ -4614,7 +4629,7 @@ PADDING: 80244364 to 80244370 (00004364 to 00004370)
 #new:Script $Script_802443B8
 {
     0:  Call  DisablePlayerInput        ( .True )
-   10:  Call  ShowMessageAtScreenPos    ( 001D016C 000000A0 00000028 ) % Today's Menu Sailor's Lunch Special Mushroom Pasta ...
+   10:  Call  ShowMessageAtScreenPos    ( 001D016C  160`  40` ) % Today's Menu Sailor's Lunch Special Mushroom Pasta ...
    28:  Call  DisablePlayerInput        ( .False )
    38:  Return
    40:  End
@@ -4752,9 +4767,9 @@ PADDING: 802444D8 to 802444E0 (000044D8 to 000044E0)
    D4:  	Case  ==  ~Entry:Entry3
    E0:  		Call  DisablePlayerInput    ( .True )
    F0:  		Call  DisablePlayerPhysics  ( .True )
-  100:  		Call  SetPlayerPos      ( FFFFFF60 FFFFFFF6 00000173 )
-  118:  		Call  SetNpcPos ( .Npc:Partner FFFFFF60 FFFFFFF6 00000173 )
-  134:  		Call  SetEnemyFlagBits  ( 00000000 08000000 00000001 )
+  100:  		Call  SetPlayerPos      (  -160`  -10`  371` )
+  118:  		Call  SetNpcPos ( .Npc:Partner  -160`  -10`  371` )
+  134:  		Call  SetEnemyFlagBits  ( .NpcID:Toad_00 08000000 00000001 )
   14C:  		Call  DisablePartnerAI  ( 00000000 )
   15C:  		Call  802D2B6C ( )
   168:  		Wait  10`
@@ -4762,24 +4777,24 @@ PADDING: 802444D8 to 802444E0 (000044D8 to 000044E0)
   17C:  			Call  MakeLerp  ( FFFFFF60 FFFFFF24 0000001E .Easing:Linear )
   198:  			Loop
   1A4:  				Call  UpdateLerp ( )
-  1B0:  				Call  SetPlayerPos  ( *Var0 FFFFFFF6 00000173 )
-  1C8:  				Call  SetNpcPos     ( .Npc:Partner *Var0 FFFFFFF6 00000173 )
+  1B0:  				Call  SetPlayerPos  ( *Var0  -10`  371` )
+  1C8:  				Call  SetNpcPos     ( .Npc:Partner *Var0  -10`  371` )
   1E4:  				Wait  1`
   1F0:  				If  *Var1  ==  00000000
   200:  					BreakLoop
   208:  				EndIf
   210:  			EndLoop
   218:  		EndThread
-  220:  		Call  SetNpcAnimation   ( 00000000 00B60002 )
+  220:  		Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60002 )
   234:  		Wait  30`
-  240:  		Call  SetPlayerPos      ( FFFFFEE8 FFFFFFF6 00000173 )
+  240:  		Call  SetPlayerPos      (  -280`  -10`  371` )
   258:  		Call  EnablePartnerAI ( )
   264:  		Call  DisablePlayerPhysics  ( .False )
   274:  		Call  DisablePlayerInput    ( .False )
   284:  		Set   *Var0  $Script_8024487C
   294:  		ExecWait  EnterWalk
-  2A0:  		Call  SetNpcPos ( 00000000 FFFFFF24 0000000A 00000174 )
-  2BC:  		Call  SetEnemyFlagBits  ( 00000000 08000000 00000000 )
+  2A0:  		Call  SetNpcPos ( .NpcID:Toad_00  -220`  10`  372` )
+  2BC:  		Call  SetEnemyFlagBits  ( .NpcID:Toad_00 08000000 00000000 )
   2D4:  EndSwitch
   2DC:  Return
   2E4:  End
@@ -4789,8 +4804,8 @@ PADDING: 802444D8 to 802444E0 (000044D8 to 000044E0)
 {
     0:  Set   *GB_WorldLocation  .Location:ToadTown
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Switch  *GB_StoryProgress
@@ -4953,7 +4968,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
    48:  	Call  SetNpcJumpscale   ( .Npc:Self 00000001 )
    5C:  	Call  SetNpcAnimation   ( .Npc:Self 00AF000C )
    70:  	Wait  40`
-   7C:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   7C:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    98:  EndIf
    A0:  Return
    A8:  End
@@ -4988,7 +5003,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
 % Origin: HEURISTIC
 #new:Script $Script_802453F0
 {
-    0:  Call  GetNpcPos ( 00000006 *Var0 *Var1 *Var2 )
+    0:  Call  GetNpcPos ( .NpcID:ChuckQuizmo_06 *Var0 *Var1 *Var2 )
    1C:  Add   *Var1  0000001E
    2C:  Call  SetPanTarget      ( .Cam:Default *Var0 *Var1 *Var2 )
    48:  Call  GetCamDistance    ( .Cam:Default *Var0 )
@@ -5000,7 +5015,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
    9C:  Call  SetCamDistance    ( .Cam:Default *Var0 )
    B0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    C4:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-   D8:  Call  SetCamSpeed   ( .Cam:Default 00000001 )
+   D8:  Call  SetCamSpeed   ( .Cam:Default  1` )
    EC:  Return
    F4:  End
 }
@@ -5070,7 +5085,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
 
 #new:Script $Script_80245810
 {
-    0:  Call  GetNpcPos ( 00000006 *VarA *VarB *VarC )
+    0:  Call  GetNpcPos ( .NpcID:ChuckQuizmo_06 *VarA *VarB *VarC )
    1C:  Call  $Function_80241FA0    ( *VarA *VarC FFFFFFBA *Var0 *Var1 )
    3C:  Thread
    44:  	SetF  *Var2  00000000
@@ -5083,14 +5098,14 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
    B0:  		DivF  *Var4  0000003C
    C0:  		AddF  *Var3  *VarA
    D0:  		AddF  *Var4  *VarC
-   E0:  		Call  SetNpcPos ( 00000006 *Var3 *Array[2] *Var4 )
+   E0:  		Call  SetNpcPos ( .NpcID:ChuckQuizmo_06 *Var3 *Array[2] *Var4 )
    FC:  		AddF  *Var2  00000001
   10C:  		Wait  1`
   118:  	EndLoop
   120:  EndThread
   128:  Wait  60`
-  134:  Call  NpcFacePlayer     ( 00000006 00000000 )
-  148:  Call  SetNpcAnimation   ( 00000006 00AF0001 )
+  134:  Call  NpcFacePlayer     ( .NpcID:ChuckQuizmo_06 00000000 )
+  148:  Call  SetNpcAnimation   ( .NpcID:ChuckQuizmo_06 00AF0001 )
   15C:  Return
   164:  End
 }
@@ -5317,10 +5332,10 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
    48:  	SetF  *Var3  *Array[3]
    58:  	AddF  *Var3  *Var1
    68:  	Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
-   7C:  	Call  NpcMoveTo ( .Npc:Partner *Var2 *Var3 00000028 )
+   7C:  	Call  NpcMoveTo ( .Npc:Partner *Var2 *Var3  40` )
    98:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
    AC:  EndThread
-   B4:  Call  PlayerMoveTo  ( *Array[1] *Array[3] 00000028 )
+   B4:  Call  PlayerMoveTo  ( *Array[1] *Array[3]  40` )
    CC:  Return
    D4:  End
 }
@@ -5390,9 +5405,9 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
   1A0:  Exec  $Script_80245254
   1AC:  Call  DisablePartnerAI  ( 00000000 )
   1BC:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-  1D4:  Call  SetNpcFlagBits    ( 00000006 00000200 .False )
+  1D4:  Call  SetNpcFlagBits    ( .NpcID:ChuckQuizmo_06 00000200 .False )
   1EC:  Call  SetNpcFlagBits    ( .Npc:Partner 00000148 .True )
-  204:  Call  SetNpcFlagBits    ( 00000006 00000100 .True )
+  204:  Call  SetNpcFlagBits    ( .NpcID:ChuckQuizmo_06 00000100 .True )
   21C:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   230:  Exec  $Script_8024597C *Var1
   240:  Call  ContinueSpeech    ( .Npc:Self 00AF0004 00AF0001 00000000 0008000B ) % Then let's go to the question!
@@ -5435,7 +5450,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
   464:  	Set   *Array[4]  00000000
   474:  EndThread
   47C:  If  *Var0  ==  00000001
-  48C:  	Call  SetNpcAnimation   ( 00000006 00AF0007 )
+  48C:  	Call  SetNpcAnimation   ( .NpcID:ChuckQuizmo_06 00AF0007 )
   4A0:  	Set   *Array[4]  00000001
   4B0:  	Thread
   4B8:  		Call  $Function_80241D5C    ( 00000001 )
@@ -5479,7 +5494,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
   830:  	Add   *GB_CompletedQuizzes  00000001
   840:  	If  *GB_CompletedQuizzes  >  0000003F
   850:  		Call  ContinueSpeech    ( .Npc:Self FFFFFFFF FFFFFFFF 00000000 00080010 ) % Correct!! Congratulations! This is my last prize!  ...
-  870:  		Call  SetNpcAnimation   ( 00000006 00AF0006 )
+  870:  		Call  SetNpcAnimation   ( .NpcID:ChuckQuizmo_06 00AF0006 )
   884:  		Loop
   890:  			DoesScriptExist  *Var1 *Var0
   8A0:  			If  *Var0  ==  00000000
@@ -5487,7 +5502,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
   8B8:  			EndIf
   8C0:  			Wait  1`
   8CC:  		EndLoop
-  8D4:  		Call  SetNpcAnimation   ( 00000006 00AF0005 )
+  8D4:  		Call  SetNpcAnimation   ( .NpcID:ChuckQuizmo_06 00AF0005 )
   8E8:  		Set   *Var0  0000015C
   8F8:  		Set   *Var1  00000003
   908:  		ExecWait  $Script_802450B4
@@ -5498,7 +5513,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
   954:  		Call  SpeakToPlayer     ( .Npc:Self 00AF0004 00AF0001 00000000 00080011 ) % You've managed to correctly answer all questions.  ...
   974:  	Else
   97C:  		Call  ContinueSpeech    ( .Npc:Self FFFFFFFF FFFFFFFF 00000000 0008000E ) % Correct! Congratulations! Here's your Star Piece!
-  99C:  		Call  SetNpcAnimation   ( 00000006 00AF0006 )
+  99C:  		Call  SetNpcAnimation   ( .NpcID:ChuckQuizmo_06 00AF0006 )
   9B0:  		Loop
   9BC:  			DoesScriptExist  *Var1 *Var0
   9CC:  			If  *Var0  ==  00000000
@@ -5506,7 +5521,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
   9E4:  			EndIf
   9EC:  			Wait  1`
   9F8:  		EndLoop
-  A00:  		Call  SetNpcAnimation   ( 00000006 00AF0005 )
+  A00:  		Call  SetNpcAnimation   ( .NpcID:ChuckQuizmo_06 00AF0005 )
   A14:  		Set   *Var0  0000015C
   A24:  		Set   *Var1  00000001
   A34:  		ExecWait  $Script_802450B4
@@ -5523,7 +5538,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
   AE8:  	EndIf
   AF0:  	Set   *Var0  00000001
   B00:  Else
-  B08:  	Call  SetNpcAnimation   ( 00000006 00AF0009 )
+  B08:  	Call  SetNpcAnimation   ( .NpcID:ChuckQuizmo_06 00AF0009 )
   B1C:  	Set   *Array[4]  00000002
   B2C:  	Call  PlaySound ( 0000021D )
   B3C:  	Call  PlaySound ( 0000008B )
@@ -5531,7 +5546,7 @@ MISSING: 80245058 to 802450B0 (00005058 to 000050B0)
   B5C:  	Call  GetPlayerPos      ( *Var2 *Var3 *Var4 )
   B74:  	Call  PlayEffect        ( ~FX:DeadLeaves:Gust1 *Var2 *Var3 *Var4 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   BB8:  	Call  ContinueSpeech    ( .Npc:Self FFFFFFFF FFFFFFFF 00000000 0008000D ) % Oops! Tough luck, pal! Wrong answer! Better luck n ...
-  BD8:  	Call  SetNpcAnimation   ( 00000006 00AF000A )
+  BD8:  	Call  SetNpcAnimation   ( .NpcID:ChuckQuizmo_06 00AF000A )
   BEC:  	Loop
   BF8:  		DoesScriptExist  *Var1 *Var0
   C08:  		If  *Var0  ==  00000000
@@ -5755,7 +5770,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -5795,7 +5810,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -5944,27 +5959,27 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 
 #new:Script $Script_802484F8
 {
-    0:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+    0:  Call  GetNpcPos     ( .NpcID:Toad_00 *Var0 *Var1 *Var2 )
    1C:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    38:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
    54:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    6C:  If  *Var0  ==  00000000
    7C:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    90:  Else
-   98:  	Call  SetCamSpeed   ( .Cam:Default 00000001 )
+   98:  	Call  SetCamSpeed   ( .Cam:Default  1` )
    AC:  EndIf
    B4:  Wait  1`
    C0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
-   D8:  Call  SetCamSpeed   ( .Cam:Default 00000001 )
+   D8:  Call  SetCamSpeed   ( .Cam:Default  1` )
    EC:  Loop
    F8:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   110:  	If  *Var0  <  00000064
-  120:  		Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  120:  		Call  GetNpcPos     ( .NpcID:Toad_00 *Var0 *Var1 *Var2 )
   13C:  		Call  SetCamTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   158:  	Else
   160:  		Set   *Var3  *Var0
   170:  		Sub   *Var3  00000064
-  180:  		Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  180:  		Call  GetNpcPos     ( .NpcID:Toad_00 *Var0 *Var1 *Var2 )
   19C:  		Sub   *Var0  *Var3
   1AC:  		Call  SetCamTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   1C8:  	EndIf
@@ -5988,11 +6003,11 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    A8:  		Call  GetPlayerPos  ( *Var0 *Var4 *Var4 )
    C0:  		Sub   *Var0  *Var3
    D0:  		Call  SetCamTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-   EC:  		Call  GetNpcPos     ( 00000000 *Var0 *Var4 *Var4 )
+   EC:  		Call  GetNpcPos     ( .NpcID:Toad_00 *Var0 *Var4 *Var4 )
   108:  		If  *Var0  <  FFFFFF6A
   118:  			Call  SetCamTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   134:  		Else
-  13C:  			Call  SetCamTarget  ( .Cam:Default FFFFFF6A *Var1 *Var2 )
+  13C:  			Call  SetCamTarget  ( .Cam:Default  -150` *Var1 *Var2 )
   158:  		EndIf
   160:  	EndIf
   168:  	Wait  1`
@@ -6008,66 +6023,66 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    20:  Call  DisablePlayerPhysics  ( .True )
    30:  Call  SetPlayerActionState  ( .ActionState:Land )
    40:  Call  DisablePartnerAI  ( 00000000 )
-   50:  Call  SetNpcPos ( .Npc:Partner FFFFFF88 00000018 00000177 )
+   50:  Call  SetNpcPos ( .Npc:Partner  -120`  24`  375` )
    6C:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
    84:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    A0:  Call  SetPanTarget      ( .Cam:Default *Var0 *Var1 *Var2 )
-   BC:  Call  SetCamDistance    ( .Cam:Default 00000190 )
+   BC:  Call  SetCamDistance    ( .Cam:Default  400` )
    D0:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    E8:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    FC:  Wait  20`
-  108:  Call  SpeakToPlayer     ( 00000000 00B60004 00B60000 00000005 0007009F ) % Whooooosh!
+  108:  Call  SpeakToPlayer     ( .NpcID:Toad_00 00B60004 00B60000 00000005 0007009F ) % Whooooosh!
   128:  Wait  20`
-  134:  Call  SetNpcAnimation   ( 00000000 00B60009 )
-  148:  Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+  134:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60009 )
+  148:  Call  GetNpcPos ( .NpcID:Toad_00 *Var0 *Var1 *Var2 )
   164:  Add   *Var0  00000028
   174:  Call  SetPanTarget      ( .Cam:Default *Var0 *Var1 *Var2 )
-  190:  Call  SetCamDistance    ( .Cam:Default 000001DB )
-  1A4:  Call  SetCamSpeed       ( .Cam:Default 00000003 )
+  190:  Call  SetCamDistance    ( .Cam:Default  475` )
+  1A4:  Call  SetCamSpeed       ( .Cam:Default  3` )
   1B8:  Wait  10`
   1C4:  Thread
   1CC:  	Call  SetPlayerJumpscale    ( *Fixed[0.5] )
   1DC:  	Call  SetPlayerAnimation    ( 0001002B )
-  1EC:  	Call  SetPlayerPos  ( FFFFFF88 00000018 00000177 )
+  1EC:  	Call  SetPlayerPos  (  -120`  24`  375` )
   204:  	Call  PlaySoundAtPlayer     ( 00000044 00000000 )
-  218:  	Call  PlayerJump1   ( FFFFFECA FFFFFFF6 00000174 00000050 )
+  218:  	Call  PlayerJump1   (  -310`  -10`  372`  80` )
   234:  	Call  SetPlayerActionState  ( .ActionState:Land )
-  244:  	Call  PlayerFaceNpc ( 00000000 00000000 )
+  244:  	Call  PlayerFaceNpc ( .NpcID:Toad_00 .False )
   258:  EndThread
   260:  Thread
   268:  	Wait  5`
-  274:  	Call  SetNpcPos ( .Npc:Partner FFFFFF88 00000018 00000177 )
+  274:  	Call  SetNpcPos ( .Npc:Partner  -120`  24`  375` )
   290:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[0.5] )
   2A4:  	Call  PlaySoundAtNpc    ( .Npc:Partner 00000044 00000000 )
-  2BC:  	Call  NpcJump0  ( .Npc:Partner FFFFFEA7 00000000 00000174 00000050 )
+  2BC:  	Call  NpcJump0  ( .Npc:Partner  -345`  0`  372`  80` )
   2DC:  	Call  ClearPartnerMoveHistory   ( .Npc:Partner )
-  2EC:  	Call  NpcFaceNpc        ( .Npc:Partner 00000000 00000000 )
+  2EC:  	Call  NpcFaceNpc        ( .Npc:Partner .NpcID:Toad_00 00000000 )
   304:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   318:  EndThread
   320:  Thread
   328:  	Wait  10`
-  334:  	Call  SetNpcPos ( 00000003 FFFFFF88 00000018 00000177 )
-  350:  	Call  SetNpcJumpscale   ( 00000003 *Fixed[0.5] )
-  364:  	Call  PlaySoundAtNpc    ( 00000003 00000044 00000000 )
-  37C:  	Call  NpcJump0  ( 00000003 FFFFFEE8 FFFFFFF6 00000174 0000005A )
-  39C:  	Call  NpcFaceNpc        ( 00000003 00000000 00000000 )
+  334:  	Call  SetNpcPos ( .NpcID:Fuzzipede_03  -120`  24`  375` )
+  350:  	Call  SetNpcJumpscale   ( .NpcID:Fuzzipede_03 *Fixed[0.5] )
+  364:  	Call  PlaySoundAtNpc    ( .NpcID:Fuzzipede_03 00000044 00000000 )
+  37C:  	Call  NpcJump0  ( .NpcID:Fuzzipede_03  -280`  -10`  372`  90` )
+  39C:  	Call  NpcFaceNpc        ( .NpcID:Fuzzipede_03 .NpcID:Toad_00 00000000 )
   3B4:  EndThread
   3BC:  Wait  50`
   3C8:  Thread
   3D0:  	Wait  15`
-  3DC:  	Call  SetNpcJumpscale   ( 00000001 *Fixed[0.1] )
-  3F0:  	Call  NpcJump0  ( 00000001 FFFFFE84 FFFFFFF6 00000174 00000014 )
-  410:  	Call  NpcFaceNpc        ( 00000001 00000000 00000000 )
+  3DC:  	Call  SetNpcJumpscale   ( .NpcID:Kolorado_01 *Fixed[0.1] )
+  3F0:  	Call  NpcJump0  ( .NpcID:Kolorado_01  -380`  -10`  372`  20` )
+  410:  	Call  NpcFaceNpc        ( .NpcID:Kolorado_01 .NpcID:Toad_00 00000000 )
   428:  EndThread
-  430:  Call  SetNpcAnimation   ( 00000000 00B60000 )
+  430:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60000 )
   444:  Wait  60`
-  450:  Call  NpcFacePlayer ( 00000001 00000000 )
-  464:  Call  NpcFaceNpc    ( .Npc:Partner 00000003 00000000 )
-  47C:  Call  NpcFaceNpc    ( 00000003 00000000 00000000 )
-  494:  Call  PlayerFaceNpc ( 00000003 00000000 )
-  4A8:  Call  SetCamSpeed   ( .Cam:Default 00000003 )
-  4BC:  Call  GetNpcPos     ( 00000003 *Var0 *Var1 *Var2 )
-  4D8:  Call  GetNpcPos     ( 00000000 *Var3 *Var4 *Var5 )
+  450:  Call  NpcFacePlayer ( .NpcID:Kolorado_01 00000000 )
+  464:  Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Fuzzipede_03 00000000 )
+  47C:  Call  NpcFaceNpc    ( .NpcID:Fuzzipede_03 .NpcID:Toad_00 00000000 )
+  494:  Call  PlayerFaceNpc ( .NpcID:Fuzzipede_03 .False )
+  4A8:  Call  SetCamSpeed   ( .Cam:Default  3` )
+  4BC:  Call  GetNpcPos     ( .NpcID:Fuzzipede_03 *Var0 *Var1 *Var2 )
+  4D8:  Call  GetNpcPos     ( .NpcID:Toad_00 *Var3 *Var4 *Var5 )
   4F4:  Add   *Var0  *Var3
   504:  Add   *Var1  *Var4
   514:  Add   *Var2  *Var5
@@ -6076,12 +6091,12 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   544:  Div   *Var2  00000002
   554:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   570:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  58C:  Call  SetCamDistance    ( .Cam:Default 00000190 )
+  58C:  Call  SetCamDistance    ( .Cam:Default  400` )
   5A0:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  5B4:  Call  SpeakToPlayer ( 00000003 00410024 00410004 00000005 000700A0 ) % Hey, it's you, boy! You're that dumb ol' fish that ...
-  5D4:  Call  SpeakToPlayer ( 00000000 00B60004 00B60000 00000005 000700A1 ) % I'm awfully sorry. I was just having a nap with my ...
+  5B4:  Call  SpeakToPlayer ( .NpcID:Fuzzipede_03 00410024 00410004 00000005 000700A0 ) % Hey, it's you, boy! You're that dumb ol' fish that ...
+  5D4:  Call  SpeakToPlayer ( .NpcID:Toad_00 00B60004 00B60000 00000005 000700A1 ) % I'm awfully sorry. I was just having a nap with my ...
   5F4:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  60C:  Call  GetNpcPos     ( 00000000 *Var3 *Var4 *Var5 )
+  60C:  Call  GetNpcPos     ( .NpcID:Toad_00 *Var3 *Var4 *Var5 )
   628:  Add   *Var0  *Var3
   638:  Add   *Var1  *Var4
   648:  Add   *Var2  *Var5
@@ -6089,34 +6104,34 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   668:  Div   *Var1  00000002
   678:  Div   *Var2  00000002
   688:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-  69C:  Call  SetCamDistance    ( .Cam:Default 000001DB )
-  6B0:  Call  SetCamPosA    ( .Cam:Default *Fixed[-63.5] 00000000 )
+  69C:  Call  SetCamDistance    ( .Cam:Default  475` )
+  6B0:  Call  SetCamPosA    ( .Cam:Default *Fixed[-63.5]  0` )
   6C8:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.5] *Fixed[-5.0] )
-  6E0:  Call  SpeakToNpc    ( 00000003 00410024 00410004 00000000 00000000 000700A2 ) % Well, I suppose I can see my way to forgivin' you  ...
-  704:  Call  NpcFacePlayer ( 00000003 00000000 )
+  6E0:  Call  SpeakToNpc    ( .NpcID:Fuzzipede_03 00410024 00410004 00000000 .NpcID:Toad_00 000700A2 ) % Well, I suppose I can see my way to forgivin' you  ...
+  704:  Call  NpcFacePlayer ( .NpcID:Fuzzipede_03 00000000 )
   718:  Wait  10`
-  724:  Call  EndSpeech     ( 00000003 00410024 00410004 00000000 )
+  724:  Call  EndSpeech     ( .NpcID:Fuzzipede_03 00410024 00410004 00000000 )
   740:  Wait  10`
-  74C:  Call  SetNpcJumpscale   ( 00000003 00000001 )
-  760:  Call  GetNpcPos     ( 00000003 *Var0 *Var1 *Var2 )
+  74C:  Call  SetNpcJumpscale   ( .NpcID:Fuzzipede_03 00000001 )
+  760:  Call  GetNpcPos     ( .NpcID:Fuzzipede_03 *Var0 *Var1 *Var2 )
   77C:  Call  FadeOutMusic  ( 00000000 00000BB8 )
   790:  Loop  0000000A
   79C:  	Add   *Var2  FFFFFFC4
-  7AC:  	Call  PlaySoundAtNpc    ( 00000003 000020D9 00000000 )
-  7C4:  	Call  NpcJump0      ( 00000003 *Var0 *Var1 *Var2 0000000A )
-  7E4:  	Call  NpcFaceNpc    ( 00000001 00000003 00000000 )
-  7FC:  	Call  NpcFaceNpc    ( .Npc:Partner 00000003 00000000 )
-  814:  	Call  PlayerFaceNpc ( 00000003 00000000 )
+  7AC:  	Call  PlaySoundAtNpc    ( .NpcID:Fuzzipede_03 000020D9 00000000 )
+  7C4:  	Call  NpcJump0      ( .NpcID:Fuzzipede_03 *Var0 *Var1 *Var2  10` )
+  7E4:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .NpcID:Fuzzipede_03 00000000 )
+  7FC:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Fuzzipede_03 00000000 )
+  814:  	Call  PlayerFaceNpc ( .NpcID:Fuzzipede_03 .False )
   828:  EndLoop
-  830:  Call  SetNpcPos ( 00000003 00000000 FFFFFC18 00000000 )
+  830:  Call  SetNpcPos ( .NpcID:Fuzzipede_03  0`  -1000`  0` )
   84C:  Thread
   854:  	Wait  5`
-  860:  	Call  NpcFaceNpc    ( 00000001 00000000 00000000 )
-  878:  	Call  NpcFaceNpc    ( .Npc:Partner 00000000 00000000 )
-  890:  	Call  PlayerFaceNpc ( 00000000 00000000 )
+  860:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .NpcID:Toad_00 00000000 )
+  878:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Toad_00 00000000 )
+  890:  	Call  PlayerFaceNpc ( .NpcID:Toad_00 .False )
   8A4:  EndThread
-  8AC:  Call  SpeakToPlayer ( 00000000 00B60004 00B60000 00000005 000700A3 ) % Whew! I feel so much better now! They should call  ...
-  8CC:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+  8AC:  Call  SpeakToPlayer ( .NpcID:Toad_00 00B60004 00B60000 00000005 000700A3 ) % Whew! I feel so much better now! They should call  ...
+  8CC:  Call  GetNpcPos     ( .NpcID:Kolorado_01 *Var0 *Var1 *Var2 )
   8E8:  Call  GetPlayerPos  ( *Var3 *Var4 *Var5 )
   900:  Add   *Var0  *Var3
   910:  Add   *Var1  *Var4
@@ -6125,25 +6140,25 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   940:  Div   *Var1  00000002
   950:  Div   *Var2  00000002
   960:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  97C:  Call  SetCamDistance    ( .Cam:Default 0000012C )
-  990:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
+  97C:  Call  SetCamDistance    ( .Cam:Default  300` )
+  990:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
   9A8:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.0] *Fixed[-7.0] )
   9C0:  Wait  5`
   9CC:  Thread
   9D4:  	Wait  5`
-  9E0:  	Call  NpcFacePlayer ( 00000001 00000000 )
-  9F4:  	Call  NpcFaceNpc    ( .Npc:Partner 00000001 00000000 )
-  A0C:  	Call  PlayerFaceNpc ( 00000001 00000000 )
+  9E0:  	Call  NpcFacePlayer ( .NpcID:Kolorado_01 00000000 )
+  9F4:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Kolorado_01 00000000 )
+  A0C:  	Call  PlayerFaceNpc ( .NpcID:Kolorado_01 .False )
   A20:  EndThread
-  A28:  Call  SpeakToPlayer ( 00000001 00B60008 00B60001 00000000 000700A4 ) % Pardon the eavesdropping, but did you just say "an ...
-  A48:  Call  SetCamSpeed   ( .Cam:Default 00000003 )
+  A28:  Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60008 00B60001 00000000 000700A4 ) % Pardon the eavesdropping, but did you just say "an ...
+  A48:  Call  SetCamSpeed   ( .Cam:Default  3` )
   A5C:  Call  GetNpcPos     ( .Npc:Partner *Var0 *Var1 *Var2 )
   A78:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  A94:  Call  SetCamDistance    ( .Cam:Default 000000FA )
+  A94:  Call  SetCamDistance    ( .Cam:Default  250` )
   AA8:  Thread
   AB0:  	Wait  5`
-  ABC:  	Call  NpcFaceNpc    ( 00000001 .Npc:Partner 00000000 )
-  AD4:  	Call  PlayerFaceNpc ( .Npc:Partner 00000000 )
+  ABC:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .Npc:Partner 00000000 )
+  AD4:  	Call  PlayerFaceNpc ( .Npc:Partner .False )
   AE8:  EndThread
   AF0:  Call  GetCurrentPartnerID   ( *Var0 )
   B00:  Switch  *Var0
@@ -6161,7 +6176,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   BF4:  		Call  SpeakToPlayer ( .Npc:Partner 00060004 00060001 00000000 000700AA ) % Mario, um... I think the Star Kid said a Star Spir ...
   C14:  EndSwitch
   C1C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  C34:  Call  GetNpcPos     ( 00000000 *Var3 *Var4 *Var5 )
+  C34:  Call  GetNpcPos     ( .NpcID:Toad_00 *Var3 *Var4 *Var5 )
   C50:  Add   *Var0  *Var3
   C60:  Add   *Var1  *Var4
   C70:  Add   *Var2  *Var5
@@ -6170,22 +6185,22 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   CA0:  Div   *Var2  00000002
   CB0:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   CCC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-  CE0:  Call  SetCamDistance    ( .Cam:Default 000001DB )
-  CF4:  Call  SetCamPosA    ( .Cam:Default *Fixed[-63.5] 00000000 )
+  CE0:  Call  SetCamDistance    ( .Cam:Default  475` )
+  CF4:  Call  SetCamPosA    ( .Cam:Default *Fixed[-63.5]  0` )
   D0C:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.5] *Fixed[-5.0] )
   D24:  Wait  5`
   D30:  Thread
   D38:  	Wait  5`
-  D44:  	Call  NpcFaceNpc    ( 00000001 00000000 00000000 )
-  D5C:  	Call  NpcFaceNpc    ( .Npc:Partner 00000000 00000000 )
-  D74:  	Call  PlayerFaceNpc ( 00000000 00000000 )
+  D44:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .NpcID:Toad_00 00000000 )
+  D5C:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Toad_00 00000000 )
+  D74:  	Call  PlayerFaceNpc ( .NpcID:Toad_00 .False )
   D88:  EndThread
-  D90:  Call  SpeakToPlayer ( 00000000 00B60004 00B60000 00000005 000700AB ) % Huh? Lavalava Island? Yes, of course I know where  ...
+  D90:  Call  SpeakToPlayer ( .NpcID:Toad_00 00B60004 00B60000 00000005 000700AB ) % Huh? Lavalava Island? Yes, of course I know where  ...
   DB0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   DC8:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
   DDC:  Thread
   DE4:  	Wait  100`
-  DF0:  	Call  SetCamSpeed   ( .Cam:Default 00000001 )
+  DF0:  	Call  SetCamSpeed   ( .Cam:Default  1` )
   E04:  EndThread
   E0C:  Call  DisablePlayerPhysics  ( .False )
   E1C:  Call  DisablePlayerInput    ( .False )
@@ -6208,14 +6223,14 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Call  SetPlayerActionState  ( .ActionState:Land )
-   30:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+   30:  Call  InterpPlayerYaw   (  270`  0` )
    44:  Set   *Var0  00000001
    54:  Exec  $Script_802484F8 *VarA
    64:  Call  DisablePartnerAI  ( 00000000 )
    74:  Call  SetNpcFlagBits    ( .Npc:Partner 00008048 .True )
    8C:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
    A4:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
-   B8:  Call  SetNpcYaw ( .Npc:Partner 0000010E )
+   B8:  Call  SetNpcYaw ( .Npc:Partner  270` )
    CC:  Set   *Var0  00000000
    DC:  Exec  $Script_802484D8 *VarB
    EC:  Set   *Var0  00000001
@@ -6233,30 +6248,30 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   190:  Wait  1`
   19C:  Call  ModifyColliderFlags   ( 00000000 ~Collider:tt9 7FFFFE00 )
   1B4:  If  *GB_StoryProgress  ==  .Story:Ch5_TradedVaseForSeed % 28
-  1C4:  	Call  SetNpcAnimation   ( 00000001 00B60006 )
+  1C4:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60006 )
   1D8:  	Call  $Function_80242A90    ( 00000005 *Var0 *Var1 *Var2 )
-  1F4:  	Call  PlaySoundAtNpc    ( 00000001 0000032C 00000000 )
-  20C:  	Call  SetNpcJumpscale   ( 00000001 *Fixed[1.0] )
-  220:  	Call  NpcJump0  ( 00000001 *Var0 *Var1 *Var2 00000014 )
-  240:  	Call  SetNpcAnimation   ( 00000001 00B60001 )
+  1F4:  	Call  PlaySoundAtNpc    ( .NpcID:Kolorado_01 0000032C 00000000 )
+  20C:  	Call  SetNpcJumpscale   ( .NpcID:Kolorado_01 *Fixed[1.0] )
+  220:  	Call  NpcJump0  ( .NpcID:Kolorado_01 *Var0 *Var1 *Var2  20` )
+  240:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60001 )
   254:  EndIf
   25C:  Call  $Function_80242A90    ( 00000003 *Var0 *Var1 *Var2 )
   278:  Exec  $Script_802496C0
   284:  Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  294:  Call  PlayerJump        ( *Var0 *Var1 *Var2 00000014 )
+  294:  Call  PlayerJump        ( *Var0 *Var1 *Var2  20` )
   2B0:  Call  SetPlayerAnimation    ( 00010002 )
   2C0:  Call  SetNpcAnimation   ( .Npc:Partner 00000107 )
   2D4:  Call  $Function_80242A90    ( 00000004 *Var0 *Var1 *Var2 )
   2F0:  Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[1.0] )
-  304:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 00000014 )
+  304:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  20` )
   324:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   338:  Call  ModifyColliderFlags   ( 00000001 ~Collider:tt9 7FFFFE00 )
   350:  Kill  *VarA
-  35C:  Call  SetNpcAnimation   ( 00000000 00B6000A )
-  370:  Call  InterpNpcYaw      ( 00000000 0000010E 0000003C )
+  35C:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B6000A )
+  370:  Call  InterpNpcYaw      ( .NpcID:Toad_00  270`  60` )
   388:  Thread
-  390:  	Call  SetNpcJumpscale   ( 00000000 00000000 )
-  3A4:  	Call  NpcJump0  ( 00000000 FFFFFF24 0000000A 00000174 00000014 )
+  390:  	Call  SetNpcJumpscale   ( .NpcID:Toad_00 00000000 )
+  3A4:  	Call  NpcJump0  ( .NpcID:Toad_00  -220`  10`  372`  20` )
   3C4:  EndThread
   3CC:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   3E4:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -6268,10 +6283,10 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   478:  Switch  *GB_StoryProgress
   484:  	Case  .Story:Ch5_SushieJoinedParty  to  .Story:Ch5_StarSpritDeparted % F to 27
   494:  		If  *GF_MAC01_Defeated_JrTroopa4  ==  .False
-  4A4:  			Call  SetNpcVar ( 00000004 00000000 00000001 )
+  4A4:  			Call  SetNpcVar ( .NpcID:JrTroopa_04 00000000 00000001 )
   4BC:  		EndIf
   4C4:  	Case  ==  .Story:Ch5_TradedVaseForSeed % 28
-  4D0:  		Call  SetNpcVar ( 00000001 00000000 00000001 )
+  4D0:  		Call  SetNpcVar ( .NpcID:Kolorado_01 00000000 00000001 )
   4E8:  EndSwitch
   4F0:  Exec  $Script_802441E0
   4FC:  Call  DisablePlayerPhysics  ( .False )
@@ -6286,9 +6301,9 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
     0:  Thread
     8:  	Call  SetPlayerJumpscale    ( *Fixed[1.0] )
    18:  	Call  SetPlayerAnimation    ( 0001002B )
-   28:  	Call  PlayerJump1   ( FFFFFECA FFFFFFF6 00000174 0000001E )
+   28:  	Call  PlayerJump1   (  -310`  -10`  372`  30` )
    44:  	Call  SetPlayerActionState  ( .ActionState:Land )
-   54:  	Call  PlayerFaceNpc ( 00000000 00000000 )
+   54:  	Call  PlayerFaceNpc ( .NpcID:Toad_00 .False )
    68:  EndThread
    70:  Thread
    78:  	Call  DisablePartnerAI  ( 00000000 )
@@ -6296,8 +6311,8 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    A0:  	Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
    B8:  	Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
    CC:  	Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[1.0] )
-   E0:  	Call  NpcJump0  ( .Npc:Partner FFFFFEA7 FFFFFFF6 00000174 0000001E )
-  100:  	Call  NpcFaceNpc        ( .Npc:Partner 00000000 00000000 )
+   E0:  	Call  NpcJump0  ( .Npc:Partner  -345`  -10`  372`  30` )
+  100:  	Call  NpcFaceNpc        ( .Npc:Partner .NpcID:Toad_00 00000000 )
   118:  	Call  ClearPartnerMoveHistory   ( .Npc:Partner )
   128:  	Call  EnablePartnerAI ( )
   134:  EndThread
@@ -6308,14 +6323,14 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 #new:Script $Script_80249D80
 {
     0:  Wait  20`
-    C:  Call  PlayerMoveTo      ( FFFFFEE3 000001E5 00000028 )
-   24:  Call  PlayerMoveTo      ( FFFFFECA 00000174 00000014 )
-   3C:  Call  PlayerFaceNpc     ( 00000000 00000000 )
+    C:  Call  PlayerMoveTo      (  -285`  485`  40` )
+   24:  Call  PlayerMoveTo      (  -310`  372`  20` )
+   3C:  Call  PlayerFaceNpc     ( .NpcID:Toad_00 .False )
    50:  Call  DisablePartnerAI  ( 00000000 )
    60:  Call  SetNpcFlagBits    ( .Npc:Partner 00008048 .True )
    78:  Call  SetNpcFlagBits    ( .Npc:Partner 00000200 .False )
-   90:  Call  NpcMoveTo ( .Npc:Partner FFFFFEA7 00000174 0000001E )
-   AC:  Call  NpcFaceNpc        ( .Npc:Partner 00000000 *Fixed[1.0] )
+   90:  Call  NpcMoveTo ( .Npc:Partner  -345`  372`  30` )
+   AC:  Call  NpcFaceNpc        ( .Npc:Partner .NpcID:Toad_00 *Fixed[1.0] )
    C4:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
    D8:  Call  ClearPartnerMoveHistory   ( .Npc:Partner )
    E8:  Call  EnablePartnerAI ( )
@@ -6363,13 +6378,13 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   1D0:  					Call  SetPlayerJumpscale    ( *Fixed[1.0] )
   1E0:  					Call  GetPlayerPos  ( *Var2 *Var3 *Var4 )
   1F8:  					Call  SetPlayerAnimation    ( 0001002B )
-  208:  					Call  PlayerJump1   ( *Var2 *Var3 *Var4 0000000A )
+  208:  					Call  PlayerJump1   ( *Var2 *Var3 *Var4  10` )
   224:  					Call  SetPlayerAnimation    ( 00010002 )
   234:  				EndThread
   23C:  				Call  PlaySoundAt       ( 00000041 00000000 00000000 00000000 000001E0 )
-  25C:  				Call  SetNpcAnimation   ( 00000000 00B60007 )
+  25C:  				Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60007 )
   270:  				Wait  10`
-  27C:  				Call  SetNpcAnimation   ( 00000000 00B60005 )
+  27C:  				Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60005 )
   290:  				Call  DisablePlayerInput    ( .False )
   2A0:  				Add   *VarA  00000001
   2B0:  			EndIf
@@ -6398,7 +6413,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
     C:  Call  DisablePlayerInput    ( .True )
    1C:  Wait  10`
    28:  Call  PlaySoundAt   ( 00000041 00000000 00000000 00000000 000001E0 )
-   48:  Call  SetNpcAnimation       ( 00000000 00B60007 )
+   48:  Call  SetNpcAnimation       ( .NpcID:Toad_00 00B60007 )
    5C:  Wait  10`
    68:  Call  DisablePlayerPhysics  ( .True )
    78:  Exec  $Script_802486EC *VarA
@@ -6406,18 +6421,18 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    98:  	Exec  $Script_80249C34
    A4:  EndIf
    AC:  Wait  10`
-   B8:  Call  SetNpcAnimation   ( 00000000 00B60006 )
+   B8:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60006 )
    CC:  Wait  20`
-   D8:  Call  SpeakToPlayer     ( 00000000 00B60006 00B60006 00000005 00070090 ) % Ouch! Yeeowch! What are you doing!
+   D8:  Call  SpeakToPlayer     ( .NpcID:Toad_00 00B60006 00B60006 00000005 00070090 ) % Ouch! Yeeowch! What are you doing!
    F8:  If  *Flag[00]  ==  .False
   108:  	Exec  $Script_80249D80
   114:  EndIf
   11C:  Call  ModifyColliderFlags   ( 00000001 ~Collider:kujira 7FFFFE00 )
-  134:  Call  SetNpcAnimation   ( 00000000 00B60005 )
+  134:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60005 )
   148:  Call  MakeLerp  ( 000001E0 00000174 00000032 .Easing:CosInOut )
   164:  Label  0
   170:  Call  UpdateLerp ( )
-  17C:  Call  SetNpcPos ( 00000000 FFFFFFB7 FFFFFFCB *Var0 )
+  17C:  Call  SetNpcPos ( .NpcID:Toad_00  -73`  -53` *Var0 )
   198:  If  *Var1  ==  00000001
   1A8:  	Wait  1`
   1B4:  	Goto  0
@@ -6425,7 +6440,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   1C8:  Call  MakeLerp  ( FFFFFFB7 FFFFFF24 00000032 .Easing:CosInOut )
   1E4:  Label  1
   1F0:  Call  UpdateLerp ( )
-  1FC:  Call  SetNpcPos ( 00000000 *Var0 FFFFFFCB 00000174 )
+  1FC:  Call  SetNpcPos ( .NpcID:Toad_00 *Var0  -53`  372` )
   218:  If  *Var1  ==  00000001
   228:  	Wait  1`
   234:  	Goto  1
@@ -6434,17 +6449,17 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   254:  Call  MakeLerp  ( FFFFFFCB 0000000A 00000032 .Easing:CosInOut )
   270:  Label  2
   27C:  Call  UpdateLerp ( )
-  288:  Call  SetNpcPos ( 00000000 FFFFFF24 *Var0 00000174 )
+  288:  Call  SetNpcPos ( .NpcID:Toad_00  -220` *Var0  372` )
   2A4:  If  *Var1  ==  00000001
   2B4:  	Wait  1`
   2C0:  	Goto  2
   2CC:  EndIf
-  2D4:  Call  SetNpcAnimation   ( 00000000 00B6000C )
+  2D4:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B6000C )
   2E8:  Wait  50`
-  2F4:  Call  SetNpcAnimation   ( 00000000 00B60008 )
+  2F4:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60008 )
   308:  Kill  *VarA
   314:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
-  32C:  Call  GetNpcPos ( 00000001 *Var3 *Var4 *Var5 )
+  32C:  Call  GetNpcPos ( .NpcID:Kolorado_01 *Var3 *Var4 *Var5 )
   348:  Add   *Var0  *Var3
   358:  Add   *Var1  *Var4
   368:  Add   *Var2  *Var5
@@ -6453,18 +6468,18 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   398:  Div   *Var2  00000002
   3A8:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   3C4:  Call  SetPanTarget      ( .Cam:Default *Var0 *Var1 *Var2 )
-  3E0:  Call  SetCamDistance    ( .Cam:Default 0000012C )
+  3E0:  Call  SetCamDistance    ( .Cam:Default  300` )
   3F4:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   40C:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
   420:  Thread
   428:  	Wait  5`
-  434:  	Call  NpcFaceNpc    ( 00000001 00000000 00000000 )
-  44C:  	Call  NpcFaceNpc    ( .Npc:Partner 00000001 00000000 )
-  464:  	Call  PlayerFaceNpc ( 00000001 00000000 )
+  434:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .NpcID:Toad_00 00000000 )
+  44C:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Kolorado_01 00000000 )
+  464:  	Call  PlayerFaceNpc ( .NpcID:Kolorado_01 .False )
   478:  EndThread
-  480:  Call  SpeakToPlayer ( 00000001 00B60008 00B60001 00000000 00070091 ) % Oh, good heavens! I was wondering what this was. I ...
+  480:  Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60008 00B60001 00000000 00070091 ) % Oh, good heavens! I was wondering what this was. I ...
   4A0:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  4B8:  Call  GetNpcPos     ( 00000000 *Var3 *Var4 *Var5 )
+  4B8:  Call  GetNpcPos     ( .NpcID:Toad_00 *Var3 *Var4 *Var5 )
   4D4:  Add   *Var0  *Var3
   4E4:  Add   *Var1  *Var4
   4F4:  Add   *Var2  *Var5
@@ -6472,19 +6487,19 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   514:  Div   *Var1  00000002
   524:  Div   *Var2  00000002
   534:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  550:  Call  SetCamDistance    ( .Cam:Default 000001DB )
-  564:  Call  SetCamPosA    ( .Cam:Default *Fixed[-63.5] 00000000 )
+  550:  Call  SetCamDistance    ( .Cam:Default  475` )
+  564:  Call  SetCamPosA    ( .Cam:Default *Fixed[-63.5]  0` )
   57C:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.5] *Fixed[-5.0] )
   594:  Thread
   59C:  	Wait  5`
-  5A8:  	Call  NpcFaceNpc    ( 00000001 00000000 00000000 )
-  5C0:  	Call  NpcFaceNpc    ( .Npc:Partner 00000000 00000000 )
-  5D8:  	Call  PlayerFaceNpc ( 00000000 00000000 )
+  5A8:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .NpcID:Toad_00 00000000 )
+  5C0:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Toad_00 00000000 )
+  5D8:  	Call  PlayerFaceNpc ( .NpcID:Toad_00 .False )
   5EC:  EndThread
   5F4:  Exec  $Script_80244314
-  600:  Call  SpeakToPlayer ( 00000000 00B60004 00B60008 00000005 00070092 ) % Ooooog... I'm not a tuna. I'm a whale. ...And I ha ...
+  600:  Call  SpeakToPlayer ( .NpcID:Toad_00 00B60004 00B60008 00000005 00070092 ) % Ooooog... I'm not a tuna. I'm a whale. ...And I ha ...
   620:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  638:  Call  GetNpcPos     ( 00000001 *Var3 *Var4 *Var5 )
+  638:  Call  GetNpcPos     ( .NpcID:Kolorado_01 *Var3 *Var4 *Var5 )
   654:  Add   *Var0  *Var3
   664:  Add   *Var1  *Var4
   674:  Add   *Var2  *Var5
@@ -6492,18 +6507,18 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   694:  Div   *Var1  00000002
   6A4:  Div   *Var2  00000002
   6B4:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  6D0:  Call  SetCamDistance    ( .Cam:Default 0000012C )
-  6E4:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
+  6D0:  Call  SetCamDistance    ( .Cam:Default  300` )
+  6E4:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
   6FC:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.0] *Fixed[-7.0] )
   714:  Thread
   71C:  	Wait  5`
-  728:  	Call  NpcFaceNpc    ( 00000001 00000000 00000000 )
-  740:  	Call  NpcFaceNpc    ( .Npc:Partner 00000001 00000000 )
-  758:  	Call  PlayerFaceNpc ( 00000001 00000000 )
+  728:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .NpcID:Toad_00 00000000 )
+  740:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Kolorado_01 00000000 )
+  758:  	Call  PlayerFaceNpc ( .NpcID:Kolorado_01 .False )
   76C:  EndThread
-  774:  Call  SpeakToPlayer ( 00000001 00B60008 00B60001 00000000 00070093 ) % Hmm... I say... Old boy, this great tuna seems to  ...
+  774:  Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60008 00B60001 00000000 00070093 ) % Hmm... I say... Old boy, this great tuna seems to  ...
   794:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  7AC:  Call  GetNpcPos     ( 00000000 *Var3 *Var4 *Var5 )
+  7AC:  Call  GetNpcPos     ( .NpcID:Toad_00 *Var3 *Var4 *Var5 )
   7C8:  Add   *Var0  *Var3
   7D8:  Add   *Var1  *Var4
   7E8:  Add   *Var2  *Var5
@@ -6511,18 +6526,18 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   808:  Div   *Var1  00000002
   818:  Div   *Var2  00000002
   828:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  844:  Call  SetCamDistance    ( .Cam:Default 000001DB )
-  858:  Call  SetCamPosA    ( .Cam:Default *Fixed[-63.5] 00000000 )
+  844:  Call  SetCamDistance    ( .Cam:Default  475` )
+  858:  Call  SetCamPosA    ( .Cam:Default *Fixed[-63.5]  0` )
   870:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.5] *Fixed[-5.0] )
   888:  Thread
   890:  	Wait  5`
-  89C:  	Call  NpcFaceNpc    ( 00000001 00000000 00000000 )
-  8B4:  	Call  NpcFaceNpc    ( .Npc:Partner 00000000 00000000 )
-  8CC:  	Call  PlayerFaceNpc ( 00000000 00000000 )
+  89C:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .NpcID:Toad_00 00000000 )
+  8B4:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Toad_00 00000000 )
+  8CC:  	Call  PlayerFaceNpc ( .NpcID:Toad_00 .False )
   8E0:  EndThread
-  8E8:  Call  SpeakToPlayer ( 00000000 00B60004 00B60000 00000005 00070094 ) % Ugh... I told you I'm not a tuna... I'm not even a ...
+  8E8:  Call  SpeakToPlayer ( .NpcID:Toad_00 00B60004 00B60000 00000005 00070094 ) % Ugh... I told you I'm not a tuna... I'm not even a ...
   908:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
-  920:  Call  GetNpcPos     ( 00000001 *Var3 *Var4 *Var5 )
+  920:  Call  GetNpcPos     ( .NpcID:Kolorado_01 *Var3 *Var4 *Var5 )
   93C:  Add   *Var0  *Var3
   94C:  Add   *Var1  *Var4
   95C:  Add   *Var2  *Var5
@@ -6530,20 +6545,20 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   97C:  Div   *Var1  00000002
   98C:  Div   *Var2  00000002
   99C:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  9B8:  Call  SetCamDistance    ( .Cam:Default 0000012C )
-  9CC:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
+  9B8:  Call  SetCamDistance    ( .Cam:Default  300` )
+  9CC:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
   9E4:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.0] *Fixed[-7.0] )
   9FC:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   A14:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  A30:  Call  SetCamDistance    ( .Cam:Default 000001C2 )
+  A30:  Call  SetCamDistance    ( .Cam:Default  450` )
   A44:  Thread
   A4C:  	Wait  5`
-  A58:  	Call  NpcFaceNpc    ( 00000001 00000000 00000000 )
-  A70:  	Call  NpcFaceNpc    ( .Npc:Partner 00000000 00000000 )
-  A88:  	Call  PlayerFaceNpc ( 00000000 00000000 )
+  A58:  	Call  NpcFaceNpc    ( .NpcID:Kolorado_01 .NpcID:Toad_00 00000000 )
+  A70:  	Call  NpcFaceNpc    ( .Npc:Partner .NpcID:Toad_00 00000000 )
+  A88:  	Call  PlayerFaceNpc ( .NpcID:Toad_00 .False )
   A9C:  EndThread
   AA4:  Set   *GB_StoryProgress  .Story:Ch5_WhaleMouthOpen
-  AB4:  Call  SetNpcAnimation       ( 00000000 00B60002 )
+  AB4:  Call  SetNpcAnimation       ( .NpcID:Toad_00 00B60002 )
   AC8:  Wait  50`
   AD4:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   AEC:  Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -6563,25 +6578,25 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
     0:  If  *GB_StoryProgress  <  .Story:Ch5_DefeatedFuzzipede % A
    10:  	If  *GB_StoryProgress  >=  .Story:Ch5_WhaleMouthOpen % 8
    20:  		If  *GB_StoryProgress  <  .Story:Ch5_EnteredWhale % 9
-   30:  			Call  GetNpcAnimation   ( 00000000 *Var0 )
+   30:  			Call  GetNpcAnimation   ( .NpcID:Toad_00 *Var0 )
    44:  			If  *Var0  ==  00B60002
-   54:  				Call  SetNpcAnimation   ( 00000000 00B60003 )
+   54:  				Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60003 )
    68:  				Wait  15`
    74:  			EndIf
-   7C:  			Call  SetNpcAnimation   ( 00000000 00B60000 )
-   90:  			Call  SpeakToPlayer     ( 00000000 00B60004 00B60008 00000005 00070097 ) % Oh...something bouncing around in my stomach...I f ...
-   B0:  			Call  SetNpcAnimation   ( 00000000 00B60002 )
+   7C:  			Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60000 )
+   90:  			Call  SpeakToPlayer     ( .NpcID:Toad_00 00B60004 00B60008 00000005 00070097 ) % Oh...something bouncing around in my stomach...I f ...
+   B0:  			Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60002 )
    C4:  			Wait  30`
    D0:  			Return
    D8:  		Else
-   E0:  			Call  GetNpcAnimation   ( 00000000 *Var0 )
+   E0:  			Call  GetNpcAnimation   ( .NpcID:Toad_00 *Var0 )
    F4:  			If  *Var0  ==  00B60002
-  104:  				Call  SetNpcAnimation   ( 00000000 00B60003 )
+  104:  				Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60003 )
   118:  				Wait  15`
   124:  			EndIf
-  12C:  			Call  SetNpcAnimation   ( 00000000 00B60000 )
-  140:  			Call  SpeakToPlayer     ( 00000000 00B60004 00B60008 00000005 00070098 ) % Did you see what's going on in my stomach? What is ...
-  160:  			Call  SetNpcAnimation   ( 00000000 00B60002 )
+  12C:  			Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60000 )
+  140:  			Call  SpeakToPlayer     ( .NpcID:Toad_00 00B60004 00B60008 00000005 00070098 ) % Did you see what's going on in my stomach? What is ...
+  160:  			Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60002 )
   174:  			Wait  30`
   180:  			Return
   188:  		EndIf
@@ -6590,20 +6605,20 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   1A0:  	EndIf
   1A8:  EndIf
   1B0:  Call  DisablePlayerPhysics  ( .True )
-  1C0:  Call  SpeakToPlayer ( 00000000 00B60004 00B60000 00000005 000700B0 ) % Do you want to go to Lavalava Island?
+  1C0:  Call  SpeakToPlayer ( .NpcID:Toad_00 00B60004 00B60000 00000005 000700B0 ) % Do you want to go to Lavalava Island?
   1E0:  Call  ShowChoice    ( 001E0010 ) % Yes No
   1F0:  If  *Var0  ==  00000001
-  200:  	Call  ContinueSpeech        ( 00000000 00B60004 00B60000 00000005 000700B2 ) % Just come speak to me when you want to go, OK?
+  200:  	Call  ContinueSpeech        ( .NpcID:Toad_00 00B60004 00B60000 00000005 000700B2 ) % Just come speak to me when you want to go, OK?
   220:  	Call  DisablePlayerPhysics  ( .False )
   230:  	Return
   238:  Else
-  240:  	Call  EndSpeech ( 00000000 00B60004 00B60000 00000005 )
+  240:  	Call  EndSpeech ( .NpcID:Toad_00 00B60004 00B60000 00000005 )
   25C:  EndIf
   264:  Call  SetNpcJumpscale   ( .Npc:Self 00000000 )
   278:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-  294:  Call  NpcJump0  ( .Npc:Self FFFFFF24 FFFFFFE2 00000174 00000014 )
-  2B4:  Call  SetNpcAnimation   ( 00000000 00B6000A )
-  2C8:  Call  InterpNpcYaw      ( 00000000 000000B4 0000003C )
+  294:  Call  NpcJump0  ( .Npc:Self  -220`  -30`  372`  20` )
+  2B4:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B6000A )
+  2C8:  Call  InterpNpcYaw      ( .NpcID:Toad_00  180`  60` )
   2E0:  Set   *Var0  00000000
   2F0:  Exec  $Script_802484F8
   2FC:  Call  ModifyColliderFlags   ( 00000000 ~Collider:tt9 7FFFFE00 )
@@ -6615,40 +6630,40 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   380:  Call  $Function_80242A90    ( 00000000 *Var0 *Var1 *Var2 )
   39C:  Exec  $Script_802496C0
   3A8:  Call  SetPlayerJumpscale    ( *Fixed[1.0] )
-  3B8:  Call  PlayerJump        ( *Var0 *Var1 *Var2 00000014 )
+  3B8:  Call  PlayerJump        ( *Var0 *Var1 *Var2  20` )
   3D4:  Call  SetPlayerAnimation    ( 00010002 )
-  3E4:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  3E4:  Call  InterpPlayerYaw   (  90`  0` )
   3F8:  Thread
   400:  	Call  $Function_80242C78    ( 00000000 )
   410:  EndThread
   418:  Call  SetNpcAnimation   ( .Npc:Partner 00000107 )
-  42C:  Call  NpcMoveTo ( .Npc:Partner *Var3 *Var5 0000000A )
+  42C:  Call  NpcMoveTo ( .Npc:Partner *Var3 *Var5  10` )
   448:  Call  $Function_80242A90    ( 00000001 *Var0 *Var1 *Var2 )
   464:  Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[1.0] )
-  478:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 00000014 )
+  478:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  20` )
   498:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
-  4AC:  Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+  4AC:  Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
   4C4:  Thread
   4CC:  	Call  $Function_80242C78    ( 00000001 )
   4DC:  EndThread
   4E4:  If  *GB_StoryProgress  <  .Story:Ch5_ReachedLavaLavaIsland % B
-  4F4:  	Call  SpeakToPlayer     ( 00000001 00B60008 00B60008 00000000 000700AD ) % Ulp. Sure this is safe, then? Make some room, hm?
-  514:  	Call  SetNpcAnimation   ( 00000001 00B60006 )
-  528:  	Call  NpcMoveTo ( 00000001 *Var3 *Var5 00000014 )
+  4F4:  	Call  SpeakToPlayer     ( .NpcID:Kolorado_01 00B60008 00B60008 00000000 000700AD ) % Ulp. Sure this is safe, then? Make some room, hm?
+  514:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60006 )
+  528:  	Call  NpcMoveTo ( .NpcID:Kolorado_01 *Var3 *Var5  20` )
   544:  	Call  $Function_80242A90    ( 00000002 *Var0 *Var1 *Var2 )
-  560:  	Call  PlaySoundAtNpc    ( 00000001 0000032C 00000000 )
-  578:  	Call  SetNpcJumpscale   ( 00000001 *Fixed[1.0] )
-  58C:  	Call  NpcJump0  ( 00000001 *Var0 *Var1 *Var2 00000014 )
-  5AC:  	Call  SetNpcAnimation   ( 00000001 00B60001 )
+  560:  	Call  PlaySoundAtNpc    ( .NpcID:Kolorado_01 0000032C 00000000 )
+  578:  	Call  SetNpcJumpscale   ( .NpcID:Kolorado_01 *Fixed[1.0] )
+  58C:  	Call  NpcJump0  ( .NpcID:Kolorado_01 *Var0 *Var1 *Var2  20` )
+  5AC:  	Call  SetNpcAnimation   ( .NpcID:Kolorado_01 00B60001 )
   5C0:  	Thread
   5C8:  		Call  $Function_80242C78    ( 00000002 )
   5D8:  	EndThread
-  5E0:  	Call  SpeakToPlayer     ( 00000000 00B60004 00B60000 00000005 000700AE ) % OK! We're off to Lavalava Island! The sea is calli ...
-  600:  	Call  SetNpcAnimation   ( 00000000 00B60009 )
+  5E0:  	Call  SpeakToPlayer     ( .NpcID:Toad_00 00B60004 00B60000 00000005 000700AE ) % OK! We're off to Lavalava Island! The sea is calli ...
+  600:  	Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60009 )
   614:  	Wait  30`
-  620:  	Call  SetNpcAnimation   ( 00000000 00B60001 )
+  620:  	Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60001 )
   634:  Else
-  63C:  	Call  SpeakToPlayer ( 00000000 00B60004 00B60000 00000005 000700B1 ) % Let's go!
+  63C:  	Call  SpeakToPlayer ( .NpcID:Toad_00 00B60004 00B60000 00000005 000700B1 ) % Let's go!
   65C:  EndIf
   664:  Set   *MapFlag[01]  .False
   674:  Thread
@@ -6656,7 +6671,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   68C:  	Call  GotoMap   ( $ASCII_80252964 00000000 ) % mac_06
   6A0:  EndThread
   6A8:  If  *GB_StoryProgress  <  .Story:Ch5_ReachedLavaLavaIsland % B
-  6B8:  	Call  SpeakToPlayer ( 00000000 00B60004 00B60000 00000005 000700AF ) % I can't believe we're on a tuna. Mario, do you eve ...
+  6B8:  	Call  SpeakToPlayer ( .NpcID:Toad_00 00B60004 00B60000 00000005 000700AF ) % I can't believe we're on a tuna. Mario, do you eve ...
   6D8:  	Set   *MapFlag[01]  .True
   6E8:  Else
   6F0:  	Set   *MapFlag[01]  .True
@@ -6668,42 +6683,42 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 #new:Script $Script_Init_8024B4BC
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024ADA4 )
-   14:  Call  SetNpcFlagBits    ( 00000000 01000000 .True )
-   2C:  Call  SetNpcFlagBits    ( 00000000 00000010 .False )
-   44:  Call  InterpNpcYaw      ( 00000000 0000010E 00000000 )
+   14:  Call  SetNpcFlagBits    ( .NpcID:Toad_00 01000000 .True )
+   2C:  Call  SetNpcFlagBits    ( .NpcID:Toad_00 00000010 .False )
+   44:  Call  InterpNpcYaw      ( .NpcID:Toad_00  270`  0` )
    5C:  If  *GB_StoryProgress  <  .Story:Ch3_StarSpritDeparted % FFFFFFF3
-   6C:  	Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
-   88:  	Call  SetNpcAnimation       ( 00000000 00B60005 )
+   6C:  	Call  SetNpcPos ( .NpcID:Toad_00  0`  -1000`  0` )
+   88:  	Call  SetNpcAnimation       ( .NpcID:Toad_00 00B60005 )
    9C:  	Call  ModifyColliderFlags   ( 00000000 ~Collider:kujira_atari 7FFFFE00 )
    B4:  	Return
    BC:  EndIf
    C4:  If  *GB_StoryProgress  <  .Story:Ch4_StarSpritDeparted % 7
-   D4:  	Call  SetNpcPos ( 00000000 00000000 FFFFFFC4 00000122 )
-   F0:  	Call  SetNpcAnimation       ( 00000000 00B60005 )
+   D4:  	Call  SetNpcPos ( .NpcID:Toad_00  0`  -60`  290` )
+   F0:  	Call  SetNpcAnimation       ( .NpcID:Toad_00 00B60005 )
   104:  	Call  ModifyColliderFlags   ( 00000000 ~Collider:kujira_atari 7FFFFE00 )
   11C:  	Return
   124:  EndIf
   12C:  If  *GB_StoryProgress  <  .Story:Ch5_WhaleMouthOpen % 8
   13C:  	Call  ModifyColliderFlags   ( 00000000 ~Collider:kujira 7FFFFE00 )
-  154:  	Call  SetNpcAnimation       ( 00000000 00B60006 )
+  154:  	Call  SetNpcAnimation       ( .NpcID:Toad_00 00B60006 )
   168:  	Call  ModifyColliderFlags   ( 00000000 ~Collider:kujira_atari 7FFFFE00 )
-  180:  	Call  SetNpcPos ( 00000000 FFFFFFB7 FFFFFFCB 000001E0 )
+  180:  	Call  SetNpcPos ( .NpcID:Toad_00  -73`  -53`  480` )
   19C:  	Exec  $Script_8024A1F8
   1A8:  	Return
   1B0:  EndIf
   1B8:  Call  GetEntryID    ( *Var0 )
   1C8:  If  *Var0  ==  ~Entry:Entry2
-  1D8:  	Call  SetNpcAnimation   ( 00000000 00B60008 )
-  1EC:  	Call  SetNpcPos ( 00000000 FFFFFF24 0000000A 00000174 )
+  1D8:  	Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60008 )
+  1EC:  	Call  SetNpcPos ( .NpcID:Toad_00  -220`  10`  372` )
   208:  	Return
   210:  EndIf
   218:  If  *GB_StoryProgress  <  .Story:Ch5_DefeatedFuzzipede % A
-  228:  	Call  SetNpcAnimation   ( 00000000 00B60008 )
-  23C:  	Call  SetNpcPos ( 00000000 FFFFFF24 0000000A 00000174 )
+  228:  	Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60008 )
+  23C:  	Call  SetNpcPos ( .NpcID:Toad_00  -220`  10`  372` )
   258:  	Return
   260:  EndIf
-  268:  Call  SetNpcAnimation   ( 00000000 00B60000 )
-  27C:  Call  SetNpcPos ( 00000000 FFFFFF24 0000000A 00000174 )
+  268:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60000 )
+  27C:  Call  SetNpcPos ( .NpcID:Toad_00  -220`  10`  372` )
   298:  Return
   2A0:  End
 }
@@ -6721,7 +6736,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    6C:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
    84:  Call  SetNpcAnimation   ( .Npc:Self 00B60004 )
    98:  Call  SetNpcSpeed       ( .Npc:Self *Fixed[1.5] )
-   AC:  Call  NpcMoveTo ( .Npc:Self FFFFFEB1 00000190 0000000A )
+   AC:  Call  NpcMoveTo ( .Npc:Self  -335`  400`  10` )
    C8:  Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
    DC:  Call  NpcFacePlayer     ( .Npc:Self 00000000 )
    F0:  Loop
@@ -6735,20 +6750,20 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   150:  Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000000 000700B3 ) % Thank heavens we've arrived! Now, tuna-ferrying is ...
   170:  Thread
   178:  	Wait  15`
-  184:  	Call  PlayerMoveTo      ( FFFFFEAC 0000017C 00000014 )
-  19C:  	Call  InterpPlayerYaw   ( 0000002D 00000000 )
+  184:  	Call  PlayerMoveTo      (  -340`  380`  20` )
+  19C:  	Call  InterpPlayerYaw   (  45`  0` )
   1B0:  EndThread
   1B8:  Call  SetNpcAnimation   ( .Npc:Self 00B60006 )
   1CC:  Call  SetNpcSpeed       ( .Npc:Self *Fixed[8.0] )
-  1E0:  Call  NpcMoveTo ( .Npc:Self FFFFFEE8 00000118 00000000 )
-  1FC:  Call  NpcMoveTo ( .Npc:Self FFFFFEAC 00000046 00000000 )
-  218:  Call  NpcMoveTo ( .Npc:Self FFFFFEFC FFFFFF74 00000000 )
+  1E0:  Call  NpcMoveTo ( .Npc:Self  -280`  280`  0` )
+  1FC:  Call  NpcMoveTo ( .Npc:Self  -340`  70`  0` )
+  218:  Call  NpcMoveTo ( .Npc:Self  -260`  -140`  0` )
   234:  Call  SetNpcSpeed       ( .Npc:Self *Fixed[7.0] )
-  248:  Call  NpcMoveTo ( .Npc:Self 00000096 FFFFFF74 00000000 )
-  264:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  248:  Call  NpcMoveTo ( .Npc:Self  150`  -140`  0` )
+  264:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   280:  Set   *GB_StoryProgress  .Story:Ch5_ReturnedToToadTown
   290:  If  *GF_MAC01_Defeated_JrTroopa4  ==  .False
-  2A0:  	Call  SetNpcVar ( 00000004 00000000 00000001 )
+  2A0:  	Call  SetNpcVar ( .NpcID:JrTroopa_04 00000000 00000001 )
   2B8:  EndIf
   2C0:  Call  DisablePlayerInput    ( .False )
   2D0:  Return
@@ -6766,14 +6781,14 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    60:  			Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000000 00070084 ) % Dear chap, I am traveling bravely to Lavalava Isla ...
    80:  		EndIf
    88:  	Case  <  .Story:Ch5_DefeatedFuzzipede % A
-   94:  		Call  SpeakToPlayer ( 00000001 00B60008 00B60001 00000000 00070095 ) % Now, now, you really should help out, dear boy.
+   94:  		Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60008 00B60001 00000000 00070095 ) % Now, now, you really should help out, dear boy.
    B4:  		Call  SetPlayerAnimation    ( 00010002 )
    C4:  		Wait  10`
    D0:  		Call  SetPlayerAnimation    ( 00080007 )
    E0:  		Wait  30`
-   EC:  		Call  SpeakToPlayer ( 00000001 00B60008 00B60001 00000000 00070096 ) % Me...? In there? Poppycock! My grandmother's last  ...
+   EC:  		Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60008 00B60001 00000000 00070096 ) % Me...? In there? Poppycock! My grandmother's last  ...
   10C:  	Case  <  .Story:Ch5_ReachedLavaLavaIsland % B
-  118:  		Call  SpeakToPlayer ( 00000001 00B60008 00B60001 00000000 000700AC ) % Mario, old boy, you must remember to take me to La ...
+  118:  		Call  SpeakToPlayer ( .NpcID:Kolorado_01 00B60008 00B60001 00000000 000700AC ) % Mario, old boy, you must remember to take me to La ...
   138:  EndSwitch
   140:  ExecWait  $Script_802482BC
   14C:  ExecWait  $Script_80248164
@@ -6789,14 +6804,14 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 {
     0:  Switch  *GB_StoryProgress
     C:  	Case  <  .Story:Ch5_ReachedLavaLavaIsland % B
-   18:  		Call  SetNpcPos ( .Npc:Self FFFFFE84 FFFFFFF6 00000174 )
-   34:  		Call  NpcFaceNpc        ( .Npc:Self 00000000 00000000 )
+   18:  		Call  SetNpcPos ( .Npc:Self  -380`  -10`  372` )
+   34:  		Call  NpcFaceNpc        ( .Npc:Self .NpcID:Toad_00 00000000 )
    4C:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024BA44 )
    60:  	Case  ==  .Story:Ch5_TradedVaseForSeed % 28
    6C:  		Call  SetSelfVar    ( 00000000 00000000 )
    80:  		Call  BindNpcIdle   ( .Npc:Self $Script_Idle_8024B764 )
    94:  	Default
-   9C:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   9C:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    B8:  		Call  EnableNpcShadow   ( .Npc:Self .False )
    CC:  EndSwitch
    D4:  Return
@@ -6827,28 +6842,28 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    80:  Exec  $Script_80244298
    8C:  Call  PlaySound ( 80000055 )
    9C:  Exec  $Script_8024BCBC *Var9
-   AC:  Call  SetNpcPos ( .Npc:Self 00000096 FFFFFFE2 000001EA )
+   AC:  Call  SetNpcPos ( .Npc:Self  150`  -30`  490` )
    C8:  Wait  5`
    D4:  Thread
-   DC:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
-   F0:  	Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+   DC:  	Call  InterpPlayerYaw   (  90`  0` )
+   F0:  	Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
   108:  	Wait  20`
   114:  	Call  PlaySoundAtPlayer ( 00000262 00000000 )
-  128:  	Call  ShowEmote ( 00000000 .Emote:Exclamation 00000000 0000001E 00000000 00000000 00000000 00000000 00000000 )
+  128:  	Call  ShowEmote ( .NpcID:Toad_00 .Emote:Exclamation  0`  30` .False  0`  0`  0`  0` )
   158:  	Call  PlaySoundAtNpc    ( .Npc:Partner 00000262 00000000 )
-  170:  	Call  ShowEmote ( .Npc:Partner .Emote:Exclamation 00000000 0000001E 00000001 00000000 00000000 00000000 00000000 )
+  170:  	Call  ShowEmote ( .Npc:Partner .Emote:Exclamation  0`  30` .True  0`  0`  0`  0` )
   1A0:  EndThread
-  1A8:  Call  ShowMessageAtScreenPos    ( 000700B4 000000A0 00000028 ) % Woooooooooooooooooooh!!
-  1C0:  Call  UseSettingsFrom   ( .Cam:Default FFFFFF9C FFFFFFF6 000001EA )
-  1DC:  Call  SetPanTarget  ( .Cam:Default FFFFFF9C FFFFFFF6 000001EA )
-  1F8:  Call  SetCamDistance    ( .Cam:Default 000002BC )
+  1A8:  Call  ShowMessageAtScreenPos    ( 000700B4  160`  40` ) % Woooooooooooooooooooh!!
+  1C0:  Call  UseSettingsFrom   ( .Cam:Default  -100`  -10`  490` )
+  1DC:  Call  SetPanTarget  ( .Cam:Default  -100`  -10`  490` )
+  1F8:  Call  SetCamDistance    ( .Cam:Default  700` )
   20C:  Call  SetCamPitch   ( .Cam:Default *Fixed[20.0] *Fixed[-8.0] )
   224:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   238:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   250:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   264:  Call  SetNpcAnimation   ( .Npc:Self 0021000C )
   278:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
-  28C:  Call  NpcMoveTo     ( .Npc:Self FFFFFFD8 000001EA 00000000 )
+  28C:  Call  NpcMoveTo     ( .Npc:Self  -40`  490`  0` )
   2A8:  Kill  *Var9
   2B4:  Call  StopSound     ( 80000055 )
   2C4:  Call  PlaySoundAtNpc    ( .Npc:Self .Sound:JrTroopaSplash 00000000 )
@@ -6856,27 +6871,27 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   2F4:  Call  ModifyColliderFlags   ( 00000000 ~Collider:o236 7FFFFE00 )
   30C:  Call  SetNpcAnimation   ( .Npc:Self 0021000A )
   320:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.5] )
-  334:  Call  NpcJump0      ( .Npc:Self FFFFFF9C FFFFFFF6 000001EA 0000000F )
+  334:  Call  NpcJump0      ( .Npc:Self  -100`  -10`  490`  15` )
   354:  Call  SetNpcAnimation   ( .Npc:Self 00210005 )
   368:  Call  ModifyColliderFlags   ( 00000001 ~Collider:kujira 7FFFFE00 )
   380:  Call  ModifyColliderFlags   ( 00000001 ~Collider:o236 7FFFFE00 )
   398:  Wait  10`
-  3A4:  Call  SetCamDistance    ( .Cam:Default 0000012C )
+  3A4:  Call  SetCamDistance    ( .Cam:Default  300` )
   3B8:  Call  SetCamPitch   ( .Cam:Default *Fixed[18.0] *Fixed[-7.0] )
   3D0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   3E8:  Wait  10`
   3F4:  Call  SpeakToPlayer ( .Npc:Self 00210018 00210005 00000000 000700B5 ) % Wheeze wheeze wheeze... I...will never...swim agai ...
-  414:  Call  SetCamDistance    ( .Cam:Default 000000E1 )
+  414:  Call  SetCamDistance    ( .Cam:Default  225` )
   428:  Call  SetCamSpeed   ( .Cam:Default *Fixed[5.0] )
   43C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   454:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   468:  Wait  10`
   474:  Call  SpeakToPlayer ( .Npc:Self 0021001A 00210005 00000000 000700B6 ) % Now, Mario! You're mine this time!
-  494:  Call  SetPanTarget  ( .Cam:Default FFFFFF06 FFFFFFF6 000001EA )
+  494:  Call  SetPanTarget  ( .Cam:Default  -250`  -10`  490` )
   4B0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.5] )
   4C4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   4DC:  Call  SetNpcAnimation   ( .Npc:Self 00210007 )
-  4F0:  Call  NpcMoveTo     ( .Npc:Self FFFFFF01 000001EA 0000004B )
+  4F0:  Call  NpcMoveTo     ( .Npc:Self  -255`  490`  75` )
   50C:  Call  SetNpcAnimation   ( .Npc:Self 00210005 )
   520:  Wait  10`
   52C:  Thread
@@ -6886,7 +6901,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   570:  Wait  15`
   57C:  Thread
   584:  	Call  $Function_80243254    ( FFFFFFFF *Var0 *Var2 )
-  59C:  	Call  NpcMoveTo ( .Npc:Self *Var0 *Var2 0000002D )
+  59C:  	Call  NpcMoveTo ( .Npc:Self *Var0 *Var2  45` )
   5B8:  EndThread
   5C0:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   5D8:  Call  DisablePlayerInput    ( .False )
@@ -6906,16 +6921,16 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 {
     0:  Call  DisablePartnerAI  ( 00000000 )
    10:  Set   *GF_MAC01_Defeated_JrTroopa4  .True
-   20:  Call  SetPlayerPos      ( FFFFFEAC FFFFFFF6 0000017C )
+   20:  Call  SetPlayerPos      (  -340`  -10`  380` )
    38:  Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
-   54:  Call  SetNpcPos ( .Npc:Partner FFFFFE98 *Var1 00000186 )
-   70:  Call  SetNpcYaw ( .Npc:Partner 0000005A )
+   54:  Call  SetNpcPos ( .Npc:Partner  -360` *Var1  390` )
+   70:  Call  SetNpcYaw ( .Npc:Partner  90` )
    84:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
-   98:  Call  SetNpcPos ( .Npc:Self FFFFFED4 FFFFFFF6 0000017C )
+   98:  Call  SetNpcPos ( .Npc:Self  -300`  -10`  380` )
    B4:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-   D0:  Call  SetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
-   EC:  Call  SetNpcYaw ( .Npc:Self 0000010E )
-  100:  Call  SetNpcYaw ( 00000005 0000010E )
+   D0:  Call  SetNpcPos ( .NpcID:JrTroopa_05 *Var0 *Var1 *Var2 )
+   EC:  Call  SetNpcYaw ( .Npc:Self  270` )
+  100:  Call  SetNpcYaw ( .NpcID:JrTroopa_05  270` )
   114:  Call  SetNpcAnimation   ( .Npc:Self 00210014 )
   128:  Call  ResetCam  ( .Cam:Default *Fixed[90.0] )
   13C:  Wait  10`
@@ -6955,7 +6970,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 {
     0:  Call  EnableNpcShadow   ( .Npc:Self .False )
    14:  Call  SetNpcFlagBits    ( .Npc:Self 00000002 .True )
-   2C:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   2C:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    48:  Call  BindNpcHit        ( .Npc:Self $Script_Hit_8024C4C8 )
    5C:  Return
    64:  End
@@ -6976,8 +6991,8 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    84:  		Set   *Var0  00070050
    94:  		Set   *Var1  0007005D
    A4:  EndSwitch
-   AC:  Call  SpeakToNpc    ( 00000002 008D0002 008D0001 00000000 00000003 *Var0 ) % variable string ID
-   D0:  Call  SpeakToNpc    ( 00000003 00410024 00410004 00000000 00000002 *Var1 ) % variable string ID
+   AC:  Call  SpeakToNpc    ( .NpcID:Fishmael_02 008D0002 008D0001 00000000 .NpcID:Fuzzipede_03 *Var0 ) % variable string ID
+   D0:  Call  SpeakToNpc    ( .NpcID:Fuzzipede_03 00410024 00410004 00000000 .NpcID:Fishmael_02 *Var1 ) % variable string ID
    F4:  ExecWait  $Script_8024810C
   100:  If  *VarC  !=  00000000
   110:  	Return
@@ -7044,7 +7059,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 
 #new:Script $Script_Init_8024C9D8
 {
-    0:  Call  SetNpcCollisionSize   ( .Npc:Self 00000026 00000026 )
+    0:  Call  SetNpcCollisionSize   ( .Npc:Self  38`  38` )
    18:  If  *GB_StoryProgress  <  .Story:Ch3_StarSpiritRescued % FFFFFFF1
    28:  	Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024C620 )
    3C:  Else
@@ -7061,10 +7076,10 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
     C:  	Case  <  .Story:Ch3_StarSpiritRescued % FFFFFFF1
    18:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024C620 )
    2C:  	Case  <  .Story:Ch5_DefeatedFuzzipede % A
-   38:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   38:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    54:  	Default
    5C:  		Call  SetSelfEnemyFlagBits  ( 00400000 00000000 )
-   70:  		Call  SetNpcPos ( .Npc:Self FFFFFDC1 00000028 00000078 )
+   70:  		Call  SetNpcPos ( .Npc:Self  -575`  40`  120` )
    8C:  		Call  BindNpcInteract       ( .Npc:Self $Script_Interact_8024C8EC )
    A0:  	Default
    A8:  EndSwitch
@@ -7379,7 +7394,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   158:  	Wait  60`
   164:  	Call  SetNpcAnimation   ( .Npc:Self 008E0001 )
   178:  	Call  SpeakToPlayer     ( .Npc:Self 008E0002 008E0001 00000000 00070073 ) % The race is won, now I'm done! I'm not really one  ...
-  198:  	Call  SpeakToPlayer     ( 00000009 00AD0004 00AD0001 00000000 00070074 ) % Ah... But... I'm afraid I just can't sing without  ...
+  198:  	Call  SpeakToPlayer     ( .NpcID:Chanterelle_09 00AD0004 00AD0001 00000000 00070074 ) % Ah... But... I'm afraid I just can't sing without  ...
   1B8:  	Call  SpeakToPlayer     ( .Npc:Self 008E0002 008E0001 00000000 00070075 ) % !? Ooooh! Drat and drear! My mind wasn't clear! Ly ...
   1D8:  	Set   *Var0  00000067
   1E8:  	Set   *Var1  00000001
@@ -7426,88 +7441,88 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   480:  		Default
   488:  			Call  SpeakToPlayer ( .Npc:Self 008E0002 008E0001 00000000 0007007B ) % ... Hmmm... Oh yes, yes, yes! It's the best!! With ...
   4A8:  			Set   *GF_MAC05_SimonGotMelody  .True
-  4B8:  			Call  SpeakToPlayer ( 00000009 00AD0004 00AD0001 00000000 0007007C ) % Oh! It's perfect! So beautiful! ... But... What if ...
+  4B8:  			Call  SpeakToPlayer ( .NpcID:Chanterelle_09 00AD0004 00AD0001 00000000 0007007C ) % Oh! It's perfect! So beautiful! ... But... What if ...
   4D8:  			Call  SpeakToPlayer ( .Npc:Self 008E0002 008E0001 00000000 0007007D ) % Hey, hey, it'll be OK. You can do it. Nothing to i ...
-  4F8:  			Call  SpeakToPlayer ( 00000009 00AD0004 00AD0001 00000000 0007007E ) % ... Yes... I will try to sing. Aaaaa aaaaaaaa OK.. ...
-  518:  			Call  SetNpcFlagBits    ( 00000009 00000100 .True )
+  4F8:  			Call  SpeakToPlayer ( .NpcID:Chanterelle_09 00AD0004 00AD0001 00000000 0007007E ) % ... Yes... I will try to sing. Aaaaa aaaaaaaa OK.. ...
+  518:  			Call  SetNpcFlagBits    ( .NpcID:Chanterelle_09 00000100 .True )
   530:  			Thread
-  538:  				Call  PlayerMoveTo      ( 000000A7 FFFFFDFF 00000014 )
-  550:  				Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  538:  				Call  PlayerMoveTo      (  167`  -513`  20` )
+  550:  				Call  InterpPlayerYaw   (  270`  0` )
   564:  				Wait  10`
   570:  				Call  EnablePartnerAI ( )
   57C:  				Call  802CF56C  ( 00000002 )
   58C:  			EndThread
   594:  			Thread
-  59C:  				Call  SetNpcAnimation   ( 00000009 00AD0002 )
-  5B0:  				Call  NpcMoveTo ( 00000009 00000070 FFFFFE01 0000003C )
-  5CC:  				Call  SetNpcAnimation   ( 00000009 00AD0001 )
+  59C:  				Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0002 )
+  5B0:  				Call  NpcMoveTo ( .NpcID:Chanterelle_09  112`  -511`  60` )
+  5CC:  				Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0001 )
   5E0:  			EndThread
   5E8:  			Thread
-  5F0:  				Call  SetNpcAnimation   ( 00000007 00AC0002 )
-  604:  				Call  NpcMoveTo ( 00000007 00000046 FFFFFDE4 0000002D )
-  620:  				Call  SetNpcAnimation   ( 00000007 00AC0001 )
+  5F0:  				Call  SetNpcAnimation   ( .NpcID:Bartender_07 00AC0002 )
+  604:  				Call  NpcMoveTo ( .NpcID:Bartender_07  70`  -540`  45` )
+  620:  				Call  SetNpcAnimation   ( .NpcID:Bartender_07 00AC0001 )
   634:  			EndThread
-  63C:  			Call  UseSettingsFrom   ( .Cam:Default 00000070 00000000 FFFFFE01 )
-  658:  			Call  SetPanTarget      ( .Cam:Default 00000070 00000000 FFFFFE01 )
+  63C:  			Call  UseSettingsFrom   ( .Cam:Default  112`  0`  -511` )
+  658:  			Call  SetPanTarget      ( .Cam:Default  112`  0`  -511` )
   674:  			Call  SetCamDistance    ( .Cam:Default *Fixed[320.0] )
   688:  			Call  SetCamSpeed       ( .Cam:Default *Fixed[2.0] )
   69C:  			Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   6B4:  			Call  WaitForCam        ( .Cam:Default *Fixed[1.0] )
-  6C8:  			Call  InterpNpcYaw      ( 00000008 0000005A 00000000 )
-  6E0:  			Call  InterpNpcYaw      ( 0000000A 0000010E 00000000 )
+  6C8:  			Call  InterpNpcYaw      ( .NpcID:Toad_08  90`  0` )
+  6E0:  			Call  InterpNpcYaw      ( .NpcID:ArtistToad_10  270`  0` )
   6F8:  			Wait  60`
   704:  			Exec  $Script_802442C4
   710:  			Call  SetPlayerAnimation    ( .PlayerAnim:Pray )
-  720:  			Call  SetNpcAnimation   ( 00000008 00830006 )
-  734:  			Call  SetNpcAnimation   ( 0000000A 008E0005 )
+  720:  			Call  SetNpcAnimation   ( .NpcID:Toad_08 00830006 )
+  734:  			Call  SetNpcAnimation   ( .NpcID:ArtistToad_10 008E0005 )
   748:  			Wait  30`
-  754:  			Call  SetNpcAnimation   ( 00000007 00AC0005 )
-  768:  			Call  SetNpcAnimation   ( 00000009 00AD0000 )
+  754:  			Call  SetNpcAnimation   ( .NpcID:Bartender_07 00AC0005 )
+  768:  			Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0000 )
   77C:  			Wait  30`
   788:  			Call  SetMusicTrack     ( 00000000 .Song:PopDivaSong 00000000 00000008 )
-  7A4:  			Call  SetNpcAnimation   ( 00000007 00AC0004 )
-  7B8:  			Call  SetNpcAnimation   ( 00000009 00AD0001 )
+  7A4:  			Call  SetNpcAnimation   ( .NpcID:Bartender_07 00AC0004 )
+  7B8:  			Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0001 )
   7CC:  			Wait  30`
-  7D8:  			Call  SetNpcAnimation   ( 00000009 00AD0005 )
+  7D8:  			Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0005 )
   7EC:  			Wait  150`
   7F8:  			Wait  150`
   804:  			Wait  150`
-  810:  			Call  SetNpcAnimation   ( 00000009 00AD0001 )
-  824:  			Call  SetNpcAnimation   ( 00000007 00AC0001 )
+  810:  			Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0001 )
+  824:  			Call  SetNpcAnimation   ( .NpcID:Bartender_07 00AC0001 )
   838:  			Wait  40`
-  844:  			Call  SetNpcAnimation   ( 00000008 00830001 )
-  858:  			Call  SetNpcAnimation   ( 0000000A 008E0001 )
+  844:  			Call  SetNpcAnimation   ( .NpcID:Toad_08 00830001 )
+  858:  			Call  SetNpcAnimation   ( .NpcID:ArtistToad_10 008E0001 )
   86C:  			Call  SetPlayerAnimation    ( 00010002 )
   87C:  			Wait  30`
   888:  			Exec  $Script_802442E8
   894:  			Thread
-  89C:  				Call  SetNpcAnimation   ( 00000007 00AC0002 )
-  8B0:  				Call  NpcMoveTo ( 00000007 FFFFFFAB FFFFFDF8 00000028 )
-  8CC:  				Call  SetNpcAnimation   ( 00000007 00AC0001 )
-  8E0:  				Call  InterpNpcYaw      ( 00000007 0000005A 00000000 )
+  89C:  				Call  SetNpcAnimation   ( .NpcID:Bartender_07 00AC0002 )
+  8B0:  				Call  NpcMoveTo ( .NpcID:Bartender_07  -85`  -520`  40` )
+  8CC:  				Call  SetNpcAnimation   ( .NpcID:Bartender_07 00AC0001 )
+  8E0:  				Call  InterpNpcYaw      ( .NpcID:Bartender_07  90`  0` )
   8F8:  			EndThread
   900:  			Thread
-  908:  				Call  SetNpcAnimation   ( 00000009 00AD0002 )
-  91C:  				Call  NpcMoveTo ( 00000009 000000D0 FFFFFDEE 0000003C )
-  938:  				Call  SetNpcAnimation   ( 00000009 00AD0001 )
-  94C:  				Call  InterpNpcYaw      ( 00000009 0000010E 00000000 )
-  964:  				Call  InterpNpcYaw      ( 0000000A 0000005A 00000000 )
-  97C:  				Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  908:  				Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0002 )
+  91C:  				Call  NpcMoveTo ( .NpcID:Chanterelle_09  208`  -530`  60` )
+  938:  				Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0001 )
+  94C:  				Call  InterpNpcYaw      ( .NpcID:Chanterelle_09  270`  0` )
+  964:  				Call  InterpNpcYaw      ( .NpcID:ArtistToad_10  90`  0` )
+  97C:  				Call  InterpPlayerYaw   (  90`  0` )
   990:  				Wait  10`
   99C:  				Call  802CF56C  ( 00000002 )
-  9AC:  				Call  SetNpcFlagBits    ( 00000009 00000100 .False )
+  9AC:  				Call  SetNpcFlagBits    ( .NpcID:Chanterelle_09 00000100 .False )
   9C4:  			EndThread
   9CC:  			Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   9E0:  			Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   9F8:  			Wait  60`
   A04:  			Call  SpeakToPlayer ( .Npc:Self 008E0002 008E0001 00000000 0007007F ) % Bravo! Hear, hear! This sweet song has brought me  ...
-  A24:  			Call  SpeakToPlayer ( 00000009 00AD0004 00AD0001 00000000 00070080 ) % I can sing! Laaa-diiiii! I'm overjoyed! Thank you! ...
+  A24:  			Call  SpeakToPlayer ( .NpcID:Chanterelle_09 00AD0004 00AD0001 00000000 00070080 ) % I can sing! Laaa-diiiii! I'm overjoyed! Thank you! ...
   A44:  			Wait  10`
   A50:  			Set   *Var0  00000145
   A60:  			Set   *Var3  00000002
   A70:  			ExecWait  $Script_802450B4
   A7C:  			Call  AddBadge      ( *Var0 *Var1 )
-  A90:  			Call  SetTattleString   ( 00000009 001A0058 ) % She's a singer, the Pop Diva. She...is...so...beau ...
+  A90:  			Call  SetTattleString   ( .NpcID:Chanterelle_09 001A0058 ) % She's a singer, the Pop Diva. She...is...so...beau ...
   AA4:  	EndSwitch
   AAC:  EndIf
   AB4:  Return
@@ -7530,13 +7545,13 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 {
     0:  Set   *MapFlag[0A]  .True
    10:  Call  SetSelfEnemyFlagBits  ( 08400000 00000001 )
-   24:  Call  InterpNpcYaw  ( 00000009 0000010E 00000000 )
+   24:  Call  InterpNpcYaw  ( .NpcID:Chanterelle_09  270`  0` )
    3C:  Call  SetMusicTrack ( 00000000 .Song:PopDivaSong 00000001 00000008 )
    58:  ChildThread
    60:  	Wait  30`
-   6C:  	Call  SetNpcAnimation   ( 00000009 00AD0005 )
+   6C:  	Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0005 )
    80:  	Wait  1900`
-   8C:  	Call  SetNpcAnimation   ( 00000009 00AD0001 )
+   8C:  	Call  SetNpcAnimation   ( .NpcID:Chanterelle_09 00AD0001 )
    A0:  EndChildThread
    A8:  ChildThread
    B0:  	Wait  30`
@@ -7550,7 +7565,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   10C:  	Wait  1`
   118:  EndLoop
   120:  Exec  $Script_802442E8
-  12C:  Call  SetNpcAnimation       ( 00000009 00AD0001 )
+  12C:  Call  SetNpcAnimation       ( .NpcID:Chanterelle_09 00AD0001 )
   140:  Call  SetSelfEnemyFlagBits  ( 08400000 00000000 )
   154:  Return
   15C:  End
@@ -7599,7 +7614,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024E3A0 )
    14:  If  *GF_MAC05_SimonGotMelody  ==  .True
-   24:  	Call  SetTattleString   ( 00000009 001A0058 ) % She's a singer, the Pop Diva. She...is...so...beau ...
+   24:  	Call  SetTattleString   ( .NpcID:Chanterelle_09 001A0058 ) % She's a singer, the Pop Diva. She...is...so...beau ...
    38:  EndIf
    40:  Return
    48:  End
@@ -7620,7 +7635,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
    A4:  	Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
    C0:  	Call  PlaySoundAtNpc    ( .Npc:Self .Sound:SmokeBurst 00000000 )
    D8:  	Call  PlayEffect    ( ~FX:BigSmokePuff *Var0 *Var1 *Var2 00000001 00000001 00000001 00000001 00000000 00000000 00000000 00000000 00000000 00000000 )
-  11C:  	Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  11C:  	Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   138:  	Set   *GF_TradingEvent3_Active  .False
   148:  	Return
   150:  EndIf
@@ -7644,7 +7659,7 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
   288:  		Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   2A4:  		Call  PlaySoundAtNpc    ( .Npc:Self .Sound:SmokeBurst 00000000 )
   2BC:  		Call  PlayEffect    ( ~FX:BigSmokePuff *Var0 *Var1 *Var2 00000001 00000001 00000001 00000001 00000000 00000000 00000000 00000000 00000000 00000000 )
-  300:  		Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  300:  		Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   31C:  		Set   *GF_TradingEvent3_Active  .False
   32C:  		Add   *GB_TradingEvent_Count  00000001
   33C:  	Default
@@ -7667,31 +7682,31 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 
 #new:NpcGroup $NpcGroup_8024E9FC
 {
-	00000000 $NpcSettings_80244F00 ~Vec3f:NPC_8024E9FC % 0 -1000 0
+	.NpcID:Toad_00 $NpcSettings_80244F00 ~Vec3f:NPC_Toad_00 % 0 -1000 0
 	00400F09 $Script_Init_8024B4BC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024E9FC
-	~AnimationTable:NPC_8024E9FC % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 001A0055 % Some folk are calling it a tuna, but it's obviousl ...
 }
 
 #new:NpcGroup $NpcGroup_8024EBEC
 {
-	00000001 $NpcSettings_80244F2C ~Vec3f:NPC_8024EBEC % 0 -1000 0
+	.NpcID:Kolorado_01 $NpcSettings_80244F2C ~Vec3f:NPC_Kolorado_01 % 0 -1000 0
 	00000D09 $Script_Init_8024BBD8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024EBEC
-	~AnimationTable:NPC_8024EBEC % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_01
+	~AnimationTable:NPC_Kolorado_01 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 }
 
 #new:NpcGroup $NpcGroup_8024EDDC
 {
-	00000002 $NpcSettings_8024502C ~Vec3f:NPC_8024EDDC % 370 -10 -115
+	.NpcID:Fishmael_02 $NpcSettings_8024502C ~Vec3f:NPC_Fishmael_02 % 370 -10 -115
 	00400D09 $Script_Init_8024C9D8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024EDDC
-	~AnimationTable:NPC_8024EDDC % .Sprite:Fishmael
+	~Movement:NPC_Fishmael_02
+	~AnimationTable:NPC_Fishmael_02 % .Sprite:Fishmael
 	00000000 00000000 00000000 001A0053 % I really hate eating fish. But fishing does look f ...
 }
 
@@ -7702,11 +7717,11 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 
 #new:NpcGroup $NpcGroup_8024EFE4
 {
-	00000003 $NpcSettings_8024502C ~Vec3f:NPC_8024EFE4 % 320 -10 -115
+	.NpcID:Fuzzipede_03 $NpcSettings_8024502C ~Vec3f:NPC_Fuzzipede_03 % 320 -10 -115
 	00400D09 $Script_Init_8024CA5C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024EFE4
-	~AnimationTable:NPC_8024EFE4 % .Sprite:Fuzzipede
+	~Movement:NPC_Fuzzipede_03
+	~AnimationTable:NPC_Fuzzipede_03 % .Sprite:Fuzzipede
 	00000000 00000000 $ExtraAnimationList_8024EFCC 001A0054 % He's a Fuzzipede. What a weird little creature! Pe ...
 }
 
@@ -7718,105 +7733,105 @@ MISSING: 802476AC to 802476D8 (000076AC to 000076D8)
 
 #new:NpcGroup $NpcGroup_8024F208
 {
-	00000004 $NpcSettings_80244F58 ~Vec3f:NPC_8024F208 % 0 -1000 0
+	.NpcID:JrTroopa_04 $NpcSettings_80244F58 ~Vec3f:NPC_JrTroopa_04 % 0 -1000 0
 	00440D0D $Script_Init_8024C568 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024F208
-	~AnimationTable:NPC_8024F208 % .Sprite:JrTroopa
+	~Movement:NPC_JrTroopa_04
+	~AnimationTable:NPC_JrTroopa_04 % .Sprite:JrTroopa
 	00000000 00000000 $ExtraAnimationList_8024F1D4 001A0006 % That's Jr. Troopa. He used to boot us out of the f ...
 	%
 	% $NpcGroup_8024F208[1F0]
-	00000005 $NpcSettings_80244F58 ~Vec3f:NPC_8024F3F8 % 0 -1000 0
+	.NpcID:JrTroopa_05 $NpcSettings_80244F58 ~Vec3f:NPC_JrTroopa_05 % 0 -1000 0
 	21540F0C $Script_Init_8024C5B4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024F3F8
-	~AnimationTable:NPC_8024F3F8 % .Sprite:JrTroopa
+	~Movement:NPC_JrTroopa_05
+	~AnimationTable:NPC_JrTroopa_05 % .Sprite:JrTroopa
 	00000000 00000000 $ExtraAnimationList_8024F1D4 001A0006 % That's Jr. Troopa. He used to boot us out of the f ...
 }
 
 #new:NpcGroup $NpcGroup_8024F5E8
 {
-	0000000C $NpcSettings_8024502C ~Vec3f:NPC_8024F5E8 % 320 0 -300
+	.NpcID:Toad_12 $NpcSettings_8024502C ~Vec3f:NPC_Toad_12 % 320 0 -300
 	00002D09 $Script_Init_8024CCF4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024F5E8
-	~AnimationTable:NPC_8024F5E8 % .Sprite:Toad
+	~Movement:NPC_Toad_12
+	~AnimationTable:NPC_Toad_12 % .Sprite:Toad
 	00000000 00000000 00000000 001A005A % He's a Toad. I think he's a guide at the port. He  ...
 	%
 	% $NpcGroup_8024F5E8[1F0]
-	0000000D $NpcSettings_8024502C ~Vec3f:NPC_8024F7D8 % -330 -10 -90
+	.NpcID:Toad_13 $NpcSettings_8024502C ~Vec3f:NPC_Toad_13 % -330 -10 -90
 	00002D09 $Script_Init_8024CEF0 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024F7D8
-	~AnimationTable:NPC_8024F7D8 % .Sprite:Toad
+	~Movement:NPC_Toad_13
+	~AnimationTable:NPC_Toad_13 % .Sprite:Toad
 	00000000 00000000 00000000 001A005B % Whenever I talk to this Toad, he tells me he wants ...
 	%
 	% $NpcGroup_8024F5E8[3E0]
-	0000000E $NpcSettings_8024502C ~Vec3f:NPC_8024F9C8 % -50 0 -400
+	.NpcID:Toad_14 $NpcSettings_8024502C ~Vec3f:NPC_Toad_14 % -50 0 -400
 	00002D09 $Script_Init_8024D0EC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024F9C8
-	~AnimationTable:NPC_8024F9C8 % .Sprite:Toad
+	~Movement:NPC_Toad_14
+	~AnimationTable:NPC_Toad_14 % .Sprite:Toad
 	00000000 00000000 00000000 001A005C % This Toad's been all over the place. He'll tell yo ...
 	%
 	% $NpcGroup_8024F5E8[5D0]
-	0000000F $NpcSettings_8024502C ~Vec3f:NPC_8024FBB8 % 200 0 -220
+	.NpcID:Toad_15 $NpcSettings_8024502C ~Vec3f:NPC_Toad_15 % 200 0 -220
 	00002D09 $Script_Init_8024D2E8 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024FBB8
-	~AnimationTable:NPC_8024FBB8 % .Sprite:Toad
+	~Movement:NPC_Toad_15
+	~AnimationTable:NPC_Toad_15 % .Sprite:Toad
 	00000000 00000000 00000000 001A005D % He's a Toad. He seems to be taking a walk and sing ...
 }
 
 #new:NpcGroup $NpcGroup_8024FDA8
 {
-	00000007 $NpcSettings_8024502C ~Vec3f:NPC_8024FDA8 % -85 0 -520
+	.NpcID:Bartender_07 $NpcSettings_8024502C ~Vec3f:NPC_Bartender_07 % -85 0 -520
 	00002D09 $Script_Init_8024D4E4 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024FDA8
-	~AnimationTable:NPC_8024FDA8 % .Sprite:Bartender
+	~Movement:NPC_Bartender_07
+	~AnimationTable:NPC_Bartender_07 % .Sprite:Bartender
 	00000000 00000000 00000000 001A0052 % He runs this restaurant. He just opened it. He als ...
 	%
 	% $NpcGroup_8024FDA8[1F0]
-	00000008 $NpcSettings_8024502C ~Vec3f:NPC_8024FF98 % 30 0 -570
+	.NpcID:Toad_08 $NpcSettings_8024502C ~Vec3f:NPC_Toad_08 % 30 0 -570
 	00002D09 $Script_Init_8024D6E0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024FF98
-	~AnimationTable:NPC_8024FF98 % .Sprite:Toad
+	~Movement:NPC_Toad_08
+	~AnimationTable:NPC_Toad_08 % .Sprite:Toad
 	00000000 00000000 00000000 001A0056 % He's a waiter at this restaurant. He said he's wor ...
 	%
 	% $NpcGroup_8024FDA8[3E0]
-	00000009 $NpcSettings_8024502C ~Vec3f:NPC_80250188 % 208 0 -530
+	.NpcID:Chanterelle_09 $NpcSettings_8024502C ~Vec3f:NPC_Chanterelle_09 % 208 0 -530
 	00002D09 $Script_Init_8024E5DC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80250188
-	~AnimationTable:NPC_80250188 % .Sprite:Chanterelle
+	~Movement:NPC_Chanterelle_09
+	~AnimationTable:NPC_Chanterelle_09 % .Sprite:Chanterelle
 	00000000 00000000 00000000 001A0057 % She's a singer, the Pop Diva. She...is...so...beau ...
 	%
 	% $NpcGroup_8024FDA8[5D0]
-	0000000A $NpcSettings_8024502C ~Vec3f:NPC_80250378 % 158 0 -555
+	.NpcID:ArtistToad_10 $NpcSettings_8024502C ~Vec3f:NPC_ArtistToad_10 % 158 0 -555
 	00002D09 $Script_Init_8024E1D0 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80250378
-	~AnimationTable:NPC_80250378 % .Sprite:ArtistToad
+	~Movement:NPC_ArtistToad_10
+	~AnimationTable:NPC_ArtistToad_10 % .Sprite:ArtistToad
 	00000000 00000000 00000000 001A0059 % He writes songs. They call him Master Poet. He's a ...
 	%
 	% $NpcGroup_8024FDA8[7C0]
-	0000000B $NpcSettings_8024502C ~Vec3f:NPC_80250568 % 92 0 -500
+	.NpcID:Toad_11 $NpcSettings_8024502C ~Vec3f:NPC_Toad_11 % 92 0 -500
 	00112D09 $Script_Init_8024E9A8 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80250568
-	~AnimationTable:NPC_80250568 % .Sprite:Toad
+	~Movement:NPC_Toad_11
+	~AnimationTable:NPC_Toad_11 % .Sprite:Toad
 	00000000 00000000 00000000 001A0007 % That's the Toad who hands out prizes at the radio  ...
 }
 
 #new:NpcGroup $NpcGroup_80250758
 {
-	00000006 $NpcSettings_80247680 ~Vec3f:NPC_80250758 % 472 0 -230
+	.NpcID:ChuckQuizmo_06 $NpcSettings_80247680 ~Vec3f:NPC_ChuckQuizmo_06 % 472 0 -230
 	00006D09 00000000 00000001 00010605 0000005A
 	~NoDrops
-	~Movement:NPC_80250758
-	~AnimationTable:NPC_80250758 % .Sprite:ChuckQuizmo
+	~Movement:NPC_ChuckQuizmo_06
+	~AnimationTable:NPC_ChuckQuizmo_06 % .Sprite:ChuckQuizmo
 	00000000 00000000 00000000 001A0002 % He's Chuck Quizmo. He tries to quiz anybody who sp ...
 }
 
@@ -7946,14 +7961,14 @@ PADDING: 80250A44 to 80250A50 (00010A44 to 00010A50)
 % Origin: HEURISTIC
 #new:Script $Script_80250FB4
 {
-    0:  Call  GetNpcVar ( 00000000 00000000 *Var3 )
+    0:  Call  GetNpcVar ( .NpcID:Toad_00 00000000 *Var3 )
    18:  If  *Var3  ==  00000000
    28:  	Call  $Function_80243AB8 ( )
    34:  	Call  PlaySoundAt   ( 8000004F 00000000 *Var0 *Var1 *Var2 )
    54:  	Call  $Function_80243BA4    ( 00000000 *Var0 *Var1 *Var2 00000000 FFFFFFFF 00000000 0000001E )
-   80:  	Call  SetNpcVar ( 00000000 00000000 *Var0 )
+   80:  	Call  SetNpcVar ( .NpcID:Toad_00 00000000 *Var0 )
    98:  EndIf
-   A0:  Call  GetNpcVar ( 00000000 00000000 *Var3 )
+   A0:  Call  GetNpcVar ( .NpcID:Toad_00 00000000 *Var3 )
    B8:  Call  $Function_80243AB8 ( )
    C4:  Call  $Function_80243CD4    ( *Var3 *Var0 *Var1 *Var2 )
    E0:  Call  $Function_80243948    ( *VarC *Var0 0000001E 0000003C 0000001E 00000000 00000000 )
@@ -8097,12 +8112,12 @@ PADDING: 80250A44 to 80250A50 (00010A44 to 00010A50)
 #new:Script $Script_8025194C
 {
     0:  SetGroup  00000000
-    C:  Call  802C9C70  ( 00000001 0000005A 00000001 )
-   24:  Call  802C94A0  ( 00000001 $Function_80243800 00000000 )
-   3C:  Call  802C90FC  ( 0000005A 00000001 FFFFFFFF )
-   54:  Call  802C9C70  ( 00000002 0000005B 00000001 )
-   6C:  Call  802C94A0  ( 00000002 $Function_802438A4 00000000 )
-   84:  Call  802C90FC  ( 0000005B 00000002 FFFFFFFF )
+    C:  Call  MakeLocalVertexCopy   ( 00000001 ~Model:karada .True )
+   24:  Call  SetCustomGfxBuilders  ( 00000001 $Function_80243800 00000000 )
+   3C:  Call  SetModelCustomGfx     ( ~Model:karada 00000001 FFFFFFFF )
+   54:  Call  MakeLocalVertexCopy   ( 00000002 ~Model:onaka .True )
+   6C:  Call  SetCustomGfxBuilders  ( 00000002 $Function_802438A4 00000000 )
+   84:  Call  SetModelCustomGfx     ( ~Model:onaka 00000002 FFFFFFFF )
    9C:  Thread
    A4:  	Label  0
    B0:  	Call  $Function_8024343C    ( 00000000 *Var0 *Var1 *Var2 )
@@ -8119,7 +8134,7 @@ PADDING: 80250A44 to 80250A50 (00010A44 to 00010A50)
   19C:  	Call  TranslateModel    ( ~Model:o167 *Var0 *Var1 *Var2 )
   1B8:  	Call  TranslateModel    ( ~Model:o168 *Var0 *Var1 *Var2 )
   1D4:  	Call  TranslateGroup    ( ~Model:dou *Var0 *Var1 *Var2 )
-  1F0:  	Call  GetNpcYaw ( 00000000 *Var0 )
+  1F0:  	Call  GetNpcYaw ( .NpcID:Toad_00 *Var0 )
   204:  	MulF  *Var0  FFFFFFFF
   214:  	AddF  *Var0  FFFFFFA6
   224:  	Call  TranslateModel    ( ~Model:bero FFFFFF9C 00000000 00000000 )
@@ -8155,7 +8170,7 @@ PADDING: 80250A44 to 80250A50 (00010A44 to 00010A50)
   588:  	Call  TranslateModel    ( ~Model:o167 00000064 00000000 00000000 )
   5A4:  	Call  TranslateModel    ( ~Model:o168 00000064 00000000 00000000 )
   5C0:  	Call  TranslateGroup    ( ~Model:dou 00000064 00000000 00000000 )
-  5DC:  	Call  GetNpcAnimation   ( 00000000 *Var0 )
+  5DC:  	Call  GetNpcAnimation   ( .NpcID:Toad_00 *Var0 )
   5F0:  	If  *Var0  !=  *VarB
   600:  		Set   *VarB  *Var0
   610:  		Set   *VarC  00000000
@@ -8163,22 +8178,22 @@ PADDING: 80250A44 to 80250A50 (00010A44 to 00010A50)
   638:  		Call  EnableModel   ( ~Model:o170 .True )
   64C:  		Call  EnableModel   ( ~Model:o183 .False )
   660:  		If  *VarB  !=  00B60009
-  670:  			Call  GetNpcVar ( 00000000 00000000 *Var0 )
+  670:  			Call  GetNpcVar ( .NpcID:Toad_00 00000000 *Var0 )
   688:  			If  *Var0  !=  00000000
   698:  				Call  PlaySound ( 00000443 )
   6A8:  				Call  802D62E4  ( 00000043 )
   6B8:  				Call  $Function_80243D78    ( *Var0 )
-  6C8:  				Call  SetNpcVar ( 00000000 00000000 00000000 )
+  6C8:  				Call  SetNpcVar ( .NpcID:Toad_00 00000000 00000000 )
   6E0:  			EndIf
   6E8:  		EndIf
   6F0:  		Switch  *VarB
   6FC:  			Case  ==  00B60003
-  708:  				Call  PlaySoundAtNpc    ( 00000000 00002037 00000000 )
+  708:  				Call  PlaySoundAtNpc    ( .NpcID:Toad_00 00002037 00000000 )
   720:  				Set   *VarD  $Script_80250D58
   730:  			Case  ==  00B60000
   73C:  				Set   *VarD  $Script_80250A5C
   74C:  			Case  ==  00B60002
-  758:  				Call  PlaySoundAtNpc    ( 00000000 00002036 00000000 )
+  758:  				Call  PlaySoundAtNpc    ( .NpcID:Toad_00 00002036 00000000 )
   770:  				Set   *VarD  $Script_80250AD4
   780:  			Case  ==  00B60001
   78C:  				Set   *VarD  $Script_80251654
@@ -8220,7 +8235,7 @@ PADDING: 80250A44 to 80250A50 (00010A44 to 00010A50)
 % Origin: HEURISTIC
 #new:Script $Script_802522B8
 {
-    0:  Call  SetNpcAnimation   ( 00000000 00B60003 )
+    0:  Call  SetNpcAnimation   ( .NpcID:Toad_00 00B60003 )
    14:  Return
    1C:  End
 }
@@ -8315,9 +8330,9 @@ PADDING: 8025273C to 80252744 (0001273C to 00012744)
 
 #new:Script $Script_80252748
 {
-    0:  Call  802C9C70  ( 00000003 00000036 00000001 )
-   18:  Call  802C94A0  ( 00000003 $Function_80243F0C 00000000 )
-   30:  Call  802C90FC  ( 00000036 00000003 FFFFFFFF )
+    0:  Call  MakeLocalVertexCopy   ( 00000003 ~Model:o187 .True )
+   18:  Call  SetCustomGfxBuilders  ( 00000003 $Function_80243F0C 00000000 )
+   30:  Call  SetModelCustomGfx     ( ~Model:o187 00000003 FFFFFFFF )
    48:  Return
    50:  End
 }

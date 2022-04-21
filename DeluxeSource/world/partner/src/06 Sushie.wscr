@@ -769,7 +769,7 @@
   9C0:  SWC1      F0, 10 (SP)
   9C4:  LW        A1, 38 (S0)
   9C8:  LW        A3, 40 (S0)
-  9CC:  JAL       800705B0
+  9CC:  JAL       ~Func:playFX_23
   9D0:  CLEAR     A0
         .o9D4
   9D4:  LW        V0, 0 (S1)
@@ -777,7 +777,7 @@
   9DC:  BNE       V0, S1, .o9FC
   9E0:  NOP
   9E4:  LI        A0, 00080010
-  9E8:  JAL       800DFF78
+  9E8:  JAL       ~Func:suggest_player_anim_setUnkFlag
   9EC:  RESERVED
   9F0:  LI        V0, 0007000A
   9F8:  SW        V0, 28 (S0)
@@ -924,7 +924,7 @@
   C54:  SWC1      F0, 10 (SP)
   C58:  LW        A1, 38 (S0)
   C5C:  LW        A3, 40 (S0)
-  C60:  JAL       800705B0
+  C60:  JAL       ~Func:playFX_23
   C64:  CLEAR     A0
   C68:  BEQ       R0, R0, .oE38
   C6C:  NOP
@@ -978,7 +978,7 @@
   D44:  SWC1      F0, 10 (SP)
   D48:  LW        A1, 38 (S0)
   D4C:  LW        A3, 40 (S0)
-  D50:  JAL       800705B0
+  D50:  JAL       ~Func:playFX_23
   D54:  CLEAR     A0
         .oD58
   D58:  LH        V0, A8 (S0)
@@ -1034,7 +1034,7 @@
   E24:  SUB.S     F0, F0, F2
   E28:  SW        R0, 0 (S2)
   E2C:  SW        V1, 28 (S0)
-  E30:  JAL       800DFF78
+  E30:  JAL       ~Func:suggest_player_anim_setUnkFlag
   E34:  SWC1      F0, 64 (S0)
         .oE38
   E38:  LW        RA, 58 (SP)
@@ -1205,7 +1205,7 @@
   15C:  ORI       V0, V0, 8
   160:  AND       V0, V0, V1
   164:  ORI       V0, V0, 100
-  168:  JAL       800DFF78
+  168:  JAL       ~Func:suggest_player_anim_setUnkFlag
   16C:  SW        V0, 0 (S1)
   170:  JAL       ~Func:disable_player_shadow
   174:  NOP
@@ -1348,7 +1348,7 @@
   3B4:  SUB.S     F2, F2, F0
   3B8:  SW        A1, 28 (S1)
   3BC:  SH        V0, 8E (S1)
-  3C0:  JAL       ~Func:suggest_player_anim
+  3C0:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   3C4:  SWC1      F2, 64 (S1)
   3C8:  LW        V0, 70 (S5)
   3CC:  ADDIU     V0, V0, 1
@@ -1399,7 +1399,7 @@
   47C:  JAL       ~Func:sfx_play_sound_at_npc
   480:  LI        A2, FFFC
   484:  LI        A0, 00010006
-  488:  JAL       ~Func:suggest_player_anim
+  488:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   48C:  RESERVED
   490:  BEQ       R0, R0, .o1150
   494:  CLEAR     V0
@@ -1463,7 +1463,7 @@
   58C:  ADD.S     F2, F2, F6
   590:  DIV.S     F0, F0, F8
   594:  SWC1      F0, 18 (S1)
-  598:  JAL       ~Func:suggest_player_anim
+  598:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   59C:  SWC1      F2, 1C (S1)
   5A0:  LW        V0, 70 (S5)
   5A4:  ADDIU     V0, V0, 1
@@ -1481,7 +1481,7 @@
   5D8:  LW        A1, 38 (S1)
   5DC:  LW        A3, 40 (S1)
   5E0:  MFC1      A2, F2
-  5E4:  JAL       800705B0
+  5E4:  JAL       ~Func:playFX_23
   5E8:  CLEAR     A0
   5EC:  BEQ       R0, R0, .o1150
   5F0:  CLEAR     V0
@@ -1499,7 +1499,7 @@
   620:  LW        A1, 38 (S1)
   624:  LW        A3, 40 (S1)
   628:  MFC1      A2, F2
-  62C:  JAL       800705B0
+  62C:  JAL       ~Func:playFX_23
   630:  CLEAR     A0
 	% LBL: from $JumpTable_802BFE68 , entry 24`
   634:  LW        V0, 70 (S5)
@@ -1527,7 +1527,7 @@
   688:  BC1F      .o69C
   68C:  NOP
   690:  LI        A0, 00010008
-  694:  JAL       ~Func:suggest_player_anim
+  694:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   698:  RESERVED
   69C:  LWC1      F0, 28 (S2)
   6A0:  LWC1      F2, 2C (S2)
@@ -1549,7 +1549,7 @@
   6E8:  LW        V0, 0 (S2)
   6EC:  ORI       A0, A0, F
   6F0:  AND       V0, V0, V1
-  6F4:  JAL       800DFF78
+  6F4:  JAL       ~Func:suggest_player_anim_setUnkFlag
   6F8:  SW        V0, 0 (S2)
   6FC:  LI        A0, 2013
   700:  CLEAR     A1
@@ -1660,7 +1660,7 @@
   8C8:  LW        A1, 38 (S1)
   8CC:  LW        A3, 40 (S1)
   8D0:  MFC1      A2, F2
-  8D4:  JAL       800705B0
+  8D4:  JAL       ~Func:playFX_23
   8D8:  CLEAR     A0
   8DC:  BEQ       R0, R0, .o8EC
   8E0:  NOP
@@ -1756,7 +1756,7 @@
   A6C:  LW        A1, 0 (A1)
   A70:  MFC1      A2, F4
   A74:  LW        A3, 0 (A3)
-  A78:  JAL       800705B0
+  A78:  JAL       ~Func:playFX_23
   A7C:  CLEAR     A0
   A80:  LWC1      F0, 38 (S1)
   A84:  LAF       F2, $End[0]
@@ -1978,7 +1978,7 @@
   E28:  JAL       ~Func:sfx_play_sound_at_npc
   E2C:  SWC1      F4, 1C (S1)
   E30:  LI        A0, 00010006
-  E34:  JAL       ~Func:suggest_player_anim
+  E34:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   E38:  RESERVED
   E3C:  JAL       ~Func:enable_player_shadow
   E40:  NOP
@@ -1991,7 +1991,7 @@
   E5C:  SW        V0, 70 (S5)
 	% LBL: from $JumpTable_802BFE68 , entry 3`
   E60:  LI        A0, 00010007
-  E64:  JAL       ~Func:suggest_player_anim
+  E64:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   E68:  RESERVED
   E6C:  LW        V0, 70 (S5)
   E70:  ADDIU     V0, V0, 1
@@ -2004,7 +2004,7 @@
   E88:  NOP
   E8C:  BC1F      .oEA8
   E90:  LUI       A0, 1
-  E94:  JAL       ~Func:suggest_player_anim
+  E94:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   E98:  ORI       A0, A0, 8
   E9C:  LW        V0, 70 (S5)
   EA0:  ADDIU     V0, V0, 1
@@ -2024,7 +2024,7 @@
   ED4:  BLEZ      V0, .oEFC
   ED8:  SWC1      F0, 2C (S2)
   EDC:  LI        A0, 00010009
-  EE0:  JAL       ~Func:suggest_player_anim
+  EE0:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   EE4:  RESERVED
   EE8:  BEQ       R0, R0, .oEFC
   EEC:  NOP
@@ -2060,7 +2060,7 @@
   F68:  LW        V0, 0 (S2)
   F6C:  ORI       A0, A0, 2
   F70:  AND       V0, V0, V1
-  F74:  JAL       ~Func:suggest_player_anim
+  F74:  JAL       ~Func:suggest_player_anim_clearUnkFlag
   F78:  SW        V0, 0 (S2)
   F7C:  LWC1      F12, 38 (S1)
   F80:  LWC1      F14, 40 (S1)
@@ -2665,7 +2665,7 @@
   1A0:  BEQ       R0, R0, .o204
   1A4:  LI        V0, 19
         .o1A8
-  1A8:  JAL       800DFF78
+  1A8:  JAL       ~Func:suggest_player_anim_setUnkFlag
   1AC:  ORI       A0, A0, F
   1B0:  LWC1      F2, C (S1)
   1B4:  MTC1      R0, F0
@@ -2717,7 +2717,7 @@
   268:  LW        A1, 38 (S1)
   26C:  LW        A3, 40 (S1)
   270:  MFC1      A2, F2
-  274:  JAL       800705B0
+  274:  JAL       ~Func:playFX_23
   278:  CLEAR     A0
         .o27C
   27C:  LW        V0, 74 (S3)

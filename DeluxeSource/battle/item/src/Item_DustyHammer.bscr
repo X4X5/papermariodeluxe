@@ -196,10 +196,10 @@ PADDING: 802A123C to 802A1240 (00717C0C to 00717C10)
 #new:Script $Script_802A1544
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -347,7 +347,7 @@ PADDING: 802A1B68 to 802A1B6C (00718538 to 0071853C)
     0:  SetConst  *VarA  00000086
    10:  ExecWait  $Script_802A1240
    1C:  Call  UseBattleCamPreset    ( 00000003 )
-   2C:  Call  MoveBattleCamOver     ( 0000000F )
+   2C:  Call  MoveBattleCamOver     (  15` )
    3C:  Call  SetAnimation  ( .Actor:Player 00000000 00010016 )
    54:  Call  PlaySound ( 000003FA )
    64:  Wait  3`
@@ -377,13 +377,13 @@ PADDING: 802A1B68 to 802A1B6C (00718538 to 0071853C)
   20C:  EndThread
   214:  Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[0.8] )
   228:  Add   *Var2  00000005
-  238:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000012 )
+  238:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  18` )
   258:  Call  GetItemPower  ( .Item:DustyHammer *Var3 *Var4 )
   270:  Call  ApplyShrinkFromOwner  ( *Var3 )
   280:  Call  ItemDamageEnemy       ( *Var9 ~Flags:DamageType:IgnoreDefense|NoContact 00000000 *Var3 00000020 )
   2A0:  Add   *Var0  00000028
   2B0:  Add   *Var1  0000000A
-  2C0:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 0000000A )
+  2C0:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  10` )
   2E0:  Call  DeleteVirtualEntity   ( *VarA )
   2F0:  ExecWait  $Script_802A1670
   2FC:  Return

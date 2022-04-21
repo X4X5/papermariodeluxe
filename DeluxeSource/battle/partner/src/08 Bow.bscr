@@ -424,8 +424,8 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
    14:  Call  SetGoalToHome ( .Actor:Partner )
    24:  Call  SetActorSpeed ( .Actor:Partner *Fixed[6.0] )
    38:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0003 )
-   50:  Call  SetActorYaw   ( .Actor:Partner 00000000 )
-   64:  Call  RunToGoal     ( .Actor:Partner 00000000 )
+   50:  Call  SetActorYaw   ( .Actor:Partner  0` )
+   64:  Call  RunToGoal     ( .Actor:Partner  0` )
    78:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0001 )
    90:  Call  UseIdleAnimation  ( .Actor:Partner .True )
    A4:  Return
@@ -493,7 +493,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
    98:  Wait  10`
    A4:  Call  SetGoalToHome ( .Actor:Partner )
    B4:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0003 )
-   CC:  Call  FlyToGoal     ( .Actor:Partner 0000001E 00000000 .Easing:CosInOut )
+   CC:  Call  FlyToGoal     ( .Actor:Partner  30`  0` .Easing:CosInOut )
    E8:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0001 )
   100:  Call  PlaySoundAtActor  ( .Actor:Partner .Sound:BooAppear )
   114:  Set   *Var0  00000037
@@ -523,7 +523,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
    98:  Wait  10`
    A4:  Call  SetGoalToHome ( .Actor:Partner )
    B4:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0003 )
-   CC:  Call  FlyToGoal     ( .Actor:Partner 0000001E 00000000 .Easing:CosInOut )
+   CC:  Call  FlyToGoal     ( .Actor:Partner  30`  0` .Easing:CosInOut )
    E8:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0001 )
   100:  Call  PlaySoundAtActor  ( .Actor:Partner .Sound:BooAppear )
   114:  Set   *Var0  00000037
@@ -542,7 +542,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
     0:  Call  80280818 ( )
     C:  Call  SetGoalToHome ( .Actor:Partner )
    1C:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0003 )
-   34:  Call  FlyToGoal     ( .Actor:Partner 0000000F 00000000 .Easing:CosInOut )
+   34:  Call  FlyToGoal     ( .Actor:Partner  15`  0` .Easing:CosInOut )
    50:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0001 )
    68:  Return
    70:  End
@@ -582,15 +582,15 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   1F8:  Call  SetGoalToTarget   ( .Actor:Partner )
   208:  Thread
   210:  	Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0003 )
-  228:  	Call  AddGoalPos    ( .Actor:Partner FFFFFFF1 FFFFFFF6 00000000 )
-  244:  	Call  FlyToGoal     ( .Actor:Partner 0000000F 00000000 .Easing:CosInOut )
+  228:  	Call  AddGoalPos    ( .Actor:Partner  -15`  -10`  0` )
+  244:  	Call  FlyToGoal     ( .Actor:Partner  15`  0` .Easing:CosInOut )
   260:  	Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0001 )
   278:  EndThread
   280:  Call  UseBattleCamPreset    ( 0000000D )
   290:  Call  BattleCamTargetActor  ( .Actor:Self )
-  2A0:  Call  SetBattleCamZoom      ( 000000B4 )
-  2B0:  Call  MoveBattleCamOver     ( 0000001E )
-  2C0:  Call  SetBattleCamOffsetZ   ( 00000009 )
+  2A0:  Call  SetBattleCamZoom      (  180` )
+  2B0:  Call  MoveBattleCamOver     (  30` )
+  2C0:  Call  SetBattleCamOffsetZ   (  9` )
   2D0:  Call  8024EDA4 ( )
   2DC:  Wait  15`
   2E8:  Call  PlaySoundAtActor      ( .Actor:Partner .Sound:BooAppear )
@@ -619,7 +619,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   460:  Call  GetActionCommandResult    ( *VarB )
   470:  Call  80269600  ( *VarD )
   480:  Label  0
-  48C:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000 00000001 00000010 )
+  48C:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000  1` 00000010 )
   4B0:  If  *Var0  ==  .HitResult:Miss % 6
   4C0:  	Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0007 )
   4D8:  	Call  CloseActionCommandInfo ( )
@@ -629,7 +629,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   510:  		Call  SetActorYaw   ( .Actor:Partner *Var0 )
   524:  		Wait  1`
   530:  	EndLoop
-  538:  	Call  SetActorYaw   ( .Actor:Partner 00000000 )
+  538:  	Call  SetActorYaw   ( .Actor:Partner  0` )
   54C:  	Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D001A )
   564:  	Call  AddActorDecoration    ( .Actor:Self 00000000 00000000 .Decoration:SeeingStars )
   580:  	Wait  30`
@@ -656,18 +656,18 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   6C4:  Wait  2`
   6D0:  Call  SetActorScale ( .Actor:Partner *Fixed[1.0] *Fixed[1.0] *Fixed[1.0] )
   6EC:  Thread
-  6F4:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  710:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.5] )
-  72C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000001 *Fixed[0.5] )
-  748:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000001 *Fixed[0.2] )
+  6F4:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  710:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.5] )
+  72C:  	Call  ShakeCam  ( .Cam:Battle 00000000  1` *Fixed[0.5] )
+  748:  	Call  ShakeCam  ( .Cam:Battle 00000000  1` *Fixed[0.2] )
   764:  EndThread
   76C:  If  *VarE  ==  00000001
   77C:  	Call  $Function_80238014 ( )
   788:  	Call  AddBattleCamZoom  ( *Var0 )
-  798:  	Call  MoveBattleCamOver ( 00000005 )
+  798:  	Call  MoveBattleCamOver (  5` )
   7A8:  Else
-  7B0:  	Call  AddBattleCamZoom  ( 00000019 )
-  7C0:  	Call  MoveBattleCamOver ( 00000005 )
+  7B0:  	Call  AddBattleCamZoom  (  25` )
+  7C0:  	Call  MoveBattleCamOver (  5` )
   7D0:  EndIf
   7D8:  Call  SetActorSounds    ( .Actor:Partner .ActorSound:Hurt 00002019 00000000 )
   7F4:  If  *VarE  ==  00000001
@@ -694,10 +694,10 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   954:  If  *VarE  ==  00000001
   964:  	Call  $Function_80238014 ( )
   970:  	Call  AddBattleCamZoom  ( *Var0 )
-  980:  	Call  MoveBattleCamOver ( 00000005 )
+  980:  	Call  MoveBattleCamOver (  5` )
   990:  Else
-  998:  	Call  AddBattleCamZoom  ( 00000019 )
-  9A8:  	Call  MoveBattleCamOver ( 00000005 )
+  998:  	Call  AddBattleCamZoom  (  25` )
+  9A8:  	Call  MoveBattleCamOver (  5` )
   9B8:  EndIf
   9C0:  Call  SetActorScale ( .Actor:Partner *Fixed[1.4] *Fixed[1.4] *Fixed[1.0] )
   9DC:  If  *Flag[00]  ==  .False
@@ -722,7 +722,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   B30:  Wait  8`
   B3C:  Switch  *Var0
   B48:  	CaseOR  ==  .HitResult:Hit % 0
-  B54:  	CaseOR  ==  00000002 % 2
+  B54:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   B60:  		Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0001 )
   B78:  		ExecWait  $Script_80238D4C
   B84:  	EndCaseGroup
@@ -741,15 +741,15 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
     0:  Call  SetActorFlagBits      ( .Actor:Player 20000000 .True )
    18:  Call  SetActorFlagBits      ( .Actor:Player 04000000 .False )
    30:  Call  UseBattleCamPreset    ( 00000013 )
-   40:  Call  SetBattleCamTarget    ( FFFFFF7F 0000001C 00000000 )
-   58:  Call  SetBattleCamOffsetZ   ( 0000000F )
-   68:  Call  SetBattleCamZoom      ( 00000104 )
-   78:  Call  MoveBattleCamOver     ( 00000028 )
+   40:  Call  SetBattleCamTarget    (  -129`  28`  0` )
+   58:  Call  SetBattleCamOffsetZ   (  15` )
+   68:  Call  SetBattleCamZoom      (  260` )
+   78:  Call  MoveBattleCamOver     (  40` )
    88:  Thread
    90:  	Call  GetActorPos   ( .Actor:Partner *Var0 *Var1 *Var2 )
    AC:  	Add   *Var1  00000005
    BC:  	Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-   D8:  	Call  FlyToGoal     ( .Actor:Partner 0000000A 00000000 .Easing:CosInOut )
+   D8:  	Call  FlyToGoal     ( .Actor:Partner  10`  0` .Easing:CosInOut )
    F4:  EndThread
    FC:  Set   *Var0  00000000
   10C:  Loop  0000000A
@@ -762,7 +762,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   178:  Add   *Var0  FFFFFFE2
   188:  Add   *Var1  0000001E
   198:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  1B4:  Call  FlyToGoal     ( .Actor:Partner 00000014 0000001E .Easing:CosInOut )
+  1B4:  Call  FlyToGoal     ( .Actor:Partner  20`  30` .Easing:CosInOut )
   1D0:  Thread
   1D8:  	Set   *Var0  000000B4
   1E8:  	Loop  0000000A
@@ -783,7 +783,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   2B8:  Call  $Function_802380E4    ( FFFFFFF6 00000014 )
   2CC:  Add   *Var2  00000005
   2DC:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  2F8:  Call  FlyToGoal     ( .Actor:Partner 00000014 00000000 .Easing:Linear )
+  2F8:  Call  FlyToGoal     ( .Actor:Partner  20`  0` .Easing:Linear )
   314:  Call  $Function_80238198 ( )
   320:  If  *Var0  ==  00000000
   330:  	Call  SetAnimation  ( .Actor:Player 00000000 00010014 )
@@ -797,7 +797,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   3B4:  EndLoop
   3BC:  Wait  15`
   3C8:  Call  UseBattleCamPreset    ( 00000002 )
-  3D8:  Call  MoveBattleCamOver     ( 0000001E )
+  3D8:  Call  MoveBattleCamOver     (  30` )
   3E8:  Call  $Function_8023808C ( )
   3F4:  Call  SetActorFlagBits      ( .Actor:Player 20000000 .False )
   40C:  Return
@@ -828,9 +828,9 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   104:  EndThread
   10C:  Call  80280818 ( )
   118:  Call  UseBattleCamPreset    ( 00000002 )
-  128:  Call  MoveBattleCamOver ( 00000028 )
+  128:  Call  MoveBattleCamOver (  40` )
   138:  Call  SetGoalToHome     ( .Actor:Partner )
-  148:  Call  FlyToGoal ( .Actor:Partner 00000014 00000000 .Easing:CosInOut )
+  148:  Call  FlyToGoal ( .Actor:Partner  20`  0` .Easing:CosInOut )
   164:  Call  $Function_802381C8 ( )
   170:  Wait  20`
   17C:  Return
@@ -847,16 +847,16 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
    5C:  Thread
    64:  	Call  UseBattleCamPreset    ( 0000000F )
    74:  	Call  BattleCamTargetActor  ( .Actor:Self )
-   84:  	Call  SetBattleCamOffsetZ   ( 00000004 )
-   94:  	Call  AddBattleCamZoom      ( FFFFFF6A )
-   A4:  	Call  MoveBattleCamOver     ( 00000014 )
+   84:  	Call  SetBattleCamOffsetZ   (  4` )
+   94:  	Call  AddBattleCamZoom      (  -150` )
+   A4:  	Call  MoveBattleCamOver     (  20` )
    B4:  	Call  8024EDA4 ( )
    C0:  EndThread
    C8:  Call  GetActorPos   ( .Actor:Partner *Var0 *Var1 *Var2 )
    E4:  Add   *Var0  00000028
    F4:  Add   *Var1  0000000A
   104:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  120:  Call  FlyToGoal     ( .Actor:Partner 00000014 00000000 .Easing:CosInOut )
+  120:  Call  FlyToGoal     ( .Actor:Partner  20`  0` .Easing:CosInOut )
   13C:  Wait  15`
   148:  Call  8024E664      ( 00000013 )
   158:  Thread
@@ -891,57 +891,57 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   338:  	Switch  *Var1
   344:  		Case  >  00000050
   350:  			If  *Var2  ==  00000007
-  360:  				Call  AddBattleCamZoom  ( FFFFFFEC )
-  370:  				Call  MoveBattleCamOver ( 00000014 )
+  360:  				Call  AddBattleCamZoom  (  -20` )
+  370:  				Call  MoveBattleCamOver (  20` )
   380:  				Call  8024ECF8  ( 00000000 00000000 00000001 )
   398:  				Set   *Var2  00000008
   3A8:  			EndIf
   3B0:  		Case  >  00000046
   3BC:  			If  *Var2  ==  00000006
-  3CC:  				Call  AddBattleCamZoom  ( FFFFFFEC )
-  3DC:  				Call  MoveBattleCamOver ( 00000014 )
+  3CC:  				Call  AddBattleCamZoom  (  -20` )
+  3DC:  				Call  MoveBattleCamOver (  20` )
   3EC:  				Call  8024ECF8  ( 00000000 00000000 00000001 )
   404:  				Set   *Var2  00000007
   414:  			EndIf
   41C:  		Case  >  0000003C
   428:  			If  *Var2  ==  00000005
-  438:  				Call  AddBattleCamZoom  ( FFFFFFEC )
-  448:  				Call  MoveBattleCamOver ( 00000014 )
+  438:  				Call  AddBattleCamZoom  (  -20` )
+  448:  				Call  MoveBattleCamOver (  20` )
   458:  				Call  8024ECF8  ( 00000000 00000000 00000001 )
   470:  				Set   *Var2  00000006
   480:  			EndIf
   488:  		Case  >  00000032
   494:  			If  *Var2  ==  00000004
-  4A4:  				Call  AddBattleCamZoom  ( FFFFFFEC )
-  4B4:  				Call  MoveBattleCamOver ( 00000014 )
+  4A4:  				Call  AddBattleCamZoom  (  -20` )
+  4B4:  				Call  MoveBattleCamOver (  20` )
   4C4:  				Call  8024ECF8  ( 00000000 00000000 00000001 )
   4DC:  				Set   *Var2  00000005
   4EC:  			EndIf
   4F4:  		Case  >  00000028
   500:  			If  *Var2  ==  00000003
-  510:  				Call  AddBattleCamZoom  ( FFFFFFEC )
-  520:  				Call  MoveBattleCamOver ( 00000014 )
+  510:  				Call  AddBattleCamZoom  (  -20` )
+  520:  				Call  MoveBattleCamOver (  20` )
   530:  				Call  8024ECF8  ( 00000000 00000000 00000001 )
   548:  				Set   *Var2  00000004
   558:  			EndIf
   560:  		Case  >  0000001E
   56C:  			If  *Var2  ==  00000002
-  57C:  				Call  AddBattleCamZoom  ( FFFFFFEC )
-  58C:  				Call  MoveBattleCamOver ( 00000014 )
+  57C:  				Call  AddBattleCamZoom  (  -20` )
+  58C:  				Call  MoveBattleCamOver (  20` )
   59C:  				Call  8024ECF8  ( 00000000 00000000 00000001 )
   5B4:  				Set   *Var2  00000003
   5C4:  			EndIf
   5CC:  		Case  >  00000014
   5D8:  			If  *Var2  ==  00000001
-  5E8:  				Call  AddBattleCamZoom  ( FFFFFFEC )
-  5F8:  				Call  MoveBattleCamOver ( 00000014 )
+  5E8:  				Call  AddBattleCamZoom  (  -20` )
+  5F8:  				Call  MoveBattleCamOver (  20` )
   608:  				Call  8024ECF8  ( 00000000 00000000 00000001 )
   620:  				Set   *Var2  00000002
   630:  			EndIf
   638:  		Case  >  0000000A
   644:  			If  *Var2  ==  00000000
-  654:  				Call  AddBattleCamZoom  ( FFFFFFEC )
-  664:  				Call  MoveBattleCamOver ( 00000014 )
+  654:  				Call  AddBattleCamZoom  (  -20` )
+  664:  				Call  MoveBattleCamOver (  20` )
   674:  				Call  8024ECF8  ( 00000000 00000000 00000001 )
   68C:  				Set   *Var2  00000001
   69C:  			EndIf
@@ -954,7 +954,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   704:  Call  SetActorRotationOffset    ( .Actor:Self 00000000 0000000C 00000000 )
   720:  Thread
   728:  	Call  UseBattleCamPreset    ( 00000002 )
-  738:  	Call  MoveBattleCamOver     ( 00000005 )
+  738:  	Call  MoveBattleCamOver     (  5` )
   748:  	Wait  5`
   754:  	Call  UseBattleCamPreset    ( 00000001 )
   764:  	Loop  00000005
@@ -1016,16 +1016,16 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   ADC:  Call  GetActionResult   ( *VarF )
   AEC:  Loop
   AF8:  	Call  SetGoalToTarget   ( .Actor:Self )
-  B08:  	Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000 00000002 00000010 )
+  B08:  	Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000  2` 00000010 )
   B2C:  	If  *Var0  ==  .HitResult:Miss % 6
   B3C:  		Goto  A
   B48:  	EndIf
   B50:  	Call  80269EAC  ( 00000012 )
   B60:  	Switch  *VarF
   B6C:  		Case  >  00000063
-  B78:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:NoContact|Unblockable|StatusAlwaysHits 00000000 00400000 *VarF 00000000 00000070 )
+  B78:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:NoContact|NoOtherDamagePopups|StatusAlwaysHits 00000000 00400000 *VarF  0` 00000070 )
   BA0:  		Default
-  BA8:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:NoContact|Unblockable|StatusAlwaysHits 00000000 00400000 *VarF 00000000 000000B0 )
+  BA8:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:NoContact|NoOtherDamagePopups|StatusAlwaysHits 00000000 00400000 *VarF  0` 000000B0 )
   BD0:  	EndSwitch
   BD8:  	Label  A
   BE4:  	Wait  5`
@@ -1098,14 +1098,14 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   120:  Call  SetGoalToTarget   ( .Actor:Partner )
   130:  Thread
   138:  	Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0003 )
-  150:  	Call  AddGoalPos    ( .Actor:Partner FFFFFFE7 FFFFFFF6 00000000 )
-  16C:  	Call  FlyToGoal     ( .Actor:Partner 0000000F 00000000 .Easing:CosInOut )
+  150:  	Call  AddGoalPos    ( .Actor:Partner  -25`  -10`  0` )
+  16C:  	Call  FlyToGoal     ( .Actor:Partner  15`  0` .Easing:CosInOut )
   188:  EndThread
   190:  Call  UseBattleCamPreset    ( 0000000D )
   1A0:  Call  BattleCamTargetActor  ( .Actor:Self )
-  1B0:  Call  SetBattleCamZoom      ( 000000B4 )
-  1C0:  Call  MoveBattleCamOver     ( 0000001E )
-  1D0:  Call  SetBattleCamOffsetZ   ( 00000009 )
+  1B0:  Call  SetBattleCamZoom      (  180` )
+  1C0:  Call  MoveBattleCamOver     (  30` )
+  1D0:  Call  SetBattleCamOffsetZ   (  9` )
   1E0:  Call  8024EDA4 ( )
   1EC:  Wait  15`
   1F8:  Call  PlaySoundAtActor      ( .Actor:Partner .Sound:BooAppear )
@@ -1135,7 +1135,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   388:  Call  GetActionCommandResult    ( *VarB )
   398:  Call  80269600  ( *VarD )
   3A8:  Label  0
-  3B4:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:NoContact 00000095 00000000 00000001 00000010 )
+  3B4:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:NoContact 00000095 00000000  1` 00000010 )
   3D8:  If  *Var0  ==  .HitResult:Miss % 6
   3E8:  	Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D000A )
   400:  	Call  CloseActionCommandInfo ( )
@@ -1150,7 +1150,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   47C:  		Call  SetActorYaw   ( .Actor:Partner *Var0 )
   490:  		Wait  1`
   49C:  	EndLoop
-  4A4:  	Call  SetActorYaw   ( .Actor:Partner 00000000 )
+  4A4:  	Call  SetActorYaw   ( .Actor:Partner  0` )
   4B8:  	Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D001A )
   4D0:  	Call  AddActorDecoration    ( .Actor:Self 00000000 00000000 .Decoration:SeeingStars )
   4EC:  	Wait  40`
@@ -1177,18 +1177,18 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   630:  Wait  2`
   63C:  Call  SetActorScale ( .Actor:Partner *Fixed[1.0] *Fixed[1.0] *Fixed[1.0] )
   658:  Thread
-  660:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  67C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.5] )
-  698:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000001 *Fixed[0.5] )
-  6B4:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000001 *Fixed[0.2] )
+  660:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  67C:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.5] )
+  698:  	Call  ShakeCam  ( .Cam:Battle 00000000  1` *Fixed[0.5] )
+  6B4:  	Call  ShakeCam  ( .Cam:Battle 00000000  1` *Fixed[0.2] )
   6D0:  EndThread
   6D8:  If  *VarE  ==  00000001
   6E8:  	Call  $Function_80238014 ( )
   6F4:  	Call  AddBattleCamZoom  ( *Var0 )
-  704:  	Call  MoveBattleCamOver ( 00000005 )
+  704:  	Call  MoveBattleCamOver (  5` )
   714:  Else
-  71C:  	Call  AddBattleCamZoom  ( 00000019 )
-  72C:  	Call  MoveBattleCamOver ( 00000005 )
+  71C:  	Call  AddBattleCamZoom  (  25` )
+  72C:  	Call  MoveBattleCamOver (  5` )
   73C:  EndIf
   744:  Call  GetGoalPos        ( .Actor:Partner *Var0 *Var1 *Var2 )
   760:  Call  PlayEffect        ( ~FX:Confetti:Burst3 *Var0 *Var1 *Var2 *Fixed[1.0] 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
@@ -1224,24 +1224,24 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   980:  		Wait  1`
   98C:  	EndLoop
   994:  EndIf
-  99C:  Call  SetActorYaw   ( .Actor:Partner 00000000 )
+  99C:  Call  SetActorYaw   ( .Actor:Partner  0` )
   9B0:  Add   *VarF  0000000A
   9C0:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000D0001 )
   9D8:  Goto  0
   9E4:  Label  2
   9F0:  Thread
-  9F8:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  A14:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.5] )
-  A30:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000001 *Fixed[0.5] )
-  A4C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000001 *Fixed[0.2] )
+  9F8:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  A14:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.5] )
+  A30:  	Call  ShakeCam  ( .Cam:Battle 00000000  1` *Fixed[0.5] )
+  A4C:  	Call  ShakeCam  ( .Cam:Battle 00000000  1` *Fixed[0.2] )
   A68:  EndThread
   A70:  If  *VarE  ==  00000001
   A80:  	Call  $Function_80238014 ( )
   A8C:  	Call  AddBattleCamZoom  ( *Var0 )
-  A9C:  	Call  MoveBattleCamOver ( 00000005 )
+  A9C:  	Call  MoveBattleCamOver (  5` )
   AAC:  Else
-  AB4:  	Call  AddBattleCamZoom  ( 00000019 )
-  AC4:  	Call  MoveBattleCamOver ( 00000005 )
+  AB4:  	Call  AddBattleCamZoom  (  25` )
+  AC4:  	Call  MoveBattleCamOver (  5` )
   AD4:  EndIf
   ADC:  Call  SetActorScale ( .Actor:Partner *Fixed[1.4] *Fixed[1.4] *Fixed[1.0] )
   AF8:  If  *Flag[00]  ==  .False
@@ -1294,7 +1294,7 @@ PADDING: 802382FC to 80238300 (007111EC to 007111F0)
   DC8:  			Wait  1`
   DD4:  		EndLoop
   DDC:  	EndIf
-  DE4:  	Call  SetActorYaw   ( .Actor:Partner 00000000 )
+  DE4:  	Call  SetActorYaw   ( .Actor:Partner  0` )
   DF8:  EndThread
   E00:  Switch  *Var0
   E0C:  	CaseOR  ==  00000000

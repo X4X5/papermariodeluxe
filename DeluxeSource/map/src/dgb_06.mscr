@@ -1,6 +1,8 @@
 % Script File: dgb_06.mscr
 % Decoded from: 0 to B70 (dgb_06)
 
+#define .NpcID:Boo_00               00
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -262,8 +264,8 @@ PADDING: 802403B8 to 802403C0 (000003B8 to 000003C0)
 {
     0:  Set   *GB_WorldLocation  .Location:TubbasManor
    10:  Call  SetSpriteShading  ( .Shading:dgb_06 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80240B44 )
@@ -321,7 +323,7 @@ PADDING: 802403B8 to 802403C0 (000003B8 to 000003C0)
 
 #new:Script $Script_8024076C
 {
-    0:  Set   *VarA  .Item:CastleKey1 % 13
+    0:  Set   *VarA  .Item:TubbaCastleKey % 13
    10:  Set   *VarB  00000001
    20:  Set   *GF_DGB06_Chest_CastleKey1  .True
    30:  ExecWait  $Script_8024068C
@@ -364,7 +366,7 @@ PADDING: 80240834 to 80240840 (00000834 to 00000840)
 #new:Script $Script_Init_802408FC
 {
     0:  If  *GB_StoryProgress  >=  .Story:Ch3_TubbaChasedMarioInFoyer % FFFFFFE6
-   10:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   10:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    2C:  EndIf
    34:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024086C )
    48:  Return
@@ -373,11 +375,11 @@ PADDING: 80240834 to 80240840 (00000834 to 00000840)
 
 #new:NpcGroup $NpcGroup_80240954
 {
-	00000000 $NpcSettings_80240840 ~Vec3f:NPC_80240954 % -300 10 150
+	.NpcID:Boo_00 $NpcSettings_80240840 ~Vec3f:NPC_Boo_00 % -300 10 150
 	00000401 $Script_Init_802408FC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80240954
-	~AnimationTable:NPC_80240954 % .Sprite:Boo
+	~Movement:NPC_Boo_00
+	~AnimationTable:NPC_Boo_00 % .Sprite:Boo
 	00000000 00000000 00000000 001A00B3 % This Boo's hiding in Tubba Blubba's Castle. The ca ...
 }
 

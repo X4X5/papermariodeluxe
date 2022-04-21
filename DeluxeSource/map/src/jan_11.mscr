@@ -1,6 +1,8 @@
 % Script File: jan_11.mscr
 % Decoded from: 0 to 2850 (jan_11)
 
+#define .NpcID:YoshiKid_00          00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -30,7 +32,7 @@
    68:  MFC1      A2, F6
    6C:  TRUNC.W.S F6, F0
    70:  MFC1      A3, F6
-   74:  JAL       ~Func:set_transition_stencil_center_worldpos
+   74:  JAL       ~Func:set_screen_overlay_center_worldpos
    78:  COPY      A1, A0
    7C:  LAB       V0, 8010EBB0
    84:  BEQ       V0, R0, .oD0
@@ -79,10 +81,10 @@
   11C:  LWC1      F6, 70 (S0)
   120:  CVT.S.W   F6, F6
   124:  MFC1      A1, F6
-  128:  JAL       ~Func:set_transition_stencil_alpha
+  128:  JAL       ~Func:set_screen_overlay_alpha
   12C:  LI        A0, 1
   130:  LUI       A1, 437F
-  134:  JAL       ~Func:set_transition_stencil_zoom_1
+  134:  JAL       ~Func:set_screen_overlay_params_back
   138:  ADDIU     A0, R0, B
   13C:  LW        RA, 24 (SP)
   140:  LW        S2, 20 (SP)
@@ -600,13 +602,13 @@ PADDING: 8024088C to 80240890 (0000088C to 00000890)
    50:  Call  GetCurrentPartnerID   ( *Var0 )
    60:  If  *Var0  !=  .Partner:None % 0
    70:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-   84:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   84:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    A0:  EndIf
    A8:  Call  GetEntryID    ( *Var0 )
    B8:  Call  $Function_80240248 ( )
    C4:  Sub   *Var2  00000028
    D4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   EC:  Call  InterpPlayerYaw   ( *Var4 00000000 )
+   EC:  Call  InterpPlayerYaw   ( *Var4  0` )
   100:  Call  PlaySound     ( 00000163 )
   110:  Call  802D286C      ( 00000100 )
   120:  Call  802D2520      ( 00010000 00000005 00000002 00000001 00000001 00000000 )
@@ -661,7 +663,7 @@ PADDING: 8024088C to 80240890 (0000088C to 00000890)
    84:  Set   *Var7  *Var3
    94:  Add   *Var2  00000002
    A4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   BC:  Call  InterpPlayerYaw       ( *Var4 00000000 )
+   BC:  Call  InterpPlayerYaw       ( *Var4  0` )
    D0:  If  *Var4  ==  0000005A
    E0:  	Add   *Var5  00000028
    F0:  Else
@@ -675,8 +677,8 @@ PADDING: 8024088C to 80240890 (0000088C to 00000890)
   184:  If  *Var0  !=  .Partner:None % 0
   194:  	Call  DisablePartnerAI  ( 00000000 )
   1A4:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-  1B8:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
-  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000000 )
+  1B8:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
+  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0  0` )
   1EC:  EndIf
   1F4:  Wait  1`
   200:  Call  PlaySound ( 00000163 )
@@ -745,13 +747,13 @@ PADDING: 8024088C to 80240890 (0000088C to 00000890)
    28:  Call  HidePlayerShadow  ( .True )
    38:  Set   *Var0  *VarA
    48:  Call  $Function_80240248 ( )
-   54:  Call  PlayerMoveTo      ( *Var1 *Var3 00000003 )
+   54:  Call  PlayerMoveTo      ( *Var1 *Var3  3` )
    6C:  Set   *Var0  *VarA
    7C:  Call  $Function_80240248 ( )
    88:  Call  SetPlayerPos      ( *Var1 *Var2 *Var3 )
    A0:  Call  SetPlayerFlagBits ( 00200000 .True )
    B4:  Call  $Function_80240328 ( )
-   C0:  Call  InterpPlayerYaw   ( *Var0 00000000 )
+   C0:  Call  InterpPlayerYaw   ( *Var0  0` )
    D4:  Wait  2`
    E0:  Call  SetPlayerFlagBits ( 00200000 .False )
    F4:  Call  PlaySound ( 00000163 )
@@ -809,7 +811,7 @@ PADDING: 8024088C to 80240890 (0000088C to 00000890)
   1B0:  If  *Var4  >=  00000168
   1C0:  	Sub   *Var4  00000168
   1D0:  EndIf
-  1D8:  Call  InterpPlayerYaw       ( *Var8 00000001 )
+  1D8:  Call  InterpPlayerYaw       ( *Var8  1` )
   1EC:  Wait  1`
   1F8:  Call  PlaySound     ( 00000163 )
   208:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -1020,8 +1022,8 @@ PADDING: 8024088C to 80240890 (0000088C to 00000890)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80242820 )
@@ -1047,7 +1049,7 @@ PADDING: 8024204C to 80242050 (0000204C to 00002050)
 {
     0:  Set   *AreaFlag[002]  .False
    10:  Loop
-   1C:  	Call  PlaySoundAtNpc    ( 00000000 000001F0 00000000 )
+   1C:  	Call  PlaySoundAtNpc    ( .NpcID:YoshiKid_00 000001F0 00000000 )
    34:  	Wait  20`
    40:  	If  *AreaFlag[002]  ==  .True
    50:  		BreakLoop
@@ -1083,12 +1085,12 @@ PADDING: 8024204C to 80242050 (0000204C to 00002050)
   12C:  	Add   *Var1  0000001E
   13C:  EndIf
   144:  Call  SetPlayerSpeed    ( *Fixed[1.0] )
-  154:  Call  PlayerMoveTo  ( *Var1 *Var3 00000000 )
-  16C:  Call  PlayerFaceNpc ( .Npc:Self 00000000 )
+  154:  Call  PlayerMoveTo  ( *Var1 *Var3  0` )
+  16C:  Call  PlayerFaceNpc ( .Npc:Self .False )
   180:  Sub   *Var4  *Var1
   190:  Div   *Var4  00000002
   1A0:  Add   *Var1  *Var4
-  1B0:  Call  AdjustCam     ( .Cam:Default *Fixed[4.0] *Var4 0000015E *Fixed[17.0] *Fixed[-7.0] )
+  1B0:  Call  AdjustCam     ( .Cam:Default *Fixed[4.0] *Var4  350` *Fixed[17.0] *Fixed[-7.0] )
   1D4:  Set   *AreaFlag[002]  .True
   1E4:  Wait  15`
   1F0:  Call  NpcFacePlayer ( .Npc:Self 00000000 )
@@ -1102,9 +1104,9 @@ PADDING: 8024204C to 80242050 (0000204C to 00002050)
   274:  	Call  SetNpcFlagBits    ( .Npc:Self 00000300 .True )
   28C:  	Call  SetNpcAnimation   ( .Npc:Self 00970003 )
   2A0:  	Call  SetNpcSpeed       ( .Npc:Self *Fixed[5.0] )
-  2B4:  	Call  NpcMoveTo ( .Npc:Self FFFFFF9C 00000032 00000000 )
+  2B4:  	Call  NpcMoveTo ( .Npc:Self  -100`  50`  0` )
   2D0:  	Call  SetNpcFlagBits    ( .Npc:Self 00000200 .False )
-  2E8:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  2E8:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   304:  EndThread
   30C:  Set   *GF_JAN11_SavedYoshi  .True
   31C:  Set   *Var0  00000000
@@ -1143,7 +1145,7 @@ PADDING: 8024204C to 80242050 (0000204C to 00002050)
    10:  	Exec  $Script_8024207C
    1C:  	If  *GF_JAN11_SavedYoshi  ==  .False
    2C:  		Call  SetNpcAnimation   ( .Npc:Self 00970006 )
-   40:  		Call  SetNpcPos ( .Npc:Self 00000084 00000055 0000000B )
+   40:  		Call  SetNpcPos ( .Npc:Self  132`  85`  11` )
    5C:  		Call  BindNpcIdle       ( .Npc:Self $Script_Idle_802420F4 )
    70:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80242544 )
    84:  		Return
@@ -1156,11 +1158,11 @@ PADDING: 8024204C to 80242050 (0000204C to 00002050)
 
 #new:NpcGroup $NpcGroup_80242630
 {
-	00000000 $NpcSettings_80242050 ~Vec3f:NPC_80242630 % -450 0 -160
+	.NpcID:YoshiKid_00 $NpcSettings_80242050 ~Vec3f:NPC_YoshiKid_00 % -450 0 -160
 	0040090D $Script_Init_80242574 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242630
-	~AnimationTable:NPC_80242630 % .Sprite:YoshiKid
+	~Movement:NPC_YoshiKid_00
+	~AnimationTable:NPC_YoshiKid_00 % .Sprite:YoshiKid
 	00000000 00000000 00000000 001A00C3 % He's a green Yoshi kid. He's an excitable rascal,  ...
 }
 

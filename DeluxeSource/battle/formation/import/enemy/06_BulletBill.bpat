@@ -102,7 +102,7 @@
   234:  	Call  SetActorJumpGravity   ( .Actor:Self *Fixed[0.01] )
   248:  	Call  SetAnimation  ( .Actor:Self 00000001 002D0003 )
   260:  	Call  SetGoalPos    ( .Actor:Self *Var1 *Var2 *Var3 )
-  27C:  	Call  JumpToGoal    ( .Actor:Self 00000005 .False .True .False )
+  27C:  	Call  JumpToGoal    ( .Actor:Self  5` .False .True .False )
   29C:  	Call  SetAnimation  ( .Actor:Self 00000001 002D0001 )
   2B4:  	Call  ForceHomePos  ( .Actor:Self *Var1 *Var2 *Var3 )
   2D0:  	Call  HPBarToHome   ( .Actor:Self )
@@ -232,7 +232,7 @@
   1AC:  		Sub   *Var0  0000005A 
   1BC:  		Call  SetActorJumpGravity   ( .Actor:Self *Fixed[0.01] )
   1D0:  		Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  1EC:  		Call  JumpToGoal    ( .Actor:Self 00000012 .False .True .False )
+  1EC:  		Call  JumpToGoal    ( .Actor:Self  18` .False .True .False )
   20C:  		If  *VarA  ==  .HitResult:Lucky % 5
   21C:  			Call  EnemyTestTarget   ( .Actor:Self *Var0 ~Flags:DamageType:TriggerLucky 00000000 00000000 00000000 )
   240:  		EndIf
@@ -251,7 +251,7 @@
   308:  Add   *Var0  0000000A 
   318:  Call  SetActorJumpGravity   ( .Actor:Self *Fixed[0.01] )
   32C:  Call  SetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
-  348:  Call  JumpToGoal        ( .Actor:Self 0000000C .False .True .False )
+  348:  Call  JumpToGoal        ( .Actor:Self  12` .False .True .False )
   368:  ExecWait  $Script_80219BE0_06 
   374:  Call  SetGoalToTarget   ( .Actor:Self )
   384:  Wait  2`
@@ -276,7 +276,7 @@
    D4:  Call  PlaySoundAtActor  ( .Actor:Self 00002078 )
    E8:  Call  StartRumble   ( 0000000B )
    F8:  Thread
-  100:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000005 *Fixed[1.0] )
+  100:  	Call  ShakeCam  ( .Cam:Battle 00000000  5` *Fixed[1.0] )
   11C:  EndThread
   124:  Return
   12C:  End

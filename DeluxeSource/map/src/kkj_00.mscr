@@ -1,6 +1,36 @@
 % Script File: kkj_00.mscr
 % Decoded from: 0 to 9EE0 (kkj_00)
 
+#define .NpcID:WorldSushie_11       0B
+#define .NpcID:WorldLakilester_12   0C
+#define .NpcID:Merlon_13            0D
+#define .NpcID:Merluvlee_14         0E
+#define .NpcID:Merlow_15            0F
+#define .NpcID:WorldMerlee_16       10
+#define .NpcID:Merle_17             11
+#define .NpcID:Lakilulu_18          12
+#define .NpcID:Bootler_19           13
+#define .NpcID:Goompa_20            14
+#define .NpcID:Goombaria_21         15
+#define .NpcID:Yoshi_22             16
+#define .NpcID:Penguin_24           18
+#define .NpcID:Penguin_25           19
+#define .NpcID:Dryite_26            1A
+#define .NpcID:Ninji_28             1C
+#define .NpcID:Toad_31              1F
+#define .NpcID:Toad_32              20
+#define .NpcID:Toad_33              21
+#define .NpcID:Toad_34              22
+#define .NpcID:ThreeSisters_36      24
+#define .NpcID:ThreeSisters_37      25
+#define .NpcID:ThreeSisters_38      26
+#define .NpcID:ThreeSisters_39      27
+#define .NpcID:ToadGuard_40         28
+#define .NpcID:ToadGuard_41         29
+#define .NpcID:ToadGuard_42         2A
+#define .NpcID:ToadGuard_44         2C
+#define .NpcID:ToadGuard_46         2E
+
 #new:Function_Init $Function_Init
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1073,12 +1103,12 @@ PADDING: 802400A8 to 802400B0 (000000A8 to 000000B0)
    18:  CLEAR     A0
    1C:  LI        A1, D0
    20:  COPY      A2, A1
-   24:  JAL       ~Func:set_transition_stencil_color
+   24:  JAL       ~Func:set_screen_overlay_color
    28:  COPY      A3, A1
    2C:  LWC1      F0, 74 (S0)
    30:  CVT.S.W   F0, F0
    34:  MFC1      A1, F0
-   38:  JAL       ~Func:set_transition_stencil_zoom_0
+   38:  JAL       ~Func:set_screen_overlay_params_front
    3C:  LI        A0, 1
    40:  LW        V0, 74 (S0)
    44:  LI        V1, FF
@@ -1183,7 +1213,7 @@ PADDING: 8024113C to 80241140 (0000113C to 00001140)
 #new:Script $Script_802412A8
 {
     0:  Call  DisablePlayerInput        ( .True )
-   10:  Call  ShowMessageAtScreenPos    ( 001D0163 000000A0 00000028 ) % It doesn't seem to open.
+   10:  Call  ShowMessageAtScreenPos    ( 001D0163  160`  40` ) % It doesn't seem to open.
    28:  Call  DisablePlayerInput        ( .False )
    38:  Return
    40:  End
@@ -1284,8 +1314,8 @@ PADDING: 8024113C to 80241140 (0000113C to 00001140)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachCastleGrounds
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  If  *GB_StoryProgress  ==  .Story:Intro % FFFFFF80
@@ -1417,7 +1447,7 @@ MISSING: 80241920 to 8024194C (00001920 to 0000194C)
    5C:  	Wait  50`
    68:  	Call  SetNpcSpeed       ( 00000001 *Fixed[2.0] )
    7C:  	Call  SetNpcAnimation   ( 00000001 00830002 )
-   90:  	Call  NpcMoveTo ( 00000001 0000003C 00000140 00000000 )
+   90:  	Call  NpcMoveTo ( 00000001  60`  320`  0` )
    AC:  	Call  SetNpcAnimation   ( 00000001 00830001 )
    C0:  EndIf
    C8:  Loop
@@ -1444,9 +1474,9 @@ MISSING: 80241920 to 8024194C (00001920 to 0000194C)
     0:  Loop
     C:  	Wait  150`
    18:  	Loop  00000002
-   24:  		Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000007 )
+   24:  		Call  InterpNpcYaw  ( .Npc:Self  90`  7` )
    3C:  		Wait  20`
-   48:  		Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000007 )
+   48:  		Call  InterpNpcYaw  ( .Npc:Self  270`  7` )
    60:  		Wait  20`
    6C:  	EndLoop
    74:  EndLoop
@@ -1557,14 +1587,14 @@ MISSING: 80241920 to 8024194C (00001920 to 0000194C)
 
 #new:Script $Script_Init_80242198
 {
-    0:  Call  SetNpcCollisionSize   ( .Npc:Self 0000002E 0000001A )
+    0:  Call  SetNpcCollisionSize   ( .Npc:Self  46`  26` )
    18:  Call  GetEntryID    ( *Var0 )
    28:  If  *Var0  ==  ~Entry:Entry5
-   38:  	Call  SetNpcPos ( .Npc:Self 00000000 00000000 00000244 )
-   54:  	Call  SetNpcYaw ( .Npc:Self 00000000 )
+   38:  	Call  SetNpcPos ( .Npc:Self  0`  0`  580` )
+   54:  	Call  SetNpcYaw ( .Npc:Self  0` )
    68:  Else
-   70:  	Call  SetNpcPos ( .Npc:Self 00000014 00000000 00000140 )
-   8C:  	Call  SetNpcYaw ( .Npc:Self 0000005A )
+   70:  	Call  SetNpcPos ( .Npc:Self  20`  0`  320` )
+   8C:  	Call  SetNpcYaw ( .Npc:Self  90` )
    A0:  EndIf
    A8:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80241DD8 )
    BC:  Return
@@ -1575,8 +1605,8 @@ MISSING: 80241920 to 8024194C (00001920 to 0000194C)
 {
     0:  Call  GetEntryID    ( *Var0 )
    10:  If  *Var0  !=  ~Entry:Entry5
-   20:  	Call  SetNpcPos ( .Npc:Self 0000003C 00000000 00000140 )
-   3C:  	Call  SetNpcYaw ( .Npc:Self 0000010E )
+   20:  	Call  SetNpcPos ( .Npc:Self  60`  0`  320` )
+   3C:  	Call  SetNpcYaw ( .Npc:Self  270` )
    50:  EndIf
    58:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80241B80 )
    6C:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80241E64 )
@@ -1785,11 +1815,11 @@ PADDING: 802439DC to 802439E0 (000039DC to 000039E0)
    1C:  Thread
    24:  	Call  SetNpcSpeed       ( 00000000 *Fixed[4.0] )
    38:  	Call  SetNpcAnimation   ( 00000000 0082001E )
-   4C:  	Call  NpcMoveTo ( 00000000 00000014 00000140 00000000 )
+   4C:  	Call  NpcMoveTo ( 00000000  20`  320`  0` )
    68:  	Call  SetNpcAnimation   ( 00000000 00820004 )
    7C:  EndThread
    84:  Call  802D1270  ( 00000050 0000012C *Fixed[4.0] )
-   9C:  Call  InterpPlayerYaw   ( 0000010E 00000005 )
+   9C:  Call  InterpPlayerYaw   (  270`  5` )
    B0:  Wait  30`
    BC:  Call  SpeakToPlayer     ( 00000000 00820014 00820004 00000000 00000024 ) % What a magnificent castle! I never get used to thi ...
    DC:  Wait  20`
@@ -1825,16 +1855,16 @@ MISSING: 80243CBC to 80243CE8 (00003CBC to 00003CE8)
 
 #new:Script $Script_Init_80243D40
 {
-    0:  Call  SetNpcPos ( .Npc:Self FFFFFED4 00000000 00000127 )
-   1C:  Call  SetNpcYaw ( .Npc:Self 0000005A )
+    0:  Call  SetNpcPos ( .Npc:Self  -300`  0`  295` )
+   1C:  Call  SetNpcYaw ( .Npc:Self  90` )
    30:  Return
    38:  End
 }
 
 #new:Script $Script_Init_80243D80
 {
-    0:  Call  SetNpcPos ( .Npc:Self FFFFFF51 00000000 FFFFFFB5 )
-   1C:  Call  SetNpcYaw ( .Npc:Self 0000005A )
+    0:  Call  SetNpcPos ( .Npc:Self  -175`  0`  -75` )
+   1C:  Call  SetNpcYaw ( .Npc:Self  90` )
    30:  Return
    38:  End
 }
@@ -1842,32 +1872,32 @@ MISSING: 80243CBC to 80243CE8 (00003CBC to 00003CE8)
 % Origin: HEURISTIC
 #new:Script $Script_80243DC0
 {
-    0:  Call  SetNpcPos ( .Npc:Self FFFFFE48 00000000 000000DC )
-   1C:  Call  SetNpcYaw ( .Npc:Self 0000005A )
+    0:  Call  SetNpcPos ( .Npc:Self  -440`  0`  220` )
+   1C:  Call  SetNpcYaw ( .Npc:Self  90` )
    30:  Return
    38:  End
 }
 
 #new:Script $Script_Init_80243E00
 {
-    0:  Call  SetNpcPos ( .Npc:Self 00000127 00000000 FFFFFFF1 )
-   1C:  Call  SetNpcYaw ( .Npc:Self 0000010E )
+    0:  Call  SetNpcPos ( .Npc:Self  295`  0`  -15` )
+   1C:  Call  SetNpcYaw ( .Npc:Self  270` )
    30:  Return
    38:  End
 }
 
 #new:Script $Script_Init_80243E40
 {
-    0:  Call  SetNpcPos ( .Npc:Self 00000145 00000000 FFFFFFF6 )
-   1C:  Call  SetNpcYaw ( .Npc:Self 0000010E )
+    0:  Call  SetNpcPos ( .Npc:Self  325`  0`  -10` )
+   1C:  Call  SetNpcYaw ( .Npc:Self  270` )
    30:  Return
    38:  End
 }
 
 #new:Script $Script_Init_80243E80
 {
-    0:  Call  SetNpcPos ( .Npc:Self 00000032 00000064 FFFFFE93 )
-   1C:  Call  SetNpcYaw ( .Npc:Self 0000010E )
+    0:  Call  SetNpcPos ( .Npc:Self  50`  100`  -365` )
+   1C:  Call  SetNpcYaw ( .Npc:Self  270` )
    30:  Return
    38:  End
 }
@@ -2112,247 +2142,247 @@ MISSING: 80243CBC to 80243CE8 (00003CBC to 00003CE8)
 	00000000 00000000 $ExtraAnimationList_80243F84 00000000 % no tattle string
 	%
 	% $NpcGroup_802449F4[BA0]
-	0000000B $NpcSettings_80243D14 ~Vec3f:NPC_80245594 % -190 0 50
+	.NpcID:WorldSushie_11 $NpcSettings_80243D14 ~Vec3f:NPC_WorldSushie_11 % -190 0 50
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245594
-	~AnimationTable:NPC_80245594 % .Sprite:WorldSushie
+	~Movement:NPC_WorldSushie_11
+	~AnimationTable:NPC_WorldSushie_11 % .Sprite:WorldSushie
 	00000000 00000000 $ExtraAnimationList_80243F90 00000000 % no tattle string
 	%
 	% $NpcGroup_802449F4[D90]
-	0000000C $NpcSettings_80243D14 ~Vec3f:NPC_80245784 % -320 0 -60
+	.NpcID:WorldLakilester_12 $NpcSettings_80243D14 ~Vec3f:NPC_WorldLakilester_12 % -320 0 -60
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245784
-	~AnimationTable:NPC_80245784 % .Sprite:WorldLakilester
+	~Movement:NPC_WorldLakilester_12
+	~AnimationTable:NPC_WorldLakilester_12 % .Sprite:WorldLakilester
 	00000000 00000000 $ExtraAnimationList_80243F9C 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245974
 {
-	0000000D $NpcSettings_80243D14 ~Vec3f:NPC_80245974 % -145 0 415
+	.NpcID:Merlon_13 $NpcSettings_80243D14 ~Vec3f:NPC_Merlon_13 % -145 0 415
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245974
-	~AnimationTable:NPC_80245974 % .Sprite:Merlon
+	~Movement:NPC_Merlon_13
+	~AnimationTable:NPC_Merlon_13 % .Sprite:Merlon
 	00000000 00000000 $ExtraAnimationList_80243FA8 00000000 % no tattle string
 	%
 	% $NpcGroup_80245974[1F0]
-	0000000E $NpcSettings_80243D14 ~Vec3f:NPC_80245B64 % -225 0 380
+	.NpcID:Merluvlee_14 $NpcSettings_80243D14 ~Vec3f:NPC_Merluvlee_14 % -225 0 380
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245B64
-	~AnimationTable:NPC_80245B64 % .Sprite:Merluvlee
+	~Movement:NPC_Merluvlee_14
+	~AnimationTable:NPC_Merluvlee_14 % .Sprite:Merluvlee
 	00000000 00000000 $ExtraAnimationList_80243FB4 00000000 % no tattle string
 	%
 	% $NpcGroup_80245974[3E0]
-	0000000F $NpcSettings_80243D14 ~Vec3f:NPC_80245D54 % -175 0 330
+	.NpcID:Merlow_15 $NpcSettings_80243D14 ~Vec3f:NPC_Merlow_15 % -175 0 330
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245D54
-	~AnimationTable:NPC_80245D54 % .Sprite:Merlow
+	~Movement:NPC_Merlow_15
+	~AnimationTable:NPC_Merlow_15 % .Sprite:Merlow
 	00000000 00000000 $ExtraAnimationList_80243FC0 00000000 % no tattle string
 	%
 	% $NpcGroup_80245974[5D0]
-	00000010 $NpcSettings_80243D14 ~Vec3f:NPC_80245F44 % -250 0 350
+	.NpcID:WorldMerlee_16 $NpcSettings_80243D14 ~Vec3f:NPC_WorldMerlee_16 % -250 0 350
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245F44
-	~AnimationTable:NPC_80245F44 % .Sprite:WorldMerlee
+	~Movement:NPC_WorldMerlee_16
+	~AnimationTable:NPC_WorldMerlee_16 % .Sprite:WorldMerlee
 	00000000 00000000 $ExtraAnimationList_80243FCC 00000000 % no tattle string
 	%
 	% $NpcGroup_80245974[7C0]
-	00000011 $NpcSettings_80243D14 ~Vec3f:NPC_80246134 % -220 0 450
+	.NpcID:Merle_17 $NpcSettings_80243D14 ~Vec3f:NPC_Merle_17 % -220 0 450
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246134
-	~AnimationTable:NPC_80246134 % .Sprite:Merle
+	~Movement:NPC_Merle_17
+	~AnimationTable:NPC_Merle_17 % .Sprite:Merle
 	00000000 00000000 $ExtraAnimationList_80243FD8 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80246324
 {
-	00000012 $NpcSettings_80243D14 ~Vec3f:NPC_80246324 % -365 0 -60
+	.NpcID:Lakilulu_18 $NpcSettings_80243D14 ~Vec3f:NPC_Lakilulu_18 % -365 0 -60
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246324
-	~AnimationTable:NPC_80246324 % .Sprite:Lakilulu
+	~Movement:NPC_Lakilulu_18
+	~AnimationTable:NPC_Lakilulu_18 % .Sprite:Lakilulu
 	00000000 00000000 $ExtraAnimationList_80243FE4 00000000 % no tattle string
 	%
 	% $NpcGroup_80246324[1F0]
-	00000013 $NpcSettings_80243D14 ~Vec3f:NPC_80246514 % -340 0 100
+	.NpcID:Bootler_19 $NpcSettings_80243D14 ~Vec3f:NPC_Bootler_19 % -340 0 100
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246514
-	~AnimationTable:NPC_80246514 % .Sprite:Bootler
+	~Movement:NPC_Bootler_19
+	~AnimationTable:NPC_Bootler_19 % .Sprite:Bootler
 	00000000 00000000 $ExtraAnimationList_80243FF0 00000000 % no tattle string
 	%
 	% $NpcGroup_80246324[3E0]
-	00000014 $NpcSettings_80243D14 ~Vec3f:NPC_80246704 % 170 0 0
+	.NpcID:Goompa_20 $NpcSettings_80243D14 ~Vec3f:NPC_Goompa_20 % 170 0 0
 	3F002F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80246704
-	~AnimationTable:NPC_80246704 % .Sprite:Goompa
+	~Movement:NPC_Goompa_20
+	~AnimationTable:NPC_Goompa_20 % .Sprite:Goompa
 	00000000 00000000 $ExtraAnimationList_80243FFC 00000000 % no tattle string
 	%
 	% $NpcGroup_80246324[5D0]
-	00000015 $NpcSettings_80243D14 ~Vec3f:NPC_802468F4 % 140 0 50
+	.NpcID:Goombaria_21 $NpcSettings_80243D14 ~Vec3f:NPC_Goombaria_21 % 140 0 50
 	3F002F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802468F4
-	~AnimationTable:NPC_802468F4 % .Sprite:Goombaria
+	~Movement:NPC_Goombaria_21
+	~AnimationTable:NPC_Goombaria_21 % .Sprite:Goombaria
 	00000000 00000000 $ExtraAnimationList_80244008 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80246AE4
 {
-	00000016 $NpcSettings_80243D14 ~Vec3f:NPC_80246AE4 % -340 0 310
+	.NpcID:Yoshi_22 $NpcSettings_80243D14 ~Vec3f:NPC_Yoshi_22 % -340 0 310
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246AE4
-	~AnimationTable:NPC_80246AE4 % .Sprite:Yoshi
+	~Movement:NPC_Yoshi_22
+	~AnimationTable:NPC_Yoshi_22 % .Sprite:Yoshi
 	00000000 00000000 $ExtraAnimationList_80244014 00000000 % no tattle string
 	%
 	% $NpcGroup_80246AE4[1F0]
-	00000018 $NpcSettings_80243D14 ~Vec3f:NPC_80246CD4 % 225 0 -80
+	.NpcID:Penguin_24 $NpcSettings_80243D14 ~Vec3f:NPC_Penguin_24 % 225 0 -80
 	3F002F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80246CD4
-	~AnimationTable:NPC_80246CD4 % .Sprite:Penguin
+	~Movement:NPC_Penguin_24
+	~AnimationTable:NPC_Penguin_24 % .Sprite:Penguin
 	00000000 00000000 $ExtraAnimationList_80244020 00000000 % no tattle string
 	%
 	% $NpcGroup_80246AE4[3E0]
-	00000019 $NpcSettings_80243D14 ~Vec3f:NPC_80246EC4 % -250 0 -150
+	.NpcID:Penguin_25 $NpcSettings_80243D14 ~Vec3f:NPC_Penguin_25 % -250 0 -150
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80246EC4
-	~AnimationTable:NPC_80246EC4 % .Sprite:Penguin
+	~Movement:NPC_Penguin_25
+	~AnimationTable:NPC_Penguin_25 % .Sprite:Penguin
 	00000000 00000000 $ExtraAnimationList_80244020 00000000 % no tattle string
 	%
 	% $NpcGroup_80246AE4[5D0]
-	0000001A $NpcSettings_80243D14 ~Vec3f:NPC_802470B4 % -320 0 245
+	.NpcID:Dryite_26 $NpcSettings_80243D14 ~Vec3f:NPC_Dryite_26 % -320 0 245
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802470B4
-	~AnimationTable:NPC_802470B4 % .Sprite:Dryite
+	~Movement:NPC_Dryite_26
+	~AnimationTable:NPC_Dryite_26 % .Sprite:Dryite
 	00000000 00000000 $ExtraAnimationList_8024402C 00000000 % no tattle string
 	%
 	% $NpcGroup_80246AE4[7C0]
-	0000001C $NpcSettings_80243D14 ~Vec3f:NPC_802472A4 % -395 68 50
+	.NpcID:Ninji_28 $NpcSettings_80243D14 ~Vec3f:NPC_Ninji_28 % -395 68 50
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802472A4
-	~AnimationTable:NPC_802472A4 % .Sprite:Ninji
+	~Movement:NPC_Ninji_28
+	~AnimationTable:NPC_Ninji_28 % .Sprite:Ninji
 	00000000 00000000 $ExtraAnimationList_80244038 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80247494
 {
-	0000001F $NpcSettings_80243C90 ~Vec3f:NPC_80247494 % 200 0 420
+	.NpcID:Toad_31 $NpcSettings_80243C90 ~Vec3f:NPC_Toad_31 % 200 0 420
 	3F002F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80247494
-	~AnimationTable:NPC_80247494 % .Sprite:Toad
+	~Movement:NPC_Toad_31
+	~AnimationTable:NPC_Toad_31 % .Sprite:Toad
 	00000000 00000000 $ExtraAnimationList_80243F20 00000000 % no tattle string
 	%
 	% $NpcGroup_80247494[1F0]
-	00000020 $NpcSettings_80243C90 ~Vec3f:NPC_80247684 % -120 0 205
+	.NpcID:Toad_32 $NpcSettings_80243C90 ~Vec3f:NPC_Toad_32 % -120 0 205
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80247684
-	~AnimationTable:NPC_80247684 % .Sprite:Toad
+	~Movement:NPC_Toad_32
+	~AnimationTable:NPC_Toad_32 % .Sprite:Toad
 	00000000 00000000 $ExtraAnimationList_80243F20 00000000 % no tattle string
 	%
 	% $NpcGroup_80247494[3E0]
-	00000021 $NpcSettings_80243C90 ~Vec3f:NPC_80247874 % -440 0 220
+	.NpcID:Toad_33 $NpcSettings_80243C90 ~Vec3f:NPC_Toad_33 % -440 0 220
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80247874
-	~AnimationTable:NPC_80247874 % .Sprite:Toad
+	~Movement:NPC_Toad_33
+	~AnimationTable:NPC_Toad_33 % .Sprite:Toad
 	00000000 00000000 $ExtraAnimationList_80243F20 00000000 % no tattle string
 	%
 	% $NpcGroup_80247494[5D0]
-	00000022 $NpcSettings_80243C90 ~Vec3f:NPC_80247A64 % 285 0 290
+	.NpcID:Toad_34 $NpcSettings_80243C90 ~Vec3f:NPC_Toad_34 % 285 0 290
 	3F002F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80247A64
-	~AnimationTable:NPC_80247A64 % .Sprite:Toad
+	~Movement:NPC_Toad_34
+	~AnimationTable:NPC_Toad_34 % .Sprite:Toad
 	00000000 00000000 $ExtraAnimationList_80243F20 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80247C54
 {
-	00000024 $NpcSettings_80243C90 ~Vec3f:NPC_80247C54 % -300 0 100
+	.NpcID:ThreeSisters_36 $NpcSettings_80243C90 ~Vec3f:NPC_ThreeSisters_36 % -300 0 100
 	3F002F0D $Script_Init_80243E00 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80247C54
-	~AnimationTable:NPC_80247C54 % .Sprite:ThreeSisters
+	~Movement:NPC_ThreeSisters_36
+	~AnimationTable:NPC_ThreeSisters_36 % .Sprite:ThreeSisters
 	00000000 00000000 $ExtraAnimationList_80243F2C 00000000 % no tattle string
 	%
 	% $NpcGroup_80247C54[1F0]
-	00000025 $NpcSettings_80243C90 ~Vec3f:NPC_80247E44 % -270 0 85
+	.NpcID:ThreeSisters_37 $NpcSettings_80243C90 ~Vec3f:NPC_ThreeSisters_37 % -270 0 85
 	3F002F0D $Script_Init_80243E40 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80247E44
-	~AnimationTable:NPC_80247E44 % .Sprite:ThreeSisters
+	~Movement:NPC_ThreeSisters_37
+	~AnimationTable:NPC_ThreeSisters_37 % .Sprite:ThreeSisters
 	00000000 00000000 $ExtraAnimationList_80243F2C 00000000 % no tattle string
 	%
 	% $NpcGroup_80247C54[3E0]
-	00000026 $NpcSettings_80243C90 ~Vec3f:NPC_80248034 % -190 0 160
+	.NpcID:ThreeSisters_38 $NpcSettings_80243C90 ~Vec3f:NPC_ThreeSisters_38 % -190 0 160
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80248034
-	~AnimationTable:NPC_80248034 % .Sprite:ThreeSisters
+	~Movement:NPC_ThreeSisters_38
+	~AnimationTable:NPC_ThreeSisters_38 % .Sprite:ThreeSisters
 	00000000 00000000 $ExtraAnimationList_80243F2C 00000000 % no tattle string
 	%
 	% $NpcGroup_80247C54[5D0]
-	00000027 $NpcSettings_80243C90 ~Vec3f:NPC_80248224 % 190 0 300
+	.NpcID:ThreeSisters_39 $NpcSettings_80243C90 ~Vec3f:NPC_ThreeSisters_39 % 190 0 300
 	3F002F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248224
-	~AnimationTable:NPC_80248224 % .Sprite:ThreeSisters
+	~Movement:NPC_ThreeSisters_39
+	~AnimationTable:NPC_ThreeSisters_39 % .Sprite:ThreeSisters
 	00000000 00000000 $ExtraAnimationList_80243F2C 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80248414
 {
-	00000028 $NpcSettings_80243C90 ~Vec3f:NPC_80248414 % 100 0 150
+	.NpcID:ToadGuard_40 $NpcSettings_80243C90 ~Vec3f:NPC_ToadGuard_40 % 100 0 150
 	3F002F0D $Script_Init_80243E80 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248414
-	~AnimationTable:NPC_80248414 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_40
+	~AnimationTable:NPC_ToadGuard_40 % .Sprite:ToadGuard
 	00000000 00000000 $ExtraAnimationList_80243F38 00000000 % no tattle string
 	%
 	% $NpcGroup_80248414[1F0]
-	00000029 $NpcSettings_80243C90 ~Vec3f:NPC_80248604 % -50 100 -365
+	.NpcID:ToadGuard_41 $NpcSettings_80243C90 ~Vec3f:NPC_ToadGuard_41 % -50 100 -365
 	3F002F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248604
-	~AnimationTable:NPC_80248604 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_41
+	~AnimationTable:NPC_ToadGuard_41 % .Sprite:ToadGuard
 	00000000 00000000 $ExtraAnimationList_80243F38 00000000 % no tattle string
 	%
 	% $NpcGroup_80248414[3E0]
-	0000002A $NpcSettings_80243C90 ~Vec3f:NPC_802487F4 % 225 0 125
+	.NpcID:ToadGuard_42 $NpcSettings_80243C90 ~Vec3f:NPC_ToadGuard_42 % 225 0 125
 	3F002F0D 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802487F4
-	~AnimationTable:NPC_802487F4 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_42
+	~AnimationTable:NPC_ToadGuard_42 % .Sprite:ToadGuard
 	00000000 00000000 $ExtraAnimationList_80243F38 00000000 % no tattle string
 	%
 	% $NpcGroup_80248414[5D0]
-	0000002C $NpcSettings_80243C90 ~Vec3f:NPC_802489E4 % -392 40 -230
+	.NpcID:ToadGuard_44 $NpcSettings_80243C90 ~Vec3f:NPC_ToadGuard_44 % -392 40 -230
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802489E4
-	~AnimationTable:NPC_802489E4 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_44
+	~AnimationTable:NPC_ToadGuard_44 % .Sprite:ToadGuard
 	00000000 00000000 $ExtraAnimationList_80243F38 00000000 % no tattle string
 	%
 	% $NpcGroup_80248414[7C0]
-	0000002E $NpcSettings_80243C90 ~Vec3f:NPC_80248BD4 % -392 40 -230
+	.NpcID:ToadGuard_46 $NpcSettings_80243C90 ~Vec3f:NPC_ToadGuard_46 % -392 40 -230
 	3F002F0D 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80248BD4
-	~AnimationTable:NPC_80248BD4 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_46
+	~AnimationTable:NPC_ToadGuard_46 % .Sprite:ToadGuard
 	00000000 00000000 $ExtraAnimationList_80243F38 00000000 % no tattle string
 }
 
@@ -2434,33 +2464,33 @@ PADDING: 80248E3C to 80248E40 (00008E3C to 00008E40)
 #new:Script $Script_80249178
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  UseSettingsFrom   ( .Cam:Default 00000032 00000000 000000FA )
-   2C:  Call  SetPanTarget  ( .Cam:Default 00000032 00000000 000000FA )
+   10:  Call  UseSettingsFrom   ( .Cam:Default  50`  0`  250` )
+   2C:  Call  SetPanTarget  ( .Cam:Default  50`  0`  250` )
    48:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    5C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    74:  Wait  10`
    80:  Exec  $Script_80248E40
    8C:  Call  802D1270      ( 00000000 0000012C *Fixed[4.0] )
    A4:  Call  SetNpcAnimation   ( 00000001 00890002 )
-   B8:  Call  NpcMoveTo     ( 00000001 0000004A 000000F3 0000000A )
+   B8:  Call  NpcMoveTo     ( 00000001  74`  243`  10` )
    D4:  Call  SetNpcAnimation   ( 00000001 00890001 )
    E8:  Call  SpeakToPlayer ( 00000001 00890004 00890001 00000000 00010064 ) % Mario, welcome to the castle. Princess Peach shoul ...
   108:  Wait  10`
-  114:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000064 FFFFFEDE )
-  130:  Call  SetPanTarget  ( .Cam:Default 00000000 00000064 FFFFFEDE )
-  14C:  Call  SetCamDistance    ( .Cam:Default 00000190 )
-  160:  Call  SetCamPitch   ( .Cam:Default 0000000A FFFFFFF9 )
+  114:  Call  UseSettingsFrom   ( .Cam:Default  0`  100`  -290` )
+  130:  Call  SetPanTarget  ( .Cam:Default  0`  100`  -290` )
+  14C:  Call  SetCamDistance    ( .Cam:Default  400` )
+  160:  Call  SetCamPitch   ( .Cam:Default  10`  -7` )
   178:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   190:  Wait  20`
-  19C:  Call  SpeakToPlayer ( 00000028 00870004 00870001 00000005 00010065 ) % And now... Princess Peach!
-  1BC:  Call  InterpPlayerYaw   ( 00000000 00000000 )
+  19C:  Call  SpeakToPlayer ( .NpcID:ToadGuard_40 00870004 00870001 00000005 00010065 ) % And now... Princess Peach!
+  1BC:  Call  InterpPlayerYaw   (  0`  0` )
   1D0:  Wait  10`
   1DC:  Call  SetMusicTrack ( 00000000 .Song:PeachAppears 00000000 00000008 )
   1F8:  Exec  $Script_80248FDC
   204:  Thread
   20C:  	Call  SetNpcAnimation   ( 00000000 000A0002 )
   220:  	Call  SetNpcSpeed       ( 00000000 *Fixed[2.0] )
-  234:  	Call  NpcMoveTo ( 00000000 00000000 FFFFFF38 00000000 )
+  234:  	Call  NpcMoveTo ( 00000000  0`  -200`  0` )
   250:  	Call  SetNpcAnimation   ( 00000000 000A0001 )
   264:  EndThread
   26C:  Loop
@@ -2470,17 +2500,17 @@ PADDING: 80248E3C to 80248E40 (00008E3C to 00008E40)
   2AC:  	EndIf
   2B4:  	Wait  1`
   2C0:  EndLoop
-  2C8:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000064 FFFFFF38 )
-  2E4:  Call  SetPanTarget  ( .Cam:Default 00000000 00000064 FFFFFF38 )
-  300:  Call  SetCamDistance    ( .Cam:Default 00000226 )
-  314:  Call  SetCamPitch   ( .Cam:Default 0000000A FFFFFFF9 )
+  2C8:  Call  UseSettingsFrom   ( .Cam:Default  0`  100`  -200` )
+  2E4:  Call  SetPanTarget  ( .Cam:Default  0`  100`  -200` )
+  300:  Call  SetCamDistance    ( .Cam:Default  550` )
+  314:  Call  SetCamPitch   ( .Cam:Default  10`  -7` )
   32C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.6] )
   340:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   358:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  36C:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000064 FFFFFF38 )
-  388:  Call  SetPanTarget  ( .Cam:Default 00000000 00000064 FFFFFF38 )
-  3A4:  Call  SetCamDistance    ( .Cam:Default 000000FA )
-  3B8:  Call  SetCamPitch   ( .Cam:Default 00000003 FFFFFFF5 )
+  36C:  Call  UseSettingsFrom   ( .Cam:Default  0`  100`  -200` )
+  388:  Call  SetPanTarget  ( .Cam:Default  0`  100`  -200` )
+  3A4:  Call  SetCamDistance    ( .Cam:Default  250` )
+  3B8:  Call  SetCamPitch   ( .Cam:Default  3`  -11` )
   3D0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   3E4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   3FC:  Wait  20`
@@ -2489,62 +2519,62 @@ PADDING: 80248E3C to 80248E40 (00008E3C to 00008E40)
   438:  Wait  10`
   444:  Call  SetNpcAnimation   ( 00000000 000C0026 )
   458:  Call  SpeakToPlayer ( 00000000 000C0001 000C0026 00000005 00010066 ) % Greetings to all of you! I'm so glad everyone coul ...
-  478:  Call  UseSettingsFrom   ( .Cam:Default 00000032 00000000 000000FA )
-  494:  Call  SetPanTarget  ( .Cam:Default 00000032 00000000 000000FA )
-  4B0:  Call  SetCamDistance    ( .Cam:Default 000001F4 )
-  4C4:  Call  SetCamPitch   ( .Cam:Default 00000003 FFFFFFF6 )
+  478:  Call  UseSettingsFrom   ( .Cam:Default  50`  0`  250` )
+  494:  Call  SetPanTarget  ( .Cam:Default  50`  0`  250` )
+  4B0:  Call  SetCamDistance    ( .Cam:Default  500` )
+  4C4:  Call  SetCamPitch   ( .Cam:Default  3`  -10` )
   4DC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   4F4:  Wait  1`
   500:  Call  SpeakToPlayer ( 00000000 000C0001 000C0026 00000005 00010067 ) % The Star Rod stolen by Bowser has been returned to ...
   520:  Wait  10`
-  52C:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000064 FFFFFF38 )
-  548:  Call  SetPanTarget  ( .Cam:Default 00000000 00000064 FFFFFF38 )
-  564:  Call  SetCamDistance    ( .Cam:Default 0000012C )
-  578:  Call  SetCamPitch   ( .Cam:Default 00000019 *Fixed[-9.5] )
+  52C:  Call  UseSettingsFrom   ( .Cam:Default  0`  100`  -200` )
+  548:  Call  SetPanTarget  ( .Cam:Default  0`  100`  -200` )
+  564:  Call  SetCamDistance    ( .Cam:Default  300` )
+  578:  Call  SetCamPitch   ( .Cam:Default  25` *Fixed[-9.5] )
   590:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
-  5A8:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  5A8:  Call  InterpPlayerYaw   (  90`  0` )
   5BC:  Wait  10`
   5C8:  Call  SpeakToPlayer ( 00000000 000C0001 000C0026 00000005 00010068 ) % Above us, the stars shine with more beauty and pow ...
   5E8:  Call  SetNpcAnimation   ( 00000000 000C0002 )
   5FC:  Wait  10`
   608:  Call  SetNpcAnimation   ( 00000000 000A0001 )
-  61C:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 0000012C )
-  638:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 0000012C )
+  61C:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  300` )
+  638:  Call  SetPanTarget  ( .Cam:Default  0`  0`  300` )
   654:  Call  SetCamDistance    ( .Cam:Default *Fixed[252.7] )
-  668:  Call  SetCamPitch   ( .Cam:Default 00000005 *Fixed[-9.5] )
-  680:  Call  SetCamPosA    ( .Cam:Default 000001F4 00000064 )
+  668:  Call  SetCamPitch   ( .Cam:Default  5` *Fixed[-9.5] )
+  680:  Call  SetCamPosA    ( .Cam:Default  500`  100` )
   698:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   6B0:  Wait  20`
-  6BC:  Call  ShowMessageAtWorldPos ( 00010069 00000000 00000064 FFFFFF38 ) % Mario...
-  6D8:  Call  UseSettingsFrom   ( .Cam:Default 000000FA 00000000 00000064 )
-  6F4:  Call  SetPanTarget  ( .Cam:Default 000000FA 00000000 00000064 )
-  710:  Call  SetCamDistance    ( .Cam:Default 00000190 )
-  724:  Call  SetCamPitch   ( .Cam:Default 0000000F FFFFFFFF )
-  73C:  Call  SetCamPosA    ( .Cam:Default FFFFFF9C 00000064 )
+  6BC:  Call  ShowMessageAtWorldPos ( 00010069  0`  100`  -200` ) % Mario...
+  6D8:  Call  UseSettingsFrom   ( .Cam:Default  250`  0`  100` )
+  6F4:  Call  SetPanTarget  ( .Cam:Default  250`  0`  100` )
+  710:  Call  SetCamDistance    ( .Cam:Default  400` )
+  724:  Call  SetCamPitch   ( .Cam:Default  15`  -1` )
+  73C:  Call  SetCamPosA    ( .Cam:Default  -100`  100` )
   754:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   76C:  Wait  1`
-  778:  Call  ShowMessageAtWorldPos ( 0001006A 00000000 00000064 FFFFFF38 ) % Goombario, Kooper, Bombette, Parakarry,...
-  794:  Call  UseSettingsFrom   ( .Cam:Default FFFFFF06 00000000 00000032 )
-  7B0:  Call  SetPanTarget  ( .Cam:Default FFFFFF06 00000000 00000032 )
-  7CC:  Call  SetCamDistance    ( .Cam:Default 000001C2 )
-  7E0:  Call  SetCamPitch   ( .Cam:Default 0000000F FFFFFFF9 )
+  778:  Call  ShowMessageAtWorldPos ( 0001006A  0`  100`  -200` ) % Goombario, Kooper, Bombette, Parakarry,...
+  794:  Call  UseSettingsFrom   ( .Cam:Default  -250`  0`  50` )
+  7B0:  Call  SetPanTarget  ( .Cam:Default  -250`  0`  50` )
+  7CC:  Call  SetCamDistance    ( .Cam:Default  450` )
+  7E0:  Call  SetCamPitch   ( .Cam:Default  15`  -7` )
   7F8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   810:  Wait  1`
-  81C:  Call  ShowMessageAtWorldPos ( 0001006B 00000000 00000064 FFFFFF38 ) % Bow, Watt, Sushie, Lakilester,
-  838:  Call  UseSettingsFrom   ( .Cam:Default FFFFFF6A 00000000 00000168 )
-  854:  Call  SetPanTarget  ( .Cam:Default FFFFFF6A 00000000 00000168 )
-  870:  Call  SetCamDistance    ( .Cam:Default 0000012C )
-  884:  Call  SetCamPitch   ( .Cam:Default 00000019 FFFFFFF3 )
-  89C:  Call  SetCamPosA    ( .Cam:Default 00000334 FFFFFF9C )
+  81C:  Call  ShowMessageAtWorldPos ( 0001006B  0`  100`  -200` ) % Bow, Watt, Sushie, Lakilester,
+  838:  Call  UseSettingsFrom   ( .Cam:Default  -150`  0`  360` )
+  854:  Call  SetPanTarget  ( .Cam:Default  -150`  0`  360` )
+  870:  Call  SetCamDistance    ( .Cam:Default  300` )
+  884:  Call  SetCamPitch   ( .Cam:Default  25`  -13` )
+  89C:  Call  SetCamPosA    ( .Cam:Default  820`  -100` )
   8B4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   8CC:  Wait  1`
-  8D8:  Call  ShowMessageAtWorldPos ( 0001006C 00000000 00000064 FFFFFF38 ) % and everybody across the lands of the Mushroom Kin ...
+  8D8:  Call  ShowMessageAtWorldPos ( 0001006C  0`  100`  -200` ) % and everybody across the lands of the Mushroom Kin ...
   8F4:  Wait  10`
-  900:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000064 FFFFFF38 )
-  91C:  Call  SetPanTarget  ( .Cam:Default 00000000 00000064 FFFFFF38 )
-  938:  Call  SetCamDistance    ( .Cam:Default 000000FA )
-  94C:  Call  SetCamPitch   ( .Cam:Default 00000005 FFFFFFF6 )
-  964:  Call  SetCamPosA    ( .Cam:Default FFFFFE0C FFFFFA88 )
+  900:  Call  UseSettingsFrom   ( .Cam:Default  0`  100`  -200` )
+  91C:  Call  SetPanTarget  ( .Cam:Default  0`  100`  -200` )
+  938:  Call  SetCamDistance    ( .Cam:Default  250` )
+  94C:  Call  SetCamPitch   ( .Cam:Default  5`  -10` )
+  964:  Call  SetCamPosA    ( .Cam:Default  -500`  -1400` )
   97C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   994:  Wait  1`
   9A0:  Call  SetNpcAnimation   ( 00000000 000C0000 )
@@ -2559,11 +2589,11 @@ PADDING: 80248E3C to 80248E40 (00008E3C to 00008E40)
   A48:  Call  SpeakToPlayer ( 00000000 000C0001 000C0026 00000000 0001006E ) % So, let's celebrate! Enjoy the festivities, everyo ...
   A68:  Call  SetNpcAnimation   ( 00000000 000C0010 )
   A7C:  Call  EnableGroup   ( ~Model:chandelier .False )
-  A90:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000078 )
-  AAC:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000078 )
-  AC8:  Call  SetCamDistance    ( .Cam:Default 00000514 )
-  ADC:  Call  SetCamPitch   ( .Cam:Default 0000001E FFFFFFF9 )
-  AF4:  Call  SetCamPosA    ( .Cam:Default FFFFFF88 0000004B )
+  A90:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  120` )
+  AAC:  Call  SetPanTarget  ( .Cam:Default  0`  0`  120` )
+  AC8:  Call  SetCamDistance    ( .Cam:Default  1300` )
+  ADC:  Call  SetCamPitch   ( .Cam:Default  30`  -7` )
+  AF4:  Call  SetCamPosA    ( .Cam:Default  -120`  75` )
   B0C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.5] )
   B20:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   B38:  Wait  120`

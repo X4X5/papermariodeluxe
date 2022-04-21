@@ -1,6 +1,8 @@
 % Script File: kpa_113.mscr
 % Decoded from: 0 to 1D50 (kpa_113)
 
+#define .NpcID:BonyBeetle_00        00
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -848,8 +850,8 @@ PADDING: 80240B78 to 80240B80 (00000B78 to 00000B80)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80241CB4 )
    84:  ExecWait  $Script_MakeEntities
@@ -866,7 +868,7 @@ PADDING: 80240E2C to 80240E30 (00000E2C to 00000E30)
 
 #new:ItemList $ItemList_80240E30
 {
-	.Item:CastleKey2
+	.Item:BowserCastleKey
 	00000000
 }
 
@@ -890,7 +892,7 @@ PADDING: 80240E2C to 80240E30 (00000E2C to 00000E30)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf
@@ -943,7 +945,7 @@ PADDING: 802410C4 to 802410D0 (000010C4 to 000010D0)
    78:  		Set   *Var8  FFFFFFFF
    88:  		Return
    90:  	Else
-   98:  		Call  SetPlayerActionState  ( 00000014 )
+   98:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
    A8:  	EndIf
    B0:  	Wait  1`
    BC:  EndLoop
@@ -953,17 +955,17 @@ PADDING: 802410C4 to 802410D0 (000010C4 to 000010D0)
    F4:  	Return
    FC:  EndIf
   104:  Call  DisablePlayerInput    ( .True )
-  114:  Call  SetPlayerActionState  ( 00000014 )
+  114:  Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   124:  Thread
-  12C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000064 *Fixed[0.6] )
+  12C:  	Call  ShakeCam  ( .Cam:Default 00000000  100` *Fixed[0.6] )
   148:  EndThread
   150:  Thread
   158:  	If  *Var6  >=  *Var7
-  168:  		Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  168:  		Call  InterpPlayerYaw   (  270`  0` )
   17C:  	Else
-  184:  		Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  184:  		Call  InterpPlayerYaw   (  90`  0` )
   198:  	EndIf
-  1A0:  	Call  SetPlayerActionState  ( 00000014 )
+  1A0:  	Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   1B0:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   1C8:  	Set   *Var1  *Var0
   1D8:  	Set   *Var2  *Var7
@@ -971,7 +973,7 @@ PADDING: 802410C4 to 802410D0 (000010C4 to 000010D0)
   1F8:  	Add   *Var1  *Var2
   208:  	Call  MakeLerp  ( *Var0 *Var1 00000064 .Easing:Linear )
   224:  	Loop
-  230:  		Call  SetPlayerActionState  ( 00000014 )
+  230:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   240:  		Call  UpdateLerp ( )
   24C:  		Call  $Function_802400FC ( )
   258:  		Wait  1`
@@ -1163,11 +1165,11 @@ MISSING: 80241A14 to 80241A98 (00001A14 to 00001A98)
 
 #new:NpcGroup $NpcGroup_80241AC4
 {
-	00000000 $NpcSettings_80241A98 ~Vec3f:NPC_80241AC4 % 100 0 83
+	.NpcID:BonyBeetle_00 $NpcSettings_80241A98 ~Vec3f:NPC_BonyBeetle_00 % 100 0 83
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:4 ~FP:Standard:2 ~CoinBonus:0:4
-	~Movement:NPC_80241AC4
-	~AnimationTable:NPC_80241AC4 % .Sprite:BonyBeetle
+	~Movement:NPC_BonyBeetle_00
+	~AnimationTable:NPC_BonyBeetle_00 % .Sprite:BonyBeetle
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

@@ -1,6 +1,8 @@
 % Script File: pra_01.mscr
 % Decoded from: 0 to 2FB0 (pra_01)
 
+#define .NpcID:WorldKalmar_00       00
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -13,7 +15,6 @@
 PADDING: 80240018 to 80240020 (00000018 to 00000020)
 00000000 00000000
 
-% Origin: HEURISTIC
 #new:Function $Function_80240020
 {
     0:  LI        V0, FEFFFFFF
@@ -30,7 +31,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  COPY      V0, A0
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240054
 {
     0:  SRA       V0, A0, 10
@@ -84,7 +84,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
     8:  COPY      S0, A0
     C:  LA        A1, $Function_80240128
    14:  SW        RA, 14 (SP)
-   18:  JAL       ~Func:create_dynamic_entity_world
+   18:  JAL       ~Func:create_generic_entity_world
    1C:  CLEAR     A0
    20:  LW        V1, 13C (S0)
    24:  SW        V0, 0 (V1)
@@ -95,7 +95,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    38:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240128
 {
     0:  ADDIU     SP, SP, FFB0
@@ -213,7 +212,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   1C4:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_802402F0
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -244,7 +242,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    1C:  BEQ       V0, R0, .o50
    20:  NOP
    24:  LA        A1, $Function_80240500
-   2C:  JAL       ~Func:create_dynamic_entity_world
+   2C:  JAL       ~Func:create_generic_entity_world
    30:  CLEAR     A0
    34:  LW        V1, 13C (S0)
    38:  SW        V0, 0 (V1)
@@ -260,7 +258,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    60:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240500
 {
     0:  ADDIU     SP, SP, FFB0
@@ -364,7 +361,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   188:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_8024068C
 {
 	3C03800A 8463A634 3C07BF80 27BDFEC0 F7B40128 4480A000 AFB1011C 0080882D
@@ -385,7 +381,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
 	27BD0140
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240870
 {
     0:  ADDIU     SP, SP, FE80
@@ -525,7 +520,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   224:  COPY      A0, S3
   228:  ADDIU     A1, SP, 120
   22C:  ADDIU     A2, SP, 124
-  230:  JAL       ~Func:player_get_spin_history
+  230:  JAL       ~Func:phys_get_spin_history
   234:  ADDIU     A3, SP, 128
   238:  LW        A2, 124 (SP)
   23C:  LUI       V0, 8000
@@ -733,7 +728,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
         .o8C
    8C:  LA        A0, $Function_80240EB8
         .o94
-   94:  JAL       ~Func:create_dynamic_entity_world
+   94:  JAL       ~Func:create_generic_entity_world
    98:  CLEAR     A1
    9C:  LW        V1, 13C (S0)
    A0:  SW        V0, 4 (V1)
@@ -789,7 +784,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   144:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240E84
 {
     0:  ADDIU     SP, SP, FFE8
@@ -808,7 +802,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EB8
 {
     0:  ADDIU     SP, SP, FFE8
@@ -827,7 +820,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    30:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EEC
 {
     0:  ADDIU     SP, SP, FFE8
@@ -1419,8 +1411,8 @@ PADDING: 802414B8 to 802414C0 (000014B8 to 000014C0)
 {
     0:  Set   *GB_WorldLocation  .Location:ShiverMountain
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *GF_Map_CrystalPalace  .True
@@ -1587,37 +1579,37 @@ MISSING: 80241F3C to 80241F94 (00001F3C to 00001F94)
    48:  Add   *Var3  FFFFFFCE
    58:  Set   *Var4  *Var1
    68:  Add   *Var4  0000001A
-   78:  Call  SetNpcPos     ( 00000000 *Var3 *Var4 *Var2 )
-   94:  Call  PlayerFaceNpc ( 00000000 00000000 )
-   A8:  Call  NpcFaceNpc    ( .Npc:Partner 00000000 00000000 )
+   78:  Call  SetNpcPos     ( .NpcID:WorldKalmar_00 *Var3 *Var4 *Var2 )
+   94:  Call  PlayerFaceNpc ( .NpcID:WorldKalmar_00 .False )
+   A8:  Call  NpcFaceNpc    ( .Npc:Partner .NpcID:WorldKalmar_00 00000000 )
    C0:  Add   *Var0  FFFFFFE7
    D0:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
    EC:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   108:  Call  SetCamDistance    ( .Cam:Default *Fixed[575.0] )
-  11C:  Call  SetCamPitch   ( .Cam:Default 00000012 FFFFFFFB )
+  11C:  Call  SetCamPitch   ( .Cam:Default  18`  -5` )
   134:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   148:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   160:  Wait  1`
   16C:  Call  WaitForPlayerInputEnabled ( )
   178:  Call  DisablePlayerInput    ( .True )
   188:  Wait  40`
-  194:  Call  SpeakToPlayer ( 00000000 00180002 00180001 00000200 0012016D ) % My name is Kalmar. Mario, well done. Thank you for ...
+  194:  Call  SpeakToPlayer ( .NpcID:WorldKalmar_00 00180002 00180001 00000200 0012016D ) % My name is Kalmar. Mario, well done. Thank you for ...
   1B4:  Call  SetCamDistance    ( .Cam:Default *Fixed[400.0] )
-  1C8:  Call  SetCamPitch   ( .Cam:Default 00000012 FFFFFFFA )
+  1C8:  Call  SetCamPitch   ( .Cam:Default  18`  -6` )
   1E0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
   1F4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   20C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   220:  Call  MakeLerp      ( 00000000 00000168 0000000A .Easing:Linear )
   23C:  Loop
   248:  	Call  UpdateLerp ( )
-  254:  	Call  SetNpcRotation    ( 00000000 00000000 *Var0 00000000 )
+  254:  	Call  SetNpcRotation    ( .NpcID:WorldKalmar_00 00000000 *Var0 00000000 )
   270:  	Wait  1`
   27C:  	If  *Var1  ==  00000000
   28C:  		BreakLoop
   294:  	EndIf
   29C:  EndLoop
-  2A4:  Call  EnableNpcAI       ( 00000000 .False )
-  2B8:  Call  SetNpcAnimation   ( 00000000 00180003 )
+  2A4:  Call  EnableNpcAI       ( .NpcID:WorldKalmar_00 .False )
+  2B8:  Call  SetNpcAnimation   ( .NpcID:WorldKalmar_00 00180003 )
   2CC:  Wait  20`
   2D8:  Call  SetPlayerAnimation    ( .PlayerAnim:GotItem )
   2E8:  Call  PlaySoundAtPlayer ( 00000139 00000000 )
@@ -1639,18 +1631,18 @@ MISSING: 80241F3C to 80241F94 (00001F3C to 00001F94)
   450:  Call  PlayEffect    ( ~FX:EnergyWaveOut:Grey *Var0 *Var1 *Var2 00000001 0000001E 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   494:  Wait  30`
   4A0:  Call  SetPlayerAnimation        ( 00010002 )
-  4B0:  Call  SetNpcAnimation   ( 00000000 00180001 )
-  4C4:  Call  EnableNpcAI   ( 00000000 .True )
+  4B0:  Call  SetNpcAnimation   ( .NpcID:WorldKalmar_00 00180001 )
+  4C4:  Call  EnableNpcAI   ( .NpcID:WorldKalmar_00 .True )
   4D8:  Call  $Function_80241370 ( )
-  4E4:  Call  ShowMessageAtScreenPos    ( 001D0197 000000A0 00000028 ) % Mario's Star Energy goes up to 7! Mario can now us ...
+  4E4:  Call  ShowMessageAtScreenPos    ( 001D0197  160`  40` ) % Mario's Star Energy goes up to 7! Mario can now us ...
   4FC:  Wait  10`
-  508:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  508:  Call  GetNpcPos     ( .NpcID:WorldKalmar_00 *Var0 *Var1 *Var2 )
   524:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   540:  Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
   554:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   56C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   580:  Wait  10`
-  58C:  Call  SpeakToPlayer ( 00000000 00180002 00180001 00000200 0012016E ) % Mario, you must make your way back to Shooting Sta ...
+  58C:  Call  SpeakToPlayer ( .NpcID:WorldKalmar_00 00180002 00180001 00000200 0012016E ) % Mario, you must make your way back to Shooting Sta ...
   5AC:  Wait  10`
   5B8:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   5D0:  Add   *Var0  FFFFFFE7
@@ -1660,11 +1652,11 @@ MISSING: 80241F3C to 80241F94 (00001F3C to 00001F94)
   624:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   63C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   650:  Wait  10`
-  65C:  Call  SpeakToPlayer ( 00000000 00180002 00180001 00000200 0012016F ) % My only wish is for you to save this precious worl ...
-  67C:  Call  SetNpcFlagBits    ( 00000000 00040000 .True )
+  65C:  Call  SpeakToPlayer ( .NpcID:WorldKalmar_00 00180002 00180001 00000200 0012016F ) % My only wish is for you to save this precious worl ...
+  67C:  Call  SetNpcFlagBits    ( .NpcID:WorldKalmar_00 00040000 .True )
   694:  Thread
   69C:  	Loop  00000019
-  6A8:  		Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  6A8:  		Call  GetNpcPos     ( .NpcID:WorldKalmar_00 *Var0 *Var1 *Var2 )
   6C4:  		Call  PlayEffect    ( 00000011 00000004 *Var0 *Var1 *Var2 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   708:  		Wait  4`
   714:  	EndLoop
@@ -1675,7 +1667,7 @@ MISSING: 80241F3C to 80241F94 (00001F3C to 00001F94)
   74C:  	Call  MakeLerp  ( *Var2 *Var3 00000064 .Easing:CubicIn )
   768:  	Loop
   774:  		Call  UpdateLerp ( )
-  780:  		Call  SetNpcRotation    ( 00000000 00000000 *Var0 00000000 )
+  780:  		Call  SetNpcRotation    ( .NpcID:WorldKalmar_00 00000000 *Var0 00000000 )
   79C:  		Wait  1`
   7A8:  		If  *Var1  ==  00000000
   7B8:  			BreakLoop
@@ -1683,28 +1675,28 @@ MISSING: 80241F3C to 80241F94 (00001F3C to 00001F94)
   7C8:  	EndLoop
   7D0:  EndThread
   7D8:  Thread
-  7E0:  	Call  GetNpcPos ( 00000000 *Var2 *Var3 *Var4 )
+  7E0:  	Call  GetNpcPos ( .NpcID:WorldKalmar_00 *Var2 *Var3 *Var4 )
   7FC:  	Set   *Var5  *Var3
   80C:  	Add   *Var5  000000B4
   81C:  	Call  MakeLerp  ( *Var3 *Var5 00000064 .Easing:CubicIn )
   838:  	Loop
   844:  		Call  UpdateLerp ( )
-  850:  		Call  SetNpcPos ( 00000000 *Var2 *Var0 *Var4 )
+  850:  		Call  SetNpcPos ( .NpcID:WorldKalmar_00 *Var2 *Var0 *Var4 )
   86C:  		Wait  1`
   878:  		If  *Var1  ==  00000000
   888:  			BreakLoop
   890:  		EndIf
   898:  	EndLoop
-  8A0:  	Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+  8A0:  	Call  SetNpcPos ( .NpcID:WorldKalmar_00  0`  -1000`  0` )
   8BC:  EndThread
   8C4:  Thread
   8CC:  	Wait  15`
-  8D8:  	Call  PlaySoundAtNpc    ( 00000000 00002045 00000000 )
+  8D8:  	Call  PlaySoundAtNpc    ( .NpcID:WorldKalmar_00 00002045 00000000 )
   8F0:  EndThread
   8F8:  Wait  10`
   904:  Call  SetPlayerAnimation    ( 0001002A )
   914:  Wait  90`
-  920:  Call  ResetCam  ( .Cam:Default 00000003 )
+  920:  Call  ResetCam  ( .Cam:Default  3` )
   934:  Wait  20`
   940:  Call  SetPlayerAnimation    ( 00010002 )
   950:  Set   *GB_StoryProgress  .Story:Ch7_StarSpritDeparted
@@ -1725,11 +1717,11 @@ MISSING: 80241F3C to 80241F94 (00001F3C to 00001F94)
 
 #new:NpcGroup $NpcGroup_80242D70
 {
-	00000000 $NpcSettings_80241F10 ~Vec3f:NPC_80242D70 % 0 -1000 0
+	.NpcID:WorldKalmar_00 $NpcSettings_80241F10 ~Vec3f:NPC_WorldKalmar_00 % 0 -1000 0
 	00600D09 $Script_Init_80242D40 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242D70
-	~AnimationTable:NPC_80242D70 % .Sprite:WorldKalmar
+	~Movement:NPC_WorldKalmar_00
+	~AnimationTable:NPC_WorldKalmar_00 % .Sprite:WorldKalmar
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

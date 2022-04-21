@@ -1,6 +1,10 @@
 % Script File: tik_23.mscr
 % Decoded from: 0 to 36B0 (tik_23)
 
+#define .NpcID:Spiny_00             00
+#define .NpcID:Spiny_01             01
+#define .NpcID:Spiny_02             02
+
 #new:Function $Function_80240000
 {
     0:  LAW       V0, 800F7B30
@@ -1257,13 +1261,13 @@ PADDING: 802411CC to 802411D0 (000011CC to 000011D0)
    50:  Call  GetCurrentPartnerID   ( *Var0 )
    60:  If  *Var0  !=  .Partner:None % 0
    70:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-   84:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+   84:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
    A0:  EndIf
    A8:  Call  GetEntryID    ( *Var0 )
    B8:  Call  $Function_802400F0 ( )
    C4:  Sub   *Var2  00000028
    D4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   EC:  Call  InterpPlayerYaw   ( *Var4 00000000 )
+   EC:  Call  InterpPlayerYaw   ( *Var4  0` )
   100:  Call  PlaySound     ( 00000163 )
   110:  Call  802D286C      ( 00000100 )
   120:  Call  802D2520      ( 00010000 00000005 00000002 00000001 00000001 00000000 )
@@ -1317,7 +1321,7 @@ PADDING: 802411CC to 802411D0 (000011CC to 000011D0)
    84:  Set   *Var7  *Var3
    94:  Add   *Var2  00000002
    A4:  Call  SetPlayerPos  ( *Var1 *Var2 *Var3 )
-   BC:  Call  InterpPlayerYaw       ( *Var4 00000000 )
+   BC:  Call  InterpPlayerYaw       ( *Var4  0` )
    D0:  If  *Var4  ==  0000005A
    E0:  	Add   *Var5  00000028
    F0:  Else
@@ -1331,8 +1335,8 @@ PADDING: 802411CC to 802411D0 (000011CC to 000011D0)
   184:  If  *Var0  !=  .Partner:None % 0
   194:  	Call  DisablePartnerAI  ( 00000000 )
   1A4:  	Call  EnableNpcShadow   ( .Npc:Partner .False )
-  1B8:  	Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
-  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0 00000000 )
+  1B8:  	Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
+  1D4:  	Call  InterpNpcYaw      ( .Npc:Partner *Var0  0` )
   1EC:  EndIf
   1F4:  Wait  1`
   200:  Call  PlaySound ( 00000163 )
@@ -1401,13 +1405,13 @@ PADDING: 802411CC to 802411D0 (000011CC to 000011D0)
    28:  Call  HidePlayerShadow  ( .True )
    38:  Set   *Var0  *VarA
    48:  Call  $Function_802400F0 ( )
-   54:  Call  PlayerMoveTo      ( *Var1 *Var3 00000003 )
+   54:  Call  PlayerMoveTo      ( *Var1 *Var3  3` )
    6C:  Set   *Var0  *VarA
    7C:  Call  $Function_802400F0 ( )
    88:  Call  SetPlayerPos      ( *Var1 *Var2 *Var3 )
    A0:  Call  SetPlayerFlagBits ( 00200000 .True )
    B4:  Call  $Function_802401D0 ( )
-   C0:  Call  InterpPlayerYaw   ( *Var0 00000000 )
+   C0:  Call  InterpPlayerYaw   ( *Var0  0` )
    D4:  Wait  2`
    E0:  Call  SetPlayerFlagBits ( 00200000 .False )
    F4:  Call  PlaySound ( 00000163 )
@@ -1465,7 +1469,7 @@ PADDING: 802411CC to 802411D0 (000011CC to 000011D0)
   1B0:  If  *Var4  >=  00000168
   1C0:  	Sub   *Var4  00000168
   1D0:  EndIf
-  1D8:  Call  InterpPlayerYaw       ( *Var8 00000001 )
+  1D8:  Call  InterpPlayerYaw       ( *Var8  1` )
   1EC:  Wait  1`
   1F8:  Call  PlaySound     ( 00000163 )
   208:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
@@ -1732,8 +1736,8 @@ PADDING: 802411CC to 802411D0 (000011CC to 000011D0)
 {
     0:  Set   *GB_WorldLocation  .Location:ToadTownTunnels
    10:  Call  SetSpriteShading  ( .Shading:tik_23 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_8024360C )
@@ -1851,31 +1855,31 @@ PADDING: 80242F64 to 80242F70 (00002F64 to 00002F70)
 
 #new:NpcGroup $NpcGroup_8024303C
 {
-	00000000 $NpcSettings_80243010 ~Vec3f:NPC_8024303C % 25 -20 0
+	.NpcID:Spiny_00 $NpcSettings_80243010 ~Vec3f:NPC_Spiny_00 % 25 -20 0
 	00000C00 00000000 00000000 00000000 0000010E
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024303C
-	~AnimationTable:NPC_8024303C % .Sprite:Spiny
+	~Movement:NPC_Spiny_00
+	~AnimationTable:NPC_Spiny_00 % .Sprite:Spiny
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024322C
 {
-	00000001 $NpcSettings_80243010 ~Vec3f:NPC_8024322C % 275 -20 120
+	.NpcID:Spiny_01 $NpcSettings_80243010 ~Vec3f:NPC_Spiny_01 % 275 -20 120
 	00000C00 00000000 00000000 00000000 0000005A
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024322C
-	~AnimationTable:NPC_8024322C % .Sprite:Spiny
+	~Movement:NPC_Spiny_01
+	~AnimationTable:NPC_Spiny_01 % .Sprite:Spiny
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024341C
 {
-	00000002 $NpcSettings_80243010 ~Vec3f:NPC_8024341C % -150 -20 120
+	.NpcID:Spiny_02 $NpcSettings_80243010 ~Vec3f:NPC_Spiny_02 % -150 -20 120
 	00000C00 00000000 00000000 00000000 0000005A
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024341C
-	~AnimationTable:NPC_8024341C % .Sprite:Spiny
+	~Movement:NPC_Spiny_02
+	~AnimationTable:NPC_Spiny_02 % .Sprite:Spiny
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 

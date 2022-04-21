@@ -1,6 +1,7 @@
 % Script File: isk_11.mscr
 % Decoded from: 0 to 2C30 (isk_11)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFC0
@@ -33,7 +34,7 @@
    6C:  MFC1      A2, F22
    70:  MFC1      A3, F20
    74:  CLEAR     A0
-   78:  JAL       80070250
+   78:  JAL       ~Func:playFX_1A
    7C:  SW        V0, 10 (SP)
    80:  LW        RA, 20 (SP)
    84:  LW        S1, 1C (SP)
@@ -125,7 +126,7 @@ PADDING: 80240154 to 80240160 (00000154 to 00000160)
    60:  		Wait  20`
    6C:  		SetGroup  00000000
    78:  		Call  SetTimeFreezeMode ( 00000001 )
-   88:  		Call  ShowMessageAtScreenPos    ( 000D00E0 000000A0 00000028 ) % Turn back, thief! Your time is running out! If you ...
+   88:  		Call  ShowMessageAtScreenPos    ( 000D00E0  160`  40` ) % Turn back, thief! Your time is running out! If you ...
    A0:  		Set   *GF_ISK11_FourthWarning  .True
    B0:  		Call  DisablePlayerInput        ( .False )
    C0:  		Call  SetTimeFreezeMode ( 00000000 )
@@ -207,8 +208,8 @@ PADDING: 8024039C to 802403A0 (0000039C to 000003A0)
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:isk_11 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  SetCamSpeed       ( .Cam:Default *Fixed[2.8] )
@@ -394,7 +395,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
   34C:  Wait  30`
   358:  Thread
   360:  	Call  PlaySound ( 80000003 )
-  370:  	Call  ShakeCam  ( .Cam:Default 00000000 0000014A *Fixed[0.5] )
+  370:  	Call  ShakeCam  ( .Cam:Default 00000000  330` *Fixed[0.5] )
   38C:  	Call  StopSound ( 80000003 )
   39C:  EndThread
   3A4:  Thread
@@ -420,30 +421,30 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
   4D0:  EndThread
   4D8:  Thread
   4E0:  	Wait  20`
-  4EC:  	Call  SetPlayerSpeed    ( 00000004 )
+  4EC:  	Call  SetPlayerSpeed    (  4` )
   4FC:  	Label  1E
-  508:  	Call  PlayerMoveTo      ( 00000042 0000022B 00000000 )
-  520:  	Call  PlayerMoveTo      ( FFFFFFBE 0000022B 00000000 )
+  508:  	Call  PlayerMoveTo      (  66`  555`  0` )
+  520:  	Call  PlayerMoveTo      (  -66`  555`  0` )
   538:  	If  *MapVar[0]  ==  00000000
   548:  		Goto  1E
   554:  	EndIf
-  55C:  	Call  PlayerMoveTo  ( 00000000 0000022B 00000000 )
+  55C:  	Call  PlayerMoveTo  (  0`  555`  0` )
   574:  	Set   *MapVar[1]  00000001
   584:  EndThread
   58C:  Wait  40`
   598:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-  5AC:  Call  UseSettingsFrom       ( .Cam:Default 00000000 FFFFFDF8 00000212 )
-  5C8:  Call  SetCamDistance        ( .Cam:Default 0000008C )
+  5AC:  Call  UseSettingsFrom       ( .Cam:Default  0`  -520`  530` )
+  5C8:  Call  SetCamDistance        ( .Cam:Default  140` )
   5DC:  Call  SetCamPitch   ( .Cam:Default *Fixed[22.7] *Fixed[-22.7] )
-  5F4:  Call  SetPanTarget  ( .Cam:Default 00000000 FFFFFDF8 00000212 )
+  5F4:  Call  SetPanTarget  ( .Cam:Default  0`  -520`  530` )
   610:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   628:  Call  EnableGroup   ( ~Model:15 .True )
   63C:  Call  EnableGroup   ( ~Model:g377 .False )
   650:  Call  EnableModel   ( ~Model:o2205 .False )
   664:  Wait  60`
   670:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
-  684:  Call  UseSettingsFrom       ( .Cam:Default 00000000 FFFFFDF8 00000212 )
-  6A0:  Call  SetPanTarget  ( .Cam:Default 00000000 FFFFFDF8 00000212 )
+  684:  Call  UseSettingsFrom       ( .Cam:Default  0`  -520`  530` )
+  6A0:  Call  SetPanTarget  ( .Cam:Default  0`  -520`  530` )
   6BC:  Wait  10`
   6C8:  Call  SetCamPitch   ( .Cam:Default *Fixed[10.0] *Fixed[12.0] )
   6E0:  Wait  90`
@@ -524,7 +525,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
    54:  	Call  DisablePlayerInput    ( .True )
    64:  	Call  $Function_802400B0    ( *GB_ISK11_ItemSocket1 *Var0 )
    78:  	Call  SetMessageString      ( *Var0 00000000 )
-   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162 000000A0 00000028 ) % Do you want to take the out?
+   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162  160`  40` ) % Do you want to take the out?
    A4:  	Call  ShowChoice    ( 001E000D ) % Yes No
    B4:  	Call  CloseMessage ( )
    C0:  	If  *Var0  ==  00000000
@@ -544,7 +545,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
   194:  Set   *Var2  *Var0
   1A4:  Switch  *Var2
   1B0:  	Case  ==  00000000
-  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159 000000A0 00000028 ) % It's a Chomp Statue. Maybe you can put something i ...
+  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159  160`  40` ) % It's a Chomp Statue. Maybe you can put something i ...
   1D4:  		Call  CloseChoicePopup ( )
   1E0:  		Call  SetTimeFreezeMode ( 00000000 )
   1F0:  		Return
@@ -576,7 +577,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
    54:  	Call  DisablePlayerInput    ( .True )
    64:  	Call  $Function_802400B0    ( *GB_ISK11_ItemSocket2 *Var0 )
    78:  	Call  SetMessageString      ( *Var0 00000000 )
-   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162 000000A0 00000028 ) % Do you want to take the out?
+   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162  160`  40` ) % Do you want to take the out?
    A4:  	Call  ShowChoice    ( 001E000D ) % Yes No
    B4:  	Call  CloseMessage ( )
    C0:  	If  *Var0  ==  00000000
@@ -596,7 +597,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
   194:  Set   *Var2  *Var0
   1A4:  Switch  *Var2
   1B0:  	Case  ==  00000000
-  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159 000000A0 00000028 ) % It's a Chomp Statue. Maybe you can put something i ...
+  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159  160`  40` ) % It's a Chomp Statue. Maybe you can put something i ...
   1D4:  		Call  CloseChoicePopup ( )
   1E0:  		Call  SetTimeFreezeMode ( 00000000 )
   1F0:  		Return
@@ -628,7 +629,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
    54:  	Call  DisablePlayerInput    ( .True )
    64:  	Call  $Function_802400B0    ( *GB_ISK11_ItemSocket3 *Var0 )
    78:  	Call  SetMessageString      ( *Var0 00000000 )
-   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162 000000A0 00000028 ) % Do you want to take the out?
+   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162  160`  40` ) % Do you want to take the out?
    A4:  	Call  ShowChoice    ( 001E000D ) % Yes No
    B4:  	Call  CloseMessage ( )
    C0:  	If  *Var0  ==  00000000
@@ -648,7 +649,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
   194:  Set   *Var2  *Var0
   1A4:  Switch  *Var2
   1B0:  	Case  ==  00000000
-  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159 000000A0 00000028 ) % It's a Chomp Statue. Maybe you can put something i ...
+  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159  160`  40` ) % It's a Chomp Statue. Maybe you can put something i ...
   1D4:  		Call  CloseChoicePopup ( )
   1E0:  		Call  SetTimeFreezeMode ( 00000000 )
   1F0:  		Return
@@ -680,7 +681,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
    54:  	Call  DisablePlayerInput    ( .True )
    64:  	Call  $Function_802400B0    ( *GB_ISK11_ItemSocket4 *Var0 )
    78:  	Call  SetMessageString      ( *Var0 00000000 )
-   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162 000000A0 00000028 ) % Do you want to take the out?
+   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162  160`  40` ) % Do you want to take the out?
    A4:  	Call  ShowChoice    ( 001E000D ) % Yes No
    B4:  	Call  CloseMessage ( )
    C0:  	If  *Var0  ==  00000000
@@ -700,7 +701,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
   194:  Set   *Var2  *Var0
   1A4:  Switch  *Var2
   1B0:  	Case  ==  00000000
-  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159 000000A0 00000028 ) % It's a Chomp Statue. Maybe you can put something i ...
+  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159  160`  40` ) % It's a Chomp Statue. Maybe you can put something i ...
   1D4:  		Call  CloseChoicePopup ( )
   1E0:  		Call  SetTimeFreezeMode ( 00000000 )
   1F0:  		Return
@@ -732,7 +733,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
    54:  	Call  DisablePlayerInput    ( .True )
    64:  	Call  $Function_802400B0    ( *GB_ISK11_ItemSocket5 *Var0 )
    78:  	Call  SetMessageString      ( *Var0 00000000 )
-   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162 000000A0 00000028 ) % Do you want to take the out?
+   8C:  	Call  ShowMessageAtScreenPos    ( 001D0162  160`  40` ) % Do you want to take the out?
    A4:  	Call  ShowChoice    ( 001E000D ) % Yes No
    B4:  	Call  CloseMessage ( )
    C0:  	If  *Var0  ==  00000000
@@ -752,7 +753,7 @@ PADDING: 80240C04 to 80240C10 (00000C04 to 00000C10)
   194:  Set   *Var2  *Var0
   1A4:  Switch  *Var2
   1B0:  	Case  ==  00000000
-  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159 000000A0 00000028 ) % It's a Chomp Statue. Maybe you can put something i ...
+  1BC:  		Call  ShowMessageAtScreenPos    ( 001D0159  160`  40` ) % It's a Chomp Statue. Maybe you can put something i ...
   1D4:  		Call  CloseChoicePopup ( )
   1E0:  		Call  SetTimeFreezeMode ( 00000000 )
   1F0:  		Return
@@ -785,7 +786,7 @@ PADDING: 802429AC to 802429B0 (000029AC to 000029B0)
 {
     0:  Call  ShowKeyChoicePopup ( )
     C:  If  *Var0  ==  00000000
-   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8 000000A0 00000028 ) % It's locked! You can't open it.
+   1C:  	Call  ShowMessageAtScreenPos    ( 001D00D8  160`  40` ) % It's locked! You can't open it.
    34:  	Call  CloseChoicePopup ( )
    40:  	Return
    48:  EndIf
@@ -819,7 +820,7 @@ PADDING: 802429AC to 802429B0 (000029AC to 000029B0)
 #new:Script $Script_80242B80
 {
     0:  If  *GF_ISK11_UnlockedDoor  ==  .False
-   10:  	Call  802C971C  ( 00000050 )
+   10:  	Call  MakeTransformGroup    ( ~Model:g374 )
    20:  	BindLock  $Script_802429B8 .Trigger:WallPressA 00004000 $ItemList_802429B0 00000000 00000001
    40:  Else
    48:  	Call  EnableGroup   ( ~Model:g374 .False )

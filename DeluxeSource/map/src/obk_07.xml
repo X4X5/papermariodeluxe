@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Map name="obk_07" background="obk_bg" textures="obk_tex">
 	<ModelTree>
 		<Node name="Root" id="4A">
@@ -155,9 +155,9 @@
 				<Node name="Entry0" id="FFFFFFFF"/>
 			</Node>
 			<Node name="NPCs" id="4">
-				<Node name="NPC_80242A04" id="1"/>
-				<Node name="NPC_80242C18" id="2"/>
-				<Node name="NPC_80242E64" id="3"/>
+				<Node name="Boo_00" id="1"/>
+				<Node name="Boo_01" id="2"/>
+				<Node name="Boo_02" id="3"/>
 			</Node>
 			<Node name="Entities" id="6">
 				<Node name="Entity80242164" id="5"/>
@@ -3837,23 +3837,23 @@
 		</Marker>
 		<Marker ver="4" type="Entity" desc="Entity:Chest" pos="170,0,-160" yaw="0.000000">
 			<MapObject name="Entity80242164" id="5"/>
-			<Entity type="802EAE30" flag="*GF_OBK07_Chest_Weight" item="Weight"/>
+			<Entity type="802EAE30" flag="*GF_OBK07_Chest_Weight" item="BooWeight"/>
 		</Marker>
 		<Marker ver="4" type="Group">
 			<MapObject name="NPCs" id="4"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="168,0,-161" yaw="270.000000">
-			<MapObject name="NPC_80242E64" id="3"/>
+			<MapObject name="Boo_02" id="3"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="473,-122,247" yaw="0.000000">
-			<MapObject name="NPC_80242C18" id="2"/>
+			<MapObject name="Boo_01" id="2"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="523,-139,193" yaw="0.000000">
-			<MapObject name="NPC_80242A04" id="1"/>
+			<MapObject name="Boo_00" id="1"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="95" palette="0" animations="1,2,3,3,1,1,0,0,3,3,3,3,3,3,3,3"/>
 		</Marker>

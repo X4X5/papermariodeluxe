@@ -1,6 +1,9 @@
 % Script File: kzn_02.mscr
 % Decoded from: 0 to 65D0 (kzn_02)
 
+#define .NpcID:Kolorado_00          00
+#define .NpcID:Bubble_01            01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -2742,7 +2745,7 @@ PADDING: 80242724 to 80242730 (00002724 to 00002730)
    8C:  MFC1      A0, F4
    90:  TRUNC.W.S F4, F2
    94:  MFC1      A1, F4
-   98:  JAL       800EF3C0
+   98:  JAL       ~Func:partner_set_goal_pos
    9C:  NOP
    A0:  JAL       800EF3D4
    A4:  CLEAR     A0
@@ -2960,8 +2963,8 @@ PADDING: 80242724 to 80242730 (00002724 to 00002730)
 {
     0:  Set   *GB_WorldLocation  .Location:MtLavalava
    10:  Call  SetSpriteShading      ( .Shading:kzn_02 )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80246254 )
    84:  Call  ModifyColliderFlags   ( 00000003 ~Collider:o112 00000003 )
@@ -3608,7 +3611,7 @@ PADDING: 80243268 to 80243270 (00003268 to 00003270)
   20C:  		Wait  20`
   218:  		Call  GetNpcYaw ( .Npc:Partner *VarA )
   22C:  		Add   *VarA  000000B4
-  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA 00000000 )
+  23C:  		Call  InterpNpcYaw      ( .Npc:Partner *VarA  0` )
   254:  		Wait  5`
   260:  		Call  NpcJump1  ( .Npc:Partner *Var3 *Var4 *Var5 00000014 )
   280:  		Call  SetNpcAnimation   ( .Npc:Partner 00040001 )
@@ -3648,7 +3651,7 @@ PADDING: 80243268 to 80243270 (00003268 to 00003270)
    60:  If  *Var0  ==  .Partner:Parakarry % 4
    70:  	If  *Var1  !=  FFFFFFFF
    80:  		Call  DisablePartnerAI  ( 00000000 )
-   90:  		Call  PlayerFaceNpc ( *Var2 00000000 )
+   90:  		Call  PlayerFaceNpc ( *Var2 .False )
    A4:  		Wait  1`
    B0:  		Call  GetNpcPos     ( *Var2 *VarD *Var0 *VarE )
    CC:  		Call  GetNpcPos     ( .Npc:Partner *VarD *VarE *VarF )
@@ -3724,11 +3727,11 @@ PADDING: 80243268 to 80243270 (00003268 to 00003270)
    58:  	EndIf
    60:  EndLoop
    68:  Wait  30`
-   74:  Call  AdjustCam     ( .Cam:Default *Fixed[5.0] 00000064 0000015E *Fixed[15.0] *Fixed[-7.0] )
-   98:  Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+   74:  Call  AdjustCam     ( .Cam:Default *Fixed[5.0]  100`  350` *Fixed[15.0] *Fixed[-7.0] )
+   98:  Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
    B0:  Wait  10`
    BC:  Call  SpeakToPlayer ( .Npc:Self 00B60008 00B60001 00000000 001000EE ) % Hmm... I sense danger here... All adventures are d ...
-   DC:  Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+   DC:  Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
    F4:  Call  SetNpcAnimation   ( .Npc:Self 00B60004 )
   108:  Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   124:  Loop  0000001E
@@ -3737,39 +3740,39 @@ PADDING: 80243268 to 80243270 (00003268 to 00003270)
   158:  	Sub   *Var0  00000001
   168:  EndLoop
   170:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[3.0] )
-  184:  Call  NpcMoveTo     ( .Npc:Self FFFFFD1C 00000000 00000000 )
-  1A0:  Call  SetPanTarget  ( .Cam:Default FFFFFD76 00000014 00000000 )
+  184:  Call  NpcMoveTo     ( .Npc:Self  -740`  0`  0` )
+  1A0:  Call  SetPanTarget  ( .Cam:Default  -650`  20`  0` )
   1BC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   1D0:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1E8:  Call  SetNpcAnimation   ( .Npc:Self 00B6000E )
   1FC:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
   210:  Call  PlaySoundAtNpc    ( .Npc:Self 0000032C 00000000 )
-  228:  Call  NpcJump0      ( .Npc:Self FFFFFD71 00000014 00000000 00000014 )
+  228:  Call  NpcJump0      ( .Npc:Self  -655`  20`  0`  20` )
   248:  Call  SetNpcAnimation   ( .Npc:Self 00B60002 )
-  25C:  Call  NpcJump0      ( .Npc:Self FFFFFD7B 00000014 00000000 00000005 )
-  27C:  Call  NpcJump0      ( .Npc:Self FFFFFD85 00000014 00000000 00000005 )
+  25C:  Call  NpcJump0      ( .Npc:Self  -645`  20`  0`  5` )
+  27C:  Call  NpcJump0      ( .Npc:Self  -635`  20`  0`  5` )
   29C:  Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
   2B0:  Wait  15`
-  2BC:  Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000001 )
+  2BC:  Call  InterpNpcYaw  ( .Npc:Self  270`  1` )
   2D4:  Wait  5`
-  2E0:  Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000001 )
+  2E0:  Call  InterpNpcYaw  ( .Npc:Self  90`  1` )
   2F8:  Wait  10`
   304:  Exec  $Script_80243270
   310:  Set   *Var0  00000002
   320:  Loop  00000003
   32C:  	Call  SetNpcAnimation   ( .Npc:Self 00B60007 )
   340:  	Call  802D7E08      ( 00000000 00000001 0000002D 00000001 00000000 00000000 00000000 00000000 00000014 )
-  370:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000001 )
-  388:  	Call  NpcMoveTo     ( .Npc:Self FFFFFD71 00000000 *Var0 )
+  370:  	Call  InterpNpcYaw  ( .Npc:Self  270`  1` )
+  388:  	Call  NpcMoveTo     ( .Npc:Self  -655`  0` *Var0 )
   3A4:  	Call  802D7E08      ( 00000000 00000001 FFFFFFD3 00000001 00000000 00000000 00000000 00000000 00000014 )
-  3D4:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000001 )
-  3EC:  	Call  NpcMoveTo     ( .Npc:Self FFFFFD85 00000000 *Var0 )
+  3D4:  	Call  InterpNpcYaw  ( .Npc:Self  90`  1` )
+  3EC:  	Call  NpcMoveTo     ( .Npc:Self  -635`  0` *Var0 )
   408:  	Mul   *Var0  00000002
   418:  EndLoop
   420:  Call  802D7E08      ( 00000000 00000000 0000002D 00000001 00000000 00000000 00000000 00000000 00000014 )
-  450:  Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000002 )
+  450:  Call  InterpNpcYaw  ( .Npc:Self  270`  2` )
   468:  Call  802D7E08      ( 00000000 00000000 FFFFFFD3 00000001 00000000 00000000 00000000 00000000 00000014 )
-  498:  Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000002 )
+  498:  Call  InterpNpcYaw  ( .Npc:Self  90`  2` )
   4B0:  Call  SetNpcAnimation   ( .Npc:Self 00B6000D )
   4C4:  Call  802D7E08      ( 00000000 00000000 FFFFFFD3 00000001 00000000 00000000 00000000 00000000 00000014 )
   4F4:  Call  SetSelfVar    ( 00000000 00000001 )
@@ -3784,27 +3787,27 @@ PADDING: 80243268 to 80243270 (00003268 to 00003270)
   5B8:  	EndIf
   5C0:  EndThread
   5C8:  Call  PlaySoundAtNpc    ( .Npc:Self 000000E8 00000000 )
-  5E0:  Call  NpcJump0  ( .Npc:Self FFFFFD44 00000096 00000000 00000023 )
+  5E0:  Call  NpcJump0  ( .Npc:Self  -700`  150`  0`  35` )
   600:  Thread
   608:  	Call  ResetCam  ( .Cam:Default *Fixed[5.0] )
   61C:  EndThread
   624:  Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
-  638:  Call  NpcJump0  ( .Npc:Self FFFFFCF9 00000014 FFFFFFD8 00000028 )
+  638:  Call  NpcJump0  ( .Npc:Self  -775`  20`  -40`  40` )
   658:  Call  SetSelfVar        ( 00000000 00000000 )
   66C:  Call  SetNpcAnimation   ( .Npc:Self 00B6000B )
-  680:  Call  InterpNpcYaw      ( .Npc:Self 0000010E 00000002 )
+  680:  Call  InterpNpcYaw      ( .Npc:Self  270`  2` )
   698:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .False )
   6B0:  Call  PlaySoundAtNpc    ( .Npc:Self 0000032C 00000000 )
-  6C8:  Call  NpcJump0  ( .Npc:Self FFFFFD08 00000032 FFFFFFD8 0000000A )
+  6C8:  Call  NpcJump0  ( .Npc:Self  -760`  50`  -40`  10` )
   6E8:  Call  SetNpcAnimation   ( .Npc:Self 00B60007 )
   6FC:  Wait  4`
   708:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .True )
   720:  Wait  8`
   72C:  Call  SetNpcAnimation   ( .Npc:Self 00B6000B )
-  740:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000002 )
+  740:  Call  InterpNpcYaw      ( .Npc:Self  90`  2` )
   758:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .False )
   770:  Call  PlaySoundAtNpc    ( .Npc:Self 0000032C 00000000 )
-  788:  Call  NpcJump0  ( .Npc:Self FFFFFD08 00000028 FFFFFFD8 0000000A )
+  788:  Call  NpcJump0  ( .Npc:Self  -760`  40`  -40`  10` )
   7A8:  Call  SetNpcAnimation   ( .Npc:Self 00B60007 )
   7BC:  Wait  4`
   7C8:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .True )
@@ -3813,10 +3816,10 @@ PADDING: 80243268 to 80243270 (00003268 to 00003270)
   800:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .False )
   818:  Wait  5`
   824:  Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
-  838:  Call  InterpNpcYaw      ( .Npc:Self 0000005A 00000004 )
+  838:  Call  InterpNpcYaw      ( .Npc:Self  90`  4` )
   850:  Call  SpeakToPlayer     ( .Npc:Self 00B60008 00B60001 00000005 001000EF ) % Yaaaah!!! What's wrong with this rock? It sank rig ...
   870:  Wait  5`
-  87C:  Call  InterpNpcYaw      ( .Npc:Self 0000010E 00000004 )
+  87C:  Call  InterpNpcYaw      ( .Npc:Self  270`  4` )
   894:  Set   *GB_StoryProgress  .Story:Ch5_KoloradoFellInLava
   8A4:  Call  DisablePlayerInput    ( .False )
   8B4:  Return
@@ -3832,7 +3835,7 @@ PADDING: 80243268 to 80243270 (00003268 to 00003270)
    2C:  Call  SpeakToPlayer     ( .Npc:Self 00B60008 00B60001 00000000 001000F0 ) % Please...er...after you. Do go ahead, old boy. Rat ...
    4C:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    68:  Call  SetNpcAnimation   ( .Npc:Self 00B60007 )
-   7C:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 00000007 )
+   7C:  Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  7` )
    9C:  Call  SetNpcAnimation   ( .Npc:Self 00B60001 )
    B0:  Call  CloseMessage ( )
    BC:  ExecWait  $Script_80245324
@@ -3849,13 +3852,13 @@ PADDING: 80243268 to 80243270 (00003268 to 00003270)
    2C:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80245C9C )
    40:  	Case  <  .Story:Ch5_LavaStreamBlocked % 1B
    4C:  		If  *GF_KZN06_Visited  ==  .False
-   5C:  			Call  SetNpcPos ( .Npc:Self FFFFFD08 00000014 FFFFFFD8 )
+   5C:  			Call  SetNpcPos ( .Npc:Self  -760`  20`  -40` )
    78:  			Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80245C9C )
    8C:  		Else
-   94:  			Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   94:  			Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    B0:  		EndIf
    B8:  	Default
-   C0:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   C0:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    DC:  EndSwitch
    E4:  Return
    EC:  End
@@ -3863,21 +3866,21 @@ PADDING: 80243268 to 80243270 (00003268 to 00003270)
 
 #new:NpcGroup $NpcGroup_80245E74
 {
-	00000000 $NpcSettings_802449E4 ~Vec3f:NPC_80245E74 % -740 20 0
+	.NpcID:Kolorado_00 $NpcSettings_802449E4 ~Vec3f:NPC_Kolorado_00 % -740 20 0
 	00110509 $Script_Init_80245D80 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80245E74
-	~AnimationTable:NPC_80245E74 % .Sprite:Kolorado
+	~Movement:NPC_Kolorado_00
+	~AnimationTable:NPC_Kolorado_00 % .Sprite:Kolorado
 	00000000 00000000 00000000 001A0000 % He's the archaeologist, Kolorado. He's famous as b ...
 }
 
 #new:NpcGroup $NpcGroup_80246064
 {
-	00000001 $NpcSettings_802449B8 ~Vec3f:NPC_80246064 % 250 50 0
+	.NpcID:Bubble_01 $NpcSettings_802449B8 ~Vec3f:NPC_Bubble_01 % 250 50 0
 	00000D00 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80246064
-	~AnimationTable:NPC_80246064 % .Sprite:Bubble
+	~Movement:NPC_Bubble_01
+	~AnimationTable:NPC_Bubble_01 % .Sprite:Bubble
 	00000002 00000000 00000000 00000000 % no tattle string
 }
 

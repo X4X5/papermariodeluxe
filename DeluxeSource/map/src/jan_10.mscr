@@ -1,6 +1,9 @@
 % Script File: jan_10.mscr
 % Decoded from: 0 to 44D0 (jan_10)
 
+#define .NpcID:YoshiKid_00          00
+#define .NpcID:Fuzzy_01             01
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -932,7 +935,7 @@ PADDING: 8024030C to 80240310 (0000030C to 00000310)
   20C:  LW        A1, 38 (S3)
   210:  LW        A2, 3C (S3)
   214:  LW        A3, 40 (S3)
-  218:  JAL       ~Func:fx_walk_normal
+  218:  JAL       ~Func:fx_walk
   21C:  LI        A0, 2
   220:  COPY      A0, S7
   224:  LI        V0, C
@@ -1655,10 +1658,10 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
 #new:Script_Main $Script_Main_EnterWalk
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
-   10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
-   5C:  Call  SetCamEnabled     ( .Cam:Default .True )
+   10:  Call  SetSpriteShading      ( .Shading:None )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
+   5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_8024256C )
    84:  ExecWait  $Script_80244430
    90:  Exec  $Script_80242DE8
@@ -1671,8 +1674,8 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
   114:  Set   *Var0  $Script_802418C8
   124:  Exec  EnterWalk
   130:  Exec  $Script_80241790
-  13C:  Call  802C971C  ( 00000045 )
-  14C:  Call  EnableTexPanning  ( ~Model:o28 .True )
+  13C:  Call  MakeTransformGroup    ( ~Model:g11 )
+  14C:  Call  EnableTexPanning      ( ~Model:o28 .True )
   160:  Thread
   168:  	Set   *Var0  00000001
   178:  	Set   *Var1  FFFFFFB0
@@ -1731,7 +1734,7 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
 
 #new:Script $Script_Idle_80241C14
 {
-    0:  Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+    0:  Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
    1C:  Label  0
    28:  Call  GetSelfVar    ( 00000007 *Var0 )
    3C:  Wait  1`
@@ -1741,7 +1744,7 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
    6C:  Call  SetNpcAnimation   ( .Npc:Self 002B0309 )
    80:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .True )
    98:  Call  SetNpcFlagBits    ( .Npc:Self 00000008 .False )
-   B0:  Call  SetNpcPos ( .Npc:Self FFFFFDCA 00000064 00000041 )
+   B0:  Call  SetNpcPos ( .Npc:Self  -566`  100`  65` )
    CC:  Call  PlaySoundWithVolume   ( 00000331 0000006E )
    E0:  Wait  20`
    EC:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .False )
@@ -1766,7 +1769,7 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
 {
     0:  Set   *AreaFlag[002]  .False
    10:  Loop
-   1C:  	Call  PlaySoundAtNpc    ( 00000000 000001F0 00000000 )
+   1C:  	Call  PlaySoundAtNpc    ( .NpcID:YoshiKid_00 000001F0 00000000 )
    34:  	Wait  20`
    40:  	If  *AreaFlag[002]  ==  .True
    50:  		BreakLoop
@@ -1778,7 +1781,7 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
 
 #new:Script $Script_Interact_80241E48
 {
-    0:  Call  AdjustCam ( .Cam:Default *Fixed[4.0] 00000000 0000015E *Fixed[17.0] *Fixed[-7.0] )
+    0:  Call  AdjustCam ( .Cam:Default *Fixed[4.0]  0`  350` *Fixed[17.0] *Fixed[-7.0] )
    24:  Set   *AreaFlag[002]  .True
    34:  Wait  15`
    40:  Call  GetCurrentPartnerID   ( *Var0 )
@@ -1792,8 +1795,8 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
    D4:  	Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
    EC:  	Call  SetNpcAnimation   ( .Npc:Self 00970103 )
   100:  	Call  SetNpcSpeed       ( .Npc:Self *Fixed[5.0] )
-  114:  	Call  NpcMoveTo ( .Npc:Self FFFFFF10 0000000A 00000000 )
-  130:  	Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  114:  	Call  NpcMoveTo ( .Npc:Self  -240`  10`  0` )
+  130:  	Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   14C:  EndThread
   154:  Set   *GF_JAN10_SavedYoshi  .True
   164:  Set   *Var0  00000000
@@ -1824,8 +1827,8 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
    10:  	Exec  $Script_80241DD0
    1C:  	If  *GF_JAN10_SavedYoshi  ==  .False
    2C:  		Call  SetNpcAnimation   ( .Npc:Self 00970106 )
-   40:  		Call  SetNpcYaw ( .Npc:Self 0000005A )
-   54:  		Call  SetNpcPos ( .Npc:Self FFFFFE3E 00000000 00000046 )
+   40:  		Call  SetNpcYaw ( .Npc:Self  90` )
+   54:  		Call  SetNpcPos ( .Npc:Self  -450`  0`  70` )
    70:  		Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80241E48 )
    84:  		Return
    8C:  	EndIf
@@ -1837,22 +1840,22 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
 
 #new:NpcGroup $NpcGroup_8024218C
 {
-	00000000 $NpcSettings_80241BE8 ~Vec3f:NPC_8024218C % -260 0 -220
+	.NpcID:YoshiKid_00 $NpcSettings_80241BE8 ~Vec3f:NPC_YoshiKid_00 % -260 0 -220
 	0040090D $Script_Init_802420D0 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024218C
-	~AnimationTable:NPC_8024218C % .Sprite:YoshiKid
+	~Movement:NPC_YoshiKid_00
+	~AnimationTable:NPC_YoshiKid_00 % .Sprite:YoshiKid
 	00000000 00000000 00000000 001A00C4 % He's a blue Yoshi kid. He thinks he's different fr ...
 }
 
 #new:NpcGroup $NpcGroup_8024237C
 {
-	00000001 $NpcSettings_80241BBC ~Vec3f:NPC_8024237C % 0 0 0
+	.NpcID:Fuzzy_01 $NpcSettings_80241BBC ~Vec3f:NPC_Fuzzy_01 % 0 0 0
 	00400400 $Script_Init_80241D54 00000000 00000000 0000010E
 	~Items:10:DizzyDial:5:VoltShroom:5
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_8024237C
-	~AnimationTable:NPC_8024237C % .Sprite:Fuzzy
+	~Movement:NPC_Fuzzy_01
+	~AnimationTable:NPC_Fuzzy_01 % .Sprite:Fuzzy
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1937,7 +1940,7 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
   1A4:  Call  SetPlayerAnimation    ( 00010002 )
   1B4:  Call  PlaySoundAtCollider   ( ~Collider:o11 0000209D 00000000 )
   1CC:  Call  PlayEffect    ( ~FX:Steam:LargeOutward 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  210:  Call  ShakeCam  ( .Cam:Default 00000002 00000003 00000001 )
+  210:  Call  ShakeCam  ( .Cam:Default 00000002  3`  1` )
   22C:  Return
   234:  End
 }
@@ -1961,7 +1964,7 @@ PADDING: 802417CC to 802417D0 (000017CC to 000017D0)
    FC:  	EndIf
   104:  EndLoop
   10C:  Thread
-  114:  	Call  ShakeCam  ( .Cam:Default 00000002 00000003 00000001 )
+  114:  	Call  ShakeCam  ( .Cam:Default 00000002  3`  1` )
   130:  EndThread
   138:  Return
   140:  End
@@ -2206,7 +2209,7 @@ PADDING: 80242E38 to 80242E40 (00002E38 to 00002E40)
     0:  Wait  15`
     C:  Call  $Function_802414BC ( )
    18:  If  *Var0  ==  00000001
-   28:  	Call  SetNpcVar ( 00000001 00000007 00000001 )
+   28:  	Call  SetNpcVar ( .NpcID:Fuzzy_01 00000007 00000001 )
    40:  EndIf
    48:  Return
    50:  End

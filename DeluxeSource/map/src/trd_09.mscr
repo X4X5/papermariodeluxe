@@ -1,6 +1,25 @@
 % Script File: trd_09.mscr
 % Decoded from: 0 to 52B0 (trd_09)
 
+#define .NpcID:BillBlaster_10       0A
+#define .NpcID:BillBlaster_11       0B
+#define .NpcID:BillBlaster_12       0C
+#define .NpcID:BulletBill_20        14
+#define .NpcID:BulletBill_21        15
+#define .NpcID:BulletBill_22        16
+#define .NpcID:BulletBill_23        17
+#define .NpcID:BulletBill_24        18
+#define .NpcID:BulletBill_25        19
+#define .NpcID:BulletBill_26        1A
+#define .NpcID:BulletBill_27        1B
+#define .NpcID:BulletBill_28        1C
+#define .NpcID:BulletBill_29        1D
+#define .NpcID:BulletBill_40        28
+#define .NpcID:BulletBill_41        29
+#define .NpcID:BulletBill_42        2A
+#define .NpcID:BulletBill_43        2B
+#define .NpcID:BulletBill_44        2C
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -105,7 +124,7 @@ PADDING: 802400B8 to 802400C0 (000000B8 to 000000C0)
    AC:  MFC1      A0, F4
    B0:  TRUNC.W.S F4, F2
    B4:  MFC1      A1, F4
-   B8:  JAL       800EF3C0
+   B8:  JAL       ~Func:partner_set_goal_pos
    BC:  NOP
    C0:  JAL       800EF3D4
    C4:  CLEAR     A0
@@ -236,8 +255,8 @@ PADDING: 802402F4 to 80240300 (000002F4 to 00000300)
 {
     0:  Set   *GB_WorldLocation  .Location:KoopaBrosFortress
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  GetDemoState      ( *Var0 )
    80:  If  *Var0  !=  00000000
@@ -395,10 +414,10 @@ PADDING: 8024081C to 80240820 (0000081C to 00000820)
    2C:  Switch  *Var0
    38:  	Case  ==  .Outcome:PlayerWon % 0
    44:  		Call  DoNpcDefeat ( )
-   50:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   50:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    6C:  	Case  ==  .Outcome:PlayerFled % 2
    78:  	Case  ==  .Outcome:EnemyFled % 3
-   84:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   84:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    A0:  EndSwitch
    A8:  Return
    B0:  End
@@ -429,17 +448,17 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
    54:  Call  DisablePlayerInput    ( .True )
    64:  Wait  20`
    70:  Call  FadeOutMusic  ( 00000000 000007D0 )
-   84:  Call  UseSettingsFrom       ( .Cam:Default 00000514 00000000 00000000 )
-   A0:  Call  SetPanTarget  ( .Cam:Default 000005D2 00000000 00000000 )
-   BC:  Call  SetCamPosB    ( .Cam:Default 000005BA *Fixed[41.6] )
+   84:  Call  UseSettingsFrom       ( .Cam:Default  1300`  0`  0` )
+   A0:  Call  SetPanTarget  ( .Cam:Default  1490`  0`  0` )
+   BC:  Call  SetCamPosB    ( .Cam:Default  1466` *Fixed[41.6] )
    D4:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
    E8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   100:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   114:  Wait  20`
-  120:  Call  SetCamPosB    ( .Cam:Default 000005BA *Fixed[41.6] )
-  138:  Call  SetPanTarget  ( .Cam:Default 000005D2 0000003C 00000000 )
-  154:  Call  SetCamDistance        ( .Cam:Default 0000012C )
-  168:  Call  SetCamPitch   ( .Cam:Default 00000019 FFFFFFF7 )
+  120:  Call  SetCamPosB    ( .Cam:Default  1466` *Fixed[41.6] )
+  138:  Call  SetPanTarget  ( .Cam:Default  1490`  60`  0` )
+  154:  Call  SetCamDistance        ( .Cam:Default  300` )
+  168:  Call  SetCamPitch   ( .Cam:Default  25`  -9` )
   180:  Call  SetCamSpeed   ( .Cam:Default *Fixed[5.0] )
   194:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1AC:  Wait  20`
@@ -461,19 +480,19 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
   2DC:  Call  SetNpcAnimation   ( .Npc:Self 00660103 )
   2F0:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[3.0] )
   304:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.8] )
-  318:  Call  NpcMoveTo     ( .Npc:Self 000005D2 00000000 00000000 )
+  318:  Call  NpcMoveTo     ( .Npc:Self  1490`  0`  0` )
   334:  Wait  10`
   340:  Call  SpeakToPlayer ( .Npc:Self 0066011B 0066011B 00000000 000C00F2 ) % Well, well, well! Mario! I wouldn't have bet you'd ...
-  360:  Call  UseSettingsFrom   ( .Cam:Default 00000514 00000000 00000000 )
-  37C:  Call  SetCamPosB    ( .Cam:Default 000005BA *Fixed[41.6] )
-  394:  Call  SetPanTarget  ( .Cam:Default 000004E2 00000000 00000000 )
+  360:  Call  UseSettingsFrom   ( .Cam:Default  1300`  0`  0` )
+  37C:  Call  SetCamPosB    ( .Cam:Default  1466` *Fixed[41.6] )
+  394:  Call  SetPanTarget  ( .Cam:Default  1250`  0`  0` )
   3B0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   3C4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   3DC:  Call  SetNpcAnimation   ( .Npc:Self 00660112 )
-  3F0:  Call  NpcJump0      ( .Npc:Self 000005A0 0000001E 00000000 00000014 )
-  410:  Call  NpcJump0      ( .Npc:Self 00000564 00000000 00000000 00000014 )
+  3F0:  Call  NpcJump0      ( .Npc:Self  1440`  30`  0`  20` )
+  410:  Call  NpcJump0      ( .Npc:Self  1380`  0`  0`  20` )
   430:  Call  SetNpcAnimation   ( .Npc:Self 00660103 )
-  444:  Call  NpcMoveTo     ( .Npc:Self 00000550 00000000 00000000 )
+  444:  Call  NpcMoveTo     ( .Npc:Self  1360`  0`  0` )
   460:  Wait  20`
   46C:  Call  SetNpcAnimation   ( .Npc:Self 00660104 )
   480:  Call  SpeakToPlayer ( .Npc:Self 0066011B 0066011B 00000000 000C00F3 ) % Yeah, boys!! Open fire!
@@ -483,7 +502,7 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
   4E8:  Call  SetSelfVar    ( 00000000 00000001 )
   4FC:  Call  SetMusicTrack ( 00000000 .Song:BulletBillAssault 00000000 00000008 )
   518:  Wait  60`
-  524:  Call  UseSettingsFrom   ( .Cam:Default 00000514 00000000 00000000 )
+  524:  Call  UseSettingsFrom   ( .Cam:Default  1300`  0`  0` )
   540:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   558:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
   56C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
@@ -540,12 +559,12 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
    64:  Call  SetNpcAnimation   ( .Npc:Self 00660003 )
    78:  Call  SetNpcSpeed       ( .Npc:Self *Fixed[3.0] )
    8C:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.8] )
-   A0:  Call  NpcMoveTo ( .Npc:Self 000005F0 00000014 00000000 )
+   A0:  Call  NpcMoveTo ( .Npc:Self  1520`  20`  0` )
    BC:  Call  SetNpcAnimation   ( .Npc:Self 00660012 )
-   D0:  Call  NpcJump0  ( .Npc:Self 000005BE 0000001E 0000001E 00000014 )
-   F0:  Call  NpcJump0  ( .Npc:Self 00000582 00000000 00000028 00000014 )
+   D0:  Call  NpcJump0  ( .Npc:Self  1470`  30`  30`  20` )
+   F0:  Call  NpcJump0  ( .Npc:Self  1410`  0`  40`  20` )
   110:  Call  SetNpcAnimation   ( .Npc:Self 00660003 )
-  124:  Call  NpcMoveTo ( .Npc:Self 00000532 00000032 00000000 )
+  124:  Call  NpcMoveTo ( .Npc:Self  1330`  50`  0` )
   140:  Call  SetNpcAnimation   ( .Npc:Self 00660001 )
   154:  Label  14
   160:  Call  GetSelfVar        ( 00000000 *Var0 )
@@ -573,12 +592,12 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
    64:  Call  SetNpcAnimation   ( .Npc:Self 00660203 )
    78:  Call  SetNpcSpeed       ( .Npc:Self *Fixed[3.0] )
    8C:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.8] )
-   A0:  Call  NpcMoveTo ( .Npc:Self 000005E1 00000005 00000000 )
+   A0:  Call  NpcMoveTo ( .Npc:Self  1505`  5`  0` )
    BC:  Call  SetNpcAnimation   ( .Npc:Self 00660212 )
-   D0:  Call  NpcJump0  ( .Npc:Self 000005AF 0000001E 00000005 00000014 )
-   F0:  Call  NpcJump0  ( .Npc:Self 00000573 00000000 00000005 00000014 )
+   D0:  Call  NpcJump0  ( .Npc:Self  1455`  30`  5`  20` )
+   F0:  Call  NpcJump0  ( .Npc:Self  1395`  0`  5`  20` )
   110:  Call  SetNpcAnimation   ( .Npc:Self 00660203 )
-  124:  Call  NpcMoveTo ( .Npc:Self 00000523 00000005 00000000 )
+  124:  Call  NpcMoveTo ( .Npc:Self  1315`  5`  0` )
   140:  Call  SetNpcAnimation   ( .Npc:Self 00660201 )
   154:  Label  14
   160:  Call  GetSelfVar        ( 00000000 *Var0 )
@@ -606,12 +625,12 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
    64:  Call  SetNpcAnimation   ( .Npc:Self 00660303 )
    78:  Call  SetNpcSpeed       ( .Npc:Self *Fixed[3.0] )
    8C:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.8] )
-   A0:  Call  NpcMoveTo ( .Npc:Self 000005D2 FFFFFFF6 00000000 )
+   A0:  Call  NpcMoveTo ( .Npc:Self  1490`  -10`  0` )
    BC:  Call  SetNpcAnimation   ( .Npc:Self 00660312 )
-   D0:  Call  NpcJump0  ( .Npc:Self 000005A0 0000001E FFFFFFEC 00000014 )
-   F0:  Call  NpcJump0  ( .Npc:Self 00000564 00000000 FFFFFFE2 00000014 )
+   D0:  Call  NpcJump0  ( .Npc:Self  1440`  30`  -20`  20` )
+   F0:  Call  NpcJump0  ( .Npc:Self  1380`  0`  -30`  20` )
   110:  Call  SetNpcAnimation   ( .Npc:Self 00660303 )
-  124:  Call  NpcMoveTo ( .Npc:Self 00000514 FFFFFFD8 00000000 )
+  124:  Call  NpcMoveTo ( .Npc:Self  1300`  -40`  0` )
   140:  Call  SetNpcAnimation   ( .Npc:Self 00660301 )
   154:  Label  14
   160:  Call  GetSelfVar        ( 00000000 *Var0 )
@@ -666,7 +685,7 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
    34:  Call  EnableNpcShadow   ( .Npc:Self .False )
    48:  Call  80045580  ( 00000000 )
    58:  Call  SetNpcFlagBits    ( .Npc:Self 00000002 .True )
-   70:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   70:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    8C:  Label  2
    98:  Call  GetSelfVar        ( 00000000 *Var0 )
    AC:  If  *Var0  ==  00000000
@@ -683,7 +702,7 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
   168:  Call  AddVectorPolar    ( *Var1 *Var3 *Fixed[14.0] *Var4 )
   184:  Add   *Var2  0000000B
   194:  Call  SetNpcPos     ( .Npc:Self *Var1 *Var2 *Var3 )
-  1B0:  Call  InterpNpcYaw  ( .Npc:Self *Var4 00000000 )
+  1B0:  Call  InterpNpcYaw  ( .Npc:Self *Var4  0` )
   1C8:  Call  80045838      ( FFFFFFFF 00000328 00200000 )
   1E0:  Set   *VarA  *Var1
   1F0:  Sub   *VarA  0000000A
@@ -695,11 +714,11 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
   284:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[6.0] )
   298:  Switch  *Var0
   2A4:  	Case  ==  0000000A
-  2B0:  		Call  NpcMoveTo ( .Npc:Self FFFFFE4B *Var3 00000000 )
+  2B0:  		Call  NpcMoveTo ( .Npc:Self  -437` *Var3  0` )
   2CC:  	Case  ==  0000000B
-  2D8:  		Call  NpcMoveTo ( .Npc:Self FFFFFE34 *Var3 00000000 )
+  2D8:  		Call  NpcMoveTo ( .Npc:Self  -460` *Var3  0` )
   2F4:  	Case  ==  0000000C
-  300:  		Call  NpcMoveTo ( .Npc:Self FFFFFE3E *Var3 00000000 )
+  300:  		Call  NpcMoveTo ( .Npc:Self  -450` *Var3  0` )
   31C:  EndSwitch
   324:  Call  80045838      ( FFFFFFFF B0000018 00000000 )
   33C:  Call  SetNpcAnimation   ( .Npc:Self 002D0005 )
@@ -724,7 +743,7 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
    44:  		Thread
    4C:  			Wait  20`
    58:  			Call  SetNpcFlagBits    ( .Npc:Self 00000002 .True )
-   70:  			Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   70:  			Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    8C:  			Call  BindNpcAI ( .Npc:Self $Script_NpcAI_80241B6C )
    A0:  		EndThread
    A8:  		Call  DoNpcDefeat ( )
@@ -793,127 +812,127 @@ MISSING: 80240CE4 to 80240D3C (00000CE4 to 00000D3C)
 
 #new:NpcGroup $NpcGroup_80242240
 {
-	0000000A $NpcSettings_80242150 ~Vec3f:NPC_80242240 % 1260 0 -40
+	.NpcID:BillBlaster_10 $NpcSettings_80242150 ~Vec3f:NPC_BillBlaster_10 % 1260 0 -40
 	00242D00 $Script_Init_802421EC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242240
-	~AnimationTable:NPC_80242240 % .Sprite:BillBlaster
+	~Movement:NPC_BillBlaster_10
+	~AnimationTable:NPC_BillBlaster_10 % .Sprite:BillBlaster
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242240[1F0]
-	0000000C $NpcSettings_80242150 ~Vec3f:NPC_80242430 % 1275 0 5
+	.NpcID:BillBlaster_12 $NpcSettings_80242150 ~Vec3f:NPC_BillBlaster_12 % 1275 0 5
 	00242D00 00000000 00000000 00000000 0000010E
 	~NoItems ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_80242430
-	~AnimationTable:NPC_80242430 % .Sprite:BillBlaster
+	~Movement:NPC_BillBlaster_12
+	~AnimationTable:NPC_BillBlaster_12 % .Sprite:BillBlaster
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242240[3E0]
-	0000000B $NpcSettings_80242150 ~Vec3f:NPC_80242620 % 1290 0 50
+	.NpcID:BillBlaster_11 $NpcSettings_80242150 ~Vec3f:NPC_BillBlaster_11 % 1290 0 50
 	00242D00 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242620
-	~AnimationTable:NPC_80242620 % .Sprite:BillBlaster
+	~Movement:NPC_BillBlaster_11
+	~AnimationTable:NPC_BillBlaster_11 % .Sprite:BillBlaster
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242810
 {
-	00000014 $NpcSettings_8024217C ~Vec3f:NPC_80242810 % 0 -1000 0
+	.NpcID:BulletBill_20 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_20 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80242810
-	~AnimationTable:NPC_80242810 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_20
+	~AnimationTable:NPC_BulletBill_20 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242A00
 {
-	00000015 $NpcSettings_8024217C ~Vec3f:NPC_80242A00 % 0 -1000 0
+	.NpcID:BulletBill_21 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_21 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80242A00
-	~AnimationTable:NPC_80242A00 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_21
+	~AnimationTable:NPC_BulletBill_21 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242BF0
 {
-	00000016 $NpcSettings_8024217C ~Vec3f:NPC_80242BF0 % 0 -1000 0
+	.NpcID:BulletBill_22 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_22 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80242BF0
-	~AnimationTable:NPC_80242BF0 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_22
+	~AnimationTable:NPC_BulletBill_22 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242DE0
 {
-	00000017 $NpcSettings_8024217C ~Vec3f:NPC_80242DE0 % 0 -1000 0
+	.NpcID:BulletBill_23 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_23 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80242DE0
-	~AnimationTable:NPC_80242DE0 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_23
+	~AnimationTable:NPC_BulletBill_23 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80242FD0
 {
-	00000018 $NpcSettings_8024217C ~Vec3f:NPC_80242FD0 % 0 -1000 0
+	.NpcID:BulletBill_24 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_24 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80242FD0
-	~AnimationTable:NPC_80242FD0 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_24
+	~AnimationTable:NPC_BulletBill_24 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802431C0
 {
-	00000019 $NpcSettings_8024217C ~Vec3f:NPC_802431C0 % 0 -1000 0
+	.NpcID:BulletBill_25 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_25 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_802431C0
-	~AnimationTable:NPC_802431C0 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_25
+	~AnimationTable:NPC_BulletBill_25 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802433B0
 {
-	0000001A $NpcSettings_8024217C ~Vec3f:NPC_802433B0 % 0 -1000 0
+	.NpcID:BulletBill_26 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_26 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_802433B0
-	~AnimationTable:NPC_802433B0 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_26
+	~AnimationTable:NPC_BulletBill_26 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802435A0
 {
-	0000001B $NpcSettings_8024217C ~Vec3f:NPC_802435A0 % 0 -1000 0
+	.NpcID:BulletBill_27 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_27 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_802435A0
-	~AnimationTable:NPC_802435A0 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_27
+	~AnimationTable:NPC_BulletBill_27 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243790
 {
-	0000001C $NpcSettings_8024217C ~Vec3f:NPC_80243790 % 0 -1000 0
+	.NpcID:BulletBill_28 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_28 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80243790
-	~AnimationTable:NPC_80243790 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_28
+	~AnimationTable:NPC_BulletBill_28 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243980
 {
-	0000001D $NpcSettings_8024217C ~Vec3f:NPC_80243980 % 0 -1000 0
+	.NpcID:BulletBill_29 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_29 % 0 -1000 0
 	00080D04 00000000 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80243980
-	~AnimationTable:NPC_80243980 % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_29
+	~AnimationTable:NPC_BulletBill_29 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -993,7 +1012,7 @@ MISSING: 80244058 to 80244330 (00004058 to 00004330)
 {
     0:  Call  GetNpcPos     ( .Npc:Self *Var1 *Var2 *Var3 )
    1C:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[6.0] )
-   30:  Call  NpcMoveTo     ( .Npc:Self FFFFFE34 *Var3 00000000 )
+   30:  Call  NpcMoveTo     ( .Npc:Self  -460` *Var3  0` )
    4C:  Return
    54:  End
 }
@@ -1008,51 +1027,51 @@ MISSING: 80244058 to 80244330 (00004058 to 00004330)
 
 #new:NpcGroup $NpcGroup_8024445C
 {
-	00000028 $NpcSettings_8024217C ~Vec3f:NPC_8024445C % -100 11 50
+	.NpcID:BulletBill_40 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_40 % -100 11 50
 	00080D04 $Script_Init_80244428 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_8024445C
-	~AnimationTable:NPC_8024445C % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_40
+	~AnimationTable:NPC_BulletBill_40 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024464C
 {
-	00000029 $NpcSettings_8024217C ~Vec3f:NPC_8024464C % -150 11 5
+	.NpcID:BulletBill_41 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_41 % -150 11 5
 	00080D04 $Script_Init_80244428 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_8024464C
-	~AnimationTable:NPC_8024464C % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_41
+	~AnimationTable:NPC_BulletBill_41 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024483C
 {
-	0000002A $NpcSettings_8024217C ~Vec3f:NPC_8024483C % 120 11 50
+	.NpcID:BulletBill_42 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_42 % 120 11 50
 	00080D04 $Script_Init_80244428 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_8024483C
-	~AnimationTable:NPC_8024483C % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_42
+	~AnimationTable:NPC_BulletBill_42 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244A2C
 {
-	0000002B $NpcSettings_8024217C ~Vec3f:NPC_80244A2C % 330 11 5
+	.NpcID:BulletBill_43 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_43 % 330 11 5
 	00080D04 $Script_Init_80244428 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80244A2C
-	~AnimationTable:NPC_80244A2C % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_43
+	~AnimationTable:NPC_BulletBill_43 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244C1C
 {
-	0000002C $NpcSettings_8024217C ~Vec3f:NPC_80244C1C % 380 11 -40
+	.NpcID:BulletBill_44 $NpcSettings_8024217C ~Vec3f:NPC_BulletBill_44 % 380 11 -40
 	00080D04 $Script_Init_80244428 00000001 00000000 0000010E
 	~Items:3:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~NoCoinBonus
-	~Movement:NPC_80244C1C
-	~AnimationTable:NPC_80244C1C % .Sprite:BulletBill
+	~Movement:NPC_BulletBill_44
+	~AnimationTable:NPC_BulletBill_44 % .Sprite:BulletBill
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -1153,7 +1172,7 @@ PADDING: 80244E54 to 80244E60 (00004E54 to 00004E60)
 #new:Script $Script_80245238
 {
     0:  Call  $Function_802400C0 ( )
-    C:  Call  SetNpcYaw ( .Npc:Partner 0000005A )
+    C:  Call  SetNpcYaw ( .Npc:Partner  90` )
    20:  Set   *GF_DemoSceneDone  .False
    30:  Exec  $Script_80245174
    3C:  Exec  $Script_80244E60

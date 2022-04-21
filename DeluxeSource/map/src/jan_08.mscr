@@ -1,6 +1,15 @@
 % Script File: jan_08.mscr
 % Decoded from: 0 to 7800 (jan_08)
 
+#define .NpcID:JungleGuy_00         00
+#define .NpcID:JungleGuy_01         01
+#define .NpcID:HurtPlant_02         02
+#define .NpcID:MBush_03             03
+#define .NpcID:MBush_04             04
+#define .NpcID:HeartPlant_05        05
+#define .NpcID:HeartPlant_06        06
+#define .NpcID:YoshiKid_07          07
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -767,7 +776,7 @@ PADDING: 8024065C to 80240660 (0000065C to 00000660)
     8:  LW        V0, C (A0)
     C:  JAL       ~Func:get_variable
    10:  LW        A1, 0 (V0)
-   14:  JAL       800EB168
+   14:  JAL       ~Func:switch_to_partner
    18:  COPY      A0, V0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -813,7 +822,7 @@ PADDING: 8024065C to 80240660 (0000065C to 00000660)
    54:  LW        A1, 48 (V0)
    58:  LW        A3, 50 (V0)
    5C:  MFC1      A2, F4
-   60:  JAL       80071750
+   60:  JAL       ~Func:playFX_52
    64:  CLEAR     A0
    68:  COPY      A0, S1
    6C:  COPY      A1, S0
@@ -863,7 +872,7 @@ PADDING: 8024065C to 80240660 (0000065C to 00000660)
    40:  LW        A1, 48 (V0)
    44:  LW        A3, 50 (V0)
    48:  MFC1      A2, F2
-   4C:  JAL       80070BB0
+   4C:  JAL       ~Func:playFX_33
    50:  LI        A0, 4
    54:  LW        RA, 18 (SP)
    58:  LI        V0, 2
@@ -887,7 +896,7 @@ PADDING: 8024065C to 80240660 (0000065C to 00000660)
    34:  LW        A1, 38 (V0)
    38:  LW        A3, 40 (V0)
    3C:  MFC1      A2, F4
-   40:  JAL       80070BB0
+   40:  JAL       ~Func:playFX_33
    44:  LI        A0, 9
    48:  LW        RA, 18 (SP)
    4C:  LI        V0, 2
@@ -955,7 +964,7 @@ PADDING: 8024065C to 80240660 (0000065C to 00000660)
    EC:  LW        A1, 48 (V0)
    F0:  LW        A3, 50 (V0)
    F4:  MFC1      A2, F0
-   F8:  JAL       800716F0
+   F8:  JAL       ~Func:playFX_51
    FC:  ADDIU     S1, S1, 1
   100:  SW        V0, 8 (S0)
   104:  SWC1      F20, 2C (S0)
@@ -1265,7 +1274,7 @@ PADDING: 8024065C to 80240660 (0000065C to 00000660)
    4C:  COPY      A3, A1
    50:  SW        V0, 88 (S1)
    54:  SW        R0, 70 (S1)
-   58:  JAL       ~Func:set_transition_stencil_color
+   58:  JAL       ~Func:set_screen_overlay_color
    5C:  SW        R0, 74 (S1)
         .o60
    60:  LW        V1, 70 (S1)
@@ -1322,7 +1331,7 @@ PADDING: 8024065C to 80240660 (0000065C to 00000660)
   110:  LWC1      F0, 74 (S1)
   114:  CVT.S.W   F0, F0
   118:  MFC1      A1, F0
-  11C:  JAL       ~Func:set_transition_stencil_zoom_0
+  11C:  JAL       ~Func:set_screen_overlay_params_front
   120:  LI        A0, 1
   124:  COPY      V0, S2
   128:  LW        RA, 1C (SP)
@@ -1346,7 +1355,7 @@ PADDING: 8024065C to 80240660 (0000065C to 00000660)
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 2
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -1367,7 +1376,7 @@ PADDING: 8024065C to 80240660 (0000065C to 00000660)
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 4
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -2652,8 +2661,8 @@ PADDING: 802424DC to 802424E0 (000024DC to 000024E0)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer      ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_8024687C )
@@ -2672,7 +2681,7 @@ PADDING: 802424DC to 802424E0 (000024DC to 000024E0)
   194:  Set   *Var0  $Script_80242690
   1A4:  Exec  EnterWalk
   1B0:  Exec  $Script_802424A0
-  1BC:  Call  802C971C  ( 0000006D )
+  1BC:  Call  MakeTransformGroup    ( ~Model:g40 )
   1CC:  Call  EnableTexPanning      ( ~Model:o111 .True )
   1E0:  Thread
   1E8:  	Set   *Var0  00000001
@@ -2944,13 +2953,13 @@ PADDING: 802424DC to 802424E0 (000024DC to 000024E0)
    F0:  		Thread
    F8:  			Call  DisablePartnerAI  ( 00000000 )
   108:  			Call  SetNpcFlagBits    ( .Npc:Partner 00008140 .True )
-  120:  			Call  NpcMoveTo ( .Npc:Partner FFFFFEC5 *Var5 00000014 )
-  13C:  			Call  NpcFaceNpc        ( .Npc:Partner 00000007 00000000 )
+  120:  			Call  NpcMoveTo ( .Npc:Partner  -315` *Var5  20` )
+  13C:  			Call  NpcFaceNpc        ( .Npc:Partner .NpcID:YoshiKid_07 00000000 )
   154:  			Call  SetNpcFlagBits    ( .Npc:Partner 00008140 .False )
   16C:  			Call  EnablePartnerAI ( )
   178:  		EndThread
-  180:  		Call  PlayerMoveTo  ( FFFFFEAC *Var5 00000014 )
-  198:  		Call  PlayerFaceNpc ( 00000007 00000000 )
+  180:  		Call  PlayerMoveTo  (  -340` *Var5  20` )
+  198:  		Call  PlayerFaceNpc ( .NpcID:YoshiKid_07 .False )
   1AC:  		Wait  10`
   1B8:  		Call  PlaySoundAtCollider   ( ~Collider:o88 0000209F 00000000 )
   1D0:  		Set   *Var3  00000000
@@ -2960,20 +2969,20 @@ PADDING: 802424DC to 802424E0 (000024DC to 000024E0)
   21C:  			Wait  1`
   228:  		EndLoop
   230:  		Set   *Var4  0000010E
-  240:  		Call  SetNpcRotation    ( 00000007 00000000 *Var4 00000000 )
-  25C:  		Call  SetNpcPos ( 00000007 FFFFFE79 00000000 FFFFFF70 )
-  278:  		Call  SetNpcFlagBits    ( 00000007 00000102 .False )
+  240:  		Call  SetNpcRotation    ( .NpcID:YoshiKid_07 00000000 *Var4 00000000 )
+  25C:  		Call  SetNpcPos ( .NpcID:YoshiKid_07  -391`  0`  -144` )
+  278:  		Call  SetNpcFlagBits    ( .NpcID:YoshiKid_07 00000102 .False )
   290:  		Loop  0000000A
   29C:  			Add   *Var3  00000009
   2AC:  			Call  RotateModel       ( *Var1 *Var3 00000000 00000001 00000000 )
   2CC:  			Add   *Var4  00000009
-  2DC:  			Call  SetNpcRotation    ( 00000007 00000000 *Var4 00000000 )
+  2DC:  			Call  SetNpcRotation    ( .NpcID:YoshiKid_07 00000000 *Var4 00000000 )
   2F8:  			Wait  1`
   304:  		EndLoop
-  30C:  		Call  EnableNpcShadow   ( 00000007 .True )
-  320:  		Call  PlayerFaceNpc     ( 00000007 00000000 )
+  30C:  		Call  EnableNpcShadow   ( .NpcID:YoshiKid_07 .True )
+  320:  		Call  PlayerFaceNpc     ( .NpcID:YoshiKid_07 .False )
   334:  		Wait  20`
-  340:  		Call  SetNpcVar ( 00000007 00000000 00000001 )
+  340:  		Call  SetNpcVar ( .NpcID:YoshiKid_07 00000000 00000001 )
   358:  	EndIf
   360:  EndIf
   368:  Call  DisablePlayerInput    ( .False )
@@ -3333,7 +3342,7 @@ PADDING: 80243DFC to 80243E00 (00003DFC to 00003E00)
    E8:  Call  FindKeyItem   ( .Item:UltraStone *VarC )
    FC:  Call  $Function_80240780 ( )
   108:  If  *Var0  ==  FFFFFFFF
-  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC 000000A0 00000028 ) % You have no member you can upgrade now.
+  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC  160`  40` ) % You have no member you can upgrade now.
   130:  	Wait  10`
   13C:  	Call  $Function_80240B70        ( *Var9 )
   14C:  	Call  DisablePlayerInput        ( .False )
@@ -3344,9 +3353,9 @@ PADDING: 80243DFC to 80243E00 (00003DFC to 00003E00)
   190:  EndIf
   198:  If  *GF_Tutorial_SuperBlock  ==  .False
   1A8:  	Set   *GF_Tutorial_SuperBlock  .True
-  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA 000000A0 00000028 ) % This is a Super Block. With this, you can upgrade  ...
+  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA  160`  40` ) % This is a Super Block. With this, you can upgrade  ...
   1D0:  Else
-  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB 000000A0 00000028 ) % With this, you can upgrade one of your party membe ...
+  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB  160`  40` ) % With this, you can upgrade one of your party membe ...
   1F0:  EndIf
   1F8:  Call  $Function_8024082C ( )
   204:  If  *Var0  ==  FFFFFFFF
@@ -3367,7 +3376,7 @@ PADDING: 80243DFC to 80243E00 (00003DFC to 00003E00)
   2D4:  	Call  802CF56C  ( 00000002 )
   2E4:  EndIf
   2EC:  Wait  10`
-  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF 000000A0 00000028 ) % Do you want to upgrade this member?
+  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF  160`  40` ) % Do you want to upgrade this member?
   310:  Call  ShowChoice    ( 001E000D ) % Yes No
   320:  Call  CloseMessage ( )
   32C:  If  *Var0  !=  00000000
@@ -3384,9 +3393,9 @@ PADDING: 80243DFC to 80243E00 (00003DFC to 00003E00)
   3C8:  Call  $Function_80240B70    ( *Var9 )
   3D8:  Call  $Function_80240AA8 ( )
   3E4:  If  *VarD  ==  00000001
-  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD 000000A0 00000028 ) % is upgraded to Super-rank!
+  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD  160`  40` ) % is upgraded to Super-rank!
   40C:  Else
-  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE 000000A0 00000028 ) % is upgraded to Ultra-rank!
+  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE  160`  40` ) % is upgraded to Ultra-rank!
   42C:  EndIf
   434:  Call  DisablePlayerInput        ( .False )
   444:  Call  EnablePartnerAI ( )
@@ -3462,7 +3471,7 @@ PADDING: 80244598 to 802445A0 (00004598 to 000045A0)
   268:  EndThread
   270:  Thread
   278:  	Wait  6`
-  284:  	Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  284:  	Call  InterpPlayerYaw   (  90`  0` )
   298:  EndThread
   2A0:  Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
   2B8:  Call  EnableNpcShadow   ( .Npc:Self .True )
@@ -3638,7 +3647,7 @@ PADDING: 80244598 to 802445A0 (00004598 to 000045A0)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -3705,7 +3714,7 @@ PADDING: 80244598 to 802445A0 (00004598 to 000045A0)
 {
     0:  Set   *AreaFlag[002]  .False
    10:  Loop
-   1C:  	Call  PlaySoundAtNpc    ( 00000007 000001F0 00000000 )
+   1C:  	Call  PlaySoundAtNpc    ( .NpcID:YoshiKid_07 000001F0 00000000 )
    34:  	Wait  20`
    40:  	If  *AreaFlag[002]  ==  .True
    50:  		BreakLoop
@@ -3727,7 +3736,7 @@ PADDING: 80244598 to 802445A0 (00004598 to 000045A0)
    78:  			Wait  18`
    84:  		EndIf
    8C:  		Call  DisablePlayerInput        ( .True )
-   9C:  		Call  ShowMessageAtScreenPos    ( 001000AF 000000A0 00000028 ) % Buh-buh-boooo huh-hoooo!
+   9C:  		Call  ShowMessageAtScreenPos    ( 001000AF  160`  40` ) % Buh-buh-boooo huh-hoooo!
    B4:  		Exec  $Script_802451B8
    C0:  		Call  DisablePlayerInput        ( .False )
    D0:  		Set   *Var0  00000001
@@ -3744,7 +3753,7 @@ PADDING: 80244598 to 802445A0 (00004598 to 000045A0)
   15C:  	Goto  A
   168:  EndIf
   170:  Call  DisablePlayerInput    ( .True )
-  180:  Call  AdjustCam ( .Cam:Default *Fixed[4.0] FFFFFFE9 0000015E *Fixed[17.0] *Fixed[-7.0] )
+  180:  Call  AdjustCam ( .Cam:Default *Fixed[4.0]  -23`  350` *Fixed[17.0] *Fixed[-7.0] )
   1A4:  Call  NpcFacePlayer ( .Npc:Self 00000000 )
   1B8:  Call  GetCurrentPartnerID   ( *Var0 )
   1C8:  Set   *AreaFlag[002]  .True
@@ -3759,10 +3768,10 @@ PADDING: 80244598 to 802445A0 (00004598 to 000045A0)
   268:  	Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
   280:  	Call  SetNpcAnimation   ( .Npc:Self 00970403 )
   294:  	Call  SetNpcSpeed   ( .Npc:Self *Fixed[5.0] )
-  2A8:  	Call  NpcMoveTo     ( .Npc:Self FFFFFE5E FFFFFFC4 00000000 )
-  2C4:  	Call  NpcMoveTo     ( .Npc:Self FFFFFED4 00000050 00000000 )
-  2E0:  	Call  NpcMoveTo     ( .Npc:Self FFFFFEC0 00000073 00000000 )
-  2FC:  	Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  2A8:  	Call  NpcMoveTo     ( .Npc:Self  -418`  -60`  0` )
+  2C4:  	Call  NpcMoveTo     ( .Npc:Self  -300`  80`  0` )
+  2E0:  	Call  NpcMoveTo     ( .Npc:Self  -320`  115`  0` )
+  2FC:  	Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   318:  EndThread
   320:  Set   *GF_JAN08_SavedYoshi  .True
   330:  Set   *Var0  00000000
@@ -3795,8 +3804,8 @@ PADDING: 80244598 to 802445A0 (00004598 to 000045A0)
    20:  		Call  SetNpcFlagBits    ( .Npc:Self 00000102 .True )
    38:  		Call  EnableNpcShadow   ( .Npc:Self .False )
    4C:  		Call  SetNpcAnimation   ( .Npc:Self 00970406 )
-   60:  		Call  SetNpcYaw ( .Npc:Self 0000005A )
-   74:  		Call  SetNpcPos ( .Npc:Self FFFFFE79 00000000 FFFFFF5C )
+   60:  		Call  SetNpcYaw ( .Npc:Self  90` )
+   74:  		Call  SetNpcPos ( .Npc:Self  -391`  0`  -164` )
    90:  		Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80245230 )
    A4:  		Return
    AC:  	EndIf
@@ -3832,7 +3841,7 @@ PADDING: 80244598 to 802445A0 (00004598 to 000045A0)
 
 #new:Script $Script_Init_802458C0
 {
-    0:  Call  SetNpcCollisionSize   ( .Npc:Self 0000003C 0000001E )
+    0:  Call  SetNpcCollisionSize   ( .Npc:Self  60`  30` )
    18:  Call  BindNpcDefeat ( .Npc:Self $Script_Defeat_80245770 )
    2C:  Return
    34:  End
@@ -3840,82 +3849,82 @@ PADDING: 80244598 to 802445A0 (00004598 to 000045A0)
 
 #new:NpcGroup $NpcGroup_802458FC
 {
-	00000000 $NpcSettings_802450B8 ~Vec3f:NPC_802458FC % 255 15 -65
+	.NpcID:JungleGuy_00 $NpcSettings_802450B8 ~Vec3f:NPC_JungleGuy_00 % 255 15 -65
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:5:SleepySheep:A ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_802458FC
-	~AnimationTable:NPC_802458FC % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_00
+	~AnimationTable:NPC_JungleGuy_00 % .Sprite:JungleGuy
 	00000003 00000000 $ExtraAnimationList_80244F2C 00000000 % no tattle string
 	%
 	% $NpcGroup_802458FC[1F0]
-	00000001 $NpcSettings_8024518C ~Vec3f:NPC_80245AEC % 0 -1000 0
+	.NpcID:JungleGuy_01 $NpcSettings_8024518C ~Vec3f:NPC_JungleGuy_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245AEC
-	~AnimationTable:NPC_80245AEC % .Sprite:JungleGuy
+	~Movement:NPC_JungleGuy_01
+	~AnimationTable:NPC_JungleGuy_01 % .Sprite:JungleGuy
 	00000000 00000000 $ExtraAnimationList_80244F54 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80245CDC
 {
-	00000002 $NpcSettings_80244EEC ~Vec3f:NPC_80245CDC % 400 0 235
+	.NpcID:HurtPlant_02 $NpcSettings_80244EEC ~Vec3f:NPC_HurtPlant_02 % 400 0 235
 	00408D01 00000000 00000000 00000000 0000010E
 	~Items:10:TastyTonic:5:SuperSoda:5
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80245CDC
-	~AnimationTable:NPC_80245CDC % .Sprite:HurtPlant
+	~Movement:NPC_HurtPlant_02
+	~AnimationTable:NPC_HurtPlant_02 % .Sprite:HurtPlant
 	00000000 00000000 $ExtraAnimationList_80244F18 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_80245ECC
 {
-	00000003 $NpcSettings_80244ACC ~Vec3f:NPC_80245ECC % -407 0 -42
+	.NpcID:MBush_03 $NpcSettings_80244ACC ~Vec3f:NPC_MBush_03 % -407 0 -42
 	00408D01 $Script_Init_802458C0 00000000 00000000 0000005A
 	~Items:10:TastyTonic:5:SuperSoda:5
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_80245ECC
-	~AnimationTable:NPC_80245ECC % .Sprite:MBush
+	~Movement:NPC_MBush_03
+	~AnimationTable:NPC_MBush_03 % .Sprite:MBush
 	00000000 00000000 00000000 001A00D4 % M. Bush. This bizarre creature is only found in th ...
 }
 
 #new:NpcGroup $NpcGroup_802460BC
 {
-	00000004 $NpcSettings_80244ACC ~Vec3f:NPC_802460BC % -120 0 -395
+	.NpcID:MBush_04 $NpcSettings_80244ACC ~Vec3f:NPC_MBush_04 % -120 0 -395
 	00408D01 00000000 00000000 00000000 0000005A
 	~Items:10:TastyTonic:5:SuperSoda:5
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_802460BC
-	~AnimationTable:NPC_802460BC % .Sprite:MBush
+	~Movement:NPC_MBush_04
+	~AnimationTable:NPC_MBush_04 % .Sprite:MBush
 	00000000 00000000 00000000 001A00D4 % M. Bush. This bizarre creature is only found in th ...
 }
 
 #new:NpcGroup $NpcGroup_802462AC
 {
-	00000005 $NpcSettings_80244C80 ~Vec3f:NPC_802462AC % -219 0 420
+	.NpcID:HeartPlant_05 $NpcSettings_80244C80 ~Vec3f:NPC_HeartPlant_05 % -219 0 420
 	00408D05 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802462AC
-	~AnimationTable:NPC_802462AC % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_05
+	~AnimationTable:NPC_HeartPlant_05 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_8024649C
 {
-	00000006 $NpcSettings_80244C80 ~Vec3f:NPC_8024649C % -157 0 452
+	.NpcID:HeartPlant_06 $NpcSettings_80244C80 ~Vec3f:NPC_HeartPlant_06 % -157 0 452
 	00408D05 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024649C
-	~AnimationTable:NPC_8024649C % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_06
+	~AnimationTable:NPC_HeartPlant_06 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_8024668C
 {
-	00000007 $NpcSettings_802445A0 ~Vec3f:NPC_8024668C % -450 0 -290
+	.NpcID:YoshiKid_07 $NpcSettings_802445A0 ~Vec3f:NPC_YoshiKid_07 % -450 0 -290
 	00400D0D $Script_Init_80245694 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024668C
-	~AnimationTable:NPC_8024668C % .Sprite:YoshiKid
+	~Movement:NPC_YoshiKid_07
+	~AnimationTable:NPC_YoshiKid_07 % .Sprite:YoshiKid
 	00000000 00000000 00000000 001A00C7 % Yoshi kids are so cheerful. This red Yoshi kid, th ...
 }
 

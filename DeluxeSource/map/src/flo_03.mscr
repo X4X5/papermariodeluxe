@@ -1,6 +1,13 @@
 % Script File: flo_03.mscr
 % Decoded from: 0 to 4F50 (flo_03)
 
+#define .NpcID:Petunia_00           00
+#define .NpcID:Dayzee_01            01
+#define .NpcID:MontyMole_02         02
+#define .NpcID:MontyMole_03         03
+#define .NpcID:MontyMole_04         04
+#define .NpcID:MontyMole_05         05
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -10,7 +17,7 @@
    10:  COPY      A3, A1
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -563,8 +570,8 @@ PADDING: 8024062C to 80240630 (0000062C to 00000630)
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   54:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   54:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Set   *AreaFlag[01B]  .False
    94:  Set   *AreaFlag[01C]  .False
@@ -669,20 +676,20 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  DisablePlayerPhysics  ( .True )
-   20:  Call  SetNpcYaw     ( 00000000 0000005A )
-   34:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+   20:  Call  SetNpcYaw     ( .NpcID:Petunia_00  90` )
+   34:  Call  GetNpcPos     ( .NpcID:Petunia_00 *Var0 *Var1 *Var2 )
    50:  Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
    6C:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-   88:  Call  SetCamDistance        ( .Cam:Default 0000012C )
+   88:  Call  SetCamDistance        ( .Cam:Default  300` )
    9C:  Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-9.5] )
-   B4:  Call  SetCamPosA    ( .Cam:Default FFFFFFE5 00000000 )
-   CC:  Call  SetCamPosB    ( .Cam:Default 00000000 FFFFFFCE )
+   B4:  Call  SetCamPosA    ( .Cam:Default  -27`  0` )
+   CC:  Call  SetCamPosB    ( .Cam:Default  0`  -50` )
    E4:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    F8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   110:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   124:  Wait  20`
-  130:  Call  SpeakToPlayer ( 00000000 00C70002 00C70001 00000000 001100C8 ) % It's the sun, it's the sun!!!!! Oh, that heat feel ...
-  150:  Call  SetNpcAnimation       ( 00000000 00C70003 )
+  130:  Call  SpeakToPlayer ( .NpcID:Petunia_00 00C70002 00C70001 00000000 001100C8 ) % It's the sun, it's the sun!!!!! Oh, that heat feel ...
+  150:  Call  SetNpcAnimation       ( .NpcID:Petunia_00 00C70003 )
   164:  Wait  10`
   170:  Call  GotoMap       ( $ASCII_80244F40 00000001 ) % flo_18
   184:  Wait  100`
@@ -717,7 +724,7 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    18:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    34:  Add   *Var0  *Var3
    44:  Div   *Var0  00000002
-   54:  Call  SetCamProperties  ( .Cam:Default *Var4 *Var0 *Var1 *Var2 0000012C *Fixed[20.0] *Fixed[-9.5] )
+   54:  Call  SetCamProperties  ( .Cam:Default *Var4 *Var0 *Var1 *Var2  300` *Fixed[20.0] *Fixed[-9.5] )
    80:  Return
    88:  End
 }
@@ -735,88 +742,88 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    84:  		Call  SetPlayerAnimation    ( .PlayerAnim:NodYes )
    94:  		Wait  20`
    A0:  		Call  SpeakToPlayer ( .Npc:Self 00C70007 00C70006 00000000 00110051 ) % In case you're wondering, the Monty Moles I'm talk ...
-   C0:  		Call  SetNpcAnimation   ( 00000002 002F0112 )
-   D4:  		Call  SetNpcYaw     ( 00000002 0000010E )
-   E8:  		Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+   C0:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_02 002F0112 )
+   D4:  		Call  SetNpcYaw     ( .NpcID:MontyMole_02  270` )
+   E8:  		Call  GetNpcPos     ( .NpcID:MontyMole_02 *Var0 *Var1 *Var2 )
   104:  		Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   120:  		Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   13C:  		Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   150:  		Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-8.0] )
-  168:  		Call  SetCamDistance    ( .Cam:Default 000000C8 )
+  168:  		Call  SetCamDistance    ( .Cam:Default  200` )
   17C:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   194:  		Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   1A8:  		Wait  20`
-  1B4:  		Call  PlaySoundAtNpc    ( 00000002 .Sound:MoleSurface 00000000 )
-  1CC:  		Call  SetNpcAnimation   ( 00000002 002F0116 )
+  1B4:  		Call  PlaySoundAtNpc    ( .NpcID:MontyMole_02 .Sound:MoleSurface 00000000 )
+  1CC:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_02 002F0116 )
   1E0:  		Wait  10`
-  1EC:  		Call  PlaySoundAtNpc    ( 00000002 00000263 00000000 )
-  204:  		Call  ShowEmote     ( 00000002 .Emote:Question FFFFFFD3 0000001E 00000001 00000000 00000000 00000000 00000000 )
-  234:  		Call  GetNpcPos     ( 00000003 *Var0 *Var1 *Var2 )
+  1EC:  		Call  PlaySoundAtNpc    ( .NpcID:MontyMole_02 00000263 00000000 )
+  204:  		Call  ShowEmote     ( .NpcID:MontyMole_02 .Emote:Question  -45`  30` .True  0`  0`  0`  0` )
+  234:  		Call  GetNpcPos     ( .NpcID:MontyMole_03 *Var0 *Var1 *Var2 )
   250:  		Call  SpeakToPlayer ( .Npc:Self 00C70007 00C70006 00000000 00110052 ) % this guy...
-  270:  		Call  SetNpcYaw     ( 00000003 0000005A )
-  284:  		Call  SetNpcPos     ( 00000003 00000000 FFFFFC18 00000000 )
+  270:  		Call  SetNpcYaw     ( .NpcID:MontyMole_03  90` )
+  284:  		Call  SetNpcPos     ( .NpcID:MontyMole_03  0`  -1000`  0` )
   2A0:  		Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   2BC:  		Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  2D8:  		Call  SetCamDistance    ( .Cam:Default 000000C8 )
+  2D8:  		Call  SetCamDistance    ( .Cam:Default  200` )
   2EC:  		Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-8.0] )
   304:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   31C:  		Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  330:  		Call  SetNpcAnimation   ( 00000003 002F0100 )
+  330:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_03 002F0100 )
   344:  		Wait  20`
-  350:  		Call  PlaySoundAtNpc    ( 00000003 .Sound:MoleSurface 00000000 )
-  368:  		Call  SetNpcPos     ( 00000003 *Var0 *Var1 *Var2 )
-  384:  		Call  SetNpcAnimation   ( 00000003 002F0110 )
+  350:  		Call  PlaySoundAtNpc    ( .NpcID:MontyMole_03 .Sound:MoleSurface 00000000 )
+  368:  		Call  SetNpcPos     ( .NpcID:MontyMole_03 *Var0 *Var1 *Var2 )
+  384:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_03 002F0110 )
   398:  		Wait  20`
   3A4:  		Call  SpeakToPlayer ( .Npc:Self 00C70007 00C70006 00000000 00110053 ) % and this jerk...
-  3C4:  		Call  SetNpcYaw     ( 00000004 0000010E )
-  3D8:  		Call  GetNpcPos     ( 00000004 *Var0 *Var1 *Var2 )
+  3C4:  		Call  SetNpcYaw     ( .NpcID:MontyMole_04  270` )
+  3D8:  		Call  GetNpcPos     ( .NpcID:MontyMole_04 *Var0 *Var1 *Var2 )
   3F4:  		Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   410:  		Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  42C:  		Call  SetCamDistance    ( .Cam:Default 000000C8 )
+  42C:  		Call  SetCamDistance    ( .Cam:Default  200` )
   440:  		Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-8.0] )
   458:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   470:  		Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   484:  		Wait  20`
-  490:  		Call  SetNpcAnimation   ( 00000004 002F0114 )
+  490:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_04 002F0114 )
   4A4:  		Call  SpeakToPlayer ( .Npc:Self 00C70007 00C70006 00000000 00110054 ) % and this troublemaker...
-  4C4:  		Call  SetNpcYaw     ( 00000005 0000010E )
-  4D8:  		Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+  4C4:  		Call  SetNpcYaw     ( .NpcID:MontyMole_05  270` )
+  4D8:  		Call  GetNpcPos     ( .NpcID:MontyMole_05 *Var0 *Var1 *Var2 )
   4F4:  		Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   510:  		Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  52C:  		Call  SetCamDistance    ( .Cam:Default 000000C8 )
+  52C:  		Call  SetCamDistance    ( .Cam:Default  200` )
   540:  		Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-9.0] )
   558:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   570:  		Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  584:  		Call  SetNpcAnimation   ( 00000005 002F0106 )
+  584:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_05 002F0106 )
   598:  		Wait  20`
-  5A4:  		Call  SetNpcAnimation   ( 00000005 002F0107 )
+  5A4:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_05 002F0107 )
   5B8:  		Wait  20`
-  5C4:  		Call  SetNpcAnimation   ( 00000005 002F0108 )
+  5C4:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_05 002F0108 )
   5D8:  		Wait  20`
-  5E4:  		Call  SetNpcAnimation   ( 00000005 002F0116 )
+  5E4:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_05 002F0116 )
   5F8:  		Call  SpeakToPlayer ( .Npc:Self 00C70007 00C70006 00000000 00110055 ) % and this wicked creature!
-  618:  		Call  SetNpcPos     ( 00000001 FFFFFF17 00000000 FFFFFF27 )
-  634:  		Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+  618:  		Call  SetNpcPos     ( .NpcID:Dayzee_01  -233`  0`  -217` )
+  634:  		Call  GetNpcPos     ( .NpcID:Dayzee_01 *Var0 *Var1 *Var2 )
   650:  		Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   66C:  		Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  688:  		Call  SetCamDistance    ( .Cam:Default 0000012C )
+  688:  		Call  SetCamDistance    ( .Cam:Default  300` )
   69C:  		Call  SetCamPitch   ( .Cam:Default *Fixed[17.0] *Fixed[-9.0] )
   6B4:  		Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   6CC:  		Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  6E0:  		Call  SetNpcAnimation   ( 00000001 0048000D )
-  6F4:  		Call  PlaySoundAtNpc    ( 00000001 00000262 00000000 )
-  70C:  		Call  ShowEmote     ( 00000001 .Emote:Exclamation 0000002D 0000001E 00000001 00000000 00000000 00000000 00000000 )
+  6E0:  		Call  SetNpcAnimation   ( .NpcID:Dayzee_01 0048000D )
+  6F4:  		Call  PlaySoundAtNpc    ( .NpcID:Dayzee_01 00000262 00000000 )
+  70C:  		Call  ShowEmote     ( .NpcID:Dayzee_01 .Emote:Exclamation  45`  30` .True  0`  0`  0`  0` )
   73C:  		Wait  15`
   748:  		Call  SpeakToPlayer ( .Npc:Self 00C70007 00C70006 00000000 00110056 ) % This guy is... Well, you probably don't need to be ...
   768:  		Set   *Var4  *Fixed[90.0]
   778:  		ExecWait  $Script_8024122C
   784:  		Call  SpeakToPlayer ( .Npc:Self 00C70007 00C70006 00000000 00110057 ) % Please don't fail me! My seeds and I are counting  ...
-  7A4:  		Call  SetEnemyFlagBits  ( 00000001 00000001 00000000 )
-  7BC:  		Call  SetEnemyFlagBits  ( 00000002 00000001 00000000 )
-  7D4:  		Call  SetEnemyFlagBits  ( 00000003 00000001 00000000 )
-  7EC:  		Call  SetEnemyFlagBits  ( 00000004 00000001 00000000 )
-  804:  		Call  SetEnemyFlagBits  ( 00000005 00000001 00000000 )
-  81C:  		Call  BindNpcAI     ( 00000001 $Script_NpcAI_8024119C )
+  7A4:  		Call  SetEnemyFlagBits  ( .NpcID:Dayzee_01 00000001 00000000 )
+  7BC:  		Call  SetEnemyFlagBits  ( .NpcID:MontyMole_02 00000001 00000000 )
+  7D4:  		Call  SetEnemyFlagBits  ( .NpcID:MontyMole_03 00000001 00000000 )
+  7EC:  		Call  SetEnemyFlagBits  ( .NpcID:MontyMole_04 00000001 00000000 )
+  804:  		Call  SetEnemyFlagBits  ( .NpcID:MontyMole_05 00000001 00000000 )
+  81C:  		Call  BindNpcAI     ( .NpcID:Dayzee_01 $Script_NpcAI_8024119C )
   830:  		Set   *MapVar[E]  00000000
   840:  		Set   *MapVar[F]  0000003C
   850:  		Set   *GB_StoryProgress  .Story:Ch6_AskedToDefeatMontyMoles
@@ -863,9 +870,9 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
 {
     0:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_802412BC )
    14:  If  *GF_FLO03_DefeatedAll_MontyMoles  ==  .False
-   24:  	Call  SetNpcAnimation   ( 00000000 00C70006 )
+   24:  	Call  SetNpcAnimation   ( .NpcID:Petunia_00 00C70006 )
    38:  Else
-   40:  	Call  SetNpcAnimation   ( 00000000 00C70001 )
+   40:  	Call  SetNpcAnimation   ( .NpcID:Petunia_00 00C70001 )
    54:  EndIf
    5C:  Return
    64:  End
@@ -874,16 +881,16 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
 #new:Script $Script_Init_80241E10
 {
     0:  Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_802411B8 )
-   14:  Call  EnableNpcShadow   ( 00000001 .False )
+   14:  Call  EnableNpcShadow   ( .NpcID:Dayzee_01 .False )
    28:  Switch  *GB_StoryProgress
    34:  	Case  <  .Story:Ch6_AskedToDefeatMontyMoles % 2C
-   40:  		Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
+   40:  		Call  SetNpcPos ( .NpcID:Dayzee_01  0`  -1000`  0` )
    5C:  	Default
    64:  		If  *GF_FLO03_Defeated_Dayzee  ==  .False
-   74:  			Call  SetEnemyFlagBits  ( 00000001 00000001 00000000 )
+   74:  			Call  SetEnemyFlagBits  ( .NpcID:Dayzee_01 00000001 00000000 )
    8C:  			Call  BindNpcIdle       ( .Npc:Self $Script_NpcAI_8024119C )
    A0:  		Else
-   A8:  			Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
+   A8:  			Call  SetNpcPos ( .NpcID:Dayzee_01  0`  -1000`  0` )
    C4:  		EndIf
    CC:  EndSwitch
    D4:  Return
@@ -924,9 +931,9 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    EC:  		Add   *Var0  *GF_FLO03_Defeated_MontyMoleC
    FC:  		Add   *Var0  *GF_FLO03_Defeated_MontyMoleD
   10C:  		If  *Var0  !=  00000004
-  11C:  			Call  SetNpcAnimation   ( 00000000 00C70006 )
+  11C:  			Call  SetNpcAnimation   ( .NpcID:Petunia_00 00C70006 )
   130:  		Else
-  138:  			Call  SetNpcAnimation   ( 00000000 00C70001 )
+  138:  			Call  SetNpcAnimation   ( .NpcID:Petunia_00 00C70001 )
   14C:  			Set   *GF_FLO03_DefeatedAll_MontyMoles  .True
   15C:  			ExecWait  $Script_802406A0
   168:  		EndIf
@@ -962,7 +969,7 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    40:  		Set   *Var3  00000001
    50:  	Else
    58:  		Label  0
-   64:  		Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+   64:  		Call  GetNpcPos ( .NpcID:MontyMole_02 *Var0 *Var1 *Var2 )
    80:  		Call  IsPlayerWithin    ( *Var0 *Var2 *MapVar[F] *Var3 )
    9C:  	EndIf
    A4:  	Call  GetCurrentPartner ( *Var9 )
@@ -974,8 +981,8 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    FC:  	EndIf
   104:  	If  *Var3  ==  00000001
   114:  		If  *AreaFlag[017]  ==  .False
-  124:  			Call  SetNpcFlagBits    ( 00000002 00008048 .True )
-  13C:  			Call  NpcFacePlayer     ( 00000002 00000001 )
+  124:  			Call  SetNpcFlagBits    ( .NpcID:MontyMole_02 00008048 .True )
+  13C:  			Call  NpcFacePlayer     ( .NpcID:MontyMole_02 00000001 )
   150:  			Wait  1`
   15C:  			Set   *AreaFlag[017]  .True
   16C:  			If  *MapVar[A]  !=  00000000
@@ -984,16 +991,16 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
   19C:  				Else
   1A4:  					Set   *Var1  0000000A
   1B4:  				EndIf
-  1BC:  				Call  PlaySoundAtNpc        ( 00000002 00000262 00000000 )
-  1D4:  				Call  ShowEmote ( 00000002 .Emote:Exclamation 00000000 *Var1 00000001 00000000 00000000 00000000 00000000 )
+  1BC:  				Call  PlaySoundAtNpc        ( .NpcID:MontyMole_02 00000262 00000000 )
+  1D4:  				Call  ShowEmote ( .NpcID:MontyMole_02 .Emote:Exclamation  0` *Var1 .True  0`  0`  0`  0` )
   204:  				Wait  *Var1
   210:  				Call  SetSelfEnemyFlagBits  ( 17100000 00000001 )
   224:  			EndIf
-  22C:  			Call  PlaySoundAtNpc    ( 00000002 .Sound:MoleDig 00000000 )
-  244:  			Call  SetNpcAnimation   ( 00000002 002F0111 )
+  22C:  			Call  PlaySoundAtNpc    ( .NpcID:MontyMole_02 .Sound:MoleDig 00000000 )
+  244:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_02 002F0111 )
   258:  			Wait  20`
   264:  			If  *GF_FLO03_Defeated_MontyMoleA  ==  .False
-  274:  				Call  SetNpcPos ( 00000002 00000000 FFFFFFCE 00000000 )
+  274:  				Call  SetNpcPos ( .NpcID:MontyMole_02  0`  -50`  0` )
   290:  			EndIf
   298:  			Wait  45`
   2A4:  		EndIf
@@ -1006,14 +1013,14 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
   304:  				Loop  *Var0
   310:  					Get3Int  *Var1 *Var2 *Var3
   324:  				EndLoop
-  32C:  				Call  SetNpcPos ( 00000002 *Var1 *Var2 *Var3 )
+  32C:  				Call  SetNpcPos ( .NpcID:MontyMole_02 *Var1 *Var2 *Var3 )
   348:  			EndIf
-  350:  			Call  SetNpcFlagBits    ( 00000002 00008048 .True )
+  350:  			Call  SetNpcFlagBits    ( .NpcID:MontyMole_02 00008048 .True )
   368:  			Set   *AreaFlag[017]  .False
-  378:  			Call  NpcFacePlayer     ( 00000002 00000001 )
+  378:  			Call  NpcFacePlayer     ( .NpcID:MontyMole_02 00000001 )
   38C:  			Wait  1`
-  398:  			Call  PlaySoundAtNpc    ( 00000002 .Sound:MoleSurface 00000000 )
-  3B0:  			Call  SetNpcAnimation   ( 00000002 002F0110 )
+  398:  			Call  PlaySoundAtNpc    ( .NpcID:MontyMole_02 .Sound:MoleSurface 00000000 )
+  3B0:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_02 002F0110 )
   3C4:  			Wait  10`
   3D0:  			Call  SetSelfEnemyFlagBits  ( 17100000 00000000 )
   3E4:  			Call  RandInt   ( 0000001E *Var0 )
@@ -1041,7 +1048,7 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    40:  		Set   *Var3  00000001
    50:  	Else
    58:  		Label  0
-   64:  		Call  GetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
+   64:  		Call  GetNpcPos ( .NpcID:MontyMole_03 *Var0 *Var1 *Var2 )
    80:  		Call  IsPlayerWithin    ( *Var0 *Var2 *MapVar[F] *Var3 )
    9C:  	EndIf
    A4:  	Call  GetCurrentPartner ( *Var9 )
@@ -1053,8 +1060,8 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    FC:  	EndIf
   104:  	If  *Var3  ==  00000001
   114:  		If  *AreaFlag[018]  ==  .False
-  124:  			Call  SetNpcFlagBits    ( 00000003 00008048 .True )
-  13C:  			Call  NpcFacePlayer     ( 00000003 00000001 )
+  124:  			Call  SetNpcFlagBits    ( .NpcID:MontyMole_03 00008048 .True )
+  13C:  			Call  NpcFacePlayer     ( .NpcID:MontyMole_03 00000001 )
   150:  			Wait  1`
   15C:  			Set   *AreaFlag[018]  .True
   16C:  			If  *MapVar[B]  !=  00000000
@@ -1063,16 +1070,16 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
   19C:  				Else
   1A4:  					Set   *Var1  0000000A
   1B4:  				EndIf
-  1BC:  				Call  PlaySoundAtNpc        ( 00000003 00000262 00000000 )
-  1D4:  				Call  ShowEmote ( 00000003 .Emote:Exclamation 00000000 *Var1 00000001 00000000 00000000 00000000 00000000 )
+  1BC:  				Call  PlaySoundAtNpc        ( .NpcID:MontyMole_03 00000262 00000000 )
+  1D4:  				Call  ShowEmote ( .NpcID:MontyMole_03 .Emote:Exclamation  0` *Var1 .True  0`  0`  0`  0` )
   204:  				Wait  *Var1
   210:  				Call  SetSelfEnemyFlagBits  ( 17100000 00000001 )
   224:  			EndIf
-  22C:  			Call  PlaySoundAtNpc    ( 00000003 .Sound:MoleDig 00000000 )
-  244:  			Call  SetNpcAnimation   ( 00000003 002F0111 )
+  22C:  			Call  PlaySoundAtNpc    ( .NpcID:MontyMole_03 .Sound:MoleDig 00000000 )
+  244:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_03 002F0111 )
   258:  			Wait  20`
   264:  			If  *GF_FLO03_Defeated_MontyMoleB  ==  .False
-  274:  				Call  SetNpcPos ( 00000003 00000000 FFFFFFCE 00000000 )
+  274:  				Call  SetNpcPos ( .NpcID:MontyMole_03  0`  -50`  0` )
   290:  			EndIf
   298:  			Wait  45`
   2A4:  		EndIf
@@ -1085,14 +1092,14 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
   304:  				Loop  *Var0
   310:  					Get3Int  *Var1 *Var2 *Var3
   324:  				EndLoop
-  32C:  				Call  SetNpcPos ( 00000003 *Var1 *Var2 *Var3 )
+  32C:  				Call  SetNpcPos ( .NpcID:MontyMole_03 *Var1 *Var2 *Var3 )
   348:  			EndIf
-  350:  			Call  SetNpcFlagBits    ( 00000003 00008048 .True )
+  350:  			Call  SetNpcFlagBits    ( .NpcID:MontyMole_03 00008048 .True )
   368:  			Set   *AreaFlag[018]  .False
-  378:  			Call  NpcFacePlayer     ( 00000003 00000001 )
+  378:  			Call  NpcFacePlayer     ( .NpcID:MontyMole_03 00000001 )
   38C:  			Wait  1`
-  398:  			Call  PlaySoundAtNpc    ( 00000003 .Sound:MoleSurface 00000000 )
-  3B0:  			Call  SetNpcAnimation   ( 00000003 002F0110 )
+  398:  			Call  PlaySoundAtNpc    ( .NpcID:MontyMole_03 .Sound:MoleSurface 00000000 )
+  3B0:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_03 002F0110 )
   3C4:  			Wait  10`
   3D0:  			Call  SetSelfEnemyFlagBits  ( 17100000 00000000 )
   3E4:  			Call  RandInt   ( 00000023 *Var0 )
@@ -1120,7 +1127,7 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    40:  		Set   *Var3  00000001
    50:  	Else
    58:  		Label  0
-   64:  		Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+   64:  		Call  GetNpcPos ( .NpcID:MontyMole_04 *Var0 *Var1 *Var2 )
    80:  		Call  IsPlayerWithin    ( *Var0 *Var2 *MapVar[F] *Var3 )
    9C:  	EndIf
    A4:  	Call  GetCurrentPartner ( *Var9 )
@@ -1132,8 +1139,8 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    FC:  	EndIf
   104:  	If  *Var3  ==  00000001
   114:  		If  *AreaFlag[019]  ==  .False
-  124:  			Call  SetNpcFlagBits    ( 00000004 00008048 .True )
-  13C:  			Call  NpcFacePlayer     ( 00000004 00000001 )
+  124:  			Call  SetNpcFlagBits    ( .NpcID:MontyMole_04 00008048 .True )
+  13C:  			Call  NpcFacePlayer     ( .NpcID:MontyMole_04 00000001 )
   150:  			Wait  1`
   15C:  			Set   *AreaFlag[019]  .True
   16C:  			If  *MapVar[C]  !=  00000000
@@ -1142,16 +1149,16 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
   19C:  				Else
   1A4:  					Set   *Var1  0000000A
   1B4:  				EndIf
-  1BC:  				Call  PlaySoundAtNpc        ( 00000004 00000262 00000000 )
-  1D4:  				Call  ShowEmote ( 00000004 .Emote:Exclamation 00000000 *Var1 00000001 00000000 00000000 00000000 00000000 )
+  1BC:  				Call  PlaySoundAtNpc        ( .NpcID:MontyMole_04 00000262 00000000 )
+  1D4:  				Call  ShowEmote ( .NpcID:MontyMole_04 .Emote:Exclamation  0` *Var1 .True  0`  0`  0`  0` )
   204:  				Wait  *Var1
   210:  				Call  SetSelfEnemyFlagBits  ( 17100000 00000001 )
   224:  			EndIf
-  22C:  			Call  PlaySoundAtNpc    ( 00000004 .Sound:MoleDig 00000000 )
-  244:  			Call  SetNpcAnimation   ( 00000004 002F0111 )
+  22C:  			Call  PlaySoundAtNpc    ( .NpcID:MontyMole_04 .Sound:MoleDig 00000000 )
+  244:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_04 002F0111 )
   258:  			Wait  20`
   264:  			If  *GF_FLO03_Defeated_MontyMoleC  ==  .False
-  274:  				Call  SetNpcPos ( 00000004 00000000 FFFFFFCE 00000000 )
+  274:  				Call  SetNpcPos ( .NpcID:MontyMole_04  0`  -50`  0` )
   290:  			EndIf
   298:  			Wait  45`
   2A4:  		EndIf
@@ -1164,14 +1171,14 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
   304:  				Loop  *Var0
   310:  					Get3Int  *Var1 *Var2 *Var3
   324:  				EndLoop
-  32C:  				Call  SetNpcPos ( 00000004 *Var1 *Var2 *Var3 )
+  32C:  				Call  SetNpcPos ( .NpcID:MontyMole_04 *Var1 *Var2 *Var3 )
   348:  			EndIf
-  350:  			Call  SetNpcFlagBits    ( 00000004 00008048 .True )
+  350:  			Call  SetNpcFlagBits    ( .NpcID:MontyMole_04 00008048 .True )
   368:  			Set   *AreaFlag[019]  .False
-  378:  			Call  NpcFacePlayer     ( 00000004 00000001 )
+  378:  			Call  NpcFacePlayer     ( .NpcID:MontyMole_04 00000001 )
   38C:  			Wait  1`
-  398:  			Call  PlaySoundAtNpc    ( 00000004 .Sound:MoleSurface 00000000 )
-  3B0:  			Call  SetNpcAnimation   ( 00000004 002F0110 )
+  398:  			Call  PlaySoundAtNpc    ( .NpcID:MontyMole_04 .Sound:MoleSurface 00000000 )
+  3B0:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_04 002F0110 )
   3C4:  			Wait  10`
   3D0:  			Call  SetSelfEnemyFlagBits  ( 17100000 00000000 )
   3E4:  			Call  RandInt   ( 00000028 *Var0 )
@@ -1199,7 +1206,7 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    40:  		Set   *Var3  00000001
    50:  	Else
    58:  		Label  0
-   64:  		Call  GetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
+   64:  		Call  GetNpcPos ( .NpcID:MontyMole_05 *Var0 *Var1 *Var2 )
    80:  		Call  IsPlayerWithin    ( *Var0 *Var2 *MapVar[F] *Var3 )
    9C:  	EndIf
    A4:  	Call  GetCurrentPartner ( *Var9 )
@@ -1211,8 +1218,8 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
    FC:  	EndIf
   104:  	If  *Var3  ==  00000001
   114:  		If  *AreaFlag[01A]  ==  .False
-  124:  			Call  SetNpcFlagBits    ( 00000005 00008048 .True )
-  13C:  			Call  NpcFacePlayer     ( 00000005 00000001 )
+  124:  			Call  SetNpcFlagBits    ( .NpcID:MontyMole_05 00008048 .True )
+  13C:  			Call  NpcFacePlayer     ( .NpcID:MontyMole_05 00000001 )
   150:  			Wait  1`
   15C:  			Set   *AreaFlag[01A]  .True
   16C:  			If  *MapVar[D]  !=  00000000
@@ -1221,16 +1228,16 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
   19C:  				Else
   1A4:  					Set   *Var1  0000000A
   1B4:  				EndIf
-  1BC:  				Call  PlaySoundAtNpc        ( 00000005 00000262 00000000 )
-  1D4:  				Call  ShowEmote ( 00000005 .Emote:Exclamation 00000000 *Var1 00000001 00000000 00000000 00000000 00000000 )
+  1BC:  				Call  PlaySoundAtNpc        ( .NpcID:MontyMole_05 00000262 00000000 )
+  1D4:  				Call  ShowEmote ( .NpcID:MontyMole_05 .Emote:Exclamation  0` *Var1 .True  0`  0`  0`  0` )
   204:  				Wait  *Var1
   210:  				Call  SetSelfEnemyFlagBits  ( 17100000 00000001 )
   224:  			EndIf
-  22C:  			Call  PlaySoundAtNpc    ( 00000005 .Sound:MoleDig 00000000 )
-  244:  			Call  SetNpcAnimation   ( 00000005 002F0111 )
+  22C:  			Call  PlaySoundAtNpc    ( .NpcID:MontyMole_05 .Sound:MoleDig 00000000 )
+  244:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_05 002F0111 )
   258:  			Wait  20`
   264:  			If  *GF_FLO03_Defeated_MontyMoleD  ==  .False
-  274:  				Call  SetNpcPos ( 00000005 00000000 FFFFFFCE 00000000 )
+  274:  				Call  SetNpcPos ( .NpcID:MontyMole_05  0`  -50`  0` )
   290:  			EndIf
   298:  			Wait  45`
   2A4:  		EndIf
@@ -1243,14 +1250,14 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
   304:  				Loop  *Var0
   310:  					Get3Int  *Var1 *Var2 *Var3
   324:  				EndLoop
-  32C:  				Call  SetNpcPos ( 00000005 *Var1 *Var2 *Var3 )
+  32C:  				Call  SetNpcPos ( .NpcID:MontyMole_05 *Var1 *Var2 *Var3 )
   348:  			EndIf
-  350:  			Call  SetNpcFlagBits    ( 00000005 00008048 .True )
+  350:  			Call  SetNpcFlagBits    ( .NpcID:MontyMole_05 00008048 .True )
   368:  			Set   *AreaFlag[01A]  .False
-  378:  			Call  NpcFacePlayer     ( 00000005 00000001 )
+  378:  			Call  NpcFacePlayer     ( .NpcID:MontyMole_05 00000001 )
   38C:  			Wait  1`
-  398:  			Call  PlaySoundAtNpc    ( 00000005 .Sound:MoleSurface 00000000 )
-  3B0:  			Call  SetNpcAnimation   ( 00000005 002F0110 )
+  398:  			Call  PlaySoundAtNpc    ( .NpcID:MontyMole_05 .Sound:MoleSurface 00000000 )
+  3B0:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_05 002F0110 )
   3C4:  			Wait  10`
   3D0:  			Call  SetSelfEnemyFlagBits  ( 17100000 00000000 )
   3E4:  			Call  RandInt   ( 0000002D *Var0 )
@@ -1272,21 +1279,21 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
 {
     0:  Call  BindNpcHit        ( .Npc:Self $Script_Hit_80242138 )
    14:  Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_80241F64 )
-   28:  Call  EnableNpcShadow   ( 00000002 .False )
+   28:  Call  EnableNpcShadow   ( .NpcID:MontyMole_02 .False )
    3C:  Switch  *GB_StoryProgress
    48:  	Case  <  .Story:Ch6_AskedToDefeatMontyMoles % 2C
    54:  		Call  BindNpcIdle       ( .Npc:Self $Script_Idle_8024219C )
-   68:  		Call  SetNpcAnimation   ( 00000002 002F0110 )
+   68:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_02 002F0110 )
    7C:  	Case  ==  .Story:Ch6_AskedToDefeatMontyMoles % 2C
    88:  		If  *GF_FLO03_Defeated_MontyMoleA  ==  .False
    98:  			Call  BindNpcIdle       ( .Npc:Self $Script_Idle_8024219C )
-   AC:  			Call  SetNpcAnimation   ( 00000002 002F0110 )
-   C0:  			Call  SetEnemyFlagBits  ( 00000002 00000001 00000000 )
+   AC:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_02 002F0110 )
+   C0:  			Call  SetEnemyFlagBits  ( .NpcID:MontyMole_02 00000001 00000000 )
    D8:  		Else
-   E0:  			Call  SetNpcPos ( 00000002 00000000 FFFFFC18 00000000 )
+   E0:  			Call  SetNpcPos ( .NpcID:MontyMole_02  0`  -1000`  0` )
    FC:  		EndIf
   104:  	Default
-  10C:  		Call  SetNpcPos ( 00000002 00000000 FFFFFC18 00000000 )
+  10C:  		Call  SetNpcPos ( .NpcID:MontyMole_02  0`  -1000`  0` )
   128:  EndSwitch
   130:  Return
   138:  End
@@ -1296,21 +1303,21 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
 {
     0:  Call  BindNpcHit        ( .Npc:Self $Script_Hit_80242138 )
    14:  Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_80241F64 )
-   28:  Call  EnableNpcShadow   ( 00000003 .False )
+   28:  Call  EnableNpcShadow   ( .NpcID:MontyMole_03 .False )
    3C:  Switch  *GB_StoryProgress
    48:  	Case  <  .Story:Ch6_AskedToDefeatMontyMoles % 2C
    54:  		Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80242618 )
-   68:  		Call  SetNpcAnimation   ( 00000003 002F0110 )
+   68:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_03 002F0110 )
    7C:  	Case  ==  .Story:Ch6_AskedToDefeatMontyMoles % 2C
    88:  		If  *GF_FLO03_Defeated_MontyMoleB  ==  .False
    98:  			Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80242618 )
-   AC:  			Call  SetNpcAnimation   ( 00000003 002F0110 )
-   C0:  			Call  SetEnemyFlagBits  ( 00000003 00000001 00000000 )
+   AC:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_03 002F0110 )
+   C0:  			Call  SetEnemyFlagBits  ( .NpcID:MontyMole_03 00000001 00000000 )
    D8:  		Else
-   E0:  			Call  SetNpcPos ( 00000003 00000000 FFFFFC18 00000000 )
+   E0:  			Call  SetNpcPos ( .NpcID:MontyMole_03  0`  -1000`  0` )
    FC:  		EndIf
   104:  	Default
-  10C:  		Call  SetNpcPos ( 00000003 00000000 FFFFFC18 00000000 )
+  10C:  		Call  SetNpcPos ( .NpcID:MontyMole_03  0`  -1000`  0` )
   128:  EndSwitch
   130:  Return
   138:  End
@@ -1320,21 +1327,21 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
 {
     0:  Call  BindNpcHit        ( .Npc:Self $Script_Hit_80242138 )
    14:  Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_80241F64 )
-   28:  Call  EnableNpcShadow   ( 00000004 .False )
+   28:  Call  EnableNpcShadow   ( .NpcID:MontyMole_04 .False )
    3C:  Switch  *GB_StoryProgress
    48:  	Case  <  .Story:Ch6_AskedToDefeatMontyMoles % 2C
    54:  		Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80242A94 )
-   68:  		Call  SetNpcAnimation   ( 00000004 002F0110 )
+   68:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_04 002F0110 )
    7C:  	Case  ==  .Story:Ch6_AskedToDefeatMontyMoles % 2C
    88:  		If  *GF_FLO03_Defeated_MontyMoleC  ==  .False
    98:  			Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80242A94 )
-   AC:  			Call  SetNpcAnimation   ( 00000004 002F0110 )
-   C0:  			Call  SetEnemyFlagBits  ( 00000004 00000001 00000000 )
+   AC:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_04 002F0110 )
+   C0:  			Call  SetEnemyFlagBits  ( .NpcID:MontyMole_04 00000001 00000000 )
    D8:  		Else
-   E0:  			Call  SetNpcPos ( 00000004 00000000 FFFFFC18 00000000 )
+   E0:  			Call  SetNpcPos ( .NpcID:MontyMole_04  0`  -1000`  0` )
    FC:  		EndIf
   104:  	Default
-  10C:  		Call  SetNpcPos ( 00000004 00000000 FFFFFC18 00000000 )
+  10C:  		Call  SetNpcPos ( .NpcID:MontyMole_04  0`  -1000`  0` )
   128:  EndSwitch
   130:  Return
   138:  End
@@ -1344,21 +1351,21 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
 {
     0:  Call  BindNpcHit        ( .Npc:Self $Script_Hit_80242138 )
    14:  Call  BindNpcDefeat     ( .Npc:Self $Script_Defeat_80241F64 )
-   28:  Call  EnableNpcShadow   ( 00000005 .False )
+   28:  Call  EnableNpcShadow   ( .NpcID:MontyMole_05 .False )
    3C:  Switch  *GB_StoryProgress
    48:  	Case  <  .Story:Ch6_AskedToDefeatMontyMoles % 2C
    54:  		Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80242F10 )
-   68:  		Call  SetNpcAnimation   ( 00000005 002F0110 )
+   68:  		Call  SetNpcAnimation   ( .NpcID:MontyMole_05 002F0110 )
    7C:  	Case  ==  .Story:Ch6_AskedToDefeatMontyMoles % 2C
    88:  		If  *GF_FLO03_Defeated_MontyMoleD  ==  .False
    98:  			Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80242F10 )
-   AC:  			Call  SetNpcAnimation   ( 00000005 002F0110 )
-   C0:  			Call  SetEnemyFlagBits  ( 00000005 00000001 00000000 )
+   AC:  			Call  SetNpcAnimation   ( .NpcID:MontyMole_05 002F0110 )
+   C0:  			Call  SetEnemyFlagBits  ( .NpcID:MontyMole_05 00000001 00000000 )
    D8:  		Else
-   E0:  			Call  SetNpcPos ( 00000005 00000000 FFFFFC18 00000000 )
+   E0:  			Call  SetNpcPos ( .NpcID:MontyMole_05  0`  -1000`  0` )
    FC:  		EndIf
   104:  	Default
-  10C:  		Call  SetNpcPos ( 00000005 00000000 FFFFFC18 00000000 )
+  10C:  		Call  SetNpcPos ( .NpcID:MontyMole_05  0`  -1000`  0` )
   128:  EndSwitch
   130:  Return
   138:  End
@@ -1366,61 +1373,61 @@ PADDING: 80240EA4 to 80240EB0 (00000EA4 to 00000EB0)
 
 #new:NpcGroup $NpcGroup_8024388C
 {
-	00000000 $NpcSettings_80240EDC ~Vec3f:NPC_8024388C % -30 0 100
+	.NpcID:Petunia_00 $NpcSettings_80240EDC ~Vec3f:NPC_Petunia_00 % -30 0 100
 	00000D01 $Script_Init_80241DA4 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024388C
-	~AnimationTable:NPC_8024388C % .Sprite:Petunia
+	~Movement:NPC_Petunia_00
+	~AnimationTable:NPC_Petunia_00 % .Sprite:Petunia
 	00000000 00000000 00000000 001A00DD % This flower is named Petunia. She's obsessed with  ...
 }
 
 #new:NpcGroup $NpcGroup_80243A7C
 {
-	00000001 $NpcSettings_80240EB0 ~Vec3f:NPC_80243A7C % -233 0 -217
+	.NpcID:Dayzee_01 $NpcSettings_80240EB0 ~Vec3f:NPC_Dayzee_01 % -233 0 -217
 	00000D01 $Script_Init_80241E10 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243A7C
-	~AnimationTable:NPC_80243A7C % .Sprite:Dayzee
+	~Movement:NPC_Dayzee_01
+	~AnimationTable:NPC_Dayzee_01 % .Sprite:Dayzee
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243C6C
 {
-	00000002 $NpcSettings_80240EB0 ~Vec3f:NPC_80243C6C % -100 0 210
+	.NpcID:MontyMole_02 $NpcSettings_80240EB0 ~Vec3f:NPC_MontyMole_02 % -100 0 210
 	00000F01 $Script_Init_8024338C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243C6C
-	~AnimationTable:NPC_80243C6C % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_02
+	~AnimationTable:NPC_MontyMole_02 % .Sprite:MontyMole
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243E5C
 {
-	00000003 $NpcSettings_80240EB0 ~Vec3f:NPC_80243E5C % -130 0 0
+	.NpcID:MontyMole_03 $NpcSettings_80240EB0 ~Vec3f:NPC_MontyMole_03 % -130 0 0
 	00000F01 $Script_Init_802434CC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243E5C
-	~AnimationTable:NPC_80243E5C % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_03
+	~AnimationTable:NPC_MontyMole_03 % .Sprite:MontyMole
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024404C
 {
-	00000004 $NpcSettings_80240EB0 ~Vec3f:NPC_8024404C % 75 0 20
+	.NpcID:MontyMole_04 $NpcSettings_80240EB0 ~Vec3f:NPC_MontyMole_04 % 75 0 20
 	00000F01 $Script_Init_8024360C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024404C
-	~AnimationTable:NPC_8024404C % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_04
+	~AnimationTable:NPC_MontyMole_04 % .Sprite:MontyMole
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024423C
 {
-	00000005 $NpcSettings_80240EB0 ~Vec3f:NPC_8024423C % 71 0 200
+	.NpcID:MontyMole_05 $NpcSettings_80240EB0 ~Vec3f:NPC_MontyMole_05 % 71 0 200
 	00000F01 $Script_Init_8024374C 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_8024423C
-	~AnimationTable:NPC_8024423C % .Sprite:MontyMole
+	~Movement:NPC_MontyMole_05
+	~AnimationTable:NPC_MontyMole_05 % .Sprite:MontyMole
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

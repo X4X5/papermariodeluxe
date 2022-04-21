@@ -1,6 +1,18 @@
 % Script File: kkj_01.mscr
 % Decoded from: 0 to 3BB0 (kkj_01)
 
+#define .NpcID:ToadMinister_00      00
+#define .NpcID:Toad_01              01
+#define .NpcID:Toad_02              02
+#define .NpcID:Toad_03              03
+#define .NpcID:ThreeSisters_04      04
+#define .NpcID:ToadGuard_05         05
+#define .NpcID:ToadGuard_06         06
+#define .NpcID:Dryite_07            07
+#define .NpcID:Mouser_08            08
+#define .NpcID:MayorPenguin_09      09
+#define .NpcID:Koopa_10             0A
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFB8
@@ -1099,7 +1111,7 @@ PADDING: 80240FCC to 80240FD0 (00000FCC to 00000FD0)
 #new:Script $Script_802411EC
 {
     0:  Call  DisablePlayerInput        ( .True )
-   10:  Call  ShowMessageAtScreenPos    ( 001D0163 000000A0 00000028 ) % It doesn't seem to open.
+   10:  Call  ShowMessageAtScreenPos    ( 001D0163  160`  40` ) % It doesn't seem to open.
    28:  Call  DisablePlayerInput        ( .False )
    38:  Return
    40:  End
@@ -1164,8 +1176,8 @@ PADDING: 80240FCC to 80240FD0 (00000FCC to 00000FD0)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachCastleGrounds
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_802439D4 )
@@ -1293,17 +1305,17 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
     0:  Loop
     C:  	Call  GetSelfVar    ( 00000001 *Var0 )
    20:  	If  *Var0  ==  00000000
-   30:  		Call  SetNpcAnimation   ( 00000007 00930304 )
+   30:  		Call  SetNpcAnimation   ( .NpcID:Dryite_07 00930304 )
    44:  		Call  SetSelfVar        ( 00000001 00000001 )
    58:  	Else
-   60:  		Call  SetNpcAnimation   ( 00000008 00940005 )
+   60:  		Call  SetNpcAnimation   ( .NpcID:Mouser_08 00940005 )
    74:  		Call  SetSelfVar        ( 00000001 00000000 )
    88:  	EndIf
    90:  	Call  RandInt   ( 0000003C *Var0 )
    A4:  	Add   *Var0  0000001E
    B4:  	Wait  *Var0
-   C0:  	Call  SetNpcAnimation   ( 00000007 00930301 )
-   D4:  	Call  SetNpcAnimation   ( 00000008 00940001 )
+   C0:  	Call  SetNpcAnimation   ( .NpcID:Dryite_07 00930301 )
+   D4:  	Call  SetNpcAnimation   ( .NpcID:Mouser_08 00940001 )
    E8:  	Wait  10`
    F4:  EndLoop
    FC:  End
@@ -1314,17 +1326,17 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
     0:  Loop
     C:  	Call  GetSelfVar    ( 00000001 *Var0 )
    20:  	If  *Var0  ==  00000000
-   30:  		Call  SetNpcAnimation   ( 00000009 00CE0004 )
+   30:  		Call  SetNpcAnimation   ( .NpcID:MayorPenguin_09 00CE0004 )
    44:  		Call  SetSelfVar        ( 00000001 00000001 )
    58:  	Else
-   60:  		Call  SetNpcAnimation   ( 0000000A 008F0007 )
+   60:  		Call  SetNpcAnimation   ( .NpcID:Koopa_10 008F0007 )
    74:  		Call  SetSelfVar        ( 00000001 00000000 )
    88:  	EndIf
    90:  	Call  RandInt   ( 0000003C *Var0 )
    A4:  	Add   *Var0  0000001E
    B4:  	Wait  *Var0
-   C0:  	Call  SetNpcAnimation   ( 00000009 00CE0001 )
-   D4:  	Call  SetNpcAnimation   ( 0000000A 008F0002 )
+   C0:  	Call  SetNpcAnimation   ( .NpcID:MayorPenguin_09 00CE0001 )
+   D4:  	Call  SetNpcAnimation   ( .NpcID:Koopa_10 008F0002 )
    E8:  	Wait  10`
    F4:  EndLoop
    FC:  End
@@ -1336,9 +1348,9 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
     C:  Loop
    18:  	Wait  150`
    24:  	Loop  00000002
-   30:  		Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000007 )
+   30:  		Call  InterpNpcYaw  ( .Npc:Self  90`  7` )
    48:  		Wait  20`
-   54:  		Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000007 )
+   54:  		Call  InterpNpcYaw  ( .Npc:Self  270`  7` )
    6C:  		Wait  20`
    78:  	EndLoop
    80:  EndLoop
@@ -1351,9 +1363,9 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
     0:  Loop
     C:  	Wait  150`
    18:  	Loop  00000002
-   24:  		Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000007 )
+   24:  		Call  InterpNpcYaw  ( .Npc:Self  90`  7` )
    3C:  		Wait  15`
-   48:  		Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000007 )
+   48:  		Call  InterpNpcYaw  ( .Npc:Self  270`  7` )
    60:  		Wait  15`
    6C:  	EndLoop
    74:  EndLoop
@@ -1437,7 +1449,7 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
    C4:  		Call  SpeakToPlayer     ( .Npc:Self 00870304 00870301 00000010 00000040 ) % Boy, you're persistent! I guess I have no choice.. ...
    E4:  		Wait  10`
    F0:  		Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
-  108:  		Call  SetNpcAnimation   ( 00000006 00870302 )
+  108:  		Call  SetNpcAnimation   ( .NpcID:ToadGuard_06 00870302 )
   11C:  		If  *Var0  >  00000000
   12C:  			Set   *Var3  FFFFFFCE
   13C:  		Else
@@ -1445,10 +1457,10 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
   154:  		EndIf
   15C:  		Call  SetNpcFlagBits    ( .Npc:Self 00000100 .True )
   174:  		Call  SetNpcSpeed       ( .Npc:Self *Fixed[2.0] )
-  188:  		Call  NpcMoveTo ( .Npc:Self *Var3 FFFFFF0B 00000000 )
+  188:  		Call  NpcMoveTo ( .Npc:Self *Var3  -245`  0` )
   1A4:  		Call  SetNpcFlagBits    ( .Npc:Self 00000100 .False )
-  1BC:  		Call  SetNpcAnimation   ( 00000006 00870301 )
-  1D0:  		Call  InterpNpcYaw      ( .Npc:Self 000000B4 00000005 )
+  1BC:  		Call  SetNpcAnimation   ( .NpcID:ToadGuard_06 00870301 )
+  1D0:  		Call  InterpNpcYaw      ( .Npc:Self  180`  5` )
   1E8:  		Set   *AreaFlag[001]  .True
   1F8:  		Bind  $Script_ExitSingleDoor_80241138 .Trigger:WallPressA ~Collider:ttn2 00000001 00000000
   214:  	Default
@@ -1462,8 +1474,8 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
 
 #new:Script $Script_Interact_80242048
 {
-    0:  Call  SetNpcAnimation   ( 00000008 00940001 )
-   14:  Call  SetNpcAnimation   ( 00000007 00930301 )
+    0:  Call  SetNpcAnimation   ( .NpcID:Mouser_08 00940001 )
+   14:  Call  SetNpcAnimation   ( .NpcID:Dryite_07 00930301 )
    28:  Wait  10`
    34:  Call  SpeakToPlayer     ( .Npc:Self 00930304 00930301 00000010 00000034 ) % I come from a desert town called Dry Dry Outpost.  ...
    54:  Return
@@ -1472,20 +1484,20 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
 
 #new:Script $Script_Interact_802420AC
 {
-    0:  Call  EnableNpcAI       ( 00000007 .False )
-   14:  Call  SetNpcAnimation   ( 00000008 00940001 )
-   28:  Call  SetNpcAnimation   ( 00000007 00930301 )
+    0:  Call  EnableNpcAI       ( .NpcID:Dryite_07 .False )
+   14:  Call  SetNpcAnimation   ( .NpcID:Mouser_08 00940001 )
+   28:  Call  SetNpcAnimation   ( .NpcID:Dryite_07 00930301 )
    3C:  Wait  10`
    48:  Call  SpeakToPlayer     ( .Npc:Self 00940005 00940001 00000010 00000035 ) % I'm a Nomadimouse, and I come from Dry Dry Desert. ...
-   68:  Call  EnableNpcAI       ( 00000007 .True )
+   68:  Call  EnableNpcAI       ( .NpcID:Dryite_07 .True )
    7C:  Return
    84:  End
 }
 
 #new:Script $Script_Interact_80242138
 {
-    0:  Call  SetNpcAnimation   ( 00000009 00CE0001 )
-   14:  Call  SetNpcAnimation   ( 0000000A 008F0002 )
+    0:  Call  SetNpcAnimation   ( .NpcID:MayorPenguin_09 00CE0001 )
+   14:  Call  SetNpcAnimation   ( .NpcID:Koopa_10 008F0002 )
    28:  Wait  10`
    34:  Call  SpeakToPlayer     ( .Npc:Self 00CE0004 00CE0001 00000010 00000036 ) % I'm here on behalf of lovely Shiver City. I'm the  ...
    54:  Return
@@ -1494,12 +1506,12 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
 
 #new:Script $Script_Interact_8024219C
 {
-    0:  Call  EnableNpcAI       ( 00000009 .False )
-   14:  Call  SetNpcAnimation   ( 00000009 00CE0001 )
-   28:  Call  SetNpcAnimation   ( 0000000A 008F0002 )
+    0:  Call  EnableNpcAI       ( .NpcID:MayorPenguin_09 .False )
+   14:  Call  SetNpcAnimation   ( .NpcID:MayorPenguin_09 00CE0001 )
+   28:  Call  SetNpcAnimation   ( .NpcID:Koopa_10 008F0002 )
    3C:  Wait  10`
    48:  Call  SpeakToPlayer     ( .Npc:Self 008F0007 008F0002 00000010 00000037 ) % I come from Koopa Village, which is just down the  ...
-   68:  Call  EnableNpcAI       ( 00000009 .True )
+   68:  Call  EnableNpcAI       ( .NpcID:MayorPenguin_09 .True )
    7C:  Return
    84:  End
 }
@@ -1551,10 +1563,10 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
 #new:Script $Script_Init_80242328
 {
     0:  If  *AreaFlag[001]  ==  .True
-   10:  	Call  SetNpcPos     ( .Npc:Self FFFFFFCE 00000000 FFFFFF0B )
+   10:  	Call  SetNpcPos     ( .Npc:Self  -50`  0`  -245` )
    2C:  	Call  SetSelfVar    ( 00000000 00000005 )
    40:  Else
-   48:  	Call  SetNpcPos ( .Npc:Self 00000000 00000000 FFFFFEFC )
+   48:  	Call  SetNpcPos ( .Npc:Self  0`  0`  -260` )
    64:  EndIf
    6C:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80241BF4 )
    80:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80241DD0 )
@@ -1594,91 +1606,91 @@ MISSING: 802417EC to 80241818 (000017EC to 00001818)
 
 #new:NpcGroup $NpcGroup_80242484
 {
-	00000000 $NpcSettings_802417C0 ~Vec3f:NPC_80242484 % 0 0 350
+	.NpcID:ToadMinister_00 $NpcSettings_802417C0 ~Vec3f:NPC_ToadMinister_00 % 0 0 350
 	00000D09 $Script_Init_80242228 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242484
-	~AnimationTable:NPC_80242484 % .Sprite:ToadMinister
+	~Movement:NPC_ToadMinister_00
+	~AnimationTable:NPC_ToadMinister_00 % .Sprite:ToadMinister
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[1F0]
-	00000001 $NpcSettings_802417C0 ~Vec3f:NPC_80242674 % 100 0 175
+	.NpcID:Toad_01 $NpcSettings_802417C0 ~Vec3f:NPC_Toad_01 % 100 0 175
 	00000D09 $Script_Init_80242260 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242674
-	~AnimationTable:NPC_80242674 % .Sprite:Toad
+	~Movement:NPC_Toad_01
+	~AnimationTable:NPC_Toad_01 % .Sprite:Toad
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[3E0]
-	00000002 $NpcSettings_802416C0 ~Vec3f:NPC_80242864 % 200 0 110
+	.NpcID:Toad_02 $NpcSettings_802416C0 ~Vec3f:NPC_Toad_02 % 200 0 110
 	00000D09 $Script_Init_80242298 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242864
-	~AnimationTable:NPC_80242864 % .Sprite:Toad
+	~Movement:NPC_Toad_02
+	~AnimationTable:NPC_Toad_02 % .Sprite:Toad
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[5D0]
-	00000003 $NpcSettings_80241768 ~Vec3f:NPC_80242A54 % -250 0 225
+	.NpcID:Toad_03 $NpcSettings_80241768 ~Vec3f:NPC_Toad_03 % -250 0 225
 	00000D09 $Script_Init_802422BC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242A54
-	~AnimationTable:NPC_80242A54 % .Sprite:Toad
+	~Movement:NPC_Toad_03
+	~AnimationTable:NPC_Toad_03 % .Sprite:Toad
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[7C0]
-	00000004 $NpcSettings_802416C0 ~Vec3f:NPC_80242C44 % -170 0 100
+	.NpcID:ThreeSisters_04 $NpcSettings_802416C0 ~Vec3f:NPC_ThreeSisters_04 % -170 0 100
 	00000D09 $Script_Init_802422E0 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242C44
-	~AnimationTable:NPC_80242C44 % .Sprite:ThreeSisters
+	~Movement:NPC_ThreeSisters_04
+	~AnimationTable:NPC_ThreeSisters_04 % .Sprite:ThreeSisters
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[9B0]
-	00000005 $NpcSettings_802417C0 ~Vec3f:NPC_80242E34 % -55 100 -360
+	.NpcID:ToadGuard_05 $NpcSettings_802417C0 ~Vec3f:NPC_ToadGuard_05 % -55 100 -360
 	00000D09 $Script_Init_80242304 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242E34
-	~AnimationTable:NPC_80242E34 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_05
+	~AnimationTable:NPC_ToadGuard_05 % .Sprite:ToadGuard
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[BA0]
-	00000006 $NpcSettings_802417C0 ~Vec3f:NPC_80243024 % 0 -1000 0
+	.NpcID:ToadGuard_06 $NpcSettings_802417C0 ~Vec3f:NPC_ToadGuard_06 % 0 -1000 0
 	00000D09 $Script_Init_80242328 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243024
-	~AnimationTable:NPC_80243024 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_06
+	~AnimationTable:NPC_ToadGuard_06 % .Sprite:ToadGuard
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[D90]
-	00000007 $NpcSettings_80241818 ~Vec3f:NPC_80243214 % 170 0 345
+	.NpcID:Dryite_07 $NpcSettings_80241818 ~Vec3f:NPC_Dryite_07 % 170 0 345
 	00400D01 $Script_Init_802423CC 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80243214
-	~AnimationTable:NPC_80243214 % .Sprite:Dryite
+	~Movement:NPC_Dryite_07
+	~AnimationTable:NPC_Dryite_07 % .Sprite:Dryite
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[F80]
-	00000008 $NpcSettings_80241844 ~Vec3f:NPC_80243404 % 200 0 325
+	.NpcID:Mouser_08 $NpcSettings_80241844 ~Vec3f:NPC_Mouser_08 % 200 0 325
 	00400D01 $Script_Init_80242404 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80243404
-	~AnimationTable:NPC_80243404 % .Sprite:Mouser
+	~Movement:NPC_Mouser_08
+	~AnimationTable:NPC_Mouser_08 % .Sprite:Mouser
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[1170]
-	00000009 $NpcSettings_80241870 ~Vec3f:NPC_802435F4 % -150 0 0
+	.NpcID:MayorPenguin_09 $NpcSettings_80241870 ~Vec3f:NPC_MayorPenguin_09 % -150 0 0
 	00400C09 $Script_Init_80242428 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802435F4
-	~AnimationTable:NPC_802435F4 % .Sprite:MayorPenguin
+	~Movement:NPC_MayorPenguin_09
+	~AnimationTable:NPC_MayorPenguin_09 % .Sprite:MayorPenguin
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242484[1360]
-	0000000A $NpcSettings_8024189C ~Vec3f:NPC_802437E4 % -120 0 -15
+	.NpcID:Koopa_10 $NpcSettings_8024189C ~Vec3f:NPC_Koopa_10 % -120 0 -15
 	00400909 $Script_Init_80242460 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802437E4
-	~AnimationTable:NPC_802437E4 % .Sprite:Koopa
+	~Movement:NPC_Koopa_10
+	~AnimationTable:NPC_Koopa_10 % .Sprite:Koopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

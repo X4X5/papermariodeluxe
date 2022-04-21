@@ -1,6 +1,11 @@
 % Script File: nok_14.mscr
 % Decoded from: 0 to 46C0 (nok_14)
 
+#define .NpcID:KoopaTroopa_00       00
+#define .NpcID:SpikedGoomba_02      02
+#define .NpcID:ParaTroopa_03        03
+#define .NpcID:KoopaTroopa_04       04
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD0
@@ -2611,8 +2616,8 @@ PADDING: 802424BC to 802424C0 (000024BC to 000024C0)
 {
     0:  Set   *GB_WorldLocation  .Location:PleasantPath
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_8024456C )
    84:  ExecWait  $Script_MakeEntities
@@ -2642,7 +2647,7 @@ PADDING: 80242AAC to 80242AB0 (00002AAC to 00002AB0)
    30:  SetGroup  00000000
    3C:  Call  SetTimeFreezeMode     ( 00000001 )
    4C:  Call  DisablePlayerInput    ( .True )
-   5C:  Call  ShowMessageAtScreenPos    ( 001D0179 000000A0 00000028 ) % No entry allowed, Mario! Yours truly, The Koopa Br ...
+   5C:  Call  ShowMessageAtScreenPos    ( 001D0179  160`  40` ) % No entry allowed, Mario! Yours truly, The Koopa Br ...
    74:  Call  DisablePlayerInput    ( .False )
    84:  Call  SetTimeFreezeMode     ( 00000000 )
    94:  Return
@@ -2658,19 +2663,19 @@ PADDING: 80242AAC to 80242AB0 (00002AAC to 00002AB0)
    28:  	Call  DisablePlayerInput    ( .True )
    38:  	Loop  00000019
    44:  		Wait  1`
-   50:  		Call  GetNpcPos     ( 00000004 *Var0 *Var1 *Var2 )
+   50:  		Call  GetNpcPos     ( .NpcID:KoopaTroopa_04 *Var0 *Var1 *Var2 )
    6C:  		Call  SetItemPos    ( *MapVar[0] *Var0 *Var1 *Var2 )
    88:  	EndLoop
-   90:  	Call  SetNpcPos ( 00000004 00000000 FFFFFC18 00000000 )
+   90:  	Call  SetNpcPos ( .NpcID:KoopaTroopa_04  0`  -1000`  0` )
    AC:  	Call  DisablePlayerInput    ( .False )
    BC:  EndThread
-   C4:  Call  SetNpcPos ( 00000004 FFFFFEA7 0000004B FFFFFF8B )
+   C4:  Call  SetNpcPos ( .NpcID:KoopaTroopa_04  -345`  75`  -117` )
    E0:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
-   F8:  Call  SetNpcJumpscale   ( 00000004 *Fixed[1.5] )
+   F8:  Call  SetNpcJumpscale   ( .NpcID:KoopaTroopa_04 *Fixed[1.5] )
   10C:  If  *Var0  <=  FFFFFEA7
-  11C:  	Call  NpcJump0  ( 00000004 FFFFFEE8 00000000 FFFFFF90 00000014 )
+  11C:  	Call  NpcJump0  ( .NpcID:KoopaTroopa_04  -280`  0`  -112`  20` )
   13C:  Else
-  144:  	Call  NpcJump0  ( 00000004 FFFFFE66 00000000 FFFFFF90 00000014 )
+  144:  	Call  NpcJump0  ( .NpcID:KoopaTroopa_04  -410`  0`  -112`  20` )
   164:  EndIf
   16C:  Return
   174:  End
@@ -2993,7 +2998,7 @@ PADDING: 802438C4 to 802438D0 (000038C4 to 000038D0)
   16C:  	EndIf
   174:  EndThread
   17C:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[0.6] )
-  190:  Call  NpcJump0  ( .Npc:Self FFFFFD76 0000004B FFFFFFE2 00000014 )
+  190:  Call  NpcJump0  ( .Npc:Self  -650`  75`  -30`  20` )
   1B0:  Call  SetNpcFlagBits    ( .Npc:Self 00240040 .False )
   1C8:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .True )
   1E0:  Call  BindNpcAI ( .Npc:Self $Script_NpcAI_80243900 )
@@ -3004,7 +3009,7 @@ PADDING: 802438C4 to 802438D0 (000038C4 to 000038D0)
 #new:Script $Script_Init_80243D2C
 {
     0:  Call  SetNpcFlagBits    ( .Npc:Self 00000200 .False )
-   18:  Call  SetNpcPos ( .Npc:Self FFFFFD76 0000004B FFFFFF6A )
+   18:  Call  SetNpcPos ( .Npc:Self  -650`  75`  -150` )
    34:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_80243B28 )
    48:  Return
    50:  End
@@ -3019,43 +3024,43 @@ PADDING: 802438C4 to 802438D0 (000038C4 to 000038D0)
 
 #new:NpcGroup $NpcGroup_80243DAC
 {
-	00000000 $NpcSettings_80243970 ~Vec3f:NPC_80243DAC % -667 75 -50
+	.NpcID:KoopaTroopa_00 $NpcSettings_80243970 ~Vec3f:NPC_KoopaTroopa_00 % -667 75 -50
 	00002400 $Script_Init_80243D2C 00000000 00000000 0000010E
 	~Items:5:Mushroom:3:KoopaLeaf:7
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_80243DAC
-	~AnimationTable:NPC_80243DAC % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_00
+	~AnimationTable:NPC_KoopaTroopa_00 % .Sprite:KoopaTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243F9C
 {
-	00000003 $NpcSettings_80243AD0 ~Vec3f:NPC_80243F9C % 184 50 -100
+	.NpcID:ParaTroopa_03 $NpcSettings_80243AD0 ~Vec3f:NPC_ParaTroopa_03 % 184 50 -100
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:POWBlock:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_80243F9C
-	~AnimationTable:NPC_80243F9C % .Sprite:ParaTroopa
+	~Movement:NPC_ParaTroopa_03
+	~AnimationTable:NPC_ParaTroopa_03 % .Sprite:ParaTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024418C
 {
-	00000002 $NpcSettings_802439EC ~Vec3f:NPC_8024418C % -257 0 -47
+	.NpcID:SpikedGoomba_02 $NpcSettings_802439EC ~Vec3f:NPC_SpikedGoomba_02 % -257 0 -47
 	00002C00 00000000 00000000 00000000 0000005A
 	~Items:5:Mushroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_8024418C
-	~AnimationTable:NPC_8024418C % .Sprite:SpikedGoomba
+	~Movement:NPC_SpikedGoomba_02
+	~AnimationTable:NPC_SpikedGoomba_02 % .Sprite:SpikedGoomba
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024437C
 {
-	00000004 $NpcSettings_80243AFC ~Vec3f:NPC_8024437C % 0 -1000 0
+	.NpcID:KoopaTroopa_04 $NpcSettings_80243AFC ~Vec3f:NPC_KoopaTroopa_04 % 0 -1000 0
 	00004E01 $Script_Init_80243D84 00000000 00000000 00000000
 	~Items:5:Mushroom:3:KoopaLeaf:7
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:1
-	~Movement:NPC_8024437C
-	~AnimationTable:NPC_8024437C % .Sprite:KoopaTroopa
+	~Movement:NPC_KoopaTroopa_04
+	~AnimationTable:NPC_KoopaTroopa_04 % .Sprite:KoopaTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

@@ -1,6 +1,7 @@
 % Script File: tst_10.mscr
 % Decoded from: 0 to 510 (tst_10)
 
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 %    0.0    0.0 -480.0  180.0
@@ -87,8 +88,8 @@
 {
     0:  Set   *GB_WorldLocation  .Location:Testing
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  ExecWait  $Script_MakeEntities
    7C:  If  *AreaFlag[000]  ==  .True

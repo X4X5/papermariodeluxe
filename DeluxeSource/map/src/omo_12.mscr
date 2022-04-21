@@ -1,6 +1,11 @@
 % Script File: omo_12.mscr
 % Decoded from: 0 to 3180 (omo_12)
 
+#define .NpcID:BigLanternGhost_00   00
+#define .NpcID:WorldWatt_01         01
+#define .NpcID:BigLanternGhost_02   02
+#define .NpcID:BigLanternGhost_03   03
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -50,7 +55,7 @@
    AC:  BEQ       R0, R0, .o164
    B0:  NOP
         .oB4
-   B4:  JAL       800EB168
+   B4:  JAL       ~Func:switch_to_partner
    B8:  CLEAR     A0
    BC:  LI        V0, 1E
    C0:  SW        V0, 74 (S2)
@@ -137,7 +142,7 @@
    68:  MFC1      A2, F6
    6C:  TRUNC.W.S F6, F0
    70:  MFC1      A3, F6
-   74:  JAL       ~Func:set_transition_stencil_center_worldpos
+   74:  JAL       ~Func:set_screen_overlay_center_worldpos
    78:  COPY      A1, A0
    7C:  LAB       V0, 8010EBB0
    84:  BEQ       V0, R0, .oD0
@@ -186,10 +191,10 @@
   11C:  LWC1      F6, 70 (S0)
   120:  CVT.S.W   F6, F6
   124:  MFC1      A1, F6
-  128:  JAL       ~Func:set_transition_stencil_alpha
+  128:  JAL       ~Func:set_screen_overlay_alpha
   12C:  LI        A0, 1
   130:  LUI       A1, 437F
-  134:  JAL       ~Func:set_transition_stencil_zoom_1
+  134:  JAL       ~Func:set_screen_overlay_params_back
   138:  ADDIU     A0, R0, B
   13C:  LW        RA, 24 (SP)
   140:  LW        S2, 20 (SP)
@@ -252,16 +257,16 @@
    6C:  SW        S0, 10 (SP)
    70:  COPY      S0, V0
    74:  COPY      A2, S3
-   78:  JAL       ~Func:set_transition_stencil_center_worldpos
+   78:  JAL       ~Func:set_screen_overlay_center_worldpos
    7C:  COPY      A3, S2
    80:  MTC1      S0, F0
    84:  NOP
    88:  CVT.S.W   F0, F0
    8C:  MFC1      A1, F0
-   90:  JAL       ~Func:set_transition_stencil_alpha
+   90:  JAL       ~Func:set_screen_overlay_alpha
    94:  LI        A0, 1
    98:  LUI       A1, 437F
-   9C:  JAL       ~Func:set_transition_stencil_zoom_1
+   9C:  JAL       ~Func:set_screen_overlay_params_back
    A0:  ADDIU     A0, R0, B
    A4:  LW        RA, 28 (SP)
    A8:  LW        S3, 24 (SP)
@@ -281,10 +286,10 @@
     C:  NOP
    10:  MFC1      A1, F20
    14:  SW        RA, 10 (SP)
-   18:  JAL       ~Func:set_transition_stencil_alpha
+   18:  JAL       ~Func:set_screen_overlay_alpha
    1C:  LI        A0, 1
    20:  MFC1      A1, F20
-   24:  JAL       ~Func:set_transition_stencil_zoom_1
+   24:  JAL       ~Func:set_screen_overlay_params_back
    28:  LI        A0, B
    2C:  LW        RA, 10 (SP)
    30:  LDC1      F20, 18 (SP)
@@ -411,8 +416,8 @@ PADDING: 80240644 to 80240650 (00000644 to 00000650)
 {
     0:  Set   *GB_WorldLocation  .Location:ShyGuysToybox
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80243124 )
@@ -467,17 +472,17 @@ PADDING: 80240844 to 80240850 (00000844 to 00000850)
    18:  Switch  *AreaByte[1]
    24:  	Case  ==  00000000
    30:  	Case  ==  00000001
-   3C:  		Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+   3C:  		Call  GetNpcPos ( .NpcID:BigLanternGhost_00 *Var0 *Var1 *Var2 )
    58:  		Set   *Var3  *AreaByte[2]
    68:  		Add   *Var3  00000080
    78:  		Call  $Function_80240314    ( *Var0 *Var1 *Var2 *Var3 )
    94:  	Case  ==  00000002
-   A0:  		Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+   A0:  		Call  GetNpcPos ( .NpcID:WorldWatt_01 *Var0 *Var1 *Var2 )
    BC:  		Set   *Var3  *AreaByte[2]
    CC:  		Add   *Var3  00000080
    DC:  		Call  $Function_80240314    ( *Var0 *Var1 *Var2 *Var3 )
    F8:  	Case  ==  00000003
-  104:  		Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+  104:  		Call  GetNpcPos ( .NpcID:BigLanternGhost_02 *Var0 *Var1 *Var2 )
   120:  		Set   *Var3  *AreaByte[2]
   130:  		Add   *Var3  00000080
   140:  		Call  $Function_80240314    ( *Var0 *Var1 *Var2 *Var3 )
@@ -519,18 +524,18 @@ PADDING: 80240844 to 80240850 (00000844 to 00000850)
 #new:Script $Script_80240BA0
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  SetPlayerPos  ( 00000046 00000014 00000000 )
-   28:  Call  ShowMessageAtScreenPos    ( 000F004E 000000A0 00000028 ) % Wee hee hee hee... Someone... has come... Someone  ...
-   40:  Call  SetNpcPos     ( 00000000 FFFFFF6A 00000000 00000014 )
-   5C:  Call  UseSettingsFrom       ( .Cam:Default FFFFFF6A 00000000 00000014 )
-   78:  Call  SetPanTarget  ( .Cam:Default FFFFFF6A 00000000 00000014 )
+   10:  Call  SetPlayerPos  (  70`  20`  0` )
+   28:  Call  ShowMessageAtScreenPos    ( 000F004E  160`  40` ) % Wee hee hee hee... Someone... has come... Someone  ...
+   40:  Call  SetNpcPos     ( .NpcID:BigLanternGhost_00  -150`  0`  20` )
+   5C:  Call  UseSettingsFrom       ( .Cam:Default  -150`  0`  20` )
+   78:  Call  SetPanTarget  ( .Cam:Default  -150`  0`  20` )
    94:  Call  SetCamDistance        ( .Cam:Default *Fixed[350.0] )
    A8:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-9.0] )
    C0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    D4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    EC:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   100:  Wait  20`
-  10C:  Call  GetNpcPos     ( 00000000 *Var2 *Var3 *Var4 )
+  10C:  Call  GetNpcPos     ( .NpcID:BigLanternGhost_00 *Var2 *Var3 *Var4 )
   128:  Add   *Var2  00000020
   138:  Add   *Var3  0000000A
   148:  Call  MakeLerp      ( 000000FF 00000064 0000003C .Easing:Linear )
@@ -541,22 +546,22 @@ PADDING: 80240844 to 80240850 (00000844 to 00000850)
   1A4:  If  *Var1  ==  00000001
   1B4:  	Goto  0
   1C0:  EndIf
-  1C8:  Call  SpeakToPlayer ( 00000000 006D0005 006D0001 00000000 000F004F ) % Wee hee hee... Oh... Could it be...? Wee hee hee h ...
-  1E8:  Call  SetPanTarget  ( .Cam:Default 00000032 00000000 00000014 )
+  1C8:  Call  SpeakToPlayer ( .NpcID:BigLanternGhost_00 006D0005 006D0001 00000000 000F004F ) % Wee hee hee... Oh... Could it be...? Wee hee hee h ...
+  1E8:  Call  SetPanTarget  ( .Cam:Default  50`  0`  20` )
   204:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.7] )
   218:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   230:  Set   *AreaByte[1]  00000001
   240:  Set   *AreaByte[2]  FFFFFFE4
-  250:  Call  SetNpcAnimation   ( 00000000 006D0006 )
-  264:  Call  SetNpcSpeed   ( 00000000 *Fixed[3.0] )
-  278:  Call  NpcMoveTo     ( 00000000 00000000 00000014 00000000 )
-  294:  Call  SetNpcAnimation   ( 00000000 006D0001 )
+  250:  Call  SetNpcAnimation   ( .NpcID:BigLanternGhost_00 006D0006 )
+  264:  Call  SetNpcSpeed   ( .NpcID:BigLanternGhost_00 *Fixed[3.0] )
+  278:  Call  NpcMoveTo     ( .NpcID:BigLanternGhost_00  0`  20`  0` )
+  294:  Call  SetNpcAnimation   ( .NpcID:BigLanternGhost_00 006D0001 )
   2A8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  2BC:  Call  SpeakToPlayer ( 00000000 006D0005 006D0001 00000000 000F0050 ) % Looks like you're mine, Mario! Wee hee... I won't  ...
+  2BC:  Call  SpeakToPlayer ( .NpcID:BigLanternGhost_00 006D0005 006D0001 00000000 000F0050 ) % Looks like you're mine, Mario! Wee hee... I won't  ...
   2DC:  Thread
-  2E4:  	Call  ShakeCam  ( .Cam:Default 00000000 0000000A *Fixed[0.5] )
+  2E4:  	Call  ShakeCam  ( .Cam:Default 00000000  10` *Fixed[0.5] )
   300:  EndThread
-  308:  Call  SetNpcAnimation       ( 00000000 006D000F )
+  308:  Call  SetNpcAnimation       ( .NpcID:BigLanternGhost_00 006D000F )
   31C:  Wait  5`
   328:  Call  SetPlayerAnimation    ( 0008000A )
   338:  Wait  15`
@@ -564,7 +569,7 @@ PADDING: 80240844 to 80240850 (00000844 to 00000850)
   34C:  	Wait  20`
   358:  	Set   *AreaByte[1]  00000004
   368:  EndThread
-  370:  Call  SetNpcVar ( 00000000 00000000 00000001 )
+  370:  Call  SetNpcVar ( .NpcID:BigLanternGhost_00 00000000 00000001 )
   388:  Return
   390:  End
 }
@@ -610,18 +615,18 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
 {
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  $Function_802402DC ( )
-   1C:  Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+   1C:  Call  GetNpcPos ( .NpcID:BigLanternGhost_02 *Var0 *Var1 *Var2 )
    38:  Call  SetCamProperties      ( .Cam:Default *Fixed[2.0] *Var0 *Var1 *Var2 *Fixed[450.0] *Fixed[15.0] *Fixed[-6.0] )
    64:  Set   *VarA  00000000
    74:  Call  GetOwnerEncounterTrigger  ( *Var0 )
    84:  If  *Var0  ==  .EncounterTrigger:Partner % 6
    94:  	Call  GetCurrentPartnerID   ( *Var0 )
    A4:  	If  *Var0  ==  .Partner:Bombette % 3
-   B4:  		Call  SetNpcAnimation   ( 00000001 00060007 )
+   B4:  		Call  SetNpcAnimation   ( .NpcID:WorldWatt_01 00060007 )
    C8:  		Set   *VarA  FFFFFFFF
    D8:  	EndIf
    E0:  EndIf
-   E8:  Call  NpcFacePlayer ( 00000001 00000000 )
+   E8:  Call  NpcFacePlayer ( .NpcID:WorldWatt_01 00000000 )
    FC:  If  *VarA  ==  00000000
   10C:  	Call  GetOwnerEncounterTrigger  ( *Var0 )
   11C:  	Switch  *Var0
@@ -639,26 +644,26 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
   1A4:  Call  PlaySound ( 000001F5 )
   1B4:  Set   *AreaFlag[010]  .False
   1C4:  Loop  00000008
-  1D0:  	Call  SetNpcFlagBits    ( 00000002 00000002 .True )
+  1D0:  	Call  SetNpcFlagBits    ( .NpcID:BigLanternGhost_02 00000002 .True )
   1E8:  	Wait  3`
-  1F4:  	Call  SetNpcFlagBits    ( 00000002 00000002 .False )
+  1F4:  	Call  SetNpcFlagBits    ( .NpcID:BigLanternGhost_02 00000002 .False )
   20C:  	Wait  3`
   218:  EndLoop
-  220:  Call  SetNpcAnimation   ( 00000002 006D0003 )
-  234:  Call  SetNpcAnimation   ( 00000003 006D0004 )
+  220:  Call  SetNpcAnimation   ( .NpcID:BigLanternGhost_02 006D0003 )
+  234:  Call  SetNpcAnimation   ( .NpcID:BigLanternGhost_03 006D0004 )
   248:  Thread
   250:  	Label  A
-  25C:  	Call  SetNpcFlagBits    ( 00000002 00000002 .True )
-  274:  	Call  SetNpcFlagBits    ( 00000003 00000002 .True )
+  25C:  	Call  SetNpcFlagBits    ( .NpcID:BigLanternGhost_02 00000002 .True )
+  274:  	Call  SetNpcFlagBits    ( .NpcID:BigLanternGhost_03 00000002 .True )
   28C:  	Wait  2`
-  298:  	Call  SetNpcFlagBits    ( 00000002 00000002 .False )
-  2B0:  	Call  SetNpcFlagBits    ( 00000003 00000002 .False )
+  298:  	Call  SetNpcFlagBits    ( .NpcID:BigLanternGhost_02 00000002 .False )
+  2B0:  	Call  SetNpcFlagBits    ( .NpcID:BigLanternGhost_03 00000002 .False )
   2C8:  	Wait  2`
   2D4:  	If  *AreaFlag[010]  ==  .False
   2E4:  		Goto  A
   2F0:  	EndIf
   2F8:  EndThread
-  300:  Call  GetAngleToPlayer  ( 00000002 *Var0 )
+  300:  Call  GetAngleToPlayer  ( .NpcID:BigLanternGhost_02 *Var0 )
   314:  If  *Var0  <  000000B4
   324:  	Set   *Var1  0000001B
   334:  	Set   *Var2  00000032
@@ -669,21 +674,21 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
   374:  Call  802D2C14  ( 00000001 )
   384:  Call  SetNpcFlagBits    ( .Npc:Partner 00000100 .True )
   39C:  Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  3AC:  Call  PlayerMoveTo      ( *Var1 00000000 00000000 )
-  3C4:  Call  PlayerFaceNpc     ( 00000002 00000003 )
+  3AC:  Call  PlayerMoveTo      ( *Var1  0`  0` )
+  3C4:  Call  PlayerFaceNpc     ( .NpcID:BigLanternGhost_02 00000003 )
   3D8:  Thread
-  3E0:  	Call  SetNpcJumpscale   ( 00000002 00000000 )
-  3F4:  	Call  GetNpcPos ( 00000002 *Var0 00000014 *Var2 )
-  410:  	Call  NpcJump0  ( 00000002 *Var0 00000014 *Var2 00000014 )
+  3E0:  	Call  SetNpcJumpscale   ( .NpcID:BigLanternGhost_02 00000000 )
+  3F4:  	Call  GetNpcPos ( .NpcID:BigLanternGhost_02 *Var0 00000014 *Var2 )
+  410:  	Call  NpcJump0  ( .NpcID:BigLanternGhost_02 *Var0  20` *Var2  20` )
   430:  EndThread
   438:  Thread
   440:  	Wait  6`
-  44C:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-  468:  	Call  SetNpcPos ( 00000001 *Var0 00000006 *Var2 )
+  44C:  	Call  GetNpcPos ( .NpcID:BigLanternGhost_02 *Var0 *Var1 *Var2 )
+  468:  	Call  SetNpcPos ( .NpcID:WorldWatt_01 *Var0  6` *Var2 )
   484:  	Loop  00000007
-  490:  		Call  SetNpcFlagBits    ( 00000002 00000002 .True )
+  490:  		Call  SetNpcFlagBits    ( .NpcID:BigLanternGhost_02 00000002 .True )
   4A8:  		Wait  1`
-  4B4:  		Call  SetNpcFlagBits    ( 00000002 00000002 .False )
+  4B4:  		Call  SetNpcFlagBits    ( .NpcID:BigLanternGhost_02 00000002 .False )
   4CC:  		Wait  1`
   4D8:  	EndLoop
   4E0:  EndThread
@@ -692,47 +697,47 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
   504:  Set   *AreaByte[2]  00000048
   514:  Wait  40`
   520:  Set   *AreaFlag[010]  .True
-  530:  Call  SetNpcPos     ( 00000002 00000000 FFFFFC18 00000000 )
-  54C:  Call  SetNpcPos     ( 00000003 00000000 FFFFFC18 00000000 )
+  530:  Call  SetNpcPos     ( .NpcID:BigLanternGhost_02  0`  -1000`  0` )
+  54C:  Call  SetNpcPos     ( .NpcID:BigLanternGhost_03  0`  -1000`  0` )
   568:  Wait  25`
   574:  Call  GetPlayerPos  ( *Var3 *Var1 *Var2 )
-  58C:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+  58C:  Call  GetNpcPos     ( .NpcID:WorldWatt_01 *Var0 *Var1 *Var2 )
   5A8:  Add   *Var0  *Var3
   5B8:  Div   *Var0  00000002
   5C8:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   5E4:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-  600:  Call  SetCamDistance    ( .Cam:Default 0000012C )
+  600:  Call  SetCamDistance    ( .Cam:Default  300` )
   614:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-8.0] )
   62C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[5.0] )
   640:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   658:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   66C:  If  *VarA  ==  FFFFFFFF
-  67C:  	Call  SpeakToPlayer ( 00000001 00060005 00060007 00000000 000F0058 ) % Cough cough... You're crazy, mister! Did ya have t ...
+  67C:  	Call  SpeakToPlayer ( .NpcID:WorldWatt_01 00060005 00060007 00000000 000F0058 ) % Cough cough... You're crazy, mister! Did ya have t ...
   69C:  	Thread
   6A4:  		Wait  10`
   6B0:  		Call  SetPlayerAnimation    ( .PlayerAnim:Pray )
   6C0:  		Wait  15`
   6CC:  		Call  SetPlayerAnimation    ( 00010002 )
   6DC:  	EndThread
-  6E4:  	Call  EndSpeech ( 00000001 00060005 00060007 00000000 )
+  6E4:  	Call  EndSpeech ( .NpcID:WorldWatt_01 00060005 00060007 00000000 )
   700:  Else
-  708:  	Call  SpeakToPlayer ( 00000001 00060006 00060001 00000000 000F0057 ) % Hm hm hee hee... Yay! I got out! Yay for me! Thank ...
+  708:  	Call  SpeakToPlayer ( .NpcID:WorldWatt_01 00060006 00060001 00000000 000F0057 ) % Hm hm hee hee... Yay! I got out! Yay for me! Thank ...
   728:  	Call  SetPlayerAnimation    ( .PlayerAnim:NodYes )
   738:  EndIf
   740:  Call  802D2C14  ( 00000000 )
   750:  Wait  20`
-  75C:  Call  SetNpcAnimation   ( 00000001 00060001 )
-  770:  Call  PlaySoundAtNpc    ( 00000001 00000262 00000000 )
-  788:  Call  ShowEmote ( 00000001 .Emote:Exclamation 00000000 0000001E 00000001 00000000 00000000 00000000 00000000 )
+  75C:  Call  SetNpcAnimation   ( .NpcID:WorldWatt_01 00060001 )
+  770:  Call  PlaySoundAtNpc    ( .NpcID:WorldWatt_01 00000262 00000000 )
+  788:  Call  ShowEmote ( .NpcID:WorldWatt_01 .Emote:Exclamation  0`  30` .True  0`  0`  0`  0` )
   7B8:  Wait  40`
-  7C4:  Call  SpeakToPlayer     ( 00000001 00060004 00060001 00000000 000F0059 ) % Hey! Aren't you, um, Mario!? You just saved me lik ...
+  7C4:  Call  SpeakToPlayer     ( .NpcID:WorldWatt_01 00060004 00060001 00000000 000F0059 ) % Hey! Aren't you, um, Mario!? You just saved me lik ...
   7E4:  Call  SetPlayerAnimation    ( 00080011 )
   7F4:  Wait  30`
   800:  Call  SetPlayerAnimation    ( .PlayerAnim:NodYes )
   810:  Wait  20`
-  81C:  Call  EndSpeech ( 00000001 00060004 00060001 00000000 )
+  81C:  Call  EndSpeech ( .NpcID:WorldWatt_01 00060004 00060001 00000000 )
   838:  Wait  20`
-  844:  Call  GetAngleToPlayer  ( 00000001 *Var0 )
+  844:  Call  GetAngleToPlayer  ( .NpcID:WorldWatt_01 *Var0 )
   858:  If  *Var0  <  000000B4
   868:  	Set   *Var1  FFFFFFE7
   878:  Else
@@ -744,13 +749,13 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
   8C8:  	Add   *Var1  *Var2
   8D8:  	Call  SetNpcSpeed       ( .Npc:Partner *Fixed[3.0] )
   8EC:  	Call  SetNpcAnimation   ( .Npc:Partner 00000102 )
-  900:  	Call  NpcMoveTo ( .Npc:Partner *Var1 *Var4 00000000 )
+  900:  	Call  NpcMoveTo ( .Npc:Partner *Var1 *Var4  0` )
   91C:  	Call  NpcFacePlayer     ( .Npc:Partner 00000003 )
   930:  	Call  EnablePartnerAI ( )
   93C:  EndThread
-  944:  Call  SetNpcFlagBits    ( 00000001 00000100 .True )
-  95C:  Call  GetNpcPos ( 00000001 *Var7 *Var8 *Var9 )
-  978:  Call  GetAngleToPlayer  ( 00000001 *Var0 )
+  944:  Call  SetNpcFlagBits    ( .NpcID:WorldWatt_01 00000100 .True )
+  95C:  Call  GetNpcPos ( .NpcID:WorldWatt_01 *Var7 *Var8 *Var9 )
+  978:  Call  GetAngleToPlayer  ( .NpcID:WorldWatt_01 *Var0 )
   98C:  If  *Var0  <  000000B4
   99C:  	Call  LoadPath  ( 0000000F $VectorList_80240FF4 00000003 .Easing:Linear )
   9B8:  	Set   *Var4  0000000C
@@ -760,7 +765,7 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
   9FC:  EndIf
   A04:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   A1C:  Add   *Var0  *Var4
-  A2C:  Call  SetPanTarget  ( .Cam:Default *Var0 00000000 00000000 )
+  A2C:  Call  SetPanTarget  ( .Cam:Default *Var0  0`  0` )
   A48:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   A5C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   A74:  Label  1E
@@ -768,27 +773,27 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
   A8C:  Add   *Var1  *Var7
   A9C:  Add   *Var2  *Var8
   AAC:  Add   *Var3  *Var9
-  ABC:  Call  SetNpcPos     ( 00000001 *Var1 *Var2 *Var3 )
-  AD8:  Call  PlayerFaceNpc ( 00000001 00000000 )
+  ABC:  Call  SetNpcPos     ( .NpcID:WorldWatt_01 *Var1 *Var2 *Var3 )
+  AD8:  Call  PlayerFaceNpc ( .NpcID:WorldWatt_01 .False )
   AEC:  Wait  1`
   AF8:  If  *Var0  ==  00000001
   B08:  	Goto  1E
   B14:  EndIf
-  B1C:  Call  NpcFacePlayer ( 00000001 00000003 )
+  B1C:  Call  NpcFacePlayer ( .NpcID:WorldWatt_01 00000003 )
   B30:  Wait  20`
-  B3C:  Call  SpeakToPlayer ( 00000001 00060004 00060001 00000000 000F005A ) % I gotta make it up to you! I'll go with you, Mario ...
+  B3C:  Call  SpeakToPlayer ( .NpcID:WorldWatt_01 00060004 00060001 00000000 000F005A ) % I gotta make it up to you! I'll go with you, Mario ...
   B5C:  Call  SetPlayerAnimation    ( 00010002 )
   B6C:  Wait  5`
   B78:  Call  SetPlayerAnimation    ( .PlayerAnim:NodYes )
   B88:  Wait  20`
-  B94:  Call  EndSpeech ( 00000001 00060004 00060001 00000000 )
+  B94:  Call  EndSpeech ( .NpcID:WorldWatt_01 00060004 00060001 00000000 )
   BB0:  Set   *AreaByte[1]  00000006
   BC0:  Wait  1`
   BCC:  Call  $Function_80240000    ( 00000001 00000006 )
   BE0:  Call  $Function_80240420 ( )
   BEC:  Exec  $Script_802405E4
   BF8:  Wait  15`
-  C04:  Call  ShowMessageAtScreenPos    ( 001D018E 000000A0 00000028 ) % Watt joined your party!! Press to have her illumin ...
+  C04:  Call  ShowMessageAtScreenPos    ( 001D018E  160`  40` ) % Watt joined your party!! Press to have her illumin ...
   C1C:  Exec  $Script_80240608
   C28:  Wait  10`
   C34:  Thread
@@ -818,8 +823,8 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
   DA8:  Call  ResetCam      ( .Cam:Default *Fixed[5.0] )
   DBC:  Set   *GB_StoryProgress  .Story:Ch4_WattJoinedParty
   DCC:  Call  DisablePlayerInput    ( .False )
-  DDC:  Call  RemoveNpc     ( 00000002 )
-  DEC:  Call  RemoveNpc     ( 00000003 )
+  DDC:  Call  RemoveNpc     ( .NpcID:BigLanternGhost_02 )
+  DEC:  Call  RemoveNpc     ( .NpcID:BigLanternGhost_03 )
   DFC:  Unbind
   E04:  Return
   E0C:  End
@@ -852,25 +857,25 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
    74:  		Call  $Function_80240314    ( *Var0 *Var1 *Var2 00000064 )
    90:  		Thread
    98:  			Set   *MapFlag[00]  .False
-   A8:  			Call  SpeakToPlayer ( 00000000 006D0008 006D0008 00000000 000F0054 ) % Nooooooooo!!
+   A8:  			Call  SpeakToPlayer ( .NpcID:BigLanternGhost_00 006D0008 006D0008 00000000 000F0054 ) % Nooooooooo!!
    C8:  			Set   *MapFlag[00]  .True
    D8:  		EndThread
    E0:  		Thread
    E8:  			Wait  15`
-   F4:  			Call  SetNpcJumpscale   ( 00000002 *Fixed[1.0] )
-  108:  			Call  SetNpcPos ( 00000002 00000000 00000000 00000014 )
-  124:  			Call  NpcJump0  ( 00000002 00000000 00000000 00000014 0000000A )
-  144:  			Call  SetNpcPos ( 00000003 00000000 00000000 00000014 )
+   F4:  			Call  SetNpcJumpscale   ( .NpcID:BigLanternGhost_02 *Fixed[1.0] )
+  108:  			Call  SetNpcPos ( .NpcID:BigLanternGhost_02  0`  0`  20` )
+  124:  			Call  NpcJump0  ( .NpcID:BigLanternGhost_02  0`  0`  20`  10` )
+  144:  			Call  SetNpcPos ( .NpcID:BigLanternGhost_03  0`  0`  20` )
   160:  		EndThread
   168:  		Call  SetNpcAnimation   ( .Npc:Self 006D0007 )
   17C:  		Call  SetNpcSpeed       ( .Npc:Self *Fixed[10.0] )
-  190:  		Call  NpcMoveTo ( .Npc:Self 00000190 00000000 00000000 )
+  190:  		Call  NpcMoveTo ( .Npc:Self  400`  0`  0` )
   1AC:  		Label  0
   1B8:  		If  *MapFlag[00]  ==  .False
   1C8:  			Wait  1`
   1D4:  			Goto  0
   1E0:  		EndIf
-  1E8:  		Call  GetNpcPos ( 00000002 *Var3 *Var4 *Var5 )
+  1E8:  		Call  GetNpcPos ( .NpcID:BigLanternGhost_02 *Var3 *Var4 *Var5 )
   204:  		SubF  *Var3  *Var0
   214:  		SubF  *Var4  *Var1
   224:  		SubF  *Var5  *Var2
@@ -890,7 +895,7 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
   300:  		Set   *AreaByte[1]  00000003
   310:  		Set   *AreaByte[2]  00000066
   320:  		Wait  1`
-  32C:  		Call  SetNpcVar ( 00000002 00000000 00000001 )
+  32C:  		Call  SetNpcVar ( .NpcID:BigLanternGhost_02 00000000 00000001 )
   344:  		Set   *GB_StoryProgress  .Story:Ch4_DefeatedLanternGhost
   354:  		Call  DisablePlayerInput    ( .False )
   364:  		Call  RemoveNpc ( .Npc:Self )
@@ -957,9 +962,9 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
    A8:  			Thread
    B0:  				Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
    C4:  				Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-   E0:  				Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 00000010 )
-  100:  				Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 00000008 )
-  120:  				Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2 00000004 )
+   E0:  				Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  16` )
+  100:  				Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  8` )
+  120:  				Call  NpcJump0  ( .Npc:Self *Var0 *Var1 *Var2  4` )
   140:  			EndThread
   148:  			Call  SpeakToPlayer ( .Npc:Self 006D0002 006D0002 00000000 000F0056 ) % Wait, wait! Don't leave me, please! Let me out, mi ...
   168:  			Call  DisablePlayerInput    ( .False )
@@ -989,7 +994,7 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
    18:  		Call  SetNpcAnimation   ( .Npc:Self 006D0002 )
    2C:  	Case  <  .Story:Ch4_WattJoinedParty % 2
    38:  		Call  SetNpcAnimation   ( .Npc:Self 006D0002 )
-   4C:  		Call  SetNpcPos ( .Npc:Self 00000000 00000000 00000014 )
+   4C:  		Call  SetNpcPos ( .Npc:Self  0`  0`  20` )
    68:  		Call  SetSelfVar        ( 00000000 00000002 )
    7C:  	Case  >=  .Story:Ch4_WattJoinedParty % 2
    88:  		Call  RemoveNpc ( .Npc:Self )
@@ -1008,13 +1013,13 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
    18:  		Call  SetNpcAnimation   ( .Npc:Self 006D0002 )
    2C:  	Case  <  .Story:Ch4_WattJoinedParty % 2
    38:  		Call  SetNpcAnimation   ( .Npc:Self 006D0002 )
-   4C:  		Call  SetNpcPos ( .Npc:Self 00000000 00000000 00000014 )
+   4C:  		Call  SetNpcPos ( .Npc:Self  0`  0`  20` )
    68:  	Case  >=  .Story:Ch4_WattJoinedParty % 2
    74:  		Call  RemoveNpc ( .Npc:Self )
    84:  		Return
    8C:  EndSwitch
    94:  Call  BindNpcHit        ( .Npc:Self $Script_Hit_8024104C )
-   A8:  Call  SetNpcFlagBits    ( 00000003 00000002 .True )
+   A8:  Call  SetNpcFlagBits    ( .NpcID:BigLanternGhost_03 00000002 .True )
    C0:  Return
    C8:  End
 }
@@ -1040,41 +1045,41 @@ MISSING: 8024103C to 8024104C (0000103C to 0000104C)
 
 #new:NpcGroup $NpcGroup_80242964
 {
-	00000000 $NpcSettings_80240850 ~Vec3f:NPC_80242964 % 0 -1000 0
+	.NpcID:BigLanternGhost_00 $NpcSettings_80240850 ~Vec3f:NPC_BigLanternGhost_00 % 0 -1000 0
 	00040F04 $Script_Init_80242284 00000001 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242964
-	~AnimationTable:NPC_80242964 % .Sprite:BigLanternGhost
+	~Movement:NPC_BigLanternGhost_00
+	~AnimationTable:NPC_BigLanternGhost_00 % .Sprite:BigLanternGhost
 	00000000 00000000 $ExtraAnimationList_8024293C 001A00B9 % Say... This is the lantern that belongs to the Big ...
 }
 
 #new:NpcGroup $NpcGroup_80242B54
 {
-	00000001 $NpcSettings_8024087C ~Vec3f:NPC_80242B54 % 0 -1000 0
+	.NpcID:WorldWatt_01 $NpcSettings_8024087C ~Vec3f:NPC_WorldWatt_01 % 0 -1000 0
 	00000D09 $Script_Init_802428DC 00000001 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242B54
-	~AnimationTable:NPC_80242B54 % .Sprite:WorldWatt
+	~Movement:NPC_WorldWatt_01
+	~AnimationTable:NPC_WorldWatt_01 % .Sprite:WorldWatt
 	00000000 00000000 00000000 001A00B9 % Say... This is the lantern that belongs to the Big ...
 }
 
 #new:NpcGroup $NpcGroup_80242D44
 {
-	00000002 $NpcSettings_8024087C ~Vec3f:NPC_80242D44 % 0 -1000 0
+	.NpcID:BigLanternGhost_02 $NpcSettings_8024087C ~Vec3f:NPC_BigLanternGhost_02 % 0 -1000 0
 	00400D09 $Script_Init_8024272C 00000001 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242D44
-	~AnimationTable:NPC_80242D44 % .Sprite:BigLanternGhost
+	~Movement:NPC_BigLanternGhost_02
+	~AnimationTable:NPC_BigLanternGhost_02 % .Sprite:BigLanternGhost
 	00000000 00000000 $ExtraAnimationList_8024293C 001A00B9 % Say... This is the lantern that belongs to the Big ...
 }
 
 #new:NpcGroup $NpcGroup_80242F34
 {
-	00000003 $NpcSettings_8024087C ~Vec3f:NPC_80242F34 % 0 -1000 0
+	.NpcID:BigLanternGhost_03 $NpcSettings_8024087C ~Vec3f:NPC_BigLanternGhost_03 % 0 -1000 0
 	09100F08 $Script_Init_8024280C 00000001 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80242F34
-	~AnimationTable:NPC_80242F34 % .Sprite:BigLanternGhost
+	~Movement:NPC_BigLanternGhost_03
+	~AnimationTable:NPC_BigLanternGhost_03 % .Sprite:BigLanternGhost
 	00000000 00000000 $ExtraAnimationList_8024293C 001A00B9 % Say... This is the lantern that belongs to the Big ...
 }
 

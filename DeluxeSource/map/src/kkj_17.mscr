@@ -1,6 +1,7 @@
 % Script File: kkj_17.mscr
 % Decoded from: 0 to 1040 (kkj_17)
 
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -442,8 +443,8 @@ PADDING: 80240594 to 802405A0 (00000594 to 000005A0)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachsCastle
    10:  Call  SetSpriteShading  ( .Shading:kkj_17 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  ExecWait  $Script_8024084C
    7C:  Exec  $Script_80240FF8
@@ -585,7 +586,7 @@ PADDING: 802408BC to 802408C0 (000008BC to 000008C0)
   150:  		ExecWait  $Script_80240940
   15C:  		Call  $Function_802400B4        ( *Var9 )
   16C:  		Call  SetMessageString  ( *Var9 00000000 )
-  180:  		Call  ShowMessageAtScreenPos    ( 00140198 000000A0 00000028 ) % You put in
+  180:  		Call  ShowMessageAtScreenPos    ( 00140198  160`  40` ) % You put in
   198:  		Wait  10`
   1A4:  		ExecWait  $Script_802409F0
   1B0:  EndSwitch
@@ -601,7 +602,7 @@ PADDING: 802408BC to 802408C0 (000008BC to 000008C0)
    28:  Switch  *Var0
    34:  	Case  ==  FFFFFFFF
    40:  	Case  ==  00000000
-   4C:  		Call  ShowMessageAtScreenPos    ( 001D00D4 000000A0 00000028 ) % It's empty.
+   4C:  		Call  ShowMessageAtScreenPos    ( 001D00D4  160`  40` ) % It's empty.
    64:  	CaseOR  ==  0000010D
    70:  	CaseOR  ==  00000129
    7C:  	CaseOR  ==  00000111
@@ -615,7 +616,7 @@ PADDING: 802408BC to 802408C0 (000008BC to 000008C0)
    F4:  	Default
    FC:  		Call  $Function_80240568 ( )
   108:  		If  *Var1  <=  00000000
-  118:  			Call  ShowMessageAtScreenPos    ( 001D00D5 000000A0 00000028 ) % You already have as many items as you can carry.
+  118:  			Call  ShowMessageAtScreenPos    ( 001D00D5  160`  40` ) % You already have as many items as you can carry.
   130:  		Else
   138:  			Call  ShowGotItem   ( *Var0 .False 00000002 )
   150:  			Call  AddItem       ( *Var0 *Var1 )

@@ -164,7 +164,7 @@
    34:  ANDI      S1, V0, 700
    38:  LH        A0, 436 (S0)
    3C:  SB        R0, 211 (S0)
-   40:  JAL       80047898
+   40:  JAL       ~Func:remove_status_1
    44:  SB        R0, 210 (S0)
         .o48
    48:  LB        V0, 216 (S0)
@@ -241,10 +241,10 @@ PADDING: 802A12D4 to 802A12E0 (007222D4 to 007222E0)
 #new:Script $Script_802A15E4
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )

@@ -1,6 +1,8 @@
 % Script File: kmr_10.mscr
 % Decoded from: 0 to 1C30 (kmr_10)
 
+#define .NpcID:Toad_00              00
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -505,8 +507,8 @@ PADDING: 802406AC to 802406B0 (000006AC to 000006B0)
 {
     0:  Set   *GB_WorldLocation  .Location:GoombaRoad
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80240BFC )
    84:  Call  ClearDefeatedEnemies ( )
@@ -548,11 +550,11 @@ MISSING: 802409BC to 802409E8 (000009BC to 000009E8)
 
 #new:NpcGroup $NpcGroup_80240A0C
 {
-	00000000 $NpcSettings_80240990 ~Vec3f:NPC_80240A0C % 0 -1000 0
+	.NpcID:Toad_00 $NpcSettings_80240990 ~Vec3f:NPC_Toad_00 % 0 -1000 0
 	00206F01 $Script_Init_802409E8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80240A0C
-	~AnimationTable:NPC_80240A0C % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -610,17 +612,17 @@ PADDING: 80240C14 to 80240C20 (00000C14 to 00000C20)
     C:  If  *GF_KMR10_KnockedSpringOutOfTree  ==  .False
    1C:  	Set   *GF_KMR10_KnockedSpringOutOfTree  .True
    2C:  	Call  DisablePlayerInput    ( .True )
-   3C:  	Call  SetNpcPos ( 00000000 00000172 00000073 FFFFFFEC )
+   3C:  	Call  SetNpcPos ( .NpcID:Toad_00  370`  115`  -20` )
    58:  	Thread
    60:  		Loop  00000011
-   6C:  			Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+   6C:  			Call  GetNpcPos ( .NpcID:Toad_00 *Var0 *Var1 *Var2 )
    88:  			Call  $Function_80240304    ( *MapVar[0] *Var0 *Var1 *Var2 )
    A4:  			Wait  1`
    B0:  		EndLoop
-   B8:  		Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+   B8:  		Call  SetNpcPos ( .NpcID:Toad_00  0`  -1000`  0` )
    D4:  	EndThread
-   DC:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[0.8] )
-   F0:  	Call  NpcJump0  ( 00000000 00000172 0000000A 00000014 0000000F )
+   DC:  	Call  SetNpcJumpscale   ( .NpcID:Toad_00 *Fixed[0.8] )
+   F0:  	Call  NpcJump0  ( .NpcID:Toad_00  370`  10`  20`  15` )
   110:  	Call  PlaySoundAt       ( 00000048 00000000 00000172 0000000A 00000014 )
   130:  	Call  PlaySoundAt       ( 00002086 00000000 00000172 0000000A 00000014 )
   150:  	Call  $Function_802402BC    ( *MapVar[0] )
@@ -651,7 +653,7 @@ PADDING: 80240C14 to 80240C20 (00000C14 to 00000C20)
    20:  Call  SetPlayerActionState  ( .ActionState:Launch )
    30:  Exec  $Script_80240F1C *VarA
    40:  Call  SetPlayerJumpscale    ( *Fixed[1.2] )
-   50:  Call  PlayerJump    ( ~Vec3d:JumpDest_80240FD4 0000001E )
+   50:  Call  PlayerJump    ( ~Vec3d:JumpDest_80240FD4  30` )
    6C:  Kill  *VarA
    78:  Call  SetPlayerActionState  ( .ActionState:Idle )
    88:  Call  DisablePlayerPhysics  ( .False )

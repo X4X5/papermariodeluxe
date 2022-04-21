@@ -181,7 +181,7 @@
    78:  MFC1      A1, F22
    7C:  MFC1      A3, F20
    80:  MFC1      A2, F0
-   84:  JAL       80070130
+   84:  JAL       ~Func:playFX_17
    88:  CLEAR     A0
    8C:  ADDIU     S0, S0, 14
    90:  MTC1      S0, F0
@@ -190,7 +190,7 @@
    9C:  MFC1      A1, F22
    A0:  MFC1      A3, F20
    A4:  MFC1      A2, F0
-   A8:  JAL       800701F0
+   A8:  JAL       ~Func:playFX_19
    AC:  CLEAR     A0
    B0:  LW        RA, 1C (SP)
    B4:  LW        S2, 18 (SP)
@@ -250,10 +250,10 @@
 #new:Script $Script_802A1614
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -592,7 +592,7 @@ MISSING: 802A2580 to 802A25A0 (0072A440 to 0072A460)
     0:  SetConst  *VarA  000000C8
    10:  ExecWait  $Script_802A1310
    1C:  Call  UseBattleCamPreset        ( 00000003 )
-   2C:  Call  MoveBattleCamOver ( 0000000F )
+   2C:  Call  MoveBattleCamOver (  15` )
    3C:  Call  SetAnimation      ( .Actor:Player 00000000 00010016 )
    54:  Call  PlaySound ( 000003FA )
    64:  Wait  3`
@@ -615,16 +615,16 @@ MISSING: 802A2580 to 802A25A0 (0072A440 to 0072A460)
   188:  EndThread
   190:  Call  SetVirtualEntityJumpGravity   ( *VarA *Fixed[1.0] )
   1A4:  Add   *Var2  00000005
-  1B4:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2 00000012 )
+  1B4:  Call  VirtualEntityJumpTo   ( *VarA *Var0 *Var1 *Var2  18` )
   1D4:  Call  DeleteVirtualEntity   ( *VarA )
   1E4:  Call  PlaySound ( 00002010 )
   1F4:  Call  $Function_802A123C    ( *Var0 *Var1 *Var2 )
   20C:  Thread
   214:  	Call  StartRumble   ( 00000005 )
-  224:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.75] )
-  240:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000005 *Fixed[1.5] )
-  25C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000004 *Fixed[1.2] )
-  278:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.45] )
+  224:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.75] )
+  240:  	Call  ShakeCam  ( .Cam:Battle 00000000  5` *Fixed[1.5] )
+  25C:  	Call  ShakeCam  ( .Cam:Battle 00000000  4` *Fixed[1.2] )
+  278:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.45] )
   294:  EndThread
   29C:  Call  GetItemPower      ( .Item:EggMissile *Var0 *Var1 )
   2B4:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:IgnoreDefense|NoContact|Fire|Blast 00000000 *Var0 00000020 )

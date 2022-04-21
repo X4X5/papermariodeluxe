@@ -289,10 +289,10 @@
 #new:Script $Script_802A16A4
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -366,7 +366,7 @@
   178:  Call  SetAnimation  ( .Actor:Player 00000000 00010002 )
   190:  Wait  20`
   19C:  Call  UseBattleCamPreset    ( 00000002 )
-  1AC:  Call  MoveBattleCamOver     ( 00000014 )
+  1AC:  Call  MoveBattleCamOver     (  20` )
   1BC:  Thread
   1C4:  	Wait  15`
   1D0:  	Call  PlaySoundAtActor  ( .Actor:Player .Sound:HitBlock )
@@ -376,17 +376,17 @@
   278:  	Call  PlayEffect    ( ~FX:Steam:Ring FFFFFFD8 0000003C 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   2BC:  	Call  PlayEffect    ( ~FX:Steam:Ring FFFFFFD8 00000037 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   300:  	Call  StartRumble   ( 00000004 )
-  310:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  32C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[3.0] )
-  348:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[6.0] )
-  364:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[5.0] )
-  380:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[4.0] )
+  310:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  32C:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[3.0] )
+  348:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[6.0] )
+  364:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[5.0] )
+  380:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[4.0] )
   39C:  	Call  PlaySoundAtActor  ( .Actor:Player 00002030 )
-  3B0:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[3.0] )
-  3CC:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[2.0] )
-  3E8:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  404:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
-  420:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.2] )
+  3B0:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[3.0] )
+  3CC:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[2.0] )
+  3E8:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  404:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
+  420:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.2] )
   43C:  EndThread
   444:  Call  GetActorPos   ( .Actor:Player *Var0 *Var1 *Var2 )
   460:  Add   *Var0  0000001E
@@ -401,7 +401,7 @@
   524:  Call  80273444      ( 00000014 00000000 00000000 )
   53C:  Call  SetAnimation  ( .Actor:Player 00000000 00010002 )
   554:  Call  UseBattleCamPreset    ( 00000003 )
-  564:  Call  MoveBattleCamOver ( 00000014 )
+  564:  Call  MoveBattleCamOver (  20` )
   574:  Call  InitTargetIterator ( )
   580:  Label  0
   58C:  Call  SetGoalToTarget   ( .Actor:Self )
@@ -412,7 +412,7 @@
   5E0:  Call  GetItemPower      ( .Item:POWBlock *Var3 *Var4 )
   5F8:  Call  ApplyShrinkFromOwner  ( *Var3 )
   608:  Call  80269EAC  ( 00000016 )
-  618:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:IgnoreDefense|NoContact|Unblockable|POW 00000000 *Var3 00000020 )
+  618:  Call  ItemDamageEnemy   ( *Var0 ~Flags:DamageType:IgnoreDefense|NoContact|NoOtherDamagePopups|POW 00000000 *Var3 00000020 )
   638:  Label  1
   644:  Call  ChooseNextTarget  ( .Iter:Next *Var0 )
   658:  If  *Var0  !=  FFFFFFFF

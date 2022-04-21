@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Map name="dgb_08" textures="dgb_tex">
 	<ModelTree>
 		<Node name="Root" id="32">
@@ -115,17 +115,17 @@
 				<Node name="Entry1" id="0"/>
 			</Node>
 			<Node name="NPCs" id="D">
-				<Node name="NPC_80246768" id="2"/>
-				<Node name="NPC_80245290" id="3"/>
-				<Node name="NPC_80245480" id="4"/>
-				<Node name="NPC_80245670" id="5"/>
-				<Node name="NPC_80245860" id="6"/>
-				<Node name="NPC_80245A50" id="7"/>
-				<Node name="NPC_80245C40" id="8"/>
-				<Node name="NPC_80245E30" id="9"/>
-				<Node name="NPC_80246020" id="A"/>
-				<Node name="NPC_802450A0" id="B"/>
-				<Node name="NPC_80246528" id="C"/>
+				<Node name="WorldClubba_00" id="2"/>
+				<Node name="WorldClubba_01" id="3"/>
+				<Node name="WorldClubba_02" id="4"/>
+				<Node name="WorldClubba_03" id="5"/>
+				<Node name="WorldClubba_04" id="6"/>
+				<Node name="WorldClubba_05" id="7"/>
+				<Node name="WorldClubba_06" id="8"/>
+				<Node name="Sentinel_07" id="9"/>
+				<Node name="Sentinel_08" id="A"/>
+				<Node name="WorldTubba_09" id="B"/>
+				<Node name="WorldClubba_11" id="C"/>
 			</Node>
 		</Node>
 	</MarkerTree>
@@ -4184,57 +4184,57 @@
 			<MapObject name="NPCs" id="D"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="426,0,38" yaw="270.000000">
-			<MapObject name="NPC_80246528" id="C"/>
+			<MapObject name="WorldClubba_11" id="C"/>
 			<Movement type="Wander" data="0,0,0,0,0,FFFF8001,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="39" palette="0" animations="2,3,4,4,2,2,C,C,11,12,7,8,1,2,2,2"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,-1000,0" yaw="270.000000">
-			<MapObject name="NPC_802450A0" id="B"/>
+			<MapObject name="WorldTubba_09" id="B"/>
 			<Movement type="Patrol" data="A,FFFFFE70,D2,50,FFFFFF9C,D2,50,64,D2,50,190,D2,50,334,64,50,334,64,104,190,0,104,64,0,C8,FFFFFF9C,0,AF,FFFFFE3E,0,AF,FFFF8001,96,0,AF,5AA,C8,1,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="6A" palette="0" animations="7,A,D,D,19,7,7,7,7,7,7,7,7,7,7,7"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-451,310,81" yaw="90.000000">
-			<MapObject name="NPC_80246020" id="A"/>
+			<MapObject name="Sentinel_08" id="A"/>
 			<Movement type="Wander" data="FFFFFE3D,136,51,1E,0,FFFF8001,0,FFFFFECA,0,AF,FA,91,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="38" palette="0" animations="1,2,3,3,1,1,1,1,5,1,8,1,1,1,1,1"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="75,310,85" yaw="90.000000">
-			<MapObject name="NPC_80245E30" id="9"/>
+			<MapObject name="Sentinel_07" id="9"/>
 			<Movement type="Wander" data="4B,136,55,1E,0,FFFF8001,0,4B,0,55,FA,37,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="38" palette="0" animations="1,2,3,3,1,1,1,1,5,1,8,1,1,1,1,1"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,-1000,0" yaw="0.000000">
-			<MapObject name="NPC_80245C40" id="8"/>
+			<MapObject name="WorldClubba_06" id="8"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="39" palette="0" animations="2,3,4,4,2,2,C,C,11,12,7,8,1,2,2,2"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="825,100,200" yaw="270.000000">
-			<MapObject name="NPC_80245A50" id="7"/>
+			<MapObject name="WorldClubba_05" id="7"/>
 			<Movement type="Wander" data="339,64,C8,19,0,FFFF8001,0,339,64,C8,96,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="39" palette="0" animations="2,3,4,4,2,2,C,C,11,12,7,8,1,2,2,2"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,-1000,0" yaw="0.000000">
-			<MapObject name="NPC_80245860" id="6"/>
+			<MapObject name="WorldClubba_04" id="6"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="39" palette="0" animations="2,3,4,4,2,2,C,C,11,12,7,8,1,2,2,2"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="220,0,155" yaw="270.000000">
-			<MapObject name="NPC_80245670" id="5"/>
+			<MapObject name="WorldClubba_03" id="5"/>
 			<Movement type="Wander" data="DC,0,9B,1E,0,FFFF8001,0,DC,0,9B,FA,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="39" palette="0" animations="2,3,4,4,2,2,C,C,11,12,7,8,1,2,2,2"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="0,-1000,0" yaw="0.000000">
-			<MapObject name="NPC_80245480" id="4"/>
+			<MapObject name="WorldClubba_02" id="4"/>
 			<Movement type="Stationary" data="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="39" palette="0" animations="2,3,4,4,2,2,C,C,11,12,7,8,1,2,2,2"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-250,0,135" yaw="90.000000">
-			<MapObject name="NPC_80245290" id="3"/>
+			<MapObject name="WorldClubba_01" id="3"/>
 			<Movement type="Wander" data="FFFFFF06,0,87,1E,0,FFFF8001,0,FFFFFF06,0,87,FA,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="39" palette="0" animations="2,3,4,4,2,2,C,C,11,12,7,8,1,2,2,2"/>
 		</Marker>
 		<Marker ver="4" type="NPC" pos="-250,0,135" yaw="90.000000">
-			<MapObject name="NPC_80246768" id="2"/>
+			<MapObject name="WorldClubba_00" id="2"/>
 			<Movement type="Wander" data="FFFFFF06,0,87,1E,0,FFFF8001,0,FFFFFF06,0,87,FA,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"/>
 			<Sprite sprite="39" palette="0" animations="2,3,4,4,2,2,C,C,11,12,7,8,1,2,2,2"/>
 		</Marker>

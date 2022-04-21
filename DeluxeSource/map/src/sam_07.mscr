@@ -1,6 +1,13 @@
 % Script File: sam_07.mscr
 % Decoded from: 0 to 3F50 (sam_07)
 
+#define .NpcID:Gulpit_00            00
+#define .NpcID:Gulpit_01            01
+#define .NpcID:PutridPiranha_02     02
+#define .NpcID:PutridPiranha_03     03
+#define .NpcID:PutridPiranha_04     04
+#define .NpcID:PutridPiranha_05     05
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FEB0
@@ -2229,8 +2236,8 @@ PADDING: 8024208C to 80242090 (0000208C to 00002090)
 {
     0:  Set   *GB_WorldLocation  .Location:ShiverMountain
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Set   *GF_Map_ShiverMountain  .True
    80:  Call  MakeNpcs  ( .False $NpcGroupList_80243D40 )
@@ -2430,7 +2437,7 @@ PADDING: 80242C88 to 80242C90 (00002C88 to 00002C90)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -2584,56 +2591,56 @@ MISSING: 80243180 to 802431A0 (00003180 to 000031A0)
 
 #new:NpcGroup $NpcGroup_802431A0
 {
-	00000000 $NpcSettings_80242DEC ~Vec3f:NPC_802431A0 % -500 -150 -75
+	.NpcID:Gulpit_00 $NpcSettings_80242DEC ~Vec3f:NPC_Gulpit_00 % -500 -150 -75
 	00000C00 00000000 00000000 00000000 0000010E
 	~Items:5:Pebble:2:SuperShroom:8
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:4
-	~Movement:NPC_802431A0
-	~AnimationTable:NPC_802431A0 % .Sprite:Gulpit
+	~Movement:NPC_Gulpit_00
+	~AnimationTable:NPC_Gulpit_00 % .Sprite:Gulpit
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802431A0[1F0]
-	00000001 $NpcSettings_80242EC0 ~Vec3f:NPC_80243390 % 0 -1000 0
+	.NpcID:Gulpit_01 $NpcSettings_80242EC0 ~Vec3f:NPC_Gulpit_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243390
-	~AnimationTable:NPC_80243390 % .Sprite:Gulpit
+	~Movement:NPC_Gulpit_01
+	~AnimationTable:NPC_Gulpit_01 % .Sprite:Gulpit
 	00000000 00000000 $ExtraAnimationList_80242EEC 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243580
 {
-	00000002 $NpcSettings_80243014 ~Vec3f:NPC_80243580 % 250 120 -75
+	.NpcID:PutridPiranha_02 $NpcSettings_80243014 ~Vec3f:NPC_PutridPiranha_02 % 250 120 -75
 	00000400 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:1:4
-	~Movement:NPC_80243580
-	~AnimationTable:NPC_80243580 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_02
+	~AnimationTable:NPC_PutridPiranha_02 % .Sprite:PutridPiranha
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80243580[1F0]
-	00000003 $NpcSettings_8024314C ~Vec3f:NPC_80243770 % 0 -1000 0
+	.NpcID:PutridPiranha_03 $NpcSettings_8024314C ~Vec3f:NPC_PutridPiranha_03 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243770
-	~AnimationTable:NPC_80243770 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_03
+	~AnimationTable:NPC_PutridPiranha_03 % .Sprite:PutridPiranha
 	00000000 00000000 $ExtraAnimationList_80243178 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243960
 {
-	00000004 $NpcSettings_80243014 ~Vec3f:NPC_80243960 % 400 120 -75
+	.NpcID:PutridPiranha_04 $NpcSettings_80243014 ~Vec3f:NPC_PutridPiranha_04 % 400 120 -75
 	00000400 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:1:4
-	~Movement:NPC_80243960
-	~AnimationTable:NPC_80243960 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_04
+	~AnimationTable:NPC_PutridPiranha_04 % .Sprite:PutridPiranha
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80243960[1F0]
-	00000005 $NpcSettings_8024314C ~Vec3f:NPC_80243B50 % 0 -1000 0
+	.NpcID:PutridPiranha_05 $NpcSettings_8024314C ~Vec3f:NPC_PutridPiranha_05 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243B50
-	~AnimationTable:NPC_80243B50 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_05
+	~AnimationTable:NPC_PutridPiranha_05 % .Sprite:PutridPiranha
 	00000000 00000000 $ExtraAnimationList_80243178 00000000 % no tattle string
 }
 

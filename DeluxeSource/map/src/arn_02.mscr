@@ -1,6 +1,10 @@
 % Script File: arn_02.mscr
 % Decoded from: 0 to 1BE0 (arn_02)
 
+#define .NpcID:Cleft_00             00
+#define .NpcID:Cleft_01             01
+#define .NpcID:Goomba_02            02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -489,7 +493,7 @@
    A8:  LW        A2, 3C (S0)
    AC:  LW        A1, 38 (S0)
    B0:  MFC1      A3, F2
-   B4:  JAL       ~Func:fx_walk_normal
+   B4:  JAL       ~Func:fx_walk
    B8:  LI        A0, 2
         .oBC
    BC:  LHU       V0, 8E (S0)
@@ -1170,8 +1174,8 @@ PADDING: 802410E8 to 802410F0 (000010E8 to 000010F0)
 {
     0:  Set   *GB_WorldLocation  .Location:GustyGulch
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80241A9C )
    84:  ExecWait  $Script_MakeEntities
@@ -1260,31 +1264,31 @@ PADDING: 802412C4 to 802412D0 (000012C4 to 000012D0)
 
 #new:NpcGroup $NpcGroup_802414CC
 {
-	00000000 $NpcSettings_802414A0 ~Vec3f:NPC_802414CC % -196 130 104
+	.NpcID:Cleft_00 $NpcSettings_802414A0 ~Vec3f:NPC_Cleft_00 % -196 130 104
 	00000400 00000000 00000000 00000000 0000005A
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:3
-	~Movement:NPC_802414CC
-	~AnimationTable:NPC_802414CC % .Sprite:Cleft
+	~Movement:NPC_Cleft_00
+	~AnimationTable:NPC_Cleft_00 % .Sprite:Cleft
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802416BC
 {
-	00000001 $NpcSettings_802414A0 ~Vec3f:NPC_802416BC % 641 268 202
+	.NpcID:Cleft_01 $NpcSettings_802414A0 ~Vec3f:NPC_Cleft_01 % 641 268 202
 	00000400 00000000 00000000 00000000 0000005A
 	~NoItems ~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:3
-	~Movement:NPC_802416BC
-	~AnimationTable:NPC_802416BC % .Sprite:Cleft
+	~Movement:NPC_Cleft_01
+	~AnimationTable:NPC_Cleft_01 % .Sprite:Cleft
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802418AC
 {
-	00000002 $NpcSettings_80241420 ~Vec3f:NPC_802418AC % 333 215 85
+	.NpcID:Goomba_02 $NpcSettings_80241420 ~Vec3f:NPC_Goomba_02 % 333 215 85
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:20:DriedShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_802418AC
-	~AnimationTable:NPC_802418AC % .Sprite:Goomba
+	~Movement:NPC_Goomba_02
+	~AnimationTable:NPC_Goomba_02 % .Sprite:Goomba
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 

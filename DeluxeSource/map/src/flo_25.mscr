@@ -1,6 +1,10 @@
 % Script File: flo_25.mscr
 % Decoded from: 0 to 4FA0 (flo_25)
 
+#define .NpcID:GateFlower_00        00
+#define .NpcID:TuffPuff_01          01
+#define .NpcID:Bzzap_02             02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -10,7 +14,7 @@
    10:  COPY      A3, A0
    14:  SW        RA, 18 (SP)
    18:  SW        R0, 10 (SP)
-   1C:  JAL       80072950
+   1C:  JAL       ~Func:playFX_82
    20:  SW        R0, 14 (SP)
    24:  LW        RA, 18 (SP)
    28:  LI        V0, 2
@@ -2480,8 +2484,8 @@ PADDING: 802422C4 to 802422D0 (000022C4 to 000022D0)
     0:  Set   *GB_WorldLocation  .Location:FlowerFields
    10:  Call  SetSpriteShading  ( .Shading:None )
    20:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   34:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   54:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   34:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   54:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80243C5C )
    98:  ExecWait  $Script_MakeEntities
@@ -2633,7 +2637,7 @@ PADDING: 802422C4 to 802422D0 (000022C4 to 000022D0)
    20:  	Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
    3C:  	Call  UseSettingsFrom       ( .Cam:Default *Var0 *Var1 *Var2 )
    58:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
-   74:  	Call  SetCamDistance        ( .Cam:Default 0000015E )
+   74:  	Call  SetCamDistance        ( .Cam:Default  350` )
    88:  	Call  SetCamPitch   ( .Cam:Default *Fixed[18.5] *Fixed[-7.5] )
    A0:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
    B4:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2780,32 +2784,32 @@ PADDING: 802422C4 to 802422D0 (000022C4 to 000022D0)
 
 #new:NpcGroup $NpcGroup_8024368C
 {
-	00000000 $NpcSettings_802428F0 ~Vec3f:NPC_8024368C % 505 0 -25
+	.NpcID:GateFlower_00 $NpcSettings_802428F0 ~Vec3f:NPC_GateFlower_00 % 505 0 -25
 	00402D09 $Script_Init_80243564 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024368C
-	~AnimationTable:NPC_8024368C % .Sprite:GateFlower
+	~Movement:NPC_GateFlower_00
+	~AnimationTable:NPC_GateFlower_00 % .Sprite:GateFlower
 	00000000 00000000 00000000 001A00DA % It's a red flower that guards a gate. Red is a pas ...
 }
 
 #new:NpcGroup $NpcGroup_8024387C
 {
-	00000001 $NpcSettings_802429D4 ~Vec3f:NPC_8024387C % -200 45 0
+	.NpcID:TuffPuff_01 $NpcSettings_802429D4 ~Vec3f:NPC_TuffPuff_01 % -200 45 0
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:10:ThunderRage:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_8024387C
-	~AnimationTable:NPC_8024387C % .Sprite:TuffPuff
+	~Movement:NPC_TuffPuff_01
+	~AnimationTable:NPC_TuffPuff_01 % .Sprite:TuffPuff
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243A6C
 {
-	00000002 $NpcSettings_80242AA0 ~Vec3f:NPC_80243A6C % 150 55 0
+	.NpcID:Bzzap_02 $NpcSettings_80242AA0 ~Vec3f:NPC_Bzzap_02 % 150 55 0
 	00000400 00000000 00000000 00000000 0000005A
 	~Items:15:MapleSyrup:6:HoneySyrup:4
 	~HP:Standard:3 ~FP:Standard:2 ~CoinBonus:1:4
-	~Movement:NPC_80243A6C
-	~AnimationTable:NPC_80243A6C % .Sprite:Bzzap
+	~Movement:NPC_Bzzap_02
+	~AnimationTable:NPC_Bzzap_02 % .Sprite:Bzzap
 	00000003 00000000 00000000 00000000 % no tattle string
 }
 

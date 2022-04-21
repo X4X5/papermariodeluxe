@@ -1,6 +1,14 @@
 % Script File: sam_08.mscr
 % Decoded from: 0 to 6670 (sam_08)
 
+#define .NpcID:WorldKooper_00       00
+#define .NpcID:WorldKooper_01       01
+#define .NpcID:Duplighost_02        02
+#define .NpcID:WorldKooper_03       03
+#define .NpcID:WorldKooper_04       04
+#define .NpcID:WorldClubba_05       05
+#define .NpcID:WorldClubba_06       06
+
 #new:Function $Function_80240000
 {
     0:  LA        V1, 8009A650
@@ -301,7 +309,7 @@
     8:  LW        V0, C (A0)
     C:  JAL       ~Func:get_variable
    10:  LW        A1, 0 (V0)
-   14:  JAL       800EB168
+   14:  JAL       ~Func:switch_to_partner
    18:  COPY      A0, V0
    1C:  LW        RA, 10 (SP)
    20:  LI        V0, 2
@@ -347,7 +355,7 @@
    54:  LW        A1, 48 (V0)
    58:  LW        A3, 50 (V0)
    5C:  MFC1      A2, F4
-   60:  JAL       80071750
+   60:  JAL       ~Func:playFX_52
    64:  CLEAR     A0
    68:  COPY      A0, S1
    6C:  COPY      A1, S0
@@ -397,7 +405,7 @@
    40:  LW        A1, 48 (V0)
    44:  LW        A3, 50 (V0)
    48:  MFC1      A2, F2
-   4C:  JAL       80070BB0
+   4C:  JAL       ~Func:playFX_33
    50:  LI        A0, 4
    54:  LW        RA, 18 (SP)
    58:  LI        V0, 2
@@ -421,7 +429,7 @@
    34:  LW        A1, 38 (V0)
    38:  LW        A3, 40 (V0)
    3C:  MFC1      A2, F4
-   40:  JAL       80070BB0
+   40:  JAL       ~Func:playFX_33
    44:  LI        A0, 9
    48:  LW        RA, 18 (SP)
    4C:  LI        V0, 2
@@ -489,7 +497,7 @@
    EC:  LW        A1, 48 (V0)
    F0:  LW        A3, 50 (V0)
    F4:  MFC1      A2, F0
-   F8:  JAL       800716F0
+   F8:  JAL       ~Func:playFX_51
    FC:  ADDIU     S1, S1, 1
   100:  SW        V0, 8 (S0)
   104:  SWC1      F20, 2C (S0)
@@ -799,7 +807,7 @@
    4C:  COPY      A3, A1
    50:  SW        V0, 88 (S1)
    54:  SW        R0, 70 (S1)
-   58:  JAL       ~Func:set_transition_stencil_color
+   58:  JAL       ~Func:set_screen_overlay_color
    5C:  SW        R0, 74 (S1)
         .o60
    60:  LW        V1, 70 (S1)
@@ -856,7 +864,7 @@
   110:  LWC1      F0, 74 (S1)
   114:  CVT.S.W   F0, F0
   118:  MFC1      A1, F0
-  11C:  JAL       ~Func:set_transition_stencil_zoom_0
+  11C:  JAL       ~Func:set_screen_overlay_params_front
   120:  LI        A0, 1
   124:  COPY      V0, S2
   128:  LW        RA, 1C (SP)
@@ -880,7 +888,7 @@
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 2
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -901,7 +909,7 @@
    24:  LW        A1, 38 (V0)
    28:  LW        A3, 40 (V0)
    2C:  MFC1      A2, F2
-   30:  JAL       8006FEF0
+   30:  JAL       ~Func:playFX_11
    34:  LI        A0, 4
    38:  LW        RA, 18 (SP)
    3C:  LI        V0, 2
@@ -1573,7 +1581,7 @@ PADDING: 80240D38 to 80240D40 (00000D38 to 00000D40)
    64:  MFC1      A2, F0
    68:  MTC1      S0, F14
    6C:  NOP
-   70:  JAL       8006F8F0
+   70:  JAL       ~Func:playFX_01
    74:  CVT.S.W   F14, F14
    78:  LW        RA, 1C (SP)
    7C:  LW        S2, 18 (SP)
@@ -1717,8 +1725,8 @@ PADDING: 8024183C to 80241840 (0000183C to 00001840)
 {
     0:  Set   *GB_WorldLocation  .Location:ShiverMountain
    10:  Call  SetSpriteShading      ( .Shading:None )
-   20:  Call  SetCamPerspective     ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective     ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80243924 )
    84:  ExecWait  $Script_MakeEntities
@@ -1815,7 +1823,7 @@ PADDING: 8024183C to 80241840 (0000183C to 00001840)
    E8:  Call  FindKeyItem   ( .Item:UltraStone *VarC )
    FC:  Call  $Function_80240120 ( )
   108:  If  *Var0  ==  FFFFFFFF
-  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC 000000A0 00000028 ) % You have no member you can upgrade now.
+  118:  	Call  ShowMessageAtScreenPos    ( 001D00DC  160`  40` ) % You have no member you can upgrade now.
   130:  	Wait  10`
   13C:  	Call  $Function_80240510        ( *Var9 )
   14C:  	Call  DisablePlayerInput        ( .False )
@@ -1826,9 +1834,9 @@ PADDING: 8024183C to 80241840 (0000183C to 00001840)
   190:  EndIf
   198:  If  *GF_Tutorial_SuperBlock  ==  .False
   1A8:  	Set   *GF_Tutorial_SuperBlock  .True
-  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA 000000A0 00000028 ) % This is a Super Block. With this, you can upgrade  ...
+  1B8:  	Call  ShowMessageAtScreenPos    ( 001D00DA  160`  40` ) % This is a Super Block. With this, you can upgrade  ...
   1D0:  Else
-  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB 000000A0 00000028 ) % With this, you can upgrade one of your party membe ...
+  1D8:  	Call  ShowMessageAtScreenPos    ( 001D00DB  160`  40` ) % With this, you can upgrade one of your party membe ...
   1F0:  EndIf
   1F8:  Call  $Function_802401CC ( )
   204:  If  *Var0  ==  FFFFFFFF
@@ -1849,7 +1857,7 @@ PADDING: 8024183C to 80241840 (0000183C to 00001840)
   2D4:  	Call  802CF56C  ( 00000002 )
   2E4:  EndIf
   2EC:  Wait  10`
-  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF 000000A0 00000028 ) % Do you want to upgrade this member?
+  2F8:  Call  ShowMessageAtScreenPos    ( 001D00DF  160`  40` ) % Do you want to upgrade this member?
   310:  Call  ShowChoice    ( 001E000D ) % Yes No
   320:  Call  CloseMessage ( )
   32C:  If  *Var0  !=  00000000
@@ -1866,9 +1874,9 @@ PADDING: 8024183C to 80241840 (0000183C to 00001840)
   3C8:  Call  $Function_80240510    ( *Var9 )
   3D8:  Call  $Function_80240448 ( )
   3E4:  If  *VarD  ==  00000001
-  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD 000000A0 00000028 ) % is upgraded to Super-rank!
+  3F4:  	Call  ShowMessageAtScreenPos    ( 001D00DD  160`  40` ) % is upgraded to Super-rank!
   40C:  Else
-  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE 000000A0 00000028 ) % is upgraded to Ultra-rank!
+  414:  	Call  ShowMessageAtScreenPos    ( 001D00DE  160`  40` ) % is upgraded to Ultra-rank!
   42C:  EndIf
   434:  Call  DisablePlayerInput        ( .False )
   444:  Call  EnablePartnerAI ( )
@@ -1915,7 +1923,7 @@ PADDING: 802421FC to 80242200 (000021FC to 00002200)
    1C:  	Case  ==  .Outcome:PlayerWon % 0
    28:  		Call  RemoveNpc ( .Npc:Self )
    38:  	Case  ==  .Outcome:PlayerFled % 2
-   44:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   44:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    60:  		Call  80045900  ( 00000001 )
    70:  	Case  ==  .Outcome:EnemyFled % 3
    7C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -2041,29 +2049,29 @@ MISSING: 80242314 to 8024233C (00002314 to 0000233C)
     0:  Call  GetBattleOutcome  ( *Var0 )
    10:  Switch  *Var0
    1C:  	Case  ==  .Outcome:PlayerWon % 0
-   28:  		Call  SetNpcFlagBits    ( 00000002 00000100 .True )
-   40:  		Call  SetNpcSpeed       ( 00000002 *Fixed[3.0] )
-   54:  		Call  SetNpcJumpscale   ( 00000002 *Fixed[1.5] )
-   68:  		Call  SetNpcAnimation   ( 00000002 004E0004 )
-   7C:  		Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+   28:  		Call  SetNpcFlagBits    ( .NpcID:Duplighost_02 00000100 .True )
+   40:  		Call  SetNpcSpeed       ( .NpcID:Duplighost_02 *Fixed[3.0] )
+   54:  		Call  SetNpcJumpscale   ( .NpcID:Duplighost_02 *Fixed[1.5] )
+   68:  		Call  SetNpcAnimation   ( .NpcID:Duplighost_02 004E0004 )
+   7C:  		Call  GetNpcPos ( .NpcID:Duplighost_02 *Var0 *Var1 *Var2 )
    98:  		Add   *Var0  00000032
-   A8:  		Call  PlaySoundAtNpc    ( 00000002 000002CA 00000000 )
-   C0:  		Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 0000000D )
-   E0:  		Call  InterpPlayerYaw   ( 0000005A 00000000 )
-   F4:  		Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+   A8:  		Call  PlaySoundAtNpc    ( .NpcID:Duplighost_02 000002CA 00000000 )
+   C0:  		Call  NpcJump0  ( .NpcID:Duplighost_02 *Var0 *Var1 *Var2  13` )
+   E0:  		Call  InterpPlayerYaw   (  90`  0` )
+   F4:  		Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
   10C:  		Add   *Var0  00000032
-  11C:  		Call  PlaySoundAtNpc    ( 00000002 000002CA 00000000 )
-  134:  		Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 0000000D )
+  11C:  		Call  PlaySoundAtNpc    ( .NpcID:Duplighost_02 000002CA 00000000 )
+  134:  		Call  NpcJump0  ( .NpcID:Duplighost_02 *Var0 *Var1 *Var2  13` )
   154:  		Add   *Var0  00000032
-  164:  		Call  PlaySoundAtNpc    ( 00000002 000002CA 00000000 )
-  17C:  		Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 0000000D )
+  164:  		Call  PlaySoundAtNpc    ( .NpcID:Duplighost_02 000002CA 00000000 )
+  17C:  		Call  NpcJump0  ( .NpcID:Duplighost_02 *Var0 *Var1 *Var2  13` )
   19C:  		Set   *GB_StoryProgress  .Story:Ch7_DefeatedFirstDuplighost
   1AC:  		Call  SetPlayerFlagBits ( 000000C0 .False )
   1C0:  		Call  ModifyColliderFlags   ( 00000000 ~Collider:o47 7FFFFE00 )
   1D8:  		Call  DisablePlayerInput    ( .False )
   1E8:  		Add   *Var0  00000032
-  1F8:  		Call  PlaySoundAtNpc    ( 00000002 000002CA 00000000 )
-  210:  		Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 00000014 )
+  1F8:  		Call  PlaySoundAtNpc    ( .NpcID:Duplighost_02 000002CA 00000000 )
+  210:  		Call  NpcJump0  ( .NpcID:Duplighost_02 *Var0 *Var1 *Var2  20` )
   230:  	Case  ==  .Outcome:PlayerLost % 1
   23C:  	Case  ==  .Outcome:PlayerFled % 2
   248:  EndSwitch
@@ -2104,34 +2112,34 @@ MISSING: 80242314 to 8024233C (00002314 to 0000233C)
 
 #new:NpcGroup $NpcGroup_802429A4
 {
-	00000000 $NpcSettings_80242200 ~Vec3f:NPC_802429A4 % 0 -1000 0
+	.NpcID:WorldKooper_00 $NpcSettings_80242200 ~Vec3f:NPC_WorldKooper_00 % 0 -1000 0
 	00C40D09 $Script_Init_802428AC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802429A4
-	~AnimationTable:NPC_802429A4 % .Sprite:WorldKooper
+	~Movement:NPC_WorldKooper_00
+	~AnimationTable:NPC_WorldKooper_00 % .Sprite:WorldKooper
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802429A4[1F0]
-	00000001 $NpcSettings_80242200 ~Vec3f:NPC_80242B94 % 0 -1000 0
+	.NpcID:WorldKooper_01 $NpcSettings_80242200 ~Vec3f:NPC_WorldKooper_01 % 0 -1000 0
 	00C40D09 $Script_Init_802428F8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80242B94
-	~AnimationTable:NPC_80242B94 % .Sprite:WorldKooper
+	~Movement:NPC_WorldKooper_01
+	~AnimationTable:NPC_WorldKooper_01 % .Sprite:WorldKooper
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802429A4[3E0]
-	00000002 $NpcSettings_8024222C ~Vec3f:NPC_80242D84 % 0 -1000 0
+	.NpcID:Duplighost_02 $NpcSettings_8024222C ~Vec3f:NPC_Duplighost_02 % 0 -1000 0
 	00C40D09 $Script_Init_80242944 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80242D84
-	~AnimationTable:NPC_80242D84 % .Sprite:Duplighost
+	~Movement:NPC_Duplighost_02
+	~AnimationTable:NPC_Duplighost_02 % .Sprite:Duplighost
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:Script $Script_Idle_80242F74
 {
     0:  Loop
-    C:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
    28:  	Call  SetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    44:  	Wait  1`
    50:  EndLoop
@@ -2155,7 +2163,7 @@ MISSING: 80242314 to 8024233C (00002314 to 0000233C)
 #new:Script $Script_Idle_8024306C
 {
     0:  Loop
-    C:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+    C:  	Call  GetNpcPos ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2 )
    28:  	Call  SetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    44:  	Wait  1`
    50:  EndLoop
@@ -2178,37 +2186,37 @@ MISSING: 80242314 to 8024233C (00002314 to 0000233C)
 
 #new:NpcGroup $NpcGroup_80243164
 {
-	00000003 $NpcSettings_80242200 ~Vec3f:NPC_80243164 % 0 -1000 0
+	.NpcID:WorldKooper_03 $NpcSettings_80242200 ~Vec3f:NPC_WorldKooper_03 % 0 -1000 0
 	03F44D0D $Script_Init_80242FDC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243164
-	~AnimationTable:NPC_80243164 % .Sprite:WorldKooper
+	~Movement:NPC_WorldKooper_03
+	~AnimationTable:NPC_WorldKooper_03 % .Sprite:WorldKooper
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80243164[1F0]
-	00000004 $NpcSettings_80242200 ~Vec3f:NPC_80243354 % 0 -1000 0
+	.NpcID:WorldKooper_04 $NpcSettings_80242200 ~Vec3f:NPC_WorldKooper_04 % 0 -1000 0
 	03F44D0D $Script_Init_802430D4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243354
-	~AnimationTable:NPC_80243354 % .Sprite:WorldKooper
+	~Movement:NPC_WorldKooper_04
+	~AnimationTable:NPC_WorldKooper_04 % .Sprite:WorldKooper
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80243544
 {
-	00000005 $NpcSettings_802423E4 ~Vec3f:NPC_80243544 % -450 0 -90
+	.NpcID:WorldClubba_05 $NpcSettings_802423E4 ~Vec3f:NPC_WorldClubba_05 % -450 0 -90
 	00002D00 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:3
-	~Movement:NPC_80243544
-	~AnimationTable:NPC_80243544 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_05
+	~AnimationTable:NPC_WorldClubba_05 % .Sprite:WorldClubba
 	00000003 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80243544[1F0]
-	00000006 $NpcSettings_802424B8 ~Vec3f:NPC_80243734 % 0 -1000 0
+	.NpcID:WorldClubba_06 $NpcSettings_802424B8 ~Vec3f:NPC_WorldClubba_06 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243734
-	~AnimationTable:NPC_80243734 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_06
+	~AnimationTable:NPC_WorldClubba_06 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_8024233C 00000000 % no tattle string
 }
 
@@ -2225,10 +2233,10 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
 
 #new:Script $Script_80243960
 {
-    0:  Call  PlaySoundAtNpc    ( 00000000 8000006C 00000000 )
+    0:  Call  PlaySoundAtNpc    ( .NpcID:WorldKooper_00 8000006C 00000000 )
    18:  Loop
    24:  	Call  $Function_8024174C    ( 00000050 0000000A )
-   38:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+   38:  	Call  GetNpcPos ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
    54:  	Add   *Var2  00000003
    64:  	Call  $Function_80241610    ( *Var0 *Var1 *Var2 )
    7C:  	Call  $Function_802416A4    ( *Var0 *Var1 *Var2 )
@@ -2257,75 +2265,75 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
    FC:  	EndIf
   104:  EndThread
   10C:  Call  SetNpcFlagBits    ( .Npc:Partner 00000002 .True )
-  124:  Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-  13C:  Call  SetNpcFlagBits    ( 00000001 00000100 .True )
+  124:  Call  SetNpcFlagBits    ( .NpcID:WorldKooper_00 00000100 .True )
+  13C:  Call  SetNpcFlagBits    ( .NpcID:WorldKooper_01 00000100 .True )
   154:  Call  EnableNpcShadow   ( .Npc:Partner .False )
   168:  Call  GetNpcPos ( .Npc:Partner *Var2 *Var3 *Var4 )
   184:  Call  GetPlayerPos      ( *Var5 *Var6 *Var7 )
   19C:  Thread
-  1A4:  	Call  SetNpcPos ( 00000000 *Var2 *Var3 *Var4 )
+  1A4:  	Call  SetNpcPos ( .NpcID:WorldKooper_00 *Var2 *Var3 *Var4 )
   1C0:  	Sub   *Var5  0000001E
   1D0:  	Call  MakeLerp  ( *Var2 *Var5 00000014 .Easing:QuadraticOut )
   1EC:  	Label  1
   1F8:  	Call  UpdateLerp ( )
-  204:  	Call  SetNpcPos ( 00000000 *Var0 *Var3 *Var4 )
+  204:  	Call  SetNpcPos ( .NpcID:WorldKooper_00 *Var0 *Var3 *Var4 )
   220:  	Wait  1`
   22C:  	If  *Var1  ==  00000001
   23C:  		Goto  1
   248:  	EndIf
   250:  EndThread
-  258:  Call  SetNpcPos ( 00000001 *Var2 *Var3 *Var4 )
+  258:  Call  SetNpcPos ( .NpcID:WorldKooper_01 *Var2 *Var3 *Var4 )
   274:  Sub   *Var5  0000003C
   284:  Call  MakeLerp  ( *Var2 *Var5 00000014 .Easing:QuadraticOut )
   2A0:  Label  2
   2AC:  Call  UpdateLerp ( )
-  2B8:  Call  SetNpcPos ( 00000001 *Var0 *Var3 *Var4 )
+  2B8:  Call  SetNpcPos ( .NpcID:WorldKooper_01 *Var0 *Var3 *Var4 )
   2D4:  Wait  1`
   2E0:  If  *Var1  ==  00000001
   2F0:  	Goto  2
   2FC:  EndIf
-  304:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  304:  Call  InterpPlayerYaw   (  270`  0` )
   318:  Wait  70`
   324:  Call  DisablePartnerAI  ( 00000000 )
-  334:  Call  SetNpcPos ( .Npc:Partner 00000000 FFFFFC18 00000000 )
+  334:  Call  SetNpcPos ( .Npc:Partner  0`  -1000`  0` )
   350:  Call  SetNpcFlagBits    ( .Npc:Partner 00000004 .True )
-  368:  Call  SetNpcAnimation   ( 00000000 00020003 )
-  37C:  Call  SetNpcAnimation   ( 00000001 00020003 )
-  390:  Call  InterpNpcYaw      ( 00000000 0000010E 00000000 )
-  3A8:  Call  InterpNpcYaw      ( 00000001 0000005A 00000000 )
+  368:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 00020003 )
+  37C:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_01 00020003 )
+  390:  Call  InterpNpcYaw      ( .NpcID:WorldKooper_00  270`  0` )
+  3A8:  Call  InterpNpcYaw      ( .NpcID:WorldKooper_01  90`  0` )
   3C0:  Wait  15`
-  3CC:  Call  PlaySoundAtNpc    ( 00000001 00000263 00000000 )
-  3E4:  Call  ShowEmote ( 00000001 .Emote:Question 0000002D 00000014 00000001 00000000 00000000 00000000 00000000 )
+  3CC:  Call  PlaySoundAtNpc    ( .NpcID:WorldKooper_01 00000263 00000000 )
+  3E4:  Call  ShowEmote ( .NpcID:WorldKooper_01 .Emote:Question  45`  20` .True  0`  0`  0`  0` )
   414:  Wait  15`
-  420:  Call  PlaySoundAtNpc    ( 00000000 00000263 00000000 )
-  438:  Call  ShowEmote ( 00000000 .Emote:Question 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+  420:  Call  PlaySoundAtNpc    ( .NpcID:WorldKooper_00 00000263 00000000 )
+  438:  Call  ShowEmote ( .NpcID:WorldKooper_00 .Emote:Question  0`  20` .True  0`  0`  0`  0` )
   468:  Wait  15`
   474:  Call  PlaySoundAtPlayer ( 00000263 00000000 )
-  488:  Call  ShowEmote ( 00000000 .Emote:Question FFFFFFD3 00000014 00000000 00000000 00000000 00000000 00000000 )
+  488:  Call  ShowEmote ( .NpcID:WorldKooper_00 .Emote:Question  -45`  20` .False  0`  0`  0`  0` )
   4B8:  Wait  15`
-  4C4:  Call  PlaySoundAtNpc    ( 00000001 00000263 00000000 )
-  4DC:  Call  ShowEmote ( 00000001 .Emote:Question 0000002D 00000014 00000001 00000000 00000000 00000000 00000000 )
+  4C4:  Call  PlaySoundAtNpc    ( .NpcID:WorldKooper_01 00000263 00000000 )
+  4DC:  Call  ShowEmote ( .NpcID:WorldKooper_01 .Emote:Question  45`  20` .True  0`  0`  0`  0` )
   50C:  Wait  15`
-  518:  Call  PlaySoundAtNpc    ( 00000000 00000263 00000000 )
-  530:  Call  ShowEmote ( 00000000 .Emote:Question 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
-  560:  Call  SpeakToPlayer     ( 00000000 00020003 00020003 00000005 0012011F ) % Mmm??
+  518:  Call  PlaySoundAtNpc    ( .NpcID:WorldKooper_00 00000263 00000000 )
+  530:  Call  ShowEmote ( .NpcID:WorldKooper_00 .Emote:Question  0`  20` .True  0`  0`  0`  0` )
+  560:  Call  SpeakToPlayer     ( .NpcID:WorldKooper_00 00020003 00020003 00000005 0012011F ) % Mmm??
   580:  Thread
-  588:  	Call  SetNpcAnimation   ( 00000000 00020006 )
-  59C:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  5B0:  	Call  NpcJump1  ( 00000000 FFFFFBDA FFFFFF88 FFFFFFDB 0000000F )
-  5D0:  	Call  SetNpcAnimation   ( 00000000 00020003 )
+  588:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 00020006 )
+  59C:  	Call  SetNpcJumpscale   ( .NpcID:WorldKooper_00 *Fixed[1.0] )
+  5B0:  	Call  NpcJump1  ( .NpcID:WorldKooper_00  -1062`  -120`  -37` 0000000F )
+  5D0:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 00020003 )
   5E4:  EndThread
   5EC:  Thread
-  5F4:  	Call  SetNpcAnimation   ( 00000001 00020006 )
-  608:  	Call  SetNpcJumpscale   ( 00000001 *Fixed[1.0] )
-  61C:  	Call  NpcJump1  ( 00000001 FFFFFB6C FFFFFF88 FFFFFFDB 0000000F )
-  63C:  	Call  SetNpcAnimation   ( 00000001 00020003 )
+  5F4:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_01 00020006 )
+  608:  	Call  SetNpcJumpscale   ( .NpcID:WorldKooper_01 *Fixed[1.0] )
+  61C:  	Call  NpcJump1  ( .NpcID:WorldKooper_01  -1172`  -120`  -37` 0000000F )
+  63C:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_01 00020003 )
   650:  EndThread
   658:  Wait  5`
-  664:  Call  ShowMessageAtScreenPos    ( 00120120 000000A0 00000028 ) % Nooo!!
+  664:  Call  ShowMessageAtScreenPos    ( 00120120  160`  40` ) % Nooo!!
   67C:  Wait  20`
   688:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-  69C:  Call  GetNpcPos     ( 00000000 *Var1 *Var2 *Var3 )
+  69C:  Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var1 *Var2 *Var3 )
   6B8:  Call  GetPlayerPos  ( *Var4 *Var5 *Var6 )
   6D0:  Add   *Var1  *Var4
   6E0:  Add   *Var2  *Var5
@@ -2340,9 +2348,9 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   794:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   7A8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   7C0:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  7D4:  Call  PlayerFaceNpc ( 00000000 00000000 )
-  7E8:  Call  SpeakToPlayer ( 00000000 0002000E 00020003 00000000 00120121 ) % What's wrong with my eyes? You look just like me!  ...
-  808:  Call  GetNpcPos     ( 00000001 *Var7 *Var8 *Var9 )
+  7D4:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+  7E8:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000E 00020003 00000000 00120121 ) % What's wrong with my eyes? You look just like me!  ...
+  808:  Call  GetNpcPos     ( .NpcID:WorldKooper_01 *Var7 *Var8 *Var9 )
   824:  Add   *Var7  *Var4
   834:  Add   *Var8  *Var5
   844:  Add   *Var9  *Var6
@@ -2352,28 +2360,28 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   884:  Call  SetPanTarget  ( .Cam:Default *Var7 *Var8 *Var9 )
   8A0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
   8B4:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  8C8:  Call  PlayerFaceNpc ( 00000001 00000000 )
-  8DC:  Call  SpeakToPlayer ( 00000001 0002000E 00020003 00000000 00120122 ) % I'm Kooper... Yeah, that's it. The question is, wh ...
+  8C8:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+  8DC:  Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000E 00020003 00000000 00120122 ) % I'm Kooper... Yeah, that's it. The question is, wh ...
   8FC:  Call  SetPanTarget  ( .Cam:Default *Var1 *Var2 *Var3 )
   918:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  92C:  Call  PlayerFaceNpc ( 00000000 00000000 )
-  940:  Call  SpeakToPlayer ( 00000000 0002000E 00020003 00000000 00120123 ) % Wha... Wha... Whaaat!? That's impossible! I'm the  ...
+  92C:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+  940:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000E 00020003 00000000 00120123 ) % Wha... Wha... Whaaat!? That's impossible! I'm the  ...
   960:  Call  SetPanTarget  ( .Cam:Default *Var7 *Var8 *Var9 )
   97C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  990:  Call  PlayerFaceNpc ( 00000001 00000000 )
-  9A4:  Call  SpeakToPlayer ( 00000001 0002000E 00020003 00000000 00120124 ) % You're talking crazy-talk now. You're making no se ...
+  990:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+  9A4:  Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000E 00020003 00000000 00120124 ) % You're talking crazy-talk now. You're making no se ...
   9C4:  Call  SetPanTarget  ( .Cam:Default *Var1 *Var2 *Var3 )
   9E0:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  9F4:  Call  PlayerFaceNpc ( 00000000 00000000 )
-  A08:  Call  SpeakToPlayer ( 00000000 0002000E 00020003 00000000 00120125 ) % I'm not lying! Mario...you know I'm Kooper, don't  ...
+  9F4:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+  A08:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000E 00020003 00000000 00120125 ) % I'm not lying! Mario...you know I'm Kooper, don't  ...
   A28:  Call  SetPanTarget  ( .Cam:Default *Var7 *Var8 *Var9 )
   A44:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  A58:  Call  PlayerFaceNpc ( 00000001 00000000 )
-  A6C:  Call  SpeakToPlayer ( 00000001 0002000E 00020003 00000000 00120126 ) % Shut your mouth, goody-goody! I'm his buddy! Yeah, ...
+  A58:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+  A6C:  Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000E 00020003 00000000 00120126 ) % Shut your mouth, goody-goody! I'm his buddy! Yeah, ...
   A8C:  Call  SetPanTarget  ( .Cam:Default *Var1 *Var2 *Var3 )
   AA8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  ABC:  Call  PlayerFaceNpc ( 00000000 00000000 )
-  AD0:  Call  SpeakToPlayer ( 00000000 0002000E 00020003 00000000 00120127 ) % Why you... You're the one who should shut his mout ...
+  ABC:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+  AD0:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000E 00020003 00000000 00120127 ) % Why you... You're the one who should shut his mout ...
   AF0:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   B08:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   B24:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -2381,12 +2389,12 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   B54:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   B68:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   B80:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  B94:  Call  PlayerFaceNpc ( 00000001 00000000 )
-  BA8:  Call  SpeakToPlayer ( 00000001 0002000E 00020003 00000000 00120128 ) % Listen, Moron...er, Mario, you have to decide who' ...
-  BC8:  Call  PlayerFaceNpc ( 00000000 00000000 )
-  BDC:  Call  SpeakToPlayer ( 00000000 0002000E 00020003 00000000 00120129 ) % Fine! Yeah, fine with me! If you think you'll get  ...
-  BFC:  Call  SetNpcFlagBits    ( 00000000 00000100 .False )
-  C14:  Call  SetNpcFlagBits    ( 00000001 00000100 .False )
+  B94:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+  BA8:  Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000E 00020003 00000000 00120128 ) % Listen, Moron...er, Mario, you have to decide who' ...
+  BC8:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+  BDC:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000E 00020003 00000000 00120129 ) % Fine! Yeah, fine with me! If you think you'll get  ...
+  BFC:  Call  SetNpcFlagBits    ( .NpcID:WorldKooper_00 00000100 .False )
+  C14:  Call  SetNpcFlagBits    ( .NpcID:WorldKooper_01 00000100 .False )
   C2C:  Call  DisablePlayerInput        ( .False )
   C3C:  Call  SetPlayerFlagBits ( 000000C0 .True )
   C50:  Unbind
@@ -2397,11 +2405,11 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
 #new:Script $Script_80244680
 {
     0:  Call  DisablePlayerInput    ( .True )
-   10:  Call  SetNpcAnimation   ( 00000000 0002000C )
+   10:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 0002000C )
    24:  Wait  20`
-   30:  Call  SetNpcAnimation   ( 00000000 00020003 )
-   44:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
-   60:  Call  GetNpcPos     ( 00000000 *Var3 *Var4 *Var5 )
+   30:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 00020003 )
+   44:  Call  GetNpcPos     ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2 )
+   60:  Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var3 *Var4 *Var5 )
    7C:  AddF  *Var0  *Var3
    8C:  AddF  *Var1  *Var4
    9C:  AddF  *Var2  *Var5
@@ -2424,8 +2432,8 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   1D0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[3.0] )
   1E4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1FC:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  210:  Call  SpeakToPlayer ( 00000000 0002000F 00020002 00000000 0012012C ) % Ow! Unbelievable! You don't even recognize me?
-  230:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+  210:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000F 00020002 00000000 0012012C ) % Ow! Unbelievable! You don't even recognize me?
+  230:  Call  GetNpcPos     ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2 )
   24C:  SetF  *Var3  *Var6
   25C:  SetF  *Var4  *Var7
   26C:  SetF  *Var5  *Var8
@@ -2438,9 +2446,9 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   2DC:  Call  SetPanTarget  ( .Cam:Default *Var3 *Var4 *Var5 )
   2F8:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
   30C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  320:  Call  PlayerFaceNpc ( 00000001 00000000 )
-  334:  Call  SpeakToPlayer ( 00000001 00020011 00020003 00000000 0012012D ) % Baaa ha ha ha ha! You simpleton, Mario! I complete ...
-  354:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  320:  Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+  334:  Call  SpeakToPlayer ( .NpcID:WorldKooper_01 00020011 00020003 00000000 0012012D ) % Baaa ha ha ha ha! You simpleton, Mario! I complete ...
+  354:  Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   370:  SetF  *Var3  *Var6
   380:  SetF  *Var4  *Var7
   390:  SetF  *Var5  *Var8
@@ -2453,8 +2461,8 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   400:  Call  SetPanTarget  ( .Cam:Default *Var3 *Var4 *Var5 )
   41C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   430:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  444:  Call  SpeakToPlayer ( 00000000 0002000F 00020002 00000000 0012012E ) % You deceitful monster! How dare you try to trick M ...
-  464:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+  444:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000F 00020002 00000000 0012012E ) % You deceitful monster! How dare you try to trick M ...
+  464:  Call  GetNpcPos     ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2 )
   480:  SetF  *Var3  *Var6
   490:  SetF  *Var4  *Var7
   4A0:  SetF  *Var5  *Var8
@@ -2467,21 +2475,21 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   510:  Call  SetPanTarget  ( .Cam:Default *Var3 *Var4 *Var5 )
   52C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
   540:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  554:  Call  SpeakToPlayer ( 00000001 0002000E 00020003 00000000 0012012F ) % What're you gonna do about it?
-  574:  Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-  58C:  Call  SetNpcFlagBits    ( 00000001 00000100 .True )
-  5A4:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
-  5C0:  Call  GetNpcPos     ( 00000001 *Var3 *Var4 *Var5 )
-  5DC:  Call  GetAngleBetweenNPCs   ( 00000000 00000001 *Var9 )
+  554:  Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000E 00020003 00000000 0012012F ) % What're you gonna do about it?
+  574:  Call  SetNpcFlagBits    ( .NpcID:WorldKooper_00 00000100 .True )
+  58C:  Call  SetNpcFlagBits    ( .NpcID:WorldKooper_01 00000100 .True )
+  5A4:  Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
+  5C0:  Call  GetNpcPos     ( .NpcID:WorldKooper_01 *Var3 *Var4 *Var5 )
+  5DC:  Call  GetAngleBetweenNPCs   ( .NpcID:WorldKooper_00 .NpcID:WorldKooper_01 *Var9 )
   5F4:  Call  GetDist2D     ( *VarA *Var0 *Var2 *Var3 *Var5 )
   614:  MulF  *VarA  *Fixed[0.6]
   624:  Call  AddVectorPolar    ( *Var0 *Var2 *VarA *Var9 )
-  640:  Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  654:  Call  SetNpcAnimation   ( 00000000 00020006 )
-  668:  Call  NpcJump0      ( 00000000 *Var0 *Var1 *Var2 00000014 )
-  688:  Call  NpcJump0      ( 00000000 *Var3 *Var4 *Var5 0000000A )
+  640:  Call  SetNpcJumpscale   ( .NpcID:WorldKooper_00 *Fixed[1.0] )
+  654:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 00020006 )
+  668:  Call  NpcJump0      ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2  20` )
+  688:  Call  NpcJump0      ( .NpcID:WorldKooper_00 *Var3 *Var4 *Var5  10` )
   6A8:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  6BC:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  6BC:  Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   6D8:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   6F4:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   710:  Call  SetCamDistance    ( .Cam:Default *Fixed[400.0] )
@@ -2491,19 +2499,19 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   764:  Exec  $Script_80243960 *MapVar[0]
   774:  Thread
   77C:  	Call  SetPlayerSpeed    ( *Fixed[3.0] )
-  78C:  	Call  PlayerMoveTo      ( *Var6 *Var8 00000000 )
+  78C:  	Call  PlayerMoveTo      ( *Var6 *Var8  0` )
   7A4:  EndThread
-  7AC:  Call  SetNpcAnimation   ( 00000000 00020005 )
-  7C0:  Call  SetNpcAnimation   ( 00000001 00020005 )
-  7D4:  Call  PlayerFaceNpc     ( 00000000 00000000 )
+  7AC:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 00020005 )
+  7C0:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_01 00020005 )
+  7D4:  Call  PlayerFaceNpc     ( .NpcID:WorldKooper_00 .False )
   7E8:  Loop  00000003
-  7F4:  	Call  GetNpcYaw     ( 00000000 *Var0 )
+  7F4:  	Call  GetNpcYaw     ( .NpcID:WorldKooper_00 *Var0 )
   808:  	Add   *Var0  000000B4
-  818:  	Call  InterpNpcYaw  ( 00000000 *Var0 00000000 )
-  830:  	Call  GetNpcYaw     ( 00000001 *Var0 )
+  818:  	Call  InterpNpcYaw  ( .NpcID:WorldKooper_00 *Var0  0` )
+  830:  	Call  GetNpcYaw     ( .NpcID:WorldKooper_01 *Var0 )
   844:  	Add   *Var0  000000B4
-  854:  	Call  InterpNpcYaw  ( 00000001 *Var0 00000000 )
-  86C:  	Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  854:  	Call  InterpNpcYaw  ( .NpcID:WorldKooper_01 *Var0  0` )
+  86C:  	Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   888:  	Add   *Var2  00000003
   898:  	Call  $Function_80241610    ( *Var0 *Var1 *Var2 )
   8B0:  	Wait  5`
@@ -2514,20 +2522,20 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   908:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   91C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   934:  Thread
-  93C:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  950:  	Call  NpcJump1  ( 00000000 *Var0 *Var1 *Var2 00000014 )
+  93C:  	Call  SetNpcJumpscale   ( .NpcID:WorldKooper_00 *Fixed[1.0] )
+  950:  	Call  NpcJump1  ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 00000014 )
   970:  EndThread
-  978:  Call  SetNpcJumpscale   ( 00000001 *Fixed[1.0] )
-  98C:  Call  NpcJump1  ( 00000001 *Var0 *Var1 *Var2 00000014 )
-  9AC:  Call  PlayerFaceNpc     ( 00000000 00000000 )
+  978:  Call  SetNpcJumpscale   ( .NpcID:WorldKooper_01 *Fixed[1.0] )
+  98C:  Call  NpcJump1  ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2 00000014 )
+  9AC:  Call  PlayerFaceNpc     ( .NpcID:WorldKooper_00 .False )
   9C0:  Loop  00000003
-  9CC:  	Call  GetNpcYaw     ( 00000000 *Var0 )
+  9CC:  	Call  GetNpcYaw     ( .NpcID:WorldKooper_00 *Var0 )
   9E0:  	Add   *Var0  000000B4
-  9F0:  	Call  InterpNpcYaw  ( 00000000 *Var0 00000000 )
-  A08:  	Call  GetNpcYaw     ( 00000001 *Var0 )
+  9F0:  	Call  InterpNpcYaw  ( .NpcID:WorldKooper_00 *Var0  0` )
+  A08:  	Call  GetNpcYaw     ( .NpcID:WorldKooper_01 *Var0 )
   A1C:  	Add   *Var0  000000B4
-  A2C:  	Call  InterpNpcYaw  ( 00000001 *Var0 00000000 )
-  A44:  	Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  A2C:  	Call  InterpNpcYaw  ( .NpcID:WorldKooper_01 *Var0  0` )
+  A44:  	Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   A60:  	Add   *Var2  00000003
   A70:  	Call  $Function_80241610    ( *Var0 *Var1 *Var2 )
   A88:  	Wait  5`
@@ -2538,20 +2546,20 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   AE0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   AF4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   B0C:  Thread
-  B14:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[0.0] )
-  B28:  	Call  NpcJump1  ( 00000000 *Var0 *Var1 *Var2 00000014 )
+  B14:  	Call  SetNpcJumpscale   ( .NpcID:WorldKooper_00 *Fixed[0.0] )
+  B28:  	Call  NpcJump1  ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 00000014 )
   B48:  EndThread
-  B50:  Call  SetNpcJumpscale   ( 00000001 *Fixed[0.0] )
-  B64:  Call  NpcJump1  ( 00000001 *Var0 *Var1 *Var2 00000014 )
-  B84:  Call  PlayerFaceNpc     ( 00000000 00000000 )
+  B50:  Call  SetNpcJumpscale   ( .NpcID:WorldKooper_01 *Fixed[0.0] )
+  B64:  Call  NpcJump1  ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2 00000014 )
+  B84:  Call  PlayerFaceNpc     ( .NpcID:WorldKooper_00 .False )
   B98:  Loop  00000005
-  BA4:  	Call  GetNpcYaw     ( 00000000 *Var0 )
+  BA4:  	Call  GetNpcYaw     ( .NpcID:WorldKooper_00 *Var0 )
   BB8:  	Add   *Var0  000000B4
-  BC8:  	Call  InterpNpcYaw  ( 00000000 *Var0 00000000 )
-  BE0:  	Call  GetNpcYaw     ( 00000001 *Var0 )
+  BC8:  	Call  InterpNpcYaw  ( .NpcID:WorldKooper_00 *Var0  0` )
+  BE0:  	Call  GetNpcYaw     ( .NpcID:WorldKooper_01 *Var0 )
   BF4:  	Add   *Var0  000000B4
-  C04:  	Call  InterpNpcYaw  ( 00000001 *Var0 00000000 )
-  C1C:  	Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  C04:  	Call  InterpNpcYaw  ( .NpcID:WorldKooper_01 *Var0  0` )
+  C1C:  	Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   C38:  	Add   *Var2  00000003
   C48:  	Call  $Function_80241610    ( *Var0 *Var1 *Var2 )
   C60:  	Wait  4`
@@ -2561,20 +2569,20 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   CA8:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
   CBC:  Add   *Var2  0000001E
   CCC:  Thread
-  CD4:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[1.0] )
-  CE8:  	Call  NpcJump1  ( 00000000 *Var0 *Var1 *Var2 00000014 )
+  CD4:  	Call  SetNpcJumpscale   ( .NpcID:WorldKooper_00 *Fixed[1.0] )
+  CE8:  	Call  NpcJump1  ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 00000014 )
   D08:  EndThread
-  D10:  Call  SetNpcJumpscale   ( 00000001 *Fixed[1.0] )
-  D24:  Call  NpcJump1  ( 00000001 *Var0 *Var1 *Var2 00000014 )
-  D44:  Call  PlayerFaceNpc     ( 00000000 00000000 )
+  D10:  Call  SetNpcJumpscale   ( .NpcID:WorldKooper_01 *Fixed[1.0] )
+  D24:  Call  NpcJump1  ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2 00000014 )
+  D44:  Call  PlayerFaceNpc     ( .NpcID:WorldKooper_00 .False )
   D58:  Loop  00000006
-  D64:  	Call  GetNpcYaw     ( 00000000 *Var0 )
+  D64:  	Call  GetNpcYaw     ( .NpcID:WorldKooper_00 *Var0 )
   D78:  	Add   *Var0  000000B4
-  D88:  	Call  InterpNpcYaw  ( 00000000 *Var0 00000000 )
-  DA0:  	Call  GetNpcYaw     ( 00000001 *Var0 )
+  D88:  	Call  InterpNpcYaw  ( .NpcID:WorldKooper_00 *Var0  0` )
+  DA0:  	Call  GetNpcYaw     ( .NpcID:WorldKooper_01 *Var0 )
   DB4:  	Add   *Var0  000000B4
-  DC4:  	Call  InterpNpcYaw  ( 00000001 *Var0 00000000 )
-  DDC:  	Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+  DC4:  	Call  InterpNpcYaw  ( .NpcID:WorldKooper_01 *Var0  0` )
+  DDC:  	Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
   DF8:  	Add   *Var2  00000003
   E08:  	Call  $Function_80241610    ( *Var0 *Var1 *Var2 )
   E20:  	Wait  6`
@@ -2584,40 +2592,40 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
   E50:  Call  RandInt   ( 00000064 *Var0 )
   E64:  If  *Var0  >  00000032
   E74:  	Thread
-  E7C:  		Call  InterpNpcYaw      ( 00000000 0000010E 00000000 )
-  E94:  		Call  SetNpcJumpscale   ( 00000000 *Fixed[2.0] )
-  EA8:  		Call  NpcJump1  ( 00000000 FFFFFBDA FFFFFF88 FFFFFFDB 0000000F )
+  E7C:  		Call  InterpNpcYaw      ( .NpcID:WorldKooper_00  270`  0` )
+  E94:  		Call  SetNpcJumpscale   ( .NpcID:WorldKooper_00 *Fixed[2.0] )
+  EA8:  		Call  NpcJump1  ( .NpcID:WorldKooper_00  -1062`  -120`  -37` 0000000F )
   EC8:  	EndThread
   ED0:  	Thread
-  ED8:  		Call  InterpNpcYaw      ( 00000001 0000005A 00000000 )
-  EF0:  		Call  SetNpcJumpscale   ( 00000001 *Fixed[2.0] )
-  F04:  		Call  NpcJump1  ( 00000001 FFFFFB6C FFFFFF88 FFFFFFDB 0000000F )
+  ED8:  		Call  InterpNpcYaw      ( .NpcID:WorldKooper_01  90`  0` )
+  EF0:  		Call  SetNpcJumpscale   ( .NpcID:WorldKooper_01 *Fixed[2.0] )
+  F04:  		Call  NpcJump1  ( .NpcID:WorldKooper_01  -1172`  -120`  -37` 0000000F )
   F24:  	EndThread
   F2C:  Else
   F34:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   F4C:  	Thread
-  F54:  		Call  InterpNpcYaw      ( 00000000 0000005A 00000000 )
-  F6C:  		Call  SetNpcJumpscale   ( 00000000 *Fixed[2.0] )
-  F80:  		Call  NpcJump1  ( 00000000 FFFFFB6C FFFFFF88 FFFFFFDB 0000000F )
+  F54:  		Call  InterpNpcYaw      ( .NpcID:WorldKooper_00  90`  0` )
+  F6C:  		Call  SetNpcJumpscale   ( .NpcID:WorldKooper_00 *Fixed[2.0] )
+  F80:  		Call  NpcJump1  ( .NpcID:WorldKooper_00  -1172`  -120`  -37` 0000000F )
   FA0:  	EndThread
   FA8:  	Thread
-  FB0:  		Call  InterpNpcYaw      ( 00000001 0000010E 00000000 )
-  FC8:  		Call  SetNpcJumpscale   ( 00000001 *Fixed[2.0] )
-  FDC:  		Call  NpcJump1  ( 00000001 FFFFFBDA FFFFFF88 FFFFFFDB 0000000F )
+  FB0:  		Call  InterpNpcYaw      ( .NpcID:WorldKooper_01  270`  0` )
+  FC8:  		Call  SetNpcJumpscale   ( .NpcID:WorldKooper_01 *Fixed[2.0] )
+  FDC:  		Call  NpcJump1  ( .NpcID:WorldKooper_01  -1062`  -120`  -37` 0000000F )
   FFC:  	EndThread
  1004:  EndIf
  100C:  Wait  30`
- 1018:  Call  SetNpcAnimation   ( 00000000 00020003 )
- 102C:  Call  SetNpcAnimation   ( 00000001 00020003 )
+ 1018:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 00020003 )
+ 102C:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_01 00020003 )
  1040:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
- 1058:  Call  GetNpcPos     ( 00000000 *Var3 *Var4 *Var5 )
+ 1058:  Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var3 *Var4 *Var5 )
  1074:  AddF  *Var3  *Var0
  1084:  AddF  *Var4  *Var1
  1094:  AddF  *Var5  *Var2
  10A4:  DivF  *Var3  *Fixed[2.0]
  10B4:  DivF  *Var4  *Fixed[2.0]
  10C4:  DivF  *Var5  *Fixed[2.0]
- 10D4:  Call  GetNpcPos     ( 00000001 *Var6 *Var7 *Var8 )
+ 10D4:  Call  GetNpcPos     ( .NpcID:WorldKooper_01 *Var6 *Var7 *Var8 )
  10F0:  AddF  *Var6  *Var0
  1100:  AddF  *Var7  *Var1
  1110:  AddF  *Var8  *Var2
@@ -2633,21 +2641,21 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
  11D8:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
  11EC:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
  1204:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 1218:  	Call  PlayerFaceNpc ( 00000000 00000000 )
- 122C:  	Call  SpeakToPlayer ( 00000000 0002000D 00020003 00000000 00120125 ) % I'm not lying! Mario...you know I'm Kooper, don't  ...
+ 1218:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+ 122C:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000D 00020003 00000000 00120125 ) % I'm not lying! Mario...you know I'm Kooper, don't  ...
  124C:  	Call  SetPanTarget  ( .Cam:Default *Var6 *Var7 *Var8 )
  1268:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
  127C:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 1290:  	Call  PlayerFaceNpc ( 00000001 00000000 )
- 12A4:  	Call  SpeakToPlayer ( 00000001 0002000D 00020003 00000000 00120124 ) % You're talking crazy-talk now. You're making no se ...
+ 1290:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+ 12A4:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000D 00020003 00000000 00120124 ) % You're talking crazy-talk now. You're making no se ...
  12C4:  	Call  SetPanTarget  ( .Cam:Default *Var3 *Var4 *Var5 )
  12E0:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 12F4:  	Call  PlayerFaceNpc ( 00000000 00000000 )
- 1308:  	Call  SpeakToPlayer ( 00000000 0002000D 00020003 00000000 00120127 ) % Why you... You're the one who should shut his mout ...
+ 12F4:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+ 1308:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000D 00020003 00000000 00120127 ) % Why you... You're the one who should shut his mout ...
  1328:  	Call  SetPanTarget  ( .Cam:Default *Var6 *Var7 *Var8 )
  1344:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 1358:  	Call  PlayerFaceNpc ( 00000001 00000000 )
- 136C:  	Call  SpeakToPlayer ( 00000001 0002000D 00020003 00000000 00120126 ) % Shut your mouth, goody-goody! I'm his buddy! Yeah, ...
+ 1358:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+ 136C:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000D 00020003 00000000 00120126 ) % Shut your mouth, goody-goody! I'm his buddy! Yeah, ...
  138C:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
  13A4:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
  13C0:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -2655,10 +2663,10 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
  13F0:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
  1404:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
  141C:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 1430:  	Call  PlayerFaceNpc ( 00000000 00000000 )
- 1444:  	Call  SpeakToPlayer ( 00000000 0002000D 00020003 00000000 00120129 ) % Fine! Yeah, fine with me! If you think you'll get  ...
- 1464:  	Call  PlayerFaceNpc ( 00000001 00000000 )
- 1478:  	Call  SpeakToPlayer ( 00000001 0002000D 00020003 00000000 00120128 ) % Listen, Moron...er, Mario, you have to decide who' ...
+ 1430:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+ 1444:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000D 00020003 00000000 00120129 ) % Fine! Yeah, fine with me! If you think you'll get  ...
+ 1464:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+ 1478:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000D 00020003 00000000 00120128 ) % Listen, Moron...er, Mario, you have to decide who' ...
  1498:  Else
  14A0:  	Call  UseSettingsFrom   ( .Cam:Default *Var6 *Var7 *Var8 )
  14BC:  	Call  SetPanTarget  ( .Cam:Default *Var6 *Var7 *Var8 )
@@ -2667,21 +2675,21 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
  1504:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
  1518:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
  1530:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 1544:  	Call  PlayerFaceNpc ( 00000001 00000000 )
- 1558:  	Call  SpeakToPlayer ( 00000001 0002000D 00020003 00000000 00120124 ) % You're talking crazy-talk now. You're making no se ...
+ 1544:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+ 1558:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000D 00020003 00000000 00120124 ) % You're talking crazy-talk now. You're making no se ...
  1578:  	Call  SetPanTarget  ( .Cam:Default *Var3 *Var4 *Var5 )
  1594:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[1.0] )
  15A8:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 15BC:  	Call  PlayerFaceNpc ( 00000000 00000000 )
- 15D0:  	Call  SpeakToPlayer ( 00000000 0002000D 00020003 00000000 00120125 ) % I'm not lying! Mario...you know I'm Kooper, don't  ...
+ 15BC:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+ 15D0:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000D 00020003 00000000 00120125 ) % I'm not lying! Mario...you know I'm Kooper, don't  ...
  15F0:  	Call  SetPanTarget  ( .Cam:Default *Var6 *Var7 *Var8 )
  160C:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 1620:  	Call  PlayerFaceNpc ( 00000001 00000000 )
- 1634:  	Call  SpeakToPlayer ( 00000001 0002000D 00020003 00000000 00120126 ) % Shut your mouth, goody-goody! I'm his buddy! Yeah, ...
+ 1620:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+ 1634:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000D 00020003 00000000 00120126 ) % Shut your mouth, goody-goody! I'm his buddy! Yeah, ...
  1654:  	Call  SetPanTarget  ( .Cam:Default *Var3 *Var4 *Var5 )
  1670:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 1684:  	Call  PlayerFaceNpc ( 00000000 00000000 )
- 1698:  	Call  SpeakToPlayer ( 00000000 0002000D 00020003 00000000 00120127 ) % Why you... You're the one who should shut his mout ...
+ 1684:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+ 1698:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000D 00020003 00000000 00120127 ) % Why you... You're the one who should shut his mout ...
  16B8:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
  16D0:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
  16EC:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -2689,13 +2697,13 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
  171C:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
  1730:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
  1748:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
- 175C:  	Call  PlayerFaceNpc ( 00000001 00000000 )
- 1770:  	Call  SpeakToPlayer ( 00000001 0002000D 00020003 00000000 00120128 ) % Listen, Moron...er, Mario, you have to decide who' ...
- 1790:  	Call  PlayerFaceNpc ( 00000000 00000000 )
- 17A4:  	Call  SpeakToPlayer ( 00000000 0002000D 00020003 00000000 00120129 ) % Fine! Yeah, fine with me! If you think you'll get  ...
+ 175C:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_01 .False )
+ 1770:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_01 0002000D 00020003 00000000 00120128 ) % Listen, Moron...er, Mario, you have to decide who' ...
+ 1790:  	Call  PlayerFaceNpc ( .NpcID:WorldKooper_00 .False )
+ 17A4:  	Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000D 00020003 00000000 00120129 ) % Fine! Yeah, fine with me! If you think you'll get  ...
  17C4:  EndIf
- 17CC:  Call  SetNpcFlagBits    ( 00000000 00000100 .False )
- 17E4:  Call  SetNpcFlagBits    ( 00000001 00000100 .False )
+ 17CC:  Call  SetNpcFlagBits    ( .NpcID:WorldKooper_00 00000100 .False )
+ 17E4:  Call  SetNpcFlagBits    ( .NpcID:WorldKooper_01 00000100 .False )
  17FC:  Call  DisablePlayerInput    ( .False )
  180C:  Call  SetPlayerFlagBits ( 000000C0 .True )
  1820:  Return
@@ -2712,66 +2720,66 @@ PADDING: 80243954 to 80243960 (00003954 to 00003960)
    74:  Call  SetCamPitch       ( .Cam:Default *Fixed[15.0] *Fixed[-8.0] )
    8C:  Call  SetCamSpeed       ( .Cam:Default *Fixed[2.0] )
    A0:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
-   B8:  Call  SetNpcAnimation   ( 00000001 0002000C )
+   B8:  Call  SetNpcAnimation   ( .NpcID:WorldKooper_01 0002000C )
    CC:  Wait  20`
-   D8:  Call  PlaySoundAtNpc    ( 00000001 000020B8 00000000 )
+   D8:  Call  PlaySoundAtNpc    ( .NpcID:WorldKooper_01 000020B8 00000000 )
    F0:  Loop  0000000A
-   FC:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+   FC:  	Call  GetNpcPos ( .NpcID:WorldKooper_01 *Var0 *Var1 *Var2 )
   118:  	Add   *Var2  00000003
   128:  	Call  $Function_80241610    ( *Var0 *Var1 *Var2 )
   140:  	Wait  5`
   14C:  EndLoop
-  154:  Call  PlaySoundAtNpc    ( 00000001 .Sound:SmokeBurst 00000000 )
-  16C:  Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
-  188:  Call  EnableNpcShadow   ( 00000001 .False )
-  19C:  Call  SetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+  154:  Call  PlaySoundAtNpc    ( .NpcID:WorldKooper_01 .Sound:SmokeBurst 00000000 )
+  16C:  Call  SetNpcPos ( .NpcID:WorldKooper_01  0`  -1000`  0` )
+  188:  Call  EnableNpcShadow   ( .NpcID:WorldKooper_01 .False )
+  19C:  Call  SetNpcPos ( .NpcID:Duplighost_02 *Var0 *Var1 *Var2 )
   1B8:  Call  MakeLerp  ( 00000000 00000B40 00000028 .Easing:QuadraticOut )
   1D4:  Label  1
   1E0:  Call  UpdateLerp ( )
-  1EC:  Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  1EC:  Call  SetNpcRotation    ( .NpcID:Duplighost_02 00000000 *Var0 00000000 )
   208:  Wait  1`
   214:  If  *Var1  ==  00000001
   224:  	Goto  1
   230:  EndIf
-  238:  Call  GetAngleToPlayer  ( 00000002 *Var0 )
-  24C:  Call  InterpNpcYaw      ( 00000002 *Var0 00000000 )
+  238:  Call  GetAngleToPlayer  ( .NpcID:Duplighost_02 *Var0 )
+  24C:  Call  InterpNpcYaw      ( .NpcID:Duplighost_02 *Var0  0` )
   264:  Thread
   26C:  	Set   *MapFlag[00]  .False
-  27C:  	Call  GetAngleToNPC     ( 00000000 *Var0 )
+  27C:  	Call  GetAngleToNPC     ( .NpcID:WorldKooper_00 *Var0 )
   290:  	Call  GetPlayerPos      ( *Var1 *Var2 *Var3 )
   2A8:  	Call  AddVectorPolar    ( *Var1 *Var3 *Fixed[40.0] *Var0 )
-  2C4:  	Call  SetNpcSpeed       ( 00000000 *Fixed[3.0] )
-  2D8:  	Call  SetNpcAnimation   ( 00000000 00020005 )
-  2EC:  	Call  SetNpcFlagBits    ( 00000000 00000100 .True )
-  304:  	Call  NpcMoveTo ( 00000000 *Var1 *Var3 00000000 )
-  320:  	Call  SetNpcAnimation   ( 00000000 00020003 )
+  2C4:  	Call  SetNpcSpeed       ( .NpcID:WorldKooper_00 *Fixed[3.0] )
+  2D8:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 00020005 )
+  2EC:  	Call  SetNpcFlagBits    ( .NpcID:WorldKooper_00 00000100 .True )
+  304:  	Call  NpcMoveTo ( .NpcID:WorldKooper_00 *Var1 *Var3  0` )
+  320:  	Call  SetNpcAnimation   ( .NpcID:WorldKooper_00 00020003 )
   334:  	Set   *MapFlag[00]  .True
   344:  EndThread
-  34C:  Call  PlayerFaceNpc ( 00000002 00000000 )
-  360:  Call  SpeakToPlayer ( 00000002 004E0005 004E0002 00000000 00120130 ) % Yeeeow! What made you think that I was the one lyi ...
+  34C:  Call  PlayerFaceNpc ( .NpcID:Duplighost_02 .False )
+  360:  Call  SpeakToPlayer ( .NpcID:Duplighost_02 004E0005 004E0002 00000000 00120130 ) % Yeeeow! What made you think that I was the one lyi ...
   380:  Label  0
   38C:  If  *MapFlag[00]  ==  .False
   39C:  	Wait  1`
   3A8:  	Goto  0
   3B4:  EndIf
-  3BC:  Call  SpeakToPlayer ( 00000000 0002000D 00020003 00000005 00120131 ) % Don't be such a crybaby! You lost! What were you t ...
+  3BC:  Call  SpeakToPlayer ( .NpcID:WorldKooper_00 0002000D 00020003 00000005 00120131 ) % Don't be such a crybaby! You lost! What were you t ...
   3DC:  Wait  10`
-  3E8:  Call  SpeakToPlayer ( 00000002 004E0005 004E0002 00000000 00120132 ) % What? Shut up! I'll trick YOU...
-  408:  Call  SetNpcAnimation   ( 00000002 004E0006 )
+  3E8:  Call  SpeakToPlayer ( .NpcID:Duplighost_02 004E0005 004E0002 00000000 00120132 ) % What? Shut up! I'll trick YOU...
+  408:  Call  SetNpcAnimation   ( .NpcID:Duplighost_02 004E0006 )
   41C:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   434:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   450:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   46C:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
-  484:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
-  4A0:  Call  SetNpcPos     ( 00000000 00000000 FFFFFC18 00000000 )
-  4BC:  Call  EnableNpcShadow   ( 00000000 .False )
+  484:  Call  GetNpcPos     ( .NpcID:WorldKooper_00 *Var0 *Var1 *Var2 )
+  4A0:  Call  SetNpcPos     ( .NpcID:WorldKooper_00  0`  -1000`  0` )
+  4BC:  Call  EnableNpcShadow   ( .NpcID:WorldKooper_00 .False )
   4D0:  Call  SetNpcPos     ( .Npc:Partner *Var0 *Var1 *Var2 )
-  4EC:  Call  GetNpcYaw     ( 00000000 *Var0 )
+  4EC:  Call  GetNpcYaw     ( .NpcID:WorldKooper_00 *Var0 )
   500:  Call  SetNpcYaw     ( .Npc:Partner *Var0 )
   514:  Call  SetNpcFlagBits    ( .Npc:Partner 00000006 .False )
   52C:  Call  EnableNpcShadow   ( .Npc:Partner .True )
   540:  Call  EnablePartnerAI ( )
-  54C:  Call  SetNpcVar     ( 00000002 00000000 00000001 )
+  54C:  Call  SetNpcVar     ( .NpcID:Duplighost_02 00000000 00000001 )
   564:  Return
   56C:  End
 }

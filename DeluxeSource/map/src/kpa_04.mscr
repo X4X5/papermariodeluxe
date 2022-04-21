@@ -1,6 +1,7 @@
 % Script File: kpa_04.mscr
 % Decoded from: 0 to AC0 (kpa_04)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -176,8 +177,8 @@ PADDING: 80240238 to 80240240 (00000238 to 00000240)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Exec  $Script_80240990
@@ -201,7 +202,7 @@ PADDING: 80240238 to 80240240 (00000238 to 00000240)
    6C:  		Set   *Var9  00000000
    7C:  		Return
    84:  	Else
-   8C:  		Call  SetPlayerActionState  ( 00000014 )
+   8C:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
    9C:  	EndIf
    A4:  	Wait  1`
    B0:  EndLoop
@@ -213,7 +214,7 @@ PADDING: 80240238 to 80240240 (00000238 to 00000240)
    F8:  Call  DisablePlayerInput    ( .True )
   108:  Call  PlaySoundAtCollider   ( ~Collider:o160 80000010 00000000 )
   120:  Thread
-  128:  	Call  ShakeCam  ( .Cam:Default 00000000 00000064 *Fixed[0.6] )
+  128:  	Call  ShakeCam  ( .Cam:Default 00000000  100` *Fixed[0.6] )
   144:  EndThread
   14C:  Thread
   154:  	Call  EnableGroup   ( ~Model:g22 .True )
@@ -230,14 +231,14 @@ PADDING: 80240238 to 80240240 (00000238 to 00000240)
   204:  	EndLoop
   20C:  EndThread
   214:  Thread
-  21C:  	Call  InterpPlayerYaw   ( 0000010E 00000000 )
-  230:  	Call  SetPlayerActionState  ( 00000014 )
+  21C:  	Call  InterpPlayerYaw   (  270`  0` )
+  230:  	Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   240:  	Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
   258:  	Set   *Var1  *Var0
   268:  	Add   *Var1  *VarB
   278:  	Call  MakeLerp  ( *Var0 *Var1 00000064 .Easing:Linear )
   294:  	Loop
-  2A0:  		Call  SetPlayerActionState  ( 00000014 )
+  2A0:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   2B0:  		Call  UpdateLerp ( )
   2BC:  		Call  $Function_802400BC ( )
   2C8:  		Wait  1`

@@ -1,6 +1,10 @@
 % Script File: kkj_12.mscr
 % Decoded from: 0 to 1E40 (kkj_12)
 
+#define .NpcID:WorldKoopatrol_00    00
+#define .NpcID:WorldKoopatrol_01    01
+#define .NpcID:WorldClubba_02       02
+
 #new:Function $Function_80240000
 {
     0:  CLEAR     A0
@@ -678,8 +682,8 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
 {
     0:  Set   *GB_WorldLocation  .Location:PeachsCastle
    10:  Call  SetSpriteShading  ( .Shading:kkj_12 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  If  *GB_StoryProgress  ==  .Story:Ch6_BeganPeachMission % 3A
    80:  	Call  $Function_80240034    ( 00000001 )
@@ -749,11 +753,11 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
     0:  Call  DisablePlayerInput    ( .True )
    10:  Call  $Function_802406E8    ( *Var0 )
    20:  If  *Var0  ==  00000003
-   30:  	Call  AdjustCam     ( .Cam:Default *Fixed[5.0] 00000000 *Fixed[350.0] *Fixed[15.0] *Fixed[-7.0] )
+   30:  	Call  AdjustCam     ( .Cam:Default *Fixed[5.0]  0` *Fixed[350.0] *Fixed[15.0] *Fixed[-7.0] )
    54:  	Call  SpeakToPlayer ( .Npc:Self 00580009 00580002 00000000 00140147 ) % Ah! Finally! About time! You're so late! Again! Do ...
    74:  	Thread
    7C:  		Loop
-   88:  			Call  PlayerFaceNpc ( 00000001 00000000 )
+   88:  			Call  PlayerFaceNpc ( .NpcID:WorldKoopatrol_01 .False )
    9C:  			Wait  1`
    A8:  			If  *GF_KKJ12_TrickedGuard  ==  .True
    B8:  				BreakLoop
@@ -763,10 +767,10 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
    D8:  	Call  SetNpcFlagBits        ( .Npc:Self 00000100 .True )
    F0:  	Call  SetNpcAnimation       ( .Npc:Self 00580005 )
   104:  	Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
-  118:  	Call  NpcMoveTo     ( .Npc:Self 0000041A 00000000 00000000 )
+  118:  	Call  NpcMoveTo     ( .Npc:Self  1050`  0`  0` )
   134:  	Call  SpeakToPlayer ( .Npc:Self 00580009 00580002 00000000 00140148 ) % Don't goof off, either! You're on thin ice, buddy!
-  154:  	Call  NpcMoveTo     ( .Npc:Self 00000384 00000000 00000000 )
-  170:  	Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFE0C 00000000 )
+  154:  	Call  NpcMoveTo     ( .Npc:Self  900`  0`  0` )
+  170:  	Call  SetNpcPos     ( .Npc:Self  0`  -500`  0` )
   18C:  	Set   *GF_KKJ12_TrickedGuard  .True
   19C:  	Bind  $Script_ExitDoubleDoor_802409B4 .Trigger:WallPressA ~Collider:deilit2 00000001 00000000
   1B8:  	Call  ResetCam      ( .Cam:Default *Fixed[4.0] )
@@ -774,7 +778,7 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
   1DC:  	Return
   1E4:  EndIf
   1EC:  If  *GF_KKJ11_TrickedGuard  ==  .False
-  1FC:  	Call  AdjustCam     ( .Cam:Default *Fixed[5.0] 00000000 *Fixed[350.0] *Fixed[15.0] *Fixed[-7.0] )
+  1FC:  	Call  AdjustCam     ( .Cam:Default *Fixed[5.0]  0` *Fixed[350.0] *Fixed[15.0] *Fixed[-7.0] )
   220:  	Call  SpeakToPlayer ( .Npc:Self 00580009 00580002 00000000 00140144 ) % Where's my relief, already? My shift has been over ...
   240:  	Wait  10`
   24C:  	Set   *Var0  0000006A
@@ -782,7 +786,7 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
   274:  	Call  AddKeyItem    ( *Var0 )
   284:  	Set   *GF_KKJ11_TrickedGuard  .True
   294:  	Call  SpeakToPlayer ( .Npc:Self 00580009 00580002 00000000 00140145 ) % It's the key to the entrance of the castle. You wo ...
-  2B4:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+  2B4:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
   2CC:  	Call  ResetCam      ( .Cam:Default *Fixed[5.0] )
   2E0:  Else
   2E8:  	Call  SpeakToPlayer ( .Npc:Self 00580009 00580002 00000010 00140146 ) % He still hasn't shown up... Find this guy, OK?
@@ -799,10 +803,10 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
    1C:  SetGroup  00000000
    28:  Call  SetTimeFreezeMode ( 00000001 )
    38:  Call  PlaySoundAtNpc    ( .Npc:Self 00000262 00000000 )
-   50:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation 00000000 00000014 00000001 00000000 00000000 00000000 00000000 )
+   50:  Call  ShowEmote ( .Npc:Self .Emote:Exclamation  0`  20` .True  0`  0`  0`  0` )
    80:  Call  NpcFacePlayer     ( .Npc:Self 00000005 )
    94:  Wait  20`
-   A0:  Call  PlayerFaceNpc     ( .Npc:Self 00000000 )
+   A0:  Call  PlayerFaceNpc     ( .Npc:Self .False )
    B4:  Call  SetPlayerAnimation    ( 000C0005 )
    C4:  Call  SetNpcAnimation   ( .Npc:Self 00580002 )
    D8:  Call  SpeakToPlayer     ( .Npc:Self 00580009 00580002 00000000 00140174 ) % What?! Princess Peach!
@@ -810,7 +814,7 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
   114:  If  *Var3  !=  00000000
   124:  	Call  SetNpcAnimation   ( .Npc:Self 00580007 )
   138:  	Call  SetNpcSpeed       ( .Npc:Self *Fixed[5.0] )
-  14C:  	Call  NpcMoveTo ( .Npc:Self *Var0 *Var2 00000000 )
+  14C:  	Call  NpcMoveTo ( .Npc:Self *Var0 *Var2  0` )
   168:  	Call  SetNpcAnimation   ( .Npc:Self 00580002 )
   17C:  EndIf
   184:  Call  SpeakToPlayer ( .Npc:Self 00580009 00580002 00000000 00140175 ) % You know you're not allowed to leave the room! I'm ...
@@ -847,12 +851,12 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
   10C:  EndThread
   114:  Call  SetNpcSpeed   ( .Npc:Self *Fixed[2.0] )
   128:  Loop
-  134:  	Call  NpcMoveTo     ( .Npc:Self 00000384 00000000 00000000 )
+  134:  	Call  NpcMoveTo     ( .Npc:Self  900`  0`  0` )
   150:  	Call  $Function_80240604    ( *Var0 00000384 00000000 00000320 00000000 )
-  170:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
-  188:  	Call  NpcMoveTo     ( .Npc:Self 00000320 00000000 00000000 )
+  170:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
+  188:  	Call  NpcMoveTo     ( .Npc:Self  800`  0`  0` )
   1A4:  	Call  $Function_80240604    ( *Var0 00000320 00000000 00000384 00000000 )
-  1C4:  	Call  InterpNpcYaw  ( .Npc:Self *Var0 0000000F )
+  1C4:  	Call  InterpNpcYaw  ( .Npc:Self *Var0  15` )
   1DC:  EndLoop
   1E4:  Return
   1EC:  End
@@ -886,7 +890,7 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
 #new:Script $Script_Init_802416EC
 {
     0:  Call  SetNpcAnimation   ( .Npc:Self 00580005 )
-   14:  Call  SetNpcPos ( .Npc:Self 00000320 0000006E 00000000 )
+   14:  Call  SetNpcPos ( .Npc:Self  800`  110`  0` )
    30:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_802413D4 )
    44:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80240D74 )
    58:  Return
@@ -902,8 +906,8 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
    40:  	Return
    48:  EndIf
    50:  Call  SetNpcAnimation   ( .Npc:Self 00580002 )
-   64:  Call  SetNpcPos ( .Npc:Self 00000492 0000006E 00000000 )
-   80:  Call  SetNpcYaw ( .Npc:Self 0000010E )
+   64:  Call  SetNpcPos ( .Npc:Self  1170`  110`  0` )
+   80:  Call  SetNpcYaw ( .Npc:Self  270` )
    94:  Call  BindNpcIdle       ( .Npc:Self $Script_Idle_802415C8 )
    A8:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80240E90 )
    BC:  Return
@@ -912,27 +916,27 @@ PADDING: 8024006C to 80240070 (0000006C to 00000070)
 
 #new:NpcGroup $NpcGroup_80241820
 {
-	00000000 $NpcSettings_80240CC0 ~Vec3f:NPC_80241820 % 0 -500 0
+	.NpcID:WorldKoopatrol_00 $NpcSettings_80240CC0 ~Vec3f:NPC_WorldKoopatrol_00 % 0 -500 0
 	00000D0D $Script_Init_802416EC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241820
-	~AnimationTable:NPC_80241820 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_00
+	~AnimationTable:NPC_WorldKoopatrol_00 % .Sprite:WorldKoopatrol
 	00000000 00000000 $ExtraAnimationList_80240D18 00000000 % no tattle string
 	%
 	% $NpcGroup_80241820[1F0]
-	00000001 $NpcSettings_80240CC0 ~Vec3f:NPC_80241A10 % 0 -500 0
+	.NpcID:WorldKoopatrol_01 $NpcSettings_80240CC0 ~Vec3f:NPC_WorldKoopatrol_01 % 0 -500 0
 	00400D0D $Script_Init_80241754 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241A10
-	~AnimationTable:NPC_80241A10 % .Sprite:WorldKoopatrol
+	~Movement:NPC_WorldKoopatrol_01
+	~AnimationTable:NPC_WorldKoopatrol_01 % .Sprite:WorldKoopatrol
 	00000000 00000000 $ExtraAnimationList_80240D18 00000000 % no tattle string
 	%
 	% $NpcGroup_80241820[3E0]
-	00000002 $NpcSettings_80240CEC ~Vec3f:NPC_80241C00 % 0 -1000 0
+	.NpcID:WorldClubba_02 $NpcSettings_80240CEC ~Vec3f:NPC_WorldClubba_02 % 0 -1000 0
 	00000D0D 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80241C00
-	~AnimationTable:NPC_80241C00 % .Sprite:WorldClubba
+	~Movement:NPC_WorldClubba_02
+	~AnimationTable:NPC_WorldClubba_02 % .Sprite:WorldClubba
 	00000000 00000000 $ExtraAnimationList_80240D4C 00000000 % no tattle string
 }
 

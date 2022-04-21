@@ -1,6 +1,7 @@
 % Script File: jan_13.mscr
 % Decoded from: 0 to 38A0 (jan_13)
 
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFB8
@@ -432,8 +433,8 @@ PADDING: 802405CC to 802405D0 (000005CC to 000005D0)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Exec  $Script_MakeEntities
    7C:  Exec  $Script_80242438
@@ -647,7 +648,7 @@ PADDING: 8024084C to 80240850 (0000084C to 00000850)
 #new:Script $Script_80241110
 {
     0:  Call  PlaySoundAtCollider   ( ~Collider:o33 00000191 00000000 )
-   18:  Call  ShakeCam  ( .Cam:Default 00000000 00000005 *Fixed[1.5] )
+   18:  Call  ShakeCam  ( .Cam:Default 00000000  5` *Fixed[1.5] )
    34:  Return
    3C:  End
 }
@@ -663,66 +664,66 @@ PADDING: 8024084C to 80240850 (0000084C to 00000850)
    58:  	If  *Flag[00]  ==  .False
    68:  		Call  EnableModel   ( ~Model:o33 .False )
    7C:  		Call  ModifyColliderFlags   ( 00000000 ~Collider:o33 7FFFFE00 )
-   94:  		Call  SetPushBlock  ( 00000000 0000000F 00000000 00000000 )
-   B0:  		Call  SetPushBlock  ( 00000000 00000010 00000000 00000000 )
-   CC:  		Call  SetPushBlock  ( 00000000 00000011 00000000 00000000 )
-   E8:  		Call  SetPushBlock  ( 00000000 00000012 00000000 00000000 )
-  104:  		Call  SetPushBlock  ( 00000000 00000013 00000000 00000000 )
-  120:  		Call  SetPushBlock  ( 00000000 0000000F 00000001 00000000 )
-  13C:  		Call  SetPushBlock  ( 00000000 00000010 00000001 00000000 )
-  158:  		Call  SetPushBlock  ( 00000000 00000011 00000001 00000000 )
-  174:  		Call  SetPushBlock  ( 00000000 00000012 00000001 00000000 )
-  190:  		Call  SetPushBlock  ( 00000000 00000013 00000001 00000000 )
-  1AC:  		Call  SetPushBlock  ( 00000000 0000000F 00000002 00000000 )
-  1C8:  		Call  SetPushBlock  ( 00000000 00000010 00000002 00000000 )
-  1E4:  		Call  SetPushBlock  ( 00000000 00000011 00000002 00000000 )
-  200:  		Call  SetPushBlock  ( 00000000 00000012 00000002 00000000 )
-  21C:  		Call  SetPushBlock  ( 00000000 00000013 00000002 00000000 )
+   94:  		Call  SetPushBlock  ( 00000000  15`  0` 00000000 )
+   B0:  		Call  SetPushBlock  ( 00000000  16`  0` 00000000 )
+   CC:  		Call  SetPushBlock  ( 00000000  17`  0` 00000000 )
+   E8:  		Call  SetPushBlock  ( 00000000  18`  0` 00000000 )
+  104:  		Call  SetPushBlock  ( 00000000  19`  0` 00000000 )
+  120:  		Call  SetPushBlock  ( 00000000  15`  1` 00000000 )
+  13C:  		Call  SetPushBlock  ( 00000000  16`  1` 00000000 )
+  158:  		Call  SetPushBlock  ( 00000000  17`  1` 00000000 )
+  174:  		Call  SetPushBlock  ( 00000000  18`  1` 00000000 )
+  190:  		Call  SetPushBlock  ( 00000000  19`  1` 00000000 )
+  1AC:  		Call  SetPushBlock  ( 00000000  15`  2` 00000000 )
+  1C8:  		Call  SetPushBlock  ( 00000000  16`  2` 00000000 )
+  1E4:  		Call  SetPushBlock  ( 00000000  17`  2` 00000000 )
+  200:  		Call  SetPushBlock  ( 00000000  18`  2` 00000000 )
+  21C:  		Call  SetPushBlock  ( 00000000  19`  2` 00000000 )
   238:  		Set   *Flag[00]  .True
   248:  	EndIf
   250:  EndIf
-  258:  Call  GetPushBlock  ( 00000000 0000001C 00000006 *Var0 )
+  258:  Call  GetPushBlock  ( 00000000  28`  6` *Var0 )
   274:  If  *Var0  ==  00000000
   284:  	Set   *MapVar[0]  00000000
   294:  	Goto  1
   2A0:  EndIf
-  2A8:  Call  GetPushBlock  ( 00000000 00000019 00000004 *Var0 )
+  2A8:  Call  GetPushBlock  ( 00000000  25`  4` *Var0 )
   2C4:  If  *Var0  ==  00000000
   2D4:  	Set   *MapVar[0]  00000001
   2E4:  	Goto  1
   2F0:  EndIf
-  2F8:  Call  GetPushBlock  ( 00000000 00000015 00000008 *Var0 )
+  2F8:  Call  GetPushBlock  ( 00000000  21`  8` *Var0 )
   314:  If  *Var0  ==  00000000
   324:  	Set   *MapVar[0]  00000002
   334:  	Goto  1
   340:  EndIf
-  348:  Call  GetPushBlock  ( 00000000 00000004 00000004 *Var0 )
+  348:  Call  GetPushBlock  ( 00000000  4`  4` *Var0 )
   364:  If  *Var0  ==  00000000
   374:  	Set   *MapVar[0]  00000003
   384:  	Goto  1
   390:  EndIf
-  398:  Call  GetPushBlock  ( 00000000 0000000E 00000006 *Var0 )
+  398:  Call  GetPushBlock  ( 00000000  14`  6` *Var0 )
   3B4:  If  *Var0  ==  00000000
   3C4:  	Set   *MapVar[0]  00000004
   3D4:  	Goto  1
   3E0:  EndIf
   3E8:  If  *GF_JAN13_SolvedBlockPuzzle  ==  .False
   3F8:  	Call  DisablePlayerInput    ( .True )
-  408:  	Call  SetPushBlock  ( 00000000 0000000F 00000000 00000000 )
-  424:  	Call  SetPushBlock  ( 00000000 00000010 00000000 00000000 )
-  440:  	Call  SetPushBlock  ( 00000000 00000011 00000000 00000000 )
-  45C:  	Call  SetPushBlock  ( 00000000 00000012 00000000 00000000 )
-  478:  	Call  SetPushBlock  ( 00000000 00000013 00000000 00000000 )
-  494:  	Call  SetPushBlock  ( 00000000 0000000F 00000001 00000000 )
-  4B0:  	Call  SetPushBlock  ( 00000000 00000010 00000001 00000000 )
-  4CC:  	Call  SetPushBlock  ( 00000000 00000011 00000001 00000000 )
-  4E8:  	Call  SetPushBlock  ( 00000000 00000012 00000001 00000000 )
-  504:  	Call  SetPushBlock  ( 00000000 00000013 00000001 00000000 )
-  520:  	Call  SetPushBlock  ( 00000000 0000000F 00000002 00000000 )
-  53C:  	Call  SetPushBlock  ( 00000000 00000010 00000002 00000000 )
-  558:  	Call  SetPushBlock  ( 00000000 00000011 00000002 00000000 )
-  574:  	Call  SetPushBlock  ( 00000000 00000012 00000002 00000000 )
-  590:  	Call  SetPushBlock  ( 00000000 00000013 00000002 00000000 )
+  408:  	Call  SetPushBlock  ( 00000000  15`  0` 00000000 )
+  424:  	Call  SetPushBlock  ( 00000000  16`  0` 00000000 )
+  440:  	Call  SetPushBlock  ( 00000000  17`  0` 00000000 )
+  45C:  	Call  SetPushBlock  ( 00000000  18`  0` 00000000 )
+  478:  	Call  SetPushBlock  ( 00000000  19`  0` 00000000 )
+  494:  	Call  SetPushBlock  ( 00000000  15`  1` 00000000 )
+  4B0:  	Call  SetPushBlock  ( 00000000  16`  1` 00000000 )
+  4CC:  	Call  SetPushBlock  ( 00000000  17`  1` 00000000 )
+  4E8:  	Call  SetPushBlock  ( 00000000  18`  1` 00000000 )
+  504:  	Call  SetPushBlock  ( 00000000  19`  1` 00000000 )
+  520:  	Call  SetPushBlock  ( 00000000  15`  2` 00000000 )
+  53C:  	Call  SetPushBlock  ( 00000000  16`  2` 00000000 )
+  558:  	Call  SetPushBlock  ( 00000000  17`  2` 00000000 )
+  574:  	Call  SetPushBlock  ( 00000000  18`  2` 00000000 )
+  590:  	Call  SetPushBlock  ( 00000000  19`  2` 00000000 )
   5AC:  	Set   *MapVar[0]  00000005
   5BC:  	Wait  30`
   5C8:  	Loop  00000002
@@ -734,7 +735,7 @@ PADDING: 8024084C to 80240850 (0000084C to 00000850)
   638:  	EndLoop
   640:  	Thread
   648:  		Call  PlaySoundAtPlayer ( 00000262 00000000 )
-  65C:  		Call  ShowEmote ( 00000000 .Emote:Exclamation 00000000 00000014 00000000 00000000 00000000 00000000 00000000 )
+  65C:  		Call  ShowEmote ( 00000000 .Emote:Exclamation  0`  20` .False  0`  0`  0`  0` )
   68C:  		Call  GetModelCenter    ( ~Model:o33 )
   69C:  		Call  802D2884  ( *Var0 *Var2 00000004 )
   6B4:  		Call  GetPlayerPos      ( *Var3 *Var1 *Var2 )
@@ -749,7 +750,7 @@ PADDING: 8024084C to 80240850 (0000084C to 00000850)
   748:  		EndSwitch
   750:  		Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   76C:  		Call  SetPanTarget      ( .Cam:Default *Var0 *Var1 *Var2 )
-  788:  		Call  SetCamDistance    ( .Cam:Default 00000190 )
+  788:  		Call  SetCamDistance    ( .Cam:Default  400` )
   79C:  		Call  SetCamSpeed       ( .Cam:Default *Fixed[3.0] )
   7B0:  		Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   7C8:  	EndThread
@@ -784,7 +785,7 @@ PADDING: 8024084C to 80240850 (0000084C to 00000850)
   A3C:  		Wait  3`
   A48:  	EndLoop
   A50:  	Thread
-  A58:  		Call  ShakeCam  ( .Cam:Default 00000000 0000000F *Fixed[0.4] )
+  A58:  		Call  ShakeCam  ( .Cam:Default 00000000  15` *Fixed[0.4] )
   A74:  	EndThread
   A7C:  	Call  PlaySoundAt   ( 8000001D 00000000 00000025 00000000 FFFFFF76 )
   A9C:  	Set   *AreaByte[2]  00000001
@@ -831,7 +832,7 @@ PADDING: 8024084C to 80240850 (0000084C to 00000850)
   D34:  	Call  ResetCam  ( .Cam:Default *Fixed[5.0] )
   D48:  	Call  DisablePlayerInput    ( .False )
   D58:  Else
-  D60:  	Call  GetPushBlock  ( 00000000 00000011 00000000 *Var0 )
+  D60:  	Call  GetPushBlock  ( 00000000  17`  0` *Var0 )
   D7C:  	If  *Var0  ==  00000000
   D8C:  		Set   *MapVar[0]  00000005
   D9C:  		Goto  1
@@ -946,66 +947,66 @@ PADDING: 8024084C to 80240850 (0000084C to 00000850)
 #new:Script $Script_80242438
 {
     0:  Call  CreatePushBlockGrid   ( 00000000 ~PushGrid:Grid_80242438 00000000 )
-   28:  Call  SetPushBlock  ( 00000000 00000007 00000005 00000001 )
-   44:  Call  SetPushBlock  ( 00000000 0000000D 00000009 00000001 )
-   60:  Call  SetPushBlock  ( 00000000 00000010 00000005 00000001 )
-   7C:  Call  SetPushBlock  ( 00000000 00000015 00000002 00000001 )
-   98:  Call  SetPushBlock  ( 00000000 00000016 00000004 00000001 )
-   B4:  Call  SetPushBlock  ( 00000000 0000001A 00000006 00000001 )
-   D0:  Call  SetPushBlock  ( 00000000 0000001B 00000007 00000001 )
-   EC:  Call  SetPushBlock  ( 00000000 0000000F 00000000 00000002 )
-  108:  Call  SetPushBlock  ( 00000000 00000010 00000000 00000002 )
-  124:  Call  SetPushBlock  ( 00000000 00000011 00000000 00000002 )
-  140:  Call  SetPushBlock  ( 00000000 00000012 00000000 00000002 )
-  15C:  Call  SetPushBlock  ( 00000000 00000013 00000000 00000002 )
-  178:  Call  SetPushBlock  ( 00000000 0000000F 00000001 00000002 )
-  194:  Call  SetPushBlock  ( 00000000 00000010 00000001 00000002 )
-  1B0:  Call  SetPushBlock  ( 00000000 00000011 00000001 00000002 )
-  1CC:  Call  SetPushBlock  ( 00000000 00000012 00000001 00000002 )
-  1E8:  Call  SetPushBlock  ( 00000000 00000013 00000001 00000002 )
-  204:  Call  SetPushBlock  ( 00000000 0000000F 00000002 00000002 )
-  220:  Call  SetPushBlock  ( 00000000 00000010 00000002 00000002 )
-  23C:  Call  SetPushBlock  ( 00000000 00000011 00000002 00000002 )
-  258:  Call  SetPushBlock  ( 00000000 00000012 00000002 00000002 )
-  274:  Call  SetPushBlock  ( 00000000 00000013 00000002 00000002 )
+   28:  Call  SetPushBlock  ( 00000000  7`  5` 00000001 )
+   44:  Call  SetPushBlock  ( 00000000  13`  9` 00000001 )
+   60:  Call  SetPushBlock  ( 00000000  16`  5` 00000001 )
+   7C:  Call  SetPushBlock  ( 00000000  21`  2` 00000001 )
+   98:  Call  SetPushBlock  ( 00000000  22`  4` 00000001 )
+   B4:  Call  SetPushBlock  ( 00000000  26`  6` 00000001 )
+   D0:  Call  SetPushBlock  ( 00000000  27`  7` 00000001 )
+   EC:  Call  SetPushBlock  ( 00000000  15`  0` 00000002 )
+  108:  Call  SetPushBlock  ( 00000000  16`  0` 00000002 )
+  124:  Call  SetPushBlock  ( 00000000  17`  0` 00000002 )
+  140:  Call  SetPushBlock  ( 00000000  18`  0` 00000002 )
+  15C:  Call  SetPushBlock  ( 00000000  19`  0` 00000002 )
+  178:  Call  SetPushBlock  ( 00000000  15`  1` 00000002 )
+  194:  Call  SetPushBlock  ( 00000000  16`  1` 00000002 )
+  1B0:  Call  SetPushBlock  ( 00000000  17`  1` 00000002 )
+  1CC:  Call  SetPushBlock  ( 00000000  18`  1` 00000002 )
+  1E8:  Call  SetPushBlock  ( 00000000  19`  1` 00000002 )
+  204:  Call  SetPushBlock  ( 00000000  15`  2` 00000002 )
+  220:  Call  SetPushBlock  ( 00000000  16`  2` 00000002 )
+  23C:  Call  SetPushBlock  ( 00000000  17`  2` 00000002 )
+  258:  Call  SetPushBlock  ( 00000000  18`  2` 00000002 )
+  274:  Call  SetPushBlock  ( 00000000  19`  2` 00000002 )
   290:  Set   *Var0  00000000
   2A0:  Loop  00000020
-  2AC:  	Call  SetPushBlock  ( 00000000 *Var0 00000000 00000002 )
+  2AC:  	Call  SetPushBlock  ( 00000000 *Var0  0` 00000002 )
   2C8:  	Add   *Var0  00000001
   2D8:  EndLoop
   2E0:  Set   *Var0  00000000
   2F0:  Loop  0000000F
-  2FC:  	Call  SetPushBlock  ( 00000000 *Var0 00000001 00000002 )
+  2FC:  	Call  SetPushBlock  ( 00000000 *Var0  1` 00000002 )
   318:  	Add   *Var0  00000001
   328:  EndLoop
   330:  Set   *Var0  00000014
   340:  Loop  0000000C
-  34C:  	Call  SetPushBlock  ( 00000000 *Var0 00000001 00000002 )
+  34C:  	Call  SetPushBlock  ( 00000000 *Var0  1` 00000002 )
   368:  	Add   *Var0  00000001
   378:  EndLoop
   380:  Set   *Var0  00000000
   390:  Loop  00000003
-  39C:  	Call  SetPushBlock  ( 00000000 *Var0 00000002 00000002 )
+  39C:  	Call  SetPushBlock  ( 00000000 *Var0  2` 00000002 )
   3B8:  	Add   *Var0  00000001
   3C8:  EndLoop
   3D0:  Set   *Var0  0000000A
   3E0:  Loop  00000004
-  3EC:  	Call  SetPushBlock  ( 00000000 *Var0 00000002 00000002 )
+  3EC:  	Call  SetPushBlock  ( 00000000 *Var0  2` 00000002 )
   408:  	Add   *Var0  00000001
   418:  EndLoop
   420:  Set   *Var0  0000001A
   430:  Loop  00000006
-  43C:  	Call  SetPushBlock  ( 00000000 *Var0 00000002 00000002 )
+  43C:  	Call  SetPushBlock  ( 00000000 *Var0  2` 00000002 )
   458:  	Add   *Var0  00000001
   468:  EndLoop
   470:  Set   *Var0  00000000
   480:  Loop  00000002
-  48C:  	Call  SetPushBlock  ( 00000000 *Var0 00000003 00000002 )
+  48C:  	Call  SetPushBlock  ( 00000000 *Var0  3` 00000002 )
   4A8:  	Add   *Var0  00000001
   4B8:  EndLoop
   4C0:  Set   *Var0  0000000A
   4D0:  Loop  00000004
-  4DC:  	Call  SetPushBlock  ( 00000000 *Var0 00000003 00000002 )
+  4DC:  	Call  SetPushBlock  ( 00000000 *Var0  3` 00000002 )
   4F8:  	Add   *Var0  00000001
   508:  EndLoop
   510:  Exec  $Script_80241154
@@ -1046,13 +1047,13 @@ PADDING: 8024084C to 80240850 (0000084C to 00000850)
   75C:  Call  EnableTexPanning  ( ~Model:o75 .True )
   770:  Call  EnableTexPanning  ( ~Model:o76 .True )
   784:  Call  EnableTexPanning  ( ~Model:o71 .True )
-  798:  Call  802C90FC  ( 0000002E 00000000 FFFFFFFF )
-  7B0:  Call  802C90FC  ( 00000030 00000000 FFFFFFFF )
-  7C8:  Call  802C90FC  ( 00000032 00000000 FFFFFFFF )
-  7E0:  Call  802C90FC  ( 00000034 00000000 FFFFFFFF )
-  7F8:  Call  802C90FC  ( 00000036 00000000 FFFFFFFF )
-  810:  Call  802C90FC  ( 00000038 00000000 FFFFFFFF )
-  828:  Call  802C94A0  ( 00000000 $Function_80240000 00000000 )
+  798:  Call  SetModelCustomGfx ( ~Model:o72 00000000 FFFFFFFF )
+  7B0:  Call  SetModelCustomGfx ( ~Model:o73 00000000 FFFFFFFF )
+  7C8:  Call  SetModelCustomGfx ( ~Model:o74 00000000 FFFFFFFF )
+  7E0:  Call  SetModelCustomGfx ( ~Model:o75 00000000 FFFFFFFF )
+  7F8:  Call  SetModelCustomGfx ( ~Model:o76 00000000 FFFFFFFF )
+  810:  Call  SetModelCustomGfx ( ~Model:o71 00000000 FFFFFFFF )
+  828:  Call  SetCustomGfxBuilders  ( 00000000 $Function_80240000 00000000 )
   840:  Set   *Var0  00000000
   850:  Loop
   85C:  	Sub   *Var0  000007D0

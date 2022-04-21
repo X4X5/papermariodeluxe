@@ -1,6 +1,10 @@
 % Script File: isk_18.mscr
 % Decoded from: 0 to 17D0 (isk_18)
 
+#define .NpcID:BuzzyBeetle_00       00
+#define .NpcID:BuzzyBeetle_01       01
+#define .NpcID:BuzzyBeetle_02       02
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE0
@@ -684,8 +688,8 @@ PADDING: 802408E8 to 802408F0 (000008E8 to 000008F0)
 {
     0:  Set   *GB_WorldLocation  .Location:DryDryRuins
    10:  Call  SetSpriteShading  ( .Shading:isk_18 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80241574 )
@@ -816,31 +820,31 @@ MISSING: 80240F4C to 80240FA4 (00000F4C to 00000FA4)
 
 #new:NpcGroup $NpcGroup_80240FA4
 {
-	00000000 $NpcSettings_80240F20 ~Vec3f:NPC_80240FA4 % -372 -700 439
+	.NpcID:BuzzyBeetle_00 $NpcSettings_80240F20 ~Vec3f:NPC_BuzzyBeetle_00 % -372 -700 439
 	00000400 00000000 00000001 00000B0E 00000000
 	~NoItems ~HP:Generous:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80240FA4
-	~AnimationTable:NPC_80240FA4 % .Sprite:BuzzyBeetle
+	~Movement:NPC_BuzzyBeetle_00
+	~AnimationTable:NPC_BuzzyBeetle_00 % .Sprite:BuzzyBeetle
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241194
 {
-	00000001 $NpcSettings_80240F20 ~Vec3f:NPC_80241194 % -58 -700 591
+	.NpcID:BuzzyBeetle_01 $NpcSettings_80240F20 ~Vec3f:NPC_BuzzyBeetle_01 % -58 -700 591
 	00000400 00000000 00000001 00000B0B 00000000
 	~NoItems ~HP:Generous:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80241194
-	~AnimationTable:NPC_80241194 % .Sprite:BuzzyBeetle
+	~Movement:NPC_BuzzyBeetle_01
+	~AnimationTable:NPC_BuzzyBeetle_01 % .Sprite:BuzzyBeetle
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241384
 {
-	00000002 $NpcSettings_80240EF4 ~Vec3f:NPC_80241384 % 292 -780 488
+	.NpcID:BuzzyBeetle_02 $NpcSettings_80240EF4 ~Vec3f:NPC_BuzzyBeetle_02 % 292 -780 488
 	00000400 00000000 00000000 00000000 00000000
 	~NoItems ~HP:Generous:2 ~FP:Standard:2 ~CoinBonus:1:2
-	~Movement:NPC_80241384
-	~AnimationTable:NPC_80241384 % .Sprite:BuzzyBeetle
+	~Movement:NPC_BuzzyBeetle_02
+	~AnimationTable:NPC_BuzzyBeetle_02 % .Sprite:BuzzyBeetle
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

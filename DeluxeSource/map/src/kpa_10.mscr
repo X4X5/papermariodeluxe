@@ -1,6 +1,10 @@
 % Script File: kpa_10.mscr
 % Decoded from: 0 to F40 (kpa_10)
 
+#define .NpcID:Toad_00              00
+#define .NpcID:Toad_01              01
+#define .NpcID:ToadGuard_02         02
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -375,8 +379,8 @@ PADDING: 80240408 to 80240410 (00000408 to 00000410)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80240E98 )
    84:  ExecWait  $Script_MakeEntities
@@ -400,27 +404,27 @@ MISSING: 8024089C to 802408C8 (0000089C to 000008C8)
 
 #new:NpcGroup $NpcGroup_802408C8
 {
-	00000000 $NpcSettings_80240870 ~Vec3f:NPC_802408C8 % 845 30 -285
+	.NpcID:Toad_00 $NpcSettings_80240870 ~Vec3f:NPC_Toad_00 % 845 30 -285
 	00002D01 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802408C8
-	~AnimationTable:NPC_802408C8 % .Sprite:Toad
+	~Movement:NPC_Toad_00
+	~AnimationTable:NPC_Toad_00 % .Sprite:Toad
 	00000000 00000000 00000000 001A0113 % This Toad worked in the castle. Even though he's i ...
 	%
 	% $NpcGroup_802408C8[1F0]
-	00000001 $NpcSettings_80240870 ~Vec3f:NPC_80240AB8 % 872 30 -315
+	.NpcID:Toad_01 $NpcSettings_80240870 ~Vec3f:NPC_Toad_01 % 872 30 -315
 	00002D01 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80240AB8
-	~AnimationTable:NPC_80240AB8 % .Sprite:Toad
+	~Movement:NPC_Toad_01
+	~AnimationTable:NPC_Toad_01 % .Sprite:Toad
 	00000000 00000000 00000000 001A0114 % This Toad's been captured. He looks like he's all  ...
 	%
 	% $NpcGroup_802408C8[3E0]
-	00000002 $NpcSettings_80240870 ~Vec3f:NPC_80240CA8 % 900 30 -285
+	.NpcID:ToadGuard_02 $NpcSettings_80240870 ~Vec3f:NPC_ToadGuard_02 % 900 30 -285
 	00002D01 00000000 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80240CA8
-	~AnimationTable:NPC_80240CA8 % .Sprite:ToadGuard
+	~Movement:NPC_ToadGuard_02
+	~AnimationTable:NPC_ToadGuard_02 % .Sprite:ToadGuard
 	00000000 00000000 00000000 001A0115 % He was a soldier at Princess Peach's Castle. He wa ...
 }
 

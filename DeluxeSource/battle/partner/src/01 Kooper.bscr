@@ -514,8 +514,8 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
    14:  Call  SetGoalToHome ( .Actor:Partner )
    24:  Call  SetActorSpeed ( .Actor:Partner *Fixed[6.0] )
    38:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
-   50:  Call  SetActorYaw   ( .Actor:Partner 00000000 )
-   64:  Call  RunToGoal     ( .Actor:Partner 00000000 )
+   50:  Call  SetActorYaw   ( .Actor:Partner  0` )
+   64:  Call  RunToGoal     ( .Actor:Partner  0` )
    78:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
    90:  Call  UseIdleAnimation  ( .Actor:Partner .True )
    A4:  Return
@@ -602,21 +602,21 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
    88:  Set   *Var1  00000000
    98:  Call  SetActorJumpGravity   ( .Actor:Partner *Fixed[1.4] )
    AC:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-   C8:  Call  JumpToGoal    ( .Actor:Partner 00000014 .False .True .False )
+   C8:  Call  JumpToGoal    ( .Actor:Partner  20` .False .True .False )
    E8:  Sub   *Var0  0000001E
    F8:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  114:  Call  JumpToGoal    ( .Actor:Partner 00000008 .False .False .True )
+  114:  Call  JumpToGoal    ( .Actor:Partner  8` .False .False .True )
   134:  Sub   *Var0  00000014
   144:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  160:  Call  JumpToGoal    ( .Actor:Partner 00000006 .False .False .True )
+  160:  Call  JumpToGoal    ( .Actor:Partner  6` .False .False .True )
   180:  Sub   *Var0  0000000A
-  190:  Call  JumpToGoal    ( .Actor:Partner 00000004 .False .False .True )
+  190:  Call  JumpToGoal    ( .Actor:Partner  4` .False .False .True )
   1B0:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A000F )
   1C8:  Wait  4`
   1D4:  Call  SetGoalToHome ( .Actor:Partner )
   1E4:  Call  SetActorSpeed ( .Actor:Partner *Fixed[7.0] )
   1F8:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
-  210:  Call  RunToGoal     ( .Actor:Partner 00000000 )
+  210:  Call  RunToGoal     ( .Actor:Partner  0` )
   224:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
   23C:  Return
   244:  End
@@ -632,21 +632,21 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
    5C:  Set   *Var1  00000000
    6C:  Call  SetActorJumpGravity   ( .Actor:Partner *Fixed[1.1] )
    80:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-   9C:  Call  JumpToGoal    ( .Actor:Partner 0000000A .False .True .False )
+   9C:  Call  JumpToGoal    ( .Actor:Partner  10` .False .True .False )
    BC:  Sub   *Var0  00000014
    CC:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-   E8:  Call  JumpToGoal    ( .Actor:Partner 00000008 .False .False .True )
+   E8:  Call  JumpToGoal    ( .Actor:Partner  8` .False .False .True )
   108:  Sub   *Var0  0000000A
   118:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  134:  Call  JumpToGoal    ( .Actor:Partner 00000006 .False .False .True )
+  134:  Call  JumpToGoal    ( .Actor:Partner  6` .False .False .True )
   154:  Sub   *Var0  0000000A
-  164:  Call  JumpToGoal    ( .Actor:Partner 00000004 .False .False .True )
+  164:  Call  JumpToGoal    ( .Actor:Partner  4` .False .False .True )
   184:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A000F )
   19C:  Wait  4`
   1A8:  Call  SetGoalToHome ( .Actor:Partner )
   1B8:  Call  SetActorSpeed ( .Actor:Partner *Fixed[7.0] )
   1CC:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
-  1E4:  Call  RunToGoal     ( .Actor:Partner 00000000 )
+  1E4:  Call  RunToGoal     ( .Actor:Partner  0` )
   1F8:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
   210:  Return
   218:  End
@@ -681,7 +681,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
    54:  Call  SetActorSpeed ( .Actor:Partner *Fixed[4.0] )
    68:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
    80:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-   9C:  Call  RunToGoal     ( .Actor:Partner 00000000 .False )
+   9C:  Call  RunToGoal     ( .Actor:Partner  0` .False )
    B4:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
    CC:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A000E )
    E4:  Call  PlaySoundAtActor  ( .Actor:Partner 00000000 )
@@ -761,14 +761,14 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   644:  EndIf
   64C:  Call  PlaySoundAtActor  ( .Actor:Partner 0000200A )
   660:  Call  UseBattleCamPreset    ( 00000003 )
-  670:  Call  MoveBattleCamOver ( 0000000F )
+  670:  Call  MoveBattleCamOver (  15` )
   680:  ExecWait  $Script_802392A4
   68C:  Call  AddActorDecoration    ( .Actor:Self 00000000 00000000 .Decoration:GreySmokeTrail )
   6A8:  Call  SetGoalToTarget   ( .Actor:Partner )
   6B8:  Call  SetActorSpeed     ( .Actor:Partner *VarA )
   6CC:  Call  SetActorSounds    ( .Actor:Partner .ActorSound:Walk 00000000 00000000 )
-  6E8:  Call  RunToGoal ( .Actor:Partner 00000000 )
-  6FC:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000 00000002 00000010 )
+  6E8:  Call  RunToGoal ( .Actor:Partner  0` )
+  6FC:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000  2` 00000010 )
   720:  If  *Var0  ==  .HitResult:Miss % 6
   730:  	Thread
   738:  		Call  $Function_80238000 ( )
@@ -803,7 +803,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   970:  	Call  SetGoalToHome     ( .Actor:Partner )
   980:  	Call  SetActorSpeed     ( .Actor:Partner *Fixed[7.0] )
   994:  	Call  SetAnimation      ( .Actor:Partner FFFFFFFF 000A0006 )
-  9AC:  	Call  RunToGoal ( .Actor:Partner 00000000 )
+  9AC:  	Call  RunToGoal ( .Actor:Partner  0` )
   9C0:  	Return
   9C8:  EndIf
   9D0:  Call  RemoveActorDecoration     ( .Actor:Self 00000000 00000000 )
@@ -817,7 +817,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   A68:  Call  PlaySoundAtActor  ( .Actor:Partner 00000000 )
   A7C:  Switch  *Var0
   A88:  	CaseOR  ==  .HitResult:Hit % 0
-  A94:  	CaseOR  ==  00000002 % 2
+  A94:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   AA0:  		ExecWait  $Script_80239084
   AAC:  	EndCaseGroup
   AB4:  	CaseOR  ==  00000001 % 1
@@ -851,7 +851,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   100:  Call  SetActorSpeed ( .Actor:Partner *Fixed[4.0] )
   114:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
   12C:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  148:  Call  RunToGoal     ( .Actor:Partner 00000000 .False )
+  148:  Call  RunToGoal     ( .Actor:Partner  0` .False )
   160:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
   178:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A000E )
   190:  Call  PlaySoundAtActor  ( .Actor:Partner 00000000 )
@@ -933,7 +933,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   710:  Call  SetActorVar       ( .Actor:Self 00000000 00000000 )
   728:  Call  PlaySoundAtActor  ( .Actor:Partner 0000200B )
   73C:  Call  UseBattleCamPreset    ( 00000003 )
-  74C:  Call  MoveBattleCamOver ( 0000000F )
+  74C:  Call  MoveBattleCamOver (  15` )
   75C:  Set   *VarB  00000104
   76C:  DivF  *VarB  *VarA
   77C:  Thread
@@ -943,7 +943,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   7CC:  	Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
   7E8:  	Call  SetActorSpeed ( .Actor:Partner *VarA )
   7FC:  	Call  SetActorSounds        ( .Actor:Partner .ActorSound:Walk 00000000 00000000 )
-  818:  	Call  RunToGoal     ( .Actor:Partner 00000000 )
+  818:  	Call  RunToGoal     ( .Actor:Partner  0` )
   82C:  	Call  SetActorVar   ( .Actor:Self 00000000 00000001 )
   844:  	Call  RemoveActorDecoration ( .Actor:Self 00000000 00000001 )
   85C:  EndThread
@@ -956,7 +956,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   8D4:  If  *Var0  >  *Var3
   8E4:  	Goto  A
   8F0:  EndIf
-  8F8:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000 00000002 00000010 )
+  8F8:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000  2` 00000010 )
   91C:  If  *Var0  ==  .HitResult:Miss % 6
   92C:  	Goto  C
   938:  EndIf
@@ -973,9 +973,9 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   9C0:  Call  GetActionCommandResult    ( *Var0 )
   9D0:  Switch  *Var0
   9DC:  	Case  >  00000000
-  9E8:  		Call  PartnerDamageEnemy    ( *Var0 ~Flags:DamageType:Unblockable 0000009F 00000000 *VarF 00000070 )
+  9E8:  		Call  PartnerDamageEnemy    ( *Var0 ~Flags:DamageType:NoOtherDamagePopups 0000009F 00000000 *VarF 00000070 )
   A0C:  	Default
-  A14:  		Call  PartnerDamageEnemy    ( *Var0 ~Flags:DamageType:Unblockable 0000009F 00000000 *VarE 00000030 )
+  A14:  		Call  PartnerDamageEnemy    ( *Var0 ~Flags:DamageType:NoOtherDamagePopups 0000009F 00000000 *VarE 00000030 )
   A38:  EndSwitch
   A40:  Call  PlaySoundAtActor  ( .Actor:Partner 00000000 )
   A54:  Label  C
@@ -1020,14 +1020,14 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
    78:  Call  SetActorSpeed ( .Actor:Partner *Fixed[4.0] )
    8C:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
    A4:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-   C0:  Call  RunToGoal     ( .Actor:Partner 00000000 .False )
+   C0:  Call  RunToGoal     ( .Actor:Partner  0` .False )
    D8:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
    F0:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A000E )
   108:  Call  PlaySoundAtActor  ( .Actor:Partner 00000000 )
   11C:  Wait  15`
   128:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A000A )
   140:  Call  UseBattleCamPreset    ( 0000003B )
-  150:  Call  MoveBattleCamOver ( 0000004B )
+  150:  Call  MoveBattleCamOver (  75` )
   160:  Set   *VarD  0000004B
   170:  Set   *VarA  *VarD
   180:  Add   *VarA  FFFFFFFD
@@ -1076,7 +1076,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   538:  EndLoop
   540:  Call  PlaySoundAtActor      ( .Actor:Partner 00000290 )
   554:  Call  UseBattleCamPreset    ( 00000003 )
-  564:  Call  MoveBattleCamOver     ( 0000000F )
+  564:  Call  MoveBattleCamOver     (  15` )
   574:  Set   *VarB  0000012C
   584:  DivF  *VarB  *VarA
   594:  Thread
@@ -1087,15 +1087,15 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   5F8:  	Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
   614:  	Call  SetActorSpeed ( .Actor:Partner *VarA )
   628:  	Call  SetActorSounds        ( .Actor:Partner .ActorSound:Walk 00000000 00000000 )
-  644:  	Call  RunToGoal     ( .Actor:Partner 00000000 )
+  644:  	Call  RunToGoal     ( .Actor:Partner  0` )
   658:  	Call  RemoveActorDecoration ( .Actor:Self 00000000 00000000 )
   670:  	Call  RemoveActorDecoration ( .Actor:Self 00000000 00000001 )
   688:  	Wait  20`
-  694:  	Call  SetActorPos   ( .Actor:Partner FFFFFF38 00000000 00000000 )
+  694:  	Call  SetActorPos   ( .Actor:Partner  -200`  0`  0` )
   6B0:  	Call  SetGoalToHome ( .Actor:Partner )
-  6C0:  	Call  AddGoalPos    ( .Actor:Partner 00000028 00000000 00000000 )
+  6C0:  	Call  AddGoalPos    ( .Actor:Partner  40`  0`  0` )
   6DC:  	Call  SetActorSpeed ( .Actor:Partner *Fixed[12.0] )
-  6F0:  	Call  FlyToGoal     ( .Actor:Partner 00000000 00000000 .Easing:QuarticOut )
+  6F0:  	Call  FlyToGoal     ( .Actor:Partner  0`  0` .Easing:QuarticOut )
   70C:  	Call  EnableActorBlur       ( .Actor:Partner 00000000 )
   720:  	Call  SetActorVar   ( .Actor:Self 00000000 00000001 )
   738:  EndThread
@@ -1112,7 +1112,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   7E4:  If  *Var0  >  *Var3
   7F4:  	Goto  A
   800:  EndIf
-  808:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000 00000002 00000010 )
+  808:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000  2` 00000010 )
   82C:  If  *Var0  ==  .HitResult:Miss % 6
   83C:  	Goto  C
   848:  EndIf
@@ -1132,18 +1132,18 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   8FC:  	Case  >  00000000
   908:  		If  *Var9  ==  00000001
   918:  			If  *VarF  ==  00000064
-  928:  				Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:Unblockable|StatusAlwaysHits 0000009F C0040300 000000FE 00000000 00000070 )
+  928:  				Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:NoOtherDamagePopups|StatusAlwaysHits 0000009F C0040300 000000FE  0` 00000070 )
   950:  			Else
-  958:  				Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:Unblockable|StatusAlwaysHits 0000009F C0040300 *VarF 00000000 00000070 )
+  958:  				Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:NoOtherDamagePopups|StatusAlwaysHits 0000009F C0040300 *VarF  0` 00000070 )
   980:  			EndIf
   988:  		Else
-  990:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:Unblockable|StatusAlwaysHits 0000009F C0040300 *VarF 00000000 00000070 )
+  990:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:NoOtherDamagePopups|StatusAlwaysHits 0000009F C0040300 *VarF  0` 00000070 )
   9B8:  		EndIf
   9C0:  	Default
   9C8:  		If  *Var9  ==  00000001
-  9D8:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:Unblockable|StatusAlwaysHits 0000009F C0040300 000000FF 00000000 00000030 )
+  9D8:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:NoOtherDamagePopups|StatusAlwaysHits 0000009F C0040300 000000FF  0` 00000030 )
   A00:  		Else
-  A08:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:Unblockable|StatusAlwaysHits 0000009F C0040300 000000FF 00000000 00000030 )
+  A08:  			Call  PartnerAfflictEnemy   ( *Var0 ~Flags:DamageType:NoOtherDamagePopups|StatusAlwaysHits 0000009F C0040300 000000FF  0` 00000030 )
   A30:  		EndIf
   A38:  EndSwitch
   A40:  Call  PlaySoundAtActor  ( .Actor:Partner 00000000 )
@@ -1175,7 +1175,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   BB0:  Call  SetGoalToHome ( .Actor:Partner )
   BC0:  Call  SetActorSpeed ( .Actor:Partner *Fixed[7.0] )
   BD4:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
-  BEC:  Call  RunToGoal     ( .Actor:Partner 00000000 )
+  BEC:  Call  RunToGoal     ( .Actor:Partner  0` )
   C00:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
   C18:  Return
   C20:  End
@@ -1192,14 +1192,14 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
    78:  Call  SetActorSpeed ( .Actor:Partner *Fixed[4.0] )
    8C:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
    A4:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-   C0:  Call  RunToGoal     ( .Actor:Partner 00000000 .False )
+   C0:  Call  RunToGoal     ( .Actor:Partner  0` .False )
    D8:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
    F0:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A000E )
   108:  Call  PlaySoundAtActor  ( .Actor:Partner 00000000 )
   11C:  Wait  15`
   128:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A000A )
   140:  Call  UseBattleCamPreset    ( 0000003B )
-  150:  Call  MoveBattleCamOver ( 0000004B )
+  150:  Call  MoveBattleCamOver (  75` )
   160:  Set   *VarD  0000004B
   170:  Set   *VarC  *VarD
   180:  Add   *VarC  FFFFFFFD
@@ -1298,18 +1298,18 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   95C:  	CaseOR  ==  00000000
   968:  	CaseOR  ==  00000001
   974:  		Call  UseBattleCamPreset    ( 00000003 )
-  984:  		Call  MoveBattleCamOver     ( 00000032 )
+  984:  		Call  MoveBattleCamOver     (  50` )
   994:  		SetF  *VarA  *Fixed[10.0]
   9A4:  	EndCaseGroup
   9AC:  	CaseOR  ==  00000002
   9B8:  	CaseOR  ==  00000003
   9C4:  		Call  UseBattleCamPreset    ( 00000003 )
-  9D4:  		Call  MoveBattleCamOver     ( 0000001E )
+  9D4:  		Call  MoveBattleCamOver     (  30` )
   9E4:  		SetF  *VarA  *Fixed[10.0]
   9F4:  	EndCaseGroup
   9FC:  	Case  ==  00000004
   A08:  		Call  UseBattleCamPreset    ( 00000003 )
-  A18:  		Call  MoveBattleCamOver     ( 0000000F )
+  A18:  		Call  MoveBattleCamOver     (  15` )
   A28:  		SetF  *VarA  *Fixed[16.0]
   A38:  EndSwitch
   A40:  Set   *VarB  0000015E
@@ -1335,16 +1335,16 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   BA8:  	Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
   BC4:  	Call  SetActorSpeed ( .Actor:Partner *VarA )
   BD8:  	Call  SetActorSounds        ( .Actor:Partner .ActorSound:Walk 00000000 00000000 )
-  BF4:  	Call  RunToGoal     ( .Actor:Partner 00000000 )
+  BF4:  	Call  RunToGoal     ( .Actor:Partner  0` )
   C08:  	Call  RemoveActorDecoration ( .Actor:Self 00000000 00000001 )
   C20:  	Wait  20`
   C2C:  	Call  RemoveActorDecoration ( .Actor:Self 00000000 00000000 )
   C44:  	Call  8026ED20      ( 00000100 00000000 00000000 )
-  C5C:  	Call  SetActorPos   ( .Actor:Partner FFFFFF38 00000000 00000000 )
+  C5C:  	Call  SetActorPos   ( .Actor:Partner  -200`  0`  0` )
   C78:  	Call  SetGoalToHome ( .Actor:Partner )
-  C88:  	Call  AddGoalPos    ( .Actor:Partner 00000028 00000000 00000000 )
+  C88:  	Call  AddGoalPos    ( .Actor:Partner  40`  0`  0` )
   CA4:  	Call  SetActorSpeed ( .Actor:Partner *Fixed[12.0] )
-  CB8:  	Call  FlyToGoal     ( .Actor:Partner 00000000 00000000 .Easing:QuarticOut )
+  CB8:  	Call  FlyToGoal     ( .Actor:Partner  0`  0` .Easing:QuarticOut )
   CD4:  	Call  EnableActorBlur       ( .Actor:Partner 00000000 )
   CE8:  	Call  SetActorVar   ( .Actor:Self 00000000 00000001 )
   D00:  EndThread
@@ -1358,7 +1358,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   D90:  If  *Var0  >  *Var3
   DA0:  	Goto  A
   DAC:  EndIf
-  DB4:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000 00000002 00000010 )
+  DB4:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000  2` 00000010 )
   DD8:  If  *Var0  ==  .HitResult:Miss % 6
   DE8:  	Goto  C
   DF4:  EndIf
@@ -1376,9 +1376,9 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   E8C:  Call  GetActionCommandResult    ( *Var0 )
   E9C:  Switch  *Var0
   EA8:  	Case  >  00000063
-  EB4:  		Call  PartnerDamageEnemy    ( *Var0 ~Flags:DamageType:Unblockable|Fire 0000009F 00000000 *VarF 00000070 )
+  EB4:  		Call  PartnerDamageEnemy    ( *Var0 ~Flags:DamageType:NoOtherDamagePopups|Fire 0000009F 00000000 *VarF 00000070 )
   ED8:  	Default
-  EE0:  		Call  PartnerDamageEnemy    ( *Var0 ~Flags:DamageType:Unblockable|Fire 0000009F 00000000 *VarF 00000030 )
+  EE0:  		Call  PartnerDamageEnemy    ( *Var0 ~Flags:DamageType:NoOtherDamagePopups|Fire 0000009F 00000000 *VarF 00000030 )
   F04:  EndSwitch
   F0C:  Call  PlaySoundAtActor  ( .Actor:Partner 00000000 )
   F20:  Label  C
@@ -1409,7 +1409,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
  107C:  Call  SetGoalToHome ( .Actor:Partner )
  108C:  Call  SetActorSpeed ( .Actor:Partner *Fixed[7.0] )
  10A0:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
- 10B8:  Call  RunToGoal     ( .Actor:Partner 00000000 )
+ 10B8:  Call  RunToGoal     ( .Actor:Partner  0` )
  10CC:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
  10E4:  Return
  10EC:  End
@@ -1422,13 +1422,13 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
    2C:  Call  SetActorPos       ( .Actor:Partner *Var0 *Var1 *Var2 )
    48:  Call  InitTargetIterator ( )
    54:  Call  UseBattleCamPreset    ( 00000003 )
-   64:  Call  MoveBattleCamOver ( 0000000F )
+   64:  Call  MoveBattleCamOver (  15` )
    74:  Call  SetAnimation      ( .Actor:Partner FFFFFFFF 000A000A )
    8C:  Call  SetGoalToTarget   ( .Actor:Partner )
    9C:  Call  SetActorSpeed     ( .Actor:Partner *Fixed[16.0] )
    B0:  Call  SetActorSounds    ( .Actor:Partner .ActorSound:Walk 00000000 00000000 )
-   CC:  Call  RunToGoal ( .Actor:Partner 00000000 )
-   E0:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000 00000002 00000010 )
+   CC:  Call  RunToGoal ( .Actor:Partner  0` )
+   E0:  Call  PartnerTestEnemy  ( *Var0 ~Flags:DamageType:0 00000014 00000000  2` 00000010 )
   104:  If  *Var0  ==  .HitResult:Miss % 6
   114:  	Thread
   11C:  		Call  $Function_80238000 ( )
@@ -1463,7 +1463,7 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   354:  	Call  SetGoalToHome     ( .Actor:Partner )
   364:  	Call  SetActorSpeed     ( .Actor:Partner *Fixed[7.0] )
   378:  	Call  SetAnimation      ( .Actor:Partner FFFFFFFF 000A0006 )
-  390:  	Call  RunToGoal ( .Actor:Partner 00000000 )
+  390:  	Call  RunToGoal ( .Actor:Partner  0` )
   3A4:  	Return
   3AC:  EndIf
   3B4:  Set   *VarF  00000001
@@ -1492,22 +1492,22 @@ PADDING: 8023842C to 80238430 (006F62AC to 006F62B0)
   530:  Set   *Var1  00000000
   540:  Call  SetActorJumpGravity   ( .Actor:Partner *Fixed[1.1] )
   554:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  570:  Call  JumpToGoal    ( .Actor:Partner 0000000A .False .True .False )
+  570:  Call  JumpToGoal    ( .Actor:Partner  10` .False .True .False )
   590:  Sub   *Var0  0000001E
   5A0:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  5BC:  Call  JumpToGoal    ( .Actor:Partner 00000008 .False .False .True )
+  5BC:  Call  JumpToGoal    ( .Actor:Partner  8` .False .False .True )
   5DC:  Sub   *Var0  00000014
   5EC:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
-  608:  Call  JumpToGoal    ( .Actor:Partner 00000006 .False .False .True )
+  608:  Call  JumpToGoal    ( .Actor:Partner  6` .False .False .True )
   628:  Sub   *Var0  0000000A
-  638:  Call  JumpToGoal    ( .Actor:Partner 00000004 .False .False .True )
+  638:  Call  JumpToGoal    ( .Actor:Partner  4` .False .False .True )
   658:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A000F )
   670:  Wait  15`
   67C:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
   694:  Call  SetGoalToHome ( .Actor:Partner )
   6A4:  Call  SetActorSpeed ( .Actor:Partner *Fixed[7.0] )
   6B8:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0006 )
-  6D0:  Call  RunToGoal     ( .Actor:Partner 00000000 )
+  6D0:  Call  RunToGoal     ( .Actor:Partner  0` )
   6E4:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 000A0004 )
   6FC:  Call  EnableIdleScript      ( .Actor:Self 00000001 )
   710:  Call  UseIdleAnimation      ( .Actor:Self .True )

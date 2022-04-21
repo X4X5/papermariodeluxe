@@ -1,7 +1,20 @@
 % Script File: obk_08.mscr
 % Decoded from: 0 to 6F40 (obk_08)
 
-% Origin: HEURISTIC
+#define .NpcID:Boo_00               00
+#define .NpcID:Boo_01               01
+#define .NpcID:Boo_02               02
+#define .NpcID:Boo_03               03
+#define .NpcID:Boo_04               04
+#define .NpcID:Boo_05               05
+#define .NpcID:Boo_06               06
+#define .NpcID:Boo_07               07
+#define .NpcID:Boo_08               08
+#define .NpcID:Boo_09               09
+#define .NpcID:Boo_10               0A
+#define .NpcID:Boo_11               0B
+#define .NpcID:Boo_12               0C
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FF10
@@ -285,7 +298,7 @@
    C4:  SWC1      F2, 18 (S0)
    C8:  CLEAR     A0
    CC:  LA        A1, $Function_80240000
-   D4:  JAL       ~Func:create_dynamic_entity_world
+   D4:  JAL       ~Func:create_generic_entity_world
    D8:  SW        V0, 0 (S0)
    DC:  COPY      A0, S3
    E0:  LI        A1, *MapVar[A]
@@ -315,7 +328,7 @@
    24:  COPY      S0, V0
    28:  JAL       8013A854
    2C:  LW        A0, 0 (S0)
-   30:  JAL       ~Func:free_dynamic_entity
+   30:  JAL       ~Func:free_generic_entity
    34:  LW        A0, 4 (S0)
    38:  JAL       ~Func:heap_free
    3C:  COPY      A0, S0
@@ -1670,8 +1683,8 @@ PADDING: 80241858 to 80241860 (00001858 to 00001860)
 {
     0:  Set   *GB_WorldLocation  .Location:BoosMansion
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_802458E0 )
@@ -1728,12 +1741,12 @@ PADDING: 80241858 to 80241860 (00001858 to 00001860)
    30:  	Call  GetNpcPos ( .Npc:Partner *Var0 *Var1 *Var2 )
    4C:  	ExecWait  $Script_80241B40
    58:  	Call  SetNpcAnimation   ( .Npc:Partner *VarA )
-   6C:  	Call  NpcMoveTo ( .Npc:Partner FFFFFFA3 *Var2 0000000F )
+   6C:  	Call  NpcMoveTo ( .Npc:Partner  -93` *Var2  15` )
    88:  	ExecWait  $Script_80241B40
    94:  	Call  SetNpcAnimation   ( .Npc:Partner *VarB )
    A8:  	Wait  15`
    B4:  	Call  SetNpcFlagBits    ( .Npc:Partner 00000100 .False )
-   CC:  	Call  InterpNpcYaw      ( .Npc:Partner 0000010E 00000000 )
+   CC:  	Call  InterpNpcYaw      ( .Npc:Partner  270`  0` )
    E4:  EndThread
    EC:  Call  DisablePlayerPhysics  ( .True )
    FC:  Wait  8`
@@ -1743,7 +1756,7 @@ PADDING: 80241858 to 80241860 (00001858 to 00001860)
   13C:  Call  $Function_802403DC    ( 00000001 00000025 )
   150:  Call  $Function_8024055C    ( *MapVar[7] *MapVar[8] *MapVar[9] )
   168:  Wait  1`
-  174:  Call  SetPlayerPos  ( 00000000 000003E8 00000000 )
+  174:  Call  SetPlayerPos  (  0`  1000`  0` )
   18C:  Call  MakeLerp  ( 00000000 0000005A 0000000A .Easing:QuadraticIn )
   1A8:  Label  0
   1B4:  Call  UpdateLerp ( )
@@ -1762,7 +1775,7 @@ PADDING: 80241858 to 80241860 (00001858 to 00001860)
 #new:Script $Script_80241F20
 {
     0:  Call  SetPlayerAnimation    ( 00010002 )
-   10:  Call  InterpPlayerYaw       ( 0000010E 00000000 )
+   10:  Call  InterpPlayerYaw       (  270`  0` )
    24:  Wait  15`
    30:  Sub   *MapVar[8]  00000003
    40:  Call  $Function_8024055C    ( *MapVar[7] *MapVar[8] *MapVar[9] )
@@ -1891,7 +1904,7 @@ PADDING: 80241858 to 80241860 (00001858 to 00001860)
   1FC:  EndIf
   204:  Call  PlaySoundAtCollider   ( ~Collider:tansu1 000000F7 00000000 )
   21C:  Thread
-  224:  	Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[1.5] )
+  224:  	Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[1.5] )
   240:  EndThread
   248:  UseIntBuffer  $IntTable_802420FC
   254:  Loop  00000010
@@ -1947,7 +1960,7 @@ PADDING: 80241858 to 80241860 (00001858 to 00001860)
   1FC:  EndIf
   204:  Call  PlaySoundAtCollider   ( ~Collider:tansu3 000000F7 00000000 )
   21C:  Thread
-  224:  	Call  ShakeCam  ( .Cam:Default 00000000 0000001E *Fixed[1.5] )
+  224:  	Call  ShakeCam  ( .Cam:Default 00000000  30` *Fixed[1.5] )
   240:  EndThread
   248:  UseIntBuffer  $IntTable_8024207C
   254:  Loop  00000010
@@ -2149,9 +2162,9 @@ PADDING: 80242C54 to 80242C60 (00002C54 to 00002C60)
 #new:Script $Script_MakeEntities
 {
     0:  If  *GB_StoryProgress  >=  .Story:Ch3_GotRecord % FFFFFFD4
-   10:  	Call  MakeItemEntity    ( .Item:Record ~Vec3d:Item802434A0 .ItemSpawnMode:Fixed_NeverVanish *GF_OBK08_Item_Record )
+   10:  	Call  MakeItemEntity    ( .Item:BooRecord ~Vec3d:Item802434A0 .ItemSpawnMode:Fixed_NeverVanish *GF_OBK08_Item_Record )
    34:  Else
-   3C:  	Call  MakeItemEntity    ( .Item:Record ~Vec3d:Item802434CC .ItemSpawnMode:Decoration 00000000 )
+   3C:  	Call  MakeItemEntity    ( .Item:BooRecord ~Vec3d:Item802434CC .ItemSpawnMode:Decoration 00000000 )
    60:  	Call  $Function_80240870 ( )
    6C:  	Set   *MapVar[0]  *Var0
    7C:  EndIf
@@ -2438,91 +2451,91 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
 
 #new:NpcGroup $NpcGroup_80243E7C
 {
-	00000000 $NpcSettings_80243560 ~Vec3f:NPC_80243E7C % 0 -1000 0
+	.NpcID:Boo_00 $NpcSettings_80243560 ~Vec3f:NPC_Boo_00 % 0 -1000 0
 	11300F00 $Script_Init_80243B30 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80243E7C
-	~AnimationTable:NPC_80243E7C % .Sprite:Boo
+	~Movement:NPC_Boo_00
+	~AnimationTable:NPC_Boo_00 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024406C
 {
-	00000001 $NpcSettings_80243560 ~Vec3f:NPC_8024406C % -268 52 0
+	.NpcID:Boo_01 $NpcSettings_80243560 ~Vec3f:NPC_Boo_01 % -268 52 0
 	11300F00 $Script_Init_80243B7C 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024406C
-	~AnimationTable:NPC_8024406C % .Sprite:Boo
+	~Movement:NPC_Boo_01
+	~AnimationTable:NPC_Boo_01 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024425C
 {
-	00000002 $NpcSettings_80243560 ~Vec3f:NPC_8024425C % -268 52 0
+	.NpcID:Boo_02 $NpcSettings_80243560 ~Vec3f:NPC_Boo_02 % -268 52 0
 	11300F00 $Script_Init_80243BDC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024425C
-	~AnimationTable:NPC_8024425C % .Sprite:Boo
+	~Movement:NPC_Boo_02
+	~AnimationTable:NPC_Boo_02 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024444C
 {
-	00000003 $NpcSettings_80243560 ~Vec3f:NPC_8024444C % -268 52 0
+	.NpcID:Boo_03 $NpcSettings_80243560 ~Vec3f:NPC_Boo_03 % -268 52 0
 	11300F00 $Script_Init_80243C3C 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024444C
-	~AnimationTable:NPC_8024444C % .Sprite:Boo
+	~Movement:NPC_Boo_03
+	~AnimationTable:NPC_Boo_03 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024463C
 {
-	00000004 $NpcSettings_80243560 ~Vec3f:NPC_8024463C % -268 52 0
+	.NpcID:Boo_04 $NpcSettings_80243560 ~Vec3f:NPC_Boo_04 % -268 52 0
 	11300F00 $Script_Init_80243C9C 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024463C
-	~AnimationTable:NPC_8024463C % .Sprite:Boo
+	~Movement:NPC_Boo_04
+	~AnimationTable:NPC_Boo_04 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_8024482C
 {
-	00000005 $NpcSettings_80243560 ~Vec3f:NPC_8024482C % -268 52 0
+	.NpcID:Boo_05 $NpcSettings_80243560 ~Vec3f:NPC_Boo_05 % -268 52 0
 	11300F00 $Script_Init_80243CFC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_8024482C
-	~AnimationTable:NPC_8024482C % .Sprite:Boo
+	~Movement:NPC_Boo_05
+	~AnimationTable:NPC_Boo_05 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244A1C
 {
-	00000006 $NpcSettings_80243560 ~Vec3f:NPC_80244A1C % -268 52 0
+	.NpcID:Boo_06 $NpcSettings_80243560 ~Vec3f:NPC_Boo_06 % -268 52 0
 	11300F00 $Script_Init_80243D5C 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244A1C
-	~AnimationTable:NPC_80244A1C % .Sprite:Boo
+	~Movement:NPC_Boo_06
+	~AnimationTable:NPC_Boo_06 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244C0C
 {
-	00000007 $NpcSettings_80243560 ~Vec3f:NPC_80244C0C % -268 52 0
+	.NpcID:Boo_07 $NpcSettings_80243560 ~Vec3f:NPC_Boo_07 % -268 52 0
 	11300F00 $Script_Init_80243DBC 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244C0C
-	~AnimationTable:NPC_80244C0C % .Sprite:Boo
+	~Movement:NPC_Boo_07
+	~AnimationTable:NPC_Boo_07 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80244DFC
 {
-	00000008 $NpcSettings_80243560 ~Vec3f:NPC_80244DFC % -268 52 0
+	.NpcID:Boo_08 $NpcSettings_80243560 ~Vec3f:NPC_Boo_08 % -268 52 0
 	11300F00 $Script_Init_80243E1C 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80244DFC
-	~AnimationTable:NPC_80244DFC % .Sprite:Boo
+	~Movement:NPC_Boo_08
+	~AnimationTable:NPC_Boo_08 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2540,7 +2553,7 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
    38:  	Call  $Function_80240FE4 ( )
    44:  	Call  $Function_8024116C ( )
    50:  	Call  802CFD30  ( FFFFFFFF 00000007 *Var0 00000000 00000000 00000000 )
-   74:  	Call  802D0244  ( FFFFFFFF 00000011 )
+   74:  	Call  SetNpcRenderMode  ( .Npc:Self .RenderMode:Surface_XLU_Layer1 )
    88:  	Wait  1`
    94:  EndLoop
    9C:  Return
@@ -2563,19 +2576,19 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
 
 #new:NpcGroup $NpcGroup_802450E8
 {
-	00000009 $NpcSettings_80243560 ~Vec3f:NPC_802450E8 % 523 -139 193
+	.NpcID:Boo_09 $NpcSettings_80243560 ~Vec3f:NPC_Boo_09 % 523 -139 193
 	00000F01 $Script_Init_802450A0 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802450E8
-	~AnimationTable:NPC_802450E8 % .Sprite:Boo
+	~Movement:NPC_Boo_09
+	~AnimationTable:NPC_Boo_09 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802450E8[1F0]
-	0000000A $NpcSettings_80243560 ~Vec3f:NPC_802452D8 % 473 -122 247
+	.NpcID:Boo_10 $NpcSettings_80243560 ~Vec3f:NPC_Boo_10 % 473 -122 247
 	00000F01 $Script_Init_802450C4 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802452D8
-	~AnimationTable:NPC_802452D8 % .Sprite:Boo
+	~Movement:NPC_Boo_10
+	~AnimationTable:NPC_Boo_10 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2594,19 +2607,19 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
 
 #new:NpcGroup $NpcGroup_80245500
 {
-	0000000B $NpcSettings_80243560 ~Vec3f:NPC_80245500 % 0 -1000 0
+	.NpcID:Boo_11 $NpcSettings_80243560 ~Vec3f:NPC_Boo_11 % 0 -1000 0
 	00000F01 $Script_Init_802454C8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_80245500
-	~AnimationTable:NPC_80245500 % .Sprite:Boo
+	~Movement:NPC_Boo_11
+	~AnimationTable:NPC_Boo_11 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80245500[1F0]
-	0000000C $NpcSettings_80243560 ~Vec3f:NPC_802456F0 % 0 -1000 0
+	.NpcID:Boo_12 $NpcSettings_80243560 ~Vec3f:NPC_Boo_12 % 0 -1000 0
 	00004F01 $Script_Init_802454D8 00000000 00000000 00000000
 	~NoDrops
-	~Movement:NPC_802456F0
-	~AnimationTable:NPC_802456F0 % .Sprite:Boo
+	~Movement:NPC_Boo_12
+	~AnimationTable:NPC_Boo_12 % .Sprite:Boo
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -2681,7 +2694,7 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
    BC:  If  *Var1  ==  00000001
    CC:  	Goto  0
    D8:  EndIf
-   E0:  Call  SetNpcPos ( *VarA 00000000 FFFFFC18 00000000 )
+   E0:  Call  SetNpcPos ( *VarA  0`  -1000`  0` )
    FC:  Return
   104:  End
 }
@@ -2692,36 +2705,36 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
    10:  Call  802D2B6C ( )
    1C:  Call  SetMusicTrack ( 00000000 .Song:BooMinigame 00000000 00000008 )
    38:  Wait  20`
-   44:  Call  InterpPlayerYaw       ( 0000005A 00000000 )
+   44:  Call  InterpPlayerYaw       (  90`  0` )
    58:  Wait  20`
    64:  Thread
    6C:  	Call  SetPlayerSpeed    ( *Fixed[2.0] )
-   7C:  	Call  PlayerMoveTo      ( FFFFFF56 00000000 00000000 )
+   7C:  	Call  PlayerMoveTo      (  -170`  0`  0` )
    94:  EndThread
-   9C:  Call  SetCamProperties  ( .Cam:Default *Fixed[2.0] 00000000 00000000 00000000 *Fixed[450.0] *Fixed[15.0] *Fixed[-7.0] )
+   9C:  Call  SetCamProperties  ( .Cam:Default *Fixed[2.0]  0`  0`  0` *Fixed[450.0] *Fixed[15.0] *Fixed[-7.0] )
    C8:  Wait  60`
-   D4:  Call  SetCamProperties  ( .Cam:Default *Fixed[2.0] 00000000 00000000 00000000 *Fixed[325.0] *Fixed[13.0] *Fixed[-13.0] )
-  100:  Call  SetNpcPos ( 0000000B 00000000 0000002D 00000014 )
+   D4:  Call  SetCamProperties  ( .Cam:Default *Fixed[2.0]  0`  0`  0` *Fixed[325.0] *Fixed[13.0] *Fixed[-13.0] )
+  100:  Call  SetNpcPos ( .NpcID:Boo_11  0`  45`  20` )
   11C:  Call  SetItemPos        ( *MapVar[0] 00000000 00000041 00000000 )
   138:  Call  MakeLerp  ( 00000000 000000FF 0000001E .Easing:Linear )
   154:  Loop
   160:  	Call  UpdateLerp ( )
-  16C:  	Call  802CFD30  ( 0000000B 00000007 *Var0 00000000 00000000 00000000 )
-  190:  	Call  802D721C  ( *MapVar[0] *Var0 )
+  16C:  	Call  802CFD30      ( 0000000B 00000007 *Var0 00000000 00000000 00000000 )
+  190:  	Call  SetItemAlpha  ( *MapVar[0] *Var0 )
   1A4:  	Wait  1`
   1B0:  	If  *Var1  ==  00000000
   1C0:  		BreakLoop
   1C8:  	EndIf
   1D0:  EndLoop
-  1D8:  Call  SpeakToPlayer     ( 0000000B 00950004 00950001 00000000 000E0030 ) % Marioooooo... You have come... If you want this re ...
+  1D8:  Call  SpeakToPlayer     ( .NpcID:Boo_11 00950004 00950001 00000000 000E0030 ) % Marioooooo... You have come... If you want this re ...
   1F8:  Label  32
-  204:  Call  SetCamProperties  ( .Cam:Default *Fixed[2.0] 00000000 00000000 00000000 *Fixed[500.0] *Fixed[15.0] *Fixed[-7.0] )
+  204:  Call  SetCamProperties  ( .Cam:Default *Fixed[2.0]  0`  0`  0` *Fixed[500.0] *Fixed[15.0] *Fixed[-7.0] )
   230:  Wait  20`
   23C:  Call  MakeLerp  ( 000000FF 00000000 0000001E .Easing:Linear )
   258:  Loop
   264:  	Call  UpdateLerp ( )
-  270:  	Call  802CFD30  ( 0000000B 00000007 *Var0 00000000 00000000 00000000 )
-  294:  	Call  802D721C  ( *MapVar[0] *Var0 )
+  270:  	Call  802CFD30      ( 0000000B 00000007 *Var0 00000000 00000000 00000000 )
+  294:  	Call  SetItemAlpha  ( *MapVar[0] *Var0 )
   2A8:  	Wait  1`
   2B4:  	If  *Var1  ==  00000000
   2C4:  		BreakLoop
@@ -2740,21 +2753,21 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
   354:  Call  MakeLerp  ( 00000000 000000FF 0000001E .Easing:Linear )
   370:  Loop
   37C:  	Call  UpdateLerp ( )
-  388:  	Call  802CFD30  ( 0000000B 00000007 *Var0 00000000 00000000 00000000 )
-  3AC:  	Call  GetNpcPos ( 0000000B *Var3 *Var4 *Var5 )
+  388:  	Call  802CFD30      ( 0000000B 00000007 *Var0 00000000 00000000 00000000 )
+  3AC:  	Call  GetNpcPos     ( .NpcID:Boo_11 *Var3 *Var4 *Var5 )
   3C8:  	Add   *Var4  00000014
   3D8:  	Call  SetItemPos    ( *MapVar[0] *Var3 *Var4 *Var5 )
-  3F4:  	Call  802D721C  ( *MapVar[0] *Var0 )
+  3F4:  	Call  SetItemAlpha  ( *MapVar[0] *Var0 )
   408:  	Wait  1`
   414:  	If  *Var1  ==  00000000
   424:  		BreakLoop
   42C:  	EndIf
   434:  EndLoop
   43C:  Wait  20`
-  448:  Call  SpeakToPlayer ( 0000000B 00950004 00950001 00000000 000E0031 ) % The Lady Bow will be very angry if we let him get  ...
+  448:  Call  SpeakToPlayer ( .NpcID:Boo_11 00950004 00950001 00000000 000E0031 ) % The Lady Bow will be very angry if we let him get  ...
   468:  Wait  20`
   474:  Thread
-  47C:  	Call  GetNpcPos ( 0000000B *Var3 *Var4 *Var5 )
+  47C:  	Call  GetNpcPos ( .NpcID:Boo_11 *Var3 *Var4 *Var5 )
   498:  	Set   *Var6  *Var4
   4A8:  	Add   *Var6  00000014
   4B8:  	Call  MakeLerp  ( *Var6 *Var4 00000014 .Easing:Linear )
@@ -2795,8 +2808,8 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
   6A0:  	EndIf
   6A8:  EndLoop
   6B0:  Thread
-  6B8:  	Call  PlaySoundAtNpc    ( 0000000B 000003FA 00000000 )
-  6D0:  	Call  GetNpcPos ( 0000000B *Var3 *Var4 *Var5 )
+  6B8:  	Call  PlaySoundAtNpc    ( .NpcID:Boo_11 000003FA 00000000 )
+  6D0:  	Call  GetNpcPos ( .NpcID:Boo_11 *Var3 *Var4 *Var5 )
   6EC:  	Add   *Var5  00000014
   6FC:  	Set   *Var6  *Var4
   70C:  	Add   *Var6  FFFFFFE2
@@ -2820,7 +2833,7 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
   814:  		BreakLoop
   81C:  	EndIf
   824:  EndLoop
-  82C:  Call  SpeakToPlayer ( 0000000B 00950004 00950001 00000000 000E0032 ) % Hey, hey, Boos and Boos! Who's got it? Choose, cho ...
+  82C:  Call  SpeakToPlayer ( .NpcID:Boo_11 00950004 00950001 00000000 000E0032 ) % Hey, hey, Boos and Boos! Who's got it? Choose, cho ...
   84C:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   864:  Wait  10`
   870:  Set   *MapVar[4]  00000000
@@ -2836,37 +2849,37 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
   8F0:  ExecWait  $Script_80245970
   8FC:  If  *MapVar[4]  ==  00000001
   90C:  	Call  GetNpcPos     ( *MapVar[6] *Var3 *Var4 *Var5 )
-  928:  	Call  SetNpcPos     ( 0000000C *Var3 *Var4 *Var5 )
+  928:  	Call  SetNpcPos     ( .NpcID:Boo_12 *Var3 *Var4 *Var5 )
   944:  	Set   *Var0  0000000C
   954:  	Set   *Var3  00000000
   964:  	Set   *Var4  00000000
   974:  	Set   *Var5  FFFFFFEC
   984:  	Exec  $Script_80245A90
-  990:  	Call  PlaySoundAtNpc    ( 0000000C 000003FA 00000000 )
-  9A8:  	Call  SetNpcJumpscale   ( 0000000C *Fixed[2.0] )
-  9BC:  	Call  NpcJump0      ( 0000000C 00000000 00000000 00000000 00000014 )
-  9DC:  	Call  SetNpcPos     ( 0000000C 00000000 FFFFFC18 00000000 )
-  9F8:  	Call  MakeItemEntity    ( .Item:Record ~Vec3d:Item8024662C .ItemSpawnMode:Fixed_NeverVanish *GF_OBK08_Item_Record )
+  990:  	Call  PlaySoundAtNpc    ( .NpcID:Boo_12 000003FA 00000000 )
+  9A8:  	Call  SetNpcJumpscale   ( .NpcID:Boo_12 *Fixed[2.0] )
+  9BC:  	Call  NpcJump0      ( .NpcID:Boo_12  0`  0`  0`  20` )
+  9DC:  	Call  SetNpcPos     ( .NpcID:Boo_12  0`  -1000`  0` )
+  9F8:  	Call  MakeItemEntity    ( .Item:BooRecord ~Vec3d:Item8024662C .ItemSpawnMode:Fixed_NeverVanish *GF_OBK08_Item_Record )
   A1C:  	Wait  20`
-  A28:  	Call  GetNpcPos     ( 0000000B *Var0 *Var1 *Var2 )
+  A28:  	Call  GetNpcPos     ( .NpcID:Boo_11 *Var0 *Var1 *Var2 )
   A44:  	Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   A60:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
   A7C:  	Call  SetCamDistance    ( .Cam:Default *Fixed[350.0] )
   A90:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
   AA4:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   ABC:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
-  AD0:  	Call  SpeakToPlayer ( 0000000B 00950004 00950001 00000000 000E0033 ) % Noooo! Boo hoo! You...You guessed right. Go on, ta ...
+  AD0:  	Call  SpeakToPlayer ( .NpcID:Boo_11 00950004 00950001 00000000 000E0033 ) % Noooo! Boo hoo! You...You guessed right. Go on, ta ...
   AF0:  	Wait  20`
   AFC:  	Thread
-  B04:  		Call  SetNpcJumpscale   ( 0000000B 00000000 )
-  B18:  		Call  NpcJump1  ( 0000000B 00000000 0000002D 00000000 00000014 )
-  B38:  		Call  InterpNpcYaw      ( 0000000B 0000005A 00000000 )
+  B04:  		Call  SetNpcJumpscale   ( .NpcID:Boo_11 00000000 )
+  B18:  		Call  NpcJump1  ( .NpcID:Boo_11  0`  45`  0` 00000014 )
+  B38:  		Call  InterpNpcYaw      ( .NpcID:Boo_11  90`  0` )
   B50:  	EndThread
   B58:  	Call  $Function_80241658 ( )
   B64:  	Call  SetPlayerSpeed    ( *Fixed[4.0] )
-  B74:  	Call  PlayerMoveTo  ( *Var0 *Var2 00000000 )
-  B8C:  	Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
-  BA8:  	Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+  B74:  	Call  PlayerMoveTo  ( *Var0 *Var2  0` )
+  B8C:  	Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
+  BA8:  	Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
   BC4:  	Call  SetCamDistance    ( .Cam:Default *Fixed[450.0] )
   BD8:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[2.0] )
   BEC:  	Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -2904,15 +2917,15 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
   DE8:  	Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   DFC:  	Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   E14:  Else
-  E1C:  	Call  SetCamProperties  ( .Cam:Default *Fixed[2.0] 00000000 00000000 00000000 *Fixed[450.0] *Fixed[15.0] *Fixed[-7.0] )
+  E1C:  	Call  SetCamProperties  ( .Cam:Default *Fixed[2.0]  0`  0`  0` *Fixed[450.0] *Fixed[15.0] *Fixed[-7.0] )
   E48:  	Wait  30`
   E54:  	Call  SetNpcFlagBits    ( *MapVar[6] 00040000 .False )
   E6C:  	Call  GetNpcPos     ( *MapVar[6] *Var3 *Var4 *Var5 )
-  E88:  	Call  GetAngleBetweenNPCs   ( *MapVar[6] 00000000 *Var0 )
-  EA0:  	Call  InterpNpcYaw  ( *MapVar[6] *Var0 00000000 )
+  E88:  	Call  GetAngleBetweenNPCs   ( *MapVar[6] .NpcID:Boo_00 *Var0 )
+  EA0:  	Call  InterpNpcYaw  ( *MapVar[6] *Var0  0` )
   EB8:  	Call  SetNpcJumpscale   ( *MapVar[6] 00000000 )
-  ECC:  	Call  NpcJump0      ( *MapVar[6] 00000000 0000002D 00000000 00000014 )
-  EEC:  	Call  InterpNpcYaw  ( *MapVar[6] 0000005A 00000000 )
+  ECC:  	Call  NpcJump0      ( *MapVar[6]  0`  45`  0`  20` )
+  EEC:  	Call  InterpNpcYaw  ( *MapVar[6]  90`  0` )
   F04:  	Call  GetNpcPos     ( *MapVar[6] *Var6 *Var7 *Var8 )
   F20:  	Set   *VarA  *Var7
   F30:  	Add   *VarA  00000014
@@ -2927,9 +2940,9 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
   FBC:  	EndLoop
   FC4:  	Wait  20`
   FD0:  	Call  SpeakToPlayer ( *MapVar[6] 00950004 00950001 00000000 000E0034 ) % Hee hee hee hee... Wrong! This is so much fun... K ...
-  FF0:  	Call  GetNpcPos ( 0000000B *Var0 *Var1 *Var2 )
+  FF0:  	Call  GetNpcPos ( .NpcID:Boo_11 *Var0 *Var1 *Var2 )
  100C:  	Call  GetNpcPos ( *MapVar[6] *VarA *VarB *VarC )
- 1028:  	Call  SetNpcPos ( 0000000B *VarA *VarB *VarC )
+ 1028:  	Call  SetNpcPos ( .NpcID:Boo_11 *VarA *VarB *VarC )
  1044:  	Call  SetNpcPos ( *MapVar[6] *Var0 *Var1 *Var2 )
  1060:  	Wait  1`
  106C:  	Call  MakeLerp  ( 000000FF 00000000 00000014 .Easing:Linear )
@@ -2943,7 +2956,7 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
  10F0:  	EndLoop
  10F8:  	Wait  10`
  1104:  	Call  SetNpcPos     ( *MapVar[6] *Var3 *Var4 *Var5 )
- 1120:  	Call  InterpNpcYaw  ( *MapVar[6] 0000005A 00000000 )
+ 1120:  	Call  InterpNpcYaw  ( *MapVar[6]  90`  0` )
  1138:  	Call  MakeLerp      ( 00000000 000000FF 00000014 .Easing:Linear )
  1154:  	Loop
  1160:  		Call  UpdateLerp ( )
@@ -2958,7 +2971,7 @@ PADDING: 8024355C to 80243560 (0000355C to 00003560)
  11EC:  	Set   *MapVar[2]  00000000
  11FC:  	Call  $Function_80241658 ( )
  1208:  	Call  SetPlayerSpeed    ( *Fixed[4.0] )
- 1218:  	Call  PlayerMoveTo      ( *Var0 *Var2 00000000 )
+ 1218:  	Call  PlayerMoveTo      ( *Var0 *Var2  0` )
  1230:  	Goto  32
  123C:  EndIf
  1244:  Set   *GB_StoryProgress  .Story:Ch3_GotRecord

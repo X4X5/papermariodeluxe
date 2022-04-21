@@ -1,6 +1,8 @@
 % Script File: kpa_96.mscr
 % Decoded from: 0 to 9A0 (kpa_96)
 
+#define .NpcID:SpikedGoomba_00      00
+
 #new:Function $Function_80240000
 {
     0:  LAH       V0, 8010F29C
@@ -85,8 +87,8 @@ PADDING: 802400E8 to 802400F0 (000000E8 to 000000F0)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .True $NpcGroupList_80240970 )
@@ -215,11 +217,11 @@ PADDING: 802400E8 to 802400F0 (000000E8 to 000000F0)
 
 #new:NpcGroup $NpcGroup_80240780
 {
-	00000000 $NpcSettings_80240560 ~Vec3f:NPC_80240780 % -122 0 163
+	.NpcID:SpikedGoomba_00 $NpcSettings_80240560 ~Vec3f:NPC_SpikedGoomba_00 % -122 0 163
 	00512D09 $Script_Init_8024075C 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80240780
-	~AnimationTable:NPC_80240780 % .Sprite:SpikedGoomba
+	~Movement:NPC_SpikedGoomba_00
+	~AnimationTable:NPC_SpikedGoomba_00 % .Sprite:SpikedGoomba
 	00000000 00000000 00000000 001A011F % He's one of Bowser's followers. He got bored guard ...
 }
 

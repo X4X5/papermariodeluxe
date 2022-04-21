@@ -62,7 +62,7 @@
    78:  LW        A1, 4 (S0)
    7C:  LW        A2, 8 (S0)
    80:  LW        A3, C (S0)
-   84:  JAL       80072650
+   84:  JAL       ~Func:playFX_7A
    88:  ADDIU     S1, S1, 1
    8C:  LW        V1, C (V0)
    90:  LWC1      F0, 18 (S0)
@@ -1117,7 +1117,7 @@
 }
 
 #new:Script $Script_Init_8022F70C_11 {
-    0:  Call  SetActorPos   ( .Actor:Self 00000074 00000046 00000000 )
+    0:  Call  SetActorPos   ( .Actor:Self  116`  70`  0` )
    1C:  Call  BindTakeTurn  ( .Actor:Self $Script_TakeTurn_8022F9C8_11 )
    30:  Call  BindIdle      ( .Actor:Self $Script_Idle_8022F774_11 )
    44:  Call  BindHandleEvent   ( .Actor:Self $Script_HandleEvent_8022F7A8_11 )

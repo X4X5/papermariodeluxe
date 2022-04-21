@@ -1,6 +1,15 @@
 % Script File: kpa_111.mscr
 % Decoded from: 0 to 3400 (kpa_111)
 
+#define .NpcID:DryBones_00          00
+#define .NpcID:ThrownBone_01        01
+#define .NpcID:ThrownBone_02        02
+#define .NpcID:ThrownBone_03        03
+#define .NpcID:DryBones_04          04
+#define .NpcID:ThrownBone_05        05
+#define .NpcID:ThrownBone_06        06
+#define .NpcID:ThrownBone_07        07
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFE8
@@ -779,7 +788,7 @@
   4A4:  LW        A1, 38 (S2)
   4A8:  LW        A2, 3C (S2)
   4AC:  LW        A3, 40 (S2)
-  4B0:  JAL       ~Func:fx_walk_normal
+  4B0:  JAL       ~Func:fx_walk
   4B4:  LI        A0, 2
   4B8:  LIF       F0, -1000.0
   4C0:  SW        R0, 6C (S3)
@@ -887,7 +896,7 @@
   104:  LW        A1, 38 (S0)
   108:  LW        A2, 3C (S0)
   10C:  LW        A3, 40 (S0)
-  110:  JAL       ~Func:fx_walk_normal
+  110:  JAL       ~Func:fx_walk
   114:  LI        A0, 2
   118:  LWC1      F12, 6C (S2)
   11C:  JAL       ~Func:clamp_angle
@@ -1043,7 +1052,7 @@
   37C:  LW        A1, 38 (S0)
   380:  LW        A2, 3C (S0)
   384:  LW        A3, 40 (S0)
-  388:  JAL       ~Func:fx_walk_normal
+  388:  JAL       ~Func:fx_walk
   38C:  LI        A0, 2
   390:  LIF       F0, -1000.0
   398:  SW        R0, 6C (S1)
@@ -1429,8 +1438,8 @@ PADDING: 80241488 to 80241490 (00001488 to 00001490)
 {
     0:  Set   *GB_WorldLocation  .Location:BowsersCastle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80243180 )
    84:  ExecWait  $Script_MakeEntities
@@ -1458,7 +1467,7 @@ PADDING: 80241758 to 80241760 (00001758 to 00001760)
    78:  		Set   *Var8  FFFFFFFF
    88:  		Return
    90:  	Else
-   98:  		Call  SetPlayerActionState  ( 00000014 )
+   98:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
    A8:  	EndIf
    B0:  	Wait  1`
    BC:  EndLoop
@@ -1469,15 +1478,15 @@ PADDING: 80241758 to 80241760 (00001758 to 00001760)
    FC:  EndIf
   104:  Call  DisablePlayerInput    ( .True )
   114:  Thread
-  11C:  	Call  ShakeCam  ( .Cam:Default 00000000 00000064 *Fixed[0.6] )
+  11C:  	Call  ShakeCam  ( .Cam:Default 00000000  100` *Fixed[0.6] )
   138:  EndThread
   140:  Thread
   148:  	If  *Var6  >=  *Var7
-  158:  		Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  158:  		Call  InterpPlayerYaw   (  270`  0` )
   16C:  	Else
-  174:  		Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  174:  		Call  InterpPlayerYaw   (  90`  0` )
   188:  	EndIf
-  190:  	Call  SetPlayerActionState  ( 00000014 )
+  190:  	Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   1A0:  	Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   1B8:  	Set   *Var1  *Var0
   1C8:  	Set   *Var2  *Var7
@@ -1485,7 +1494,7 @@ PADDING: 80241758 to 80241760 (00001758 to 00001760)
   1E8:  	Add   *Var1  *Var2
   1F8:  	Call  MakeLerp  ( *Var0 *Var1 00000064 .Easing:Linear )
   214:  	Loop
-  220:  		Call  SetPlayerActionState  ( 00000014 )
+  220:  		Call  SetPlayerActionState  ( .ActionState:PushingBlock )
   230:  		Call  UpdateLerp ( )
   23C:  		Call  $Function_802400BC ( )
   248:  		Wait  1`
@@ -1585,7 +1594,7 @@ PADDING: 80241758 to 80241760 (00001758 to 00001760)
    28:  		Call  SetSelfVar    ( 00000000 00000005 )
    3C:  		Call  RemoveNpc     ( .Npc:Self )
    4C:  	Case  ==  .Outcome:PlayerFled % 2
-   58:  		Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+   58:  		Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
    74:  		Call  80045900  ( 00000001 )
    84:  	Case  ==  .Outcome:EnemyFled % 3
    90:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -1683,7 +1692,7 @@ PADDING: 80241758 to 80241760 (00001758 to 00001760)
    D4:  		Call  SetSelfVar    ( 00000000 00000004 )
    E8:  		Call  GetNpcPos     ( .Npc:Self *Var0 *Var1 *Var2 )
   104:  		Call  PlayEffect    ( ~FX:Steam:Ring *Var0 *Var1 *Var2 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
-  148:  		Call  SetNpcPos     ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  148:  		Call  SetNpcPos     ( .Npc:Self  0`  -1000`  0` )
   164:  		Call  SetSelfVar    ( 00000000 00000000 )
   178:  	EndCaseGroup
   180:  	Default
@@ -1703,69 +1712,69 @@ PADDING: 80241758 to 80241760 (00001758 to 00001760)
 
 #new:NpcGroup $NpcGroup_80242200
 {
-	00000000 $NpcSettings_80241F30 ~Vec3f:NPC_80242200 % -10 0 100
+	.NpcID:DryBones_00 $NpcSettings_80241F30 ~Vec3f:NPC_DryBones_00 % -10 0 100
 	00000800 00000000 00000000 00000000 0000005A
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:0:4
-	~Movement:NPC_80242200
-	~AnimationTable:NPC_80242200 % .Sprite:DryBones
+	~Movement:NPC_DryBones_00
+	~AnimationTable:NPC_DryBones_00 % .Sprite:DryBones
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242200[1F0]
-	00000001 $NpcSettings_802421D4 ~Vec3f:NPC_802423F0 % 0 -1000 0
+	.NpcID:ThrownBone_01 $NpcSettings_802421D4 ~Vec3f:NPC_ThrownBone_01 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802423F0
-	~AnimationTable:NPC_802423F0 % .Sprite:ThrownBone
+	~Movement:NPC_ThrownBone_01
+	~AnimationTable:NPC_ThrownBone_01 % .Sprite:ThrownBone
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242200[3E0]
-	00000002 $NpcSettings_802421D4 ~Vec3f:NPC_802425E0 % 0 -1000 0
+	.NpcID:ThrownBone_02 $NpcSettings_802421D4 ~Vec3f:NPC_ThrownBone_02 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802425E0
-	~AnimationTable:NPC_802425E0 % .Sprite:ThrownBone
+	~Movement:NPC_ThrownBone_02
+	~AnimationTable:NPC_ThrownBone_02 % .Sprite:ThrownBone
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80242200[5D0]
-	00000003 $NpcSettings_802421D4 ~Vec3f:NPC_802427D0 % 0 -1000 0
+	.NpcID:ThrownBone_03 $NpcSettings_802421D4 ~Vec3f:NPC_ThrownBone_03 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802427D0
-	~AnimationTable:NPC_802427D0 % .Sprite:ThrownBone
+	~Movement:NPC_ThrownBone_03
+	~AnimationTable:NPC_ThrownBone_03 % .Sprite:ThrownBone
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802429C0
 {
-	00000004 $NpcSettings_80241F30 ~Vec3f:NPC_802429C0 % 200 0 140
+	.NpcID:DryBones_04 $NpcSettings_80241F30 ~Vec3f:NPC_DryBones_04 % 200 0 140
 	00000800 00000000 00000000 00000000 0000010E
 	~Items:5:SuperShroom:A ~HP:Standard:2 ~FP:Standard:4 ~CoinBonus:0:4
-	~Movement:NPC_802429C0
-	~AnimationTable:NPC_802429C0 % .Sprite:DryBones
+	~Movement:NPC_DryBones_04
+	~AnimationTable:NPC_DryBones_04 % .Sprite:DryBones
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802429C0[1F0]
-	00000005 $NpcSettings_802421D4 ~Vec3f:NPC_80242BB0 % 0 -1000 0
+	.NpcID:ThrownBone_05 $NpcSettings_802421D4 ~Vec3f:NPC_ThrownBone_05 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242BB0
-	~AnimationTable:NPC_80242BB0 % .Sprite:ThrownBone
+	~Movement:NPC_ThrownBone_05
+	~AnimationTable:NPC_ThrownBone_05 % .Sprite:ThrownBone
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802429C0[3E0]
-	00000006 $NpcSettings_802421D4 ~Vec3f:NPC_80242DA0 % 0 -1000 0
+	.NpcID:ThrownBone_06 $NpcSettings_802421D4 ~Vec3f:NPC_ThrownBone_06 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242DA0
-	~AnimationTable:NPC_80242DA0 % .Sprite:ThrownBone
+	~Movement:NPC_ThrownBone_06
+	~AnimationTable:NPC_ThrownBone_06 % .Sprite:ThrownBone
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_802429C0[5D0]
-	00000007 $NpcSettings_802421D4 ~Vec3f:NPC_80242F90 % 0 -1000 0
+	.NpcID:ThrownBone_07 $NpcSettings_802421D4 ~Vec3f:NPC_ThrownBone_07 % 0 -1000 0
 	00800D00 00000000 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80242F90
-	~AnimationTable:NPC_80242F90 % .Sprite:ThrownBone
+	~Movement:NPC_ThrownBone_07
+	~AnimationTable:NPC_ThrownBone_07 % .Sprite:ThrownBone
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

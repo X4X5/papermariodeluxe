@@ -1,6 +1,7 @@
 % Script File: end_00.mscr
 % Decoded from: 0 to E960 (end_00)
 
+
 #new:Function_Init $Function_Init
 {
     0:  LAW       V1, 8007419C
@@ -160,7 +161,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   24C:  ADDIU     SP, SP, C8
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240270
 {
     0:  ADDIU     SP, SP, FF40
@@ -344,7 +344,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   2CC:  ADDIU     SP, SP, C0
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240540
 {
     0:  ADDIU     SP, SP, FEF0
@@ -524,7 +523,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   2D8:  ADDIU     SP, SP, 110
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_8024081C
 {
     0:  ADDIU     SP, SP, FEF0
@@ -702,7 +700,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   2C8:  ADDIU     SP, SP, 110
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240AE8
 {
     0:  ADDIU     SP, SP, FEF0
@@ -945,7 +942,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   3C4:  ADDIU     SP, SP, 110
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80240EB0
 {
     0:  ADDIU     SP, SP, FF90
@@ -1149,7 +1145,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   1DC:  ADDIU     SP, SP, B8
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802411CC
 {
     0:  ADDIU     SP, SP, FFA0
@@ -1345,7 +1340,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   234:  ADDIU     SP, SP, C8
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802414CC
 {
     0:  ADDIU     SP, SP, FEE8
@@ -1509,7 +1503,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   298:  ADDIU     SP, SP, 118
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80241768
 {
     0:  ADDIU     SP, SP, FEF0
@@ -1671,7 +1664,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   28C:  ADDIU     SP, SP, 110
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802419F8
 {
     0:  ADDIU     SP, SP, FF90
@@ -1756,7 +1748,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   138:  ADDIU     SP, SP, 70
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80241B34
 {
     0:  ADDIU     SP, SP, FF80
@@ -2226,7 +2217,6 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
   6A0:  ADDIU     SP, SP, 80
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802421D8
 {
     0:  ADDIU     SP, SP, FFC0
@@ -2438,7 +2428,7 @@ PADDING: 80240018 to 80240020 (00000018 to 00000020)
    10:  LA        A1, $Function_802421D8
    18:  SW        RA, 14 (SP)
    1C:  SAW       S0, $End[E84]
-   24:  JAL       ~Func:create_dynamic_entity_frontUI
+   24:  JAL       ~Func:create_generic_entity_frontUI
    28:  CLEAR     A0
    2C:  LI        A0, 1F
    30:  ADDIU     V1, S0, E0C
@@ -2780,7 +2770,7 @@ PADDING: 802428F4 to 80242900 (000028F4 to 00002900)
    E0:  SWC1      F24, 10 (SP)
    E4:  SWC1      F22, 14 (SP)
    E8:  SWC1      F20, 18 (SP)
-   EC:  JAL       80070F70
+   EC:  JAL       ~Func:playFX_3D
    F0:  SW        V0, 20 (SP)
    F4:  LW        V1, 28 (SP)
    F8:  SW        V1, 84 (S1)
@@ -2896,9 +2886,9 @@ PADDING: 80242B3C to 80242B40 (00002B3C to 00002B40)
 
 #new:Script_Main $Script_Main
 {
-    0:  Call  SetCamPerspective ( .Cam:Default 00000003 00000023 00000010 00001000 )
-   20:  Call  SetCamViewport    ( .Cam:Default 0000000F 0000001C 00000122 00000080 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+    0:  Call  SetCamPerspective ( .Cam:Default 00000003  35`  16`  4096` )
+   20:  Call  SetCamViewport    ( .Cam:Default  15`  28`  290`  128` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    84:  Call  FadeOutMusic      ( 00000000 000001F4 )
@@ -2910,7 +2900,6 @@ PADDING: 80242B3C to 80242B40 (00002B3C to 00002B40)
    D8:  End
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_80242C70
 {
 	02070001 020A0001 03040001 070D0001 09040001 0C040001 0C0C0001 0C140001
@@ -2919,7 +2908,6 @@ PADDING: 80242B3C to 80242B40 (00002B3C to 00002B40)
 	16110001 00000000
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_80242CD8
 {
 	00020001 00060001 000E0001 00030001 00080001 000A0001 000D0001 00130001
@@ -2929,7 +2917,6 @@ PADDING: 80242B3C to 80242B40 (00002B3C to 00002B40)
 	140A0001 00000000
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_80242D60
 {
 	028001E0 01FF0000 028001E0 01FF0000
@@ -3211,8 +3198,8 @@ PADDING: 802446A8 to 802446B0 (000046A8 to 000046B0)
 
 #new:Script $Script_802446B0
 {
-    0:  Call  UseSettingsFrom   ( .Cam:Default FFFFF3F8 00000000 00000000 )
-   1C:  Call  SetPanTarget  ( .Cam:Default FFFFF3F8 00000000 00000000 )
+    0:  Call  UseSettingsFrom   ( .Cam:Default  -3080`  0`  0` )
+   1C:  Call  SetPanTarget  ( .Cam:Default  -3080`  0`  0` )
    38:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
    4C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
    64:  Return
@@ -3221,7 +3208,7 @@ PADDING: 802446A8 to 802446B0 (000046A8 to 000046B0)
 
 #new:Script $Script_80244724
 {
-    0:  Call  SetPanTarget  ( .Cam:Default *Fixed[-3080.0] 00000000 00000000 )
+    0:  Call  SetPanTarget  ( .Cam:Default *Fixed[-3080.0]  0`  0` )
    1C:  SetF  *Var1  *Fixed[0.0]
    2C:  Loop
    38:  	Call  $Function_802427D8 ( )
@@ -3836,7 +3823,7 @@ PADDING: 802446A8 to 802446B0 (000046A8 to 000046B0)
    10:  Call  DisablePlayerPhysics  ( .True )
    20:  Thread
    28:  	Label  0
-   34:  	Call  SetPlayerPos  ( 00000000 FFFFFC18 00000000 )
+   34:  	Call  SetPlayerPos  (  0`  -1000`  0` )
    4C:  	Wait  1`
    58:  	Goto  0
    64:  EndThread
@@ -3983,10 +3970,10 @@ PADDING: 802446A8 to 802446B0 (000046A8 to 000046B0)
    48:  		Wait  15`
    54:  	EndLoop
    5C:  EndThread
-   64:  Call  NpcMoveTo     ( 00000000 FFFFF3F8 00000000 00000078 )
+   64:  Call  NpcMoveTo     ( 00000000  -3080`  0`  120` )
    80:  Call  SetNpcAnimation   ( 00000000 00D90001 )
    94:  Wait  10`
-   A0:  Call  InterpNpcYaw  ( 00000000 0000005A 00000000 )
+   A0:  Call  InterpNpcYaw  ( 00000000  90`  0` )
    B8:  Wait  25`
    C4:  Call  StopSound     ( 00000089 )
    D4:  Wait  15`
@@ -4005,7 +3992,7 @@ PADDING: 802446A8 to 802446B0 (000046A8 to 000046B0)
   180:  Call  SetMusicTrack     ( 00000000 .Song:ParadeDay 00000000 00000008 )
   19C:  Wait  120`
   1A8:  Wait  100`
-  1B4:  Call  InterpNpcYaw      ( 00000000 0000010E 00000000 )
+  1B4:  Call  InterpNpcYaw      ( 00000000  270`  0` )
   1CC:  Wait  30`
   1D8:  Return
   1E0:  End
@@ -4026,9 +4013,9 @@ PADDING: 802446A8 to 802446B0 (000046A8 to 000046B0)
    EC:  ChildThread
    F4:  	Call  SetNpcJumpscale   ( 0000000D *Fixed[1.0] )
   108:  	Loop
-  114:  		Call  NpcJump0  ( 0000000D FFFFF60A 00000023 00000007 0000000F )
+  114:  		Call  NpcJump0  ( 0000000D  -2550`  35`  7`  15` )
   134:  		Wait  10`
-  140:  		Call  NpcJump0  ( 0000000D FFFFF5F6 0000003D 00000007 0000000F )
+  140:  		Call  NpcJump0  ( 0000000D  -2570`  61`  7`  15` )
   160:  		Wait  10`
   16C:  	EndLoop
   174:  EndChildThread
@@ -4054,8 +4041,8 @@ PADDING: 802446A8 to 802446B0 (000046A8 to 000046B0)
    5C:  		Call  GetNpcPos ( *Var0 *Var2 *Var3 *Var4 )
    78:  		Add   *Var2  FFFFFFF9
    88:  		Call  SetNpcPos ( *Var1 *Var2 *Var3 *Var4 )
-   A4:  		Call  NpcJump0  ( *Var1 *Var2 *Var3 *Var4 00000028 )
-   C4:  		Call  SetNpcPos ( *Var1 00000000 FFFFFE0C 00000000 )
+   A4:  		Call  NpcJump0  ( *Var1 *Var2 *Var3 *Var4  40` )
+   C4:  		Call  SetNpcPos ( *Var1  0`  -500`  0` )
    E0:  	EndChildThread
    E8:  	Call  SetNpcAnimation   ( *Var0 00DF0006 )
    FC:  	Wait  5`
@@ -4099,10 +4086,10 @@ PADDING: 802446A8 to 802446B0 (000046A8 to 000046B0)
   198:  		BreakLoop
   1A0:  	EndIf
   1A8:  EndLoop
-  1B0:  Call  InterpNpcYaw      ( 00000016 0000005A 00000005 )
+  1B0:  Call  InterpNpcYaw      ( 00000016  90`  5` )
   1C8:  Call  SetNpcAnimation   ( 00000016 00850005 )
   1DC:  Wait  30`
-  1E8:  Call  InterpNpcYaw      ( 00000016 0000010E 00000005 )
+  1E8:  Call  InterpNpcYaw      ( 00000016  270`  5` )
   200:  Call  SetNpcAnimation   ( 00000016 00850001 )
   214:  Return
   21C:  End
@@ -4192,7 +4179,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    CC:  Call  SetNpcAnimation   ( 00000017 0066010E )
    E0:  Call  SetNpcJumpscale   ( 00000017 *Fixed[1.0] )
    F4:  Call  GetNpcPos ( 00000017 *Var0 *Var1 *Var2 )
-  110:  Call  NpcJump0  ( 00000017 *Var0 *Var1 *Var2 00000014 )
+  110:  Call  NpcJump0  ( 00000017 *Var0 *Var1 *Var2  20` )
   130:  Call  SetNpcAnimation   ( 00000017 0066010F )
   144:  Return
   14C:  End
@@ -4212,7 +4199,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    CC:  Call  SetNpcAnimation   ( 00000018 0066000E )
    E0:  Call  SetNpcJumpscale   ( 00000018 *Fixed[1.0] )
    F4:  Call  GetNpcPos ( 00000018 *Var0 *Var1 *Var2 )
-  110:  Call  NpcJump0  ( 00000018 *Var0 *Var1 *Var2 00000014 )
+  110:  Call  NpcJump0  ( 00000018 *Var0 *Var1 *Var2  20` )
   130:  Call  SetNpcAnimation   ( 00000018 0066000F )
   144:  Return
   14C:  End
@@ -4232,7 +4219,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    CC:  Call  SetNpcAnimation   ( 00000019 0066020E )
    E0:  Call  SetNpcJumpscale   ( 00000019 *Fixed[1.0] )
    F4:  Call  GetNpcPos ( 00000019 *Var0 *Var1 *Var2 )
-  110:  Call  NpcJump0  ( 00000019 *Var0 *Var1 *Var2 00000014 )
+  110:  Call  NpcJump0  ( 00000019 *Var0 *Var1 *Var2  20` )
   130:  Call  SetNpcAnimation   ( 00000019 0066020F )
   144:  Return
   14C:  End
@@ -4252,7 +4239,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    CC:  Call  SetNpcAnimation   ( 0000001A 0066030E )
    E0:  Call  SetNpcJumpscale   ( 0000001A *Fixed[1.0] )
    F4:  Call  GetNpcPos ( 0000001A *Var0 *Var1 *Var2 )
-  110:  Call  NpcJump0  ( 0000001A *Var0 *Var1 *Var2 00000014 )
+  110:  Call  NpcJump0  ( 0000001A *Var0 *Var1 *Var2  20` )
   130:  Call  SetNpcAnimation   ( 0000001A 0066030F )
   144:  Return
   14C:  End
@@ -4262,7 +4249,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
 {
     0:  Call  SetNpcFlagBits    ( 0000001B 00008048 .True )
    18:  Wait  180`
-   24:  Call  NpcMoveTo ( 0000001B FFFFF894 0000002B 00000046 )
+   24:  Call  NpcMoveTo ( 0000001B  -1900`  43`  70` )
    40:  Call  SetNpcAnimation   ( 0000001B 002C000B )
    54:  Wait  40`
    60:  Call  SetNpcAnimation   ( 0000001B 002C0014 )
@@ -4271,10 +4258,10 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    94:  Call  GetNpcPos ( 0000001B *Var0 *Var1 *Var2 )
    B0:  Call  PlayEffect        ( ~FX:BigSteamPuff *Var0 *Var1 *Var2 00000001 00000014 00000003 00000002 00000000 00000000 00000000 00000000 00000000 00000000 )
    F4:  Call  EnableNpcShadow   ( 0000001B .False )
-  108:  Call  NpcFlyTo  ( 0000001B *Var0 000000C8 *Var2 0000000A 00000000 .Easing:Linear )
-  130:  Call  SetNpcPos ( 0000001B FFFFF8B2 000000C8 00000028 )
-  14C:  Call  NpcFlyTo  ( 0000001B FFFFF8B2 0000000C 00000028 00000014 00000000 .Easing:Linear )
-  174:  Call  SetNpcYaw ( 0000001B 0000010E )
+  108:  Call  NpcFlyTo  ( 0000001B *Var0  200` *Var2  10`  0` .Easing:Linear )
+  130:  Call  SetNpcPos ( 0000001B  -1870`  200`  40` )
+  14C:  Call  NpcFlyTo  ( 0000001B  -1870`  12`  40`  20`  0` .Easing:Linear )
+  174:  Call  SetNpcYaw ( 0000001B  270` )
   188:  Wait  10`
   194:  Call  SetNpcAnimation   ( 0000001B 002C0017 )
   1A8:  Return
@@ -4285,7 +4272,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
 {
     0:  Call  SetNpcFlagBits    ( 0000001C 00008048 .True )
    18:  Wait  180`
-   24:  Call  NpcMoveTo ( 0000001C FFFFF8B2 0000002B 00000046 )
+   24:  Call  NpcMoveTo ( 0000001C  -1870`  43`  70` )
    40:  Call  SetNpcAnimation   ( 0000001C 002C000B )
    54:  Wait  40`
    60:  Call  SetNpcAnimation   ( 0000001C 002C0014 )
@@ -4294,10 +4281,10 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    94:  Call  GetNpcPos ( 0000001C *Var0 *Var1 *Var2 )
    B0:  Call  PlayEffect        ( ~FX:BigSteamPuff *Var0 *Var1 *Var2 00000001 00000014 00000003 00000002 00000000 00000000 00000000 00000000 00000000 00000000 )
    F4:  Call  EnableNpcShadow   ( 0000001C .False )
-  108:  Call  NpcFlyTo  ( 0000001C *Var0 000000C8 *Var2 0000000A 00000000 .Easing:Linear )
-  130:  Call  SetNpcPos ( 0000001C FFFFF8BC 000000C8 0000000D )
-  14C:  Call  NpcFlyTo  ( 0000001C FFFFF8BC 00000041 0000000D 00000014 00000000 .Easing:Linear )
-  174:  Call  SetNpcYaw ( 0000001C 0000010E )
+  108:  Call  NpcFlyTo  ( 0000001C *Var0  200` *Var2  10`  0` .Easing:Linear )
+  130:  Call  SetNpcPos ( 0000001C  -1860`  200`  13` )
+  14C:  Call  NpcFlyTo  ( 0000001C  -1860`  65`  13`  20`  0` .Easing:Linear )
+  174:  Call  SetNpcYaw ( 0000001C  270` )
   188:  Wait  10`
   194:  Call  SetNpcAnimation   ( 0000001C 002C0017 )
   1A8:  Return
@@ -4308,7 +4295,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
 {
     0:  Call  SetNpcFlagBits    ( 0000001D 00008048 .True )
    18:  Wait  180`
-   24:  Call  NpcMoveTo ( 0000001D FFFFF8D0 0000002B 00000046 )
+   24:  Call  NpcMoveTo ( 0000001D  -1840`  43`  70` )
    40:  Call  SetNpcAnimation   ( 0000001D 002C000B )
    54:  Wait  40`
    60:  Call  SetNpcAnimation   ( 0000001D 002C0014 )
@@ -4317,10 +4304,10 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    94:  Call  GetNpcPos ( 0000001D *Var0 *Var1 *Var2 )
    B0:  Call  PlayEffect        ( ~FX:BigSteamPuff *Var0 *Var1 *Var2 00000001 00000014 00000003 00000002 00000000 00000000 00000000 00000000 00000000 00000000 )
    F4:  Call  EnableNpcShadow   ( 0000001D .False )
-  108:  Call  NpcFlyTo  ( 0000001D *Var0 000000C8 *Var2 0000000A 00000000 .Easing:Linear )
-  130:  Call  SetNpcPos ( 0000001D FFFFF8D0 000000C8 0000000D )
-  14C:  Call  NpcFlyTo  ( 0000001D FFFFF8D0 00000041 0000000D 00000014 00000000 .Easing:Linear )
-  174:  Call  SetNpcYaw ( 0000001D 0000005A )
+  108:  Call  NpcFlyTo  ( 0000001D *Var0  200` *Var2  10`  0` .Easing:Linear )
+  130:  Call  SetNpcPos ( 0000001D  -1840`  200`  13` )
+  14C:  Call  NpcFlyTo  ( 0000001D  -1840`  65`  13`  20`  0` .Easing:Linear )
+  174:  Call  SetNpcYaw ( 0000001D  90` )
   188:  Wait  10`
   194:  Call  SetNpcAnimation   ( 0000001D 002C0017 )
   1A8:  Return
@@ -4331,7 +4318,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
 {
     0:  Call  SetNpcFlagBits    ( 0000001E 00008048 .True )
    18:  Wait  180`
-   24:  Call  NpcMoveTo ( 0000001E FFFFF8EE 0000002B 00000046 )
+   24:  Call  NpcMoveTo ( 0000001E  -1810`  43`  70` )
    40:  Call  SetNpcAnimation   ( 0000001E 002C000B )
    54:  Wait  40`
    60:  Call  SetNpcAnimation   ( 0000001E 002C0014 )
@@ -4340,10 +4327,10 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    94:  Call  GetNpcPos ( 0000001E *Var0 *Var1 *Var2 )
    B0:  Call  PlayEffect        ( ~FX:BigSteamPuff *Var0 *Var1 *Var2 00000001 00000014 00000003 00000002 00000000 00000000 00000000 00000000 00000000 00000000 )
    F4:  Call  EnableNpcShadow   ( 0000001E .False )
-  108:  Call  NpcFlyTo  ( 0000001E *Var0 000000C8 *Var2 0000000A 00000000 .Easing:Linear )
-  130:  Call  SetNpcPos ( 0000001E FFFFF8DA 000000C8 00000028 )
-  14C:  Call  NpcFlyTo  ( 0000001E FFFFF8DA 0000000C 00000028 00000014 00000000 .Easing:Linear )
-  174:  Call  SetNpcYaw ( 0000001E 0000005A )
+  108:  Call  NpcFlyTo  ( 0000001E *Var0  200` *Var2  10`  0` .Easing:Linear )
+  130:  Call  SetNpcPos ( 0000001E  -1830`  200`  40` )
+  14C:  Call  NpcFlyTo  ( 0000001E  -1830`  12`  40`  20`  0` .Easing:Linear )
+  174:  Call  SetNpcYaw ( 0000001E  90` )
   188:  Wait  10`
   194:  Call  SetNpcAnimation   ( 0000001E 002C0017 )
   1A8:  Return
@@ -4486,7 +4473,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    1C:  SetF  *Var0  *Var0
    2C:  Loop
    38:  	AddF  *Var0  *Fixed[0.87]
-   48:  	Call  SetNpcPos ( 00000023 *Var0 00000000 00000000 )
+   48:  	Call  SetNpcPos ( 00000023 *Var0  0`  0` )
    64:  	Wait  1`
    70:  EndLoop
    78:  Return
@@ -4497,7 +4484,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
 {
     0:  Call  SetNpcScale   ( 00000022 *Fixed[0.75] *Fixed[0.75] *Fixed[0.75] )
    1C:  Thread
-   24:  	Call  NpcMoveTo ( 00000021 FFFFFA59 FFFFFFFE 000000C8 )
+   24:  	Call  NpcMoveTo ( 00000021  -1447`  -2`  200` )
    40:  	Set   *Var0  00000021
    50:  	Exec  $Script_80248F30 *VarA
    60:  	Call  SetNpcAnimation   ( 00000021 00A70009 )
@@ -4516,22 +4503,22 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   134:  	Wait  30`
   140:  	Call  SetNpcAnimation   ( 00000021 00A7000A )
   154:  	Kill  *VarA
-  160:  	Call  NpcMoveTo ( 00000021 FFFFFCEF FFFFFFFE 0000012C )
-  17C:  	Call  SetNpcPos ( 00000021 00000000 FFFFFE0C 00000000 )
+  160:  	Call  NpcMoveTo ( 00000021  -785`  -2`  300` )
+  17C:  	Call  SetNpcPos ( 00000021  0`  -500`  0` )
   198:  EndThread
   1A0:  Thread
-  1A8:  	Call  NpcMoveTo ( 00000022 FFFFFA7C FFFFFFFE 000000C8 )
+  1A8:  	Call  NpcMoveTo ( 00000022  -1412`  -2`  200` )
   1C4:  	Set   *Var0  00000022
   1D4:  	Exec  $Script_80248F30 *VarA
   1E4:  	Call  SetNpcAnimation   ( 00000022 00A70009 )
   1F8:  	Wait  220`
   204:  	Call  SetNpcAnimation   ( 00000022 00A7000A )
   218:  	Kill  *VarA
-  224:  	Call  NpcMoveTo ( 00000022 FFFFFD12 FFFFFFFE 0000012C )
-  240:  	Call  SetNpcPos ( 00000022 00000000 FFFFFE0C 00000000 )
+  224:  	Call  NpcMoveTo ( 00000022  -750`  -2`  300` )
+  240:  	Call  SetNpcPos ( 00000022  0`  -500`  0` )
   25C:  EndThread
   264:  Thread
-  26C:  	Call  NpcMoveTo ( 00000023 FFFFFA9C 00000002 000000B4 )
+  26C:  	Call  NpcMoveTo ( 00000023  -1380`  2`  180` )
   288:  	Set   *Var0  00000023
   298:  	Exec  $Script_80248F30 *VarA
   2A8:  	Call  SetNpcAnimation   ( 00000023 00BD0001 )
@@ -4542,12 +4529,12 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   2FC:  	Wait  30`
   308:  	Call  SetNpcAnimation   ( 00000023 00BD0006 )
   31C:  	Wait  30`
-  328:  	Call  InterpNpcYaw      ( 00000023 0000005A 00000000 )
+  328:  	Call  InterpNpcYaw      ( 00000023  90`  0` )
   340:  	Call  SetNpcAnimation   ( 00000023 00BD0005 )
   354:  	Wait  30`
   360:  	Call  SetNpcAnimation   ( 00000023 00BD0006 )
   374:  	Wait  30`
-  380:  	Call  InterpNpcYaw      ( 00000023 0000010E 00000000 )
+  380:  	Call  InterpNpcYaw      ( 00000023  270`  0` )
   398:  	Call  SetNpcAnimation   ( 00000023 00BD0005 )
   3AC:  	Wait  30`
   3B8:  	Call  SetNpcAnimation   ( 00000023 00BD0006 )
@@ -4558,11 +4545,11 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   40C:  	Wait  10`
   418:  	Call  SetNpcAnimation   ( 00000023 00BD0004 )
   42C:  	Kill  *VarA
-  438:  	Call  NpcMoveTo ( 00000023 FFFFFAB0 00000002 000000B4 )
+  438:  	Call  NpcMoveTo ( 00000023  -1360`  2`  180` )
   454:  EndThread
   45C:  Thread
   464:  	Wait  10`
-  470:  	Call  NpcMoveTo ( 00000024 FFFFFAC2 00000002 000000B4 )
+  470:  	Call  NpcMoveTo ( 00000024  -1342`  2`  180` )
   48C:  	Set   *Var0  00000024
   49C:  	Exec  $Script_80248F30 *VarA
   4AC:  	Call  SetNpcAnimation   ( 00000024 00940003 )
@@ -4573,26 +4560,26 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   500:  	Wait  90`
   50C:  	Call  SetNpcAnimation   ( 00000024 00940004 )
   520:  	Kill  *VarA
-  52C:  	Call  NpcMoveTo ( 00000024 FFFFFACE 00000002 000000B4 )
+  52C:  	Call  NpcMoveTo ( 00000024  -1330`  2`  180` )
   548:  EndThread
   550:  Thread
   558:  	Wait  10`
-  564:  	Call  NpcMoveTo ( 00000025 FFFFFAE0 00000002 000000B4 )
+  564:  	Call  NpcMoveTo ( 00000025  -1312`  2`  180` )
   580:  	Set   *Var0  00000025
   590:  	Exec  $Script_80248F30 *VarA
   5A0:  	Call  SetNpcAnimation   ( 00000025 00940003 )
   5B4:  	Wait  230`
   5C0:  	Call  SetNpcAnimation   ( 00000025 00940004 )
   5D4:  	Kill  *VarA
-  5E0:  	Call  NpcMoveTo ( 00000025 FFFFFAEC 00000002 000000B4 )
+  5E0:  	Call  NpcMoveTo ( 00000025  -1300`  2`  180` )
   5FC:  EndThread
   604:  Thread
   60C:  	Wait  240`
-  618:  	Call  NpcMoveTo ( 00000026 FFFFF9FC 0000001E 0000003C )
+  618:  	Call  NpcMoveTo ( 00000026  -1540`  30`  60` )
   634:  	Wait  210`
-  640:  	Call  SetNpcPos ( 00000026 FFFFFABA 00000000 0000001E )
-  65C:  	Call  SetNpcYaw ( 00000026 0000005A )
-  670:  	Call  NpcMoveTo ( 00000026 FFFFFBAA 0000001E 0000001E )
+  640:  	Call  SetNpcPos ( 00000026  -1350`  0`  30` )
+  65C:  	Call  SetNpcYaw ( 00000026  90` )
+  670:  	Call  NpcMoveTo ( 00000026  -1110`  30`  30` )
   68C:  	Call  SetNpcAnimation   ( 00000026 00680009 )
   6A0:  	Call  MakeLerp  ( 00000000 0000005A 00000005 .Easing:Linear )
   6BC:  	Loop  00000005
@@ -4604,7 +4591,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   714:  		EndIf
   71C:  	EndLoop
   724:  	Wait  20`
-  730:  	Call  ShowEmote ( 00000026 .Emote:Ellipsis 00000000 0000003C 00000001 00000000 00000000 00000000 00000000 )
+  730:  	Call  ShowEmote ( 00000026 .Emote:Ellipsis  0`  60` .True  0`  0`  0`  0` )
   760:  	Wait  60`
   76C:  	Call  MakeLerp  ( 0000005A 00000000 00000005 .Easing:Linear )
   788:  	Loop  00000005
@@ -4616,26 +4603,26 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   7E0:  		EndIf
   7E8:  	EndLoop
   7F0:  	Call  SetNpcAnimation   ( 00000026 00680001 )
-  804:  	Call  InterpNpcYaw  ( 00000026 0000010E 00000007 )
+  804:  	Call  InterpNpcYaw  ( 00000026  270`  7` )
   81C:  	Wait  15`
-  828:  	Call  InterpNpcYaw  ( 00000026 0000005A 00000007 )
+  828:  	Call  InterpNpcYaw  ( 00000026  90`  7` )
   840:  	Wait  15`
-  84C:  	Call  InterpNpcYaw  ( 00000026 0000010E 00000007 )
+  84C:  	Call  InterpNpcYaw  ( 00000026  270`  7` )
   864:  	Wait  15`
   870:  	Call  SetNpcAnimation   ( 00000026 00680004 )
   884:  	Call  SetNpcJumpscale   ( 00000026 *Fixed[1.0] )
-  898:  	Call  NpcJump0      ( 00000026 FFFFFB8C 00000000 0000001E 0000000F )
-  8B8:  	Call  NpcJump0      ( 00000026 FFFFFB6E 00000000 0000001E 0000000F )
-  8D8:  	Call  NpcJump0      ( 00000026 FFFFFB50 00000000 0000001E 0000000F )
+  898:  	Call  NpcJump0      ( 00000026  -1140`  0`  30`  15` )
+  8B8:  	Call  NpcJump0      ( 00000026  -1170`  0`  30`  15` )
+  8D8:  	Call  NpcJump0      ( 00000026  -1200`  0`  30`  15` )
   8F8:  EndThread
   900:  Thread
   908:  	Wait  240`
-  914:  	Call  NpcMoveTo ( 00000027 FFFFFA38 0000001E 0000003C )
+  914:  	Call  NpcMoveTo ( 00000027  -1480`  30`  60` )
   930:  	Wait  210`
-  93C:  	Call  SetNpcPos ( 00000027 FFFFFA7E 00000000 0000001E )
-  958:  	Call  SetNpcYaw ( 00000027 0000005A )
-  96C:  	Call  NpcMoveTo ( 00000027 FFFFFD4E 0000001E 0000005A )
-  988:  	Call  SetNpcPos ( 00000027 00000000 FFFFFE0C 00000000 )
+  93C:  	Call  SetNpcPos ( 00000027  -1410`  0`  30` )
+  958:  	Call  SetNpcYaw ( 00000027  90` )
+  96C:  	Call  NpcMoveTo ( 00000027  -690`  30`  90` )
+  988:  	Call  SetNpcPos ( 00000027  0`  -500`  0` )
   9A4:  EndThread
   9AC:  Return
   9B4:  End
@@ -4661,10 +4648,10 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    4C:  	EndIf
    54:  EndLoop
    5C:  Wait  200`
-   68:  Call  ShowEmote ( 00000028 .Emote:Shock 0000002D 0000001E 00000001 00000000 00000000 00000000 00000000 )
+   68:  Call  ShowEmote ( 00000028 .Emote:Shock  45`  30` .True  0`  0`  0`  0` )
    98:  Wait  40`
    A4:  Call  SetNpcAnimation   ( 00000028 00670003 )
-   B8:  Call  NpcFlyTo  ( 00000028 FFFFFCA9 00000064 FFFFFF4C 0000003C 00000000 .Easing:Linear )
+   B8:  Call  NpcFlyTo  ( 00000028  -855`  100`  -180`  60`  0` .Easing:Linear )
    E0:  Call  SetNpcAnimation   ( 00000029 00DD0007 )
    F4:  Call  SetNpcAnimation   ( 0000002A 00DD0007 )
   108:  Call  SetNpcAnimation   ( 0000002B 00DD0007 )
@@ -4677,14 +4664,14 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   184:  Call  SetNpcAnimation   ( 0000002A 00DD0004 )
   198:  Call  SetNpcAnimation   ( 0000002B 00DD0003 )
   1AC:  Wait  30`
-  1B8:  Call  InterpNpcYaw      ( 00000028 0000005A 00000000 )
-  1D0:  Call  NpcFlyTo  ( 00000028 FFFFFCDB 00000064 FFFFFFB0 0000001E 00000000 .Easing:Linear )
+  1B8:  Call  InterpNpcYaw      ( 00000028  90`  0` )
+  1D0:  Call  NpcFlyTo  ( 00000028  -805`  100`  -80`  30`  0` .Easing:Linear )
   1F8:  Thread
   200:  	Loop  00000006
   20C:  		Wait  20`
-  218:  		Call  InterpNpcYaw  ( 00000028 0000010E 00000000 )
+  218:  		Call  InterpNpcYaw  ( 00000028  270`  0` )
   230:  		Wait  40`
-  23C:  		Call  InterpNpcYaw  ( 00000028 0000005A 00000000 )
+  23C:  		Call  InterpNpcYaw  ( 00000028  90`  0` )
   254:  		Wait  20`
   260:  	EndLoop
   268:  EndThread
@@ -4718,9 +4705,9 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    3C:  SetF  *Var4  *Var0
    4C:  SubF  *Var3  *Fixed[25.0]
    5C:  AddF  *Var4  *Fixed[25.0]
-   6C:  Call  SetNpcPos ( 00000032 *Var0 00000014 00000002 )
-   88:  Call  SetNpcPos ( 00000033 *Var3 00000014 FFFFFFFE )
-   A4:  Call  SetNpcPos ( 00000034 *Var4 00000014 00000002 )
+   6C:  Call  SetNpcPos ( 00000032 *Var0  20`  2` )
+   88:  Call  SetNpcPos ( 00000033 *Var3  20`  -2` )
+   A4:  Call  SetNpcPos ( 00000034 *Var4  20`  2` )
    C0:  ChildThread
    C8:  	Call  $Function_80242898    ( 00000032 )
    D8:  EndChildThread
@@ -4738,24 +4725,24 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
 #new:Script $Script_80249EA4
 {
     0:  Thread
-    8:  	Call  SetNpcPos ( 0000002D FFFFFC40 00000000 0000001E )
-   24:  	Call  NpcMoveTo ( 0000002D FFFFFF10 0000001E 0000005A )
-   40:  	Call  SetNpcPos ( 0000002D 00000000 FFFFFE0C 00000000 )
+    8:  	Call  SetNpcPos ( 0000002D  -960`  0`  30` )
+   24:  	Call  NpcMoveTo ( 0000002D  -240`  30`  90` )
+   40:  	Call  SetNpcPos ( 0000002D  0`  -500`  0` )
    5C:  EndThread
    64:  Thread
-   6C:  	Call  SetNpcPos ( 0000002E FFFFFC04 00000000 0000001E )
-   88:  	Call  NpcMoveTo ( 0000002E FFFFFED4 0000001E 0000005A )
-   A4:  	Call  SetNpcPos ( 0000002E 00000000 FFFFFE0C 00000000 )
+   6C:  	Call  SetNpcPos ( 0000002E  -1020`  0`  30` )
+   88:  	Call  NpcMoveTo ( 0000002E  -300`  30`  90` )
+   A4:  	Call  SetNpcPos ( 0000002E  0`  -500`  0` )
    C0:  EndThread
    C8:  Thread
-   D0:  	Call  SetNpcPos ( 0000002F FFFFFBE6 00000000 0000001E )
-   EC:  	Call  NpcMoveTo ( 0000002F FFFFFEB6 0000001E 0000005A )
-  108:  	Call  SetNpcPos ( 0000002F 00000000 FFFFFE0C 00000000 )
+   D0:  	Call  SetNpcPos ( 0000002F  -1050`  0`  30` )
+   EC:  	Call  NpcMoveTo ( 0000002F  -330`  30`  90` )
+  108:  	Call  SetNpcPos ( 0000002F  0`  -500`  0` )
   124:  EndThread
   12C:  Thread
-  134:  	Call  SetNpcPos ( 00000030 FFFFFBC8 00000000 0000001E )
-  150:  	Call  NpcMoveTo ( 00000030 FFFFFE98 0000001E 0000005A )
-  16C:  	Call  SetNpcPos ( 00000030 00000000 FFFFFE0C 00000000 )
+  134:  	Call  SetNpcPos ( 00000030  -1080`  0`  30` )
+  150:  	Call  NpcMoveTo ( 00000030  -360`  30`  90` )
+  16C:  	Call  SetNpcPos ( 00000030  0`  -500`  0` )
   188:  EndThread
   190:  Return
   198:  End
@@ -4770,7 +4757,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    44:  		BreakLoop
    4C:  	EndIf
    54:  EndLoop
-   5C:  Call  InterpNpcYaw  ( 0000002C 0000005A 00000000 )
+   5C:  Call  InterpNpcYaw  ( 0000002C  90`  0` )
    74:  Set   *Var0  0000002C
    84:  Exec  $Script_802447F4 *VarA
    94:  Loop
@@ -4788,16 +4775,16 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   178:  Call  EnableNpcShadow   ( 00000032 .False )
   18C:  Call  EnableNpcShadow   ( 00000033 .False )
   1A0:  Call  EnableNpcShadow   ( 00000034 .False )
-  1B4:  Call  NpcMoveTo     ( 00000031 FFFFFE34 00000000 00000064 )
+  1B4:  Call  NpcMoveTo     ( 00000031  -460`  0`  100` )
   1D0:  Exec  $Script_80249D64 *VarB
   1E0:  Wait  20`
-  1EC:  Call  SetNpcPos     ( 00000035 FFFFFEFC 00000000 00000000 )
+  1EC:  Call  SetNpcPos     ( 00000035  -260`  0`  0` )
   208:  Call  SetNpcJumpscale   ( 00000035 *Fixed[1.0] )
-  21C:  Call  NpcJump0      ( 00000035 FFFFFEDE 00000000 00000000 0000000A )
-  23C:  Call  NpcJump0      ( 00000035 FFFFFEC0 00000000 00000000 0000000A )
+  21C:  Call  NpcJump0      ( 00000035  -290`  0`  0`  10` )
+  23C:  Call  NpcJump0      ( 00000035  -320`  0`  0`  10` )
   25C:  Set   *Var0  00000035
   26C:  Exec  $Script_802447F4 *VarC
-  27C:  Call  InterpNpcYaw  ( 00000031 0000005A 00000000 )
+  27C:  Call  InterpNpcYaw  ( 00000031  90`  0` )
   294:  Thread
   29C:  	Call  MakeLerp  ( 00000000 000000FF 0000001E .Easing:Linear )
   2B8:  	Loop  0000001E
@@ -4830,39 +4817,39 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   480:  Wait  60`
   48C:  Kill  *VarA
   498:  Thread
-  4A0:  	Call  InterpNpcYaw  ( 0000002C 0000010E 00000000 )
+  4A0:  	Call  InterpNpcYaw  ( 0000002C  270`  0` )
   4B8:  	Call  SetNpcAnimation   ( 0000002C 00BF0004 )
   4CC:  	Call  GetNpcPos     ( 0000002C *Var0 *Var1 *Var2 )
   4E8:  	Sub   *Var0  000000B4
-  4F8:  	Call  NpcMoveTo     ( 0000002C *Var0 *Var2 0000003C )
+  4F8:  	Call  NpcMoveTo     ( 0000002C *Var0 *Var2  60` )
   514:  EndThread
   51C:  Kill  *VarB
   528:  Thread
-  530:  	Call  InterpNpcYaw  ( 00000031 0000010E 00000000 )
+  530:  	Call  InterpNpcYaw  ( 00000031  270`  0` )
   548:  	Call  GetNpcPos     ( 00000031 *Var0 *Var1 *Var2 )
   564:  	Sub   *Var0  000000B4
-  574:  	Call  NpcMoveTo     ( 00000031 *Var0 *Var2 0000003C )
+  574:  	Call  NpcMoveTo     ( 00000031 *Var0 *Var2  60` )
   590:  EndThread
   598:  Thread
-  5A0:  	Call  InterpNpcYaw  ( 00000032 0000010E 00000000 )
+  5A0:  	Call  InterpNpcYaw  ( 00000032  270`  0` )
   5B8:  	Call  SetNpcAnimation   ( 00000032 00950005 )
   5CC:  	Call  GetNpcPos     ( 00000032 *Var0 *Var1 *Var2 )
   5E8:  	Sub   *Var0  000000B4
-  5F8:  	Call  NpcMoveTo     ( 00000032 *Var0 *Var2 0000003C )
+  5F8:  	Call  NpcMoveTo     ( 00000032 *Var0 *Var2  60` )
   614:  EndThread
   61C:  Thread
-  624:  	Call  InterpNpcYaw  ( 00000033 0000010E 00000000 )
+  624:  	Call  InterpNpcYaw  ( 00000033  270`  0` )
   63C:  	Call  SetNpcAnimation   ( 00000033 00950005 )
   650:  	Call  GetNpcPos     ( 00000033 *Var0 *Var1 *Var2 )
   66C:  	Sub   *Var0  000000B4
-  67C:  	Call  NpcMoveTo     ( 00000033 *Var0 *Var2 0000003C )
+  67C:  	Call  NpcMoveTo     ( 00000033 *Var0 *Var2  60` )
   698:  EndThread
   6A0:  Thread
-  6A8:  	Call  InterpNpcYaw  ( 00000034 0000010E 00000000 )
+  6A8:  	Call  InterpNpcYaw  ( 00000034  270`  0` )
   6C0:  	Call  SetNpcAnimation   ( 00000034 00950005 )
   6D4:  	Call  GetNpcPos     ( 00000034 *Var0 *Var1 *Var2 )
   6F0:  	Sub   *Var0  000000B4
-  700:  	Call  NpcMoveTo     ( 00000034 *Var0 *Var2 0000003C )
+  700:  	Call  NpcMoveTo     ( 00000034 *Var0 *Var2  60` )
   71C:  EndThread
   724:  Wait  30`
   730:  Kill  *VarC
@@ -4870,7 +4857,7 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   750:  Call  GetNpcPos ( 00000035 *Var0 *Var1 *Var2 )
   76C:  Loop  00000006
   778:  	Sub   *Var0  0000002D
-  788:  	Call  NpcJump0  ( 00000035 *Var0 *Var1 *Var2 0000000F )
+  788:  	Call  NpcJump0  ( 00000035 *Var0 *Var1 *Var2  15` )
   7A8:  EndLoop
   7B0:  Return
   7B8:  End
@@ -4882,21 +4869,21 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
     C:  Call  SetNpcRotation    ( 00000036 00000000 00000000 000000B4 )
    28:  Thread
    30:  	Loop  00000008
-   3C:  		Call  NpcMoveTo ( 00000037 FFFFFFE2 FFFFFFE4 00000014 )
-   58:  		Call  NpcMoveTo ( 00000037 FFFFFF92 FFFFFFE4 00000014 )
+   3C:  		Call  NpcMoveTo ( 00000037  -30`  -28`  20` )
+   58:  		Call  NpcMoveTo ( 00000037  -110`  -28`  20` )
    74:  	EndLoop
-   7C:  	Call  NpcMoveTo ( 00000037 FFFFFFE2 FFFFFFE4 00000014 )
+   7C:  	Call  NpcMoveTo ( 00000037  -30`  -28`  20` )
    98:  	Call  GetNpcPos ( 00000037 *Var0 *Var1 *Var2 )
-   B4:  	Call  NpcJump0  ( 00000037 *Var0 *Var1 *Var2 00000014 )
+   B4:  	Call  NpcJump0  ( 00000037 *Var0 *Var1 *Var2  20` )
    D4:  EndThread
    DC:  Thread
    E4:  	Loop  00000008
-   F0:  		Call  NpcMoveTo ( 00000038 FFFFFF92 FFFFFFE0 00000014 )
-  10C:  		Call  NpcMoveTo ( 00000038 FFFFFFE2 FFFFFFE0 00000014 )
+   F0:  		Call  NpcMoveTo ( 00000038  -110`  -32`  20` )
+  10C:  		Call  NpcMoveTo ( 00000038  -30`  -32`  20` )
   128:  	EndLoop
-  130:  	Call  NpcMoveTo ( 00000038 FFFFFF92 FFFFFFE0 00000014 )
+  130:  	Call  NpcMoveTo ( 00000038  -110`  -32`  20` )
   14C:  	Call  GetNpcPos ( 00000038 *Var0 *Var1 *Var2 )
-  168:  	Call  NpcJump0  ( 00000038 *Var0 *Var1 *Var2 00000014 )
+  168:  	Call  NpcJump0  ( 00000038 *Var0 *Var1 *Var2  20` )
   188:  EndThread
   190:  Loop  00000010
   19C:  	Call  802D7E08  ( 00000037 00000000 0000002D 00000001 00000000 00000000 00000000 00000000 00000014 )
@@ -4932,17 +4919,17 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
   40C:  EndThread
   414:  Call  GetNpcPos ( 00000036 *Var0 *Var1 *Var2 )
   430:  Call  SetNpcJumpscale   ( 00000036 *Fixed[0.5] )
-  444:  Call  NpcJump0  ( 00000036 *Var0 00000000 00000000 00000014 )
+  444:  Call  NpcJump0  ( 00000036 *Var0  0`  0`  20` )
   464:  Wait  30`
   470:  Thread
-  478:  	Call  NpcMoveTo ( 00000037 FFFFFFE2 00000000 0000000F )
-  494:  	Call  NpcMoveTo ( 00000037 FFFFFF2E 00000000 000000B4 )
+  478:  	Call  NpcMoveTo ( 00000037  -30`  0`  15` )
+  494:  	Call  NpcMoveTo ( 00000037  -210`  0`  180` )
   4B0:  EndThread
   4B8:  Thread
-  4C0:  	Call  NpcMoveTo ( 00000038 FFFFFFE2 00000000 00000037 )
-  4DC:  	Call  NpcMoveTo ( 00000038 FFFFFF56 00000000 0000008C )
+  4C0:  	Call  NpcMoveTo ( 00000038  -30`  0`  55` )
+  4DC:  	Call  NpcMoveTo ( 00000038  -170`  0`  140` )
   4F8:  EndThread
-  500:  Call  NpcMoveTo ( 00000036 FFFFFF06 00000000 000000B4 )
+  500:  Call  NpcMoveTo ( 00000036  -250`  0`  180` )
   51C:  Return
   524:  End
 }
@@ -4961,9 +4948,9 @@ PADDING: 80247BA8 to 80247BB0 (00007BA8 to 00007BB0)
    80:  ChildThread
    88:  	Call  SetNpcScale   ( 0000003E *Fixed[2.0] *Fixed[2.0] 00000001 )
    A4:  	Loop
-   B0:  		Call  NpcFlyTo  ( 0000003E 00000165 00000000 FFFFFFE2 0000000A 00000000 .Easing:Linear )
+   B0:  		Call  NpcFlyTo  ( 0000003E  357`  0`  -30`  10`  0` .Easing:Linear )
    D8:  		Wait  60`
-   E4:  		Call  NpcFlyTo  ( 0000003E 00000165 FFFFFF88 FFFFFFE2 0000000A 00000000 .Easing:Linear )
+   E4:  		Call  NpcFlyTo  ( 0000003E  357`  -120`  -30`  10`  0` .Easing:Linear )
   10C:  		Wait  60`
   118:  	EndLoop
   120:  EndChildThread
@@ -5045,8 +5032,8 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
    6C:  Call  SetNpcPos ( 00000045 *Var0 *Var1 *Var2 )
    88:  Call  SetNpcPos ( 00000046 *Var0 *Var1 *Var2 )
    A4:  Call  SetNpcPos ( 00000047 *Var0 *Var1 *Var2 )
-   C0:  Call  SetNpcPos ( 00000048 *Var3 0000003C 00000000 )
-   DC:  Call  SetNpcPos ( 00000049 *Var4 0000003C 00000000 )
+   C0:  Call  SetNpcPos ( 00000048 *Var3  60`  0` )
+   DC:  Call  SetNpcPos ( 00000049 *Var4  60`  0` )
    F8:  ChildThread
   100:  	Call  $Function_80242898    ( 00000046 )
   110:  EndChildThread
@@ -5099,9 +5086,9 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
    94:  	Call  SetNpcPos ( 00000046 *Var0 *Var1 *Var2 )
    B0:  	Call  SetNpcPos ( 00000047 *Var0 *Var1 *Var2 )
    CC:  	Add   *Var3  FFFFFFFE
-   DC:  	Call  SetNpcPos ( 00000048 *Var3 0000003C 00000000 )
+   DC:  	Call  SetNpcPos ( 00000048 *Var3  60`  0` )
    F8:  	Add   *Var4  FFFFFFFE
-  108:  	Call  SetNpcPos ( 00000049 *Var4 0000003C 00000000 )
+  108:  	Call  SetNpcPos ( 00000049 *Var4  60`  0` )
   124:  	Wait  1`
   130:  EndLoop
   138:  Return
@@ -5119,7 +5106,7 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
    54:  EndLoop
    5C:  Call  GetNpcPos ( 00000049 *Var0 *Var1 *Var2 )
    78:  Call  SetNpcSpeed       ( 0000004A *Fixed[1.0] )
-   8C:  Call  NpcMoveTo ( 0000004A *Var0 FFFFFFEC 00000000 )
+   8C:  Call  NpcMoveTo ( 0000004A *Var0  -20`  0` )
    A8:  Call  SetNpcAnimation   ( 0000004A 00C10001 )
    BC:  Call  $Function_80242898    ( 0000004A )
    CC:  Return
@@ -5137,45 +5124,45 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
 {
     0:  Wait  20`
     C:  Call  SetNpcJumpscale   ( 00000040 *Fixed[1.0] )
-   20:  Call  NpcJump0  ( 00000040 000002A8 00000000 00000000 00000014 )
-   40:  Call  NpcJump0  ( 00000040 000002E4 00000000 00000000 0000000A )
+   20:  Call  NpcJump0  ( 00000040  680`  0`  0`  20` )
+   40:  Call  NpcJump0  ( 00000040  740`  0`  0`  10` )
    60:  Call  SetNpcAnimation   ( 00000040 00970001 )
    74:  Loop  00000002
-   80:  	Call  InterpNpcYaw  ( 00000040 0000010E 00000007 )
+   80:  	Call  InterpNpcYaw  ( 00000040  270`  7` )
    98:  	Wait  10`
-   A4:  	Call  InterpNpcYaw  ( 00000040 0000005A 00000007 )
+   A4:  	Call  InterpNpcYaw  ( 00000040  90`  7` )
    BC:  	Wait  10`
    C8:  EndLoop
-   D0:  Call  InterpNpcYaw  ( 00000040 0000010E 00000007 )
+   D0:  Call  InterpNpcYaw  ( 00000040  270`  7` )
    E8:  Wait  10`
    F4:  Thread
    FC:  	Call  GetNpcPos ( 00000040 *Var0 *Var1 *Var2 )
-  118:  	Call  NpcJump0  ( 00000040 *Var0 *Var1 *Var2 00000007 )
+  118:  	Call  NpcJump0  ( 00000040 *Var0 *Var1 *Var2  7` )
   138:  	Call  SetNpcAnimation   ( 00000040 00970003 )
-  14C:  	Call  NpcMoveTo ( 00000040 000003D4 00000000 0000003C )
+  14C:  	Call  NpcMoveTo ( 00000040  980`  0`  60` )
   168:  	Call  SetNpcAnimation   ( 00000040 0097000C )
   17C:  EndThread
   184:  Thread
-  18C:  	Call  SetNpcPos ( 00000041 00000294 00000000 00000000 )
-  1A8:  	Call  NpcMoveTo ( 00000041 000003AC 00000000 00000046 )
+  18C:  	Call  SetNpcPos ( 00000041  660`  0`  0` )
+  1A8:  	Call  NpcMoveTo ( 00000041  940`  0`  70` )
   1C4:  	Call  SetNpcAnimation   ( 00000041 0097010C )
   1D8:  EndThread
   1E0:  Thread
   1E8:  	Wait  10`
-  1F4:  	Call  SetNpcPos ( 00000042 00000294 00000000 00000000 )
-  210:  	Call  NpcMoveTo ( 00000042 00000384 00000000 0000003C )
+  1F4:  	Call  SetNpcPos ( 00000042  660`  0`  0` )
+  210:  	Call  NpcMoveTo ( 00000042  900`  0`  60` )
   22C:  	Call  SetNpcAnimation   ( 00000042 0097020C )
   240:  EndThread
   248:  Thread
   250:  	Wait  20`
-  25C:  	Call  SetNpcPos ( 00000043 00000294 00000000 00000000 )
-  278:  	Call  NpcMoveTo ( 00000043 0000035C 00000000 00000032 )
+  25C:  	Call  SetNpcPos ( 00000043  660`  0`  0` )
+  278:  	Call  NpcMoveTo ( 00000043  860`  0`  50` )
   294:  	Call  SetNpcAnimation   ( 00000043 0097030C )
   2A8:  EndThread
   2B0:  Thread
   2B8:  	Wait  30`
-  2C4:  	Call  SetNpcPos ( 00000044 00000294 00000000 00000000 )
-  2E0:  	Call  NpcMoveTo ( 00000044 00000334 00000000 00000028 )
+  2C4:  	Call  SetNpcPos ( 00000044  660`  0`  0` )
+  2E0:  	Call  NpcMoveTo ( 00000044  820`  0`  40` )
   2FC:  	Call  SetNpcAnimation   ( 00000044 0097040C )
   310:  EndThread
   318:  Wait  70`
@@ -5192,20 +5179,20 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   3B8:  Call  SetNpcAnimation   ( 00000042 00970201 )
   3CC:  Call  SetNpcAnimation   ( 00000043 00970301 )
   3E0:  Call  SetNpcAnimation   ( 00000044 00970401 )
-  3F4:  Call  InterpNpcYaw      ( 00000040 0000010E 00000000 )
+  3F4:  Call  InterpNpcYaw      ( 00000040  270`  0` )
   40C:  Wait  5`
   418:  Loop  00000003
-  424:  	Call  InterpNpcYaw  ( 00000042 0000010E 00000000 )
+  424:  	Call  InterpNpcYaw  ( 00000042  270`  0` )
   43C:  	Wait  5`
-  448:  	Call  InterpNpcYaw  ( 00000041 0000010E 00000000 )
+  448:  	Call  InterpNpcYaw  ( 00000041  270`  0` )
   460:  	Wait  5`
-  46C:  	Call  InterpNpcYaw  ( 00000043 0000010E 00000000 )
+  46C:  	Call  InterpNpcYaw  ( 00000043  270`  0` )
   484:  	Wait  5`
-  490:  	Call  InterpNpcYaw  ( 00000042 0000005A 00000000 )
+  490:  	Call  InterpNpcYaw  ( 00000042  90`  0` )
   4A8:  	Wait  5`
-  4B4:  	Call  InterpNpcYaw  ( 00000041 0000005A 00000000 )
+  4B4:  	Call  InterpNpcYaw  ( 00000041  90`  0` )
   4CC:  	Wait  5`
-  4D8:  	Call  InterpNpcYaw  ( 00000043 0000005A 00000000 )
+  4D8:  	Call  InterpNpcYaw  ( 00000043  90`  0` )
   4F0:  	Wait  5`
   4FC:  EndLoop
   504:  Loop
@@ -5215,15 +5202,15 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   548:  		BreakLoop
   550:  	EndIf
   558:  EndLoop
-  560:  Call  SetNpcYaw ( 00000040 0000010E )
+  560:  Call  SetNpcYaw ( 00000040  270` )
   574:  Call  SetNpcAnimation   ( 00000040 0097000D )
-  588:  Call  SetNpcYaw ( 00000041 0000010E )
+  588:  Call  SetNpcYaw ( 00000041  270` )
   59C:  Call  SetNpcAnimation   ( 00000041 0097010D )
-  5B0:  Call  SetNpcYaw ( 00000042 0000005A )
+  5B0:  Call  SetNpcYaw ( 00000042  90` )
   5C4:  Call  SetNpcAnimation   ( 00000042 0097020D )
-  5D8:  Call  SetNpcYaw ( 00000043 0000005A )
+  5D8:  Call  SetNpcYaw ( 00000043  90` )
   5EC:  Call  SetNpcAnimation   ( 00000043 0097030D )
-  600:  Call  SetNpcYaw ( 00000044 0000005A )
+  600:  Call  SetNpcYaw ( 00000044  90` )
   614:  Call  SetNpcAnimation   ( 00000044 0097040D )
   628:  Wait  10`
   634:  Exec  $Script_8024B3C4
@@ -5288,36 +5275,36 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   A60:  	Call  SetNpcAnimation   ( 00000040 00970003 )
   A74:  	Call  GetNpcPos ( 00000040 *Var0 *Var1 *Var2 )
   A90:  	Add   *Var0  0000012C
-  AA0:  	Call  NpcMoveTo ( 00000040 *Var0 *Var2 0000004B )
-  ABC:  	Call  SetNpcPos ( 00000040 00000000 FFFFFE0C 00000000 )
+  AA0:  	Call  NpcMoveTo ( 00000040 *Var0 *Var2  75` )
+  ABC:  	Call  SetNpcPos ( 00000040  0`  -500`  0` )
   AD8:  EndThread
   AE0:  Thread
   AE8:  	Call  SetNpcAnimation   ( 00000041 00970103 )
   AFC:  	Call  GetNpcPos ( 00000041 *Var0 *Var1 *Var2 )
   B18:  	Add   *Var0  0000012C
-  B28:  	Call  NpcMoveTo ( 00000041 *Var0 *Var2 0000004B )
-  B44:  	Call  SetNpcPos ( 00000041 00000000 FFFFFE0C 00000000 )
+  B28:  	Call  NpcMoveTo ( 00000041 *Var0 *Var2  75` )
+  B44:  	Call  SetNpcPos ( 00000041  0`  -500`  0` )
   B60:  EndThread
   B68:  Thread
   B70:  	Call  SetNpcAnimation   ( 00000042 00970203 )
   B84:  	Call  GetNpcPos ( 00000042 *Var0 *Var1 *Var2 )
   BA0:  	Add   *Var0  0000012C
-  BB0:  	Call  NpcMoveTo ( 00000042 *Var0 *Var2 0000004B )
-  BCC:  	Call  SetNpcPos ( 00000042 00000000 FFFFFE0C 00000000 )
+  BB0:  	Call  NpcMoveTo ( 00000042 *Var0 *Var2  75` )
+  BCC:  	Call  SetNpcPos ( 00000042  0`  -500`  0` )
   BE8:  EndThread
   BF0:  Thread
   BF8:  	Call  SetNpcAnimation   ( 00000043 00970303 )
   C0C:  	Call  GetNpcPos ( 00000043 *Var0 *Var1 *Var2 )
   C28:  	Add   *Var0  0000012C
-  C38:  	Call  NpcMoveTo ( 00000043 *Var0 *Var2 0000004B )
-  C54:  	Call  SetNpcPos ( 00000043 00000000 FFFFFE0C 00000000 )
+  C38:  	Call  NpcMoveTo ( 00000043 *Var0 *Var2  75` )
+  C54:  	Call  SetNpcPos ( 00000043  0`  -500`  0` )
   C70:  EndThread
   C78:  Thread
   C80:  	Call  SetNpcAnimation   ( 00000044 00970403 )
   C94:  	Call  GetNpcPos ( 00000044 *Var0 *Var1 *Var2 )
   CB0:  	Add   *Var0  0000012C
-  CC0:  	Call  NpcMoveTo ( 00000044 *Var0 *Var2 0000004B )
-  CDC:  	Call  SetNpcPos ( 00000044 00000000 FFFFFE0C 00000000 )
+  CC0:  	Call  NpcMoveTo ( 00000044 *Var0 *Var2  75` )
+  CDC:  	Call  SetNpcPos ( 00000044  0`  -500`  0` )
   CF8:  EndThread
   D00:  Return
   D08:  End
@@ -5359,17 +5346,17 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   200:  Kill  *VarB
   20C:  Call  SetNpcAnimation   ( 0000004A 00C1000B )
   220:  Call  GetNpcPos     ( 0000004A *Var0 *Var1 *Var2 )
-  23C:  Call  NpcJump0      ( 0000004A *Var0 *Var1 *Var2 0000000A )
+  23C:  Call  NpcJump0      ( 0000004A *Var0 *Var1 *Var2  10` )
   25C:  Call  SetNpcAnimation   ( 0000004A 00C10008 )
   270:  Exec  $Script_8024B65C *VarB
   280:  Wait  130`
   28C:  Exec  $Script_8024B350
   298:  Wait  30`
-  2A4:  Call  InterpNpcYaw  ( 00000045 0000005A 00000000 )
-  2BC:  Call  InterpNpcYaw  ( 00000046 0000005A 00000000 )
-  2D4:  Call  InterpNpcYaw  ( 00000047 0000005A 00000000 )
-  2EC:  Call  InterpNpcYaw  ( 00000048 0000005A 00000000 )
-  304:  Call  InterpNpcYaw  ( 00000049 0000005A 00000000 )
+  2A4:  Call  InterpNpcYaw  ( 00000045  90`  0` )
+  2BC:  Call  InterpNpcYaw  ( 00000046  90`  0` )
+  2D4:  Call  InterpNpcYaw  ( 00000047  90`  0` )
+  2EC:  Call  InterpNpcYaw  ( 00000048  90`  0` )
+  304:  Call  InterpNpcYaw  ( 00000049  90`  0` )
   31C:  Wait  30`
   328:  Thread
   330:  	Call  MakeLerp  ( 00000000 0000005A 00000003 .Easing:Linear )
@@ -5405,7 +5392,7 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   4D8:  	Call  SetNpcAnimation   ( 0000004A 00C10002 )
   4EC:  	Call  GetNpcPos ( 0000004A *Var0 *Var1 *Var2 )
   508:  	Add   *Var0  FFFFFFEC
-  518:  	Call  NpcMoveTo ( 0000004A *Var0 *Var2 0000000A )
+  518:  	Call  NpcMoveTo ( 0000004A *Var0 *Var2  10` )
   534:  	Call  SetNpcAnimation   ( 0000004A 00C10001 )
   548:  	Exec  $Script_8024B65C *VarB
   558:  	Wait  10`
@@ -5413,33 +5400,33 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   56C:  Kill  *VarA
   578:  Thread
   580:  	Call  GetNpcPos ( 00000045 *Var0 *Var1 *Var2 )
-  59C:  	Call  NpcJump0  ( 00000045 *Var0 *Var1 *Var2 0000000A )
+  59C:  	Call  NpcJump0  ( 00000045 *Var0 *Var1 *Var2  10` )
   5BC:  	Add   *Var0  FFFFFF38
-  5CC:  	Call  NpcMoveTo ( 00000045 *Var0 *Var2 00000032 )
+  5CC:  	Call  NpcMoveTo ( 00000045 *Var0 *Var2  50` )
   5E8:  EndThread
   5F0:  Thread
   5F8:  	Call  GetNpcPos ( 00000046 *Var0 *Var1 *Var2 )
-  614:  	Call  NpcJump0  ( 00000046 *Var0 *Var1 *Var2 0000000A )
+  614:  	Call  NpcJump0  ( 00000046 *Var0 *Var1 *Var2  10` )
   634:  	Add   *Var0  FFFFFF38
-  644:  	Call  NpcMoveTo ( 00000046 *Var0 *Var2 00000032 )
+  644:  	Call  NpcMoveTo ( 00000046 *Var0 *Var2  50` )
   660:  EndThread
   668:  Thread
   670:  	Call  GetNpcPos ( 00000047 *Var0 *Var1 *Var2 )
-  68C:  	Call  NpcJump0  ( 00000047 *Var0 *Var1 *Var2 0000000A )
+  68C:  	Call  NpcJump0  ( 00000047 *Var0 *Var1 *Var2  10` )
   6AC:  	Add   *Var0  FFFFFF38
-  6BC:  	Call  NpcMoveTo ( 00000047 *Var0 *Var2 00000032 )
+  6BC:  	Call  NpcMoveTo ( 00000047 *Var0 *Var2  50` )
   6D8:  EndThread
   6E0:  Thread
   6E8:  	Call  GetNpcPos ( 00000048 *Var0 *Var1 *Var2 )
-  704:  	Call  NpcJump0  ( 00000048 *Var0 *Var1 *Var2 0000000A )
+  704:  	Call  NpcJump0  ( 00000048 *Var0 *Var1 *Var2  10` )
   724:  	Add   *Var0  FFFFFF38
-  734:  	Call  NpcMoveTo ( 00000048 *Var0 *Var2 00000032 )
+  734:  	Call  NpcMoveTo ( 00000048 *Var0 *Var2  50` )
   750:  EndThread
   758:  Thread
   760:  	Call  GetNpcPos ( 00000049 *Var0 *Var1 *Var2 )
-  77C:  	Call  NpcJump0  ( 00000049 *Var0 *Var1 *Var2 0000000A )
+  77C:  	Call  NpcJump0  ( 00000049 *Var0 *Var1 *Var2  10` )
   79C:  	Add   *Var0  FFFFFF38
-  7AC:  	Call  NpcMoveTo ( 00000049 *Var0 *Var2 00000032 )
+  7AC:  	Call  NpcMoveTo ( 00000049 *Var0 *Var2  50` )
   7C8:  EndThread
   7D0:  Wait  30`
   7DC:  Call  SetNpcAnimation   ( 0000004A 00C1000C )
@@ -5448,7 +5435,7 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   810:  Kill  *VarB
   81C:  Call  GetNpcPos ( 0000004A *Var0 *Var1 *Var2 )
   838:  Add   *Var0  FFFFFED4
-  848:  Call  NpcMoveTo ( 0000004A *Var0 *Var2 00000032 )
+  848:  Call  NpcMoveTo ( 0000004A *Var0 *Var2  50` )
   864:  Return
   86C:  End
 }
@@ -5486,7 +5473,7 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
    70:  Set   *Var0  0000004D
    80:  Exec  $Script_802447F4 *VarA
    90:  Wait  10`
-   9C:  Call  InterpNpcYaw      ( 0000004D 0000005A 00000007 )
+   9C:  Call  InterpNpcYaw      ( 0000004D  90`  7` )
    B4:  Wait  10`
    C0:  Call  SetNpcAnimation   ( 0000004D 007F0010 )
    D4:  Call  SetNpcAnimation   ( 0000004E 007F0010 )
@@ -5500,8 +5487,8 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   154:  Kill  *VarA
   160:  Call  GetNpcPos ( 0000004D *Var0 *Var1 *Var2 )
   17C:  Call  PlayEffect        ( ~FX:BigSmokePuff *Var0 *Var1 *Var2 00000001 00000001 00000001 00000001 00000000 00000000 00000000 00000000 00000000 00000000 )
-  1C0:  Call  SetNpcPos ( 0000004D 00000708 00000000 00000000 )
-  1DC:  Call  SetNpcYaw ( 0000004D 0000010E )
+  1C0:  Call  SetNpcPos ( 0000004D  1800`  0`  0` )
+  1DC:  Call  SetNpcYaw ( 0000004D  270` )
   1F0:  Call  SetNpcAnimation   ( 0000004D 007F000E )
   204:  Call  SetNpcPos ( 0000004B *Var0 *Var1 *Var2 )
   220:  Call  SetNpcJumpscale   ( 0000004B *Fixed[0.5] )
@@ -5514,7 +5501,7 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   2A4:  Call  SetNpcAnimation   ( 0000004E 007F000F )
   2B8:  Call  GetNpcPos ( 0000004E *Var0 *Var1 *Var2 )
   2D4:  Add   *Var0  FFFFFFB0
-  2E4:  Call  NpcMoveTo ( 0000004E *Var0 *Var2 00000028 )
+  2E4:  Call  NpcMoveTo ( 0000004E *Var0 *Var2  40` )
   300:  Set   *Var0  0000004E
   310:  Exec  $Script_802447F4 *VarB
   320:  Thread
@@ -5533,7 +5520,7 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   3CC:  	Call  SetNpcAnimation   ( 0000004B 004E0002 )
   3E0:  EndThread
   3E8:  Wait  100`
-  3F4:  Call  InterpNpcYaw      ( 0000004E 0000005A 00000007 )
+  3F4:  Call  InterpNpcYaw      ( 0000004E  90`  7` )
   40C:  Wait  10`
   418:  Call  SetNpcAnimation   ( 0000004E 007F0010 )
   42C:  Call  SetNpcAnimation   ( 0000004D 007F0010 )
@@ -5547,7 +5534,7 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   4AC:  Kill  *VarB
   4B8:  Call  GetNpcPos ( 0000004E *Var0 *Var1 *Var2 )
   4D4:  Call  PlayEffect        ( ~FX:BigSmokePuff *Var0 *Var1 *Var2 00000001 00000001 00000001 00000001 00000000 00000000 00000000 00000000 00000000 00000000 )
-  518:  Call  SetNpcPos ( 0000004E 00000000 FFFFFE0C 00000000 )
+  518:  Call  SetNpcPos ( 0000004E  0`  -500`  0` )
   534:  Call  SetNpcPos ( 0000004C *Var0 *Var1 *Var2 )
   550:  Call  SetNpcJumpscale   ( 0000004C *Fixed[0.5] )
   564:  Add   *Var0  FFFFFFD8
@@ -5559,7 +5546,7 @@ PADDING: 8024AFD4 to 8024AFE0 (0000AFD4 to 0000AFE0)
   5D4:  Call  SetNpcAnimation   ( 0000004D 007F000F )
   5E8:  Call  GetNpcPos ( 0000004D *Var0 *Var1 *Var2 )
   604:  Add   *Var0  FFFFFFB0
-  614:  Call  NpcMoveTo ( 0000004D *Var0 *Var2 00000028 )
+  614:  Call  NpcMoveTo ( 0000004D *Var0 *Var2  40` )
   630:  Set   *Var0  0000004D
   640:  Exec  $Script_802447F4 *VarC
   650:  Thread
@@ -5667,11 +5654,11 @@ PADDING: 8024D77C to 8024D780 (0000D77C to 0000D780)
 {
     0:  Wait  10`
     C:  Call  SetNpcJumpscale   ( 00000053 *Fixed[0.5] )
-   20:  Call  NpcJump1      ( 00000053 000007DA 00000000 00000000 00000014 )
+   20:  Call  NpcJump1      ( 00000053  2010`  0`  0` 00000014 )
    40:  Call  SetNpcAnimation   ( 00000053 00240005 )
-   54:  Call  NpcMoveTo     ( 00000053 0000078A 00000000 00000014 )
+   54:  Call  NpcMoveTo     ( 00000053  1930`  0`  20` )
    70:  Call  SetNpcAnimation   ( 00000053 00240002 )
-   84:  Call  InterpNpcYaw  ( 00000053 0000005A 00000000 )
+   84:  Call  InterpNpcYaw  ( 00000053  90`  0` )
    9C:  Wait  10`
    A8:  Call  SetNpcAnimation   ( 00000053 00240006 )
    BC:  Wait  10`
@@ -5680,27 +5667,27 @@ PADDING: 8024D77C to 8024D780 (0000D77C to 0000D780)
   120:  Wait  30`
   12C:  Call  PlayEffect    ( ~FX:ShapeSpell:Projectile 00000870 00000064 00000000 0000078A 00000000 00000000 0000000A 00000000 00000000 00000000 00000000 00000000 )
   170:  Exec  $Script_8024D780
-  17C:  Call  NpcJump1      ( 00000053 00000762 00000000 00000000 00000014 )
+  17C:  Call  NpcJump1      ( 00000053  1890`  0`  0` 00000014 )
   19C:  Call  SetNpcAnimation   ( 00000053 00240002 )
-  1B0:  Call  NpcFlyTo      ( 00000052 0000080C 0000003C 00000000 0000000A FFFFFFF6 .Easing:Linear )
+  1B0:  Call  NpcFlyTo      ( 00000052  2060`  60`  0`  10`  -10` .Easing:Linear )
   1D8:  Call  SetNpcAnimation   ( 00000052 0060000E )
   1EC:  Wait  10`
   1F8:  Call  SetNpcAnimation   ( 00000052 0060000F )
   20C:  Call  PlayEffect    ( ~FX:ShapeSpell:Projectile 0000080C 0000003C 00000000 00000762 00000000 00000000 0000000A 00000000 00000000 00000000 00000000 00000000 )
   250:  Exec  $Script_8024D780
-  25C:  Call  NpcJump1      ( 00000053 000007F8 00000000 00000000 00000014 )
+  25C:  Call  NpcJump1      ( 00000053  2040`  0`  0` 00000014 )
   27C:  Call  SetNpcAnimation   ( 00000053 00240002 )
   290:  Call  SetNpcAnimation   ( 00000052 00600014 )
-  2A4:  Call  NpcFlyTo      ( 00000052 00000794 0000003C 00000000 00000014 FFFFFFF6 .Easing:Linear )
-  2CC:  Call  InterpNpcYaw  ( 00000052 0000005A 00000000 )
-  2E4:  Call  InterpNpcYaw  ( 00000053 0000010E 00000000 )
+  2A4:  Call  NpcFlyTo      ( 00000052  1940`  60`  0`  20`  -10` .Easing:Linear )
+  2CC:  Call  InterpNpcYaw  ( 00000052  90`  0` )
+  2E4:  Call  InterpNpcYaw  ( 00000053  270`  0` )
   2FC:  Wait  10`
   308:  Call  SetNpcAnimation   ( 00000052 0060000E )
   31C:  Wait  10`
   328:  Call  SetNpcAnimation   ( 00000052 0060000F )
   33C:  Call  PlayEffect    ( ~FX:ShapeSpell:Projectile 00000794 0000003C 00000000 000007F8 00000000 00000000 0000000A 00000000 00000000 00000000 00000000 00000000 )
   380:  Exec  $Script_8024D780
-  38C:  Call  NpcJump1      ( 00000053 00000870 00000000 00000000 00000014 )
+  38C:  Call  NpcJump1      ( 00000053  2160`  0`  0` 00000014 )
   3AC:  Call  SetNpcAnimation   ( 00000053 00240002 )
   3C0:  Wait  10`
   3CC:  Call  SetNpcAnimation   ( 00000053 00240006 )
@@ -5710,43 +5697,43 @@ PADDING: 8024D77C to 8024D780 (0000D77C to 0000D780)
   444:  Call  SetNpcAnimation   ( 00000052 00600014 )
   458:  Call  PlayEffect    ( ~FX:GatherEnergyPink 00000794 0000003C 00000000 *Fixed[0.5] 0000000A 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   49C:  Wait  10`
-  4A8:  Call  SetNpcPos     ( 00000052 00000000 FFFFFE0C 00000000 )
+  4A8:  Call  SetNpcPos     ( 00000052  0`  -500`  0` )
   4C4:  Call  PlayEffect    ( ~FX:GatherEnergyPink 00000834 0000003C 00000000 *Fixed[0.5] 0000000A 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   508:  Wait  10`
-  514:  Call  SetNpcPos     ( 00000052 00000834 0000003C 00000000 )
+  514:  Call  SetNpcPos     ( 00000052  2100`  60`  0` )
   530:  Wait  30`
   53C:  Call  SetNpcAnimation   ( 00000052 0060000E )
   550:  Wait  10`
   55C:  Call  SetNpcAnimation   ( 00000052 0060000F )
   570:  Call  PlayEffect    ( ~FX:ShapeSpell:Projectile 00000834 0000003C 00000000 00000870 00000000 00000000 0000000A 00000000 00000000 00000000 00000000 00000000 )
   5B4:  Exec  $Script_8024D780
-  5C0:  Call  NpcJump1      ( 00000053 00000834 00000000 00000000 00000014 )
+  5C0:  Call  NpcJump1      ( 00000053  2100`  0`  0` 00000014 )
   5E0:  Thread
   5E8:  	Call  SetNpcAnimation   ( 00000053 00240005 )
-  5FC:  	Call  NpcMoveTo ( 00000053 0000076C 00000000 00000032 )
+  5FC:  	Call  NpcMoveTo ( 00000053  1900`  0`  50` )
   618:  EndThread
   620:  Wait  20`
   62C:  Call  SetNpcAnimation   ( 00000052 00600014 )
-  640:  Call  InterpNpcYaw      ( 00000052 0000010E 00000000 )
+  640:  Call  InterpNpcYaw      ( 00000052  270`  0` )
   658:  Wait  10`
   664:  Call  SetNpcAnimation   ( 00000052 00600012 )
   678:  Wait  30`
   684:  Call  SetNpcAnimation   ( 00000052 00600014 )
-  698:  Call  InterpNpcYaw      ( 00000052 0000005A 00000000 )
+  698:  Call  InterpNpcYaw      ( 00000052  90`  0` )
   6B0:  Wait  20`
-  6BC:  Call  NpcFlyTo  ( 00000052 0000076C 00000028 00000000 00000019 FFFFFFF6 .Easing:Linear )
+  6BC:  Call  NpcFlyTo  ( 00000052  1900`  40`  0`  25`  -10` .Easing:Linear )
   6E4:  Wait  150`
   6F0:  Thread
   6F8:  	Wait  35`
   704:  	Call  PlayEffect    ( ~FX:ShapeSpell:Projectile 000007F8 0000003C FFFFFFEC 00000884 00000000 00000014 0000000A 00000000 00000000 00000000 00000000 00000000 )
   748:  	Wait  35`
-  754:  	Call  SetNpcPos     ( 00000052 00000956 00000078 FFFFFFEC )
-  770:  	Call  NpcFlyTo      ( 00000052 00000988 0000003C FFFFFFEC 0000000A FFFFFFF6 .Easing:Linear )
-  798:  	Call  InterpNpcYaw  ( 00000052 0000010E 00000000 )
+  754:  	Call  SetNpcPos     ( 00000052  2390`  120`  -20` )
+  770:  	Call  NpcFlyTo      ( 00000052  2440`  60`  -20`  10`  -10` .Easing:Linear )
+  798:  	Call  InterpNpcYaw  ( 00000052  270`  0` )
   7B0:  EndThread
-  7B8:  Call  SetNpcPos ( 00000053 000007F8 00000000 00000014 )
-  7D4:  Call  SetNpcYaw ( 00000053 0000005A )
-  7E8:  Call  NpcMoveTo ( 00000053 00000960 00000014 0000005A )
+  7B8:  Call  SetNpcPos ( 00000053  2040`  0`  20` )
+  7D4:  Call  SetNpcYaw ( 00000053  90` )
+  7E8:  Call  NpcMoveTo ( 00000053  2400`  20`  90` )
   804:  Call  SetNpcAnimation   ( 00000053 00240002 )
   818:  Wait  10`
   824:  Call  SetNpcAnimation   ( 00000053 00240006 )
@@ -5754,8 +5741,8 @@ PADDING: 8024D77C to 8024D780 (0000D77C to 0000D780)
   844:  Call  SetNpcAnimation   ( 00000053 00240007 )
   858:  Call  PlayEffect        ( ~FX:ShapeSpell:Projectile 00000960 00000000 00000014 00000988 0000003C FFFFFFEC 0000000A 00000000 00000000 00000000 00000000 00000000 )
   89C:  Thread
-  8A4:  	Call  NpcFlyTo  ( 00000052 000008FC 0000003C FFFFFFEC 00000014 FFFFFFF6 .Easing:Linear )
-  8CC:  	Call  InterpNpcYaw      ( 00000052 0000005A 00000000 )
+  8A4:  	Call  NpcFlyTo  ( 00000052  2300`  60`  -20`  20`  -10` .Easing:Linear )
+  8CC:  	Call  InterpNpcYaw      ( 00000052  90`  0` )
   8E4:  	Wait  20`
   8F0:  	Call  SetNpcAnimation   ( 00000052 0060000E )
   904:  	Wait  10`
@@ -5765,9 +5752,9 @@ PADDING: 8024D77C to 8024D780 (0000D77C to 0000D780)
   970:  Thread
   978:  	Wait  10`
   984:  	Call  SetNpcAnimation   ( 00000053 00240005 )
-  998:  	Call  NpcMoveTo ( 00000053 000009B0 00000014 00000014 )
+  998:  	Call  NpcMoveTo ( 00000053  2480`  20`  20` )
   9B4:  	Call  SetNpcAnimation   ( 00000053 00240002 )
-  9C8:  	Call  InterpNpcYaw      ( 00000053 0000010E 00000000 )
+  9C8:  	Call  InterpNpcYaw      ( 00000053  270`  0` )
   9E0:  	Wait  10`
   9EC:  	Call  SetNpcAnimation   ( 00000053 00240006 )
   A00:  	Wait  10`
@@ -5778,62 +5765,62 @@ PADDING: 8024D77C to 8024D780 (0000D77C to 0000D780)
   A78:  Call  PlayEffect    ( ~FX:RingBlast:Red 00000956 00000028 00000005 *Fixed[5.0] 0000001E 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   ABC:  Thread
   AC4:  	Call  SetNpcAnimation   ( 00000056 00D70004 )
-  AD8:  	Call  NpcMoveTo ( 00000056 00000884 00000000 0000001E )
-  AF4:  	Call  SetNpcPos ( 00000056 00000000 FFFFFE0C 00000000 )
+  AD8:  	Call  NpcMoveTo ( 00000056  2180`  0`  30` )
+  AF4:  	Call  SetNpcPos ( 00000056  0`  -500`  0` )
   B10:  EndThread
   B18:  Thread
   B20:  	Call  SetNpcAnimation   ( 00000057 00D70004 )
-  B34:  	Call  NpcMoveTo ( 00000057 0000085C 00000000 0000001E )
-  B50:  	Call  SetNpcPos ( 00000057 00000000 FFFFFE0C 00000000 )
+  B34:  	Call  NpcMoveTo ( 00000057  2140`  0`  30` )
+  B50:  	Call  SetNpcPos ( 00000057  0`  -500`  0` )
   B6C:  EndThread
   B74:  Thread
   B7C:  	Call  SetNpcAnimation   ( 00000058 00D70005 )
-  B90:  	Call  NpcMoveTo ( 00000058 00000A78 00000000 00000032 )
-  BAC:  	Call  SetNpcPos ( 00000058 00000000 FFFFFE0C 00000000 )
+  B90:  	Call  NpcMoveTo ( 00000058  2680`  0`  50` )
+  BAC:  	Call  SetNpcPos ( 00000058  0`  -500`  0` )
   BC8:  EndThread
   BD0:  Thread
   BD8:  	Call  SetNpcAnimation   ( 00000059 00D70005 )
-  BEC:  	Call  NpcMoveTo ( 00000059 00000AA0 00000000 00000032 )
-  C08:  	Call  SetNpcPos ( 00000059 00000000 FFFFFE0C 00000000 )
+  BEC:  	Call  NpcMoveTo ( 00000059  2720`  0`  50` )
+  C08:  	Call  SetNpcPos ( 00000059  0`  -500`  0` )
   C24:  EndThread
   C2C:  Wait  10`
-  C38:  Call  SetNpcPos ( 00000054 00000000 FFFFFE0C 00000000 )
-  C54:  Call  SetNpcPos ( 00000055 00000000 FFFFFE0C 00000000 )
-  C70:  Call  SetNpcPos ( 0000005A 00000956 0000000A 00000000 )
-  C8C:  Call  SetNpcPos ( 0000005B 00000956 0000000A 00000000 )
+  C38:  Call  SetNpcPos ( 00000054  0`  -500`  0` )
+  C54:  Call  SetNpcPos ( 00000055  0`  -500`  0` )
+  C70:  Call  SetNpcPos ( 0000005A  2390`  10`  0` )
+  C8C:  Call  SetNpcPos ( 0000005B  2390`  10`  0` )
   CA8:  Wait  60`
   CB4:  Call  SetNpcAnimation   ( 0000005A 00D80001 )
   CC8:  Wait  10`
   CD4:  Thread
   CDC:  	Call  SetNpcAnimation   ( 00000052 0060000C )
-  CF0:  	Call  NpcFlyTo  ( 00000052 00000884 0000003C FFFFFFEC 0000001E FFFFFFF6 .Easing:Linear )
+  CF0:  	Call  NpcFlyTo  ( 00000052  2180`  60`  -20`  30`  -10` .Easing:Linear )
   D18:  EndThread
   D20:  Thread
   D28:  	Call  SetNpcAnimation   ( 00000053 00240005 )
-  D3C:  	Call  NpcMoveTo ( 00000053 00000870 00000014 00000028 )
+  D3C:  	Call  NpcMoveTo ( 00000053  2160`  20`  40` )
   D58:  EndThread
   D60:  Wait  40`
   D6C:  Thread
-  D74:  	Call  NpcMoveTo ( 0000005B 000008DE 00000000 0000003C )
+  D74:  	Call  NpcMoveTo ( 0000005B  2270`  0`  60` )
   D90:  EndThread
-  D98:  Call  NpcMoveTo     ( 0000005A 000008DE 00000000 0000003C )
+  D98:  Call  NpcMoveTo     ( 0000005A  2270`  0`  60` )
   DB4:  Call  PlayEffect    ( ~FX:FireBreath:Large 000008DE 00000028 FFFFFFFB 000008E8 00000028 FFFFFFFB 00000005 00000002 0000001E 00000000 00000000 00000000 )
   DF8:  Wait  20`
   E04:  Thread
   E0C:  	Call  SetNpcAnimation   ( 00000052 00600007 )
-  E20:  	Call  SetNpcYaw ( 00000052 0000005A )
-  E34:  	Call  SetNpcPos ( 00000052 000008E8 00000000 00000000 )
+  E20:  	Call  SetNpcYaw ( 00000052  90` )
+  E34:  	Call  SetNpcPos ( 00000052  2280`  0`  0` )
   E50:  	Call  SetNpcJumpscale   ( 00000052 *Fixed[0.5] )
-  E64:  	Call  NpcJump1  ( 00000052 0000094C 00000000 00000000 00000014 )
-  E84:  	Call  NpcJump1  ( 00000052 0000097E 00000000 00000000 0000000A )
+  E64:  	Call  NpcJump1  ( 00000052  2380`  0`  0` 00000014 )
+  E84:  	Call  NpcJump1  ( 00000052  2430`  0`  0` 0000000A )
   EA4:  EndThread
   EAC:  Thread
   EB4:  	Call  SetNpcAnimation   ( 00000053 0024000B )
-  EC8:  	Call  SetNpcYaw ( 00000053 0000005A )
-  EDC:  	Call  SetNpcPos ( 00000053 00000910 00000000 00000000 )
+  EC8:  	Call  SetNpcYaw ( 00000053  90` )
+  EDC:  	Call  SetNpcPos ( 00000053  2320`  0`  0` )
   EF8:  	Call  SetNpcJumpscale   ( 00000053 *Fixed[0.5] )
-  F0C:  	Call  NpcJump1  ( 00000053 00000974 00000000 00000000 00000014 )
-  F2C:  	Call  NpcJump1  ( 00000053 000009A6 00000000 00000000 0000000A )
+  F0C:  	Call  NpcJump1  ( 00000053  2420`  0`  0` 00000014 )
+  F2C:  	Call  NpcJump1  ( 00000053  2470`  0`  0` 0000000A )
   F4C:  EndThread
   F54:  Wait  30`
   F60:  SetF  *Var0  0000097E
@@ -5841,9 +5828,9 @@ PADDING: 8024D77C to 8024D780 (0000D77C to 0000D780)
   F80:  ChildThread
   F88:  	Loop
   F94:  		AddF  *Var0  *Fixed[0.87]
-  FA4:  		Call  SetNpcPos ( 00000052 *Var0 00000000 00000000 )
+  FA4:  		Call  SetNpcPos ( 00000052 *Var0  0`  0` )
   FC0:  		AddF  *Var1  *Fixed[0.87]
-  FD0:  		Call  SetNpcPos ( 00000053 *Var1 00000000 00000000 )
+  FD0:  		Call  SetNpcPos ( 00000053 *Var1  0`  0` )
   FEC:  		Wait  1`
   FF8:  	EndLoop
  1000:  EndChildThread
@@ -5862,14 +5849,12 @@ PADDING: 8024D77C to 8024D780 (0000D77C to 0000D780)
 PADDING: 8024E8B4 to 8024E8C0 (0000E8B4 to 0000E8C0)
 00000000 00000000 00000000
 
-% Origin: HEURISTIC
 #new:Unknown $???_8024E8C0
 {
 	$Function_80241B34[E0] $Function_80241B34[110] $Function_80241B34[110] $Function_80241B34[D4] $Function_80241B34[D4] $Function_80241B34[D4] $Function_80241B34[110] $Function_80241B34[110]
 	$Function_80241B34[110] $Function_80241B34[110] $Function_80241B34[110] $Function_80241B34[110] $Function_80241B34[110] $Function_80241B34[E0] $Function_80241B34[110] $Function_80241B34[E8]
 }
 
-% Origin: HEURISTIC
 #new:JumpTable $JumpTable_8024E900
 {
 	$Function_80241B34[2B0] $Function_80241B34[2E4] $Function_80241B34[2E4] $Function_80241B34[2A4]
@@ -5878,7 +5863,6 @@ PADDING: 8024E8B4 to 8024E8C0 (0000E8B4 to 0000E8C0)
 	$Function_80241B34[2E4] $Function_80241B34[2B0] $Function_80241B34[2E4] $Function_80241B34[2BC]
 }
 
-% Origin: HEURISTIC
 #new:JumpTable $JumpTable_8024E940
 {
 	$Function_80241B34[3F4] $Function_80241B34[3A4] $Function_80241B34[3B8] $Function_80241B34[3CC]

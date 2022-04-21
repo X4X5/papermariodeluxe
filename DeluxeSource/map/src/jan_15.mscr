@@ -1,6 +1,12 @@
 % Script File: jan_15.mscr
 % Decoded from: 0 to 26E0 (jan_15)
 
+#define .NpcID:PutridPiranha_00     00
+#define .NpcID:PutridPiranha_01     01
+#define .NpcID:PutridPiranha_02     02
+#define .NpcID:HeartPlant_03        03
+#define .NpcID:HeartPlant_04        04
+
 #new:Function $Function_80240000
 {
     0:  ADDIU     SP, SP, FFD8
@@ -261,8 +267,8 @@ PADDING: 802402FC to 80240300 (000002FC to 00000300)
 {
     0:  Set   *GB_WorldLocation  .Location:JadeJungle
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .False $NpcGroupList_80241B44 )
    84:  ExecWait  $Script_MakeEntities
@@ -355,12 +361,12 @@ MISSING: 802405EC to 80240618 (000005EC to 00000618)
    C0:  	Loop
    CC:  		Call  RandInt   ( 00000005 *Var0 )
    E0:  		If  *Var0  !=  00000000
-   F0:  			Call  SetNpcAnimation   ( 00000001 00360001 )
+   F0:  			Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360001 )
   104:  			Wait  15`
   110:  		Else
-  118:  			Call  SetNpcAnimation   ( 00000001 00360005 )
+  118:  			Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360005 )
   12C:  			Wait  10`
-  138:  			Call  SetNpcAnimation   ( 00000001 00360006 )
+  138:  			Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360006 )
   14C:  			Wait  5`
   158:  		EndIf
   160:  	EndLoop
@@ -368,12 +374,12 @@ MISSING: 802405EC to 80240618 (000005EC to 00000618)
   170:  Loop
   17C:  	Call  RandInt   ( 00000005 *Var0 )
   190:  	If  *Var0  !=  00000000
-  1A0:  		Call  SetNpcAnimation   ( 00000002 00360001 )
+  1A0:  		Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360001 )
   1B4:  		Wait  15`
   1C0:  	Else
-  1C8:  		Call  SetNpcAnimation   ( 00000002 00360005 )
+  1C8:  		Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360005 )
   1DC:  		Wait  10`
-  1E8:  		Call  SetNpcAnimation   ( 00000002 00360006 )
+  1E8:  		Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360006 )
   1FC:  		Wait  5`
   208:  	EndIf
   210:  EndLoop
@@ -391,7 +397,7 @@ MISSING: 802405EC to 80240618 (000005EC to 00000618)
    50:  		Goto  0
    5C:  	EndIf
    64:  	Call  DisablePlayerInput        ( .True )
-   74:  	Call  ShowMessageAtScreenPos    ( 001000BB 00000140 0000003C ) % Grraahahahoho!
+   74:  	Call  ShowMessageAtScreenPos    ( 001000BB  320`  60` ) % Grraahahahoho!
    8C:  	Set   *GF_JAN15_EncounteredMiniboss  .True
    9C:  	Call  DisablePlayerInput        ( .False )
    AC:  EndIf
@@ -400,83 +406,83 @@ MISSING: 802405EC to 80240618 (000005EC to 00000618)
    DC:  Call  DisablePlayerInput    ( .True )
    EC:  Kill  *Var9
    F8:  Wait  15`
-  104:  Call  SetNpcAnimation       ( 00000000 00360001 )
-  118:  Call  SetNpcAnimation       ( 00000001 00360001 )
-  12C:  Call  SetNpcAnimation       ( 00000002 00360001 )
+  104:  Call  SetNpcAnimation       ( .NpcID:PutridPiranha_00 00360001 )
+  118:  Call  SetNpcAnimation       ( .NpcID:PutridPiranha_01 00360001 )
+  12C:  Call  SetNpcAnimation       ( .NpcID:PutridPiranha_02 00360001 )
   140:  Thread
   148:  	Wait  10`
-  154:  	Call  SetNpcAnimation   ( 00000002 00360004 )
+  154:  	Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360004 )
   168:  	Set   *Var0  00000000
   178:  	Loop  0000000F
   184:  		Add   *Var0  00000018
-  194:  		Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  194:  		Call  SetNpcRotation    ( .NpcID:PutridPiranha_02 00000000 *Var0 00000000 )
   1B0:  		Wait  1`
   1BC:  	EndLoop
-  1C4:  	Call  PlaySoundAtNpc    ( 00000002 000003B1 00000000 )
-  1DC:  	Call  SetNpcAnimation   ( 00000002 00360001 )
+  1C4:  	Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_02 000003B1 00000000 )
+  1DC:  	Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360001 )
   1F0:  EndThread
-  1F8:  Call  SetNpcAnimation   ( 00000000 00360004 )
+  1F8:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_00 00360004 )
   20C:  Set   *Var0  00000000
   21C:  Loop  0000000F
   228:  	Add   *Var0  00000018
-  238:  	Call  SetNpcRotation    ( 00000000 00000000 *Var0 00000000 )
+  238:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_00 00000000 *Var0 00000000 )
   254:  	Wait  1`
   260:  EndLoop
-  268:  Call  PlaySoundAtNpc    ( 00000000 000020B1 00000000 )
-  280:  Call  SetNpcAnimation   ( 00000000 00360001 )
+  268:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_00 000020B1 00000000 )
+  280:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_00 00360001 )
   294:  Wait  5`
-  2A0:  Call  SetNpcAnimation   ( 00000001 00360004 )
+  2A0:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360004 )
   2B4:  Set   *Var0  00000000
   2C4:  Loop  0000000F
   2D0:  	Add   *Var0  00000018
-  2E0:  	Call  SetNpcRotation    ( 00000001 00000000 *Var0 00000000 )
+  2E0:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_01 00000000 *Var0 00000000 )
   2FC:  	Wait  1`
   308:  EndLoop
-  310:  Call  PlaySoundAtNpc    ( 00000001 000020B1 00000000 )
-  328:  Call  SetNpcAnimation   ( 00000001 00360001 )
+  310:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_01 000020B1 00000000 )
+  328:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360001 )
   33C:  Wait  5`
-  348:  Call  SetNpcAnimation   ( 00000000 00360004 )
-  35C:  Call  SetNpcAnimation   ( 00000001 00360004 )
-  370:  Call  SetNpcAnimation   ( 00000002 00360004 )
+  348:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_00 00360004 )
+  35C:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360004 )
+  370:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360004 )
   384:  Set   *Var0  00000000
   394:  Loop  0000000C
   3A0:  	Add   *Var0  0000001E
-  3B0:  	Call  SetNpcRotation    ( 00000000 00000000 *Var0 00000000 )
-  3CC:  	Call  SetNpcRotation    ( 00000001 00000000 *Var0 00000000 )
-  3E8:  	Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  3B0:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_00 00000000 *Var0 00000000 )
+  3CC:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_01 00000000 *Var0 00000000 )
+  3E8:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_02 00000000 *Var0 00000000 )
   404:  	Wait  1`
   410:  EndLoop
-  418:  Call  PlaySoundAtNpc    ( 00000000 000020B2 00000000 )
+  418:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_00 000020B2 00000000 )
   430:  Set   *Var0  00000000
   440:  Loop  0000000C
   44C:  	Add   *Var0  0000001E
-  45C:  	Call  SetNpcRotation    ( 00000000 00000000 *Var0 00000000 )
-  478:  	Call  SetNpcRotation    ( 00000001 00000000 *Var0 00000000 )
-  494:  	Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  45C:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_00 00000000 *Var0 00000000 )
+  478:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_01 00000000 *Var0 00000000 )
+  494:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_02 00000000 *Var0 00000000 )
   4B0:  	Wait  1`
   4BC:  EndLoop
-  4C4:  Call  PlaySoundAtNpc    ( 00000000 000020B2 00000000 )
+  4C4:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_00 000020B2 00000000 )
   4DC:  Set   *Var0  00000000
   4EC:  Loop  0000000C
   4F8:  	Add   *Var0  0000001E
-  508:  	Call  SetNpcRotation    ( 00000000 00000000 *Var0 00000000 )
-  524:  	Call  SetNpcRotation    ( 00000001 00000000 *Var0 00000000 )
-  540:  	Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
+  508:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_00 00000000 *Var0 00000000 )
+  524:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_01 00000000 *Var0 00000000 )
+  540:  	Call  SetNpcRotation    ( .NpcID:PutridPiranha_02 00000000 *Var0 00000000 )
   55C:  	Wait  1`
   568:  EndLoop
-  570:  Call  PlaySoundAtNpc    ( 00000000 000020B2 00000000 )
+  570:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_00 000020B2 00000000 )
   588:  Loop  00000003
   594:  	Wait  5`
-  5A0:  	Call  PlaySoundAtNpc    ( 00000000 000020B3 00000000 )
+  5A0:  	Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_00 000020B3 00000000 )
   5B8:  EndLoop
-  5C0:  Call  SetNpcAnimation   ( 00000000 00360005 )
-  5D4:  Call  SetNpcAnimation   ( 00000001 00360005 )
-  5E8:  Call  SetNpcAnimation   ( 00000002 00360005 )
+  5C0:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_00 00360005 )
+  5D4:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360005 )
+  5E8:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360005 )
   5FC:  Wait  20`
-  608:  Call  SetNpcAnimation   ( 00000000 00360006 )
-  61C:  Call  SetNpcAnimation   ( 00000001 00360006 )
-  630:  Call  SetNpcAnimation   ( 00000002 00360006 )
-  644:  Call  PlaySoundAtNpc    ( 00000000 000003B2 00000000 )
+  608:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_00 00360006 )
+  61C:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_01 00360006 )
+  630:  Call  SetNpcAnimation   ( .NpcID:PutridPiranha_02 00360006 )
+  644:  Call  PlaySoundAtNpc    ( .NpcID:PutridPiranha_00 000003B2 00000000 )
   65C:  Call  DisablePlayerInput    ( .False )
   66C:  Call  StartBossBattle   ( .Song:SpecialBattle )
   67C:  Return
@@ -502,9 +508,9 @@ MISSING: 802405EC to 80240618 (000005EC to 00000618)
    10:  	Call  BindNpcIdle   ( .Npc:Self $Script_Idle_802409F4 )
    24:  	Call  BindNpcHit    ( .Npc:Self $Script_Hit_80241080 )
    38:  Else
-   40:  	Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
-   5C:  	Call  SetNpcPos ( 00000001 00000000 FFFFFC18 00000000 )
-   78:  	Call  SetNpcPos ( 00000002 00000000 FFFFFC18 00000000 )
+   40:  	Call  SetNpcPos ( .NpcID:PutridPiranha_00  0`  -1000`  0` )
+   5C:  	Call  SetNpcPos ( .NpcID:PutridPiranha_01  0`  -1000`  0` )
+   78:  	Call  SetNpcPos ( .NpcID:PutridPiranha_02  0`  -1000`  0` )
    94:  EndIf
    9C:  Return
    A4:  End
@@ -512,47 +518,47 @@ MISSING: 802405EC to 80240618 (000005EC to 00000618)
 
 #new:NpcGroup $NpcGroup_80241194
 {
-	00000000 $NpcSettings_802405C0 ~Vec3f:NPC_80241194 % 365 0 -45
+	.NpcID:PutridPiranha_00 $NpcSettings_802405C0 ~Vec3f:NPC_PutridPiranha_00 % 365 0 -45
 	00040800 $Script_Init_802410E8 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_80241194
-	~AnimationTable:NPC_80241194 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_00
+	~AnimationTable:NPC_PutridPiranha_00 % .Sprite:PutridPiranha
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241194[1F0]
-	00000001 $NpcSettings_802405C0 ~Vec3f:NPC_80241384 % 325 0 0
+	.NpcID:PutridPiranha_01 $NpcSettings_802405C0 ~Vec3f:NPC_PutridPiranha_01 % 325 0 0
 	00040800 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_80241384
-	~AnimationTable:NPC_80241384 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_01
+	~AnimationTable:NPC_PutridPiranha_01 % .Sprite:PutridPiranha
 	00000000 00000000 00000000 00000000 % no tattle string
 	%
 	% $NpcGroup_80241194[3E0]
-	00000002 $NpcSettings_802405C0 ~Vec3f:NPC_80241574 % 375 0 45
+	.NpcID:PutridPiranha_02 $NpcSettings_802405C0 ~Vec3f:NPC_PutridPiranha_02 % 375 0 45
 	00040800 00000000 00000000 00000000 0000010E
 	~Items:5:FireFlower:A ~HP:Standard:2 ~FP:Standard:3 ~CoinBonus:0:2
-	~Movement:NPC_80241574
-	~AnimationTable:NPC_80241574 % .Sprite:PutridPiranha
+	~Movement:NPC_PutridPiranha_02
+	~AnimationTable:NPC_PutridPiranha_02 % .Sprite:PutridPiranha
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241764
 {
-	00000003 $NpcSettings_802407A0 ~Vec3f:NPC_80241764 % -183 0 47
+	.NpcID:HeartPlant_03 $NpcSettings_802407A0 ~Vec3f:NPC_HeartPlant_03 % -183 0 47
 	00408905 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241764
-	~AnimationTable:NPC_80241764 % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_03
+	~AnimationTable:NPC_HeartPlant_03 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 
 #new:NpcGroup $NpcGroup_80241954
 {
-	00000004 $NpcSettings_802407A0 ~Vec3f:NPC_80241954 % -124 0 20
+	.NpcID:HeartPlant_04 $NpcSettings_802407A0 ~Vec3f:NPC_HeartPlant_04 % -124 0 20
 	00408905 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241954
-	~AnimationTable:NPC_80241954 % .Sprite:HeartPlant
+	~Movement:NPC_HeartPlant_04
+	~AnimationTable:NPC_HeartPlant_04 % .Sprite:HeartPlant
 	00000000 00000000 00000000 001A00D3 % A Heart Plant. These grow only on Lavalava Island. ...
 }
 

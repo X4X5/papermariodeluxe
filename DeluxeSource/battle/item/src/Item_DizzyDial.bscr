@@ -146,7 +146,6 @@
    64:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_802A123C
 {
     0:  ADDIU     SP, SP, FFE0
@@ -188,7 +187,7 @@
    4C:  SW        R0, 78 (S0)
    50:  CLEAR     A0
    54:  LA        A1, $Function_802A123C
-   5C:  JAL       ~Func:create_dynamic_entity_frontUI
+   5C:  JAL       ~Func:create_generic_entity_frontUI
    60:  SH        R0, 1C (S1)
    64:  SAW       V0, $End[0]
    6C:  LI        V0, 1
@@ -238,7 +237,7 @@
   134:  LHU       V0, 0 (S1)
   138:  SH        R0, 1C (S1)
   13C:  ANDI      V0, V0, FFF7
-  140:  JAL       ~Func:free_dynamic_entity
+  140:  JAL       ~Func:free_generic_entity
   144:  SH        V0, 0 (S1)
   148:  LI        V0, 2
         .o14C
@@ -296,10 +295,10 @@
 #new:Script $Script_802A16D4
 {
     0:  Call  UseBattleCamPreset    ( 00000013 )
-   10:  Call  SetBattleCamTarget    ( FFFFFFAB 00000001 00000000 )
-   28:  Call  SetBattleCamOffsetZ   ( 00000029 )
-   38:  Call  SetBattleCamZoom  ( 000000F8 )
-   48:  Call  MoveBattleCamOver ( 0000001E )
+   10:  Call  SetBattleCamTarget    (  -85`  1`  0` )
+   28:  Call  SetBattleCamOffsetZ   (  41` )
+   38:  Call  SetBattleCamZoom  (  248` )
+   48:  Call  MoveBattleCamOver (  30` )
    58:  Wait  10`
    64:  Call  SetAnimation      ( .Actor:Player 00000000 0001001F )
    7C:  Call  GetActorPos       ( .Actor:Player *Var0 *Var1 *Var2 )
@@ -363,30 +362,30 @@
     0:  SetConst  *VarA  0000009A
    10:  ExecWait  $Script_802A13D0
    1C:  Call  UseBattleCamPreset    ( 00000002 )
-   2C:  Call  MoveBattleCamOver     ( 00000014 )
+   2C:  Call  MoveBattleCamOver     (  20` )
    3C:  Wait  10`
    48:  Thread
    50:  	Wait  5`
-   5C:  	Call  AddBattleCamZoom  ( FFFFFF06 )
-   6C:  	Call  MoveBattleCamOver ( 00000050 )
+   5C:  	Call  AddBattleCamZoom  (  -250` )
+   6C:  	Call  MoveBattleCamOver (  80` )
    7C:  	Call  8024ECF8  ( 00000000 00000000 00000001 )
    94:  	Wait  80`
-   A0:  	Call  AddBattleCamZoom  ( 000000FA )
-   B0:  	Call  MoveBattleCamOver ( 00000003 )
+   A0:  	Call  AddBattleCamZoom  (  250` )
+   B0:  	Call  MoveBattleCamOver (  3` )
    C0:  	Call  8024ECF8  ( 00000000 00000000 00000001 )
    D8:  EndThread
    E0:  Call  $Function_802A1270 ( )
    EC:  Thread
    F4:  	Call  StartRumble   ( 00000008 )
-  104:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  120:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[4.0] )
-  13C:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[3.0] )
-  158:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[2.0] )
-  174:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[1.0] )
-  190:  	Call  ShakeCam  ( .Cam:Battle 00000000 00000002 *Fixed[0.5] )
+  104:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  120:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[4.0] )
+  13C:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[3.0] )
+  158:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[2.0] )
+  174:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[1.0] )
+  190:  	Call  ShakeCam  ( .Cam:Battle 00000000  2` *Fixed[0.5] )
   1AC:  	Wait  10`
   1B8:  	Call  UseBattleCamPreset    ( 00000003 )
-  1C8:  	Call  MoveBattleCamOver     ( 0000000A )
+  1C8:  	Call  MoveBattleCamOver     (  10` )
   1D8:  	Call  8024ECF8  ( 00000000 00000000 00000000 )
   1F0:  EndThread
   1F8:  Call  InitTargetIterator ( )

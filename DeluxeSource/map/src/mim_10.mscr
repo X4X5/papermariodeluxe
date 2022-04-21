@@ -1,6 +1,9 @@
 % Script File: mim_10.mscr
 % Decoded from: 0 to 1690 (mim_10)
 
+#define .NpcID:Bootler_00           00
+#define .NpcID:JrTroopa_01          01
+
 #new:Function $Function_80240000
 {
     0:  LAF       F2, 8010EFF0
@@ -267,8 +270,8 @@ PADDING: 80240504 to 80240510 (00000504 to 00000510)
 {
     0:  Set   *GB_WorldLocation  .Location:ToadTown
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled     ( .Cam:Default .True )
    70:  Call  MakeNpcs  ( .True $NpcGroupList_80241640 )
    84:  Exec  $Script_80240FC0
@@ -303,17 +306,17 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
    20:  	Call  UseSettingsFrom   ( .Cam:Default *VarA *VarB *VarC )
    3C:  	Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
    50:  	Loop
-   5C:  		Call  SetCamDistance    ( .Cam:Default 00000190 )
+   5C:  		Call  SetCamDistance    ( .Cam:Default  400` )
    70:  		Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    88:  		Wait  1`
-   94:  		Call  SetCamDistance    ( .Cam:Default 000001C2 )
+   94:  		Call  SetCamDistance    ( .Cam:Default  450` )
    A8:  		Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
    C0:  		Wait  1`
    CC:  	EndLoop
    D4:  EndChildThread
    DC:  Call  SetPlayerAnimation    ( 0001002B )
    EC:  Wait  5`
-   F8:  Call  SpeakToPlayer ( 00000000 00BF0009 00BF0009 00000000 000E0002 ) % And if you don't come...we'll GET YOU!! BOOO!
+   F8:  Call  SpeakToPlayer ( .NpcID:Bootler_00 00BF0009 00BF0009 00000000 000E0002 ) % And if you don't come...we'll GET YOU!! BOOO!
   118:  Call  SetPlayerAnimation    ( 00010002 )
   128:  Return
   130:  End
@@ -322,7 +325,7 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
 #new:Script $Script_80240980
 {
     0:  Call  $Function_80240000 ( )
-    C:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 0000028A )
+    C:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  650` )
    2C:  Call  $Function_80240030 ( )
    38:  Thread
    40:  	Call  $Function_802400EC ( )
@@ -331,7 +334,7 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
    5C:  	Call  $Function_80240148 ( )
    68:  EndThread
    70:  Call  DisablePlayerInput    ( .True )
-   80:  Call  SetNpcPos ( 00000000 000000C8 0000002C 00000000 )
+   80:  Call  SetNpcPos ( .NpcID:Bootler_00  200`  44`  0` )
    9C:  Call  802CFD30  ( 00000000 00000007 00000000 00000000 00000000 00000000 )
    C0:  Set   *MapVar[0]  00000001
    D0:  Call  SetMusicTrack     ( 00000000 .Song:BoosMansion 00000000 00000008 )
@@ -342,11 +345,11 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
   124:  Wait  30`
   130:  Call  SetPlayerAnimation    ( 0001002A )
   140:  Wait  10`
-  14C:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
+  14C:  Call  InterpPlayerYaw   (  270`  0` )
   160:  Wait  20`
-  16C:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
+  16C:  Call  InterpPlayerYaw   (  90`  0` )
   180:  Wait  20`
-  18C:  Call  PlaySoundAtNpc    ( 00000000 .Sound:BooVanish 00000000 )
+  18C:  Call  PlaySoundAtNpc    ( .NpcID:Bootler_00 .Sound:BooVanish 00000000 )
   1A4:  SetF  *Var0  *Fixed[0.0]
   1B4:  Loop  00000014
   1C0:  	AddF  *Var0  *Fixed[12.0]
@@ -354,15 +357,15 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
   1F4:  	Wait  1`
   200:  EndLoop
   208:  Wait  20`
-  214:  Call  GetNpcPos     ( 00000000 *VarA *VarB *VarC )
+  214:  Call  GetNpcPos     ( .NpcID:Bootler_00 *VarA *VarB *VarC )
   230:  Call  UseSettingsFrom   ( .Cam:Default *VarA *VarB *VarC )
   24C:  Call  SetPanTarget  ( .Cam:Default *VarA *VarB *VarC )
-  268:  Call  SetCamDistance    ( .Cam:Default 0000010E )
+  268:  Call  SetCamDistance    ( .Cam:Default  270` )
   27C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   290:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
   2A4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   2BC:  Wait  10`
-  2C8:  Call  SpeakToPlayer ( 00000000 00BF0004 00BF0001 00000000 000E0000 ) % Pardon me, sir... Would you happen to be Mario? Ho ...
+  2C8:  Call  SpeakToPlayer ( .NpcID:Bootler_00 00BF0004 00BF0001 00000000 000E0000 ) % Pardon me, sir... Would you happen to be Mario? Ho ...
   2E8:  Call  GetPlayerPos  ( *Var0 *Var1 *Var2 )
   300:  Call  UseSettingsFrom   ( .Cam:Default *Var0 *Var1 *Var2 )
   31C:  Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
@@ -370,8 +373,8 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
   34C:  Wait  1`
   358:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
   370:  Wait  30`
-  37C:  Call  SpeakToPlayer ( 00000000 00BF0004 00BF0001 00000000 000E0001 ) % Please make haste! We shall await your arrival wit ...
-  39C:  Call  PlaySoundAtNpc    ( 00000000 .Sound:BooAppear 00000000 )
+  37C:  Call  SpeakToPlayer ( .NpcID:Bootler_00 00BF0004 00BF0001 00000000 000E0001 ) % Please make haste! We shall await your arrival wit ...
+  39C:  Call  PlaySoundAtNpc    ( .NpcID:Bootler_00 .Sound:BooAppear 00000000 )
   3B4:  SetF  *Var0  *Fixed[240.0]
   3C4:  Loop  00000014
   3D0:  	SubF  *Var0  *Fixed[12.0]
@@ -379,12 +382,12 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
   404:  	Wait  1`
   410:  EndLoop
   418:  Wait  25`
-  424:  Call  SetNpcAnimation   ( 00000000 00BF0009 )
+  424:  Call  SetNpcAnimation   ( .NpcID:Bootler_00 00BF0009 )
   438:  Thread
-  440:  	Call  GetNpcPos     ( 00000000 *VarA *VarB *VarC )
+  440:  	Call  GetNpcPos     ( .NpcID:Bootler_00 *VarA *VarB *VarC )
   45C:  	Sub   *VarB  00000028
-  46C:  	Call  SetNpcPos     ( 00000000 *VarA *VarB *VarC )
-  488:  	Call  SetNpcScale   ( 00000000 *Fixed[3.0] *Fixed[3.0] *Fixed[3.0] )
+  46C:  	Call  SetNpcPos     ( .NpcID:Bootler_00 *VarA *VarB *VarC )
+  488:  	Call  SetNpcScale   ( .NpcID:Bootler_00 *Fixed[3.0] *Fixed[3.0] *Fixed[3.0] )
   4A4:  	SetF  *Var0  *Fixed[0.0]
   4B4:  	Loop  00000014
   4C0:  		AddF  *Var0  *Fixed[12.0]
@@ -392,9 +395,9 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
   4F4:  		Wait  1`
   500:  	EndLoop
   508:  EndThread
-  510:  Call  PlaySoundAtNpc    ( 00000000 00000292 00000000 )
+  510:  Call  PlaySoundAtNpc    ( .NpcID:Bootler_00 00000292 00000000 )
   528:  ExecWait  $Script_80240848
-  534:  Call  SetCamDistance    ( .Cam:Default 000001C2 )
+  534:  Call  SetCamDistance    ( .Cam:Default  450` )
   548:  Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
   560:  Wait  1`
   56C:  Call  PanToTarget       ( .Cam:Default 00000000 00000000 )
@@ -406,7 +409,7 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
   5E0:  EndLoop
   5E8:  Set   *GB_StoryProgress  .Story:Ch3_InvitedToBoosMansion
   5F8:  Exec  $Script_80240264
-  604:  Call  SetNpcPos ( 00000000 00000000 FFFFFC18 00000000 )
+  604:  Call  SetNpcPos ( .NpcID:Bootler_00  0`  -1000`  0` )
   620:  Call  DisablePlayerInput    ( .False )
   630:  Return
   638:  End
@@ -445,12 +448,12 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
     C:  Call  DisablePlayerInput    ( .True )
    1C:  Set   *MapVar[0]  00000001
    2C:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
-   48:  Call  SetCamProperties  ( .Cam:Default *Fixed[3.0] *Var0 *Var1 *Var2 0000012C 0000000F FFFFFFF9 )
+   48:  Call  SetCamProperties  ( .Cam:Default *Fixed[3.0] *Var0 *Var1 *Var2  300`  15`  -7` )
    74:  Call  SpeakToPlayer     ( .Npc:Self 00210016 00210003 00000005 000E0023 ) % Oh! I made it out of the forest! I could kiss this ...
    94:  Wait  15`
    A0:  Call  SetNpcAnimation   ( .Npc:Self 0021000B )
    B4:  Sub   *Var0  000000C8
-   C4:  Call  NpcMoveTo ( .Npc:Self *Var0 *Var2 00000019 )
+   C4:  Call  NpcMoveTo ( .Npc:Self *Var0 *Var2  25` )
    E0:  Call  ResetCam  ( .Cam:Default *Fixed[90.0] )
    F4:  Set   *GF_MIM10_JrTroopaEscaped  .True
   104:  Set   *MapVar[0]  00000000
@@ -477,21 +480,21 @@ PADDING: 802407E4 to 802407F0 (000007E4 to 000007F0)
 
 #new:NpcGroup $NpcGroup_80241260
 {
-	00000000 $NpcSettings_802407F0 ~Vec3f:NPC_80241260 % 0 -1000 0
+	.NpcID:Bootler_00 $NpcSettings_802407F0 ~Vec3f:NPC_Bootler_00 % 0 -1000 0
 	00000801 $Script_Init_80241020 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241260
-	~AnimationTable:NPC_80241260 % .Sprite:Bootler
+	~Movement:NPC_Bootler_00
+	~AnimationTable:NPC_Bootler_00 % .Sprite:Bootler
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80241450
 {
-	00000001 $NpcSettings_8024081C ~Vec3f:NPC_80241450 % 0 0 0
+	.NpcID:JrTroopa_01 $NpcSettings_8024081C ~Vec3f:NPC_JrTroopa_01 % 0 0 0
 	00200D04 $Script_Init_802411DC 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80241450
-	~AnimationTable:NPC_80241450 % .Sprite:JrTroopa
+	~Movement:NPC_JrTroopa_01
+	~AnimationTable:NPC_JrTroopa_01 % .Sprite:JrTroopa
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

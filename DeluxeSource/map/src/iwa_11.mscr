@@ -1,6 +1,8 @@
 % Script File: iwa_11.mscr
 % Decoded from: 0 to 2880 (iwa_11)
 
+#define .NpcID:TrainStationToad_00  00
+
 #new:Function $Function_80240000
 {
     0:  LAW       V0, 8007419C
@@ -255,15 +257,15 @@ PADDING: 8024039C to 802403A0 (0000039C to 000003A0)
 {
     0:  Set   *GB_WorldLocation  .Location:MtRugged
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 0000001E 00000010 00001000 )
-   40:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  30`  16`  4096` )
+   40:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamEnabled ( .Cam:Default .True )
    70:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
-   84:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000000 00000000 )
-   A0:  Call  SetCamPosA    ( .Cam:Default FFFFE958 00000000 )
-   B8:  Call  SetCamPosB    ( .Cam:Default 00001644 00000000 )
+   84:  Call  UseSettingsFrom   ( .Cam:Default  0`  0`  0` )
+   A0:  Call  SetCamPosA    ( .Cam:Default  -5800`  0` )
+   B8:  Call  SetCamPosB    ( .Cam:Default  5700`  0` )
    D0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
-   E4:  Call  SetPanTarget  ( .Cam:Default 00000000 00000000 00000000 )
+   E4:  Call  SetPanTarget  ( .Cam:Default  0`  0`  0` )
   100:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   118:  Call  MakeNpcs      ( .True $NpcGroupList_8024282C )
   12C:  Call  ModifyColliderFlags   ( 00000000 ~Collider:deiliti 7FFFFE00 )
@@ -554,7 +556,7 @@ PADDING: 8024063C to 80240640 (0000063C to 00000640)
   170:  EndIf
   178:  Add   *Var1  FFFFFFFA
   188:  Add   *Var2  FFFFFFD8
-  198:  Call  SetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+  198:  Call  SetNpcPos ( .NpcID:TrainStationToad_00 *Var0 *Var1 *Var2 )
   1B4:  Wait  1`
   1C0:  Goto  0
   1CC:  Return
@@ -595,8 +597,8 @@ PADDING: 8024063C to 80240640 (0000063C to 00000640)
    20:  Call  DisablePartnerAI  ( 00000000 )
    30:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
    44:  Call  SetPlayerActionState  ( .ActionState:Idle )
-   54:  Call  InterpPlayerYaw   ( 0000010E 00000000 )
-   68:  Call  InterpNpcYaw      ( .Npc:Partner 0000010E 00000000 )
+   54:  Call  InterpPlayerYaw   (  270`  0` )
+   68:  Call  InterpNpcYaw      ( .Npc:Partner  270`  0` )
    80:  Call  EnableNpcShadow   ( .Npc:Partner .False )
    94:  Call  HidePlayerShadow  ( .True )
    A4:  Set   *MapFlag[04]  .True
@@ -632,8 +634,8 @@ PADDING: 8024063C to 80240640 (0000063C to 00000640)
    20:  Call  DisablePartnerAI  ( 00000000 )
    30:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
    44:  Call  SetPlayerActionState  ( .ActionState:Idle )
-   54:  Call  InterpPlayerYaw   ( 0000005A 00000000 )
-   68:  Call  InterpNpcYaw      ( .Npc:Partner 0000005A 00000000 )
+   54:  Call  InterpPlayerYaw   (  90`  0` )
+   68:  Call  InterpNpcYaw      ( .Npc:Partner  90`  0` )
    80:  Call  EnableNpcShadow   ( .Npc:Partner .False )
    94:  Call  HidePlayerShadow  ( .True )
    A4:  Exec  $Script_80241908
@@ -724,7 +726,7 @@ MISSING: 80242124 to 80242148 (00002124 to 00002148)
    D0:  Loop
    DC:  	Set   *Var0  *MapVar[0]
    EC:  	Sub   *Var0  *Var3
-   FC:  	Call  SetPanTarget      ( .Cam:Default *Var0 00000000 00000000 )
+   FC:  	Call  SetPanTarget      ( .Cam:Default *Var0  0`  0` )
   118:  	Call  $Function_80240280 ( )
   124:  	Call  TranslateGroup    ( ~Model:field_a *Var5 00000000 00000000 )
   140:  	Call  TranslateGroup    ( ~Model:field_b *Var6 00000000 00000000 )
@@ -762,11 +764,11 @@ MISSING: 802424FC to 80242580 (000024FC to 00002580)
     0:  Call  EnableNpcShadow   ( .Npc:Self .False )
    14:  Call  GetEntryID        ( *Var0 )
    24:  If  *Var0  ==  ~Entry:Entry0
-   34:  	Call  SetNpcPos     ( .Npc:Self FFFFFE57 00000046 FFFFFFEC )
-   50:  	Call  InterpNpcYaw  ( .Npc:Self 0000005A 00000000 )
+   34:  	Call  SetNpcPos     ( .Npc:Self  -425`  70`  -20` )
+   50:  	Call  InterpNpcYaw  ( .Npc:Self  90`  0` )
    68:  Else
-   70:  	Call  SetNpcPos     ( .Npc:Self FFFFFE57 00000046 FFFFFFEC )
-   8C:  	Call  InterpNpcYaw  ( .Npc:Self 0000010E 00000000 )
+   70:  	Call  SetNpcPos     ( .Npc:Self  -425`  70`  -20` )
+   8C:  	Call  InterpNpcYaw  ( .Npc:Self  270`  0` )
    A4:  EndIf
    AC:  Return
    B4:  End
@@ -774,11 +776,11 @@ MISSING: 802424FC to 80242580 (000024FC to 00002580)
 
 #new:NpcGroup $NpcGroup_8024263C
 {
-	00000000 $NpcSettings_802424D0 ~Vec3f:NPC_8024263C % 0 -1000 0
+	.NpcID:TrainStationToad_00 $NpcSettings_802424D0 ~Vec3f:NPC_TrainStationToad_00 % 0 -1000 0
 	00402D09 $Script_Init_80242580 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_8024263C
-	~AnimationTable:NPC_8024263C % .Sprite:TrainStationToad
+	~Movement:NPC_TrainStationToad_00
+	~AnimationTable:NPC_TrainStationToad_00 % .Sprite:TrainStationToad
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 

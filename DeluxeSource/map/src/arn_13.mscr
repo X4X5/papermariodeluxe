@@ -1,6 +1,9 @@
 % Script File: arn_13.mscr
 % Decoded from: 0 to C90 (arn_13)
 
+#define .NpcID:TubbasHeart_00       00
+#define .NpcID:Goomba_01            01
+
 #new:EntryList $EntryList
 {
 	~Vec4f:Entry0 % -231.0    0.0    5.0   90.0
@@ -96,8 +99,8 @@ PADDING: 802400F8 to 80240100 (000000F8 to 00000100)
 {
     0:  Set   *GB_WorldLocation  .Location:WindyMill
    10:  Call  SetSpriteShading  ( .Shading:arn_13 )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  MakeNpcs  ( .False $NpcGroupList_80240BCC )
@@ -166,23 +169,23 @@ PADDING: 80240424 to 80240430 (00000424 to 00000430)
    28:  Call  GetNpcPos ( .Npc:Self *Var0 *Var1 *Var2 )
    44:  Sub   *Var0  0000001E
    54:  Call  PlaySoundAtNpc    ( .Npc:Self 000020C8 00000000 )
-   6C:  Call  NpcJump0  ( .Npc:Self *Var0 00000000 *Var2 00000008 )
+   6C:  Call  NpcJump0  ( .Npc:Self *Var0  0` *Var2  8` )
    8C:  Call  SetNpcAnimation   ( .Npc:Self 006C0014 )
    A0:  Wait  1`
    AC:  Call  SetNpcAnimation   ( .Npc:Self 006C0013 )
    C0:  Sub   *Var0  00000050
    D0:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[2.5] )
    E4:  Call  PlaySoundAtNpc    ( .Npc:Self 000020C8 00000000 )
-   FC:  Call  NpcJump0  ( .Npc:Self *Var0 00000000 *Var2 0000000C )
+   FC:  Call  NpcJump0  ( .Npc:Self *Var0  0` *Var2  12` )
   11C:  Call  SetNpcAnimation   ( .Npc:Self 006C0014 )
   130:  Wait  1`
   13C:  Call  SetNpcAnimation   ( .Npc:Self 006C0013 )
   150:  Sub   *Var0  00000050
   160:  Call  SetNpcJumpscale   ( .Npc:Self *Fixed[2.5] )
   174:  Call  PlaySoundAtNpc    ( .Npc:Self 000020C8 00000000 )
-  18C:  Call  NpcJump0  ( .Npc:Self *Var0 00000000 *Var2 0000000C )
+  18C:  Call  NpcJump0  ( .Npc:Self *Var0  0` *Var2  12` )
   1AC:  Call  EnableNpcShadow   ( .Npc:Self .False )
-  1C0:  Call  SetNpcPos ( .Npc:Self 00000000 FFFFFC18 00000000 )
+  1C0:  Call  SetNpcPos ( .Npc:Self  0`  -1000`  0` )
   1DC:  Set   *GB_StoryProgress  .Story:Ch3_HeartFledSecondTunnel
   1EC:  Return
   1F4:  End
@@ -222,21 +225,21 @@ PADDING: 80240424 to 80240430 (00000424 to 00000430)
 
 #new:NpcGroup $NpcGroup_802407EC
 {
-	00000000 $NpcSettings_80240450 ~Vec3f:NPC_802407EC % 80 50 0
+	.NpcID:TubbasHeart_00 $NpcSettings_80240450 ~Vec3f:NPC_TubbasHeart_00 % 80 50 0
 	00000D05 $Script_Init_80240720 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802407EC
-	~AnimationTable:NPC_802407EC % .Sprite:TubbasHeart
+	~Movement:NPC_TubbasHeart_00
+	~AnimationTable:NPC_TubbasHeart_00 % .Sprite:TubbasHeart
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_802409DC
 {
-	00000001 $NpcSettings_802404CC ~Vec3f:NPC_802409DC % 0 0 0
+	.NpcID:Goomba_01 $NpcSettings_802404CC ~Vec3f:NPC_Goomba_01 % 0 0 0
 	00000C00 $Script_Init_8024076C 00000000 00000000 0000010E
 	~Items:20:DriedShroom:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:2
-	~Movement:NPC_802409DC
-	~AnimationTable:NPC_802409DC % .Sprite:Goomba
+	~Movement:NPC_Goomba_01
+	~AnimationTable:NPC_Goomba_01 % .Sprite:Goomba
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
@@ -250,7 +253,7 @@ PADDING: 80240424 to 80240430 (00000424 to 00000430)
 #new:Script $Script_80240BF0
 {
     0:  Call  DisablePlayerInput        ( .True )
-   10:  Call  ShowMessageAtScreenPos    ( 001D0184 000000A0 00000028 ) % Absolutely! No entry allowed!!
+   10:  Call  ShowMessageAtScreenPos    ( 001D0184  160`  40` ) % Absolutely! No entry allowed!!
    28:  Call  DisablePlayerInput        ( .False )
    38:  Return
    40:  End

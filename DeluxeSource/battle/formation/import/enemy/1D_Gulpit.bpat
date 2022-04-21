@@ -222,12 +222,12 @@
   11C:  Call  SetGoalToTarget   ( .Actor:Self )
   12C:  Call  GetStatusFlags    ( .Actor:Self *Var0 )
   140:  If  *Var0  &  ~Flags:StatusFlags:Shrink % 80000
-  150:  	Call  AddGoalPos    ( .Actor:Self 0000000A 00000000 00000000 )
+  150:  	Call  AddGoalPos    ( .Actor:Self  10`  0`  0` )
   16C:  Else
-  174:  	Call  AddGoalPos    ( .Actor:Self 00000014 00000000 00000000 )
+  174:  	Call  AddGoalPos    ( .Actor:Self  20`  0`  0` )
   190:  EndIf
   198:  Call  SetActorSpeed ( .Actor:Self *Fixed[4.0] )
-  1AC:  Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  1AC:  Call  RunToGoal     ( .Actor:Self  0` .False )
   1C4:  Call  SetAnimation  ( .Actor:Self 00000001 00520001 )
   1DC:  Wait  10`
   1E8:  Thread
@@ -247,11 +247,11 @@
   2D0:  		Wait  15`
   2DC:  		Call  UseBattleCamPreset    ( 00000002 )
   2EC:  		Call  YieldTurn ( )
-  2F8:  		Call  SetActorYaw   ( .Actor:Self 000000B4 )
+  2F8:  		Call  SetActorYaw   ( .Actor:Self  180` )
   30C:  		Call  AddActorDecoration    ( .Actor:Self 00000001 00000000 .Decoration:Sweat )
   328:  		ExecWait  $Script_80227FDC_1D 
   334:  		Call  RemoveActorDecoration ( .Actor:Self 00000001 00000000 )
-  34C:  		Call  SetActorYaw   ( .Actor:Self 00000000 )
+  34C:  		Call  SetActorYaw   ( .Actor:Self  0` )
   360:  		Call  EnableIdleScript      ( .Actor:Self 00000001 )
   374:  		Call  UseIdleAnimation      ( .Actor:Self .True )
   388:  		Return
@@ -261,7 +261,7 @@
   3AC:  Call  EnemyDamageTarget ( .Actor:Self *Var0 ~Flags:DamageType:0 00000000 00000000 00000002 00000020 )
   3D4:  Switch  *Var0 
   3E0:  	CaseOR  ==  .HitResult:Hit % 0
-  3EC:  	CaseOR  ==  00000002 % 2
+  3EC:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   3F8:  		Call  UseBattleCamPreset    ( 00000002 )
   408:  		Wait  10`
   414:  		Call  YieldTurn ( )
@@ -288,7 +288,7 @@
    C0:  Call  SetAnimation  ( .Actor:Self 00000001 00520002 )
    D8:  Call  SetActorSpeed ( .Actor:Self *Fixed[3.0] )
    EC:  Call  SetGoalPos    ( .Actor:Self *Var0 *Var1 *Var2 )
-  108:  Call  RunToGoal     ( .Actor:Self 00000000 .False )
+  108:  Call  RunToGoal     ( .Actor:Self  0` .False )
   120:  Call  SetAnimation  ( .Actor:Self 00000001 00520001 )
   138:  Wait  10`
   144:  Call  PlaySoundAtActor  ( .Actor:Self 000020EE )
@@ -327,11 +327,11 @@
   394:  		Add   *Var2  00000002 
   3A4:  		Call  SetPartPos        ( .Actor:Self *VarA *Var0 *Var1 *Var2 )
   3C4:  		Call  SetGoalToTarget   ( .Actor:Self )
-  3D4:  		Call  AddGoalPos        ( .Actor:Self FFFFFF9C 00000000 00000005 )
+  3D4:  		Call  AddGoalPos        ( .Actor:Self  -100`  0`  5` )
   3F0:  		Call  SetPartMoveSpeed  ( .Actor:Self *VarA *Fixed[14.0] )
   408:  		Call  SetPartJumpGravity    ( .Actor:Self *VarA *Fixed[0.01] )
   420:  		Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
-  43C:  		Call  JumpPartTo        ( .Actor:Self *VarA *Var0 *Var1 *Var2 00000000 .True )
+  43C:  		Call  JumpPartTo        ( .Actor:Self *VarA *Var0 *Var1 *Var2  0` .True )
   464:  		Call  SetPartFlagBits   ( .Actor:Self *VarA 00000001 .True )
   480:  		If  *Var9  ==  .HitResult:Lucky % 5
   490:  			Call  EnemyTestTarget   ( .Actor:Self *Var0 ~Flags:DamageType:TriggerLucky 00000000 00000000 00000000 )
@@ -355,7 +355,7 @@
   5DC:  Call  SetPartMoveSpeed  ( .Actor:Self *VarA *Fixed[14.0] )
   5F4:  Call  SetPartJumpGravity    ( .Actor:Self *VarA *Fixed[0.01] )
   60C:  Call  GetGoalPos        ( .Actor:Self *Var0 *Var1 *Var2 )
-  628:  Call  JumpPartTo        ( .Actor:Self *VarA *Var0 *Var1 *Var2 00000000 .True )
+  628:  Call  JumpPartTo        ( .Actor:Self *VarA *Var0 *Var1 *Var2  0` .True )
   650:  Switch  *VarA 
   65C:  	Case  ==  00000002 
   668:  		Wait  2`
@@ -366,13 +366,13 @@
   6DC:  EndSwitch
   6E4:  Switch  *Var0 
   6F0:  	CaseOR  ==  .HitResult:Hit % 0
-  6FC:  	CaseOR  ==  00000002 % 2
+  6FC:  	CaseOR  ==  .HitResult:QuakeImmune % 2
   708:  		Call  UseBattleCamPreset    ( 00000002 )
   718:  		Call  SetAnimation      ( .Actor:Self 00000001 00520001 )
   730:  		Call  GetPartOffset     ( .Actor:Self *VarA *Var0 *Var1 *Var2 )
   750:  		Add   *Var0  FFFFFF9C 
   760:  		Call  SetPartJumpGravity    ( .Actor:Self *VarA *Fixed[1.0] )
-  778:  		Call  JumpPartTo        ( .Actor:Self *VarA *Var0 *Var1 *Var2 00000019 .True )
+  778:  		Call  JumpPartTo        ( .Actor:Self *VarA *Var0 *Var1 *Var2  25` .True )
   7A0:  		Call  SetPartFlagBits   ( .Actor:Self *VarA 00000001 .True )
   7BC:  		Wait  10`
   7C8:  		Call  YieldTurn ( )

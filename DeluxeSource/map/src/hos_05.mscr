@@ -1,6 +1,18 @@
 % Script File: hos_05.mscr
 % Decoded from: 0 to F2A0 (hos_05)
 
+#define .NpcID:WorldEldstar_00      00
+#define .NpcID:WorldMamar_01        01
+#define .NpcID:WorldSkolar_02       02
+#define .NpcID:WorldMuskular_03     03
+#define .NpcID:WorldMisstar_04      04
+#define .NpcID:WorldKlevar_05       05
+#define .NpcID:WorldKalmar_06       06
+#define .NpcID:WorldBowser_07       07
+#define .NpcID:WorldBowser_08       08
+#define .NpcID:WorldKammy_09        09
+#define .NpcID:StarRod_10           0A
+
 % Origin: HEURISTIC
 #new:Function $Function_80240000
 {
@@ -27,7 +39,7 @@
    50:  LI        V0, FFFF
    54:  BNE       S0, V0, .o6C
    58:  LI        V0, 1
-   5C:  JAL       8011D82C
+   5C:  JAL       ~Func:mdl_set_all_fog_mode
    60:  COPY      A0, S1
    64:  BEQ       R0, R0, .o10C
    68:  LI        V0, 2
@@ -55,7 +67,7 @@
    B4:  COPY      A0, V0
    B8:  COPY      A0, V0
    BC:  LI        A1, FFFF
-   C0:  JAL       8011BC7C
+   C0:  JAL       ~Func:set_mdl_custom_gfx_set
    C4:  COPY      A2, S1
    C8:  BEQ       R0, R0, .o9C
    CC:  NOP
@@ -980,7 +992,7 @@ PADDING: 80240878 to 80240880 (00000878 to 00000880)
 {
     0:  ADDIU     SP, SP, FFE8
     4:  SW        RA, 10 (SP)
-    8:  JAL       8011D82C
+    8:  JAL       ~Func:mdl_set_all_fog_mode
     C:  LI        A0, 3
    10:  LW        RA, 10 (SP)
    14:  LI        V0, 2
@@ -2031,7 +2043,7 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
   16C:  MTC1      V1, F0
   170:  NOP
   174:  CVT.S.W   F0, F0
-  178:  JAL       80070D30
+  178:  JAL       ~Func:playFX_37
   17C:  SWC1      F0, 18 (SP)
         .o180
   180:  LA        V1, $???_80249A70
@@ -2998,7 +3010,6 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
    60:  ADDIU     SP, SP, 28
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80243164
 {
     0:  ADDIU     SP, SP, FFB0
@@ -3078,11 +3089,11 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
   134:  LI        A0, 1
   138:  ADDIU     S0, SP, 10
   13C:  COPY      A1, S0
-  140:  JAL       80137DC0
+  140:  JAL       ~Func:get_screen_overlay_params
   144:  ADDIU     A2, SP, 14
   148:  CLEAR     A0
   14C:  COPY      A1, S0
-  150:  JAL       80137DC0
+  150:  JAL       ~Func:get_screen_overlay_params
   154:  ADDIU     A2, SP, 18
   158:  LWC1      F2, 14 (SP)
   15C:  LIF       F4, 255.0
@@ -3378,7 +3389,6 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
   5A4:  ADDIU     SP, SP, 50
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_8024370C
 {
     0:  LAW       V1, $???_8024AA20
@@ -3401,7 +3411,6 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
    48:  ADDIU     SP, SP, 28
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80243758
 {
     0:  ADDIU     SP, SP, FFE8
@@ -3761,7 +3770,6 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
   564:  ADDIU     SP, SP, 18
 }
 
-% Origin: HEURISTIC
 #new:Function $Function_80243CC0
 {
     0:  ADDIU     SP, SP, FFD0
@@ -3819,7 +3827,7 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
         .oF0
    F0:  LI        A0, 1
    F4:  ADDIU     A1, SP, 10
-   F8:  JAL       80137DC0
+   F8:  JAL       ~Func:get_screen_overlay_params
    FC:  ADDIU     A2, SP, 14
   100:  LWC1      F2, 14 (SP)
   104:  MTC1      R0, F0
@@ -3964,13 +3972,13 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
     4:  CLEAR     A0
     8:  LA        A1, $Function_80243CC0
    10:  SW        RA, 14 (SP)
-   14:  JAL       ~Func:create_dynamic_entity_frontUI
+   14:  JAL       ~Func:create_generic_entity_frontUI
    18:  SW        S0, 10 (SP)
    1C:  LUI       A0, 1
    20:  LA        S0, $???_8024AA20
    28:  LW        V1, 0 (S0)
    2C:  ORI       A0, A0, D420
-   30:  JAL       8011D7E4
+   30:  JAL       ~Func:mdl_get_next_texture_address
    34:  SW        V0, 0 (V1)
    38:  ORI       A3, R0, A710
    3C:  ADDU      V1, V0, A3
@@ -4243,7 +4251,7 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
    20:  LA        S0, $???_8024AA20
    28:  LW        V0, 0 (S0)
    2C:  LW        A0, 0 (V0)
-   30:  JAL       ~Func:free_dynamic_entity
+   30:  JAL       ~Func:free_generic_entity
    34:  SH        R0, 5C (V0)
    38:  LW        V1, 0 (S0)
    3C:  LI        V0, 1
@@ -4561,23 +4569,23 @@ C4A0003C 46020000 E4A0003C 3C048025 24849984 8C830000 C4A0003C 24630001
    54:  CVT.S.W   F0, F0
    58:  MFC1      A1, F0
         .o5C
-   5C:  JAL       ~Func:set_transition_stencil_zoom_1
+   5C:  JAL       ~Func:set_screen_overlay_params_back
    60:  NOP
    64:  LI        A0, 1
    68:  LI        A1, FA
    6C:  COPY      A2, A1
-   70:  JAL       ~Func:set_transition_stencil_color
+   70:  JAL       ~Func:set_screen_overlay_color
    74:  COPY      A3, A1
    78:  BEQ       R0, R0, .oA4
    7C:  CLEAR     V0
         .o80
    80:  CLEAR     A0
-   84:  JAL       ~Func:set_transition_stencil_zoom_1
+   84:  JAL       ~Func:set_screen_overlay_params_back
    88:  CLEAR     A1
    8C:  LI        A0, 1
    90:  LI        A1, FA
    94:  COPY      A2, A1
-   98:  JAL       ~Func:set_transition_stencil_color
+   98:  JAL       ~Func:set_screen_overlay_color
    9C:  COPY      A3, A1
    A0:  LI        V0, 2
         .oA4
@@ -4692,11 +4700,11 @@ PADDING: 802449E4 to 802449F0 (000049E4 to 000049F0)
         .o194
   194:  ADDIU     S0, SP, 18
   198:  COPY      A1, S0
-  19C:  JAL       80137DC0
+  19C:  JAL       ~Func:get_screen_overlay_params
   1A0:  ADDIU     A2, SP, 1C
   1A4:  CLEAR     A0
   1A8:  COPY      A1, S0
-  1AC:  JAL       80137DC0
+  1AC:  JAL       ~Func:get_screen_overlay_params
   1B0:  ADDIU     A2, SP, 20
   1B4:  LWC1      F2, 1C (SP)
   1B8:  LIF       F4, 255.0
@@ -4804,7 +4812,7 @@ PADDING: 80244CB4 to 80244CC0 (00004CB4 to 00004CC0)
    50:  LI        V0, FFFF
    54:  BNE       S0, V0, .o6C
    58:  LI        V0, 1
-   5C:  JAL       8011D82C
+   5C:  JAL       ~Func:mdl_set_all_fog_mode
    60:  COPY      A0, S1
    64:  BEQ       R0, R0, .o10C
    68:  LI        V0, 2
@@ -4832,7 +4840,7 @@ PADDING: 80244CB4 to 80244CC0 (00004CB4 to 00004CC0)
    B4:  COPY      A0, V0
    B8:  COPY      A0, V0
    BC:  LI        A1, FFFF
-   C0:  JAL       8011BC7C
+   C0:  JAL       ~Func:set_mdl_custom_gfx_set
    C4:  COPY      A2, S1
    C8:  BEQ       R0, R0, .o9C
    CC:  NOP
@@ -5634,8 +5642,8 @@ PADDING: 80245A8C to 80245A90 (00005A8C to 00005A90)
 {
     0:  Set   *GB_WorldLocation  .Location:StarHaven
    10:  Call  SetSpriteShading  ( .Shading:None )
-   20:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   40:  Call  SetCamBGColor     ( .Cam:Default 00000000 00000000 00000000 )
+   20:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   40:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
    5C:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    70:  Call  SetCamEnabled     ( .Cam:Default .True )
    84:  Call  GetEntryID        ( *Var0 )
@@ -5893,31 +5901,31 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
 
 #new:Script $Script_802466E8
 {
-    0:  Call  SetNpcVar ( 00000000 00000000 00000000 )
-   18:  Call  GetNpcPos ( 00000000 *Var2 *Var3 *Var4 )
+    0:  Call  SetNpcVar ( .NpcID:WorldEldstar_00 00000000 00000000 )
+   18:  Call  GetNpcPos ( .NpcID:WorldEldstar_00 *Var2 *Var3 *Var4 )
    34:  Loop
    40:  	Call  MakeLerp  ( 00000000 0000000F 00000014 .Easing:CosInOut )
    5C:  	Loop
    68:  		Call  UpdateLerp ( )
    74:  		Set   *Var5  *Var3
    84:  		Add   *Var5  *Var0
-   94:  		Call  GetNpcPos ( 00000000 *Var2 *Var0 *Var4 )
-   B0:  		Call  SetNpcPos ( 00000000 *Var2 *Var5 *Var4 )
-   CC:  		Call  GetNpcPos ( 00000001 *Var2 *Var0 *Var4 )
-   E8:  		Call  SetNpcPos ( 00000001 *Var2 *Var5 *Var4 )
-  104:  		Call  GetNpcPos ( 00000002 *Var2 *Var0 *Var4 )
-  120:  		Call  SetNpcPos ( 00000002 *Var2 *Var5 *Var4 )
-  13C:  		Call  GetNpcPos ( 00000003 *Var2 *Var0 *Var4 )
-  158:  		Call  SetNpcPos ( 00000003 *Var2 *Var5 *Var4 )
-  174:  		Call  GetNpcPos ( 00000004 *Var2 *Var0 *Var4 )
-  190:  		Call  SetNpcPos ( 00000004 *Var2 *Var5 *Var4 )
-  1AC:  		Call  GetNpcPos ( 00000005 *Var2 *Var0 *Var4 )
-  1C8:  		Call  SetNpcPos ( 00000005 *Var2 *Var5 *Var4 )
-  1E4:  		Call  GetNpcPos ( 00000006 *Var2 *Var0 *Var4 )
-  200:  		Call  SetNpcPos ( 00000006 *Var2 *Var5 *Var4 )
+   94:  		Call  GetNpcPos ( .NpcID:WorldEldstar_00 *Var2 *Var0 *Var4 )
+   B0:  		Call  SetNpcPos ( .NpcID:WorldEldstar_00 *Var2 *Var5 *Var4 )
+   CC:  		Call  GetNpcPos ( .NpcID:WorldMamar_01 *Var2 *Var0 *Var4 )
+   E8:  		Call  SetNpcPos ( .NpcID:WorldMamar_01 *Var2 *Var5 *Var4 )
+  104:  		Call  GetNpcPos ( .NpcID:WorldSkolar_02 *Var2 *Var0 *Var4 )
+  120:  		Call  SetNpcPos ( .NpcID:WorldSkolar_02 *Var2 *Var5 *Var4 )
+  13C:  		Call  GetNpcPos ( .NpcID:WorldMuskular_03 *Var2 *Var0 *Var4 )
+  158:  		Call  SetNpcPos ( .NpcID:WorldMuskular_03 *Var2 *Var5 *Var4 )
+  174:  		Call  GetNpcPos ( .NpcID:WorldMisstar_04 *Var2 *Var0 *Var4 )
+  190:  		Call  SetNpcPos ( .NpcID:WorldMisstar_04 *Var2 *Var5 *Var4 )
+  1AC:  		Call  GetNpcPos ( .NpcID:WorldKlevar_05 *Var2 *Var0 *Var4 )
+  1C8:  		Call  SetNpcPos ( .NpcID:WorldKlevar_05 *Var2 *Var5 *Var4 )
+  1E4:  		Call  GetNpcPos ( .NpcID:WorldKalmar_06 *Var2 *Var0 *Var4 )
+  200:  		Call  SetNpcPos ( .NpcID:WorldKalmar_06 *Var2 *Var5 *Var4 )
   21C:  		Label  A
   228:  		Wait  2`
-  234:  		Call  GetNpcVar ( 00000000 00000000 *Var6 )
+  234:  		Call  GetNpcVar ( .NpcID:WorldEldstar_00 00000000 *Var6 )
   24C:  		If  *Var6  !=  00000000
   25C:  			Goto  A
   268:  		EndIf
@@ -5930,23 +5938,23 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
   2C0:  		Call  UpdateLerp ( )
   2CC:  		Set   *Var5  *Var3
   2DC:  		Add   *Var5  *Var0
-  2EC:  		Call  GetNpcPos ( 00000000 *Var2 *Var0 *Var4 )
-  308:  		Call  SetNpcPos ( 00000000 *Var2 *Var5 *Var4 )
-  324:  		Call  GetNpcPos ( 00000001 *Var2 *Var0 *Var4 )
-  340:  		Call  SetNpcPos ( 00000001 *Var2 *Var5 *Var4 )
-  35C:  		Call  GetNpcPos ( 00000002 *Var2 *Var0 *Var4 )
-  378:  		Call  SetNpcPos ( 00000002 *Var2 *Var5 *Var4 )
-  394:  		Call  GetNpcPos ( 00000003 *Var2 *Var0 *Var4 )
-  3B0:  		Call  SetNpcPos ( 00000003 *Var2 *Var5 *Var4 )
-  3CC:  		Call  GetNpcPos ( 00000004 *Var2 *Var0 *Var4 )
-  3E8:  		Call  SetNpcPos ( 00000004 *Var2 *Var5 *Var4 )
-  404:  		Call  GetNpcPos ( 00000005 *Var2 *Var0 *Var4 )
-  420:  		Call  SetNpcPos ( 00000005 *Var2 *Var5 *Var4 )
-  43C:  		Call  GetNpcPos ( 00000006 *Var2 *Var0 *Var4 )
-  458:  		Call  SetNpcPos ( 00000006 *Var2 *Var5 *Var4 )
+  2EC:  		Call  GetNpcPos ( .NpcID:WorldEldstar_00 *Var2 *Var0 *Var4 )
+  308:  		Call  SetNpcPos ( .NpcID:WorldEldstar_00 *Var2 *Var5 *Var4 )
+  324:  		Call  GetNpcPos ( .NpcID:WorldMamar_01 *Var2 *Var0 *Var4 )
+  340:  		Call  SetNpcPos ( .NpcID:WorldMamar_01 *Var2 *Var5 *Var4 )
+  35C:  		Call  GetNpcPos ( .NpcID:WorldSkolar_02 *Var2 *Var0 *Var4 )
+  378:  		Call  SetNpcPos ( .NpcID:WorldSkolar_02 *Var2 *Var5 *Var4 )
+  394:  		Call  GetNpcPos ( .NpcID:WorldMuskular_03 *Var2 *Var0 *Var4 )
+  3B0:  		Call  SetNpcPos ( .NpcID:WorldMuskular_03 *Var2 *Var5 *Var4 )
+  3CC:  		Call  GetNpcPos ( .NpcID:WorldMisstar_04 *Var2 *Var0 *Var4 )
+  3E8:  		Call  SetNpcPos ( .NpcID:WorldMisstar_04 *Var2 *Var5 *Var4 )
+  404:  		Call  GetNpcPos ( .NpcID:WorldKlevar_05 *Var2 *Var0 *Var4 )
+  420:  		Call  SetNpcPos ( .NpcID:WorldKlevar_05 *Var2 *Var5 *Var4 )
+  43C:  		Call  GetNpcPos ( .NpcID:WorldKalmar_06 *Var2 *Var0 *Var4 )
+  458:  		Call  SetNpcPos ( .NpcID:WorldKalmar_06 *Var2 *Var5 *Var4 )
   474:  		Label  B
   480:  		Wait  2`
-  48C:  		Call  GetNpcVar ( 00000000 00000000 *Var6 )
+  48C:  		Call  GetNpcVar ( .NpcID:WorldEldstar_00 00000000 *Var6 )
   4A4:  		If  *Var6  !=  00000000
   4B4:  			Goto  B
   4C0:  		EndIf
@@ -5977,33 +5985,33 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
    A8:  Thread
    B0:  	Call  802D2C14      ( 00000001 )
    C0:  	Wait  30`
-   CC:  	Call  PlayerMoveTo  ( 00000000 00000050 0000000A )
-   E4:  	Call  PlayerFaceNpc ( 00000000 00000000 )
+   CC:  	Call  PlayerMoveTo  (  0`  80`  10` )
+   E4:  	Call  PlayerFaceNpc ( .NpcID:WorldEldstar_00 .False )
    F8:  EndThread
-  100:  Call  UseSettingsFrom   ( .Cam:Default 00000000 00000088 00000050 )
-  11C:  Call  SetPanTarget  ( .Cam:Default 00000000 00000088 00000050 )
+  100:  Call  UseSettingsFrom   ( .Cam:Default  0`  136`  80` )
+  11C:  Call  SetPanTarget  ( .Cam:Default  0`  136`  80` )
   138:  Call  SetCamDistance    ( .Cam:Default *Fixed[510.0] )
-  14C:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
-  164:  Call  SetCamPosB    ( .Cam:Default 00000000 FFFFFFCE )
+  14C:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
+  164:  Call  SetCamPosB    ( .Cam:Default  0`  -50` )
   17C:  Call  SetCamPitch   ( .Cam:Default *Fixed[10.0] *Fixed[-2.5] )
   194:  Call  SetCamSpeed   ( .Cam:Default *Fixed[1.5] )
   1A8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   1C0:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   1D4:  Wait  30`
-  1E0:  Call  SetPanTarget  ( .Cam:Default 00000000 000000DC FFFFFEED )
+  1E0:  Call  SetPanTarget  ( .Cam:Default  0`  220`  -275` )
   1FC:  Call  SetCamDistance    ( .Cam:Default *Fixed[1.0] )
   210:  Call  SetCamPitch   ( .Cam:Default *Fixed[-4.5] *Fixed[-3.0] )
   228:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   23C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   254:  Wait  10`
-  260:  Call  SpeakToPlayer ( 00000000 00120002 00120001 00000200 000A0069 ) % Mario, you finally made it. The time has come to t ...
+  260:  Call  SpeakToPlayer ( .NpcID:WorldEldstar_00 00120002 00120001 00000200 000A0069 ) % Mario, you finally made it. The time has come to t ...
   280:  Call  802D2C14      ( 00000000 )
   290:  Wait  30`
   29C:  Call  SetSelfVar    ( 00000000 00000001 )
-  2B0:  Call  SetPanTarget  ( .Cam:Default 00000000 00000088 00000050 )
+  2B0:  Call  SetPanTarget  ( .Cam:Default  0`  136`  80` )
   2CC:  Call  SetCamDistance    ( .Cam:Default *Fixed[600.0] )
-  2E0:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
-  2F8:  Call  SetCamPosB    ( .Cam:Default 00000000 FFFFFFCE )
+  2E0:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
+  2F8:  Call  SetCamPosB    ( .Cam:Default  0`  -50` )
   310:  Call  SetCamPitch   ( .Cam:Default *Fixed[10.0] *Fixed[-2.5] )
   328:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
   33C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -6011,13 +6019,13 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
   368:  Call  MakeLerp      ( 00000000 00000168 00000019 .Easing:QuadraticIn )
   384:  Loop
   390:  	Call  UpdateLerp ( )
-  39C:  	Call  SetNpcRotation    ( 00000000 00000000 *Var0 00000000 )
-  3B8:  	Call  SetNpcRotation    ( 00000001 00000000 *Var0 00000000 )
-  3D4:  	Call  SetNpcRotation    ( 00000002 00000000 *Var0 00000000 )
-  3F0:  	Call  SetNpcRotation    ( 00000003 00000000 *Var0 00000000 )
-  40C:  	Call  SetNpcRotation    ( 00000004 00000000 *Var0 00000000 )
-  428:  	Call  SetNpcRotation    ( 00000005 00000000 *Var0 00000000 )
-  444:  	Call  SetNpcRotation    ( 00000006 00000000 *Var0 00000000 )
+  39C:  	Call  SetNpcRotation    ( .NpcID:WorldEldstar_00 00000000 *Var0 00000000 )
+  3B8:  	Call  SetNpcRotation    ( .NpcID:WorldMamar_01 00000000 *Var0 00000000 )
+  3D4:  	Call  SetNpcRotation    ( .NpcID:WorldSkolar_02 00000000 *Var0 00000000 )
+  3F0:  	Call  SetNpcRotation    ( .NpcID:WorldMuskular_03 00000000 *Var0 00000000 )
+  40C:  	Call  SetNpcRotation    ( .NpcID:WorldMisstar_04 00000000 *Var0 00000000 )
+  428:  	Call  SetNpcRotation    ( .NpcID:WorldKlevar_05 00000000 *Var0 00000000 )
+  444:  	Call  SetNpcRotation    ( .NpcID:WorldKalmar_06 00000000 *Var0 00000000 )
   460:  	Wait  1`
   46C:  	If  *Var1  ==  00000000
   47C:  		BreakLoop
@@ -6025,62 +6033,62 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
   48C:  EndLoop
   494:  Call  GetPlayerPos  ( *Var6 *Var7 *Var8 )
   4AC:  Thread
-  4B4:  	Call  SetNpcFlagBits    ( 00000000 00400000 .False )
-  4CC:  	Call  SetNpcAnimation   ( 00000000 00120003 )
-  4E0:  	Call  SetNpcJumpscale   ( 00000000 *Fixed[3.2] )
-  4F4:  	Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
-  510:  	Call  NpcJump0  ( 00000000 *Var0 *Var1 *Var2 00000005 )
-  530:  	Call  SetNpcAnimation   ( 00000000 00120001 )
+  4B4:  	Call  SetNpcFlagBits    ( .NpcID:WorldEldstar_00 00400000 .False )
+  4CC:  	Call  SetNpcAnimation   ( .NpcID:WorldEldstar_00 00120003 )
+  4E0:  	Call  SetNpcJumpscale   ( .NpcID:WorldEldstar_00 *Fixed[3.2] )
+  4F4:  	Call  GetNpcPos ( .NpcID:WorldEldstar_00 *Var0 *Var1 *Var2 )
+  510:  	Call  NpcJump0  ( .NpcID:WorldEldstar_00 *Var0 *Var1 *Var2  5` )
+  530:  	Call  SetNpcAnimation   ( .NpcID:WorldEldstar_00 00120001 )
   544:  	Add   *Var7  00000014
   554:  	Call  PlaySoundAt       ( B000001F 00000000 *Var6 *Var7 *Var8 )
   574:  	Call  PlayEffect        ( ~FX:Sparkles:Star *Var6 *Var7 *Var8 0000000A 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   5B8:  EndThread
   5C0:  Thread
-  5C8:  	Call  SetNpcFlagBits    ( 00000001 00400000 .False )
-  5E0:  	Call  SetNpcAnimation   ( 00000001 00130003 )
-  5F4:  	Call  SetNpcJumpscale   ( 00000001 *Fixed[3.2] )
-  608:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
-  624:  	Call  NpcJump0  ( 00000001 *Var0 *Var1 *Var2 00000005 )
-  644:  	Call  SetNpcAnimation   ( 00000001 00130001 )
+  5C8:  	Call  SetNpcFlagBits    ( .NpcID:WorldMamar_01 00400000 .False )
+  5E0:  	Call  SetNpcAnimation   ( .NpcID:WorldMamar_01 00130003 )
+  5F4:  	Call  SetNpcJumpscale   ( .NpcID:WorldMamar_01 *Fixed[3.2] )
+  608:  	Call  GetNpcPos ( .NpcID:WorldMamar_01 *Var0 *Var1 *Var2 )
+  624:  	Call  NpcJump0  ( .NpcID:WorldMamar_01 *Var0 *Var1 *Var2  5` )
+  644:  	Call  SetNpcAnimation   ( .NpcID:WorldMamar_01 00130001 )
   658:  EndThread
   660:  Thread
-  668:  	Call  SetNpcFlagBits    ( 00000002 00400000 .False )
-  680:  	Call  SetNpcAnimation   ( 00000002 00140003 )
-  694:  	Call  SetNpcJumpscale   ( 00000002 *Fixed[3.2] )
-  6A8:  	Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
-  6C4:  	Call  NpcJump0  ( 00000002 *Var0 *Var1 *Var2 00000005 )
-  6E4:  	Call  SetNpcAnimation   ( 00000002 00140001 )
+  668:  	Call  SetNpcFlagBits    ( .NpcID:WorldSkolar_02 00400000 .False )
+  680:  	Call  SetNpcAnimation   ( .NpcID:WorldSkolar_02 00140003 )
+  694:  	Call  SetNpcJumpscale   ( .NpcID:WorldSkolar_02 *Fixed[3.2] )
+  6A8:  	Call  GetNpcPos ( .NpcID:WorldSkolar_02 *Var0 *Var1 *Var2 )
+  6C4:  	Call  NpcJump0  ( .NpcID:WorldSkolar_02 *Var0 *Var1 *Var2  5` )
+  6E4:  	Call  SetNpcAnimation   ( .NpcID:WorldSkolar_02 00140001 )
   6F8:  EndThread
   700:  Thread
-  708:  	Call  SetNpcFlagBits    ( 00000003 00400000 .False )
-  720:  	Call  SetNpcAnimation   ( 00000003 00150003 )
-  734:  	Call  SetNpcJumpscale   ( 00000003 *Fixed[3.2] )
-  748:  	Call  GetNpcPos ( 00000003 *Var0 *Var1 *Var2 )
-  764:  	Call  NpcJump0  ( 00000003 *Var0 *Var1 *Var2 00000005 )
-  784:  	Call  SetNpcAnimation   ( 00000003 00150001 )
+  708:  	Call  SetNpcFlagBits    ( .NpcID:WorldMuskular_03 00400000 .False )
+  720:  	Call  SetNpcAnimation   ( .NpcID:WorldMuskular_03 00150003 )
+  734:  	Call  SetNpcJumpscale   ( .NpcID:WorldMuskular_03 *Fixed[3.2] )
+  748:  	Call  GetNpcPos ( .NpcID:WorldMuskular_03 *Var0 *Var1 *Var2 )
+  764:  	Call  NpcJump0  ( .NpcID:WorldMuskular_03 *Var0 *Var1 *Var2  5` )
+  784:  	Call  SetNpcAnimation   ( .NpcID:WorldMuskular_03 00150001 )
   798:  EndThread
   7A0:  Thread
-  7A8:  	Call  SetNpcFlagBits    ( 00000004 00400000 .False )
-  7C0:  	Call  SetNpcAnimation   ( 00000004 00160003 )
-  7D4:  	Call  SetNpcJumpscale   ( 00000004 *Fixed[3.2] )
-  7E8:  	Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
-  804:  	Call  NpcJump0  ( 00000004 *Var0 *Var1 *Var2 00000005 )
-  824:  	Call  SetNpcAnimation   ( 00000004 00160001 )
+  7A8:  	Call  SetNpcFlagBits    ( .NpcID:WorldMisstar_04 00400000 .False )
+  7C0:  	Call  SetNpcAnimation   ( .NpcID:WorldMisstar_04 00160003 )
+  7D4:  	Call  SetNpcJumpscale   ( .NpcID:WorldMisstar_04 *Fixed[3.2] )
+  7E8:  	Call  GetNpcPos ( .NpcID:WorldMisstar_04 *Var0 *Var1 *Var2 )
+  804:  	Call  NpcJump0  ( .NpcID:WorldMisstar_04 *Var0 *Var1 *Var2  5` )
+  824:  	Call  SetNpcAnimation   ( .NpcID:WorldMisstar_04 00160001 )
   838:  EndThread
   840:  Thread
-  848:  	Call  SetNpcFlagBits    ( 00000005 00400000 .False )
-  860:  	Call  SetNpcAnimation   ( 00000005 00170004 )
-  874:  	Call  SetNpcJumpscale   ( 00000005 *Fixed[3.2] )
-  888:  	Call  GetNpcPos ( 00000005 *Var0 *Var1 *Var2 )
-  8A4:  	Call  NpcJump0  ( 00000005 *Var0 *Var1 *Var2 00000005 )
-  8C4:  	Call  SetNpcAnimation   ( 00000005 00170001 )
+  848:  	Call  SetNpcFlagBits    ( .NpcID:WorldKlevar_05 00400000 .False )
+  860:  	Call  SetNpcAnimation   ( .NpcID:WorldKlevar_05 00170004 )
+  874:  	Call  SetNpcJumpscale   ( .NpcID:WorldKlevar_05 *Fixed[3.2] )
+  888:  	Call  GetNpcPos ( .NpcID:WorldKlevar_05 *Var0 *Var1 *Var2 )
+  8A4:  	Call  NpcJump0  ( .NpcID:WorldKlevar_05 *Var0 *Var1 *Var2  5` )
+  8C4:  	Call  SetNpcAnimation   ( .NpcID:WorldKlevar_05 00170001 )
   8D8:  EndThread
-  8E0:  Call  SetNpcFlagBits    ( 00000006 00400000 .False )
-  8F8:  Call  SetNpcAnimation   ( 00000006 00180003 )
-  90C:  Call  SetNpcJumpscale   ( 00000006 *Fixed[3.2] )
-  920:  Call  GetNpcPos ( 00000006 *Var0 *Var1 *Var2 )
-  93C:  Call  NpcJump0  ( 00000006 *Var0 *Var1 *Var2 00000005 )
-  95C:  Call  SetNpcAnimation   ( 00000006 00180001 )
+  8E0:  Call  SetNpcFlagBits    ( .NpcID:WorldKalmar_06 00400000 .False )
+  8F8:  Call  SetNpcAnimation   ( .NpcID:WorldKalmar_06 00180003 )
+  90C:  Call  SetNpcJumpscale   ( .NpcID:WorldKalmar_06 *Fixed[3.2] )
+  920:  Call  GetNpcPos ( .NpcID:WorldKalmar_06 *Var0 *Var1 *Var2 )
+  93C:  Call  NpcJump0  ( .NpcID:WorldKalmar_06 *Var0 *Var1 *Var2  5` )
+  95C:  Call  SetNpcAnimation   ( .NpcID:WorldKalmar_06 00180001 )
   970:  Thread
   978:  	Call  PlayEffect    ( ~FX:RadialFlowIn:YellowLines 00000000 0000009A 00000055 *Fixed[2.8] 00000064 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   9BC:  	Call  PlaySound     ( 0000212D )
@@ -6117,22 +6125,22 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
   D88:  Call  $Function_80240830 ( )
   D94:  Call  SetSelfVar    ( 00000000 00000000 )
   DA8:  Wait  30`
-  DB4:  Call  ShowMessageAtScreenPos    ( 001D0198 000000A0 00000028 ) % Mario can now use Star Beam!
+  DB4:  Call  ShowMessageAtScreenPos    ( 001D0198  160`  40` ) % Mario can now use Star Beam!
   DCC:  Call  SetPlayerAnimation    ( 00010002 )
   DDC:  Wait  30`
-  DE8:  Call  SetPanTarget  ( .Cam:Default 00000000 000000DC FFFFFEED )
+  DE8:  Call  SetPanTarget  ( .Cam:Default  0`  220`  -275` )
   E04:  Call  SetCamDistance    ( .Cam:Default *Fixed[1.0] )
   E18:  Call  SetCamPitch   ( .Cam:Default *Fixed[-4.5] *Fixed[-3.0] )
   E30:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   E44:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   E5C:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
   E70:  Wait  10`
-  E7C:  Call  SpeakToPlayer ( 00000000 00120002 00120001 00000200 000A006A ) % If you use this Power, you can drain the power of  ...
+  E7C:  Call  SpeakToPlayer ( .NpcID:WorldEldstar_00 00120002 00120001 00000200 000A006A ) % If you use this Power, you can drain the power of  ...
   E9C:  Wait  30`
-  EA8:  Call  SetPanTarget  ( .Cam:Default 00000000 00000088 00000050 )
+  EA8:  Call  SetPanTarget  ( .Cam:Default  0`  136`  80` )
   EC4:  Call  SetCamDistance    ( .Cam:Default *Fixed[510.0] )
-  ED8:  Call  SetCamPosA    ( .Cam:Default 00000000 00000000 )
-  EF0:  Call  SetCamPosB    ( .Cam:Default 00000000 FFFFFFCE )
+  ED8:  Call  SetCamPosA    ( .Cam:Default  0`  0` )
+  EF0:  Call  SetCamPosB    ( .Cam:Default  0`  -50` )
   F08:  Call  SetCamPitch   ( .Cam:Default *Fixed[8.0] *Fixed[-7.9] )
   F20:  Call  SetCamSpeed   ( .Cam:Default *Fixed[4.0] )
   F34:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
@@ -6140,21 +6148,21 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
   F60:  Wait  30`
   F6C:  Set   *GB_StoryProgress  .Story:Ch8_StarShipActivated
   F7C:  ExecWait  $Script_8024E148
-  F88:  Call  SetPanTarget  ( .Cam:Default 00000000 000000DC FFFFFEED )
+  F88:  Call  SetPanTarget  ( .Cam:Default  0`  220`  -275` )
   FA4:  Call  SetCamDistance    ( .Cam:Default *Fixed[1.0] )
   FB8:  Call  SetCamPitch   ( .Cam:Default *Fixed[-4.5] *Fixed[-3.0] )
   FD0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
   FE4:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   FFC:  Call  WaitForCam    ( .Cam:Default *Fixed[1.0] )
  1010:  Wait  10`
- 101C:  Call  SpeakToPlayer ( 00000000 00120002 00120001 00000200 000A006B ) % This is the legendary Star Ship of Star Haven. Bow ...
+ 101C:  Call  SpeakToPlayer ( .NpcID:WorldEldstar_00 00120002 00120001 00000200 000A006B ) % This is the legendary Star Ship of Star Haven. Bow ...
  103C:  Wait  30`
- 1048:  Call  SetNpcAnimation   ( 00000001 00130007 )
- 105C:  Call  SetNpcAnimation   ( 00000003 00150005 )
- 1070:  Call  SetNpcAnimation   ( 00000005 00170007 )
+ 1048:  Call  SetNpcAnimation   ( .NpcID:WorldMamar_01 00130007 )
+ 105C:  Call  SetNpcAnimation   ( .NpcID:WorldMuskular_03 00150005 )
+ 1070:  Call  SetNpcAnimation   ( .NpcID:WorldKlevar_05 00170007 )
  1084:  Call  ModifyColliderFlags   ( 00000000 ~Collider:o616 7FFFFE00 )
  109C:  Call  SetZoneEnabled    ( ~Zone:o622 .False )
- 10B0:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
+ 10B0:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
  10D0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
  10E4:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
  10FC:  Call  SetCamSpeed   ( .Cam:Default *Fixed[2.5] )
@@ -6171,9 +6179,9 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
     0:  Call  GetEntryID    ( *Var0 )
    10:  Switch  *Var0
    1C:  	Case  ~Entry:Entry0  to  ~Entry:Entry1
-   2C:  		Call  SetNpcAnimation   ( 00000001 00130007 )
-   40:  		Call  SetNpcAnimation   ( 00000003 00150005 )
-   54:  		Call  SetNpcAnimation   ( 00000005 00170007 )
+   2C:  		Call  SetNpcAnimation   ( .NpcID:WorldMamar_01 00130007 )
+   40:  		Call  SetNpcAnimation   ( .NpcID:WorldMuskular_03 00150005 )
+   54:  		Call  SetNpcAnimation   ( .NpcID:WorldKlevar_05 00170007 )
    68:  		Switch  *GB_StoryProgress
    74:  			Case  ==  .Story:Ch8_ReachedStarHaven % 5B
    80:  				Exec  $Script_802466E8
@@ -6228,59 +6236,59 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
 
 #new:NpcGroup $NpcGroup_80247F24
 {
-	00000001 $NpcSettings_802465D0 ~Vec3f:NPC_80247F24 % 220 220 -170
+	.NpcID:WorldMamar_01 $NpcSettings_802465D0 ~Vec3f:NPC_WorldMamar_01 % 220 220 -170
 	00000A01 $Script_Init_80247D54 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80247F24
-	~AnimationTable:NPC_80247F24 % .Sprite:WorldMamar
+	~Movement:NPC_WorldMamar_01
+	~AnimationTable:NPC_WorldMamar_01 % .Sprite:WorldMamar
 	00000000 00000000 $ExtraAnimationList_80247E88 00000000 % no tattle string
 	%
 	% $NpcGroup_80247F24[1F0]
-	00000002 $NpcSettings_802465D0 ~Vec3f:NPC_80248114 % -275 220 60
+	.NpcID:WorldSkolar_02 $NpcSettings_802465D0 ~Vec3f:NPC_WorldSkolar_02 % -275 220 60
 	00000A01 $Script_Init_80247D54 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_80248114
-	~AnimationTable:NPC_80248114 % .Sprite:WorldSkolar
+	~Movement:NPC_WorldSkolar_02
+	~AnimationTable:NPC_WorldSkolar_02 % .Sprite:WorldSkolar
 	00000000 00000000 $ExtraAnimationList_80247EA4 00000000 % no tattle string
 	%
 	% $NpcGroup_80247F24[3E0]
-	00000003 $NpcSettings_802465D0 ~Vec3f:NPC_80248304 % 125 220 250
+	.NpcID:WorldMuskular_03 $NpcSettings_802465D0 ~Vec3f:NPC_WorldMuskular_03 % 125 220 250
 	00000A01 $Script_Init_80247D54 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248304
-	~AnimationTable:NPC_80248304 % .Sprite:WorldMuskular
+	~Movement:NPC_WorldMuskular_03
+	~AnimationTable:NPC_WorldMuskular_03 % .Sprite:WorldMuskular
 	00000000 00000000 $ExtraAnimationList_80247EC0 00000000 % no tattle string
 	%
 	% $NpcGroup_80247F24[5D0]
-	00000004 $NpcSettings_802465D0 ~Vec3f:NPC_802484F4 % -125 220 250
+	.NpcID:WorldMisstar_04 $NpcSettings_802465D0 ~Vec3f:NPC_WorldMisstar_04 % -125 220 250
 	00000A01 $Script_Init_80247D54 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802484F4
-	~AnimationTable:NPC_802484F4 % .Sprite:WorldMisstar
+	~Movement:NPC_WorldMisstar_04
+	~AnimationTable:NPC_WorldMisstar_04 % .Sprite:WorldMisstar
 	00000000 00000000 $ExtraAnimationList_80247ED8 00000000 % no tattle string
 	%
 	% $NpcGroup_80247F24[7C0]
-	00000005 $NpcSettings_802465D0 ~Vec3f:NPC_802486E4 % 275 220 60
+	.NpcID:WorldKlevar_05 $NpcSettings_802465D0 ~Vec3f:NPC_WorldKlevar_05 % 275 220 60
 	00000A01 $Script_Init_80247D54 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802486E4
-	~AnimationTable:NPC_802486E4 % .Sprite:WorldKlevar
+	~Movement:NPC_WorldKlevar_05
+	~AnimationTable:NPC_WorldKlevar_05 % .Sprite:WorldKlevar
 	00000000 00000000 $ExtraAnimationList_80247EF4 00000000 % no tattle string
 	%
 	% $NpcGroup_80247F24[9B0]
-	00000006 $NpcSettings_802465D0 ~Vec3f:NPC_802488D4 % -220 220 -170
+	.NpcID:WorldKalmar_06 $NpcSettings_802465D0 ~Vec3f:NPC_WorldKalmar_06 % -220 220 -170
 	00000A01 $Script_Init_80247D54 00000000 00000000 0000005A
 	~NoDrops
-	~Movement:NPC_802488D4
-	~AnimationTable:NPC_802488D4 % .Sprite:WorldKalmar
+	~Movement:NPC_WorldKalmar_06
+	~AnimationTable:NPC_WorldKalmar_06 % .Sprite:WorldKalmar
 	00000000 00000000 $ExtraAnimationList_80247F0C 00000000 % no tattle string
 	%
 	% $NpcGroup_80247F24[BA0]
-	00000000 $NpcSettings_802465D0 ~Vec3f:NPC_80248AC4 % 0 220 -275
+	.NpcID:WorldEldstar_00 $NpcSettings_802465D0 ~Vec3f:NPC_WorldEldstar_00 % 0 220 -275
 	00000A01 $Script_Init_80247D54 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248AC4
-	~AnimationTable:NPC_80248AC4 % .Sprite:WorldEldstar
+	~Movement:NPC_WorldEldstar_00
+	~AnimationTable:NPC_WorldEldstar_00 % .Sprite:WorldEldstar
 	00000000 00000000 $ExtraAnimationList_80247E6C 00000000 % no tattle string
 }
 
@@ -6297,35 +6305,35 @@ MISSING: 802465FC to 80246654 (000065FC to 00006654)
 
 #new:NpcGroup $NpcGroup_80248D00
 {
-	00000007 $NpcSettings_80246654 ~Vec3f:NPC_80248D00 % 0 -1000 0
+	.NpcID:WorldBowser_07 $NpcSettings_80246654 ~Vec3f:NPC_WorldBowser_07 % 0 -1000 0
 	00000A01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248D00
-	~AnimationTable:NPC_80248D00 % .Sprite:WorldBowser
+	~Movement:NPC_WorldBowser_07
+	~AnimationTable:NPC_WorldBowser_07 % .Sprite:WorldBowser
 	00000000 00000000 $ExtraAnimationList_80248CB4 00000000 % no tattle string
 	%
 	% $NpcGroup_80248D00[1F0]
-	00000008 $NpcSettings_80246654 ~Vec3f:NPC_80248EF0 % 0 -1000 0
+	.NpcID:WorldBowser_08 $NpcSettings_80246654 ~Vec3f:NPC_WorldBowser_08 % 0 -1000 0
 	00000A01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_80248EF0
-	~AnimationTable:NPC_80248EF0 % .Sprite:WorldBowser
+	~Movement:NPC_WorldBowser_08
+	~AnimationTable:NPC_WorldBowser_08 % .Sprite:WorldBowser
 	00000000 00000000 $ExtraAnimationList_80248CB4 00000000 % no tattle string
 	%
 	% $NpcGroup_80248D00[3E0]
-	00000009 $NpcSettings_80246680 ~Vec3f:NPC_802490E0 % 0 -1000 0
+	.NpcID:WorldKammy_09 $NpcSettings_80246680 ~Vec3f:NPC_WorldKammy_09 % 0 -1000 0
 	00000A01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802490E0
-	~AnimationTable:NPC_802490E0 % .Sprite:WorldKammy
+	~Movement:NPC_WorldKammy_09
+	~AnimationTable:NPC_WorldKammy_09 % .Sprite:WorldKammy
 	00000000 00000000 $ExtraAnimationList_80248CE0 00000000 % no tattle string
 	%
 	% $NpcGroup_80248D00[5D0]
-	0000000A $NpcSettings_802466BC ~Vec3f:NPC_802492D0 % 0 174 0
+	.NpcID:StarRod_10 $NpcSettings_802466BC ~Vec3f:NPC_StarRod_10 % 0 174 0
 	00000A01 00000000 00000000 00000000 0000010E
 	~NoDrops
-	~Movement:NPC_802492D0
-	~AnimationTable:NPC_802492D0 % .Sprite:StarRod
+	~Movement:NPC_StarRod_10
+	~AnimationTable:NPC_StarRod_10 % .Sprite:StarRod
 	00000000 00000000 00000000 00000000 % no tattle string
 }
 
@@ -6677,11 +6685,11 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
 #new:Script $Script_80249B48
 {
     0:  Call  802D7B10      ( *Array[6] )
-   10:  Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+   10:  Call  GetNpcPos     ( .NpcID:WorldKlevar_05 *Var0 *Var1 *Var2 )
    2C:  Call  PlayEffect    ( ~FX:RingBlast:Yellow *Var0 *Var1 *Var2 00000004 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
    70:  Thread
    78:  	Wait  3`
-   84:  	Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+   84:  	Call  GetNpcPos     ( .NpcID:WorldKlevar_05 *Var0 *Var1 *Var2 )
    A0:  	Call  PlayEffect    ( ~FX:EmitterVolume:GoldShimmer2 *Var0 *Var1 *Var2 00000010 00000010 00000002 00000014 00000000 00000000 00000000 00000000 00000000 )
    E4:  	Set   *Array[D]  *VarF
    F4:  	Call  $Function_802428C8    ( 00000006 00000050 *Fixed[0.5] )
@@ -6689,27 +6697,27 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   128:  	SetF  *Var4  *Fixed[1.0]
   138:  	Label  6
   144:  	Call  GetNextPathPos ( )
-  150:  	Call  SetNpcPos     ( 00000005 *Var1 *Var2 *Var3 )
+  150:  	Call  SetNpcPos     ( .NpcID:WorldKlevar_05 *Var1 *Var2 *Var3 )
   16C:  	Call  $Function_80240E50    ( *Array[D] *Array[18] *Var1 *Var2 *Var3 )
   18C:  	AddF  *Var4  *Fixed[-0.03125]
-  19C:  	Call  SetNpcScale   ( 00000005 *Var4 *Var4 *Var4 )
+  19C:  	Call  SetNpcScale   ( .NpcID:WorldKlevar_05 *Var4 *Var4 *Var4 )
   1B8:  	Wait  1`
   1C4:  	If  *Var0  ==  00000001
   1D4:  		Goto  6
   1E0:  	EndIf
   1E8:  	Call  $Function_80240F30 ( )
-  1F4:  	Call  SetNpcAnimation   ( 00000005 00170006 )
+  1F4:  	Call  SetNpcAnimation   ( .NpcID:WorldKlevar_05 00170006 )
   208:  	Call  802CFD30  ( 00000005 00000000 00000000 00000000 00000000 00000000 )
-  22C:  	Call  SetNpcFlagBits    ( 00000005 00000002 .True )
+  22C:  	Call  SetNpcFlagBits    ( .NpcID:WorldKlevar_05 00000002 .True )
   244:  	Call  802D7B10  ( *Array[D] )
   254:  EndThread
   25C:  Wait  20`
   268:  Call  802D7B10      ( *Array[3] )
-  278:  Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+  278:  Call  GetNpcPos     ( .NpcID:WorldSkolar_02 *Var0 *Var1 *Var2 )
   294:  Call  PlayEffect    ( ~FX:RingBlast:Yellow *Var0 *Var1 *Var2 00000004 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   2D8:  Thread
   2E0:  	Wait  3`
-  2EC:  	Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+  2EC:  	Call  GetNpcPos     ( .NpcID:WorldSkolar_02 *Var0 *Var1 *Var2 )
   308:  	Call  PlayEffect    ( ~FX:EmitterVolume:GoldShimmer2 *Var0 *Var1 *Var2 00000010 00000010 00000002 00000014 00000000 00000000 00000000 00000000 00000000 )
   34C:  	Set   *Array[A]  *VarF
   35C:  	Call  $Function_802428C8    ( 00000003 0000001E *Fixed[0.5] )
@@ -6717,27 +6725,27 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   390:  	SetF  *Var4  *Fixed[1.0]
   3A0:  	Label  3
   3AC:  	Call  GetNextPathPos ( )
-  3B8:  	Call  SetNpcPos     ( 00000002 *Var1 *Var2 *Var3 )
+  3B8:  	Call  SetNpcPos     ( .NpcID:WorldSkolar_02 *Var1 *Var2 *Var3 )
   3D4:  	Call  $Function_80240E50    ( *Array[A] *Array[15] *Var1 *Var2 *Var3 )
   3F4:  	AddF  *Var4  *Fixed[-0.03125]
-  404:  	Call  SetNpcScale   ( 00000002 *Var4 *Var4 *Var4 )
+  404:  	Call  SetNpcScale   ( .NpcID:WorldSkolar_02 *Var4 *Var4 *Var4 )
   420:  	Wait  1`
   42C:  	If  *Var0  ==  00000001
   43C:  		Goto  3
   448:  	EndIf
   450:  	Call  $Function_80240F30 ( )
-  45C:  	Call  SetNpcAnimation   ( 00000002 00140009 )
+  45C:  	Call  SetNpcAnimation   ( .NpcID:WorldSkolar_02 00140009 )
   470:  	Call  802CFD30  ( 00000002 00000000 00000000 00000000 00000000 00000000 )
-  494:  	Call  SetNpcFlagBits    ( 00000002 00000002 .True )
+  494:  	Call  SetNpcFlagBits    ( .NpcID:WorldSkolar_02 00000002 .True )
   4AC:  	Call  802D7B10  ( *Array[A] )
   4BC:  EndThread
   4C4:  Wait  20`
   4D0:  Call  802D7B10      ( *Array[4] )
-  4E0:  Call  GetNpcPos     ( 00000003 *Var0 *Var1 *Var2 )
+  4E0:  Call  GetNpcPos     ( .NpcID:WorldMuskular_03 *Var0 *Var1 *Var2 )
   4FC:  Call  PlayEffect    ( ~FX:RingBlast:Yellow *Var0 *Var1 *Var2 00000004 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   540:  Thread
   548:  	Wait  3`
-  554:  	Call  GetNpcPos     ( 00000003 *Var0 *Var1 *Var2 )
+  554:  	Call  GetNpcPos     ( .NpcID:WorldMuskular_03 *Var0 *Var1 *Var2 )
   570:  	Call  PlayEffect    ( ~FX:EmitterVolume:GoldShimmer2 *Var0 *Var1 *Var2 00000010 00000010 00000002 00000014 00000000 00000000 00000000 00000000 00000000 )
   5B4:  	Set   *Array[B]  *VarF
   5C4:  	Call  $Function_802428C8    ( 00000004 FFFFFFB0 *Fixed[0.3] )
@@ -6745,27 +6753,27 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   5F8:  	SetF  *Var4  *Fixed[1.0]
   608:  	Label  4
   614:  	Call  GetNextPathPos ( )
-  620:  	Call  SetNpcPos     ( 00000003 *Var1 *Var2 *Var3 )
+  620:  	Call  SetNpcPos     ( .NpcID:WorldMuskular_03 *Var1 *Var2 *Var3 )
   63C:  	Call  $Function_80240E50    ( *Array[B] *Array[16] *Var1 *Var2 *Var3 )
   65C:  	AddF  *Var4  *Fixed[-0.03125]
-  66C:  	Call  SetNpcScale   ( 00000003 *Var4 *Var4 *Var4 )
+  66C:  	Call  SetNpcScale   ( .NpcID:WorldMuskular_03 *Var4 *Var4 *Var4 )
   688:  	Wait  1`
   694:  	If  *Var0  ==  00000001
   6A4:  		Goto  4
   6B0:  	EndIf
   6B8:  	Call  $Function_80240F30 ( )
-  6C4:  	Call  SetNpcAnimation   ( 00000003 00150007 )
+  6C4:  	Call  SetNpcAnimation   ( .NpcID:WorldMuskular_03 00150007 )
   6D8:  	Call  802CFD30  ( 00000003 00000000 00000000 00000000 00000000 00000000 )
-  6FC:  	Call  SetNpcFlagBits    ( 00000003 00000002 .True )
+  6FC:  	Call  SetNpcFlagBits    ( .NpcID:WorldMuskular_03 00000002 .True )
   714:  	Call  802D7B10  ( *Array[B] )
   724:  EndThread
   72C:  Wait  20`
   738:  Call  802D7B10      ( *Array[7] )
-  748:  Call  GetNpcPos     ( 00000006 *Var0 *Var1 *Var2 )
+  748:  Call  GetNpcPos     ( .NpcID:WorldKalmar_06 *Var0 *Var1 *Var2 )
   764:  Call  PlayEffect    ( ~FX:RingBlast:Yellow *Var0 *Var1 *Var2 00000004 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   7A8:  Thread
   7B0:  	Wait  3`
-  7BC:  	Call  GetNpcPos     ( 00000006 *Var0 *Var1 *Var2 )
+  7BC:  	Call  GetNpcPos     ( .NpcID:WorldKalmar_06 *Var0 *Var1 *Var2 )
   7D8:  	Call  PlayEffect    ( ~FX:EmitterVolume:GoldShimmer2 *Var0 *Var1 *Var2 00000010 00000010 00000002 00000014 00000000 00000000 00000000 00000000 00000000 )
   81C:  	Set   *Array[E]  *VarF
   82C:  	Call  $Function_802428C8    ( 00000007 00000078 *Fixed[0.5] )
@@ -6773,27 +6781,27 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   860:  	SetF  *Var4  *Fixed[1.0]
   870:  	Label  7
   87C:  	Call  GetNextPathPos ( )
-  888:  	Call  SetNpcPos     ( 00000006 *Var1 *Var2 *Var3 )
+  888:  	Call  SetNpcPos     ( .NpcID:WorldKalmar_06 *Var1 *Var2 *Var3 )
   8A4:  	Call  $Function_80240E50    ( *Array[E] *Array[19] *Var1 *Var2 *Var3 )
   8C4:  	AddF  *Var4  *Fixed[-0.03125]
-  8D4:  	Call  SetNpcScale   ( 00000006 *Var4 *Var4 *Var4 )
+  8D4:  	Call  SetNpcScale   ( .NpcID:WorldKalmar_06 *Var4 *Var4 *Var4 )
   8F0:  	Wait  1`
   8FC:  	If  *Var0  ==  00000001
   90C:  		Goto  7
   918:  	EndIf
   920:  	Call  $Function_80240F30 ( )
-  92C:  	Call  SetNpcAnimation   ( 00000006 00180008 )
+  92C:  	Call  SetNpcAnimation   ( .NpcID:WorldKalmar_06 00180008 )
   940:  	Call  802CFD30  ( 00000006 00000000 00000000 00000000 00000000 00000000 )
-  964:  	Call  SetNpcFlagBits    ( 00000006 00000002 .True )
+  964:  	Call  SetNpcFlagBits    ( .NpcID:WorldKalmar_06 00000002 .True )
   97C:  	Call  802D7B10  ( *Array[E] )
   98C:  EndThread
   994:  Wait  20`
   9A0:  Call  802D7B10      ( *Array[5] )
-  9B0:  Call  GetNpcPos     ( 00000004 *Var0 *Var1 *Var2 )
+  9B0:  Call  GetNpcPos     ( .NpcID:WorldMisstar_04 *Var0 *Var1 *Var2 )
   9CC:  Call  PlayEffect    ( ~FX:RingBlast:Yellow *Var0 *Var1 *Var2 00000004 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   A10:  Thread
   A18:  	Wait  3`
-  A24:  	Call  GetNpcPos     ( 00000004 *Var0 *Var1 *Var2 )
+  A24:  	Call  GetNpcPos     ( .NpcID:WorldMisstar_04 *Var0 *Var1 *Var2 )
   A40:  	Call  PlayEffect    ( ~FX:EmitterVolume:GoldShimmer2 *Var0 *Var1 *Var2 00000010 00000010 00000002 00000014 00000000 00000000 00000000 00000000 00000000 )
   A84:  	Set   *Array[C]  *VarF
   A94:  	Call  $Function_802428C8    ( 00000005 00000078 *Fixed[0.5] )
@@ -6801,27 +6809,27 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   AC8:  	SetF  *Var4  *Fixed[1.0]
   AD8:  	Label  5
   AE4:  	Call  GetNextPathPos ( )
-  AF0:  	Call  SetNpcPos     ( 00000004 *Var1 *Var2 *Var3 )
+  AF0:  	Call  SetNpcPos     ( .NpcID:WorldMisstar_04 *Var1 *Var2 *Var3 )
   B0C:  	Call  $Function_80240E50    ( *Array[C] *Array[17] *Var1 *Var2 *Var3 )
   B2C:  	AddF  *Var4  *Fixed[-0.03125]
-  B3C:  	Call  SetNpcScale   ( 00000004 *Var4 *Var4 *Var4 )
+  B3C:  	Call  SetNpcScale   ( .NpcID:WorldMisstar_04 *Var4 *Var4 *Var4 )
   B58:  	Wait  1`
   B64:  	If  *Var0  ==  00000001
   B74:  		Goto  5
   B80:  	EndIf
   B88:  	Call  $Function_80240F30 ( )
-  B94:  	Call  SetNpcAnimation   ( 00000004 00160005 )
+  B94:  	Call  SetNpcAnimation   ( .NpcID:WorldMisstar_04 00160005 )
   BA8:  	Call  802CFD30  ( 00000004 00000000 00000000 00000000 00000000 00000000 )
-  BCC:  	Call  SetNpcFlagBits    ( 00000004 00000002 .True )
+  BCC:  	Call  SetNpcFlagBits    ( .NpcID:WorldMisstar_04 00000002 .True )
   BE4:  	Call  802D7B10  ( *Array[C] )
   BF4:  EndThread
   BFC:  Wait  20`
   C08:  Call  802D7B10      ( *Array[2] )
-  C18:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+  C18:  Call  GetNpcPos     ( .NpcID:WorldMamar_01 *Var0 *Var1 *Var2 )
   C34:  Call  PlayEffect    ( ~FX:RingBlast:Yellow *Var0 *Var1 *Var2 00000004 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   C78:  Thread
   C80:  	Wait  3`
-  C8C:  	Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+  C8C:  	Call  GetNpcPos     ( .NpcID:WorldMamar_01 *Var0 *Var1 *Var2 )
   CA8:  	Call  PlayEffect    ( ~FX:EmitterVolume:GoldShimmer2 *Var0 *Var1 *Var2 00000010 00000010 00000002 00000014 00000000 00000000 00000000 00000000 00000000 )
   CEC:  	Set   *Array[9]  *VarF
   CFC:  	Call  $Function_802428C8    ( 00000002 FFFFFFC4 *Fixed[0.5] )
@@ -6829,18 +6837,18 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   D30:  	SetF  *Var4  *Fixed[1.0]
   D40:  	Label  2
   D4C:  	Call  GetNextPathPos ( )
-  D58:  	Call  SetNpcPos     ( 00000001 *Var1 *Var2 *Var3 )
+  D58:  	Call  SetNpcPos     ( .NpcID:WorldMamar_01 *Var1 *Var2 *Var3 )
   D74:  	Call  $Function_80240E50    ( *Array[9] *Array[14] *Var1 *Var2 *Var3 )
   D94:  	AddF  *Var4  *Fixed[-0.03125]
-  DA4:  	Call  SetNpcScale   ( 00000001 *Var4 *Var4 *Var4 )
+  DA4:  	Call  SetNpcScale   ( .NpcID:WorldMamar_01 *Var4 *Var4 *Var4 )
   DC0:  	Wait  1`
   DCC:  	If  *Var0  ==  00000001
   DDC:  		Goto  2
   DE8:  	EndIf
   DF0:  	Call  $Function_80240F30 ( )
-  DFC:  	Call  SetNpcAnimation   ( 00000001 00130008 )
+  DFC:  	Call  SetNpcAnimation   ( .NpcID:WorldMamar_01 00130008 )
   E10:  	Call  802CFD30  ( 00000001 00000000 00000000 00000000 00000000 00000000 )
-  E34:  	Call  SetNpcFlagBits    ( 00000001 00000002 .True )
+  E34:  	Call  SetNpcFlagBits    ( .NpcID:WorldMamar_01 00000002 .True )
   E4C:  	Call  802D7B10  ( *Array[9] )
   E5C:  EndThread
   E64:  Wait  20`
@@ -6870,7 +6878,6 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
 	$End[270] 00000000
 }
 
-% Origin: HEURISTIC
 #new:Unknown $???_8024AA28
 {
 	D7000002 FFFFFFFF E7000000 00000000 E3000A01 00000000 E3000D01 00000000
@@ -6953,7 +6960,7 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
    68:  Call  $Function_802409C4    ( 000000FF 000000FF 000000FF 00000000 00000000 00000000 00000000 )
    90:  Call  SetCamLeadPlayer      ( .Cam:Default .False )
    A4:  Call  $Function_80240DA0    ( 00000000 0000003E )
-   B8:  Call  SetPanTarget  ( .Cam:Default 00000000 0000009D 00000000 )
+   B8:  Call  SetPanTarget  ( .Cam:Default  0`  157`  0` )
    D4:  Call  LoadSettings  ( .Cam:Default $???_80249610 )
    E8:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
   100:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
@@ -6987,58 +6994,58 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
 
 #new:Script $Script_8024AECC
 {
-    0:  Call  SetNpcPaletteSwapMode ( 0000000A 00000002 )
-   14:  Call  SetNpcPaletteSwapLower    ( 0000000A 00000000 00000001 00000014 00000005 )
-   34:  Call  SetNpcPaletteSwapMode ( 00000000 00000002 )
-   48:  Call  SetNpcPaletteSwapMode ( 00000001 00000002 )
-   5C:  Call  SetNpcPaletteSwapMode ( 00000002 00000002 )
-   70:  Call  SetNpcPaletteSwapMode ( 00000003 00000002 )
-   84:  Call  SetNpcPaletteSwapMode ( 00000004 00000002 )
-   98:  Call  SetNpcPaletteSwapMode ( 00000005 00000002 )
-   AC:  Call  SetNpcPaletteSwapMode ( 00000006 00000002 )
-   C0:  Call  SetNpcPaletteSwapping ( 00000000 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
-   F0:  Call  SetNpcPaletteSwapping ( 00000001 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
-  120:  Call  SetNpcPaletteSwapping ( 00000002 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
-  150:  Call  SetNpcPaletteSwapping ( 00000003 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
-  180:  Call  SetNpcPaletteSwapping ( 00000004 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
-  1B0:  Call  SetNpcPaletteSwapping ( 00000005 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
-  1E0:  Call  SetNpcPaletteSwapping ( 00000006 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
-  210:  Call  SetNpcFlagBits        ( 0000000A 00040000 .True )
-  228:  Call  SetNpcAnimation       ( 00000007 00800017 )
-  23C:  Call  SetNpcAnimation       ( 00000008 00800021 )
-  250:  Call  EnableNpcShadow       ( 00000007 .False )
-  264:  Call  EnableNpcShadow       ( 00000008 .False )
-  278:  Call  EnableNpcShadow       ( 0000000A .False )
-  28C:  Call  EnableNpcShadow       ( 00000000 .False )
-  2A0:  Call  EnableNpcShadow       ( 00000001 .False )
-  2B4:  Call  EnableNpcShadow       ( 00000002 .False )
-  2C8:  Call  EnableNpcShadow       ( 00000003 .False )
-  2DC:  Call  EnableNpcShadow       ( 00000004 .False )
-  2F0:  Call  EnableNpcShadow       ( 00000005 .False )
-  304:  Call  EnableNpcShadow       ( 00000006 .False )
-  318:  Call  EnableNpcShadow       ( 00000009 .False )
+    0:  Call  SetNpcPaletteSwapMode ( .NpcID:StarRod_10 00000002 )
+   14:  Call  SetNpcPaletteSwapLower    ( .NpcID:StarRod_10 00000000 00000001 00000014 00000005 )
+   34:  Call  SetNpcPaletteSwapMode ( .NpcID:WorldEldstar_00 00000002 )
+   48:  Call  SetNpcPaletteSwapMode ( .NpcID:WorldMamar_01 00000002 )
+   5C:  Call  SetNpcPaletteSwapMode ( .NpcID:WorldSkolar_02 00000002 )
+   70:  Call  SetNpcPaletteSwapMode ( .NpcID:WorldMuskular_03 00000002 )
+   84:  Call  SetNpcPaletteSwapMode ( .NpcID:WorldMisstar_04 00000002 )
+   98:  Call  SetNpcPaletteSwapMode ( .NpcID:WorldKlevar_05 00000002 )
+   AC:  Call  SetNpcPaletteSwapMode ( .NpcID:WorldKalmar_06 00000002 )
+   C0:  Call  SetNpcPaletteSwapping ( .NpcID:WorldEldstar_00 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
+   F0:  Call  SetNpcPaletteSwapping ( .NpcID:WorldMamar_01 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
+  120:  Call  SetNpcPaletteSwapping ( .NpcID:WorldSkolar_02 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
+  150:  Call  SetNpcPaletteSwapping ( .NpcID:WorldMuskular_03 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
+  180:  Call  SetNpcPaletteSwapping ( .NpcID:WorldMisstar_04 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
+  1B0:  Call  SetNpcPaletteSwapping ( .NpcID:WorldKlevar_05 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
+  1E0:  Call  SetNpcPaletteSwapping ( .NpcID:WorldKalmar_06 00000000 00000001 00000019 0000000C 00000004 00000012 00000000 00000000 )
+  210:  Call  SetNpcFlagBits        ( .NpcID:StarRod_10 00040000 .True )
+  228:  Call  SetNpcAnimation       ( .NpcID:WorldBowser_07 00800017 )
+  23C:  Call  SetNpcAnimation       ( .NpcID:WorldBowser_08 00800021 )
+  250:  Call  EnableNpcShadow       ( .NpcID:WorldBowser_07 .False )
+  264:  Call  EnableNpcShadow       ( .NpcID:WorldBowser_08 .False )
+  278:  Call  EnableNpcShadow       ( .NpcID:StarRod_10 .False )
+  28C:  Call  EnableNpcShadow       ( .NpcID:WorldEldstar_00 .False )
+  2A0:  Call  EnableNpcShadow       ( .NpcID:WorldMamar_01 .False )
+  2B4:  Call  EnableNpcShadow       ( .NpcID:WorldSkolar_02 .False )
+  2C8:  Call  EnableNpcShadow       ( .NpcID:WorldMuskular_03 .False )
+  2DC:  Call  EnableNpcShadow       ( .NpcID:WorldMisstar_04 .False )
+  2F0:  Call  EnableNpcShadow       ( .NpcID:WorldKlevar_05 .False )
+  304:  Call  EnableNpcShadow       ( .NpcID:WorldKalmar_06 .False )
+  318:  Call  EnableNpcShadow       ( .NpcID:WorldKammy_09 .False )
   32C:  Thread
   334:  	Call  $Function_802444E8 ( )
   340:  EndThread
-  348:  Call  InterpNpcYaw  ( 00000007 0000005A 00000000 )
-  360:  Call  InterpNpcYaw  ( 00000008 0000005A 00000000 )
-  378:  Call  SetNpcAnimation       ( 00000007 00800019 )
-  38C:  Call  SetNpcAnimation       ( 00000008 00800021 )
-  3A0:  Call  SetNpcAnimation       ( 00000009 00600017 )
-  3B4:  Call  InterpNpcYaw  ( 00000009 0000002D 00000000 )
-  3CC:  Call  SetNpcPos     ( 00000009 FFFFFF6F 00000093 00000054 )
-  3E8:  Call  SetNpcAnimation       ( 00000004 00160000 )
+  348:  Call  InterpNpcYaw  ( .NpcID:WorldBowser_07  90`  0` )
+  360:  Call  InterpNpcYaw  ( .NpcID:WorldBowser_08  90`  0` )
+  378:  Call  SetNpcAnimation       ( .NpcID:WorldBowser_07 00800019 )
+  38C:  Call  SetNpcAnimation       ( .NpcID:WorldBowser_08 00800021 )
+  3A0:  Call  SetNpcAnimation       ( .NpcID:WorldKammy_09 00600017 )
+  3B4:  Call  InterpNpcYaw  ( .NpcID:WorldKammy_09  45`  0` )
+  3CC:  Call  SetNpcPos     ( .NpcID:WorldKammy_09  -145`  147`  84` )
+  3E8:  Call  SetNpcAnimation       ( .NpcID:WorldMisstar_04 00160000 )
   3FC:  Call  $Function_80240880    ( 00000000 00000000 00000000 00000000 00000000 00000000 00000000 000003E3 000003E8 )
   42C:  Call  $Function_802409C4    ( 00000082 00000082 00000082 00000000 00000000 00000000 0000000F )
   454:  Call  $Function_80240DA0    ( 00000000 00000023 )
-  468:  Call  SetPanTarget  ( .Cam:Default FFFFFF6F 00000093 00000054 )
+  468:  Call  SetPanTarget  ( .Cam:Default  -145`  147`  84` )
   484:  Call  LoadSettings  ( .Cam:Default $???_802496EC )
   498:  Call  $Function_802440D0 ( )
   4A4:  Wait  50`
   4B0:  Call  802CFD30      ( 00000007 00000008 00000000 00000000 00000000 00000000 )
   4D4:  Call  802CFD30      ( 00000008 00000008 00000000 00000000 00000000 00000000 )
-  4F8:  Call  SetNpcPos     ( 00000007 FFFFFFC0 00000087 00000055 )
-  514:  Call  SetNpcPos     ( 00000008 FFFFFFC0 00000087 00000055 )
+  4F8:  Call  SetNpcPos     ( .NpcID:WorldBowser_07  -64`  135`  85` )
+  514:  Call  SetNpcPos     ( .NpcID:WorldBowser_08  -64`  135`  85` )
   530:  Thread
   538:  	Set   *Var0  00000000
   548:  	Loop  00000032
@@ -7052,15 +7059,15 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   5E0:  	EndLoop
   5E8:  EndThread
   5F0:  Thread
-  5F8:  	Call  InterpNpcYaw  ( 00000008 0000005A 00000000 )
+  5F8:  	Call  InterpNpcYaw  ( .NpcID:WorldBowser_08  90`  0` )
   610:  	Set   *Var0  00000000
   620:  	Loop  00000028
   62C:  		Add   *Var0  00000024
-  63C:  		Call  SetNpcRotation    ( 00000007 00000000 *Var0 00000000 )
+  63C:  		Call  SetNpcRotation    ( .NpcID:WorldBowser_07 00000000 *Var0 00000000 )
   658:  		Wait  1`
   664:  	EndLoop
-  66C:  	Call  SetNpcRotation    ( 00000007 00000000 00000000 00000000 )
-  688:  	Call  InterpNpcYaw      ( 00000007 0000005A 00000000 )
+  66C:  	Call  SetNpcRotation    ( .NpcID:WorldBowser_07 00000000 00000000 00000000 )
+  688:  	Call  InterpNpcYaw      ( .NpcID:WorldBowser_07  90`  0` )
   6A0:  EndThread
   6A8:  Thread
   6B0:  	Call  $Function_802409C4    ( 00000075 0000001C 0000002A 00000000 00000000 00000000 0000000F )
@@ -7105,14 +7112,14 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   9E8:  Thread
   9F0:  	Call  EnableTexPanning  ( ~Model:o33 .True )
   A04:  	Call  EnableTexPanning  ( ~Model:o34 .True )
-  A18:  	Call  SetNpcAnimation   ( 00000000 00120006 )
-  A2C:  	Call  SetNpcAnimation   ( 00000001 0013000A )
-  A40:  	Call  SetNpcAnimation   ( 00000002 00140009 )
-  A54:  	Call  SetNpcAnimation   ( 00000003 00150007 )
-  A68:  	Call  SetNpcAnimation   ( 00000004 00160005 )
-  A7C:  	Call  SetNpcAnimation   ( 00000005 00170006 )
-  A90:  	Call  SetNpcAnimation   ( 00000006 00180008 )
-  AA4:  	Call  SetNpcAnimation   ( 00000009 0060000E )
+  A18:  	Call  SetNpcAnimation   ( .NpcID:WorldEldstar_00 00120006 )
+  A2C:  	Call  SetNpcAnimation   ( .NpcID:WorldMamar_01 0013000A )
+  A40:  	Call  SetNpcAnimation   ( .NpcID:WorldSkolar_02 00140009 )
+  A54:  	Call  SetNpcAnimation   ( .NpcID:WorldMuskular_03 00150007 )
+  A68:  	Call  SetNpcAnimation   ( .NpcID:WorldMisstar_04 00160005 )
+  A7C:  	Call  SetNpcAnimation   ( .NpcID:WorldKlevar_05 00170006 )
+  A90:  	Call  SetNpcAnimation   ( .NpcID:WorldKalmar_06 00180008 )
+  AA4:  	Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 0060000E )
   AB8:  	Call  PlayEffect        ( ~FX:Ending:Bubble 00000000 000000B4 00000000 *Fixed[2.59375] *Array[F] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   AFC:  	Call  PlayEffect        ( ~FX:LightRays:BlurryB 00000000 000000C8 00000000 *Fixed[1.0] *Array[10] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   B40:  EndThread
@@ -7124,26 +7131,26 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   B78:  EndThread
   B80:  Wait  50`
   B8C:  Call  $Function_80240DA0    ( 00000000 00000028 )
-  BA0:  Call  SetPanTarget      ( .Cam:Default 00000000 0000009D 00000000 )
+  BA0:  Call  SetPanTarget      ( .Cam:Default  0`  157`  0` )
   BBC:  Call  LoadSettings      ( .Cam:Default $???_80249718 )
-  BD0:  Call  SetNpcAnimation   ( 00000002 00140009 )
-  BE4:  Call  SetNpcAnimation   ( 00000003 00150007 )
-  BF8:  Call  SetNpcAnimation   ( 00000004 00160005 )
-  C0C:  Call  SetNpcAnimation   ( 00000005 00170006 )
-  C20:  Call  SetNpcAnimation   ( 00000006 0018000A )
+  BD0:  Call  SetNpcAnimation   ( .NpcID:WorldSkolar_02 00140009 )
+  BE4:  Call  SetNpcAnimation   ( .NpcID:WorldMuskular_03 00150007 )
+  BF8:  Call  SetNpcAnimation   ( .NpcID:WorldMisstar_04 00160005 )
+  C0C:  Call  SetNpcAnimation   ( .NpcID:WorldKlevar_05 00170006 )
+  C20:  Call  SetNpcAnimation   ( .NpcID:WorldKalmar_06 0018000A )
   C34:  Thread
   C3C:  	Wait  10`
   C48:  	Set   *Var0  00000000
   C58:  	Loop  00000014
   C64:  		Add   *Var0  00000024
-  C74:  		Call  SetNpcRotation    ( 00000000 00000000 *Var0 00000000 )
+  C74:  		Call  SetNpcRotation    ( .NpcID:WorldEldstar_00 00000000 *Var0 00000000 )
   C90:  		Wait  1`
   C9C:  	EndLoop
   CA4:  	Wait  10`
   CB0:  	Set   *Var0  00000000
   CC0:  	Loop  00000014
   CCC:  		Add   *Var0  00000024
-  CDC:  		Call  SetNpcRotation    ( 00000000 00000000 *Var0 00000000 )
+  CDC:  		Call  SetNpcRotation    ( .NpcID:WorldEldstar_00 00000000 *Var0 00000000 )
   CF8:  		Wait  1`
   D04:  	EndLoop
   D0C:  EndThread
@@ -7152,7 +7159,7 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   D28:  	Set   *Var0  00000000
   D38:  	Loop  00000014
   D44:  		Add   *Var0  00000024
-  D54:  		Call  SetNpcRotation    ( 00000003 00000000 *Var0 00000000 )
+  D54:  		Call  SetNpcRotation    ( .NpcID:WorldMuskular_03 00000000 *Var0 00000000 )
   D70:  		Wait  1`
   D7C:  	EndLoop
   D84:  EndThread
@@ -7161,7 +7168,7 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   DA0:  	Set   *Var0  00000000
   DB0:  	Loop  00000014
   DBC:  		Add   *Var0  00000024
-  DCC:  		Call  SetNpcRotation    ( 00000004 00000000 *Var0 00000000 )
+  DCC:  		Call  SetNpcRotation    ( .NpcID:WorldMisstar_04 00000000 *Var0 00000000 )
   DE8:  		Wait  1`
   DF4:  	EndLoop
   DFC:  EndThread
@@ -7170,7 +7177,7 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   E18:  	Set   *Var0  00000000
   E28:  	Loop  00000014
   E34:  		Add   *Var0  00000024
-  E44:  		Call  SetNpcRotation    ( 00000005 00000000 *Var0 00000000 )
+  E44:  		Call  SetNpcRotation    ( .NpcID:WorldKlevar_05 00000000 *Var0 00000000 )
   E60:  		Wait  1`
   E6C:  	EndLoop
   E74:  EndThread
@@ -7179,7 +7186,7 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
   E90:  	Set   *Var0  00000000
   EA0:  	Loop  00000014
   EAC:  		Add   *Var0  00000024
-  EBC:  		Call  SetNpcRotation    ( 00000006 00000000 *Var0 00000000 )
+  EBC:  		Call  SetNpcRotation    ( .NpcID:WorldKalmar_06 00000000 *Var0 00000000 )
   ED8:  		Wait  1`
   EE4:  	EndLoop
   EEC:  EndThread
@@ -7214,12 +7221,12 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  11EC:  Call  802D7B10  ( *Array[11] )
  11FC:  Call  $Function_80240880    ( 00000000 00000000 00000000 00000000 00000000 00000000 00000000 000003E3 000003E8 )
  122C:  Call  $Function_80240DA0    ( 00000000 00000019 )
- 1240:  Call  SetPanTarget      ( .Cam:Default FFFFFFDA 000000D2 00000055 )
+ 1240:  Call  SetPanTarget      ( .Cam:Default  -38`  210`  85` )
  125C:  Call  LoadSettings      ( .Cam:Default $???_80249744 )
- 1270:  Call  SetNpcAnimation   ( 00000007 0080001C )
- 1284:  Call  SetNpcPos ( 00000007 FFFFFFE2 00000096 000000A2 )
- 12A0:  Call  SetNpcPos ( 00000008 FFFFFFE2 00000096 000000A2 )
- 12BC:  Call  SetNpcAnimation   ( 00000009 00600011 )
+ 1270:  Call  SetNpcAnimation   ( .NpcID:WorldBowser_07 0080001C )
+ 1284:  Call  SetNpcPos ( .NpcID:WorldBowser_07  -30`  150`  162` )
+ 12A0:  Call  SetNpcPos ( .NpcID:WorldBowser_08  -30`  150`  162` )
+ 12BC:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 00600011 )
  12D0:  Thread
  12D8:  	Call  $Function_802409C4    ( 00000017 0000000A 0000000A 00000000 00000000 00000000 0000000F )
  1300:  	Wait  28`
@@ -7250,7 +7257,7 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  14D8:  Set   *Var5  00000099
  14E8:  Call  $Function_80242024 ( )
  14F4:  Call  PlayEffect        ( ~FX:FireBreath:Large FFFFFFE2 000000D2 0000008E 00000000 000000B4 00000000 00000005 00000002 0000001E 00000000 00000000 00000000 )
- 1538:  Call  SetNpcAnimation   ( 00000007 0080001D )
+ 1538:  Call  SetNpcAnimation   ( .NpcID:WorldBowser_07 0080001D )
  154C:  Thread
  1554:  	Call  $Function_802421E0 ( )
  1560:  EndThread
@@ -7262,20 +7269,20 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  15DC:  EndThread
  15E4:  Wait  20`
  15F0:  Call  $Function_80240DA0    ( 00000000 00000019 )
- 1604:  Call  SetPanTarget      ( .Cam:Default FFFFFFDA 000000D2 00000055 )
+ 1604:  Call  SetPanTarget      ( .Cam:Default  -38`  210`  85` )
  1620:  Call  LoadSettings      ( .Cam:Default $???_80249770 )
  1634:  Wait  20`
- 1640:  Call  SetNpcAnimation   ( 00000007 0080001A )
+ 1640:  Call  SetNpcAnimation   ( .NpcID:WorldBowser_07 0080001A )
  1654:  Thread
  165C:  	Call  $Function_802422A0 ( )
  1668:  EndThread
  1670:  Wait  25`
  167C:  Call  $Function_80240DA0    ( 00000000 00000023 )
- 1690:  Call  SetPanTarget      ( .Cam:Default FFFFFF10 000000C8 00000071 )
+ 1690:  Call  SetPanTarget      ( .Cam:Default  -240`  200`  113` )
  16AC:  Call  LoadSettings      ( .Cam:Default $???_8024979C )
- 16C0:  Call  SetNpcAnimation   ( 00000002 00140009 )
- 16D4:  Call  SetNpcAnimation   ( 00000004 00160005 )
- 16E8:  Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+ 16C0:  Call  SetNpcAnimation   ( .NpcID:WorldSkolar_02 00140009 )
+ 16D4:  Call  SetNpcAnimation   ( .NpcID:WorldMisstar_04 00160005 )
+ 16E8:  Call  GetNpcPos ( .NpcID:WorldSkolar_02 *Var0 *Var1 *Var2 )
  1704:  Thread
  170C:  	Wait  5`
  1718:  	UseIntBuffer  $IntTable_8024A9D0
@@ -7287,11 +7294,11 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  1770:  		MulF  *Var3  *VarB
  1780:  		MulF  *Var4  *VarA
  1790:  		MulF  *Var5  *VarB
- 17A0:  		Call  SetNpcPos ( 00000002 *Var3 *Var4 *Var5 )
+ 17A0:  		Call  SetNpcPos ( .NpcID:WorldSkolar_02 *Var3 *Var4 *Var5 )
  17BC:  		Wait  1`
  17C8:  	EndLoop
  17D0:  EndThread
- 17D8:  Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+ 17D8:  Call  GetNpcPos ( .NpcID:WorldMisstar_04 *Var0 *Var1 *Var2 )
  17F4:  Thread
  17FC:  	Wait  9`
  1808:  	UseIntBuffer  $IntTable_8024A9D0
@@ -7303,28 +7310,28 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  1860:  		MulF  *Var3  *VarB
  1870:  		MulF  *Var4  *VarA
  1880:  		MulF  *Var5  *VarB
- 1890:  		Call  SetNpcPos ( 00000004 *Var3 *Var4 *Var5 )
+ 1890:  		Call  SetNpcPos ( .NpcID:WorldMisstar_04 *Var3 *Var4 *Var5 )
  18AC:  		Wait  1`
  18B8:  	EndLoop
  18C0:  EndThread
- 18C8:  Call  GetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
+ 18C8:  Call  GetNpcPos ( .NpcID:WorldSkolar_02 *Var0 *Var1 *Var2 )
  18E4:  MulF  *Var0  *Fixed[0.9]
  18F4:  MulF  *Var1  *Fixed[0.93]
  1904:  MulF  *Var2  *Fixed[0.9]
- 1914:  Call  SetNpcPos ( 00000002 *Var0 *Var1 *Var2 )
- 1930:  Call  GetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+ 1914:  Call  SetNpcPos ( .NpcID:WorldSkolar_02 *Var0 *Var1 *Var2 )
+ 1930:  Call  GetNpcPos ( .NpcID:WorldMisstar_04 *Var0 *Var1 *Var2 )
  194C:  MulF  *Var0  *Fixed[0.9]
  195C:  MulF  *Var1  *Fixed[0.93]
  196C:  MulF  *Var2  *Fixed[0.9]
- 197C:  Call  SetNpcPos ( 00000004 *Var0 *Var1 *Var2 )
+ 197C:  Call  SetNpcPos ( .NpcID:WorldMisstar_04 *Var0 *Var1 *Var2 )
  1998:  Wait  35`
  19A4:  Call  $Function_80240DA0    ( 00000000 00000023 )
- 19B8:  Call  SetPanTarget      ( .Cam:Default 0000001E 000000E8 00000000 )
+ 19B8:  Call  SetPanTarget      ( .Cam:Default  30`  232`  0` )
  19D4:  Call  LoadSettings      ( .Cam:Default $???_802497C8 )
- 19E8:  Call  SetNpcAnimation   ( 00000007 0080001E )
- 19FC:  Call  SetNpcPos ( 00000007 00000000 000000AA 00000000 )
- 1A18:  Call  SetNpcPos ( 00000008 00000000 000000AA 00000000 )
- 1A34:  Call  SetNpcPos ( 0000000A 00000000 FFFFFC18 00000000 )
+ 19E8:  Call  SetNpcAnimation   ( .NpcID:WorldBowser_07 0080001E )
+ 19FC:  Call  SetNpcPos ( .NpcID:WorldBowser_07  0`  170`  0` )
+ 1A18:  Call  SetNpcPos ( .NpcID:WorldBowser_08  0`  170`  0` )
+ 1A34:  Call  SetNpcPos ( .NpcID:StarRod_10  0`  -1000`  0` )
  1A50:  Thread
  1A58:  	Call  $Function_802409C4    ( 00000014 00000014 00000014 00000000 00000000 00000000 0000000F )
  1A80:  EndThread
@@ -7351,9 +7358,9 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  1C10:  EndThread
  1C18:  Call  $Function_802423D4 ( )
  1C24:  Call  $Function_80240DA0    ( 00000000 00000023 )
- 1C38:  Call  SetPanTarget  ( .Cam:Default 00000000 000000B1 00000000 )
+ 1C38:  Call  SetPanTarget  ( .Cam:Default  0`  177`  0` )
  1C54:  Call  LoadSettings  ( .Cam:Default $???_802497F4 )
- 1C68:  Call  SetNpcAnimation       ( 00000007 0080001F )
+ 1C68:  Call  SetNpcAnimation       ( .NpcID:WorldBowser_07 0080001F )
  1C7C:  Call  PlayEffect    ( ~FX:LightRays:SharpA 00000014 00000109 FFFFFFEB *Fixed[1.0] *Array[12] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
  1CC0:  Call  PlayEffect    ( 0000003C 00000002 00000014 00000109 FFFFFFEB *Fixed[1.0] *Array[13] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
  1D04:  Set   *Var0  00000078
@@ -7366,15 +7373,15 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  1D8C:  EndLoop
  1D94:  Wait  5`
  1DA0:  Call  $Function_80240DA0    ( 00000000 00000028 )
- 1DB4:  Call  SetPanTarget      ( .Cam:Default 00000000 0000009D 00000000 )
+ 1DB4:  Call  SetPanTarget      ( .Cam:Default  0`  157`  0` )
  1DD0:  Call  LoadSettings      ( .Cam:Default $???_80249718 )
- 1DE4:  Call  SetNpcAnimation   ( 00000000 00120004 )
- 1DF8:  Call  SetNpcAnimation   ( 00000001 00130008 )
- 1E0C:  Call  SetNpcAnimation   ( 00000002 00140009 )
- 1E20:  Call  SetNpcAnimation   ( 00000003 00150007 )
- 1E34:  Call  SetNpcAnimation   ( 00000004 00160005 )
- 1E48:  Call  SetNpcAnimation   ( 00000005 00170006 )
- 1E5C:  Call  SetNpcAnimation   ( 00000006 00180008 )
+ 1DE4:  Call  SetNpcAnimation   ( .NpcID:WorldEldstar_00 00120004 )
+ 1DF8:  Call  SetNpcAnimation   ( .NpcID:WorldMamar_01 00130008 )
+ 1E0C:  Call  SetNpcAnimation   ( .NpcID:WorldSkolar_02 00140009 )
+ 1E20:  Call  SetNpcAnimation   ( .NpcID:WorldMuskular_03 00150007 )
+ 1E34:  Call  SetNpcAnimation   ( .NpcID:WorldMisstar_04 00160005 )
+ 1E48:  Call  SetNpcAnimation   ( .NpcID:WorldKlevar_05 00170006 )
+ 1E5C:  Call  SetNpcAnimation   ( .NpcID:WorldKalmar_06 00180008 )
  1E70:  Thread
  1E78:  	Wait  5`
  1E84:  	Call  802D7B10  ( *Array[12] )
@@ -7390,28 +7397,28 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  1F6C:  	Wait  1`
  1F78:  EndLoop
  1F80:  Call  $Function_80240DA0    ( 00000000 00000023 )
- 1F94:  Call  SetPanTarget  ( .Cam:Default 00000046 000000C8 FFFFFF11 )
+ 1F94:  Call  SetPanTarget  ( .Cam:Default  70`  200`  -239` )
  1FB0:  Call  LoadSettings  ( .Cam:Default $???_802496C0 )
- 1FC4:  Call  SetNpcAnimation   ( 00000000 00120006 )
- 1FD8:  Call  SetNpcAnimation   ( 00000001 0013000A )
- 1FEC:  Call  SetNpcAnimation   ( 00000002 00140007 )
- 2000:  Call  SetNpcAnimation   ( 00000003 00150006 )
- 2014:  Call  SetNpcAnimation   ( 00000004 00160006 )
- 2028:  Call  SetNpcAnimation   ( 00000005 00170008 )
- 203C:  Call  SetNpcAnimation   ( 00000006 0018000A )
- 2050:  Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+ 1FC4:  Call  SetNpcAnimation   ( .NpcID:WorldEldstar_00 00120006 )
+ 1FD8:  Call  SetNpcAnimation   ( .NpcID:WorldMamar_01 0013000A )
+ 1FEC:  Call  SetNpcAnimation   ( .NpcID:WorldSkolar_02 00140007 )
+ 2000:  Call  SetNpcAnimation   ( .NpcID:WorldMuskular_03 00150006 )
+ 2014:  Call  SetNpcAnimation   ( .NpcID:WorldMisstar_04 00160006 )
+ 2028:  Call  SetNpcAnimation   ( .NpcID:WorldKlevar_05 00170008 )
+ 203C:  Call  SetNpcAnimation   ( .NpcID:WorldKalmar_06 0018000A )
+ 2050:  Call  GetNpcPos     ( .NpcID:WorldEldstar_00 *Var0 *Var1 *Var2 )
  206C:  Call  PlayEffect    ( ~FX:Aura:Sandstorm *Var0 *Var1 *Var2 00000001 *Array[1] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
- 20B0:  Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+ 20B0:  Call  GetNpcPos     ( .NpcID:WorldMamar_01 *Var0 *Var1 *Var2 )
  20CC:  Call  PlayEffect    ( ~FX:Aura:Sandstorm *Var0 *Var1 *Var2 00000001 *Array[2] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
- 2110:  Call  GetNpcPos     ( 00000002 *Var0 *Var1 *Var2 )
+ 2110:  Call  GetNpcPos     ( .NpcID:WorldSkolar_02 *Var0 *Var1 *Var2 )
  212C:  Call  PlayEffect    ( ~FX:Aura:Sandstorm *Var0 *Var1 *Var2 00000001 *Array[3] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
- 2170:  Call  GetNpcPos     ( 00000003 *Var0 *Var1 *Var2 )
+ 2170:  Call  GetNpcPos     ( .NpcID:WorldMuskular_03 *Var0 *Var1 *Var2 )
  218C:  Call  PlayEffect    ( ~FX:Aura:Sandstorm *Var0 *Var1 *Var2 00000001 *Array[4] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
- 21D0:  Call  GetNpcPos     ( 00000004 *Var0 *Var1 *Var2 )
+ 21D0:  Call  GetNpcPos     ( .NpcID:WorldMisstar_04 *Var0 *Var1 *Var2 )
  21EC:  Call  PlayEffect    ( ~FX:Aura:Sandstorm *Var0 *Var1 *Var2 00000001 *Array[5] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
- 2230:  Call  GetNpcPos     ( 00000005 *Var0 *Var1 *Var2 )
+ 2230:  Call  GetNpcPos     ( .NpcID:WorldKlevar_05 *Var0 *Var1 *Var2 )
  224C:  Call  PlayEffect    ( ~FX:Aura:Sandstorm *Var0 *Var1 *Var2 00000001 *Array[6] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
- 2290:  Call  GetNpcPos     ( 00000006 *Var0 *Var1 *Var2 )
+ 2290:  Call  GetNpcPos     ( .NpcID:WorldKalmar_06 *Var0 *Var1 *Var2 )
  22AC:  Call  PlayEffect    ( ~FX:Aura:Sandstorm *Var0 *Var1 *Var2 00000001 *Array[7] 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
  22F0:  Call  $Function_802409C4    ( 0000006E 0000006E 0000006E 000000FF 000000FF 000000FF 00000000 )
  2318:  Thread
@@ -7439,14 +7446,14 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  252C:  Set   *Var1  000000DC
  253C:  Set   *Var2  00000082
  254C:  AddF  *Var1  *Fixed[-30.0]
- 255C:  Call  SetNpcPos ( 00000009 *Var0 *Var1 *Var2 )
+ 255C:  Call  SetNpcPos ( .NpcID:WorldKammy_09 *Var0 *Var1 *Var2 )
  2578:  Exec  $Script_80249AA8
  2584:  Call  802D7B10  ( *Array[1] )
- 2594:  Call  GetNpcPos ( 00000000 *Var0 *Var1 *Var2 )
+ 2594:  Call  GetNpcPos ( .NpcID:WorldEldstar_00 *Var0 *Var1 *Var2 )
  25B0:  Call  PlayEffect    ( ~FX:RingBlast:Yellow *Var0 *Var1 *Var2 00000004 00000014 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
  25F4:  Thread
  25FC:  	Wait  3`
- 2608:  	Call  GetNpcPos     ( 00000000 *Var0 *Var1 *Var2 )
+ 2608:  	Call  GetNpcPos     ( .NpcID:WorldEldstar_00 *Var0 *Var1 *Var2 )
  2624:  	Call  PlayEffect    ( ~FX:EmitterVolume:GoldShimmer2 *Var0 *Var1 *Var2 00000010 00000010 00000002 00000014 00000000 00000000 00000000 00000000 00000000 )
  2668:  	Set   *Array[8]  *VarF
  2678:  	Call  $Function_802428C8    ( 00000001 0000001E *Fixed[0.5] )
@@ -7454,48 +7461,48 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  26AC:  	SetF  *Var4  *Fixed[1.0]
  26BC:  	Label  1
  26C8:  	Call  GetNextPathPos ( )
- 26D4:  	Call  SetNpcPos     ( 00000000 *Var1 *Var2 *Var3 )
+ 26D4:  	Call  SetNpcPos     ( .NpcID:WorldEldstar_00 *Var1 *Var2 *Var3 )
  26F0:  	Call  $Function_80240E50    ( *Array[8] *Array[13] *Var1 *Var2 *Var3 )
  2710:  	AddF  *Var4  *Fixed[-0.03125]
- 2720:  	Call  SetNpcScale   ( 00000000 *Var4 *Var4 *Var4 )
+ 2720:  	Call  SetNpcScale   ( .NpcID:WorldEldstar_00 *Var4 *Var4 *Var4 )
  273C:  	Wait  1`
  2748:  	If  *Var0  ==  00000001
  2758:  		Goto  1
  2764:  	EndIf
  276C:  	Call  $Function_80240F30 ( )
- 2778:  	Call  SetNpcAnimation   ( 00000000 00120004 )
+ 2778:  	Call  SetNpcAnimation   ( .NpcID:WorldEldstar_00 00120004 )
  278C:  	Call  802CFD30  ( 00000000 00000000 00000000 00000000 00000000 00000000 )
- 27B0:  	Call  SetNpcFlagBits    ( 00000000 00000002 .True )
+ 27B0:  	Call  SetNpcFlagBits    ( .NpcID:WorldEldstar_00 00000002 .True )
  27C8:  	Call  802D7B10  ( *Array[8] )
  27D8:  EndThread
  27E0:  Wait  15`
  27EC:  Call  $Function_80240DA0    ( 00000000 00000032 )
- 2800:  Call  SetPanTarget      ( .Cam:Default 00000028 000000C8 FFFFFFD8 )
+ 2800:  Call  SetPanTarget      ( .Cam:Default  40`  200`  -40` )
  281C:  Call  LoadSettings      ( .Cam:Default $???_80249820 )
  2830:  Call  RemoveEffect      ( *Array[10] )
- 2840:  Call  SetNpcAnimation   ( 00000007 00800018 )
+ 2840:  Call  SetNpcAnimation   ( .NpcID:WorldBowser_07 00800018 )
  2854:  Thread
  285C:  	Wait  45`
- 2868:  	Call  NpcFaceNpc    ( 00000007 00000000 00000000 )
+ 2868:  	Call  NpcFaceNpc    ( .NpcID:WorldBowser_07 .NpcID:WorldEldstar_00 00000000 )
  2880:  EndThread
- 2888:  Call  SetNpcAnimation   ( 00000009 00600012 )
+ 2888:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 00600012 )
  289C:  Exec  $Script_80249B48
  28A8:  Call  $Function_802425A0 ( )
  28B4:  Wait  15`
- 28C0:  Call  SetNpcAnimation   ( 00000009 00600009 )
+ 28C0:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 00600009 )
  28D4:  Thread
  28DC:  	Wait  10`
- 28E8:  	Call  SetNpcAnimation   ( 00000009 00600012 )
+ 28E8:  	Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 00600012 )
  28FC:  	Wait  20`
- 2908:  	Call  SetNpcAnimation   ( 00000009 0060000D )
+ 2908:  	Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 0060000D )
  291C:  	Wait  40`
- 2928:  	Call  SetNpcAnimation   ( 00000009 00600009 )
+ 2928:  	Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 00600009 )
  293C:  EndThread
  2944:  Call  $Function_80242704 ( )
  2950:  Call  $Function_80240DA0    ( 00000000 00000032 )
- 2964:  Call  SetPanTarget      ( .Cam:Default 00000000 000000C8 00000000 )
+ 2964:  Call  SetPanTarget      ( .Cam:Default  0`  200`  0` )
  2980:  Call  LoadSettings      ( .Cam:Default $???_80249878 )
- 2994:  Call  SetNpcAnimation   ( 00000007 0080001B )
+ 2994:  Call  SetNpcAnimation   ( .NpcID:WorldBowser_07 0080001B )
  29A8:  Thread
  29B0:  	Call  $Function_80242F74 ( )
  29BC:  EndThread
@@ -7504,7 +7511,7 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  29D8:  	Call  $Function_80244550 ( )
  29E4:  EndThread
  29EC:  Wait  1`
- 29F8:  Call  SetNpcAnimation   ( 00000009 0060000B )
+ 29F8:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 0060000B )
  2A0C:  Call  $Function_8024301C ( )
  2A18:  Thread
  2A20:  	Call  $Function_80240F88 ( )
@@ -7515,18 +7522,18 @@ MISSING: 802494FC to 802495DC (000094FC to 000095DC)
  2A5C:  	Call  $Function_80240F88 ( )
  2A68:  	Call  $Function_80240F88 ( )
  2A74:  EndThread
- 2A7C:  Call  SetNpcAnimation   ( 00000009 0060000D )
+ 2A7C:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 0060000D )
  2A90:  Wait  15`
- 2A9C:  Call  SetNpcAnimation   ( 00000009 00600011 )
+ 2A9C:  Call  SetNpcAnimation   ( .NpcID:WorldKammy_09 00600011 )
  2AB0:  Wait  32`
- 2ABC:  Call  SetNpcJumpscale   ( 00000000 *Fixed[0.0] )
- 2AD0:  Call  SetNpcJumpscale   ( 00000001 *Fixed[0.0] )
- 2AE4:  Call  SetNpcJumpscale   ( 00000002 *Fixed[0.0] )
- 2AF8:  Call  SetNpcJumpscale   ( 00000003 *Fixed[0.0] )
- 2B0C:  Call  SetNpcJumpscale   ( 00000004 *Fixed[0.0] )
- 2B20:  Call  SetNpcJumpscale   ( 00000005 *Fixed[0.0] )
- 2B34:  Call  SetNpcJumpscale   ( 00000006 *Fixed[0.0] )
- 2B48:  Call  SetNpcAnimation   ( 00000007 00800017 )
+ 2ABC:  Call  SetNpcJumpscale   ( .NpcID:WorldEldstar_00 *Fixed[0.0] )
+ 2AD0:  Call  SetNpcJumpscale   ( .NpcID:WorldMamar_01 *Fixed[0.0] )
+ 2AE4:  Call  SetNpcJumpscale   ( .NpcID:WorldSkolar_02 *Fixed[0.0] )
+ 2AF8:  Call  SetNpcJumpscale   ( .NpcID:WorldMuskular_03 *Fixed[0.0] )
+ 2B0C:  Call  SetNpcJumpscale   ( .NpcID:WorldMisstar_04 *Fixed[0.0] )
+ 2B20:  Call  SetNpcJumpscale   ( .NpcID:WorldKlevar_05 *Fixed[0.0] )
+ 2B34:  Call  SetNpcJumpscale   ( .NpcID:WorldKalmar_06 *Fixed[0.0] )
+ 2B48:  Call  SetNpcAnimation   ( .NpcID:WorldBowser_07 00800017 )
  2B5C:  Thread
  2B64:  	Call  $Function_80244774 ( )
  2B70:  EndThread
@@ -7694,16 +7701,16 @@ PADDING: 8024DC2C to 8024DC30 (0000DC2C to 0000DC30)
    28:  If  *GB_StoryProgress  <  .Story:Ch8_StarShipActivated % 5C
    38:  	Call  EnableModel   ( ~Model:o8 .False )
    4C:  Else
-   54:  	Call  802C90FC      ( 00000093 00000000 FFFFFFFF )
-   6C:  	Call  802C94A0      ( 00000000 $Function_8024564C 00000000 )
-   84:  	Call  EnableModel   ( ~Model:o8 .True )
+   54:  	Call  SetModelCustomGfx ( ~Model:o8 00000000 FFFFFFFF )
+   6C:  	Call  SetCustomGfxBuilders  ( 00000000 $Function_8024564C 00000000 )
+   84:  	Call  EnableModel       ( ~Model:o8 .True )
    98:  	Call  $Function_8024569C    ( 0000007F )
-   A8:  	Call  EnableGroup   ( ~Model:g277 .True )
-   BC:  	Call  EnableModel   ( ~Model:o362 .False )
-   D0:  	Call  EnableModel   ( ~Model:o397 .False )
+   A8:  	Call  EnableGroup       ( ~Model:g277 .True )
+   BC:  	Call  EnableModel       ( ~Model:o362 .False )
+   D0:  	Call  EnableModel       ( ~Model:o397 .False )
    E4:  	Call  ModifyColliderFlags   ( 00000000 ~Collider:o616 7FFFFE00 )
-   FC:  	Call  SetZoneEnabled        ( ~Zone:o622 .False )
-  110:  	Call  SetCamSpeed   ( .Cam:Default *Fixed[2.5] )
+   FC:  	Call  SetZoneEnabled    ( ~Zone:o622 .False )
+  110:  	Call  SetCamSpeed       ( .Cam:Default *Fixed[2.5] )
   124:  EndIf
   12C:  Return
   134:  End
@@ -7743,8 +7750,8 @@ PADDING: 8024DC2C to 8024DC30 (0000DC2C to 0000DC30)
   1E4:  Call  PlaySoundAt   ( 000000A3 00000000 00000000 000000FA 00000000 )
   204:  Call  PlayEffect    ( ~FX:LightRays:SharpA 00000000 000000FA 00000000 0000000A *Var9 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
   248:  Wait  20`
-  254:  Call  802C90FC      ( 00000091 00000001 FFFFFFFF )
-  26C:  Call  802C94A0      ( 00000001 $Function_802456C8 00000000 )
+  254:  Call  SetModelCustomGfx     ( ~Model:o646 00000001 FFFFFFFF )
+  26C:  Call  SetCustomGfxBuilders  ( 00000001 $Function_802456C8 00000000 )
   284:  Call  EnableGroup   ( ~Model:g279 .True )
   298:  Thread
   2A0:  	Call  MakeLerp  ( 00000000 000000C8 0000004B .Easing:QuadraticIn )
@@ -7758,9 +7765,9 @@ PADDING: 8024DC2C to 8024DC30 (0000DC2C to 0000DC30)
   310:  	EndLoop
   318:  EndThread
   320:  Wait  60`
-  32C:  Call  802C90FC  ( 00000093 00000000 FFFFFFFF )
-  344:  Call  802C94A0  ( 00000000 $Function_8024564C 00000000 )
-  35C:  Call  EnableModel   ( ~Model:o8 .True )
+  32C:  Call  SetModelCustomGfx ( ~Model:o8 00000000 FFFFFFFF )
+  344:  Call  SetCustomGfxBuilders  ( 00000000 $Function_8024564C 00000000 )
+  35C:  Call  EnableModel       ( ~Model:o8 .True )
   370:  Call  MakeLerp  ( 00000000 0000007F 0000003C .Easing:CosInOut )
   38C:  Loop
   398:  	Call  UpdateLerp ( )
@@ -7842,21 +7849,21 @@ PADDING: 8024DC2C to 8024DC30 (0000DC2C to 0000DC30)
    80:  Call  HidePlayerShadow  ( .True )
    90:  Call  GetModelCenter    ( ~Model:o637 )
    A0:  Add   *Var0  FFFFFFFB
-   B0:  Call  SetPlayerJumpscale    ( 00000000 )
-   C0:  Call  PlayerJump2       ( *Var0 *Var1 *Var2 00000002 )
+   B0:  Call  SetPlayerJumpscale    (  0` )
+   C0:  Call  PlayerJump2       ( *Var0 *Var1 *Var2  2` )
    DC:  Call  SetPlayerActionState  ( .ActionState:Land )
    EC:  Set   *MapVar[C]  00000001
-   FC:  Call  InterpPlayerYaw   ( 00000000 00000000 )
+   FC:  Call  InterpPlayerYaw   (  0`  0` )
   110:  Call  DisablePlayerPhysics  ( .True )
   120:  Call  DisablePartnerAI  ( 00000000 )
   130:  Add   *Var0  0000000A
   140:  Call  SetNpcJumpscale   ( .Npc:Partner *Fixed[1.5] )
-  154:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2 0000000C )
+  154:  Call  NpcJump0  ( .Npc:Partner *Var0 *Var1 *Var2  12` )
   174:  Call  SetNpcAnimation   ( .Npc:Partner 00000106 )
   188:  Set   *MapVar[D]  00000001
   198:  Call  EnableNpcShadow   ( .Npc:Partner .False )
   1AC:  Wait  10`
-  1B8:  Call  ShowMessageAtScreenPos    ( 001D0188 000000A0 00000028 ) % Are you ready to take off?
+  1B8:  Call  ShowMessageAtScreenPos    ( 001D0188  160`  40` ) % Are you ready to take off?
   1D0:  Call  ShowChoice        ( 001E000C ) % Yes No
   1E0:  Call  CloseMessage ( )
   1EC:  If  *Var0  ==  00000001
@@ -7869,14 +7876,14 @@ PADDING: 8024DC2C to 8024DC30 (0000DC2C to 0000DC30)
   250:  		If  *Var0  ==  .True
   260:  			Wait  10`
   26C:  			Call  SetNpcJumpscale   ( .Npc:Partner 00000001 )
-  280:  			Call  NpcJump0  ( .Npc:Partner 0000002D 000000A2 00000019 0000000A )
+  280:  			Call  NpcJump0  ( .Npc:Partner  45`  162`  25`  10` )
   2A0:  		EndIf
   2A8:  		Call  EnableNpcShadow   ( .Npc:Partner .True )
   2BC:  		Call  SetNpcFlagBits    ( .Npc:Partner 00000040 .False )
   2D4:  		Call  EnablePartnerAI ( )
   2E0:  	EndThread
-  2E8:  	Call  SetPlayerJumpscale    ( 00000001 )
-  2F8:  	Call  PlayerJump    ( ~Vec3d:JumpDest_8024EB20 0000000A )
+  2E8:  	Call  SetPlayerJumpscale    (  1` )
+  2F8:  	Call  PlayerJump    ( ~Vec3d:JumpDest_8024EB20  10` )
   314:  	Call  SetPlayerActionState  ( .ActionState:Land )
   324:  	Call  HidePlayerShadow      ( .False )
   334:  	Wait  10`
@@ -7925,8 +7932,8 @@ PADDING: 8024DC2C to 8024DC30 (0000DC2C to 0000DC30)
    58:  Call  SetNpcFlagBits    ( .Npc:Partner 00000040 .True )
    70:  Call  HidePlayerShadow  ( .True )
    80:  Call  EnableNpcShadow   ( .Npc:Partner .False )
-   94:  Call  UseSettingsFrom   ( .Cam:Default 00000000 000000B4 FFFFFFFB )
-   B0:  Call  SetPanTarget      ( .Cam:Default 00000000 000000B4 FFFFFFFB )
+   94:  Call  UseSettingsFrom   ( .Cam:Default  0`  180`  -5` )
+   B0:  Call  SetPanTarget      ( .Cam:Default  0`  180`  -5` )
    CC:  Call  SetCamDistance    ( .Cam:Default *Fixed[550.0] )
    E0:  Call  SetCamPitch       ( .Cam:Default *Fixed[17.0] *Fixed[-35.0] )
    F8:  Call  SetCamSpeed       ( .Cam:Default *Fixed[90.0] )
@@ -7962,8 +7969,8 @@ PADDING: 8024DC2C to 8024DC30 (0000DC2C to 0000DC30)
   2C0:  EndLoop
   2C8:  Kill  *Var9
   2D4:  Set   *MapVar[C]  00000000
-  2E4:  Call  SetPlayerJumpscale    ( 00000001 )
-  2F4:  Call  PlayerJump    ( ~Vec3d:JumpDest_8024F018 0000000A )
+  2E4:  Call  SetPlayerJumpscale    (  1` )
+  2F4:  Call  PlayerJump    ( ~Vec3d:JumpDest_8024F018  10` )
   310:  Call  SetPlayerActionState  ( .ActionState:Land )
   320:  Call  HidePlayerShadow      ( .False )
   330:  Thread
@@ -7977,7 +7984,7 @@ PADDING: 8024DC2C to 8024DC30 (0000DC2C to 0000DC30)
   394:  		Default
   39C:  			Wait  10`
   3A8:  			Call  SetNpcJumpscale   ( .Npc:Partner 00000001 )
-  3BC:  			Call  NpcJump0  ( .Npc:Partner 0000002D 000000A2 00000019 0000000A )
+  3BC:  			Call  NpcJump0  ( .Npc:Partner  45`  162`  25`  10` )
   3DC:  	EndSwitch
   3E4:  	Call  EnableNpcShadow   ( .Npc:Partner .True )
   3F8:  	Call  SetNpcFlagBits    ( .Npc:Partner 00000040 .False )

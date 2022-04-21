@@ -1,6 +1,9 @@
 % Script File: sbk_22.mscr
 % Decoded from: 0 to E30 (sbk_22)
 
+#define .NpcID:Pokey_00             00
+#define .NpcID:Bandit_01            01
+
 #new:Function $Function_80240000
 {
     0:  MTC1      R0, F0
@@ -11,7 +14,7 @@
    14:  SW        R0, 14 (SP)
    18:  SWC1      F0, 10 (SP)
    1C:  COPY      A2, A1
-   20:  JAL       80072950
+   20:  JAL       ~Func:playFX_82
    24:  COPY      A3, A1
    28:  LW        RA, 18 (SP)
    2C:  LI        V0, 2
@@ -184,8 +187,8 @@ PADDING: 80240154 to 80240160 (00000154 to 00000160)
    20:  If  *GB_StoryProgress  ==  .Story:Ch2_GotPulseStone % FFFFFFC1
    30:  	Call  DisablePulseStone ( .False )
    40:  EndIf
-   48:  Call  SetCamPerspective ( .Cam:Default 00000003 00000019 00000010 00001000 )
-   68:  Call  SetCamBGColor ( .Cam:Default 00000000 00000000 00000000 )
+   48:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+   68:  Call  SetCamBGColor ( .Cam:Default  0`  0`  0` )
    84:  Call  SetCamEnabled ( .Cam:Default .True )
    98:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
    AC:  Call  MakeNpcs      ( .False $NpcGroupList_80240CB8 )
@@ -251,17 +254,17 @@ PADDING: 80240154 to 80240160 (00000154 to 00000160)
    C4:  		Call  SetNpcJumpscale   ( .Npc:Self *Fixed[1.0] )
    D8:  		Call  GetPlayerPos  ( *Var7 *Var8 *Var9 )
    F0:  		Add   *Var7  00000014
-  100:  		Call  NpcJump0      ( .Npc:Self *Var7 00000000 *Var9 00000006 )
+  100:  		Call  NpcJump0      ( .Npc:Self *Var7  0` *Var9  6` )
   120:  		Add   *Var7  00000014
-  130:  		Call  NpcJump0      ( .Npc:Self *Var7 00000000 *Var9 00000006 )
+  130:  		Call  NpcJump0      ( .Npc:Self *Var7  0` *Var9  6` )
   150:  		Call  GetNpcYaw     ( .Npc:Self *Var0 )
   164:  		Add   *Var0  000000B4
-  174:  		Call  InterpNpcYaw  ( .Npc:Self *Var0 00000005 )
+  174:  		Call  InterpNpcYaw  ( .Npc:Self *Var0  5` )
   18C:  		Call  SetNpcAnimation   ( .Npc:Self 00320008 )
   1A0:  		Wait  10`
   1AC:  		Call  SetNpcSpeed   ( .Npc:Self *Fixed[16.0] )
   1C0:  		Add   *Var7  000000C8
-  1D0:  		Call  NpcMoveTo     ( .Npc:Self *Var7 *Var9 00000000 )
+  1D0:  		Call  NpcMoveTo     ( .Npc:Self *Var7 *Var9  0` )
   1EC:  		Set   *AreaFlag[001]  .False
   1FC:  		Call  DisablePlayerInput    ( .False )
   20C:  		Call  SetEnemyFlagBits  ( .Npc:Self 00000010 00000001 )
@@ -309,22 +312,22 @@ PADDING: 80240154 to 80240160 (00000154 to 00000160)
 
 #new:NpcGroup $NpcGroup_802408D8
 {
-	00000000 $NpcSettings_802408AC ~Vec3f:NPC_802408D8 % -140 0 -230
+	.NpcID:Pokey_00 $NpcSettings_802408AC ~Vec3f:NPC_Pokey_00 % -140 0 -230
 	00002800 00000000 00000000 00000000 0000005A
 	~Items:15:DriedFruit:9:TastyTonic:1
 	~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:0:1
-	~Movement:NPC_802408D8
-	~AnimationTable:NPC_802408D8 % .Sprite:Pokey
+	~Movement:NPC_Pokey_00
+	~AnimationTable:NPC_Pokey_00 % .Sprite:Pokey
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
 #new:NpcGroup $NpcGroup_80240AC8
 {
-	00000001 $NpcSettings_80240824 ~Vec3f:NPC_80240AC8 % 40 0 90
+	.NpcID:Bandit_01 $NpcSettings_80240824 ~Vec3f:NPC_Bandit_01 % 40 0 90
 	00002800 00000000 00000000 00000000 0000010E
 	~Items:5:HoneySyrup:A ~HP:Standard:2 ~FP:Standard:2 ~CoinBonus:1:3
-	~Movement:NPC_80240AC8
-	~AnimationTable:NPC_80240AC8 % .Sprite:Bandit
+	~Movement:NPC_Bandit_01
+	~AnimationTable:NPC_Bandit_01 % .Sprite:Bandit
 	00000001 00000000 00000000 00000000 % no tattle string
 }
 
