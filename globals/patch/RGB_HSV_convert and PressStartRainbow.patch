@@ -1,0 +1,278 @@
+@Hook 13090 % RAM 80037C90
+{
+% we need to set some sort of rainbow value and put it in T0
+PUSH	S0, S1, S2, RA
+LUI		S2, 8011
+LWU		S0, F290 (S2)
+SRL		S0, S0, 8 % shift so we can insert FFFF
+ORI		S0, S0, FFFF
+SLL		S0, S0, 8 % go back
+LUI		S1, 0300
+ADDU	S0, S0, S1
+SW		S0, F290 (S2)
+JAL		$Function_HSVtoRGB
+DADDU	A0, S0, R0
+DADDU	T0, V0, R0 % to T0
+POP		S0, S1, S2, RA
+J		80037C98
+NOP
+}
+
+% make the text not disappear
+@Function 12FD4 % RAM 80037BD4
+{
+NOP
+ADDIU	V0, R0, 0001
+J		80037C38
+}
+
+@Function 13020 % RAM 80037C20
+{
+NOP
+}
+
+/% CONVERT HSV TO RGB
+simplified code:
+
+// _h, _s, _v = 0, 1, 2 most significant bytes of A0
+// (format = HHSSVV00)
+
+double h = (_h & 255) / 256 * 360;
+double s = (_s & 255) / 256;
+double v = (_v & 255) / 256;
+
+double c = v * s;
+double x = c * (1.0 - abs(mod(h / 60.0, 2) - 1.0));
+double m = v - c;
+// the computed values are converted to int and then added together
+if (h < 60.0)
+{
+	return ((c + m << 16) + (x + m << 8) + m) * 256 << 8; // V0
+}
+else if (h < 120.0)
+{
+	return ((x + m << 16) + (c + m << 8) + m) * 256 << 8; // V0
+}
+else if (h < 180.0)
+{
+	return ((m << 16) + (c + m << 8) + (x + m)) * 256 << 8; // V0
+}
+else if (h < 240.0)
+{
+	return ((m << 16) + (x + m << 8) + (c + m)) * 256 << 8; // V0
+}
+else if (h < 300.0)
+{
+	return ((x + m << 16) + (m << 8) + (c + m)) * 256 << 8; // V0
+}
+else
+{
+	return ((c + m << 16) + (m << 8) + (x + m)) * 256 << 8; // V0
+}
+%/
+#new:Function $Function_H2RInternalCopy
+{
+% ensure theyre >= 0
+BGEZ	S1, .set1
+NOP
+ORI		S1, R0, 0000
+.set1
+BGEZ	S2, .set2
+NOP
+ORI		S2, R0, 0000
+.set2
+BGEZ	S3, .set3
+NOP
+ORI		S3, R0, 0000
+.set3
+ADDU	S3, S3, S1 % S3 += S1
+JR		RA
+ADDU	S3, S3, S2 % S3 += S2
+}
+
+#new:Function $Function_HSVtoRGB
+{
+PUSH	S0, S1, S2, S3, S4, S5, S6, RA
+% double h = (_h & 255) / 256 * 360;
+LUI		S0, 3FB4
+MTC1	S0, F31 % load 360/256
+SRL		S0, A0, 18 % 24 bits
+MTC1	S0, F0
+CVT.S.W F0, F0
+MUL.S	F0, F0, F31 % F0 = h
+% double s = (_s & 255) / 256;
+LUI		S0, 3B80
+MTC1	S0, F31 % load 1/256
+SRL		S0, A0, 10 % 16 bits
+ANDI	S0, S0, FF % & 255
+MTC1	S0, F1
+CVT.S.W F1, F1
+MUL.S	F1, F1, F31 % F1 = s
+% double v = (_v & 255) / 256;
+SRL		S0, A0, 8 % 8 bits
+ANDI	S0, S0, FF % & 255
+MTC1	S0, F2
+CVT.S.W F2, F2
+MUL.S	F2, F2, F31 % F2 = v
+%
+% double c = v * s;
+MUL.S	F3, F2, F1 % F3 = c
+% double x = c * (1.0 - abs(mod(h / 60.0, 2) - 1.0));
+LIO		S0, 3C888889
+MTC1	S0, F31 % load 1/60
+MUL.S	F30, F0, F31 % F30 = h/60
+LUI		S0, 3F00
+MTC1	S0, F29 % load 1/2
+SUB.S	F29, F30, F29
+CVT.W.S F29, F29
+MFC1	S0, F29
+ANDI	S0, S0, FFFE
+MTC1	S0, F29
+CVT.S.W F29, F29
+SUB.S	F30, F30, F29 % F30 = F30 % 2
+LUI		S0, 3F80
+MTC1	S0, F31 % load 1
+SUB.S	F30, F30, F31
+ABS.S	F30, F30 % F30 = abs(F30 - 1)
+SUB.S	F30, F31, F30 % F30 = 1 - F30
+MUL.S	F4, F30, F3 % F4 = x
+% double m = v - c;
+SUB.S	F5, F2, F3 % F5 = m
+%
+% if (h < 60)
+LUI		S0, 4270
+MTC1	S0, F11 % load 60
+LUI		S0, 4380
+MTC1	S0, F12 % load 256
+MOV.S	F10, F11
+C.LE.S	F0, F10
+BC1F 	.else1
+ADD.S	F10, F10, F11 % increase by 60
+% return ((c + m << 16) + (x + m << 8) + m) * 256 << 8;
+ADD.S	F30, F3, F5 % c + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+MFC1	S1, F30
+SLL		S1, S1, 10 % S1 = c + m << 16
+ADD.S	F30, F4, F5 % x + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+MFC1	S2, F30
+SLL		S2, S2, 8 % S2 = x + m << 8
+MUL.S	F30, F5, F12
+CVT.W.S F30, F30
+JAL		$Function_H2RInternalCopy
+MFC1	S3, F30 % S3 = m
+BEQ		R0, R0, .return
+SLL		V0, S3, 8 % return S3 << 8
+.else1
+% else if (h < 120)
+C.LE.S	F0, F10
+BC1F 	.else2
+ADD.S	F10, F10, F11 % increase by 60
+% return ((x + m << 16) + (c + m << 8) + m) * 256 << 8;
+ADD.S	F30, F4, F5 % x + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+MFC1	S1, F30
+SLL		S1, S1, 10 % S1 = x + m << 16
+ADD.S	F30, F3, F5 % c + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+MFC1	S2, F30
+SLL		S2, S2, 8 % S2 = c + m << 8
+MUL.S	F30, F5, F12
+CVT.W.S F30, F30
+JAL		$Function_H2RInternalCopy
+MFC1	S3, F30 % S3 = m
+BEQ		R0, R0, .return
+SLL		V0, S3, 8 % return S3 << 8
+.else2
+% else if (h < 180)
+C.LE.S	F0, F10
+BC1F 	.else3
+ADD.S	F10, F10, F11 % increase by 60
+% return ((m << 16) + (c + m << 8) + (x + m)) * 256 << 8;
+MUL.S	F30, F5, F12
+CVT.W.S F30, F30
+MFC1	S1, F30
+SLL		S1, S1, 10 % S1 = m << 16
+ADD.S	F30, F3, F5 % c + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+MFC1	S2, F30
+SLL		S2, S2, 8 % S2 = c + m << 8
+ADD.S	F30, F4, F5 % x + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+JAL		$Function_H2RInternalCopy
+MFC1	S3, F30 % S3 = x + m
+BEQ		R0, R0, .return
+SLL		V0, S3, 8 % return S3 << 8
+.else3
+% else if (h < 240)
+C.LE.S	F0, F10
+BC1F 	.else4
+ADD.S	F10, F10, F11 % increase by 60
+% return ((m << 16) + (x + m << 8) + (c + m)) * 256 << 8;
+MUL.S	F30, F5, F12
+CVT.W.S F30, F30
+MFC1	S1, F30
+SLL		S1, S1, 10 % S1 = m << 16
+ADD.S	F30, F4, F5 % x + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+MFC1	S2, F30
+SLL		S2, S2, 8 % S2 = x + m << 8
+ADD.S	F30, F3, F5 % c + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+JAL		$Function_H2RInternalCopy
+MFC1	S3, F30 % S3 = c + m
+BEQ		R0, R0, .return
+SLL		V0, S3, 8 % return S3 << 8
+.else4
+% else if (h < 300)
+C.LE.S	F0, F10
+BC1F 	.else5
+ADD.S	F10, F10, F11 % increase by 60
+% return ((x + m << 16) + (m << 8) + (c + m)) * 256 << 8;
+ADD.S	F30, F4, F5 % x + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+MFC1	S1, F30
+SLL		S1, S1, 10 % S1 = x + m << 16
+MUL.S	F30, F5, F12
+CVT.W.S F30, F30
+MFC1	S2, F30
+SLL		S2, S2, 8 % S2 = m << 8
+ADD.S	F30, F3, F5 % c + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+JAL		$Function_H2RInternalCopy
+MFC1	S3, F30 % S3 = c + m
+BEQ		R0, R0, .return
+SLL		V0, S3, 8 % return S3 << 8
+.else5
+% else
+% return ((c + m << 16) + (m << 8) + (x + m)) * 256 << 8;
+ADD.S	F30, F3, F5 % c + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+MFC1	S1, F30
+SLL		S1, S1, 10 % S1 = c + m << 16
+MUL.S	F30, F5, F12
+CVT.W.S F30, F30
+MFC1	S2, F30
+SLL		S2, S2, 8 % S2 = m << 8
+ADD.S	F30, F4, F5 % x + m
+MUL.S	F30, F30, F12
+CVT.W.S F30, F30
+JAL		$Function_H2RInternalCopy
+MFC1	S3, F30 % S3 = x + m
+SLL		V0, S3, 8 % return S3 << 8
+.return
+POP		S0, S1, S2, S3, S4, S5, S6, RA
+JR		RA
+NOP
+}

@@ -1,0 +1,23 @@
+
+%write Mario's rotation instead of a 0 or 180 value
+%looks like the function already gets pointers for mario and kooper
+%8010f048 = mario rotation
+
+/%
+	%802BD7E0
+	1A8:  SWC1      F0, C (S0)
+	%802BDA04
+	3CC:  SWC1      F4, C (S0)
+%/
+
+% 802BD7B4
+%-802BD638
+% 0000017C 
+
+%still need to store stuff
+
+@ $Function_802BD638
+{
+[174] 	NOP						%remove function that sets mario's rotation?
+[1A0]	LWC1	F0, 80 (S4)		%load mario rotation instead of using atan2
+}
