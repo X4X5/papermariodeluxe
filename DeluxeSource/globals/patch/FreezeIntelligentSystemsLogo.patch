@@ -67,7 +67,7 @@ PUSH	RA, A0, A1, A2, A3, V0, V1
 ADDIU	A0, R0, 00C9
 CLEAR 	A1
 COPY 	A2, A1
-JAL 	~Func:_play_sound
+JAL 	~Func:sfx_play_sound
 COPY 	A3, A1
 POP 	RA, A0, A1, A2, A3, V0, V1
 JR 		RA
