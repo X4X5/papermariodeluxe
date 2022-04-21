@@ -3,6 +3,8 @@ Paper Mario with a few new twists
 
 Built on the latest Star Rod version, Paper Mario Deluxe aims to add QoL changes, new rooms, unused and new badges alike, and more content. It is the revival of a 2021 mod that never got off the ground
 
+# FYI
+
 Q: Will this mod just be another hard mode mod?
 A: No. This mod is meant to be enjoyed, but it's also not meant to be a walk in the park. There will be a challenge to a degree, but don't expect it to be another MQ or DSE lol
 
