@@ -26,4 +26,5 @@ A: No, it is not.
 
 
 Q: Where can I find other Paper Mario mods?
+
 A: Join the Paper Mario Modding Discord [here](https://discord.gg/JGJ7H5R7eS)
