@@ -1,0 +1,118 @@
+#new:Function $GetPartnerHP {% Loads new routine that gets partner HP globally (CANNOT USE A0 REGISTER!)
+    PUSH	A0, A1, A2, V0, V1, RA
+    LABU	V0, 8010F2A2 % Loads partner value
+    SLL		V0, V0, 3 % Multiplies it 3 times
+    LUI		V1, 8011 % Loads base RAM
+    ADDIU	V1, V1, F2A4 % Adds base RAM pointer for partner RAM setup
+    ADD		V0, V1, V0 % Adds base RAM pointer for partner RAM setup and the total value of the partner multplied by 3
+    LIO		A1, FE363C80 % Var[0]
+    LBU		A2, 0002 (V0) % Load partner's current HP
+    JAL		~Func:set_variable
+    NOP
+    POP		A0, A1, A2, V0, V1, RA
+    JR		RA
+    NOP
+}
+	
+#new:Function $RestoreFullHP {% Loads new routine that loads all PC's max health and stores to their current to max them out.
+	PUSH	S0, S1, S2, S3, RA
+	% Mario
+    LUI		S0, 8011 % Loads base RAM
+    ADDIU	S0, S0, F290 % Adds base RAM pointer for start of Mario's data
+	LB		S1, 0003 (S0) % Load's Mario's max HP
+	SB		S1, 0002 (S0) % Stores to Mario's current HP
+	% All Partners
+    LUI		S0, 8011 % Loads base RAM
+    ADDIU	S0, S0, F2A4 % Adds base RAM pointer for start of partner data
+	ADDIU	S1,	R0, 0000 % Counter
+	ADDIU	S2, R0, 000C % Total partners to heal for
+	.NextPartnerHeal
+	LB		S3, 000B (S0) % Loads partners max health
+	SB		S3, 000A (S0) % Stores max health to current health to restore full HP.
+	%
+	ADDIU	S0, S0, 0008 % Adds 0008 to current RAM location to get next partners HP.
+	ADDIU	S1, S1, 0001 % Increases the counter
+	BNE		S1, S2, .NextPartnerHeal % Compares 'Register: S1 (Counter)' to 'Register: S2 (Total Partner #)'. If not equal, load another partner's data.
+	NOP
+	%
+	POP		S0, S1, S2, S3, RA
+	JR		RA
+	NOP
+}
+
+#new:Data $MaxPartnerHPTable {
+%Partner name		maxHP_lvl0, maxHP_lvl1, maxHP_lvl2, maxHP_lvl3
+/% None %/			00`b 00`b 00`b 00`b
+/% Goombario %/		10`b 15`b 20`b 30`b
+/% Kooper %/		10`b 15`b 20`b 30`b
+/% Bombette %/		10`b 15`b 20`b 30`b
+/% Parakarry %/		10`b 15`b 20`b 30`b
+/% Goompa %/		10`b 15`b 20`b 30`b
+/% Watt %/			10`b 15`b 20`b 30`b
+/% Sushie %/ 		10`b 15`b 20`b 30`b
+/% Lakilester %/ 	10`b 15`b 20`b 30`b
+/% Bow %/			10`b 15`b 20`b 30`b
+/% Goombaria %/		10`b 15`b 20`b 30`b
+/% Twink %/			10`b 15`b 20`b 30`b
+}
+
+#new:Function $UpgradePartnerHP {
+	PUSH s0, s1, s2, s3, ra
+	%s0 script context
+	%s1 $MaxPartnerHPTable
+	%s2 partnerID chosen for upgrade
+
+	DADDU s0, a0, r0 %move script context ptr to s0
+	LIO s1, $MaxPartnerHPTable
+
+	LW t0, 000C (s0)
+	LW a1, 0000 (t0) %should load variable passed as arg to function
+	JAL ~Func:get_variable
+	NOP
+	DADDU s2, v0, r0 %move partnerID to s2
+
+	LIO t0, 8010F2A4 %start of partner structs
+	SLL t1, s2, 0002 %multiply partnerID by 4
+	SLL t2, s2, 0003 %multply partnerID by 8
+
+	ADDU t3, t0, t2 %partner struct start + (partnerID * 8) = currentParnterStructPtr
+	ADDU s1, s1, t1 %now points to partnerHP in table
+	LB t5, 0001 (t3) %load current partner upgrade
+	ADDU s1, s1, t5
+
+	LB t4, 0000 (s1) %load new max HP value from table
+	SB t4, 0002 (t3)
+	SB t4, 0003 (t3)
+
+	POP s0, s1, s2, s3, ra
+	JR RA
+	ORI v0, r0, 0002
+}
+
+#new:Function $GetPartnerUpgrade {
+	%takes 1 arg, partnerID
+	LIO t1, 8010F2A4 %start of partner structs
+	SLL a0, a0, 3 %multiply by 8
+	ADDU t1, a0, t1 %now points to current partner struct
+	JR RA
+	LB v0, 0001 (t1) %load current partner hp
+}
+
+#new:Function $RestoreCurrentPartnerHP {
+	LABU t0, 8010F2A2 %current partner ID
+	LIO t1, 8010F2A4 %start of partner structs
+	SLL t0, t0, 3 %multiply by 8
+	ADDU t1, t0, t1 %now points to current partner struct
+	LB t0, 0003 (t1) %load current partner hp
+	SB t0, 0002 (t1) %restore current hp
+	JR RA
+	ADDIU v0, r0, 0002 %return 2 so script halts execution after being ran once
+}
+
+#export $GetPartnerHP
+#export $RestoreFullHP
+
+#export $UpgradePartnerHP
+
+
+

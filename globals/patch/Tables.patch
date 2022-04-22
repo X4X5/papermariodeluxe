@@ -1,0 +1,939 @@
+@Data 6A2F0 { % (Stored to 8008EEF0) Loads data that sets partner values at game boot up so partners can be viewed without crashing game.
+	00000000	00000001	00000002	00000003	00000004	00000005
+	00000006	00000007	00000008	00000009	0000000A	0000000B
+}
+
+#new:Data $IconScript_MarioHeadHP {
+	08 % op_08
+	05 03 % SetSize -- 32x32px
+	0E 0000B000 % ScaleUniform (fixed point)
+	04 % Loop
+	02 3C $MarioHead $MarioHeadPalette % SetCI
+	03 % Restart
+	00 % End
+}
+
+#new:Data $IconScript_Heart {
+	08 % op_08
+	05 03 % SetSize -- 32x32px
+	0E 0000B000 % ScaleUniform (fixed point)
+	04 % Loop
+	02 3C $HeartCI4 $HeartCI4Palette % SetCI
+	03 % Restart
+	00 % End
+}
+
+#new:Data $IconScript_Flower {
+	08 % op_08
+	05 03 % SetSize -- 32x32px
+	0E 0000B000 % ScaleUniform (fixed point)
+	04 % Loop
+	02 3C $FlowerCI4 $FlowerCI4Palette % SetCI
+	03 % Restart
+	00 % End
+}
+
+#new:Data $IconScript_Star {
+	08 % op_08
+	05 03 % SetSize -- 32x32px
+	0E 0000B000 % ScaleUniform (fixed point)
+	04 % Loop
+	02 3C $Star $StarPalette % SetCI
+	03 % Restart
+	00 % End
+}
+
+#new:Data $IconScript_Partner {
+	08 % op_08
+	05 03 % SetSize -- 32x32px
+	0E 0000B000 % ScaleUniform (fixed point)
+	04 % Loop
+	02 3C 00000000 00000000 % filled in at run time (0x20 and 0x24 hold raster pointer and palette pointer)
+	03 % Restart
+	00 % End
+}
+
+#new:Function $DrawMarioHeadHeartIcon {
+	PUSH s0, ra
+	LIO a0, $IconScript_MarioHeadHP
+	JAL ~Func:create_hud_element %alternate name: create_icon
+	NOP
+	DADDU s0, v0, r0 %iconIndex to s0
+	DADDU a0, s0, r0
+	JAL ~Func:set_hud_element_flags %alternate name: set_icon_flags
+	ORI a1, r0, 0080
+	ORI a1, r0, 8000
+	JAL ~Func:clear_hud_element_flags %alternate name: clear_icon_flags
+	DADDU a0, s0, r0
+	DADDU a0, s0, r0
+	LH a1, 0034 (s3)
+	ADDIU a1, a1, 000E
+	LH a2, 0036 (s3)
+	JAL ~Func:set_hud_element_render_pos %alternate name: set_icon_render_pos
+	ADDIU a2, a2, 000D
+	LIO a1, $IconScript_MarioHeadHP
+	JAL ~Func:set_hud_element_script %alternate name: set_menu_icon_script
+	DADDU a0, s0, r0
+	LIO a1, 3F000000
+	JAL 80144C20 %scale icon to 0.6
+	DADDU a0, s0, r0
+	JAL ~Func:draw_hud_element_1 %alternate name: draw_icon_1
+	DADDU a0, s0, r0
+	JAL ~Func:free_hud_element
+	DADDU a0, s0, r0
+	POP s0, ra
+	JR RA
+	NOP
+}
+
+#new:Function $DrawMarioHeartIcon {
+	PUSH s0, ra
+	LIO a0, $IconScript_Heart
+	JAL ~Func:create_hud_element %alternate name: create_icon
+	NOP
+	DADDU s0, v0, r0 %iconIndex to s0
+	DADDU a0, s0, r0
+	JAL ~Func:set_hud_element_flags %alternate name: set_icon_flags
+	ORI a1, r0, 0080
+	ORI a1, r0, 8000
+	JAL ~Func:clear_hud_element_flags %alternate name: clear_icon_flags
+	DADDU a0, s0, r0
+	DADDU a0, s0, r0
+	LH a1, 0034 (s3)
+	ADDIU a1, a1, 0016
+	LH a2, 0036 (s3)
+	JAL ~Func:set_hud_element_render_pos %alternate name: set_icon_render_pos
+	ADDIU a2, a2, 000B
+	LIO a1, $IconScript_Heart
+	JAL ~Func:set_hud_element_script %alternate name: set_menu_icon_script
+	DADDU a0, s0, r0
+	LIO a1, 3F000000
+	JAL 80144C20 %scale icon to 0.6
+	DADDU a0, s0, r0
+	JAL ~Func:draw_hud_element_1 %alternate name: draw_icon_1
+	DADDU a0, s0, r0
+	JAL ~Func:free_hud_element
+	DADDU a0, s0, r0
+	POP s0, ra
+	JR RA
+	NOP
+}
+
+#new:Function $DrawPartnerHeartIcon {
+	PUSH s0, ra
+	LIO a0, $IconScript_Heart
+	JAL ~Func:create_hud_element %alternate name: create_icon
+	NOP
+	DADDU s0, v0, r0 %iconIndex to s0
+	DADDU a0, s0, r0
+	JAL ~Func:set_hud_element_flags %alternate name: set_icon_flags
+	ORI a1, r0, 0080
+	ORI a1, r0, 8000
+	JAL ~Func:clear_hud_element_flags %alternate name: clear_icon_flags
+	DADDU a0, s0, r0
+	DADDU a0, s0, r0
+	LH a1, 0034 (s3)
+	ADDIU a1, a1, 0016
+	LH a2, 0036 (s3)
+	JAL ~Func:set_hud_element_render_pos %alternate name: set_icon_render_pos
+	ADDIU a2, a2, 0021
+	LIO a1, $IconScript_Heart
+	JAL ~Func:set_hud_element_script %alternate name: set_menu_icon_script
+	DADDU a0, s0, r0
+	LIO a1, 3F000000
+	JAL 80144C20 %scale icon to 0.5
+	DADDU a0, s0, r0
+	JAL ~Func:draw_hud_element_1 %alternate name: draw_icon_1
+	DADDU a0, s0, r0
+	JAL ~Func:free_hud_element
+	DADDU a0, s0, r0
+	POP s0, ra
+	JR RA
+	NOP
+}
+
+#new:Function $DrawPartnerIcon {
+	PUSH s0, s1, ra
+	LIO a2, 8008F000 %partner icon table
+	LABU a1, 8010F2A2
+	ORI a0, r0, 0009 %bow partner ID
+	BEQ a0, a1, .isBow
+	NOP
+	BEQ a1, r0, .noSubtract
+	NOP
+	ADDIU a1, a1, FFFF
+	.noSubtract %if no partner, draws goombario.
+	SLL a1, a1, 0003 %multiply by 8
+	ADDU a0, a2, a1
+	LW s1, 0000 (a0) %load partner icon script
+	DADDU a0, s1, r0
+	JAL ~Func:create_hud_element %alternate name: create_icon
+	NOP
+	DADDU s0, v0, r0 %iconIndex to s0
+	DADDU a0, s0, r0
+	JAL ~Func:set_hud_element_flags %alternate name: set_icon_flags
+	ORI a1, r0, 0080
+	JAL ~Func:clear_hud_element_flags %alternate name: clear_icon_flags
+	DADDU a0, s0, r0
+	DADDU a0, s0, r0
+	LH a1, 0034 (s3)
+	ADDIU a1, a1, 000E
+	LH a2, 0036 (s3)
+	JAL ~Func:set_hud_element_render_pos %alternate name: set_icon_render_pos
+	ADDIU a2, a2, 0023
+	DADDU a1, s1, r0
+	JAL ~Func:set_hud_element_script %alternate name: set_menu_icon_script
+	DADDU a0, s0, r0
+	LIO a1, 3F000000
+	JAL 80144C20 %scale icon to 0.6
+	DADDU a0, s0, r0
+	JAL ~Func:draw_hud_element_1 %alternate name: draw_icon_1
+	DADDU a0, s0, r0
+	JAL ~Func:free_hud_element
+	DADDU a0, s0, r0
+	POP s0, s1, ra
+	JR RA
+	NOP
+	.isBow
+	BEQ r0, r0, .noSubtract
+	ORI a1, r0, 0004 %bow's partner ID doesn't match the icon script table index
+}
+
+#new:Function $DrawFlowerIcon {
+	PUSH s0, ra
+	LIO a0, $IconScript_Flower
+	JAL ~Func:create_hud_element %alternate name: create_icon
+	NOP
+	DADDU s0, v0, r0 %iconIndex to s0
+	DADDU a0, s0, r0
+	JAL ~Func:set_hud_element_flags %alternate name: set_icon_flags
+	ORI a1, r0, 0080
+	ORI a1, r0, 8000
+	JAL ~Func:clear_hud_element_flags %alternate name: clear_icon_flags
+	DADDU a0, s0, r0
+	DADDU a0, s0, r0
+	LH a1, 0034 (s3)
+	ADDIU a1, a1, 006C %x offset
+	LH a2, 0036 (s3)
+	JAL ~Func:set_hud_element_render_pos %alternate name: set_icon_render_pos
+	ADDIU a2, a2, 000D %y offset
+	LIO a1, $IconScript_Flower
+	JAL ~Func:set_hud_element_script %alternate name: set_menu_icon_script
+	DADDU a0, s0, r0
+	LIO a1, 3F000000
+	JAL 80144C20 %scale icon to 0.5
+	DADDU a0, s0, r0
+	JAL ~Func:draw_hud_element_1 %alternate name: draw_icon_1
+	DADDU a0, s0, r0
+	JAL ~Func:free_hud_element
+	DADDU a0, s0, r0
+	POP s0, ra
+	JR RA
+	NOP
+}
+
+#new:Function $DrawStarIcon {
+	PUSH s0, ra
+	LIO a0, $IconScript_Star
+	JAL ~Func:create_hud_element %alternate name: create_icon
+	NOP
+	DADDU s0, v0, r0 %iconIndex to s0
+	DADDU a0, s0, r0
+	JAL ~Func:set_hud_element_flags %alternate name: set_icon_flags
+	ORI a1, r0, 0080
+	ORI a1, r0, 8000
+	JAL ~Func:clear_hud_element_flags %alternate name: clear_icon_flags
+	DADDU a0, s0, r0
+	DADDU a0, s0, r0
+	LH a1, 0034 (s3)
+	ADDIU a1, a1, 006C %x offset
+	LH a2, 0036 (s3)
+	JAL ~Func:set_hud_element_render_pos %alternate name: set_icon_render_pos
+	ADDIU a2, a2, 0023 %y offset
+	LIO a1, $IconScript_Star
+	JAL ~Func:set_hud_element_script %alternate name: set_menu_icon_script
+	DADDU a0, s0, r0
+	LIO a1, 3F000000
+	JAL 80144C20 %scale icon to 0.5
+	DADDU a0, s0, r0
+	JAL ~Func:draw_hud_element_1 %alternate name: draw_icon_1
+	DADDU a0, s0, r0
+	JAL ~Func:free_hud_element
+	DADDU a0, s0, r0
+	POP s0, ra
+	JR RA
+	NOP
+}
+
+#new:Function $DrawMarioCurAndMaxHP {
+	ADDIU sp, sp, -20
+	SW ra, 0018 (sp)
+	%
+	LW a0, 0020 (s3) 
+	LH a1, 0034 (s3) %xPos
+	LH a2, 0036 (s3) %yPos
+	LB a3, 003D (s3) %first number to draw
+	LUI v0, 8011
+	LB v0, F293 (v0) %load mario's max hp (second number to draw)
+	ADDIU a1, a1, 0028
+	ADDIU a2, a2, 0008
+	JAL 800E7E34
+	SW v0, 0010 (sp)
+	%
+	LW ra, 0018 (sp)
+	JR RA
+	ADDIU sp, sp, 20
+}
+
+#new:Function $DrawCurrentPartnerCurAndMaxHP {
+	ADDIU sp, sp, -20
+	SW ra, 0018 (sp)
+	LIO t0, 8010F2A4 %start of partner structs
+	LABU t1, 8010F2A2
+	SLL t1, t1, 0003 %multiply by 8
+	ADDU t0, t0, t1
+	%
+	LW a0, 0020 (s3) %xPos
+	LH a1, 0034 (s3) %yPos
+	LH a2, 0036 (s3)
+	LB a3, 0002 (t0) %first number to draw
+	LB v0, 0003 (t0) %load partner max hp
+	ADDIU a1, a1, 0028
+	ADDIU a2, a2, 001C
+	JAL 800E7E34
+	SW v0, 0010 (sp)
+	%
+	LW ra, 0018 (sp)
+	JR RA
+	ADDIU sp, sp, 20
+}
+
+#new:Function $DrawCurAndMaxFP {
+	ADDIU sp, sp, -20
+	SW ra, 0018 (sp)
+	%
+	LW a0, 0024 (s3) 
+	LH a1, 0034 (s3) %xPos
+	LH a2, 0036 (s3) %yPos
+	LB a3, 003E (s3) %first number to draw
+	LUI v0, 8011
+	LB v0, F296 (v0) %load mario's max hp (second number to draw)
+	ADDIU a1, a1, 007A
+	ADDIU a2, a2, 0008
+	JAL 800E7E34
+	SW v0, 0010 (sp)
+	%
+	LW ra, 0018 (sp)
+	JR RA
+	ADDIU sp, sp, 20
+}
+
+#new:Function $StarIcons {
+%800E8FE4: JAL ~Func:draw_hud_element_1 %draws actual star icons
+%800E8D7C: JAL ~Func:draw_hud_element_1 %draws first part of bar between stars
+	JR RA
+	NOP
+}
+
+@Hook:Global 800E877C { %heart icons for mario code
+	PUSH ra
+	JAL $SetNewRastersAndPalettes
+	NOP
+	JAL $DrawMarioHeartIcon
+	NOP
+	JAL $DrawMarioHeadHeartIcon
+	NOP
+	JAL $DrawPartnerHeartIcon
+	NOP
+	JAL $DrawPartnerIcon
+	NOP
+	JAL $DrawMarioCurAndMaxHP
+	NOP
+	JAL $DrawCurrentPartnerCurAndMaxHP
+	NOP
+	LABU a0, 8010F51E
+	BEQ a0, r0, .noStarPower
+	NOP
+	JAL $DrawStarIcon
+	NOP
+	.noStarPower
+	POP ra
+	J 800E87EC
+	NOP
+}
+
+@Hook:Global 800E8854 {
+	JAL $DrawFlowerIcon
+	NOP
+	JAL $DrawCurAndMaxFP
+	NOP
+	J 800E88C4 %skip FP icon drawings and text drawings
+	NOP
+}
+
+%xPos offset for c-up star data
+@Function:Global 800E8AA0 {
+	ADDIU	FP, V0, 0078
+}
+
+%yPos offset for c-up star data
+@Function:Global 800E8AAC {
+	ADDIU	S5, V0, 0023
+}
+
+/% args for $DrawMenuBox
+% A0 = posX
+% A1 = posY
+% A2 = sizeX
+% A3 = sizeY
+% T0 = style
+% T1 = opacity
+%/
+
+#new:Function $DrawMenuBox {
+    ADDIU        SP, SP, -58
+    SW        RA, 50 (SP)
+    % setup call to DrawBox
+    SW        R0, 10 (SP)    % posZ
+    SW        A2, 14 (SP)    % width
+    SW        A3, 18 (SP) % height
+    SW        T1, 1C (SP) % opacity
+    COPY      A2, A0 % posX
+    COPY      A3, A1 % posY
+    COPY      A1, T0 % flags
+    CLEAR     A0 % flags
+    SW        R0, 20 (SP) % fogRGB
+    SW        R0, 24 (SP) % scaleX (unused)
+    SW        R0, 28 (SP) % scaleY (unused)
+    SW        R0, 2C (SP) % rotX (unused)
+    SW        R0, 30 (SP) % rotY (unused)
+    SW        R0, 34 (SP) % rotZ (unused)
+    SW        R0, 38 (SP) % unk func
+    SW        R0, 3C (SP) % unk func arg0
+    SW        R0, 40 (SP) % txMtx (unused)
+    SW        R0, 44 (SP) % txShiftY (unused)
+    SW        R0, 48 (SP) % txShiftX (unused)
+    JAL       800F52E0 %draw_box
+    SW        R0, 4C (SP) % unk
+    LW        RA, 50 (SP)
+    JR        RA
+    ADDIU        SP, SP, 58
+}
+
+%STYLE 4 RGBA
+%8010990F (inner box) and 80109913 (outer box)
+
+@Hook:Global 800E86B0 {
+	%%%mario hp box
+	LH a0, 0034 (s3) %xPos
+	LH a1, 0036 (s3) %yPos
+	ADDIU a0, a0, 0000
+	ADDIU a1, a1, 0000
+	ORI a2, r0, 0060 %width
+	ORI a3, r0, 001C %height
+	ORI t0, r0, 001A %custom style
+	JAL $DrawMenuBox
+	ORI t1, r0, 00FF %full opacity
+
+	%%%partner hp box
+	LH a0, 0034 (s3) %xPos
+	LH a1, 0036 (s3) %yPos
+	ADDIU a0, a0, 0000
+	ADDIU a1, a1, 0015
+	ORI a2, r0, 0060 %width
+	ORI a3, r0, 001C %height
+	ORI t0, r0, 001A %custom style
+	JAL $DrawMenuBox
+	ORI t1, r0, 00FF %full opacity
+
+	%%%fp box
+	LH a0, 0034 (s3) %xPos
+	LH a1, 0036 (s3) %yPos
+	ADDIU a0, a0, 005C
+	ADDIU a1, a1, 0000
+	ORI a2, r0, 0058 %width
+	ORI a3, r0, 001C %height
+	ORI t0, r0, 0017 %style 0x17
+	JAL $DrawMenuBox
+	ORI t1, r0, 00FF %full opacity
+
+	%%%coins/exp box
+	LH a0, 0034 (s3) %xPos
+	LH a1, 0036 (s3) %yPos
+	ADDIU a0, a0, 00B2
+	ADDIU a1, a1, 0000
+	ORI a2, r0, 0074 %width
+	ORI a3, r0, 001C %height
+	ORI t0, r0, 0019 %style 0
+	JAL $DrawMenuBox
+	ORI t1, r0, 00FF %full opacity
+
+	%%%star power box
+	LABU a0, 8010F51E
+	BEQ a0, r0, .noStarPower
+	NOP
+	LH a0, 0034 (s3) %xPos
+	LH a1, 0036 (s3) %yPos
+	ADDIU a0, a0, 005C
+	ADDIU a1, a1, 0015
+	ORI a2, r0, 00B0 %width
+	ORI a3, r0, 001C %height
+	ORI t0, r0, 001B %style 0x1B
+	JAL $DrawMenuBox
+	ORI t1, r0, 00FF %full opacity
+	.noStarPower
+	J 800E8714
+	NOP
+%0x34 from s3 is X pos of c-up menu
+%0x36 from s3 is Y pos of c-up menu
+%overwrites the left side of the [draw_box] for the c-up menu
+%JAL ~Func:draw_box
+%DADDU	A3, S5, R0
+}
+
+
+
+/%
+hook c-up menu draw boxes
+@Hook:Global 800E8620 {
+	J 800E8714
+	NOP
+}
+%/
+
+%800E7E34 draws text for c-up menu "curHP/maxHP"
+/%
+800E7E70: LUI a1, 0x800F
+800E7E74: LW a1, 0x7FAC (a1)
+this loads a pointer to all of the script
+%/
+
+%arg a0 8?
+%arg a1 xPos
+%arg a2 yPos
+%arg a3 value
+%arg sp+0x10 value2
+
+
+%icon scripts for font in c-up menu starts at 80108090
+%each is 0x28 in size
+
+
+
+%Table of partner icon pointers is at 8008F000
+%multiply partner index by 8 to get ptr to active partner icon
+
+
+	
+%@Data 97890 % Replaces the unused 000 partner icon with a new graphic so it can be used for a HUD icon! (This is Goompa's icon space!)
+#new:Data $MarioHead {
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000006 66660000 00000000
+	00000000 00000666 66666600 00000000
+	00000000 0000666A 55556660 00000000
+	00000000 00066A55 55555660 00000000
+	00000000 0066A555 55597966 00000000
+	00000000 066A5555 5597A766 00000000
+	00000000 06655555 5597AA66 00000000
+	00000000 66A55555 55599A44 44440000
+	00000000 66555555 55A64444 44400000
+	00000066 66555555 56446664 40000000
+	00000666 66555556 44632234 00000000
+	0000066A 5A555644 62111134 00000000
+	00000665 55564462 11441164 44400000
+	00000665 5A486211 11441136 44440000
+	00000444 48882111 11441111 13440000
+	00004431 12881111 11331111 11440000
+	00004413 31388111 82111111 12440000
+	00004411 31111111 88211111 24400000
+	00004443 11111111 38863336 44000000
+	00000444 44321111 16888888 44000000
+	00000004 44443111 11388884 40000000
+	00000000 00444431 11112344 00000000
+	00000000 00004444 44444440 00000000
+	00000000 00000044 44444000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+}
+
+#new:Data $MarioHeadPalette {
+	8420BC57 A34D7A05 2001B089 4001B5AD % Palette
+	2841B31B 80450001 00010001 00011085 % Palette
+}
+
+#new:Data $Star {
+%@Data 99160 { % Replaces a completely unused partner icon that isn't touched by anything with a 'Star' for Star Power.
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000011 11000000 00000000
+	00000000 00000111 11100000 00000000
+	00000000 00001112 21110000 00000000
+	00000000 00001134 43110000 00000000
+	00000000 00011564 46511000 00000000
+	00000000 00111244 44211100 00000000
+	00000001 11113644 44631111 10000000
+	00000111 11526444 44462511 11100000
+	00001113 26644444 44444662 31110000
+	00001126 44444444 44444444 62110000
+	00001136 44444444 44444444 63110000
+	00001112 64444444 44444446 21110000
+	00000111 26444444 44444462 11100000
+	00000011 52444444 44444425 11000000
+	00000001 13644444 44444631 10000000
+	00000001 13644444 44444631 10000000
+	00000001 13444444 44444431 10000000
+	00000011 52444444 44444425 11000000
+	00000011 36444446 64444463 11000000
+	00000011 24444623 32644442 11000000
+	00000011 24462311 11326442 11000000
+	00000011 32231111 11113223 11000000
+	00000011 11111100 00111111 11000000
+	00000001 11110000 00001111 10000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+}
+
+#new:Data $StarPalette {
+	00005101 DC4BDB0B E709B1C1 E5C90000
+	00000000 00000000 00000000 00000000
+}
+
+#new:Data $HeartCI4 {
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 01111100 00011111 00000000
+	00000001 11111110 00111111 11000000
+	00000011 12332111 01112332 11100000
+	00000111 34444321 11234444 51110000
+	00000113 46776684 33486644 35110000
+	00001124 67766668 88866664 35211000
+	00001134 77644488 88844444 55511000
+	00001146 76842288 88842233 55511000
+	00001146 68841144 44441133 55511000
+	00001146 68841144 44441133 55511000
+	00001138 68841144 44441133 55511000
+	00000124 68841144 44441133 55210000
+	00000113 88842244 44442233 55110000
+	00000012 48844444 44444333 52100000
+	00000011 34444444 44444335 51100000
+	00000001 13444444 44444335 11000000
+	00000000 11333333 33333351 10000000
+	00000000 01153333 33333511 00000000
+	00000000 00112555 55552110 00000000
+	00000000 00011925 55291100 00000000
+	00000000 00001119 29111000 00000000
+	00000000 00000011 11100000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+}
+
+#new:Data $HeartCI4Palette {
+	00006907 C1C9E24B E2CFE987 EC59ED5F %enabled palette
+	E3D5A107 00000000 00000000 00000000
+	7BDE94A5 C63194A5 84217BDF B5ADA529 %disabled palette
+	B5ADBDEF 8C639CE7 842194A5 7BDF7BDF
+}
+
+#new:Data $FlowerCI4 {
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+	00000000 00000111 11100000 00000000
+	00000000 00011122 22111000 00000000
+	00000000 00112333 33321100 00000000
+	00000000 01143333 33334110 00000000
+	00000000 11133333 33333111 00000000
+	00000011 11143355 55334111 11000000
+	00000112 33422666 66621433 21100000
+	00001143 33326777 77762333 34110000
+	00001233 33586677 77668533 33210000
+	00001433 33679977 77997633 33410000
+	00001433 35679977 77997653 33410000
+	00001433 35679977 77997653 33410000
+	00001133 35976677 77667953 33110000
+	00001112 42987777 77778924 21110000
+	00000111 12967777 77776921 11100000
+	00000011 43496877 77869434 11000000
+	00000114 33349666 66694333 41100000
+	00000114 33333499 99433333 41100000
+	00000112 33333332 23333333 21100000
+	0000AA11 24333341 14333342 11AA0000
+	0000AAB1 11244411 11444211 1BAA0000
+	0000AABB A111111B B111111A BBAA0000
+	00000AAA ABCCBBAA AABBCCBA AAA00000
+	000000AA CDDBCCAA AACCBDDC AA000000
+	0000AAAC DDDDDCAA AACDDDDD CAAA0000
+	0000AACD DDDDCBAA AABCDDDD DCAA0000
+	0000AABB CCCBBAA0 0AABBCCC BBAA0000
+	00000AAA AAAAAA00 00AAAAAA AAA00000
+	00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000
+}
+
+#new:Data $FlowerCI4Palette {
+	000011D3 6C2BE7FB 8E39F6A3 DCC9FE41 %enabled palette
+	F543A341 01C12B85 3CC57E07 00000000
+	7BDE94A5 C63194A5 84217BDF B5ADA529 %disabled palette
+	B5ADBDEF 8C639CE7 842194A5 7BDF7BDF
+}
+
+#new:Data $PartnerAbilityTable {
+	00000000 00000000 % Empty
+	83868788 00000000 % Goombario
+	898C8D8E 00000000 % Kooper
+	8F929394 00000000 % Bombette
+	9598999A 00000000 % Parakarry
+	9B9E9FA0 00000000 % Goompa
+	A1A4A5A6 00000000 % Watt
+	A7AAABAC 00000000 % Sushie
+	ADB0B1B2 00000000 % Lakilester
+	B3B6B7B8 00000000 % Bow
+	%
+	00000000 00000000 % Goombaria (Unused)
+	00000000 00000000 % Twink (Unused)
+}
+	
+#new:Data $MaxStarterHP {
+	0A0A0A0F 0A0A0A14
+	0F0F0A0A 00000000
+/% 	0A % Mario
+	0A % Goombario
+	0A % Kooper
+	0F % Bombette
+	0A % Parakarry
+	0A % Goompa
+	0A % Watt
+	14 % Sushie
+	0F % Lakilester
+	0F % Bow
+	%
+	0A % Goombaria (Unused)
+	0A % Twink (Unused)
+	%
+	00 % Filler
+	00 % Filler
+	00 % Filler
+	00 % Filler %/
+}
+
+#new:Data $Bar_StyleColor {% New data table that sets menu styles and expansion on them
+	% Bar Style #00
+		01`b % What texture is applied over the bar
+		00`b % What style bar will use
+		00`b % ???
+		C8BFA4FF % Colors for menu (In hex, last byte is opacity)
+		808080FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #01
+		01`b % What texture is applied over the bar
+		01`b % What style bar will use
+		01`b % ???
+		FFC880FF % Colors for menu (In hex, last byte is opacity)
+		808080FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #02
+		01`b % What texture is applied over the bar
+		02`b % What style bar will use
+		01`b % ???
+		E8C44DFF % Colors for menu (In hex, last byte is opacity)
+		A37B00FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #03
+		00`b % What texture is applied over the bar
+		03`b % What style bar will use
+		01`b % ???
+		E2E1D8FF % Colors for menu (In hex, last byte is opacity)
+		D9D0C9FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #04
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		3D4ABCFF % Colors for menu (In hex, last byte is opacity)
+		00191CFF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #05 (Used for UI Bar)
+		01`b % What texture is applied over the bar
+		08`b % What style bar will use
+		01`b % ???
+		F1A8AAFF % Colors for menu (In hex, last byte is opacity)
+		A24247FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #06 (Used for UI Bar)
+		01`b % What texture is applied over the bar
+		08`b % What style bar will use
+		01`b % ???
+		FFFF2EFF % Colors for menu (In hex, last byte is opacity)
+		86690FFF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #07
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		D7BF74FF % Colors for menu (In hex, last byte is opacity)
+		844632FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #08
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		D7BF74FF % Colors for menu (In hex, last byte is opacity)
+		844632FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #09
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		8D8FFFFF % Colors for menu (In hex, last byte is opacity)
+		F2B4566FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #0A
+		01`b % What texture is applied over the bar
+		08`b % What style bar will use
+		01`b % ???
+		8D8FFFFF % Colors for menu (In hex, last byte is opacity)
+		F2B4566FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #0B
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		AAD080FF % Colors for menu (In hex, last byte is opacity)
+		477B53FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #0C
+		01`b % What texture is applied over the bar
+		08`b % What style bar will use
+		01`b % ???
+		AAD080FF % Colors for menu (In hex, last byte is opacity)
+		477B53FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #0D
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		C8C85AFF % Colors for menu (In hex, last byte is opacity)
+		8C8C00FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #0E
+		01`b % What texture is applied over the bar
+		08`b % What style bar will use
+		01`b % ???
+		C8C85AFF % Colors for menu (In hex, last byte is opacity)
+		8C8C00FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #0F
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		EBE677FF % Colors for menu (In hex, last byte is opacity)
+		8E5A25FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #10
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		8ED4ECFF % Colors for menu (In hex, last byte is opacity)
+		436245FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #11
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		A79777FF % Colors for menu (In hex, last byte is opacity)
+		62379AFF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #12
+		01`b % What texture is applied over the bar
+		07`b % What style bar will use
+		01`b % ???
+		11971DFF % Colors for menu (In hex, last byte is opacity)
+		08370EFF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #13
+		01`b % What texture is applied over the bar
+		07`b % What style bar will use
+		01`b % ???
+		6E6EC8FF % Colors for menu (In hex, last byte is opacity)
+		0A0A64FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #14
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		B53C3CFF % Colors for menu (In hex, last byte is opacity)
+		4C0A00FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #15
+		01`b % What texture is applied over the bar
+		04`b % What style bar will use
+		01`b % ???
+		AEE3EBFF % Colors for menu (In hex, last byte is opacity)
+		4C6E3CFF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #16
+		00`b % What texture is applied over the bar
+		03`b % What style bar will use
+		01`b % ???
+		7E7DD8FF % Colors for menu (In hex, last byte is opacity)
+		D96CC9FF % Colors for menu (In hex, last byte is end byte)
+	%
+			%-------------NEW BARS HERE-------------%
+	% Bar Style #17 (Used for UI Bar for Star Points and coins)
+		01`b % What texture is applied over the bar
+		08`b % What style bar will use
+		01`b % ???
+		A6D795FF % Colors for menu (In hex, last byte is opacity)
+		397821FF % Colors for menu (In hex, last byte is end byte)
+	%
+	% Bar Style #18 (Used for UI Bar for Star Power)
+		01`b % What texture is applied over the bar
+		08`b % What style bar will use
+		01`b % ???
+		9BC9EFFF % Colors for menu (In hex, last byte is opacity)
+		246292FF % Colors for menu (In hex, last byte is end byte)
+	% Bar Style #19 (Used for UI Bar for Star Power)
+		01`b % What texture is applied over the bar
+		08`b % What style bar will use
+		01`b % ???
+		9BC9EFFF % Colors for menu (In hex, last byte is opacity)
+		246292FF % Colors for menu (In hex, last byte is end byte)
+	% Bar Style #1A (Used for hp bars)
+		01`b
+		08`b
+		01`b
+		FC0728FF
+		394821FF
+	% Bar Style #1B (Used for hp bars)
+		01`b
+		08`b
+		01`b
+		EFFA0CFF
+		996821FF
+}
+	
+	
+@Function 8E7C0 { % (800F5310) Loads original data that limits menu styles to #16 in max. (Altered so now it's 50)
+	SLTIU	V0, A1, 001C % Menu styles can now be up to 0x18 in total without any repurcussion
+}
+	
+@Function 8E808 { % (800F5358) Loads original data that sets where table for menu bar styles is drawn from.
+	LIO v1, $Bar_StyleColor
+}
+
+#export $PartnerAbilityTable
+#export $MaxStarterHP
