@@ -25,7 +25,7 @@ A: I shall work on a demo release, yes. With irl stuff going on, however, I can'
 
 Q: Do you want help?
 
-A: At the moment, no. I'll manage on my own for now.
+A: I've got all the help I need right now, thanks.
 
 
 
