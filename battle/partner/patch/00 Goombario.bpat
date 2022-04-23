@@ -6,3 +6,50 @@
   [42C] Call  80269524  ( *VarE )
 }
 
+@ $Script_8023C5B8
+{
+    0:  Call  GetActorPos   ( .Actor:Partner *Var0 *Var1 *Var2 )
+   1C:  Add   *Var0  0000001E
+   2C:  Call  SetActorSpeed ( .Actor:Partner *Fixed[6.0] )
+   40:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 00090003 )
+   58:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
+   74:  Call  RunToGoal     ( .Actor:Partner  0` .False )
+   8C:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 00090001 )
+   A4:  Call  InitTargetIterator ( )
+   B0:  Call  SetGoalToTarget   ( .Actor:Partner )
+   C0:  Call  SetBattleFlagBits ( 00000004 .True )
+   D4:  Call  $Function_80238E04 ( )
+   E0:  Wait  12`
+   EC:  Call  SetCamEnabled ( .Cam:Tattle .True )
+  100:  Call  SetCamFlag80  ( .Cam:Tattle .False )
+  114:  Call  SetCamPerspective ( .Cam:Tattle 00000006  25`  16`  1024` )
+  134:  Call  SetCamViewport    ( .Cam:Tattle  137`  95`  138`  99` )
+  154:  Call  GetOwnerTarget    ( *VarA *VarB )
+  168:  Call  GetActorPos   ( *VarA *Var0 *Var1 *Var2 )
+  184:  Call  SetGoalPos    ( .Actor:Partner *Var0 *Var1 *Var2 )
+  1A0:  Call  $Function_80238BCC ( )
+  1AC:  Wait  1`
+  1B8:  Call  802CAE50      ( 00000002 *Var0 *Var1 *Var2 )
+  1D4:  Call  802CABE8      ( 00000002 00000000 *Var3 00000064 00000004 )
+  1F4:  Wait  2`
+  200:  Call  PlaySoundAtActor  ( .Actor:Partner 00000282 )
+  214:  Call  SetCamFlag80  ( .Cam:Tattle .True )
+  228:  Wait  10`
+  234:  Call  $Function_80238B60 ( )
+  240:  Call  ActorSpeak    ( *Var0 .Actor:Self 00000001 0009000F 00090001 ) % variable string ID
+  260:  Call  $Function_80238E48 ( )
+  26C:  Wait  12`
+  278:  Call  SetCamEnabled ( .Cam:Tattle .False )
+  28C:  Wait  32`
+  298:  Call  UseBattleCamPreset    ( 00000002 )
+  2A8:  Call  SetBattleFlagBits ( 00000004 .False )
+  2BC:  Call  80280818 ( )
+  2C8:  Call  SetGoalToHome ( .Actor:Partner )
+  2D8:  Call  SetActorSpeed ( .Actor:Partner *Fixed[4.0] )
+  2EC:  Call  SetActorJumpGravity   ( .Actor:Partner *Fixed[1.8] )
+  300:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 00090003 )
+  318:  Call  RunToGoal     ( .Actor:Partner  0` )
+  32C:  Call  SetAnimation  ( .Actor:Partner FFFFFFFF 00090001 )
+  344:  Return
+  34C:  End
+}
