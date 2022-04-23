@@ -7,8 +7,7 @@ Built on the latest Star Rod version, Paper Mario: Deluxe Edition aims to add Qo
 
 Q: Will this mod just be another hard mode mod?
 
-A: No. This mod is meant to be enjoyed, but it's also not meant to be a walk in the park. There will be a challenge to a degree, but you can expect that after the main game. Post game will kick up the difficulty a bit, but not to a MQ or DSE degree.
-
+A: No. This mod is meant to be enjoyed. However, because partner hp exists in this mod, there will be a variance in difficulty, but it won't be too much to have to have a certain strategy to enemies and bosses like you would in [Paper Mario: Pro Mode](http://www.mediafire.com/file/y9g9j1pbbcmbil8/Paper%20Mario%20Pro%20Mode%20v0.1.6.mod), [Paper Mario: Master Quest](https://cdn.discordapp.com/attachments/423202607943647262/957753476107100300/PMMQ_1.5.0.2.mod), or [Paper Mario: Dark Star Edition](https://github.com/Shade-Blade/PMDarkStarEdition).
 
 
 Q: New badges? What all does this entail?
