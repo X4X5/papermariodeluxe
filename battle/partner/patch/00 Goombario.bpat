@@ -8,7 +8,7 @@
 
 @ $Script_8023C5B8
 {
-    $FreeTurn ()
+        Call $FreeTurn ()
     0:  Call  GetActorPos   ( .Actor:Partner *Var0 *Var1 *Var2 )
    1C:  Add   *Var0  0000001E
    2C:  Call  SetActorSpeed ( .Actor:Partner *Fixed[6.0] )
