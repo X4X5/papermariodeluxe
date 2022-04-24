@@ -1,0 +1,52 @@
+#new:Data $BattlePerks	
+{
+00000000 %four bytes: only the last is used, so you can use the others if you want
+}
+
+%%%%%%% FREE ACTIONS FOR PLAYERS AND PARTNERS
+%%%%%%% Calling $FreeTurn from a player or partner move script will make that player or partner action not use a turn.
+
+#new:Function $FreeTurn
+{
+ADDIU 	V0, R0, 1
+SAB 	V0, $BattlePerks[3]
+JR RA
+ADDIU	V0, R0, 2
+}
+
+@Hook 174D74   %00174D30 --> 80246450 - end player turn + 44
+{
+	%since we got here at the very start of the function, we can just redirect control flow and have done with it. Critically, we can use the function's own turn set functionality to cause Mario to get another turn.
+	LAB			S0, $BattlePerks[3]
+	BEQL		S0, R0, .normal
+		LW			S0, D8 (S3)  %in original code - eaten by hook
+		
+	SAB			R0, $BattlePerks[3] %reset free byte	
+	J			80246AEC	%80246450+69C %calls state update and gets out
+	ADDIU		A0, R0, C 	%'renew turn' value
+	
+	.normal
+	J 			8024649C %80246450+4C
+		LW			V0, 0 (A0) %in original code
+	
+}
+
+@Hook 175B1C %EndPartnerTurn (8024721C) +20
+{
+	%now uses the same strategy as the Mario one, but different registers are unused
+	%this means turn doesn't cycle over to Mario after a free action
+	LAB			V0, $BattlePerks[3]
+	BEQL		V0, R0, .normal
+		LW			V0, 4 (S0)  %in original code - eaten by hook
+		
+	SAB			R0, $BattlePerks[3] %reset free byte	
+	J			8024728C	%8024721C+70 %calls state update and gets out
+	ADDIU		A0, R0, C 	%'renew turn' value
+	
+	.normal
+	J 			80247244 %8024721C+28
+		ORI			V0, V0, 4 %in original code	
+}
+
+#export $FreeTurn
+#export $BattlePerks
