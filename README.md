@@ -5,9 +5,9 @@ Built on the latest Star Rod version, Paper Mario: Deluxe Edition aims to add Qo
 
 # FYI
 
-Q: Will this mod just be another hard mode mod?
+Q: What's the purpose of this mod, if it's like Paper Mario 20th?
 
-A: No. However, because partner hp exists in this mod, there will be a variance in difficulty, but it won't be too much to have to have a certain strategy to enemies and bosses like you would in [Paper Mario: Pro Mode](http://www.mediafire.com/file/y9g9j1pbbcmbil8/Paper%20Mario%20Pro%20Mode%20v0.1.6.mod), [Paper Mario: Master Quest](https://cdn.discordapp.com/attachments/423202607943647262/957753476107100300/PMMQ_1.5.0.2.mod), or [Paper Mario: Dark Star Edition](https://github.com/Shade-Blade/PMDarkStarEdition).
+A: The point of this mod is to provide the player with a new experience in Paper Mario 64, like with any mod. However, this is a take of a "remaster" of the game, if there ever was one that came out. What differs this mod from Paper Mario 20th is the presence of Partner HP, fixed issues from 20th, new content and custom badges, and a raised difficulty. However, the rise in difficulty isn't to be worried about, this is because partners can't be injured by enemy attacks. This won't be MQ difficulty, but this will allow the player to think through moves and partner strategies a little more, and this will probably be more aimed at mid and chapter bosses.
 
 
 Q: New badges? What all does this entail?
