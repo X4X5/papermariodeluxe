@@ -10,11 +10,6 @@ Q: What's the purpose of this mod, if it's like Paper Mario 20th?
 A: The point of this mod is to provide the player with a new experience in Paper Mario 64, like with any mod. However, this is a take of a "remaster" of the game, if there ever was one that came out. What differs this mod from Paper Mario 20th is the presence of Partner HP, fixed issues from 20th, new content and custom badges, and a raised difficulty. However, the rise in difficulty isn't to be worried about, this is because partners can't be injured by enemy attacks. This won't be MQ difficulty, but this will allow the player to think through moves and partner strategies a little more, and this will probably be more aimed at mid and chapter bosses.
 
 
-Q: New badges? What all does this entail?
-
-A: There will be new badges, but this does mean it'll replace vanilla ones, as well. Not to worry, this mod won't change every single badge in the game, I'll really only swap badges if the new badge is just a flashy version of the old badge.
-
-
 
 Q: Will there be a release this time?
 
