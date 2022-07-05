@@ -3,7 +3,7 @@ Paper Mario with a few new twists!
 
 Built on the latest Star Rod version, Paper Mario: Deluxe Edition (Paper Mario DX, for short) aims to add QoL changes, new rooms, unused and new badges alike, and more content. It is the revival of a 2021 mod that never got off the ground. Basically, think of this as [Paper Mario: 20th Anniversary Edition](https://youtu.be/rNIgK8tbh4A), but much much less broken. In fact, I refuse to put out a stupidly broken release lol.
 
-# FYI
+## FYI
 
 Q: What's the purpose of this mod, if it's like Paper Mario 20th?
 
