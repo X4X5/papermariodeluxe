@@ -19,7 +19,7 @@ A: I shall work on a demo release, yes. With irl stuff going on, however, I can'
 
 Q: Do you want help?
 
-A: I've got all the help I need right now, thanks.
+A: I'll ask around as I need to.
 
 
 
@@ -32,6 +32,10 @@ A: No, it is not.
 Q: Will this work on an actual console?
 
 A: Depends on which console we're talking. If your answer is the N64, then don't count on it. If you answer is "Wii", then the answer is stright up "no." Wii VC doesn't support Star Rod mods. If you're talking the Wii U, the answer is yes. However, it will be up to you to patch this mod to a Wii U WAD file. I will not distribute one as that would break copyright.
+
+Q: Will [x] from 20th come to this mod?
+
+A: I can't promise anything will come from 20th, tbh. I did take the title screen image from 20th Anniversary [with permission from the artist himself](https://twitter.com/fossil_arm/status/1544505271342579714)
 
 
 
